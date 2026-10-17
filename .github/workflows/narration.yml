@@ -1,0 +1,37 @@
+name: narration
+on:
+  workflow_dispatch:
+    inputs:
+      engine:
+        description: "kokoro (default) or piper"
+        required: true
+        default: kokoro
+permissions:
+  contents: write
+jobs:
+  narration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq espeak-ng ffmpeg
+      - name: Install TTS
+        run: |
+          if [ "${{ inputs.engine }}" = "kokoro" ]; then
+            pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+            pip install -q "kokoro>=0.9.4" soundfile numpy
+          else
+            pip install -q piper-tts
+          fi
+      - name: Generate
+        run: |
+          python scripts/narration.py "${{ inputs.engine }}" || { echo "primary engine failed, falling back to piper"; pip install -q piper-tts; python scripts/narration.py piper; }
+      - name: Commit
+        run: |
+          git config user.name "narration-bot"
+          git config user.email "ayhansebin@gmail.com"
+          git add narration
+          git commit -m "Generate demo narration (${{ inputs.engine }})" || echo "nothing to commit"
+          git push origin HEAD:main
