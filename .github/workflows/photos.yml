@@ -1,0 +1,37 @@
+name: photos
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "sheets (candidate contact sheets to branch photo-candidates) or fetch (download manifest photos to main)"
+        required: true
+        default: fetch
+permissions:
+  contents: write
+concurrency:
+  group: photos
+  cancel-in-progress: false
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow requests
+      - run: python scripts/photos.py "${{ inputs.mode }}"
+      - name: Commit results
+        run: |
+          git config user.name "photo-bot"
+          git config user.email "ayhansebin@gmail.com"
+          if [ "${{ inputs.mode }}" = "sheets" ]; then
+            git checkout -B photo-candidates
+            git add -f photos/_cand
+            git commit -m "Photo candidate sheets" || echo "nothing to commit"
+            git push -f origin photo-candidates
+          else
+            git add photos
+            git commit -m "Fetch photos from manifest" || echo "nothing to commit"
+            git push origin HEAD:main
+          fi
