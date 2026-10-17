@@ -115,8 +115,8 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;background:var(--blue
 .switch[aria-pressed="true"] i::after{transform:translateX(18px);background:#fff}
 
 /* chapters and stages */
-.chapter{padding-block:clamp(56px,7vw,110px) 0;position:relative}
-.chapter-head{display:grid;gap:.8rem;margin-bottom:clamp(28px,4vw,48px)}
+.chapter{padding-block:clamp(72px,9vw,140px) 0;position:relative}
+.chapter-head{display:grid;gap:.8rem;margin-bottom:clamp(32px,4.5vw,56px)}
 .chapter-head .n{font-family:var(--font-mono);font-size:.8rem;color:var(--blue-3);letter-spacing:.1em}
 .chapter-head h2{font-size:clamp(2rem,4.6vw,3.6rem);max-width:24ch}
 .chapter-head p{color:var(--ink-2);font-size:clamp(1.05rem,1.5vw,1.3rem);font-weight:300;max-width:52ch}
@@ -149,7 +149,7 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 .hint::before{content:"";width:6px;height:6px;background:var(--blue-2);box-shadow:0 0 8px var(--blue-2)}
 
 /* hero */
-.hero{padding-top:clamp(36px,5vw,72px)}
+.hero{padding-top:clamp(48px,7vw,96px)}
 .hero-head{display:grid;gap:1.1rem;margin-bottom:clamp(20px,3vw,36px)}
 .pills{display:flex;flex-wrap:wrap;gap:.5rem}
 .pill{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line-2);padding:.2rem .6rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
@@ -479,7 +479,7 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .ucpanel.has-cover .stage-top::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(0,7,20,.94) 0,rgba(0,7,20,.82) 40%,rgba(0,7,20,.55) 100%),linear-gradient(180deg,rgba(0,7,20,0) 60%,rgba(0,7,20,.95) 100%)}
 .nimg{height:64px;background-image:var(--img);background-size:cover;background-position:center;border:1px solid var(--line);margin:.1rem 0 .2rem;position:relative}
 .nimg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,7,20,.1),rgba(0,7,20,.5))}
-.lane .ln{display:grid;grid-template-columns:64px 1fr;gap:.7rem;align-items:center}
+.lane .ln{display:block}
 .lane .ln span{min-width:0}
 .lane .lt{display:block;width:64px;height:44px;background-image:var(--img);background-size:cover;background-position:center;border:1px solid var(--line);filter:saturate(.85)}
 .pimg{position:relative;aspect-ratio:16/8;background-image:var(--img);background-size:cover;background-position:center;border:1px solid var(--line);overflow:hidden;filter:saturate(.85)}
@@ -588,7 +588,6 @@ body.walking{overflow:hidden}
 </head>
 <body>
 <a class="sr" href="#innovation">Skip to content</a>
-<div class="topbar"><div class="wrap"><span><b>New</b> Streaming Agents and the Granite functions are in Early Access on Confluent Cloud.</span><a href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Sign up &#8594;</a></div></div>
 <nav class="nav" aria-label="Main">
   <div class="wrap">
     <a class="brand" href="#top"><span class="dot"></span>Real-time intelligence <span class="co">Granite Time Series on Confluent</span></a>
@@ -607,17 +606,10 @@ body.walking{overflow:hidden}
 <header class="chapter hero" id="innovation">
   <div class="wrap" id="top">
     <div class="hero-head">
-      <div class="pills"><span class="pill live">Early Access</span><span class="pill">IBM Granite Time Series</span><span class="pill">Confluent Cloud for Apache Flink</span><span class="pill">Streaming Agents</span></div>
-      <h1 class="h-display">See the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>before it happens.</h1>
-      <p class="lede">One statement of Flink SQL predicts demand, payments, energy, network telemetry, asset prices and anomalies inside the stream. No training. Touch anything on this page.</p>
+      <div class="pills"><span class="pill live">Early Access on Confluent Cloud</span></div>
+      <h1 class="h-display">See the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br> before it happens.</h1>
+      <p class="lede">One statement of Flink SQL. A forecast or a flag on every event, inside the stream, with no training. Touch anything on this page.</p>
       <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>1 min, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
-      <div class="stats" id="hero-stats">
-        <div class="stat"><b>44M+</b><span>model downloads</span></div>
-        <div class="stat"><b>#1</b><span>GIFT-Eval, zero-shot</span></div>
-        <div class="stat"><b>10 to 60×</b><span>faster throughput</span></div>
-        <div class="stat"><b>millions</b><span>of series, one statement</span></div>
-        <div class="stat"><b>seconds</b><span>to predict, not days</span></div>
-      </div>
     </div>
 
     <div class="stage" id="st-live">
@@ -661,7 +653,6 @@ body.walking{overflow:hidden}
         <div class="sqlline"><code id="live-sql"></code><button class="btn sm ghost" id="live-copy">Copy SQL</button></div>
       </div>
     </div>
-    <div class="marquee" aria-label="Runs with"><div class="mq-label">Runs where your stream runs</div><div class="mq-track"><div class="mq-inner" id="mq"></div></div></div>
   </div>
 </header>
 
@@ -711,7 +702,7 @@ body.walking{overflow:hidden}
       </div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
+    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
       <h2>Then something acts on it.</h2>
       <p>A Streaming Agent reads the forecast and the flag, reasons, and writes the decision back to a topic. Experts set the gates.</p>
     </div>
@@ -774,7 +765,7 @@ FROM pos_sales;</code></pre></div>
       </div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
+    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
       <h2>One stream. Every decision.</h2>
       <p>Connect the systems where your series already live. Flink runs the models on every event. Decisions land as topics, tables, alerts and agent calls.</p>
     </div>
@@ -818,47 +809,18 @@ FROM pos_sales;</code></pre></div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b>1</b><span>statement</span></div><div class="readout"><b id="arch-count">0</b><span>decisions in flight</span></div><div class="readout"><b class="purple">0</b><span>models to train</span></div></div><div class="hint">Nothing leaves Confluent Cloud. Models run next to the topic.</div></div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
+    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
       <h2>Four models. One family. 44M+ downloads.</h2>
       <p>Pick one. Every simulation on this page follows your choice.</p>
     </div>
 
     <div class="stage" id="st-models">
       <div class="stage-body">
-        <div class="bubbles" id="bubbles">
-          <div class="b" style="left:12%;width:34px;height:34px"></div><div class="bl" style="left:12%;bottom:-2.8rem"><b>TTM r3</b>1.4M params</div>
-          <div class="b" style="left:37%;width:58px;height:58px"></div><div class="bl" style="left:37%;bottom:-2.8rem"><b>FlowState r1</b>9.1M</div>
-          <div class="b" style="left:62%;width:124px;height:124px"></div><div class="bl" style="left:62%;bottom:-2.8rem"><b>PatchTST-FM r2</b>385M</div>
-          <div class="b" style="left:87%;width:30px;height:30px;background:radial-gradient(circle at 35% 35%,rgba(61,219,217,.9),rgba(8,189,186,.5) 55%,rgba(8,189,186,.15));box-shadow:0 0 30px rgba(8,189,186,.35)"></div><div class="bl" style="left:87%;bottom:-2.8rem"><b>TSPulse r1</b>1.1M</div>
-        </div>
-        <div style="height:3rem"></div>
         <div class="models" id="models">
           <button class="mcard on" data-m="ttm"><span class="use">in use</span><span class="mk">Mixer · default</span><h4>TTM</h4><span class="mp">'model' VALUE 'ttm'</span><canvas data-glyph="point"></canvas><span class="ml">Tiny, fast, CPU-friendly. Thousands of series per core.</span><span class="mb"><span>NeurIPS 2024</span><span>10 to 60× throughput</span><span>horizon ≤ 96</span></span></button>
           <button class="mcard" data-m="flowstate"><span class="use">in use</span><span class="mk">State space</span><h4>FlowState</h4><span class="mp">'model' VALUE 'flowstate'</span><canvas data-glyph="smooth"></canvas><span class="ml">Reads seconds and hours alike. Long, smooth horizons.</span><span class="mb"><span>ICML 2026</span><span>sampling-rate equivariant</span><span>context ≤ 4,096</span></span></button>
           <button class="mcard" data-m="patchtstfm"><span class="use">in use</span><span class="mk">Transformer</span><h4>PatchTST-FM</h4><span class="mp">'model' VALUE 'patchtstfm'</span><canvas data-glyph="quant"></canvas><span class="ml">Full predictive distribution. q10, q50, q90 per step.</span><span class="mb"><span class="gold">#1 GIFT-Eval</span><span>context ≤ 8,064</span><span>2026</span></span></button>
           <button class="mcard" data-m="tspulse"><span class="use">in use</span><span class="mk">Dual space · next</span><h4>TSPulse</h4><span class="mp">TS_EMBED · TS_SEARCH</span><canvas data-glyph="embed"></canvas><span class="ml">Embeddings, search, classification, detection. GPU-free.</span><span class="mb"><span class="gold">#1 TSB-AD</span><span>ICLR 2026</span><span>Early Access next</span></span></button>
-        </div>
-        <div class="bench" id="bench">
-          <div class="bcard"><div class="bh"><b>#1</b><span>GIFT-Eval<br>zero-shot, commercial license</span></div>
-            <div class="bars">
-              <div class="bar hi"><span>PatchTST-FM r2</span><i style="--w:100%"></i><em>CRPS</em></div>
-              <div class="bar hi"><span>PatchTST-FM r2</span><i style="--w:100%"></i><em>MASE</em></div>
-              <div class="bar"><span>next best</span><i style="--w:91%"></i><em>&nbsp;</em></div>
-              <div class="bar"><span>seasonal naive</span><i style="--w:58%"></i><em>&nbsp;</em></div>
-            </div><div class="bf">Rank 1 on both metrics among zero-shot models with a commercial-friendly license, leaderboard read 31 Aug 2026. Bars indicative.</div></div>
-          <div class="bcard"><div class="bh"><b>10<small>to</small>60×</b><span>throughput<br>TTM vs peer models</span></div>
-            <div class="bars">
-              <div class="bar hi"><span>TTM r3</span><i style="--w:100%"></i><em>1.4M</em></div>
-              <div class="bar"><span>FlowState r1</span><i style="--w:62%"></i><em>9.1M</em></div>
-              <div class="bar"><span>PatchTST-FM r2</span><i style="--w:18%"></i><em>385M</em></div>
-              <div class="bar"><span>large peer FM</span><i style="--w:3%"></i><em>500M+</em></div>
-            </div><div class="bf">Relative accelerator throughput, IBM measurements. Small models score every event in flight on CPU.</div></div>
-          <div class="bcard"><div class="bh"><b>#1</b><span>TSB-AD<br>anomaly detection</span></div>
-            <div class="bars">
-              <div class="bar gold"><span>TSPulse r1</span><i style="--w:100%"></i><em>1.1M</em></div>
-              <div class="bar"><span>runner-up</span><i style="--w:93%"></i><em>&nbsp;</em></div>
-              <div class="bar"><span>classic detector</span><i style="--w:70%"></i><em>&nbsp;</em></div>
-            </div><div class="bf">Leads the TSB-AD benchmark with about a million parameters. Powers the next functions: TS_EMBED, TS_SEARCH, TS_OPTIMIZE.</div></div>
         </div>
       </div>
     </div>
@@ -896,32 +858,17 @@ FROM pos_sales;</code></pre></div>
             </div>
           </div>
           <div class="lanes" id="lanes">
-            <div class="lane"><div class="ln"><i class="lt" style="--img:url(photos/banking-card2-s.jpg)"></i><span>Card fraud<small>a stolen card, first swipe</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
-            <div class="lane"><div class="ln"><i class="lt" style="--img:url(photos/retail-empty-s.jpg)"></i><span>Stockout<small>a store, a hot SKU, a weekend</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
-            <div class="lane"><div class="ln"><i class="lt" style="--img:url(photos/telecom-dish-s.jpg)"></i><span>Network fault<small>a cell site, drop rate rising</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
-            <div class="lane"><div class="ln"><i class="lt" style="--img:url(photos/blast-furnace-s.jpg)"></i><span>Kiln drift<small>quality sliding, energy climbing</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
+            <div class="lane"><div class="ln"><span>Card fraud<small>a stolen card, first swipe</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
+            <div class="lane"><div class="ln"><span>Stockout<small>a store, a hot SKU, a weekend</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
+            <div class="lane"><div class="ln"><span>Network fault<small>a cell site, drop rate rising</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
+            <div class="lane"><div class="ln"><span>Kiln drift<small>quality sliding, energy climbing</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
           </div>
         </div>
       </div>
       <div class="stage-foot"><div class="hint">Illustrative curves. The shape is the point: most of the value lives in the first minutes.</div><div class="readouts"><div class="readout"><b id="decay-when">1 s</b><span>you act after</span></div></div></div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
-      <h2>What changes.</h2>
-      <p>Measured across early engagements. Same stream, same team, foundation models instead of bespoke pipelines.</p>
-    </div>
-    <div class="stage" id="st-dials">
-      <div class="stage-body">
-        <div class="dials" id="dials">
-          <div class="dial"><div class="dt"><b data-count="10" data-suffix="×">0×</b><div class="dk">faster time to value</div><div class="dd">weeks of pipeline become one statement</div></div><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="42"/><circle class="arc" cx="50" cy="50" r="42" style="--c:264;--o:26"/></svg></div>
-          <div class="dial"><div class="dt"><b data-count="5" data-suffix="×">0×</b><div class="dk">lower skill required</div><div class="dd">SQL, not a data science team per series</div></div><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="42"/><circle class="arc" cx="50" cy="50" r="42" style="--c:264;--o:53"/></svg></div>
-          <div class="dial"><div class="dt"><b data-count="10" data-prefix="5 to " data-suffix="%">0%</b><div class="dk">accuracy improvement</div><div class="dd">zero-shot against tuned incumbents</div></div><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="42"/><circle class="arc" cx="50" cy="50" r="42" style="--c:264;--o:238"/></svg></div>
-          <div class="dial"><div class="dt"><b>days <small>&#8594;</small> s</b><div class="dk">responsiveness</div><div class="dd">from the nightly batch to the event</div></div><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="42"/><circle class="arc" cx="50" cy="50" r="42" style="--c:264;--o:0"/></svg></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
+    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
       <h2>From 30 models to 2.</h2>
       <p>A cement producer, one mill. Flip it.</p>
     </div>
@@ -955,33 +902,20 @@ FROM pos_sales;</code></pre></div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">$2</b><span>EBITDA per ton</span></div><div class="readout"><b>$10s to 100s M</b><span>financial benefit</span></div></div><div class="hint">Client identities withheld</div></div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
+    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
       <h2>Real outcomes on real streams.</h2>
-      <p>Engagements, demos and reference designs. Client identities withheld.</p>
+      <p>Early engagements and reference designs. Client identities withheld.</p>
     </div>
     <div class="stage" id="st-proof">
       <div class="stage-body">
         <div class="proof" id="proof">
           <div class="pcard"><span class="pk">Telco · network operations <em>production</em></span><b>0<small> tickets without a cause</small></b><div class="pimg" style="--img:url(photos/telecom-s.jpg)"><canvas data-spark="telco"></canvas></div><div class="pt">IBM Network Intelligence, Granite TSPulse</div><div class="pd">Telemetry in, anomalies out, agentic root cause, remediation human-in-the-loop or autonomous.</div><div class="tags"><span>TSPulse</span><span>agentic RCA</span><span>MCP tools</span></div></div>
-          <div class="pcard"><span class="pk">Cement · production <em>production</em></span><b data-count="99" data-prefix="93 → " data-suffix="%">93%</b><div class="pimg" style="--img:url(photos/cement-plant-s.jpg)"><canvas data-spark="cement"></canvas></div><div class="pt">Process and quality models per mill</div><div class="pd">30 regression models became 2. 6 months became 8 to 10 weeks. $2 per ton EBITDA, tens to hundreds of millions in benefit.</div><div class="tags"><span>fine-tuned per mill</span><span>setpoints</span></div></div>
           <div class="pcard"><span class="pk">Financial services · markets <em>production</em></span><b data-count="10" data-prefix="~" data-suffix="% RMSE">~0%</b><div class="pimg" style="--img:url(photos/banking-charts-s.jpg)"><canvas data-spark="fin"></canvas></div><div class="pt">Multivariate asset forecasts, Granite TTM</div><div class="pd">Per asset class, against the incumbent model. Zero-shot first, tuned where the backtest paid.</div><div class="tags"><span>TTM</span><span>multivariate</span><span>backtested</span></div></div>
           <div class="pcard"><span class="pk">Grocery · planning <em>reference design</em></span><b data-count="10" data-prefix="+5 to " data-suffix=" pts">+0 pts</b><div class="pimg" style="--img:url(photos/retail-shelves-s.jpg)"><canvas data-spark="grocery"></canvas></div><div class="pt">Every SKU in every store, hourly</div><div class="pd">Around 100,000 SKUs across thousands of stores. Reorder point and purchase order raised in the stream from the P10 to P90 band.</div><div class="tags"><span>AI_FORECAST</span><span>P10 to P90</span><span>Tableflow</span></div></div>
-          <div class="pcard"><span class="pk">Retail · stores <em>demo</em></span><b data-count="1096" data-suffix=" days">0 days</b><div class="pimg" style="--img:url(photos/retail-bananas-s.jpg)"><canvas data-spark="retail"></canvas></div><div class="pt">Scored by one running statement</div><div class="pd">A stockout dip, an unplanned spike and a feed gap flagged the same day. 99.9% band, 512-day context, no labels.</div><div class="tags"><span>AI_DETECT_ANOMALIES</span><span>streaming mode</span></div></div>
-          <div class="pcard"><span class="pk">Process industries <em>solution</em></span><b>2<small> to </small>5×</b><div class="pimg" style="--img:url(photos/factory-structure-s.jpg)"><canvas data-spark="opt"></canvas></div><div class="pt">Faster process optimization</div><div class="pd">Steel, cement, paper. Forecasts with control variables, a setpoint optimizer and guardrails, operators approve at the gate.</div><div class="tags"><span>TS_OPTIMIZE</span><span>workbench</span></div></div>
         </div>
       </div>
     </div>
 
-    <div class="trust" id="trust">
-      <div class="trust-h">Governed by design</div>
-      <div class="trust-grid">
-        <div class="trust-i"><i></i><b>RBAC on every function</b><span>who can call what, per topic</span></div>
-        <div class="trust-i"><i></i><b>Schema Registry contracts</b><span>the shape of every stream, enforced</span></div>
-        <div class="trust-i"><i></i><b>Audit log</b><span>every agent call written down</span></div>
-        <div class="trust-i"><i></i><b>Five expert gates</b><span>data, model, accuracy, release, drift</span></div>
-        <div class="trust-i"><i></i><b>Runs inside your Confluent Cloud org</b><span>models hosted next to the topic</span></div>
-        <div class="trust-i"><i></i><b>Apache 2.0 models</b><span>open weights on Hugging Face</span></div>
-      </div>
     </div>
   </div>
 </section>
@@ -1021,15 +955,11 @@ FROM pos_sales;</code></pre></div>
       </div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
+    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
       <h2>Try it on your world.</h2>
-      <p>Four simulators. Each one is one Flink SQL function on a live topic.</p>
+      <p>Each simulator is one Flink SQL function on a live topic.</p>
     </div>
 
-    <div class="inds" id="inds">
-      <a class="ind" href="#uc-opt" data-tab="uc-opt" style="--img:url(photos/factory.jpg)"><span class="il">Factory</span><b>Quality held at 99%. Setpoints corrected inside the cycle.</b><span class="is">Production optimization &#8594;</span></a>
-      <a class="ind" href="#uc-demand" data-tab="uc-demand" style="--img:url(photos/retail-produce.jpg)"><span class="il">Retail</span><b>Every SKU in every store, forecast hourly. Orders raised in the stream.</b><span class="is">Demand and replenishment &#8594;</span></a>
-      <a class="ind" href="#uc-fraud" data-tab="uc-fraud" style="--img:url(photos/banking.jpg)"><span class="il">Banking</span><b>Every card has its own normal. The odd swipe is held before authorization.</b><span class="is">Fraud and payments &#8594;</span></a>
     </div>
 
     <div class="uctabs" role="tablist" id="uctabs">
@@ -1166,7 +1096,7 @@ FROM pos_sales;</code></pre></div>
     <div class="chapter-head">
       <span class="n">04 / START</span>
       <h2>Run it on your stream.</h2>
-      <p>Three moves. The first one takes a minute.</p>
+      <p>Three moves. The first one takes a minute. The models are Apache 2.0 on <a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a> if you would rather run them yourself.</p>
     </div>
     <div class="start-tiles">
       <div class="stile"><span class="sn">01</span><h3>Paste one statement</h3><p>Any topic with a value and a timestamp. Flink SQL on Confluent Cloud.</p>
@@ -1179,19 +1109,6 @@ FROM your_topic;</code></pre>
         <button class="btn sm ghost" id="start-copy">Copy SQL</button></div>
       <div class="stile"><span class="sn">02</span><h3>Get Early Access</h3><p>Granite models hosted by Confluent. AI_FORECAST and AI_DETECT_ANOMALIES today, TS_EMBED, TS_SEARCH and TS_OPTIMIZE next. <a href="#" class="walk-link">See the console walkthrough</a>.</p><a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Sign up with Confluent <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
       <div class="stile"><span class="sn">03</span><h3>Book a working session</h3><p>Bring a topic and a decision. IBM and Confluent teams, one afternoon, your data.</p><a class="btn sm ghost" href="#briefing">Build the note <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v10M4 8l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
-    </div>
-
-    <div class="ways" id="ways">
-      <div class="way"><span class="wk">Open source · free forever</span><h3>Run the models yourself</h3><p>Granite Time Series models under Apache 2.0 on Hugging Face. The granite-tsfm library, notebooks and benchmarks on GitHub. CPU is enough for TTM and TSPulse.</p>
-        <pre><code class="py">pip install granite-tsfm
-from tsfm_public import TinyTimeMixerForPrediction
-model = TinyTimeMixerForPrediction.from_pretrained(
-  "ibm-granite/granite-timeseries-ttm-r3")</code></pre>
-        <div class="btn-row"><a class="btn sm ghost" href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a class="btn sm ghost" href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a></div></div>
-      <div class="way on"><span class="wk">Managed on Confluent · Early Access</span><h3>Call them from Flink SQL</h3><p>Models hosted by Confluent, no infrastructure, no training loop. AI_FORECAST and AI_DETECT_ANOMALIES today, TS_EMBED, TS_SEARCH and TS_OPTIMIZE next, Streaming Agents on top. Billed as Flink compute.</p>
-        <pre><code class="sql">AI_FORECAST(value, event_time,
-  JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 12))</code></pre>
-        <div class="btn-row"><a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Join Early Access</a><a class="btn sm ghost" href="#briefing">Book a session</a></div></div>
     </div>
 
     <div class="stage" id="briefing" style="margin-top:12px">
@@ -1299,12 +1216,6 @@ FROM motor_telemetry;</code></pre></div>
   </div>
 </section>
 
-<div class="cta">
-  <div class="wrap">
-    <div><h2>The future of forecasting is streaming.</h2><p class="lede" style="margin-top:.5rem">Every event is a decision. Make it before the next one arrives.</p></div>
-    <div class="btn-row"><a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Join Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a><button class="btn ghost" id="share-link">Share this page</button><span class="toast" id="share-toast"></span></div>
-  </div>
-</div>
 <div class="walk" id="walk" hidden role="dialog" aria-modal="true" aria-label="Walkthrough on Confluent Cloud">
   <div class="walk-box">
     <div class="walk-top"><span class="walk-k"><i></i>Walkthrough · Confluent Cloud</span><span class="walk-src">Confluent, an IBM Company · Aug 2026</span><button class="pitch-x" id="walk-close" type="button" aria-label="Close the walkthrough">Close <kbd>Esc</kbd></button></div>
@@ -1343,7 +1254,7 @@ FROM motor_telemetry;</code></pre></div>
 <footer class="foot">
   <div class="wrap">
     <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. Early Access, October 2026.</span></div>
-    <div class="row" id="credits">Photos: <a href="https://stocksnap.io/photo/steel-industry-1PR1SGKS69" target="_blank" rel="noopener">Steel Industry</a> by Ant Rozetsky (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:Cementera,_Yura,_Per%C3%BA,_2015-08-01,_DD_129-131_HDR.JPG" target="_blank" rel="noopener">Cementera, Yura, Perú</a> by Diego Delso (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:DSC06651_Blast_Furnace_4,_voestalpine_Leoben-Donawitz,_2026.jpg" target="_blank" rel="noopener">Blast Furnace 4, Leoben-Donawitz</a> by Aciarium (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6037545/factory-structure-free-public-domain-cc0-photo" target="_blank" rel="noopener">Factory structure</a> by rawpixel (CC0) · <a href="https://www.flickr.com/photos/149400054@N04/54435322282" target="_blank" rel="noopener">Power plant workers in PPE</a> by EU-Ukraine cooperation (CC BY-SA 2.0) · <a href="https://www.rawpixel.com/image/5904812/photo-image-public-domain-free" target="_blank" rel="noopener">Supermarket aisle</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19" target="_blank" rel="noopener">Empty shelves, supermarket</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/bananas-fruits-D0C5D92CD9" target="_blank" rel="noopener">Bananas Fruits</a> by Ryan McGuire (CC0) · <a href="https://stocksnap.io/photo/building-architecture-ONN4Z188GF" target="_blank" rel="noopener">Building Architecture</a> by Vladimir Kudinov (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:Zaldiaran_-_Antenas_01.jpg" target="_blank" rel="noopener">Zaldiaran antenas</a> by Basotxerri (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0). Edited for color and crop.</div>
+    <div class="row" id="credits">Photos: <a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.flickr.com/photos/149400054@N04/54435322282" target="_blank" rel="noopener">Power plant workers in PPE</a> by EU-Ukraine cooperation (CC BY-SA 2.0) · <a href="https://www.rawpixel.com/image/5904812/photo-image-public-domain-free" target="_blank" rel="noopener">Supermarket aisle</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19" target="_blank" rel="noopener">Empty shelves, supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0). Edited for color and crop.</div>
     <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="#reference">Technical reference</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
   </div>
@@ -1627,8 +1538,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     ctx.strokeStyle=C.ink3;ctx.beginPath();ctx.moveTo(X(split)+0.5,4);ctx.lineTo(X(split)+0.5,H-4);ctx.stroke();}
   function all(){$$('canvas[data-glyph]',el).forEach(c=>glyph(c,c.dataset.glyph));}
   reg({el,resize:all});all();
-  once($('#bubbles'),()=>$('#bubbles').classList.add('in'));
-  once($('#bench'),()=>$('#bench').classList.add('in'));
+  ['#bubbles','#bench'].forEach(id=>{const x=$(id);if(x)once(x,()=>x.classList.add('in'));});
 })();
 
 /* ============ 02 decay ============ */
