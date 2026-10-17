@@ -1,0 +1,1526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="IBM Granite Time Series models run natively on Confluent Cloud for Apache Flink. Forecasting and anomaly detection called from Flink SQL, now in Early Access.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://ayansebin.github.io/realtimeai/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IBM Granite Time Series on Confluent">
+<meta property="og:description" content="Forecast, detect and optimize inside the stream. Granite Time Series models called from Flink SQL on Confluent Cloud, in Early Access.">
+<meta property="og:url" content="https://ayansebin.github.io/realtimeai/">
+<meta property="og:image" content="https://ayansebin.github.io/realtimeai/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IBM Granite Time Series on Confluent">
+<meta name="twitter:description" content="Forecast, detect and optimize inside the stream. Granite Time Series models called from Flink SQL on Confluent Cloud, in Early Access.">
+<meta name="twitter:image" content="https://ayansebin.github.io/realtimeai/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"IBM Granite Time Series on Confluent","url":"https://ayansebin.github.io/realtimeai/","description":"IBM Granite Time Series models run natively on Confluent Cloud for Apache Flink. Forecasting and anomaly detection called from Flink SQL, now in Early Access.","about":[{"@type":"Thing","name":"Time series foundation models"},{"@type":"Thing","name":"Apache Flink SQL"},{"@type":"Thing","name":"Real-time anomaly detection and forecasting"}]}</script>
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>IBM Granite Time Series on Confluent</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: Carbon-style left-aligned grid. Navy hero band with a live stream, then alternating white / gray-10 bands separated by hairlines. Square corners throughout. */
+:root{
+  --bg:#ffffff; --bg-alt:#f4f4f4; --surface:#ffffff; --surface-2:#f4f4f4;
+  --ink:#161616; --ink-2:#525252; --ink-3:#6f6f6f;
+  --line:#e0e0e0; --line-strong:#c6c6c6;
+  --accent:#0f62fe; --accent-hover:#0353e9; --link:#0f62fe; --link-hover:#0043ce;
+  --accent-soft:#edf5ff; --accent-soft-2:#d0e2ff; --accent-ink:#0043ce;
+  --navy:#001141; --navy-2:#001d6c; --navy-3:#002d9c; --on-navy:#ffffff; --on-navy-2:#c1c7cd; --on-navy-3:#8d99a8; --navy-line:rgba(255,255,255,.14);
+  --code-bg:#262626; --code-ink:#f4f4f4; --code-kw:#78a9ff; --code-str:#42be65; --code-num:#ff832b; --code-fn:#be95ff; --code-cm:#a8a8a8; --code-line:#393939;
+  --chart-series:#0f62fe; --chart-muted:#8d8d8d; --chart-grid:#e0e0e0; --chart-band:rgba(15,98,254,.10);
+  --critical:#da1e28; --good:#24a148; --warn:#ff832b; --warn-soft:#fff2e8;
+  --demo-bg:#001d6c; --demo-ink:#f4f4f4; --demo-ink-2:#a2a9b0; --demo-grid:rgba(255,255,255,.12); --demo-series:#78a9ff; --demo-band:rgba(120,169,255,.18); --demo-actual:#ffffff; --demo-critical:#ff8389; --demo-field:#002d9c;
+  --font-sans:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono',Menlo,Consolas,monospace;
+  --shadow:0 2px 6px rgba(0,0,0,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#161616; --bg-alt:#1f1f1f; --surface:#262626; --surface-2:#333333;
+    --ink:#f4f4f4; --ink-2:#c6c6c6; --ink-3:#a8a8a8;
+    --line:#393939; --line-strong:#525252;
+    --accent:#0f62fe; --accent-hover:#0353e9; --link:#78a9ff; --link-hover:#a6c8ff;
+    --accent-soft:#001d6c; --accent-soft-2:#002d9c; --accent-ink:#a6c8ff;
+    --navy:#000a2e; --navy-2:#001141; --navy-3:#001d6c;
+    --code-bg:#161616; --code-line:#393939;
+    --chart-series:#4589ff; --chart-muted:#8d8d8d; --chart-grid:#393939; --chart-band:rgba(69,137,255,.14);
+    --critical:#fa4d56; --good:#42be65; --warn:#ff832b; --warn-soft:#3a2010;
+    --demo-bg:#000f3d; --demo-field:#001d6c;
+    --shadow:0 2px 6px rgba(0,0,0,.4);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161616; --bg-alt:#1f1f1f; --surface:#262626; --surface-2:#333333;
+  --ink:#f4f4f4; --ink-2:#c6c6c6; --ink-3:#a8a8a8;
+  --line:#393939; --line-strong:#525252;
+  --accent:#0f62fe; --accent-hover:#0353e9; --link:#78a9ff; --link-hover:#a6c8ff;
+  --accent-soft:#001d6c; --accent-soft-2:#002d9c; --accent-ink:#a6c8ff;
+  --navy:#000a2e; --navy-2:#001141; --navy-3:#001d6c;
+  --code-bg:#161616; --code-line:#393939;
+  --chart-series:#4589ff; --chart-muted:#8d8d8d; --chart-grid:#393939; --chart-band:rgba(69,137,255,.14);
+  --critical:#fa4d56; --good:#42be65; --warn:#ff832b; --warn-soft:#3a2010;
+  --demo-bg:#000f3d; --demo-field:#001d6c;
+  --shadow:0 2px 6px rgba(0,0,0,.4);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:1.0625rem;line-height:1.55;font-weight:400;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
+h1,h2,h3,h4{margin:0;font-weight:400;text-wrap:balance;line-height:1.2}
+p{margin:0}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-hover);text-decoration:underline}
+code,pre,kbd{font-family:var(--font-mono)}
+code{font-size:.9em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1360px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:1056px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+.band{padding-block:clamp(56px,7vw,104px);border-top:1px solid var(--line)}
+.band.alt{background:var(--bg-alt)}
+.band.navy{background:var(--navy);color:var(--on-navy);border-top:0}
+.eyebrow{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.navy .eyebrow{color:var(--on-navy-3)}
+.h-display{font-size:clamp(2.25rem,5.2vw,4.25rem);font-weight:300;line-height:1.08;letter-spacing:-.015em;max-width:16ch}
+.h2{font-size:clamp(1.75rem,3.2vw,2.75rem);font-weight:300;line-height:1.15;letter-spacing:-.01em;max-width:22ch}
+.h3{font-size:1.25rem;font-weight:500;line-height:1.3}
+.lede{font-size:clamp(1.125rem,1.6vw,1.375rem);line-height:1.5;color:var(--ink-2);max-width:60ch;font-weight:300}
+.navy .lede{color:var(--on-navy-2)}
+.muted{color:var(--ink-2)}
+.small{font-size:.875rem;line-height:1.5}
+.tiny{font-size:.75rem;line-height:1.45;color:var(--ink-3)}
+.sec-head{display:grid;gap:1rem;max-width:72ch;margin-bottom:clamp(32px,4vw,56px)}
+.sec-head p{max-width:65ch}
+.mono{font-family:var(--font-mono)}
+.num{font-variant-numeric:tabular-nums}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:1.5rem;min-height:56px}
+.brand{display:flex;align-items:baseline;gap:.5rem;white-space:nowrap;color:var(--ink);font-weight:600;letter-spacing:-.01em;font-size:.95rem}
+.brand:hover{text-decoration:none}
+.brand .sep{color:var(--ink-3);font-weight:300}
+.brand .co{font-weight:400;color:var(--ink-2)}
+.nav-links{display:flex;gap:1.1rem;margin-left:auto;overflow-x:auto;scrollbar-width:none;font-size:.86rem;min-width:0}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:var(--ink-2);white-space:nowrap;padding:.25rem 0}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.nav .btn{min-height:40px;padding-block:0;font-size:.875rem;gap:1rem;flex:none}
+@media (max-width:760px){.nav .wrap{flex-wrap:wrap;row-gap:0;padding-block:.5rem}.nav-links{order:3;width:100%;margin-left:0;padding-bottom:.25rem}.nav .btn{margin-left:auto}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:2rem;min-height:48px;padding:.6rem 1rem;background:var(--accent);color:#fff;font:inherit;font-size:.95rem;font-weight:400;border:1px solid transparent;cursor:pointer;text-decoration:none;line-height:1.2;transition:background .12s}
+.btn:hover{background:var(--accent-hover);color:#fff;text-decoration:none}
+.btn svg{width:16px;height:16px;flex:none}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--bg)}
+.navy .btn.ghost{color:var(--on-navy);border-color:var(--on-navy)}
+.navy .btn.ghost:hover{background:var(--on-navy);color:var(--navy)}
+.btn.sm{min-height:36px;padding:.35rem .75rem;font-size:.85rem;gap:.75rem}
+.btn-row{display:flex;flex-wrap:wrap;gap:.75rem 1rem}
+
+/* hero */
+.hero{padding-block:clamp(48px,6vw,88px) clamp(48px,6vw,80px);background:var(--navy);color:var(--on-navy)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:2.5rem}
+@media (min-width:980px){.hero-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:3rem;align-items:start}}
+.hero-copy{display:grid;gap:1.5rem;align-content:start}
+.hero-copy .eyebrow{display:flex;flex-wrap:wrap;gap:.5rem .75rem;align-items:center}
+.pill{display:inline-block;border:1px solid var(--navy-line);padding:.15rem .5rem;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--on-navy-2)}
+.pill.live{border-color:rgba(66,190,101,.6);color:#6fdc8c}
+.pill.live::before{content:"";display:inline-block;width:6px;height:6px;background:#42be65;margin-right:.4rem;vertical-align:1px}
+.hero .fine{font-size:.85rem;color:var(--on-navy-3)}
+
+/* demo panel */
+.demo{background:var(--demo-bg);border:1px solid var(--navy-line);display:grid;gap:0;min-width:0}
+.demo-head{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;padding:.8rem 1rem;border-bottom:1px solid var(--navy-line)}
+.demo-head .title{font-family:var(--font-mono);font-size:.85rem;color:var(--demo-ink)}
+.seg{display:inline-flex;border:1px solid var(--navy-line)}
+.seg button{font:inherit;font-size:.8rem;padding:.4rem .7rem;background:transparent;color:var(--on-navy-2);border:0;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--on-navy);color:var(--navy)}
+.demo-controls{display:flex;flex-wrap:wrap;gap:.6rem .9rem;padding:.75rem 1rem;border-bottom:1px solid var(--navy-line);align-items:end}
+.ctl{display:grid;gap:.25rem;min-width:0}
+.ctl label{font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--on-navy-3)}
+.ctl select,.ctl input[type=range]{font:inherit;font-size:.85rem;color:var(--demo-ink);background:var(--demo-field);border:0;border-bottom:1px solid var(--on-navy-3);padding:.4rem .5rem;min-width:9rem}
+.ctl input[type=range]{padding:0;min-width:7rem;accent-color:var(--demo-series)}
+.ctl .val{font-family:var(--font-mono);font-size:.8rem;color:var(--demo-ink)}
+.demo-controls .btn.sm{background:transparent;border-color:var(--on-navy-2);color:var(--on-navy);min-height:34px}
+.demo-controls .btn.sm:hover{background:var(--on-navy);color:var(--navy)}
+.chart-wrap{position:relative;padding:.5rem .5rem 0}
+.chart-wrap canvas{display:block;width:100%;height:272px}
+@media (max-width:600px){.chart-wrap canvas{height:220px}}
+.tip{position:absolute;pointer-events:none;background:var(--navy);color:var(--demo-ink);border:1px solid var(--navy-line);padding:.4rem .6rem;font-family:var(--font-mono);font-size:.72rem;line-height:1.4;white-space:nowrap;transform:translate(-50%,-110%);display:none;z-index:2}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;padding:.4rem 1rem .6rem;font-size:.75rem;color:var(--on-navy-2)}
+.legend span{display:inline-flex;align-items:center;gap:.4rem}
+.legend i{display:inline-block;width:14px;height:2px;background:var(--demo-actual)}
+.legend i.fc{background:var(--demo-series)}
+.legend i.swband{height:8px;background:var(--demo-band);border-top:1px solid var(--demo-series)}
+.legend i.anom{width:8px;height:8px;background:var(--demo-critical);border-radius:50%}
+.demo-out{display:grid;gap:0;border-top:1px solid var(--navy-line)}
+@media (min-width:760px){.demo-out{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.demo-out>div{padding:.75rem 1rem;min-width:0}
+.demo-out>div+div{border-top:1px solid var(--navy-line)}
+@media (min-width:760px){.demo-out>div+div{border-top:0;border-left:1px solid var(--navy-line)}}
+.demo-out .lbl{font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--on-navy-3);margin-bottom:.4rem;display:flex;justify-content:space-between;gap:1rem}
+.outtbl{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:.72rem;color:var(--demo-ink);font-variant-numeric:tabular-nums}
+.outtbl th{text-align:left;font-weight:400;color:var(--on-navy-3);padding:.2rem .4rem .2rem 0;border-bottom:1px solid var(--navy-line);white-space:nowrap}
+.outtbl td{padding:.22rem .4rem .22rem 0;border-bottom:1px solid rgba(255,255,255,.06);white-space:nowrap}
+.outtbl td.t{color:var(--demo-critical);font-weight:500}
+.outtbl-wrap{overflow-x:auto}
+.demo pre{margin:0;font-size:.74rem;line-height:1.5;color:var(--demo-ink);white-space:pre;overflow-x:auto}
+.demo .note{font-size:.72rem;color:var(--on-navy-3);padding:.5rem 1rem .75rem;border-top:1px solid var(--navy-line)}
+
+/* proof strip */
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border:1px solid var(--line);background:var(--surface)}
+.proof>div{padding:1.25rem 1.25rem 1.1rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:.35rem;align-content:start}
+.proof .big{font-size:2rem;font-weight:300;line-height:1.1;letter-spacing:-.01em}
+.proof .what{font-size:.9rem;line-height:1.4}
+.proof .src{font-size:.72rem;color:var(--ink-3);line-height:1.4}
+
+/* grids & cards */
+.grid{display:grid;gap:1.5rem}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.grid.c4{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.card{background:var(--surface);border:1px solid var(--line);padding:1.5rem;display:grid;gap:.75rem;align-content:start;min-width:0}
+.card .eyebrow{margin-bottom:.1rem}
+.card p{color:var(--ink-2);font-size:.95rem}
+.card h3{font-size:1.15rem;font-weight:500}
+.story{display:grid;gap:.6rem;font-size:.95rem}
+.story dt{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-top:.35rem}
+.story dd{margin:0;color:var(--ink-2)}
+.story dd.outcome{color:var(--ink);font-weight:500}
+.list{margin:0;padding-left:1.1rem;color:var(--ink-2);display:grid;gap:.4rem;font-size:.95rem}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.3rem 1rem;font-size:.9rem;color:var(--ink-2)}
+.kv dt{color:var(--ink-3);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;padding-top:.15rem}
+.kv dd{margin:0;min-width:0}
+.tag{display:inline-block;border:1px solid var(--line-strong);padding:.1rem .5rem;font-size:.74rem;color:var(--ink-2);margin:.15rem .3rem .15rem 0}
+.tag.blue{border-color:transparent;background:var(--accent-soft);color:var(--accent-ink)}
+.tag.warn{border-color:transparent;background:var(--warn-soft);color:var(--ink)}
+
+/* two-column split */
+.split{display:grid;gap:2rem;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.split{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:3rem}}
+.split.even{grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.split.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table.tbl{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+.tbl th,.tbl td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-weight:500;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);background:var(--bg-alt)}
+.tbl td{color:var(--ink-2)}
+.tbl td:first-child{color:var(--ink);font-weight:500}
+.tbl tr:last-child td{border-bottom:0}
+.tbl code{background:var(--bg-alt);padding:.05rem .3rem;font-size:.82em;color:var(--ink)}
+.tbl.compare td.us{color:var(--ink)}
+.tbl.compare th.us{color:var(--accent-ink);background:var(--accent-soft)}
+
+/* code */
+.codebox{background:var(--code-bg);border:1px solid var(--code-line);color:var(--code-ink);min-width:0}
+.codebox .bar{display:flex;align-items:center;gap:1rem;padding:.5rem .75rem .5rem 1rem;border-bottom:1px solid var(--code-line);font-family:var(--font-mono);font-size:.75rem;color:var(--code-cm)}
+.codebox .bar .copy{margin-left:auto;font:inherit;font-size:.75rem;color:var(--code-ink);background:transparent;border:1px solid var(--code-line);padding:.3rem .6rem;cursor:pointer}
+.codebox .bar .copy:hover{border-color:var(--code-ink)}
+.codebox pre{margin:0;padding:1rem;overflow-x:auto;font-size:.82rem;line-height:1.55;white-space:pre}
+.k{color:var(--code-kw)} .s{color:var(--code-str)} .n{color:var(--code-num)} .f{color:var(--code-fn);font-weight:500} .c{color:var(--code-cm);font-style:italic}
+.tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--line);margin-bottom:1rem}
+.tabs button{font:inherit;font-size:.9rem;padding:.65rem 1rem;background:transparent;color:var(--ink-2);border:0;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:500}
+.tabs button:hover{color:var(--ink);background:var(--bg-alt)}
+.tabpanel[hidden]{display:none}
+.tabpanel{display:grid;gap:1rem}
+.tabpanel .why{font-size:.95rem;color:var(--ink-2);max-width:70ch}
+
+/* diagrams & charts */
+.diagram{overflow-x:auto;border:1px solid var(--line);background:var(--surface);padding:1rem}
+.diagram svg{display:block;min-width:860px;width:100%;height:auto}
+.fig{display:grid;gap:.75rem}
+.fig figcaption{font-size:.8rem;color:var(--ink-3);line-height:1.45}
+.chart{border:1px solid var(--line);background:var(--surface);padding:1.25rem;display:grid;gap:.75rem;min-width:0}
+.chart h3{font-size:1rem;font-weight:500}
+.chart .sub{font-size:.85rem;color:var(--ink-2)}
+.chart svg{width:100%;height:auto;display:block;font-family:var(--font-sans)}
+.bars{display:grid;gap:.6rem;font-size:.85rem}
+.bar-row{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:.75rem;align-items:center}
+.bar-row .lab{color:var(--ink-2)}
+.bar-row .track{position:relative;height:18px;display:flex;align-items:center}
+.bar-row .fill{height:14px;background:var(--chart-series);border-radius:0 4px 4px 0}
+.bar-row .v{margin-left:.5rem;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.legend-row{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;font-size:.8rem;color:var(--ink-2)}
+.legend-row i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:.4rem;vertical-align:-1px}
+
+/* roadmap */
+.road{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.road .card{border-top:3px solid var(--line-strong)}
+.road .card.now{border-top-color:var(--good)}
+.road .card.next{border-top-color:var(--accent)}
+.road .card.then{border-top-color:var(--ink-3)}
+
+/* chooser */
+.chooser{display:grid;gap:1.25rem}
+@media (min-width:900px){.chooser{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}}
+.q{display:grid;gap:.5rem;padding:1rem 0;border-top:1px solid var(--line)}
+.q .qt{font-weight:500;font-size:.95rem}
+.q .opts{display:flex;flex-wrap:wrap;gap:.5rem}
+.q label{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line-strong);padding:.4rem .75rem;font-size:.88rem;cursor:pointer;background:var(--surface)}
+.q label:has(input:checked){border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+.q input{accent-color:var(--accent);margin:0}
+.reco{background:var(--accent-soft);border:1px solid var(--accent-soft-2);padding:1.5rem;display:grid;gap:.6rem;align-content:start;position:sticky;top:calc(72px + env(safe-area-inset-top,0px))}
+.reco .big{font-size:1.6rem;font-weight:400;letter-spacing:-.01em}
+.reco code{background:var(--surface);padding:.1rem .4rem;color:var(--ink)}
+.reco p{font-size:.92rem;color:var(--ink-2)}
+
+/* steps */
+.steps{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));counter-reset:step}
+.steps .card{position:relative;padding-top:1.5rem}
+.steps .card::before{counter-increment:step;content:counter(step);font-family:var(--font-mono);font-size:.8rem;color:var(--accent-ink);background:var(--accent-soft);padding:.15rem .5rem;display:inline-block;width:max-content}
+
+/* resources */
+.res{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));border:1px solid var(--line);background:var(--surface)}
+.res a{display:grid;gap:.3rem;padding:1.1rem 1.25rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--ink);min-width:0}
+.res a:hover{background:var(--bg-alt);text-decoration:none}
+.res a .t{font-weight:500;font-size:.95rem;display:flex;justify-content:space-between;gap:1rem;align-items:start}
+.res a .t svg{width:16px;height:16px;flex:none;color:var(--accent-ink);margin-top:.2rem}
+.res a .d{font-size:.82rem;color:var(--ink-2)}
+
+/* form */
+.form{display:grid;gap:1rem}
+.form .row{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.field{display:grid;gap:.3rem}
+.field label{font-size:.78rem;letter-spacing:.03em;color:var(--ink-2)}
+.field input,.field select,.field textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--surface-2);border:0;border-bottom:1px solid var(--line-strong);padding:.65rem .75rem;width:100%;min-width:0}
+.field textarea{min-height:92px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:-2px}
+.note-out{background:var(--surface);border:1px solid var(--line);padding:1rem 1.25rem;display:grid;gap:.75rem}
+.note-out pre{margin:0;white-space:pre-wrap;font-family:var(--font-sans);font-size:.92rem;line-height:1.5;color:var(--ink-2)}
+.toast{font-size:.85rem;color:var(--good);min-height:1.2em}
+
+/* faq */
+.faq{display:grid;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:1rem 0;font-weight:500;font-size:1rem;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:300;font-size:1.4rem;color:var(--ink-3);flex:none}
+.faq details[open] summary::after{content:"\2212"}
+.faq .a{padding:0 0 1.1rem;color:var(--ink-2);max-width:72ch;font-size:.95rem;display:grid;gap:.5rem}
+
+/* cta band */
+.cta{background:var(--accent);color:#fff;padding-block:clamp(48px,6vw,80px)}
+.cta .h2{color:#fff;max-width:26ch}
+.cta p{color:rgba(255,255,255,.85);max-width:60ch}
+.cta .btn{background:#fff;color:var(--accent-ink)}
+.cta .btn:hover{background:#edf5ff}
+.cta .btn.ghost{background:transparent;color:#fff;border-color:#fff}
+.cta .btn.ghost:hover{background:#fff;color:var(--accent-ink)}
+
+/* footer */
+footer{padding-block:2.5rem 3rem;border-top:1px solid var(--line);font-size:.8rem;color:var(--ink-3);display:grid;gap:1rem}
+footer .srcs{display:grid;gap:.25rem}
+footer a{color:var(--ink-2)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.hl{color:var(--accent-ink);font-weight:500}
+.callout{border-left:3px solid var(--accent);background:var(--accent-soft);padding:1rem 1.25rem;display:grid;gap:.35rem;font-size:.95rem}
+.callout .t{font-weight:500}
+.callout p{color:var(--ink-2)}
+.navy .callout{background:rgba(255,255,255,.05);border-left-color:var(--demo-series)}
+.navy .callout p{color:var(--on-navy-2)}
+.kpi-note{display:flex;gap:.5rem;align-items:start;font-size:.8rem;color:var(--ink-3)}
+</style>
+<a class="sr" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Page">
+  <div class="wrap">
+    <a class="brand" href="#top">IBM Granite Time Series <span class="sep">/</span> <span class="co">on Confluent</span></a>
+    <div class="nav-links">
+      <a href="#why">Why the stream</a>
+      <a href="#how">How it works</a>
+      <a href="#sql">Flink SQL</a>
+      <a href="#models">Models</a>
+      <a href="#benchmarks">Benchmarks</a>
+      <a href="#usecases">Use cases</a>
+      <a href="#start">Get started</a>
+    </div>
+    <a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Enroll in Early Access <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+  </div>
+</nav>
+
+<main id="main">
+<section class="hero navy" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="pill live">Early Access</span><span class="pill">Confluent Cloud for Apache Flink</span><span class="pill">AWS first, Confluent Platform next</span></div>
+      <h1 class="h-display">Forecast, detect and optimize inside the stream.</h1>
+      <p class="lede">IBM Granite Time Series models now run natively on Confluent Cloud for Apache Flink. One SQL call scores every event as it arrives. No model training, no feature engineering, no separate ML stack.</p>
+      <div class="btn-row">
+        <a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Enroll in Early Access <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a class="btn ghost" href="#sql">Read the Flink SQL <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg></a>
+      </div>
+      <p class="fine">No charge for the models during Early Access. Switch between four models with one SQL parameter. Open weights on Hugging Face, 44M+ downloads.</p>
+    </div>
+
+    <div class="demo" id="demo" aria-label="Interactive stream simulation">
+      <div class="demo-head">
+        <span class="title" id="demo-title">AI_DETECT_ANOMALIES · tempering_line</span>
+        <div class="seg" role="group" aria-label="Function" style="margin-left:auto">
+          <button type="button" id="mode-ad" aria-pressed="true">Detect anomalies</button>
+          <button type="button" id="mode-fc" aria-pressed="false">Forecast</button>
+        </div>
+      </div>
+      <div class="demo-controls">
+        <div class="ctl"><label for="scenario">Stream</label>
+          <select id="scenario">
+            <option value="temp">Tempering line temperature</option>
+            <option value="latency">API response time</option>
+            <option value="payments">Card spend per minute</option>
+            <option value="load">Substation load</option>
+          </select></div>
+        <div class="ctl"><label for="model">model</label>
+          <select id="model">
+            <option value="ttm">ttm (Granite TTM, default)</option>
+            <option value="flowstate">flowstate (Granite FlowState)</option>
+            <option value="patchtstfm">patchtstfm (Granite PatchTST-FM)</option>
+            <option value="timesfm-2.5">timesfm-2.5 (Google)</option>
+          </select></div>
+        <div class="ctl" id="ctl-conf"><label for="conf">confidencePercentage</label>
+          <select id="conf"><option value="80">80</option><option value="90">90</option><option value="95">95</option><option value="99" selected>99</option></select></div>
+        <div class="ctl" id="ctl-horizon" hidden><label for="horizon">horizon <span class="val" id="horizon-val">12</span></label>
+          <input type="range" id="horizon" min="3" max="24" value="12"></div>
+        <button type="button" class="btn sm" id="inject">Inject a spike</button>
+        <button type="button" class="btn sm" id="pause" aria-pressed="false">Pause</button>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="stream" role="img" aria-label="Simulated stream with model prediction band and flagged anomalies"></canvas>
+        <div class="tip" id="tip"></div>
+      </div>
+      <div class="legend">
+        <span><i></i> actual value</span>
+        <span><i class="fc"></i> forecast mean</span>
+        <span><i class="swband"></i> prediction interval</span>
+        <span><i class="anom"></i> is_anomaly = TRUE</span>
+      </div>
+      <div class="demo-out">
+        <div>
+          <div class="lbl"><span id="out-lbl">Output ROW, latest events</span><span id="out-count"></span></div>
+          <div class="outtbl-wrap"><table class="outtbl" id="outtbl"><thead></thead><tbody></tbody></table></div>
+        </div>
+        <div>
+          <div class="lbl"><span>Flink SQL for this panel</span><button type="button" class="copy" id="copy-demo" style="font:inherit;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;background:transparent;border:1px solid var(--navy-line);color:var(--on-navy-2);padding:.15rem .5rem;cursor:pointer">Copy</button></div>
+          <pre id="demo-sql"></pre>
+        </div>
+      </div>
+      <div class="note">Simulation runs in your browser to show the shape of the output. It is not model inference. The SQL is real and runs on Confluent Cloud for Apache Flink with Early Access enabled.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="border-top:0;padding-block:0">
+  <div class="wrap" style="transform:translateY(-1px)">
+    <div class="proof" aria-label="Proof points">
+      <div><span class="big">44M+</span><span class="what">downloads of IBM Granite Time Series models on Hugging Face</span><span class="src">Joint IBM and Confluent announcement, September 2026</span></div>
+      <div><span class="big">#1</span><span class="what">zero-shot model under a commercial-friendly license on GIFT-Eval, CRPS and MASE</span><span class="src">PatchTST-FM-r2 model card, as of August 31, 2026</span></div>
+      <div><span class="big">#1</span><span class="what">on the TSB-AD anomaly detection leaderboard, univariate and multivariate</span><span class="src">TSPulse paper, arXiv 2505.13033</span></div>
+      <div><span class="big">1M to 385M</span><span class="what">parameters. CPU inference, no GPU required</span><span class="src">Hugging Face model cards, October 2026</span></div>
+      <div><span class="big">5 to 10×</span><span class="what">productivity gains reported with design partners in cement, steel, pulp and paper, food and telecommunications</span><span class="src">IBM Research, Hugging Face blog</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Why the stream</span>
+      <h2 class="h2">The decision window closes faster than the batch job runs.</h2>
+      <p class="lede">Most forecasting and detection still runs on old economics: one bespoke model per series and months of expert work on each. So teams model the few hundred series where the money is and cover the rest with safety stock, extra headroom and wider tolerances, acted on after the window has closed. That margin is the cost of a decision nobody could forecast, paid every cycle.</p>
+    </div>
+    <div class="split">
+      <figure class="fig">
+        <svg viewBox="0 0 520 260" role="img" aria-labelledby="decay-t" style="width:100%;height:auto;display:block">
+          <title id="decay-t">The value of a signal decays with the time it takes to act on it</title>
+          <g stroke="var(--chart-grid)" stroke-width="1">
+            <line x1="56" y1="40" x2="56" y2="210"/>
+            <line x1="56" y1="210" x2="500" y2="210"/>
+          </g>
+          <path d="M56 48 C 120 50, 170 90, 230 130 S 380 195, 500 205" fill="none" stroke="var(--chart-series)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M56 48 C 120 50, 170 90, 230 130 S 380 195, 500 205 L 500 210 L 56 210 Z" fill="var(--chart-band)"/>
+          <g fill="var(--chart-series)" stroke="var(--surface)" stroke-width="2">
+            <circle cx="72" cy="50" r="5"/><circle cx="190" cy="98" r="5"/><circle cx="330" cy="178" r="5"/><circle cx="470" cy="203" r="5"/>
+          </g>
+          <g font-size="12" fill="var(--ink-2)">
+            <text x="80" y="38">seconds: in-flight decision</text>
+            <text x="198" y="90">minutes: work order, block, re-route</text>
+            <text x="338" y="170">hours: incident, markdown, rework</text>
+            <text x="402" y="232">days: outage, stockout, write-off</text>
+          </g>
+          <g font-size="11" fill="var(--ink-3)">
+            <text x="30" y="52" text-anchor="end" transform="rotate(-90 30 52)" style="display:none">value</text>
+            <text x="56" y="252">time between an event and knowing about it</text>
+            <text x="52" y="46" text-anchor="end">high</text>
+            <text x="52" y="212" text-anchor="end">low</text>
+            <text x="46" y="130" text-anchor="middle" transform="rotate(-90 46 130)">value of acting</text>
+          </g>
+        </svg>
+        <figcaption>A pump caught drifting today is a work order. The same pump next week is an outage. Scoring in the stream moves the decision to the left of this curve.</figcaption>
+      </figure>
+      <div style="display:grid;gap:1.25rem;align-content:start">
+        <p>A time series foundation model changes the economics. Trained once across vast, varied signals, it generalizes to a series it has never seen. Give it a window of measurements and it returns what comes next, how far behaviour sits from normal, which history looks like this one, and which settings best serve a target. A demand planner, a fraud analyst or a process engineer can put it to work on their own streams.</p>
+        <p>Forecasting and detection are stateful. The next value only means something against recent history, and an anomaly only exists against a running sense of normal. Flink manages that state, keyed per series and fault tolerant, so every model call gets the history it needs without a separate data store or a database hit per event.</p>
+        <div class="callout"><span class="t">Score in the stream. Train, backtest and evaluate at rest.</span><p>The lakehouse stays the right place for bulk historical scoring, backtesting and fine-tuning. Tableflow lands inference results from Kafka topics as Iceberg or Delta Lake tables for exactly that, so the two estates share one lineage.</p></div>
+      </div>
+    </div>
+
+    <div class="grid c3" style="margin-top:3rem">
+      <article class="card">
+        <span class="eyebrow">Demand planner, grocery retail</span>
+        <h3>She plans the head of the catalogue. The tail sits on the shelf as working capital.</h3>
+        <dl class="story">
+          <dt>Pain</dt><dd>One model per SKU, refit by hand, so planning never reaches the long tail. New launches start with no history at all.</dd>
+          <dt>Wants</dt><dd>One shared model across 100,000 SKUs nightly on CPU, returning a distribution rather than a single line, so service level becomes a policy she can state out loud.</dd>
+          <dt>Outcome</dt><dd class="outcome">Reorder points off the 90th percentile. Fewer stockouts and markdowns. Freed working capital, usually the largest line in the business case.</dd>
+        </dl>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Fraud lead, retail bank</span>
+        <h3>Rules are enumerable, so adversaries enumerate them. Labels are scarce and stale.</h3>
+        <dl class="story">
+          <dt>Pain</dt><dd>Tightening a rule declines more honest customers. Bespoke models wait for labelled cases that arrive late, and false alarms cost more than the crime.</dd>
+          <dt>Wants</dt><dd>A sense of normal per card, scored while the payment is in flight, that transfers to new products and corridors on day one.</dd>
+          <dt>Outcome</dt><dd class="outcome">The alarm fires before the money moves. The same customer on an honest holiday sails through. Every score becomes a trigger: block, escalate with the closest past cases attached, or hand to an agent.</dd>
+        </dl>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Process engineer, consumer goods plant</span>
+        <h3>Statistical models drift. Rule-based control holds a setpoint but never improves it.</h3>
+        <dl class="story">
+          <dt>Pain</dt><dd>Months of bespoke modelling per line, and recommendations nobody can interrogate, so optimization stays in pilots and the plant runs on margins.</dd>
+          <dt>Wants</dt><dd>A forecast conditioned on the settings the crew controls, so it becomes a simulator and an optimizer searches it against a KPI he names, inside his constraints.</dd>
+          <dt>Outcome</dt><dd class="outcome">Months become days. One point on an operation turning over hundreds of millions is a seven-figure line, and the person who knows the line steers it.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="compare">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">In the warehouse or in the stream</span>
+      <h2 class="h2">SQL-native forecasting exists in every warehouse. The difference is where it runs.</h2>
+      <p class="muted">BigQuery AI.FORECAST, Snowflake ML functions and Databricks ai_forecast score tables at query or job time. That is the right tool for backtesting and bulk scoring. Decisions that pay for speed need the score on the event, while the event is still in flight.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl compare">
+        <thead><tr><th style="width:20%">Dimension</th><th>Warehouse ML functions</th><th class="us">IBM Granite Time Series on Confluent</th></tr></thead>
+        <tbody>
+          <tr><td>Where inference runs</td><td>On tables, when a query or a scheduled job runs</td><td class="us">On each event as it arrives, inside Confluent Cloud for Apache Flink</td></tr>
+          <tr><td>Model choice</td><td>Typically one built-in model per function</td><td class="us">A portfolio switched with one SQL parameter: <code>ttm</code>, <code>flowstate</code>, <code>patchtstfm</code>, plus Google <code>timesfm-2.5</code></td></tr>
+          <tr><td>History and state</td><td>Lookback window rebuilt per query</td><td class="us">Flink keeps per-series state, keyed and fault tolerant, so each call sees its own history</td></tr>
+          <tr><td>Where results land</td><td>A result table</td><td class="us">A Kafka topic with fanout to alerts, dashboards, the lakehouse through Tableflow, and Streaming Agents</td></tr>
+          <tr><td>Governance</td><td>Warehouse access controls</td><td class="us">Same schemas, lineage and RBAC as every other topic. Replayable topics support audit, model evaluation and rerunning inference on history</td></tr>
+          <tr><td>Infrastructure to run</td><td>None</td><td class="us">None. Confluent hosts the models, with no provider credentials, no GPUs to provision and no cloud ingress or egress fees</td></tr>
+          <tr><td>Best for</td><td>Backtesting, bulk scoring, fine-tuning, reporting</td><td class="us">Scoring in flight and turning the result into an action within the decision window</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiny" style="margin-top:.75rem">Warehouse function names belong to their vendors and are listed for orientation. Capabilities change, check each vendor's documentation.</p>
+  </div>
+</section>
+
+<section class="band" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How it works</span>
+      <h2 class="h2">Granite reads the signal. Confluent supplies the context, the governance and the delivery.</h2>
+      <p class="muted">Confluent Cloud provides native inference: the models are hosted by Confluent and called from Flink SQL. Inference results are written to Kafka topics and shared with fanout, consumable by alerting systems, dashboards, lakehouses and AI agents.</p>
+    </div>
+    <div class="diagram" role="img" aria-label="Architecture: sources flow into Kafka topics, Flink SQL calls AI_FORECAST and AI_DETECT_ANOMALIES with Granite models hosted by Confluent, results land on topics consumed by alerts, dashboards, the lakehouse and agents">
+      <svg viewBox="0 0 1180 318" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-3)"/></marker></defs>
+        <g font-family="var(--font-sans)">
+          <!-- sources -->
+          <rect x="10" y="30" width="200" height="236" fill="var(--bg-alt)" stroke="var(--line)"/>
+          <text x="26" y="58" font-size="12" fill="var(--ink-3)" letter-spacing="1">SOURCES</text>
+          <g font-size="14" fill="var(--ink)">
+            <text x="26" y="92">Sensors and SCADA</text>
+            <text x="26" y="124">Payments and orders</text>
+            <text x="26" y="156">Application metrics</text>
+            <text x="26" y="188">Database change capture</text>
+            <text x="26" y="220">Historians and IoT</text>
+          </g>
+          <text x="26" y="250" font-size="12" fill="var(--ink-3)">200+ connectors</text>
+          <!-- topics -->
+          <rect x="250" y="30" width="190" height="236" fill="var(--surface)" stroke="var(--line-strong)"/>
+          <text x="266" y="58" font-size="12" fill="var(--ink-3)" letter-spacing="1">KAFKA TOPICS</text>
+          <g font-size="14" fill="var(--ink)">
+            <text x="266" y="92">Schema Registry</text>
+            <text x="266" y="124">Stream lineage</text>
+            <text x="266" y="156">RBAC and privacy</text>
+            <text x="266" y="188">Durable and replayable</text>
+          </g>
+          <text x="266" y="250" font-size="12" fill="var(--ink-3)">data in motion</text>
+          <!-- flink -->
+          <rect x="480" y="14" width="380" height="268" fill="var(--accent-soft)" stroke="var(--accent-soft-2)"/>
+          <text x="496" y="42" font-size="12" fill="var(--accent-ink)" letter-spacing="1">CONFLUENT CLOUD FOR APACHE FLINK</text>
+          <rect x="496" y="56" width="348" height="70" fill="var(--surface)" stroke="var(--line)"/>
+          <text x="512" y="82" font-family="var(--font-mono)" font-size="13" fill="var(--ink)">AI_FORECAST(value, ts, config)</text>
+          <text x="512" y="108" font-family="var(--font-mono)" font-size="13" fill="var(--ink)">AI_DETECT_ANOMALIES(value, ts, config)</text>
+          <rect x="496" y="138" width="168" height="98" fill="var(--surface)" stroke="var(--line)"/>
+          <text x="510" y="160" font-size="12" fill="var(--ink-3)" letter-spacing="1">GRANITE MODELS</text>
+          <g font-size="13" fill="var(--ink)">
+            <text x="510" y="184">TTM · FlowState</text>
+            <text x="510" y="204">PatchTST-FM · TSPulse</text>
+            <text x="510" y="226" fill="var(--ink-3)" font-size="12">hosted by Confluent, CPU</text>
+          </g>
+          <rect x="676" y="138" width="168" height="98" fill="var(--surface)" stroke="var(--line)"/>
+          <text x="690" y="160" font-size="12" fill="var(--ink-3)" letter-spacing="1">FLINK STATE</text>
+          <g font-size="13" fill="var(--ink)">
+            <text x="690" y="184">OVER window per series</text>
+            <text x="690" y="204">PARTITION BY key</text>
+            <text x="690" y="226" fill="var(--ink-3)" font-size="12">checkpointed state</text>
+          </g>
+          <text x="496" y="266" font-size="12" fill="var(--accent-ink)">zero configuration · no provider credentials · billed in CFUs</text>
+          <!-- results -->
+          <rect x="900" y="30" width="270" height="236" fill="var(--surface)" stroke="var(--line-strong)"/>
+          <text x="916" y="58" font-size="12" fill="var(--ink-3)" letter-spacing="1">RESULT TOPICS, FANOUT</text>
+          <g font-size="14" fill="var(--ink)">
+            <text x="916" y="92">Alerts and work orders</text>
+            <text x="916" y="124">Dashboards and apps</text>
+            <text x="916" y="156">Lakehouse via Tableflow</text>
+            <text x="916" y="188">Streaming Agents and MCP</text>
+            <text x="916" y="220">Replenishment, pricing, control</text>
+          </g>
+          <text x="916" y="250" font-size="12" fill="var(--ink-3)">the signal becomes a trigger</text>
+          <!-- arrows -->
+          <g stroke="var(--ink-3)" stroke-width="1.5" fill="none" marker-end="url(#arr)">
+            <path d="M210 148 L248 148"/>
+            <path d="M440 148 L478 148"/>
+            <path d="M860 148 L898 148"/>
+          </g>
+          <text x="590" y="306" font-size="12" fill="var(--ink-3)">Confluent Platform brings the same functions to on-premises and hybrid estates next.</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="split even" style="margin-top:3rem">
+      <div class="card">
+        <span class="eyebrow">What Confluent brings</span>
+        <h3>The live state of the business, and reach to every system that acts</h3>
+        <ul class="list">
+          <li>Native inference hosted in Confluent Cloud, called from Flink SQL. No model serving, scaling or runtime to operate.</li>
+          <li>Flink stateful processing: lookback windows keyed per series, checkpointed and fault tolerant.</li>
+          <li>Fresh, enriched context from sensor telemetry, payment activity and application metrics, joined in the stream.</li>
+          <li>Governance built in: schemas, lineage and RBAC apply to inference pipelines like any other topic.</li>
+          <li>Results on Kafka topics with fanout to alerts, dashboards, lakehouses through Tableflow, and Streaming Agents.</li>
+          <li>Confluent Cloud first, Confluent Platform next for on-premises and hybrid environments.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="eyebrow">What IBM brings</span>
+        <h3>Compact foundation models that understand how signals behave</h3>
+        <ul class="list">
+          <li>Four complementary Granite Time Series models: PatchTST-FM, FlowState, TTM and TSPulse, each matched to a different decision.</li>
+          <li>Zero-shot forecasting and anomaly detection on series the models have never seen, with probabilistic outputs.</li>
+          <li>Small by design: 1M to 385M parameters, CPU inference, open weights on the Hugging Face Hub under Apache 2.0 and OpenMDW licenses.</li>
+          <li>Proven in IBM's own products and operations first, then with design partners in cement, steel, pulp and paper, food and telecommunications.</li>
+          <li>A growing set of functions on the models, so optimization and semantic intelligence arrive as capabilities you call rather than projects you build.</li>
+          <li>IBM's enterprise AI governance framework, with model provenance and licensing transparency. Confluent joined IBM in March 2026.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid c4" style="margin-top:1.5rem">
+      <div class="card"><span class="eyebrow">Real-time where the data lives</span><p>Forecast and detect at the moment business conditions change, without extracting time series into a separate ML platform or warehouse.</p></div>
+      <div class="card"><span class="eyebrow">Zero configuration</span><p>Confluent manages model serving, infrastructure, scaling and runtime. There is no provider credential to manage and no glue between pipelines and the model.</p></div>
+      <div class="card"><span class="eyebrow">Cost efficiency</span><p>No dedicated model-serving infrastructure or GPUs to provision, and zero cloud ingress or egress fees. Compute is billed in CFUs as part of your Flink compute pool.</p></div>
+      <div class="card"><span class="eyebrow">Enhanced security</span><p>Data stays within Confluent Cloud for inference and follows RBAC and privacy policies across the platform.</p></div>
+      <div class="card"><span class="eyebrow">Built-in governance</span><p>Durable, replayable topics support auditing, troubleshooting, model evaluation and rerunning inference against historical data.</p></div>
+      <div class="card"><span class="eyebrow">Fresh context</span><p>Models act on what is happening now rather than stale batch data, which makes predictions more reliable and more actionable.</p></div>
+      <div class="card"><span class="eyebrow">Faster time to value</span><p>From a streaming topic to a working forecast and anomaly detection pipeline in minutes, in SQL your team already writes.</p></div>
+      <div class="card"><span class="eyebrow">Model choice</span><p>Confluent is model-agnostic. Benchmark Granite models and Google TimesFM on your own stream and pick the best fit per workload.</p></div>
+    </div>
+  </div>
+</section>
+<section class="band alt" id="sql">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Flink SQL</span>
+      <h2 class="h2">The whole project is one call.</h2>
+      <p class="muted">Both functions are windowed aggregates: <code>OVER (ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)</code>. Add <code>PARTITION BY</code> to keep one model context per card, SKU, host or asset. Change the <code>model</code> value and the same statement runs any of the four Granite models, or TimesFM, with no pipeline redesign.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="SQL examples">
+      <button role="tab" aria-selected="true" aria-controls="tab-fc" id="tabbtn-fc">Forecast</button>
+      <button role="tab" aria-selected="false" aria-controls="tab-ad" id="tabbtn-ad">Detect anomalies</button>
+      <button role="tab" aria-selected="false" aria-controls="tab-alerts" id="tabbtn-alerts">Only anomalies, to a topic</button>
+      <button role="tab" aria-selected="false" aria-controls="tab-q" id="tabbtn-q">Quantiles per step</button>
+      <button role="tab" aria-selected="false" aria-controls="tab-asym" id="tabbtn-asym">Asymmetric bounds</button>
+    </div>
+
+    <div class="tabpanel" id="tab-fc" role="tabpanel" aria-labelledby="tabbtn-fc">
+      <p class="why">Twelve steps ahead on a meter reading stream with the default model. The result is a ROW with a <code>forecast</code> array (one entry per horizon step, each with mean, q10, q50 and q90) and a <code>metadata</code> JSON string.</p>
+      <div class="codebox"><div class="bar"><span>AI_FORECAST · ttm</span><button class="copy" type="button">Copy SQL</button></div><pre><code class="sql">SELECT
+  event_time,
+  load_kw,
+  AI_FORECAST(
+    load_kw,
+    event_time,
+    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 12)
+  ) OVER (
+    PARTITION BY meter_id
+    ORDER BY event_time
+    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+  ) AS forecast
+FROM meter_readings;</code></pre></div>
+    </div>
+
+    <div class="tabpanel" id="tab-ad" role="tabpanel" aria-labelledby="tabbtn-ad" hidden>
+      <p class="why">A 99 percent prediction interval on service latency. Each row returns <code>actual_value</code>, <code>forecast_value</code>, <code>lower_bound</code>, <code>upper_bound</code>, <code>is_anomaly</code> and a rolling <code>rmse</code>. Fields are null until <code>minContextSize</code> points have arrived.</p>
+      <div class="codebox"><div class="bar"><span>AI_DETECT_ANOMALIES · flowstate</span><button class="copy" type="button">Copy SQL</button></div><pre><code class="sql">SELECT
+  event_time,
+  response_ms,
+  AI_DETECT_ANOMALIES(
+    response_ms,
+    event_time,
+    JSON_OBJECT(
+      'model' VALUE 'flowstate',
+      'minContextSize' VALUE 20,
+      'maxContextSize' VALUE 512,
+      'confidencePercentage' VALUE 99.0
+    )
+  ) OVER (
+    PARTITION BY host_id
+    ORDER BY event_time
+    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+  ) AS anomaly
+FROM server_metrics;</code></pre></div>
+    </div>
+
+    <div class="tabpanel" id="tab-alerts" role="tabpanel" aria-labelledby="tabbtn-alerts" hidden>
+      <p class="why">The fraud pattern: a sense of normal per card, scored while the payment is in flight, and only the flagged rows written to an alerts topic that a case system, a dashboard or a Streaming Agent consumes.</p>
+      <div class="codebox"><div class="bar"><span>CREATE TABLE AS SELECT · ttm</span><button class="copy" type="button">Copy SQL</button></div><pre><code class="sql">CREATE TABLE card_alerts AS
+SELECT
+  card_id,
+  event_time,
+  amount,
+  anomaly.forecast_value AS expected,
+  anomaly.lower_bound,
+  anomaly.upper_bound,
+  anomaly.rmse
+FROM (
+  SELECT
+    card_id,
+    event_time,
+    amount,
+    AI_DETECT_ANOMALIES(
+      amount,
+      event_time,
+      JSON_OBJECT('model' VALUE 'ttm', 'confidencePercentage' VALUE 99.5)
+    ) OVER (
+      PARTITION BY card_id
+      ORDER BY event_time
+      RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS anomaly
+  FROM card_payments
+)
+WHERE anomaly.is_anomaly = TRUE;</code></pre></div>
+    </div>
+
+    <div class="tabpanel" id="tab-q" role="tabpanel" aria-labelledby="tabbtn-q" hidden>
+      <p class="why">The planner's pattern: a seven-day probabilistic forecast per SKU with PatchTST-FM, unnested to one row per horizon step so replenishment can read the 90th percentile as a reorder point.</p>
+      <div class="codebox"><div class="bar"><span>AI_FORECAST + UNNEST · patchtstfm</span><button class="copy" type="button">Copy SQL</button></div><pre><code class="sql">SELECT
+  s.sku,
+  s.event_time AS as_of,
+  step.`timestamp` AS forecast_day,
+  step.q10 AS floor,
+  step.q50 AS expected,
+  step.q90 AS reorder_point
+FROM (
+  SELECT
+    sku,
+    event_time,
+    AI_FORECAST(
+      units_sold,
+      event_time,
+      JSON_OBJECT(
+        'model' VALUE 'patchtstfm',
+        'horizon' VALUE 7,
+        'maxContextSize' VALUE 730
+      )
+    ) OVER (
+      PARTITION BY sku
+      ORDER BY event_time
+      RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS f
+  FROM daily_sales
+) AS s
+CROSS JOIN UNNEST(s.f.forecast) AS step (`timestamp`, mean, q10, q50, q90);</code></pre></div>
+    </div>
+
+    <div class="tabpanel" id="tab-asym" role="tabpanel" aria-labelledby="tabbtn-asym" hidden>
+      <p class="why">An operator who only cares about high spikes: a tight upper bound and a tolerant lower one. Both override the symmetric <code>confidencePercentage</code> for their side.</p>
+      <div class="codebox"><div class="bar"><span>AI_DETECT_ANOMALIES · asymmetric</span><button class="copy" type="button">Copy SQL</button></div><pre><code class="sql">SELECT
+  event_time,
+  vibration_mm_s,
+  AI_DETECT_ANOMALIES(
+    vibration_mm_s,
+    event_time,
+    JSON_OBJECT(
+      'model' VALUE 'patchtstfm',
+      'maxContextSize' VALUE 2048,
+      'upperBoundConfidencePercentage' VALUE 90.0,
+      'lowerBoundConfidencePercentage' VALUE 99.9
+    )
+  ) OVER (
+    PARTITION BY asset_id
+    ORDER BY event_time
+    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+  ) AS anomaly
+FROM motor_telemetry;</code></pre></div>
+    </div>
+
+    <div class="grid c2" style="margin-top:2.5rem">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th colspan="3">Configuration parameters, JSON_OBJECT in the third argument</th></tr><tr><th>Parameter</th><th>Default</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>model</code></td><td><code>ttm</code></td><td><code>ttm</code>, <code>flowstate</code>, <code>patchtstfm</code> or <code>timesfm-2.5</code>. Hosted by Confluent. Both functions.</td></tr>
+            <tr><td><code>horizon</code></td><td>5</td><td>Future steps to forecast. AI_FORECAST only.</td></tr>
+            <tr><td><code>minContextSize</code></td><td>20</td><td>Points required before output starts. Output fields are null until then.</td></tr>
+            <tr><td><code>maxContextSize</code></td><td>512</td><td>Most recent points used for prediction. Older points are truncated.</td></tr>
+            <tr><td><code>confidencePercentage</code></td><td>99.0</td><td>Symmetric prediction interval. AI_DETECT_ANOMALIES only.</td></tr>
+            <tr><td><code>upperBoundConfidencePercentage</code><br><code>lowerBoundConfidencePercentage</code></td><td>null</td><td>Asymmetric overrides for one side of the interval.</td></tr>
+            <tr><td><code>rmseWindowSize</code></td><td>5</td><td>Rolling window for the RMSE of predictions.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th colspan="2">Output ROW</th></tr><tr><th>Field</th><th>Type and meaning</th></tr></thead>
+          <tbody>
+            <tr><td colspan="2" style="color:var(--ink-3);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase">AI_FORECAST</td></tr>
+            <tr><td><code>forecast</code></td><td><code>ARRAY&lt;ROW&lt;timestamp, mean, q10, q50, q90&gt;&gt;</code>, one entry per horizon step</td></tr>
+            <tr><td><code>metadata</code></td><td>STRING. JSON with model name, requested horizon, frequency and input lengths</td></tr>
+            <tr><td colspan="2" style="color:var(--ink-3);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase">AI_DETECT_ANOMALIES</td></tr>
+            <tr><td><code>is_anomaly</code></td><td>BOOLEAN. TRUE when <code>actual_value</code> falls outside the bounds</td></tr>
+            <tr><td><code>forecast_value</code></td><td>DOUBLE. The model's prediction for this point</td></tr>
+            <tr><td><code>lower_bound</code>, <code>upper_bound</code></td><td>DOUBLE. The prediction interval</td></tr>
+            <tr><td><code>actual_value</code>, <code>timestamp</code>, <code>rmse</code></td><td>The observed value, its TIMESTAMP(3), and the rolling error</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:1.5rem">
+      <table class="tbl">
+        <thead><tr><th>Model value</th><th>Horizon</th><th>Context size</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>ttm</code></td><td>Up to 96</td><td>52 to 512</td><td>Selects the TTM variant that best matches the requested horizon and context automatically. Fast, general-purpose default.</td></tr>
+          <tr><td><code>flowstate</code></td><td>Greater than 6</td><td>At least the horizon, up to 4,096</td><td>Combined context and horizon under 4,102. Reads seconds-level and hourly data alike.</td></tr>
+          <tr><td><code>patchtstfm</code></td><td>Up to 8,176</td><td>16 to 8,064</td><td>Combined context and horizon up to 8,192. Long horizons and full predictive distributions.</td></tr>
+          <tr><td><code>timesfm-2.5</code></td><td>Capped at the model limit</td><td>Capped, rounded down to a multiple of 32</td><td>Google Research model, also available in both functions.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiny" style="margin-top:.75rem">Inputs: <code>value</code> DOUBLE, finite, nulls skipped. <code>timestamp</code> TIMESTAMP(3), not null, evenly spaced for best results. The config must be constant within a query. Billing in CFUs as part of compute pool usage. Early Access features are for evaluation and non-production testing. Full reference in the Confluent documentation linked below.</p>
+  </div>
+</section>
+
+<section class="band" id="models">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The portfolio</span>
+      <h2 class="h2">Every decision asks the future a different question. So the answer is a portfolio.</h2>
+      <p class="muted">A planning cycle needs a range of outcomes. A trading desk needs the most accurate number from data at every rate. A fleet of a hundred thousand series needs a cost that stays rational. A security team needs the moment a stream stops behaving like itself, and what happened the last time it did.</p>
+    </div>
+    <div class="grid c4">
+      <article class="card">
+        <span class="eyebrow">Probabilistic forecasting</span>
+        <h3>PatchTST-FM</h3>
+        <p>Reads a series the way a language model reads text, patch by patch, each variable in its own channel so one noisy signal cannot drag the rest down. Returns a full distribution, so a planner can set reorder points off the 90th percentile.</p>
+        <dl class="kv">
+          <dt>Params</dt><dd>385M (r2)</dd>
+          <dt>Context</dt><dd>Up to 8,192 points</dd>
+          <dt>Flink</dt><dd><code>'model' VALUE 'patchtstfm'</code></dd>
+          <dt>License</dt><dd>OpenMDW, commercial-friendly</dd>
+          <dt>Proof</dt><dd>#1 zero-shot model under a commercial-friendly license on GIFT-Eval, CRPS and MASE. #2 among all zero-shot replicable models (Aug 31, 2026)</dd>
+        </dl>
+        <div><span class="tag">Planning</span><span class="tag">Long horizons</span><span class="tag">Quantiles</span></div>
+        <a class="small" href="https://huggingface.co/ibm-granite/granite-timeseries-patchtst-fm-r2" target="_blank" rel="noopener">Model card on Hugging Face</a>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Point forecasting at any rate</span>
+        <h3>FlowState</h3>
+        <p>A state-space model that keeps a running summary updated with every point. Its dynamics are continuous in time, so one model reads seconds-level SCADA and hourly market data alike and harmonizes mixed sampling rates for long horizons.</p>
+        <dl class="kv">
+          <dt>Params</dt><dd>9.1M (r1)</dd>
+          <dt>Context</dt><dd>Up to 4,096 points</dd>
+          <dt>Flink</dt><dd><code>'model' VALUE 'flowstate'</code></dd>
+          <dt>License</dt><dd>Apache 2.0</dd>
+          <dt>Proof</dt><dd>Leading point forecasting (MASE) on GIFT-Eval among zero-shot, replicable models without data leakage at release (IBM Research, March 2026)</dd>
+        </dl>
+        <div><span class="tag">Sensor fleets</span><span class="tag">Mixed rates</span><span class="tag">Accuracy</span></div>
+        <a class="small" href="https://huggingface.co/ibm-granite/granite-timeseries-flowstate-r1" target="_blank" rel="noopener">Model card on Hugging Face</a>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Efficient forecasting at scale</span>
+        <h3>TTM</h3>
+        <p>Tiny Time Mixers drop attention for small mixing networks along time and across variables, so a model around a million parameters covers a hundred thousand series nightly on CPU. The default model in both Flink functions.</p>
+        <dl class="kv">
+          <dt>Params</dt><dd>1.4M (r3)</dd>
+          <dt>Context</dt><dd>52 to 512, variant auto-selected</dd>
+          <dt>Flink</dt><dd><code>'model' VALUE 'ttm'</code></dd>
+          <dt>License</dt><dd>Apache 2.0</dd>
+          <dt>Proof</dt><dd>Thousands of inferences per second on CPU. The most downloaded Granite Time Series family on the Hub across releases</dd>
+        </dl>
+        <div><span class="tag">100K series</span><span class="tag">CPU</span><span class="tag">Default</span></div>
+        <a class="small" href="https://huggingface.co/ibm-granite/granite-timeseries-ttm-r3" target="_blank" rel="noopener">Model card on Hugging Face</a>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Anomalies, search, classification, gap-filling</span>
+        <h3>TSPulse</h3>
+        <p>Pairs time and frequency views in one small multi-task model. Multi-head triangulation correlates deviations across prediction heads for robust anomaly detection. Its embeddings are robust to shifts in time, magnitude and noise, which answers the question every operator asks: have we seen this before.</p>
+        <dl class="kv">
+          <dt>Params</dt><dd>1.1M (r1)</dd>
+          <dt>Tasks</dt><dd>Anomaly detection, similarity search, classification, imputation</dd>
+          <dt>Flink</dt><dd>Early Access portfolio. Ask your Confluent or IBM contact for access</dd>
+          <dt>License</dt><dd>Apache 2.0</dd>
+          <dt>Proof</dt><dd>#1 on TSB-AD, univariate and multivariate, with 10 to 100× fewer parameters than the models it beats (arXiv 2505.13033)</dd>
+        </dl>
+        <div><span class="tag">Fraud and security</span><span class="tag">Embeddings</span><span class="tag">GPU-free</span></div>
+        <a class="small" href="https://huggingface.co/ibm-granite/granite-timeseries-tspulse-r1" target="_blank" rel="noopener">Model card on Hugging Face</a>
+      </article>
+    </div>
+
+    <div class="chooser" style="margin-top:3rem">
+      <div>
+        <h3 class="h3" style="margin-bottom:.25rem">Which model should you start with?</h3>
+        <p class="small muted" style="margin-bottom:.75rem">Answer three questions. There is no single best model, and switching costs one parameter, so start with the fit and benchmark the alternatives on your own stream.</p>
+        <div class="q">
+          <span class="qt">What do you need from the stream?</span>
+          <div class="opts">
+            <label><input type="radio" name="q-need" value="forecast" checked> A forecast</label>
+            <label><input type="radio" name="q-need" value="anomaly"> Anomalies as they happen</label>
+            <label><input type="radio" name="q-need" value="search"> Search, classify or fill gaps</label>
+          </div>
+        </div>
+        <div class="q">
+          <span class="qt">What shape should the answer take?</span>
+          <div class="opts">
+            <label><input type="radio" name="q-shape" value="point" checked> The most accurate number</label>
+            <label><input type="radio" name="q-shape" value="dist"> A range of outcomes with quantiles</label>
+          </div>
+        </div>
+        <div class="q">
+          <span class="qt">What does the data look like?</span>
+          <div class="opts">
+            <label><input type="radio" name="q-data" value="many" checked> Thousands of series, keep cost rational</label>
+            <label><input type="radio" name="q-data" value="mixed"> Mixed sampling rates across sources</label>
+            <label><input type="radio" name="q-data" value="long"> Long history, long horizons</label>
+          </div>
+        </div>
+      </div>
+      <div class="reco" aria-live="polite">
+        <span class="eyebrow">Start with</span>
+        <span class="big" id="reco-name">TTM</span>
+        <code id="reco-code">'model' VALUE 'ttm'</code>
+        <p id="reco-why">A million-parameter model covers thousands of series on CPU and is the default in both functions. Benchmark FlowState next if accuracy on long horizons matters.</p>
+        <p class="tiny" id="reco-alt">Then compare: flowstate</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="benchmarks">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Benchmarks</span>
+      <h2 class="h2">Small was a decision, not a compromise.</h2>
+      <p class="muted">The models are built to run on CPU inside the stream, and they hold their own on the public leaderboards. Positions move as new models land, so the live leaderboards are linked and every claim below carries its date.</p>
+    </div>
+    <div class="grid c2">
+      <div class="chart">
+        <h3>Parameters by model, log scale</h3>
+        <p class="sub">Every model available in AI_FORECAST and AI_DETECT_ANOMALIES. Smaller runs cheaper on shared CPU and scales to more series per compute pool.</p>
+        <svg viewBox="0 0 720 250" role="img" aria-label="Dot plot of model parameter counts on a log scale: TSPulse 1.1M, TTM 1.4M, FlowState 9.1M, TimesFM 2.5 200M, PatchTST-FM 385M">
+          <g stroke="var(--chart-grid)" stroke-width="1">
+            <line x1="200" y1="20" x2="200" y2="206"/><line x1="353" y1="20" x2="353" y2="206"/><line x1="506" y1="20" x2="506" y2="206"/><line x1="660" y1="20" x2="660" y2="206"/>
+          </g>
+          <g font-size="12" fill="var(--ink-3)" text-anchor="middle">
+            <text x="200" y="226">1M</text><text x="353" y="226">10M</text><text x="506" y="226">100M</text><text x="660" y="226">1B</text>
+            <text x="430" y="246">parameters</text>
+          </g>
+          <g font-size="13" fill="var(--ink-2)" text-anchor="end">
+            <text x="180" y="47">TSPulse r1</text><text x="180" y="86">TTM r3</text><text x="180" y="125">FlowState r1</text><text x="180" y="164">TimesFM 2.5</text><text x="180" y="203">PatchTST-FM r2</text>
+          </g>
+          <g stroke="var(--chart-grid)" stroke-width="1">
+            <line x1="200" y1="43" x2="206" y2="43"/><line x1="200" y1="82" x2="222" y2="82"/><line x1="200" y1="121" x2="347" y2="121"/><line x1="200" y1="160" x2="552" y2="160"/><line x1="200" y1="199" x2="596" y2="199"/>
+          </g>
+          <g stroke="var(--surface)" stroke-width="2">
+            <circle cx="206" cy="43" r="7" fill="var(--chart-series)"><title>TSPulse r1: 1.1M parameters</title></circle>
+            <circle cx="222" cy="82" r="7" fill="var(--chart-series)"><title>TTM r3: 1.4M parameters</title></circle>
+            <circle cx="347" cy="121" r="7" fill="var(--chart-series)"><title>FlowState r1: 9.1M parameters</title></circle>
+            <circle cx="552" cy="160" r="7" fill="var(--chart-muted)"><title>TimesFM 2.5: 200M parameters</title></circle>
+            <circle cx="596" cy="199" r="7" fill="var(--chart-series)"><title>PatchTST-FM r2: 385M parameters</title></circle>
+          </g>
+          <g font-size="12" fill="var(--ink)" font-variant="tabular-nums">
+            <text x="220" y="47">1.1M</text><text x="236" y="86">1.4M</text><text x="361" y="125">9.1M</text><text x="566" y="164">200M</text><text x="610" y="203">385M</text>
+          </g>
+        </svg>
+        <div class="legend-row"><span><i style="background:var(--chart-series)"></i>IBM Granite Time Series</span><span><i style="background:var(--chart-muted)"></i>Google TimesFM</span></div>
+        <p class="tiny">Source: Hugging Face model cards (ibm-granite, google/timesfm-2.5-200m-pytorch), October 2026.</p>
+      </div>
+      <div class="chart">
+        <h3>TSPulse, gain over the prior best per task</h3>
+        <p class="sub">Relative improvement reported in the TSPulse paper, with a model 10 to 100 times smaller than the ones it compares against.</p>
+        <div class="bars" role="img" aria-label="Bar chart: TSB-AD anomaly detection +20%, UEA classification +5 to 16%, zero-shot imputation +50%, similarity search and retrieval +25%">
+          <div class="bar-row"><span class="lab">Zero-shot imputation</span><span class="track"><span class="fill" style="width:100%"></span><span class="v">+50%</span></span></div>
+          <div class="bar-row"><span class="lab">Similarity search</span><span class="track"><span class="fill" style="width:50%"></span><span class="v">+25%</span></span></div>
+          <div class="bar-row"><span class="lab">TSB-AD anomaly detection</span><span class="track"><span class="fill" style="width:40%"></span><span class="v">+20%</span></span></div>
+          <div class="bar-row"><span class="lab">UEA classification</span><span class="track"><span class="fill" style="width:32%"></span><span class="v">+5 to 16%</span></span></div>
+        </div>
+        <p class="tiny">Source: TSPulse: Dual Space Tiny Pre-Trained Models for Rapid Time-Series Analysis, arXiv 2505.13033. Bar for classification drawn at the top of its range.</p>
+      </div>
+    </div>
+    <div class="grid c3" style="margin-top:1.5rem">
+      <div class="card"><span class="eyebrow">GIFT-Eval, forecasting</span><p>97 tasks from 55 datasets across 7 domains, short to long horizons. PatchTST-FM-r2 is the top zero-shot model under a commercial-friendly license on CRPS and MASE and #2 among all zero-shot, replicable models (Aug 31, 2026). FlowState led point forecasting among zero-shot, replicable models without data leakage at release (March 2026).</p><a class="small" href="https://huggingface.co/spaces/Salesforce/GIFT-Eval" target="_blank" rel="noopener">Live leaderboard</a></div>
+      <div class="card"><span class="eyebrow">TSB-AD, anomaly detection</span><p>TSPulse ranks first on both the univariate and multivariate leaderboards, outperforming statistical baselines by 24 percent and larger foundation models by at least 33 percent, with about a million parameters and GPU-free inference.</p><a class="small" href="https://research.ibm.com/blog/tspulse-time-series-ai-model" target="_blank" rel="noopener">IBM Research on TSPulse</a></div>
+      <div class="card"><span class="eyebrow">Your own stream</span><p>Public benchmarks pick a shortlist. Your data picks the model. During Early Access, run the same statement with each <code>model</code> value and compare the rolling <code>rmse</code> field and the flagged rows on your topics. The IBM and Confluent teams work through the results with you.</p><a class="small" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Enroll and benchmark</a></div>
+    </div>
+  </div>
+</section>
+<section class="band" id="usecases">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Where the value lands</span>
+      <h2 class="h2">Four lanes, one pattern: the signal becomes a trigger.</h2>
+      <p class="muted">All four compress the time between an event and knowing about it. In the stream that gap shrinks from days to seconds, and the result feeds the systems, agents and people that act: investigate, triage what matters, and loop in a human with context already gathered.</p>
+    </div>
+    <div class="grid c2">
+      <article class="card">
+        <span class="eyebrow">Forecasting and planning</span>
+        <h3>One model is a model factory</h3>
+        <p>A two-year SKU and a three-month one in the same job, a launch with no history starting from the SKUs it resembles, 100,000 series nightly on CPU, the same play across categories and regions. Because each forecast lands on a topic, replenishment fires from it, and allocation and pricing read the same numbers.</p>
+        <dl class="kv">
+          <dt>Call</dt><dd><code>AI_FORECAST</code> with <code>patchtstfm</code> for quantiles, <code>ttm</code> for scale</dd>
+          <dt>Reads</dt><dd>Orders, point of sale, inventory movements, promotions and weather as drivers</dd>
+          <dt>Outcome</dt><dd>Fewer stockouts and markdowns, revenue protected on the shelf, working capital freed</dd>
+        </dl>
+        <div><span class="tag blue">Retail</span><span class="tag blue">Consumer goods</span><span class="tag blue">Logistics</span><span class="tag blue">Energy demand</span></div>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Anomaly detection</span>
+        <h3>Protection starts on day one</h3>
+        <p>The model keeps a sense of normal per card, per host or per asset and scores every event through the same call while it is still in flight. Because it also forecasts, it flags the drift toward trouble before the event. What the model learned elsewhere transfers to new products, corridors and asset types with no labelled case.</p>
+        <dl class="kv">
+          <dt>Call</dt><dd><code>AI_DETECT_ANOMALIES</code>, <code>PARTITION BY</code> the entity, asymmetric bounds where only one direction matters</dd>
+          <dt>Reads</dt><dd>Payments, sessions, service latency, cell-site KPIs, vibration and temperature</dd>
+          <dt>Outcome</dt><dd>Block the payment before the money moves, open the work order before the failure, catch the outage before customers do</dd>
+        </dl>
+        <div><span class="tag blue">Banking and payments</span><span class="tag blue">IT and telecom operations</span><span class="tag blue">Industrial assets</span><span class="tag blue">Security</span></div>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Production optimization</span>
+        <h3>A forecast conditioned on what you control becomes a simulator</h3>
+        <p>Energy at this mixing speed, throughput at this temperature and dosing rate, viscosity in spec or not. An optimizer searches that space against a KPI the engineer names, respects the constraints, and explains what it recommends. It re-optimizes as inputs change: a new supplier, a different batch, this quarter's objective.</p>
+        <dl class="kv">
+          <dt>Call</dt><dd>Forecasting functions today. Optimization functions on the models are next in Early Access</dd>
+          <dt>Reads</dt><dd>Line and process telemetry, setpoints, quality measurements, energy meters</dd>
+          <dt>Outcome</dt><dd>Months of bespoke modelling become days. One point on a line turning over hundreds of millions is a seven-figure line</dd>
+        </dl>
+        <div><span class="tag blue">Manufacturing</span><span class="tag blue">Process industries</span><span class="tag blue">Oil, gas and utilities</span><span class="tag blue">Data centers</span></div>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Semantic intelligence</span>
+        <h3>Have we seen this before?</h3>
+        <p>Every lane ends on the same question. Embeddings capture the shape of a window in time and frequency, so two episodes that look alike land close together whatever their scale or offset. Each window is embedded as it arrives and matched against past episodes and their outcomes, so what comes back is a precedent rather than a score.</p>
+        <dl class="kv">
+          <dt>Call</dt><dd>TSPulse embeddings, search and classification. Semantic intelligence functions are next in Early Access</dd>
+          <dt>Reads</dt><dd>Any stream with history: the runs that drifted this way and what fixed them, the demand curves a new SKU resembles, the confirmed cases a session rhymes with</dd>
+          <dt>Outcome</dt><dd>The context an agent retrieves before it acts. Faster triage, fewer repeat incidents</dd>
+        </dl>
+        <div><span class="tag blue">Operations</span><span class="tag blue">Fraud investigation</span><span class="tag blue">Quality</span><span class="tag blue">Agentic workflows</span></div>
+      </article>
+    </div>
+    <div class="callout" style="margin-top:1.5rem"><span class="t">For account teams and partners</span><p>Lead with the decision, not the model. Start with one stream the client already has on Confluent, enroll them in Early Access, and bring the IBM and Confluent teams into a working session on their own topic. What they find on their own streams shapes what ships next.</p></div>
+  </div>
+</section>
+
+<section class="band alt" id="roadmap">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Roadmap</span>
+      <h2 class="h2">Cloud first for exploration. Platform next for where the plant lives.</h2>
+      <p class="muted">Early Access is a feedback loop. The functions, the models and the packaging below are shaped with design partners and clients on real enterprise use cases, so scope and timing can change.</p>
+    </div>
+    <div class="road">
+      <div class="card now">
+        <span class="eyebrow">Available now, Early Access</span>
+        <h3>Forecasting and anomaly detection</h3>
+        <ul class="list">
+          <li><code>AI_FORECAST</code> and <code>AI_DETECT_ANOMALIES</code> with Granite TTM, FlowState and PatchTST-FM, plus Google TimesFM 2.5</li>
+          <li>Confluent Cloud for Apache Flink on AWS</li>
+          <li>No charge for the models during Early Access. Flink compute billed in CFUs</li>
+          <li>Open weights and notebooks on Hugging Face and GitHub for work outside the stream</li>
+        </ul>
+      </div>
+      <div class="card next">
+        <span class="eyebrow">Next in Early Access</span>
+        <h3>Optimization and semantic intelligence</h3>
+        <ul class="list">
+          <li>TSPulse for anomaly detection, embeddings and similarity search in the stream</li>
+          <li>Production optimization: forecasts conditioned on controllable settings, optimized against a stated KPI inside constraints</li>
+          <li>Semantic intelligence: embed each window as it arrives, search history for precedents, classify and fill gaps</li>
+          <li>Enablement materials, demo datasets and client working sessions</li>
+        </ul>
+      </div>
+      <div class="card then">
+        <span class="eyebrow">On the road to general availability</span>
+        <h3>Hardening, hybrid and agents</h3>
+        <ul class="list">
+          <li>Production readiness: performance, scale, compliance and a support model</li>
+          <li>Confluent Platform for on-premises and hybrid estates, where most industrial deployments run</li>
+          <li>Forecasts and anomalies as triggers for Streaming Agents, served through MCP and agent skills</li>
+          <li>Continued model iteration with design partners: multivariate, new architectures, new data sources</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="start">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Get started</span>
+      <h2 class="h2">From a topic to a forecast in minutes.</h2>
+      <p class="muted">Early Access is free of charge for the models and open to Confluent Cloud organizations on AWS. Enroll, open a Flink SQL workspace, and run the statements below on a table of your own.</p>
+    </div>
+    <div class="steps">
+      <div class="card">
+        <h3>Enroll in Early Access</h3>
+        <p>Submit the Confluent sign-up form with your organization ID. Confluent enables the AI functions on your organization and the IBM and Confluent teams reach out to plan your first stream.</p>
+        <a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Open the sign-up form <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </div>
+      <div class="card">
+        <h3>Point it at a stream</h3>
+        <p>Any topic with a timestamp and a numeric value works. Start with a table you already have, or create one and insert a few minutes of readings to see the output shape before you connect real data.</p>
+        <p class="small">Tip: switch the catalog and database from the read-only examples to your own cluster before running CREATE TABLE.</p>
+      </div>
+      <div class="card">
+        <h3>Run the call and route the result</h3>
+        <p>Run <code>AI_FORECAST</code> or <code>AI_DETECT_ANOMALIES</code> as an OVER aggregate. Write the result to a topic with CREATE TABLE AS SELECT and let your alerting, dashboard, lakehouse or agent consume it.</p>
+        <p class="small">Then change the <code>model</code> value and compare.</p>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:2.5rem">
+      <div style="display:grid;gap:1rem;align-content:start">
+        <h3 class="h3">Quickstart on a test table</h3>
+        <p class="muted small">Creates a sensor table, inserts an hour of readings with one injected spike, then runs anomaly detection with the default model. Copy all three statements into a Flink SQL workspace and run them in order.</p>
+        <ul class="list small">
+          <li>The first 19 rows return null output fields because <code>minContextSize</code> defaults to 20.</li>
+          <li>A yellow MISSING_PARTITION_BY warning is a performance hint. For one test series it is safe to ignore. Add <code>PARTITION BY</code> for real multi-series topics.</li>
+          <li>The injected 10:45 reading should return <code>is_anomaly = TRUE</code>.</li>
+        </ul>
+      </div>
+      <div class="codebox"><div class="bar"><span>Flink SQL · quickstart</span><button class="copy" type="button">Copy SQL</button></div><pre><code class="sql">-- 1. A table with a timestamp and a value
+CREATE TABLE sensor_test (
+  sensor_id STRING,
+  temp_c DOUBLE,
+  event_time TIMESTAMP(3),
+  WATERMARK FOR event_time AS event_time - INTERVAL '5' SECOND
+);
+
+-- 2. An hour of readings, one spike at 10:45
+INSERT INTO sensor_test VALUES
+  ('line-1', 31.4, TIMESTAMP '2026-10-16 10:00:00.000'),
+  ('line-1', 31.6, TIMESTAMP '2026-10-16 10:01:00.000'),
+  ('line-1', 31.5, TIMESTAMP '2026-10-16 10:02:00.000'),
+  -- ... one row per minute, values between 31.2 and 31.9 ...
+  ('line-1', 34.9, TIMESTAMP '2026-10-16 10:45:00.000'),
+  -- ... back to normal through 10:59 ...
+  ('line-1', 31.5, TIMESTAMP '2026-10-16 10:59:00.000');
+
+-- 3. Score every reading against its own history
+SELECT
+  event_time,
+  temp_c,
+  AI_DETECT_ANOMALIES(
+    temp_c,
+    event_time,
+    JSON_OBJECT('model' VALUE 'ttm', 'confidencePercentage' VALUE 99.0)
+  ) OVER (
+    PARTITION BY sensor_id
+    ORDER BY event_time
+    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+  ) AS anomaly
+FROM sensor_test;</code></pre></div>
+    </div>
+
+    <h3 class="h3" style="margin:3rem 0 1rem">Read, run and share</h3>
+    <div class="res">
+      <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener"><span class="t">AI_FORECAST documentation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg></span><span class="d">Syntax, parameters, per-model limits and examples on Confluent Cloud for Apache Flink</span></a>
+      <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/detect-anomalies.html" target="_blank" rel="noopener"><span class="t">AI_DETECT_ANOMALIES documentation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg></span><span class="d">Prediction intervals, asymmetric bounds, output fields and the ARIMA and MAD alternatives</span></a>
+      <a href="https://huggingface.co/blog/ibm-research/real-time-intelligence" target="_blank" rel="noopener"><span class="t">Real-Time Intelligence with IBM Time Series Models on Confluent <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg></span><span class="d">The joint IBM and Confluent article on Hugging Face: value, portfolio and use cases</span></a>
+      <a href="https://www.ibm.com/new/announcements/ibm-granite-time-series-models-bring-real-time-forecasting-and-anomaly-detection-to-confluent-cloud" target="_blank" rel="noopener"><span class="t">IBM announcement <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg></span><span class="d">IBM Granite Time Series models bring real-time forecasting and anomaly detection to Confluent Cloud</span></a>
+      <a href="https://www.confluent.io/blog/2026-q3-confluent-intelligence-ai-update/" target="_blank" rel="noopener"><span class="t">Confluent Intelligence Q3 update <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg></span><span class="d">Expanded model support, Real-Time Context Engine, MCP server and Agent Skills</span></a>
+      <a href="https://github.com/confluentinc/quickstart-ai-ml-functions" target="_blank" rel="noopener"><span class="t">AI/ML functions quickstart on GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg></span><span class="d">Confluent's runnable quickstart for the built-in AI and ML functions</span></a>
+      <a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener"><span class="t">granite-tsfm on GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg></span><span class="d">Open-source library, notebooks and fine-tuning recipes for every Granite Time Series model</span></a>
+      <a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener"><span class="t">Granite models on Hugging Face <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg></span><span class="d">Model cards, weights and benchmark notes for TTM, FlowState, PatchTST-FM and TSPulse</span></a>
+      <a href="https://research.ibm.com/blog/time-series-ai-enterprise" target="_blank" rel="noopener"><span class="t">IBM Research: a time series model for every task <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg></span><span class="d">How the portfolio fits together and where each model leads on GIFT-Eval</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="briefing">
+  <div class="wrap">
+    <div class="split">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">Talk to the team</span>
+        <h2 class="h2">Tell us about your stream.</h2>
+        <p class="muted">Describe one decision you want scored in flight. We will come back with the right model, a sample statement for your topic and a working session with the IBM and Confluent teams. Nothing is sent from this page: build the note, copy it, and send it to your IBM or Confluent account team, or enroll directly in Early Access.</p>
+        <div class="btn-row"><a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Enroll in Early Access <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><button type="button" class="btn ghost" id="share-link">Copy a link to this page <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 10l4-4M7 4h5v5M9 12H4V7"/></svg></button></div>
+        <p class="toast" id="share-toast"></p>
+      </div>
+      <form class="form" id="brief-form" novalidate>
+        <div class="row">
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Jane Doe"></div>
+          <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" type="text" autocomplete="organization" placeholder="Acme Foods"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="f-role">Role</label><input id="f-role" name="role" type="text" autocomplete="organization-title" placeholder="Head of Demand Planning"></div>
+          <div class="field"><label for="f-env">Where your data streams today</label>
+            <select id="f-env" name="env"><option>Confluent Cloud</option><option>Confluent Platform</option><option>Both</option><option>Not on Confluent yet</option></select></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="f-use">Decision you want scored</label>
+            <select id="f-use" name="use"><option>Forecasting and planning</option><option>Anomaly detection</option><option>Production optimization</option><option>Semantic search and classification</option><option>Not sure yet</option></select></div>
+          <div class="field"><label for="f-series">How many series, roughly</label>
+            <select id="f-series" name="series"><option>Fewer than 100</option><option>100 to 10,000</option><option>10,000 to 100,000</option><option>More than 100,000</option></select></div>
+        </div>
+        <div class="field"><label for="f-stream">The stream and the decision, in a sentence or two</label><textarea id="f-stream" name="stream" placeholder="Example: tempering line temperature sampled every 5 seconds from 40 lines in 3 plants. We want drift flagged before a batch blooms, and a work order opened automatically."></textarea></div>
+        <div class="btn-row"><button type="submit" class="btn">Build my request <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></div>
+        <div class="note-out" id="note-out" hidden>
+          <div style="display:flex;justify-content:space-between;gap:1rem;align-items:center"><span class="eyebrow">Your request, ready to send</span><button type="button" class="btn ghost sm" id="copy-note">Copy</button></div>
+          <pre id="note-text"></pre>
+          <p class="toast" id="note-toast"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="faq">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Questions</span><h2 class="h2">What people ask before they enroll.</h2></div>
+    <div class="faq">
+      <details><summary>Is this production-ready?</summary><div class="a"><p>Early Access features are for evaluation and non-production testing. They are provided without support, SLA or indemnification while Confluent and IBM gather feedback, and general availability follows. Many clients run them on a copy of a production topic to validate value before GA.</p></div></details>
+      <details><summary>What does it cost?</summary><div class="a"><p>There is no charge for the models during Early Access. Flink compute for the statements you run is billed in CFUs as part of your compute pool, like any other Flink SQL. There are no model-serving instances to pay for and no cloud ingress or egress fees for inference.</p></div></details>
+      <details><summary>Which clouds and deployments?</summary><div class="a"><p>Early Access runs on Confluent Cloud for Apache Flink on AWS. Confluent Platform follows, bringing the same models and capabilities to on-premises and hybrid environments, which is where most industrial deployments live.</p></div></details>
+      <details><summary>Can I bring my own model?</summary><div class="a"><p>Not through AI_FORECAST and AI_DETECT_ANOMALIES, which use models hosted and managed by Confluent. For a custom or remote model, register it with CREATE MODEL and call it with ML_PREDICT. During Early Access you can also ask your Confluent representative for additional time series models to be made available.</p></div></details>
+      <details><summary>Where does my data go?</summary><div class="a"><p>Inference runs inside Confluent Cloud, in the same environment as your Flink statements, and follows the RBAC and privacy policies already applied to your topics. Nothing is extracted to a separate ML platform.</p></div></details>
+      <details><summary>What about multivariate series?</summary><div class="a"><p>Each AI_FORECAST or AI_DETECT_ANOMALIES call scores one value column, and PARTITION BY gives every entity its own context. For multivariate robust detection today, ML_DETECT_ANOMALIES_ROBUST accepts a ROW of metrics. Cross-channel modelling through fine-tuning is part of the Granite Time Series library, and multivariate functions are one of the most common requests shaping the roadmap. Tell us yours.</p></div></details>
+      <details><summary>How is this different from ML_FORECAST and ML_DETECT_ANOMALIES?</summary><div class="a"><p>ML_FORECAST and ML_DETECT_ANOMALIES fit an ARIMA model per stream and expose p, d and q. AI_FORECAST and AI_DETECT_ANOMALIES use pretrained foundation models: no training phase, zero-shot on an unseen series, quantiles in the output, and a model choice you can benchmark with one parameter.</p></div></details>
+      <details><summary>Under which licenses are the models released?</summary><div class="a"><p>TTM, FlowState and TSPulse are released under Apache 2.0. PatchTST-FM-r2 is released under the OpenMDW license, which is commercial-friendly. Weights, architecture, inference pipeline and the code to reproduce the benchmark results are on Hugging Face and GitHub.</p></div></details>
+      <details><summary>Can I run the models outside Confluent?</summary><div class="a"><p>Yes. The open weights run on your own CPUs through the granite-tsfm library, which is the right place for backtesting, bulk historical scoring and fine-tuning. The Confluent integration removes the serving, the wiring and the state management for scoring in the stream.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap" style="display:grid;gap:1.5rem">
+    <h2 class="h2">What you find on your own streams teaches the models what to become next.</h2>
+    <p>Enroll in Early Access, point a Granite model at one topic, and work directly with the IBM and Confluent teams. No charge for the models during Early Access.</p>
+    <div class="btn-row">
+      <a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Enroll in Early Access <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      <a class="btn ghost" href="#briefing">Request a briefing <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:grid;gap:1rem">
+    <p><strong style="color:var(--ink-2)">IBM Granite Time Series models on Confluent</strong> · Early Access program · Page updated October 2026. Capabilities, availability and benchmark positions change. The linked documentation and leaderboards are authoritative.</p>
+    <div class="srcs">
+      <span>Sources: IBM announcement (Sep 2026) · Real-Time Intelligence with IBM Time Series Models on Confluent, Hugging Face (Sep 2, 2026) · Confluent Intelligence Q3 2026 update (Aug 18, 2026) · Confluent Cloud for Apache Flink documentation (Sep 28, 2026) · Hugging Face model cards for ibm-granite time series models (Oct 2026) · IBM Research blogs on the time series portfolio and TSPulse · TSPulse paper, arXiv 2505.13033 · FlowState paper, arXiv 2508.05287 · PatchTST-FM paper, arXiv 2602.06909.</span>
+    </div>
+    <p>Apache®, Apache Kafka®, Kafka®, Apache Flink® and Flink® are trademarks of the Apache Software Foundation. TimesFM is a Google Research model. Hugging Face, Iceberg, Delta Lake and other names are the property of their respective owners. The stream simulation on this page runs in the browser to illustrate output shape and is not model inference.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  'use strict';
+  /* ---------- helpers ---------- */
+  const $=(s,r)=>(r||document).querySelector(s);
+  const $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const KW='SELECT|FROM|WHERE|AS|OVER|PARTITION|BY|ORDER|RANGE|BETWEEN|UNBOUNDED|PRECEDING|AND|CURRENT|ROW|CREATE|TABLE|INSERT|INTO|VALUES|WATERMARK|FOR|INTERVAL|CROSS|JOIN|VALUE|TRUE|FALSE|STRING|DOUBLE|TIMESTAMP|SECOND|NOT|NULL';
+  const FN='AI_FORECAST|AI_DETECT_ANOMALIES|JSON_OBJECT|UNNEST|ML_FORECAST|ML_DETECT_ANOMALIES';
+  const TOK=new RegExp("(--[^\\n]*)|('(?:[^'\\\\]|\\\\.)*')|(\\b(?:"+FN+")\\b)|(\\b\\d+(?:\\.\\d+)?\\b)|(\\b(?:"+KW+")\\b)","g");
+  function highlight(sql){
+    return esc(sql).replace(TOK,(m,c,s,f,n,k)=>{
+      if(c)return'<span class="c">'+m+'</span>';
+      if(s)return'<span class="s">'+m+'</span>';
+      if(f)return'<span class="f">'+m+'</span>';
+      if(n)return'<span class="n">'+m+'</span>';
+      return'<span class="k">'+m+'</span>';
+    });
+  }
+  $$('code.sql').forEach(el=>{el.innerHTML=highlight(el.textContent);});
+
+  function copyText(text,btn,done){
+    const label=btn?btn.textContent:'';
+    const ok=()=>{if(btn){btn.textContent='Copied';setTimeout(()=>btn.textContent=label,1600);}if(done)done(true);};
+    const fail=()=>{if(done)done(false);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,fail);}else fail();
+  }
+  function selectEl(el){try{const r=document.createRange();r.selectNodeContents(el);const s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+
+  /* ---------- copy buttons on code boxes ---------- */
+  $$('.codebox').forEach(box=>{
+    const btn=$('.copy',box),pre=$('pre',box);
+    if(!btn||!pre)return;
+    btn.addEventListener('click',()=>copyText(pre.textContent,btn,ok=>{if(!ok){selectEl(pre);btn.textContent='Select and copy';setTimeout(()=>btn.textContent='Copy SQL',2000);}}));
+  });
+
+  /* ---------- tabs ---------- */
+  $$('.tabs').forEach(tabs=>{
+    const btns=$$('[role=tab]',tabs);
+    btns.forEach(b=>b.addEventListener('click',()=>{
+      btns.forEach(x=>{x.setAttribute('aria-selected',x===b?'true':'false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p)p.hidden=(x!==b);});
+    }));
+  });
+
+  /* ---------- model chooser ---------- */
+  const R={
+    ttm:{name:'TTM',code:"'model' VALUE 'ttm'"},
+    flowstate:{name:'FlowState',code:"'model' VALUE 'flowstate'"},
+    patchtstfm:{name:'PatchTST-FM',code:"'model' VALUE 'patchtstfm'"},
+    tspulse:{name:'TSPulse',code:'Early Access portfolio, ask for stream access'}
+  };
+  function recommend(){
+    const v=n=>{const el=$('input[name="'+n+'"]:checked');return el?el.value:'';};
+    const need=v('q-need'),shape=v('q-shape'),data=v('q-data');
+    let key='ttm',why='',alt='';
+    if(need==='search'){key='tspulse';why='Embeddings, similarity search, classification and gap-filling in one model around a million parameters, GPU-free. Its anomaly detection leads TSB-AD as well.';alt='ttm or flowstate to forecast the same series';}
+    else if(need==='anomaly'){
+      if(data==='mixed'){key='flowstate';why='Continuous-time dynamics read seconds-level and hourly data alike, so one model keeps a sense of normal across sources sampled at different rates.';alt='ttm for the cheapest per-entity context';}
+      else if(data==='long'){key='patchtstfm';why='Context up to 8,064 points and calibrated quantiles give tight bounds on long histories, which keeps false alarms down on slow-moving signals.';alt='flowstate for faster scoring';}
+      else{key='ttm';why='The default in AI_DETECT_ANOMALIES. Cheap enough to keep a separate context per card, host or asset across thousands of entities, and fast enough to score every event in flight.';alt='flowstate, and TSPulse once enabled on your organization';}
+    } else {
+      if(shape==='dist'){key='patchtstfm';why='Returns a full predictive distribution per step, so service levels and reorder points come straight from q10, q50 and q90 without a second model.';alt='ttm when the series count makes cost the constraint';}
+      else if(data==='mixed'){key='flowstate';why='Sampling-rate equivariant: one model harmonizes seconds-level SCADA and hourly market data for accurate long-horizon point forecasts.';alt='patchtstfm for quantiles on the same stream';}
+      else if(data==='long'){key='flowstate';why='Leading point accuracy among zero-shot, replicable models on GIFT-Eval at release, with horizons that extend well past the context.';alt='patchtstfm for horizons up to 8,176 steps';}
+      else{key='ttm';why='A model around a million parameters covers thousands of series on CPU and is the default in both functions. Benchmark FlowState next if accuracy on long horizons matters.';alt='flowstate';}
+    }
+    const r=R[key];
+    $('#reco-name').textContent=r.name;$('#reco-code').textContent=r.code;$('#reco-why').textContent=why;$('#reco-alt').textContent='Then compare: '+alt;
+  }
+  $$('.q input').forEach(i=>i.addEventListener('change',recommend));
+  recommend();
+
+  /* ---------- briefing note ---------- */
+  const form=$('#brief-form');
+  if(form){
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const g=id=>($('#'+id).value||'').trim();
+      const name=g('f-name')||'[your name]',company=g('f-company')||'[company]',role=g('f-role'),env=g('f-env'),use=g('f-use'),series=g('f-series'),stream=g('f-stream')||'[describe the stream and the decision]';
+      const txt='Subject: Early Access request, IBM Granite Time Series models on Confluent\n\n'+
+        'Hello,\n\n'+
+        'We would like to evaluate IBM Granite Time Series models on Confluent for '+use.toLowerCase()+'.\n\n'+
+        'Name: '+name+(role?' ('+role+')':'')+'\nCompany: '+company+'\nStreaming today: '+env+'\nNumber of series: '+series+'\n\n'+
+        'The stream and the decision:\n'+stream+'\n\n'+
+        'Could we set up a working session with the IBM and Confluent teams and have Early Access enabled for our Confluent Cloud organization? We can share a topic and a sample statement to start.\n\n'+
+        'Thanks,\n'+name;
+      $('#note-text').textContent=txt;$('#note-out').hidden=false;$('#note-toast').textContent='';
+      $('#note-out').scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+    $('#copy-note').addEventListener('click',()=>{
+      const pre=$('#note-text');
+      copyText(pre.textContent,$('#copy-note'),ok=>{$('#note-toast').textContent=ok?'Copied. Paste it into an email or a message to your IBM or Confluent contact.':'Copy is blocked here. The text is selected, use your keyboard shortcut to copy it.';if(!ok)selectEl(pre);});
+    });
+  }
+  const share=$('#share-link');
+  if(share)share.addEventListener('click',()=>copyText(location.href,null,ok=>{$('#share-toast').textContent=ok?'Link copied.':'Copy is blocked here. Copy the address from your browser bar instead.';}));
+
+  /* ---------- stream simulation ---------- */
+  const canvas=$('#stream');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const SC={
+    temp:{table:'tempering_line',col:'temp_c',key:'line_id',unit:'°C',base:31.5,amp:0.8,amp2:0.25,period:48,noise:0.11,stepSec:5,spike:2.6,dec:2},
+    latency:{table:'server_metrics',col:'response_ms',key:'host_id',unit:'ms',base:122,amp:16,amp2:6,period:60,noise:3.5,stepSec:1,spike:150,dec:0},
+    payments:{table:'card_payments',col:'amount',key:'card_id',unit:'$',base:46,amp:15,amp2:5,period:72,noise:3,stepSec:60,spike:240,dec:0},
+    load:{table:'meter_readings',col:'load_kw',key:'meter_id',unit:'kW',base:860,amp:150,amp2:40,period:96,noise:11,stepSec:900,spike:-330,dec:0}
+  };
+  const Z={80:1.2816,90:1.6449,95:1.96,99:2.5758},Z80=1.2816;
+  const st={mode:'ad',model:'ttm',sc:'temp',conf:99,horizon:12,paused:false};
+  let rows=[],spikeQueue=[],drift=0,hover=-1;
+  const BASE=Date.UTC(2026,9,16,9,0,0);
+  function gauss(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+  const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+  function S(){return SC[st.sc];}
+  function gen(i){const s=S();drift=Math.max(-s.amp*0.6,Math.min(s.amp*0.6,drift+0.03*s.noise*gauss()));let v=s.base+s.amp*Math.sin(2*Math.PI*i/s.period)+s.amp2*Math.sin(2*Math.PI*i/(s.period/3)+1.3)+s.noise*gauss()+drift;if(spikeQueue.length)v+=spikeQueue.shift();return v;}
+  function robustSigma(){
+    const s=S(),P=s.period,res=[];
+    for(let i=Math.max(0,rows.length-P);i<rows.length;i++){const r=rows[i];if(r.pred!=null)res.push(Math.abs(r.v-r.pred));}
+    if(res.length<6)return s.noise*1.2;
+    res.sort((a,b)=>a-b);const mad=res[Math.floor(res.length/2)];
+    return Math.max(s.noise*0.95,mad*1.4826*1.25);
+  }
+  function fc(h){
+    const s=S(),P=s.period,n=rows.length;if(n<2*P)return null;
+    const last=rows.slice(n-P).map(r=>r.v),prev=rows.slice(n-2*P,n-P).map(r=>r.v);
+    const mr=mean(last),mp=mean(prev),sig=robustSigma(),out=[];
+    for(let k=1;k<=h;k++){const idx=(k-1)%P;const m=mr+(last[idx]-mr)*0.55+(prev[idx]-mp)*0.35;const g=Math.sqrt(1+0.08*k);out.push({mean:m,sig:sig*g});}
+    return out;
+  }
+  function step(){
+    const f=fc(1);const pred=f?f[0].mean:null,sig=f?f[0].sig:null;
+    const v=gen(rows.length);
+    rows.push({i:rows.length,v:v,pred:pred,sig:sig});
+    if(rows.length>400)rows.shift();
+  }
+  function reset(){rows=[];spikeQueue=[];drift=0;const P=S().period;for(let i=0;i<3*P+10;i++)step();}
+  const z=()=>Z[st.conf]||2.5758;
+  const isAnom=r=>r.pred!=null&&(r.v>r.pred+z()*r.sig||r.v<r.pred-z()*r.sig);
+  function ts(i){const s=S();const d=new Date(BASE+i*s.stepSec*1000);const p=n=>String(n).padStart(2,'0');return p(d.getUTCHours())+':'+p(d.getUTCMinutes())+(s.stepSec<60?':'+p(d.getUTCSeconds()):'');}
+  const fmt=v=>v==null?'null':v.toFixed(S().dec);
+  function cssv(n){return getComputedStyle(canvas).getPropertyValue(n).trim();}
+  function niceTicks(lo,hi,n){const span=hi-lo;const raw=span/n;const p=Math.pow(10,Math.floor(Math.log10(raw)));const m=raw/p;const stepv=(m<1.5?1:m<3.5?2:m<7.5?5:10)*p;const t=[];for(let v=Math.ceil(lo/stepv)*stepv;v<=hi+1e-9;v+=stepv)t.push(v);return t;}
+
+  let W=0,H=0,dpr=1,layout=null;
+  function size(){const r=canvas.getBoundingClientRect();W=Math.max(200,r.width);H=Math.max(160,r.height);dpr=window.devicePixelRatio||1;canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
+  function draw(){
+    if(!W)size();
+    const s=S(),padL=48,padR=14,padT=12,padB=26,pw=W-padL-padR,ph=H-padT-padB;
+    const h=st.mode==='fc'?st.horizon:0;
+    const nVis=Math.max(30,Math.min(110,Math.floor(pw/7)));
+    const nAct=nVis-h;
+    const vis=rows.slice(Math.max(0,rows.length-nAct));
+    const f=st.mode==='fc'?fc(h):null;
+    let lo=Infinity,hi=-Infinity;
+    vis.forEach(r=>{lo=Math.min(lo,r.v);hi=Math.max(hi,r.v);if(st.mode==='ad'&&r.pred!=null){lo=Math.min(lo,r.pred-z()*r.sig);hi=Math.max(hi,r.pred+z()*r.sig);}});
+    if(f)f.forEach(p=>{lo=Math.min(lo,p.mean-Z80*p.sig*1.6);hi=Math.max(hi,p.mean+Z80*p.sig*1.6);});
+    const pad=(hi-lo)*0.12||1;lo-=pad;hi+=pad;
+    const total=vis.length+h;
+    const X=k=>padL+(k/(Math.max(1,total-1)))*pw;
+    const Y=v=>padT+(1-(v-lo)/(hi-lo))*ph;
+    layout={X,Y,vis,f,padL,padT,pw,ph,h};
+    const cGrid=cssv('--demo-grid'),cInk=cssv('--demo-ink'),cInk2=cssv('--demo-ink-2'),cSer=cssv('--demo-series'),cBand=cssv('--demo-band'),cAct=cssv('--demo-actual'),cCrit=cssv('--demo-critical'),cBg=cssv('--demo-bg');
+    ctx.clearRect(0,0,W,H);
+    ctx.font='11px "IBM Plex Mono", Menlo, monospace';ctx.textBaseline='middle';
+    /* grid */
+    ctx.strokeStyle=cGrid;ctx.lineWidth=1;ctx.fillStyle=cInk2;ctx.textAlign='right';
+    niceTicks(lo,hi,4).forEach(v=>{const y=Math.round(Y(v))+0.5;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(padL+pw,y);ctx.stroke();ctx.fillText(v.toFixed(s.dec),padL-6,y);});
+    /* x labels */
+    ctx.textAlign='center';ctx.textBaseline='alphabetic';
+    const nLab=Math.max(2,Math.floor(pw/120));
+    for(let j=0;j<=nLab;j++){const k=Math.round(j*(vis.length-1)/nLab);const r=vis[k];if(!r)continue;ctx.fillText(ts(r.i),X(k),H-8);}
+    ctx.textBaseline='middle';
+    /* AD band + pred line */
+    if(st.mode==='ad'){
+      const pts=vis.map((r,k)=>({k,r})).filter(o=>o.r.pred!=null);
+      if(pts.length>1){
+        ctx.beginPath();pts.forEach((o,j)=>{const y=Y(o.r.pred+z()*o.r.sig);j?ctx.lineTo(X(o.k),y):ctx.moveTo(X(o.k),y);});
+        for(let j=pts.length-1;j>=0;j--){const o=pts[j];ctx.lineTo(X(o.k),Y(o.r.pred-z()*o.r.sig));}
+        ctx.closePath();ctx.fillStyle=cBand;ctx.fill();
+        ctx.strokeStyle=cSer;ctx.lineWidth=1;ctx.globalAlpha=0.55;
+        [1,-1].forEach(sg=>{ctx.beginPath();pts.forEach((o,j)=>{const y=Y(o.r.pred+sg*z()*o.r.sig);j?ctx.lineTo(X(o.k),y):ctx.moveTo(X(o.k),y);});ctx.stroke();});
+        ctx.globalAlpha=1;
+        ctx.setLineDash([3,3]);ctx.strokeStyle=cSer;ctx.lineWidth=1.5;ctx.beginPath();pts.forEach((o,j)=>{j?ctx.lineTo(X(o.k),Y(o.r.pred)):ctx.moveTo(X(o.k),Y(o.r.pred));});ctx.stroke();ctx.setLineDash([]);
+      }
+    }
+    /* actual line */
+    ctx.strokeStyle=cAct;ctx.lineWidth=2;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();vis.forEach((r,k)=>{k?ctx.lineTo(X(k),Y(r.v)):ctx.moveTo(X(k),Y(r.v));});ctx.stroke();
+    /* forecast fan */
+    if(f&&vis.length){
+      const k0=vis.length-1,r0=vis[k0];
+      ctx.beginPath();ctx.moveTo(X(k0),Y(r0.v));f.forEach((p,j)=>ctx.lineTo(X(k0+1+j),Y(p.mean+Z80*p.sig)));
+      for(let j=f.length-1;j>=0;j--)ctx.lineTo(X(k0+1+j),Y(f[j].mean-Z80*f[j].sig));ctx.closePath();ctx.fillStyle=cBand;ctx.fill();
+      ctx.strokeStyle=cSer;ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(X(k0),Y(r0.v));f.forEach((p,j)=>ctx.lineTo(X(k0+1+j),Y(p.mean)));ctx.stroke();ctx.setLineDash([]);
+      /* now line */
+      ctx.strokeStyle=cInk2;ctx.lineWidth=1;ctx.beginPath();const xn=Math.round(X(k0))+0.5;ctx.moveTo(xn,padT);ctx.lineTo(xn,padT+ph);ctx.stroke();
+      ctx.fillStyle=cInk2;ctx.textAlign='left';ctx.fillText('now',xn+5,padT+8);ctx.textAlign='right';ctx.fillText('+'+h+' steps',padL+pw-2,padT+8);
+      /* endpoint */
+      const pe=f[f.length-1];ctx.beginPath();ctx.arc(X(k0+h),Y(pe.mean),4.5,0,Math.PI*2);ctx.fillStyle=cSer;ctx.fill();ctx.strokeStyle=cBg;ctx.lineWidth=2;ctx.stroke();
+      ctx.fillStyle=cInk;ctx.textAlign='right';ctx.fillText(fmt(pe.mean)+' '+s.unit,X(k0+h)-8,Y(pe.mean)-12);
+    }
+    /* anomalies + current */
+    vis.forEach((r,k)=>{if(st.mode==='ad'&&isAnom(r)){ctx.beginPath();ctx.arc(X(k),Y(r.v),5,0,Math.PI*2);ctx.fillStyle=cCrit;ctx.fill();ctx.strokeStyle=cBg;ctx.lineWidth=2;ctx.stroke();}});
+    const last=vis[vis.length-1];if(last){ctx.beginPath();ctx.arc(X(vis.length-1),Y(last.v),4,0,Math.PI*2);ctx.fillStyle=cAct;ctx.fill();ctx.strokeStyle=cBg;ctx.lineWidth=2;ctx.stroke();}
+    /* hover */
+    if(hover>=0&&hover<vis.length){const r=vis[hover];const x=Math.round(X(hover))+0.5;ctx.strokeStyle=cInk2;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,padT+ph);ctx.stroke();ctx.beginPath();ctx.arc(X(hover),Y(r.v),5,0,Math.PI*2);ctx.fillStyle=isAnom(r)&&st.mode==='ad'?cCrit:cAct;ctx.fill();ctx.strokeStyle=cBg;ctx.lineWidth=2;ctx.stroke();}
+  }
+  function table(){
+    const s=S(),thead=$('#outtbl thead'),tbody=$('#outtbl tbody');
+    if(st.mode==='ad'){
+      thead.innerHTML='<tr><th>timestamp</th><th>actual_value</th><th>forecast_value</th><th>lower_bound</th><th>upper_bound</th><th>is_anomaly</th></tr>';
+      const last=rows.slice(-6).reverse();
+      tbody.innerHTML=last.map(r=>{const a=isAnom(r);return'<tr><td>'+ts(r.i)+'</td><td>'+fmt(r.v)+'</td><td>'+(r.pred==null?'null':fmt(r.pred))+'</td><td>'+(r.pred==null?'null':fmt(r.pred-z()*r.sig))+'</td><td>'+(r.pred==null?'null':fmt(r.pred+z()*r.sig))+'</td><td'+(a?' class="t"':'')+'>'+(r.pred==null?'null':a?'TRUE':'FALSE')+'</td></tr>';}).join('');
+      const n=rows.filter(isAnom).length;$('#out-count').textContent=n+' flagged of '+rows.length;
+      $('#out-lbl').textContent='Output ROW, latest events';
+    }else{
+      thead.innerHTML='<tr><th>step</th><th>timestamp</th><th>mean</th><th>q10</th><th>q50</th><th>q90</th></tr>';
+      const f=fc(st.horizon)||[];const n0=rows.length?rows[rows.length-1].i:0;
+      tbody.innerHTML=f.slice(0,6).map((p,j)=>'<tr><td>'+(j+1)+'</td><td>'+ts(n0+j+1)+'</td><td>'+fmt(p.mean)+'</td><td>'+fmt(p.mean-Z80*p.sig)+'</td><td>'+fmt(p.mean)+'</td><td>'+fmt(p.mean+Z80*p.sig)+'</td></tr>').join('');
+      $('#out-count').textContent='array length '+st.horizon;
+      $('#out-lbl').textContent='forecast[] array, first steps';
+    }
+  }
+  function sql(){
+    const s=S();let q;
+    if(st.mode==='ad'){
+      q="SELECT event_time, "+s.col+",\n  AI_DETECT_ANOMALIES(\n    "+s.col+", event_time,\n    JSON_OBJECT('model' VALUE '"+st.model+"',\n                'confidencePercentage' VALUE "+Number(st.conf).toFixed(1)+")\n  ) OVER (PARTITION BY "+s.key+" ORDER BY event_time\n          RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS anomaly\nFROM "+s.table+";";
+    }else{
+      q="SELECT event_time, "+s.col+",\n  AI_FORECAST(\n    "+s.col+", event_time,\n    JSON_OBJECT('model' VALUE '"+st.model+"', 'horizon' VALUE "+st.horizon+")\n  ) OVER (PARTITION BY "+s.key+" ORDER BY event_time\n          RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS forecast\nFROM "+s.table+";";
+    }
+    $('#demo-sql').innerHTML=highlight(q);
+    $('#demo-title').textContent=(st.mode==='ad'?'AI_DETECT_ANOMALIES':'AI_FORECAST')+' · '+s.table;
+  }
+  function render(){draw();table();}
+  function tick(){if(!st.paused){step();render();}}
+  /* controls */
+  $('#mode-ad').addEventListener('click',()=>setMode('ad'));
+  $('#mode-fc').addEventListener('click',()=>setMode('fc'));
+  function setMode(m){st.mode=m;$('#mode-ad').setAttribute('aria-pressed',m==='ad');$('#mode-fc').setAttribute('aria-pressed',m==='fc');$('#ctl-conf').hidden=(m!=='ad');$('#ctl-horizon').hidden=(m!=='fc');sql();render();}
+  $('#scenario').addEventListener('change',e=>{st.sc=e.target.value;reset();sql();render();});
+  $('#model').addEventListener('change',e=>{st.model=e.target.value;sql();});
+  $('#conf').addEventListener('change',e=>{st.conf=Number(e.target.value);sql();render();});
+  $('#horizon').addEventListener('input',e=>{st.horizon=Number(e.target.value);$('#horizon-val').textContent=st.horizon;sql();render();});
+  $('#inject').addEventListener('click',()=>{const s=S();spikeQueue=[s.spike,s.spike*0.45,s.spike*0.15];if(st.paused){step();render();}});
+  $('#pause').addEventListener('click',e=>{st.paused=!st.paused;e.currentTarget.textContent=st.paused?'Resume':'Pause';e.currentTarget.setAttribute('aria-pressed',st.paused);});
+  $('#copy-demo').addEventListener('click',()=>copyText($('#demo-sql').textContent,$('#copy-demo'),ok=>{if(!ok)selectEl($('#demo-sql'));}));
+  /* hover */
+  const tip=$('#tip');
+  function onMove(ev){
+    if(!layout)return;const rect=canvas.getBoundingClientRect();const px=(ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left;
+    const {X,Y,vis}=layout;let best=-1,bd=1e9;vis.forEach((r,k)=>{const d=Math.abs(X(k)-px);if(d<bd){bd=d;best=k;}});
+    if(bd>24){hover=-1;tip.style.display='none';draw();return;}
+    hover=best;const r=vis[best];const s=S();
+    let html='<b>'+ts(r.i)+'</b><br>actual '+fmt(r.v)+' '+s.unit;
+    if(r.pred!=null){html+='<br>forecast '+fmt(r.pred)+'<br>bounds '+fmt(r.pred-z()*r.sig)+' to '+fmt(r.pred+z()*r.sig);if(st.mode==='ad')html+='<br>is_anomaly '+(isAnom(r)?'<b>TRUE</b>':'FALSE');}
+    tip.innerHTML=html;tip.style.display='block';tip.style.left=(X(best)+8)+'px';tip.style.top=(Y(r.v)+2)+'px';draw();
+  }
+  canvas.addEventListener('mousemove',onMove);canvas.addEventListener('touchstart',onMove,{passive:true});canvas.addEventListener('touchmove',onMove,{passive:true});
+  canvas.addEventListener('mouseleave',()=>{hover=-1;tip.style.display='none';draw();});
+  /* boot */
+  reset();sql();size();render();
+  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setInterval(tick,reduced?1500:700);
+  if(window.ResizeObserver){new ResizeObserver(()=>{size();draw();}).observe(canvas.parentElement);}else window.addEventListener('resize',()=>{size();draw();});
+  if(window.matchMedia){const mq=window.matchMedia('(prefers-color-scheme: dark)');if(mq.addEventListener)mq.addEventListener('change',draw);}
+})();
+</script>
+
+</body>
+</html>
