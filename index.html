@@ -490,6 +490,44 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 #credits{font-size:.72rem;color:var(--ink-4)}
 #credits a{color:var(--ink-3)}
 
+/* pitch player */
+.hero-cta{margin-top:.2rem}
+.btn.play{gap:.7rem;padding-right:1.2rem;box-shadow:0 0 0 1px rgba(69,137,255,.4),0 10px 30px rgba(15,98,254,.35)}
+.btn.play svg{width:14px;height:14px}
+.nav-pitch{background:transparent;cursor:pointer;color:var(--ink);border-color:var(--blue-2);gap:.3rem;align-items:center}
+.nav-pitch svg{width:10px;height:10px;color:var(--blue-3)}
+.nav-pitch:hover{background:rgba(15,98,254,.18)}
+@media (max-width:900px){.nav-pitch{display:inline-flex;padding:.3rem .5rem}.nav-pitch svg{display:none}}
+body.pitching .stage:not(.pitch-focus),body.pitching .chapter-head,body.pitching .inds,body.pitching .trust,body.pitching .start-tiles,body.pitching .ways,body.pitching .cta,body.pitching .marquee,body.pitching .hero-head{opacity:.22;filter:saturate(.3);transition:opacity .6s,filter .6s}
+body.pitching .stage,body.pitching .chapter-head,body.pitching .hero-head{transition:opacity .6s,filter .6s}
+body.pitching .stage.pitch-focus{box-shadow:0 0 0 1px var(--blue-2),0 0 0 6px rgba(69,137,255,.18),0 30px 90px rgba(0,0,0,.6);z-index:5}
+body.pitching .pitch-focus{opacity:1!important;filter:none!important}
+body.pitching .topbar{display:none}
+.pitch{position:fixed;left:0;right:0;bottom:0;z-index:60;background:linear-gradient(180deg,rgba(0,7,20,0),rgba(0,7,20,.92) 28%,rgba(0,7,20,.98));padding:34px max(16px,env(safe-area-inset-left,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px));display:grid;gap:.6rem;pointer-events:none}
+.pitch>*{pointer-events:auto;max-width:1320px;width:100%;margin:0 auto}
+.pitch-top{display:flex;align-items:center;gap:1rem;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.pitch-live{display:inline-flex;align-items:center;gap:.5rem;color:var(--blue-3)}
+.pitch-live i{width:8px;height:8px;background:var(--blue-2);box-shadow:0 0 10px var(--blue-2);animation:blink 1.4s infinite}
+.pitch-step{font-family:var(--font-mono);color:var(--ink-2)}
+.pitch-x{margin-left:auto;background:transparent;border:1px solid var(--line-2);color:var(--ink-2);padding:.3rem .6rem;cursor:pointer;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;display:inline-flex;gap:.4rem;align-items:center}
+.pitch-x:hover{color:var(--ink);background:var(--panel-2)}
+.pitch kbd{font-family:var(--font-mono);font-size:.68rem;border:1px solid var(--line-2);padding:.05rem .3rem;color:var(--ink-3);text-transform:none;letter-spacing:0}
+.pitch-prog{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;height:4px}
+.pitch-prog i{display:block;background:rgba(255,255,255,.14);position:relative;overflow:hidden}
+.pitch-prog i::after{content:"";position:absolute;inset:0;width:0;background:var(--blue-2);box-shadow:0 0 10px var(--blue-2)}
+.pitch-prog i.done::after{width:100%}
+.pitch-prog i.on::after{width:100%;transition:width var(--d,6s) linear}
+.pitch-prog i.on.paused::after{transition:none;width:var(--w,0%)}
+.pitch-cap{font-size:clamp(1.3rem,2.6vw,2.1rem);font-weight:300;line-height:1.25;letter-spacing:-.01em;color:var(--ink);min-height:2.5em;text-wrap:balance;max-width:34ch}
+.pitch-cap em{font-style:normal;color:var(--blue-3)}
+.pitch-ctl{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center}
+.pitch-ctl .btn kbd{margin-left:.2rem}
+.pitch-hint{font-size:.78rem;color:var(--ink-3)}
+.pitch-end{display:grid;gap:.8rem;padding-top:.4rem}
+.pitch-end-h{font-size:clamp(1.2rem,2.2vw,1.7rem);font-weight:300;max-width:34ch}
+@media (max-width:760px){.pitch{padding-top:22px;gap:.45rem}.pitch-cap{font-size:1.15rem;min-height:2.6em}.pitch-ctl .btn kbd,.pitch-x kbd{display:none}.pitch-top{font-size:.66rem}body.pitching .stage.pitch-focus .stage-top{display:none}body.pitching .nav-links{display:none}body.pitching .nav .wrap{min-height:48px}.nav-pitch{display:none}}
+@media (prefers-reduced-motion:reduce){.pitch-live i{animation:none}}
+
 /* cta band + footer */
 .cta{margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(15,98,254,.25),rgba(0,29,108,.35));padding:clamp(40px,5vw,72px) 0}
 .cta .wrap{display:flex;flex-wrap:wrap;gap:1.5rem 3rem;align-items:center;justify-content:space-between}
@@ -515,7 +553,7 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
       <a href="#usecases" data-ch="usecases"><b>03</b>Use cases</a>
       <a href="#start" data-ch="start"><b>04</b>Start</a>
     </div>
-    <a class="nav-stat" href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener"><b>44M+</b> downloads</a>
+    <button class="nav-stat nav-pitch" id="nav-pitch" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg> 60-second pitch</button>
     <a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </div>
 </nav>
@@ -527,6 +565,7 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
       <div class="pills"><span class="pill live">Early Access</span><span class="pill">IBM Granite Time Series</span><span class="pill">Confluent Cloud for Apache Flink</span><span class="pill">Streaming Agents</span></div>
       <h1 class="h-display">See the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>before it happens.</h1>
       <p class="lede">One statement of Flink SQL predicts demand, payments, energy, network telemetry, asset prices and anomalies inside the stream. No training. Touch anything on this page.</p>
+      <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Play the 60-second pitch</button><a class="btn ghost" href="#usecases">Try the simulators</a></div>
       <div class="stats" id="hero-stats">
         <div class="stat"><b>44M+</b><span>model downloads</span></div>
         <div class="stat"><b>#1</b><span>GIFT-Eval, zero-shot</span></div>
@@ -1190,6 +1229,21 @@ FROM motor_telemetry;</code></pre></div>
     <div class="btn-row"><a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Join Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a><button class="btn ghost" id="share-link">Share this page</button><span class="toast" id="share-toast"></span></div>
   </div>
 </div>
+<div class="pitch" id="pitch" hidden role="dialog" aria-label="60-second pitch" aria-modal="false">
+  <div class="pitch-top"><span class="pitch-live"><i></i>60-second pitch</span><span class="pitch-step" id="pitch-step">1 / 8</span><button class="pitch-x" id="pitch-exit" type="button" aria-label="Exit the pitch">Exit <kbd>Esc</kbd></button></div>
+  <div class="pitch-prog" id="pitch-prog" aria-hidden="true"></div>
+  <div class="pitch-cap" id="pitch-cap" aria-live="polite"></div>
+  <div class="pitch-ctl">
+    <button class="btn sm" id="pitch-pause" type="button" aria-pressed="false">Pause <kbd>space</kbd></button>
+    <button class="btn sm ghost" id="pitch-next" type="button">Next <kbd>&#8594;</kbd></button>
+    <button class="switch" id="pitch-voice" type="button" aria-pressed="true"><i></i>Voice</button>
+    <span class="pitch-hint" id="pitch-hint"></span>
+  </div>
+  <div class="pitch-end" id="pitch-end" hidden>
+    <div class="pitch-end-h">One statement of Flink SQL. Your stream already knows what happens next.</div>
+    <div class="btn-row"><a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Join Early Access</a><a class="btn ghost" href="#briefing" id="pitch-brief">Book a working session</a><button class="btn ghost" id="pitch-replay" type="button">Replay</button></div>
+  </div>
+</div>
 <footer class="foot">
   <div class="wrap">
     <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. Early Access, October 2026.</span></div>
@@ -1780,6 +1834,73 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
       rows.forEach((r,i)=>{const lit=parts.some(p=>{const q=pos(p);return q.phase===1&&q.row===i;});r.style.borderColor=lit?(i===3?'rgba(190,149,255,.8)':'rgba(69,137,255,.8)'):'';});
     }});
   anchors();
+})();
+
+/* ============ 60-second pitch ============ */
+(function(){
+  const ui=$('#pitch');if(!ui)return;
+  const cap=$('#pitch-cap'),prog=$('#pitch-prog'),stepEl=$('#pitch-step'),endEl=$('#pitch-end'),pauseBtn=$('#pitch-pause'),voiceBtn=$('#pitch-voice'),hint=$('#pitch-hint');
+  const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
+  const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
+  const tab=id=>click('#uctabs [aria-controls="'+id+'"]');
+  const SCRIPT=[
+    {focus:'#st-live',scroll:'#st-live',dur:8000,cap:'Every event is a decision. <em>Scored in flight.</em>',say:'Every event in your stream is a decision. Granite Time Series models score each one in flight, on Confluent. Poke it.',
+      run:async w=>{chipSet('live-mode','ad');click('#live-mode .chip[data-v="ad"]');click('#live-sc .chip[data-v="temp"]');await w(2600);click('#live-poke');}},
+    {focus:'#st-live',dur:6000,cap:'Forecast the next <em>32 steps</em>, with the band.',say:'Switch to forecast: the next thirty-two steps, with the band.',
+      run:async w=>{click('#live-mode .chip[data-v="fc"]');await w(900);setRange('#live-h',32);}},
+    {focus:'#st-draw',scroll:'#st-draw',dur:7500,cap:'<em>No training.</em> It has never seen this signal.',say:'No training. It has never seen this signal, and it finds the pattern in milliseconds.',
+      run:async w=>{click('#draw-clear');await w(700);click('#draw-preset .chip[data-v="heartbeat"]');await w(3600);click('#draw-model .chip[data-v="patchtstfm"]');}},
+    {focus:'#st-agent',scroll:'#st-agent',scrollM:'#n2',dur:9000,cap:'Then an agent acts. <em>Under a second</em>, inside Confluent.',say:'Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent.',
+      run:async w=>{click('#ag-sc .chip[data-v="retail"]');await w(300);click('#ag-run');}},
+    {focus:'#st-thennow',scroll:'#st-thennow',dur:7500,cap:'30 models <em>&#8594; 2</em>. 6 months <em>&#8594; 8 weeks</em>. 93 <em>&#8594; 99%</em>.',say:'Thirty bespoke models become two. Six months become eight weeks. Accuracy from ninety-three to ninety-nine percent.',
+      run:async w=>{click('#tn-then');await w(1500);click('#tn-now');}},
+    {focus:'#uc-fraud',scroll:'#uc-fraud',pre:()=>tab('uc-fraud'),dur:7000,cap:'Every card has <em>its own normal</em>.',say:'Every card has its own normal. The odd swipe is held before authorization.',
+      run:async w=>{await w(1500);click('#fr-inject .chip[data-v="stolen"]');}},
+    {focus:'#uc-opt',scroll:'#uc-opt',pre:()=>{tab('uc-opt');click('#op-reset');},dur:7000,cap:'The kiln finds <em>its own setpoint</em>.',say:'The kiln finds its own setpoint inside the guardrails. The operator approves.',
+      run:async w=>{await w(1200);click('#op-go');}},
+    {focus:'.start-tiles',scroll:'#start',dur:5000,cap:'One statement of Flink SQL. <em>Join Early Access.</em>',say:'One statement of Flink SQL. Join the Early Access.',
+      run:async w=>{}}
+  ];
+  const st={on:false,i:-1,paused:false,voice:true,token:0,utter:null,t0:0,elapsed:0};
+  let voices=[];const pickVoice=()=>{voices=window.speechSynthesis?speechSynthesis.getVoices():[];const pref=['Google US English','Samantha','Microsoft Aria','Microsoft Jenny','Daniel','Karen','Moira','Alex'];for(const n of pref){const v=voices.find(x=>x.name.indexOf(n)>=0);if(v)return v;}return voices.find(v=>/^en[-_]US/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;};
+  if(window.speechSynthesis){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener('voiceschanged',pickVoice);}else{voiceBtn.hidden=true;st.voice=false;}
+  prog.innerHTML=SCRIPT.map(()=>'<i></i>').join('');
+  const segs=$$('i',prog);
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  async function waitFor(ms,token){const end=performance.now()+ms;while(performance.now()<end){if(st.token!==token)throw new Error('cancel');if(st.paused){const p0=performance.now();while(st.paused&&st.token===token)await sleep(80);if(st.token!==token)throw new Error('cancel');return waitFor(end-p0,token);}await sleep(60);}}
+  function speak(text,token){return new Promise(res=>{if(!st.voice||!window.speechSynthesis){res();return;}try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);const v=pickVoice();if(v)u.voice=v;u.rate=1.02;u.pitch=1;u.lang=(v&&v.lang)||'en-US';let done=false;const fin=()=>{if(!done){done=true;res();}};u.onend=fin;u.onerror=fin;st.utter=u;speechSynthesis.speak(u);setTimeout(fin,Math.min(14000,900+text.length*75));}catch(e){res();}});}
+  function focus(sel){$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));const el=$(sel);if(el)el.classList.add('pitch-focus');}
+  function scrollTo(sel){const el=$(sel);if(!el)return;const nav=document.querySelector('.nav');const navH=nav?nav.offsetHeight:56;const panelH=ui.hidden?0:(ui.offsetHeight||230);const avail=window.innerHeight-navH-panelH;const r=el.getBoundingClientRect();let top=r.top+window.scrollY-navH-12;if(r.height<avail-24)top-=(avail-24-r.height)/2;window.scrollTo({top:Math.max(0,top),behavior:reduced?'auto':'smooth'});}
+  async function runStep(i,token){const s=SCRIPT[i];st.i=i;stepEl.textContent=(i+1)+' / '+SCRIPT.length;cap.innerHTML=s.cap;
+    segs.forEach((g,j)=>{g.classList.toggle('done',j<i);g.classList.remove('on','paused');g.style.removeProperty('--d');});
+    if(s.pre)s.pre();focus(s.focus);
+    await waitFor(60,token);const target=(window.innerWidth<=760&&s.scrollM)?s.scrollM:s.scroll;if(target)scrollTo(target);
+    await waitFor(reduced?100:650,token);
+    const seg=segs[i];seg.style.setProperty('--d',s.dur+'ms');void seg.offsetWidth;seg.classList.add('on');st.t0=performance.now();
+    const w=ms=>waitFor(ms,token);
+    const say=speak(s.say,token);
+    try{await s.run(w);}catch(e){if(e.message==='cancel')throw e;}
+    const t=Math.max(0,s.dur-(performance.now()-st.t0));await waitFor(t,token);
+    await Promise.race([say,waitFor(2500,token)]);
+    seg.classList.add('done');seg.classList.remove('on');}
+  async function play(from){st.on=true;st.token++;const token=st.token;document.body.classList.add('pitching');ui.hidden=false;endEl.hidden=true;cap.hidden=false;prog.hidden=false;$('.pitch-ctl',ui).hidden=false;st.paused=false;pauseBtn.textContent='';pauseBtn.innerHTML='Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed','false');
+    try{for(let i=from;i<SCRIPT.length;i++){await runStep(i,token);}finish();}catch(e){if(e.message!=='cancel')console.error(e);}}
+  function finish(){cap.innerHTML='';endEl.hidden=false;$('.pitch-ctl',ui).hidden=true;segs.forEach(g=>{g.classList.add('done');g.classList.remove('on');});stepEl.textContent=SCRIPT.length+' / '+SCRIPT.length;focus('.start-tiles');requestAnimationFrame(()=>scrollTo('.start-tiles'));}
+  function exit(){st.token++;st.on=false;st.paused=false;document.body.classList.remove('pitching');$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));ui.hidden=true;if(window.speechSynthesis)speechSynthesis.cancel();}
+  function togglePause(){if(!st.on||!endEl.hidden)return;st.paused=!st.paused;pauseBtn.innerHTML=st.paused?'Resume <kbd>space</kbd>':'Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed',st.paused);const seg=segs[st.i];if(seg){if(st.paused){const w=Math.min(100,100*(performance.now()-st.t0)/SCRIPT[st.i].dur);seg.style.setProperty('--w',w+'%');seg.classList.add('paused');}else{seg.classList.remove('paused');}}if(window.speechSynthesis){if(st.paused)speechSynthesis.pause();else speechSynthesis.resume();}}
+  function next(){if(!st.on)return;const i=st.i+1;st.token++;if(window.speechSynthesis)speechSynthesis.cancel();if(i>=SCRIPT.length){finish();return;}play(i);}
+  function unlock(){if(!window.speechSynthesis||!st.voice)return;try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){}}
+  $('#pitch-play').addEventListener('click',()=>{unlock();play(0);});
+  $('#nav-pitch').addEventListener('click',()=>{unlock();play(0);});
+  $('#pitch-exit').addEventListener('click',exit);
+  $('#pitch-replay').addEventListener('click',()=>{unlock();play(0);});
+  $('#pitch-brief').addEventListener('click',()=>setTimeout(exit,50));
+  pauseBtn.addEventListener('click',togglePause);
+  $('#pitch-next').addEventListener('click',next);
+  voiceBtn.addEventListener('click',()=>{st.voice=!st.voice;voiceBtn.setAttribute('aria-pressed',st.voice);if(!st.voice&&window.speechSynthesis)speechSynthesis.cancel();hint.textContent=st.voice?'':'Captions only';});
+  document.addEventListener('keydown',e=>{if(!st.on)return;if(e.key==='Escape'){exit();}else if(e.key===' '){e.preventDefault();togglePause();}else if(e.key==='ArrowRight'){next();}});
+  window.addEventListener('pagehide',()=>{if(window.speechSynthesis)speechSynthesis.cancel();});
+  if(/[?&]pitch=1/.test(location.search)){st.voice=false;voiceBtn.setAttribute('aria-pressed','false');hint.textContent='Captions only. Turn on Voice to hear it.';setTimeout(()=>play(0),900);}
 })();
 
 /* ============ nav scroll spy ============ */
