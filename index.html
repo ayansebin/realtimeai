@@ -529,6 +529,75 @@ body.pitching .topbar{display:none}
 @media (max-width:760px){.pitch{padding-top:22px;gap:.45rem}.pitch-cap{font-size:1.15rem;min-height:2.6em}.pitch-ctl .btn kbd,.pitch-x kbd{display:none}.pitch-top{font-size:.66rem}body.pitching .stage.pitch-focus .stage-top{display:none}body.pitching .nav-links{display:none}body.pitching .nav .wrap{min-height:48px}.nav-pitch{display:none}}
 @media (prefers-reduced-motion:reduce){.pitch-live i{animation:none}}
 
+/* confluent cloud workspace mock (light) */
+.console-grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:14px;align-items:stretch}
+@media (max-width:1000px){.console-grid{grid-template-columns:1fr}}
+.cc{--cc-bg:#ffffff;--cc-ink:#1f2937;--cc-ink2:#4b5563;--cc-ink3:#6b7280;--cc-line:#e5e7eb;--cc-top:#0d1117;--cc-blue:#0a5fd6;--cc-green:#16a34a;--cc-purple:#7c3aed;background:var(--cc-bg);color:var(--cc-ink);border:1px solid rgba(255,255,255,.25);box-shadow:0 30px 80px rgba(0,0,0,.55);font-family:var(--font-sans);font-size:12.5px;line-height:1.35;display:grid;grid-template-rows:auto 1fr;min-height:520px;overflow:hidden;color-scheme:light}
+.cc-top{background:var(--cc-top);color:#fff;display:flex;align-items:center;gap:.7rem;padding:0 12px;height:38px}
+.cc-brand{font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+.cc-search{margin-left:auto;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:3px 10px;min-width:150px;font-size:11px;border-radius:3px}
+.cc-ico{width:14px;height:14px;border:1.5px solid rgba(255,255,255,.55);border-radius:50%}
+.cc-main{display:grid;grid-template-columns:34px minmax(0,1fr);min-height:0}
+.cc-rail{border-right:1px solid var(--cc-line);display:grid;align-content:start;gap:14px;padding:12px 0;justify-items:center}
+.cc-rail i{width:14px;height:14px;border:1.5px solid #9ca3af;border-radius:3px}
+.cc-rail i.on{border-color:var(--cc-blue);background:rgba(10,95,214,.15)}
+.cc-work{display:grid;grid-template-rows:auto auto auto auto auto minmax(0,1fr);min-height:0;min-width:0}
+.cc-tabs{display:flex;border-bottom:1px solid var(--cc-line);font-size:11.5px}
+.cc-tab{padding:7px 12px;border-right:1px solid var(--cc-line);color:var(--cc-ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+.cc-tab.on{color:var(--cc-ink);border-bottom:2px solid var(--cc-blue)}
+.cc-tab.plus{color:var(--cc-ink3)}
+.cc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:10px 14px 6px;flex-wrap:wrap}
+.cc-title{font-size:13.5px;font-weight:600;color:var(--cc-ink)}
+.cc-sub{font-size:11px;color:var(--cc-blue);margin-top:2px}
+.cc-sel{display:flex;gap:1rem;font-size:11.5px;color:var(--cc-ink2);white-space:nowrap}
+.cc-sel b{font-weight:500;color:var(--cc-ink)}
+.cc-editor{margin:0 14px;border:1px solid var(--cc-line);background:#fafafa;max-height:118px;overflow:hidden;position:relative}
+.cc-editor::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22px;background:linear-gradient(180deg,rgba(250,250,250,0),#fafafa)}
+.cc-editor pre{margin:0;padding:8px 10px;font-family:var(--font-mono);font-size:11.5px;line-height:1.5;color:#111827;white-space:pre;overflow:hidden;counter-reset:ln}
+.cc-editor pre span.ln{display:inline-block;width:2.2em;color:#9ca3af;text-align:right;margin-right:1em;user-select:none}
+.cc-editor pre .k{color:#1d4ed8}.cc-editor pre .f{color:#7c3aed}.cc-editor pre .s{color:#047857}.cc-editor pre .n{color:#b45309}
+.cc-status{display:flex;align-items:center;gap:1rem;padding:10px 14px;font-size:11.5px;color:var(--cc-ink2);border-bottom:1px solid var(--cc-line);flex-wrap:wrap}
+.cc-stmt{color:var(--cc-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+.cc-run{display:inline-flex;align-items:center;gap:.35rem;color:var(--cc-ink)}
+.cc-run i{width:8px;height:8px;border-radius:50%;background:var(--cc-green);box-shadow:0 0 0 2px rgba(22,163,74,.2)}
+.cc-run.stopped i{background:#9ca3af;box-shadow:none}
+.cc-run.pending i{background:#f59e0b}
+.cc-mode{margin-left:auto}
+.cc-mode b{font-weight:500;color:var(--cc-ink)}
+.cc-stop{font:inherit;font-size:11.5px;border:1px solid #cbd5e1;background:#fff;color:var(--cc-ink);padding:4px 12px;border-radius:3px;cursor:pointer}
+.cc-stop:hover{background:#f3f4f6}
+.cc-tools{display:flex;align-items:center;gap:.5rem;padding:6px 14px;border-bottom:1px solid var(--cc-line);font-size:11.5px;color:var(--cc-ink2)}
+.cc-vt{border:1px solid var(--cc-line);padding:2px 7px;border-radius:3px;color:var(--cc-ink3);font-size:11px;cursor:pointer}
+.cc-vt.on{border-color:var(--cc-blue);color:var(--cc-blue);background:rgba(10,95,214,.08)}
+.cc-filter{flex:1;border:1px solid var(--cc-line);padding:3px 8px;border-radius:3px;color:#9ca3af;min-width:0;overflow:hidden;white-space:nowrap}
+.cc-quick{border:1px solid var(--cc-blue);color:var(--cc-blue);padding:3px 9px;border-radius:3px;white-space:nowrap}
+.cc-results{min-height:0;padding:8px 14px 12px;display:grid}
+.cc-chart{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:200px}
+.cc-chart canvas{width:100%;height:100%;display:block;min-height:180px}
+.cc-legend{display:flex;flex-wrap:wrap;gap:.9rem;font-size:11px;color:var(--cc-ink2);padding-top:6px}
+.cc-legend span::before{content:"";display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:6px;background:var(--c)}
+.cc-legend .add{color:var(--cc-blue)}.cc-legend .add::before{display:none}
+.cc-table{overflow:auto;max-height:230px;font-family:var(--font-mono);font-size:11px}
+.cc-table table{border-collapse:collapse;width:100%}
+.cc-table th{position:sticky;top:0;background:#f9fafb;text-align:left;font-weight:500;color:var(--cc-ink2);padding:6px 8px;border-bottom:1px solid var(--cc-line);white-space:nowrap}
+.cc-table td{padding:5px 8px;border-bottom:1px solid #f3f4f6;white-space:nowrap;color:var(--cc-ink)}
+.cc-table td.t{color:#b91c1c;font-weight:600}
+.cc-table tr.new td{background:#eff6ff}
+@media (max-width:760px){.cc{min-height:460px;font-size:12px}.cc-rail{display:none}.cc-main{grid-template-columns:1fr}.cc-sel{display:none}.cc-search{display:none}.cc-status{gap:.6rem}.cc-mode{display:none}.cc-quick{display:none}}
+/* video card */
+.video-card{background:rgba(0,7,20,.5);border:1px solid var(--line);padding:.9rem .9rem 1rem;display:grid;gap:.6rem;align-content:start}
+.video-k{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.video-box{position:relative;aspect-ratio:16/9;background:#0d1117 radial-gradient(400px 200px at 50% 40%,rgba(15,98,254,.35),transparent);overflow:hidden;border:1px solid var(--line)}
+.video-box img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;color:transparent}
+.video-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;border:0;background:var(--blue);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 0 0 8px rgba(15,98,254,.25),0 10px 30px rgba(0,0,0,.5);transition:transform .15s}
+.video-play:hover{transform:translate(-50%,-50%) scale(1.06)}
+.video-play svg{width:22px;height:22px;margin-left:3px}
+.video-dur{position:absolute;right:.5rem;bottom:.5rem;background:rgba(0,0,0,.7);color:#fff;font-size:.68rem;padding:.15rem .45rem;letter-spacing:.04em}
+.video-t{font-size:.98rem;color:var(--ink);line-height:1.3}
+.video-d{font-size:.82rem;color:var(--ink-3);line-height:1.4}
+.video-l{font-size:.82rem;margin-top:auto}
+
 /* cta band + footer */
 .cta{margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(15,98,254,.25),rgba(0,29,108,.35));padding:clamp(40px,5vw,72px) 0}
 .cta .wrap{display:flex;flex-wrap:wrap;gap:1.5rem 3rem;align-items:center;justify-content:space-between}
@@ -615,6 +684,49 @@ body.pitching .topbar{display:none}
           <div class="readout"><b id="ro-lat">~3 ms</b><span>per call, CPU</span></div>
         </div>
         <div class="sqlline"><code id="live-sql"></code><button class="btn sm ghost" id="live-copy">Copy SQL</button></div>
+      </div>
+    </div>
+    <div class="stage" id="st-console">
+      <div class="stage-top">
+        <div class="stage-title"><h3>In Confluent Cloud</h3><p>The same statement in the Flink SQL workspace. Paste it, press Run, the results stream back.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Results view</span>
+            <div class="chips" id="cc-view"><button class="chip sm" data-v="chart" aria-pressed="true">Chart</button><button class="chip sm" data-v="table" aria-pressed="false">Table</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">&nbsp;</span>
+            <div class="btn-row"><button class="btn sm" id="cc-run">Run <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3l9 5-9 5z" fill="currentColor"/></svg></button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="console-grid">
+          <div class="cc" id="cc" aria-label="Confluent Cloud Flink SQL workspace, simulated">
+            <div class="cc-top"><span class="cc-brand">Confluent Cloud</span><span class="cc-search">Search</span><span class="cc-ico"></span><span class="cc-ico"></span><span class="cc-ico"></span></div>
+            <div class="cc-main">
+              <div class="cc-rail"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="cc-work">
+                <div class="cc-tabs"><span class="cc-tab on" id="cc-tabname">workspace-2026-10-17-094102</span><span class="cc-tab plus">+</span></div>
+                <div class="cc-head"><div><div class="cc-title" id="cc-title">workspace-2026-10-17-094102</div><div class="cc-sub">&#9711; ibm_timeseries</div></div><div class="cc-sel"><span>Use catalog <b>ibm_timeseries</b> &#9662;</span><span>Use database <b>cluster_0</b> &#9662;</span></div></div>
+                <div class="cc-editor"><pre id="cc-code"></pre></div>
+                <div class="cc-status"><span class="cc-stmt" id="cc-stmt">workspace-2026-10-17-09…</span><span class="cc-run" id="cc-state"><i></i>Running</span><span class="cc-date" id="cc-date"></span><span class="cc-rows" id="cc-rows">&#9776; 0</span><span class="cc-mode">Mode <b>Streaming</b> &#9662;</span><button class="cc-stop" id="cc-stop" type="button">Stop</button></div>
+                <div class="cc-tools"><span class="cc-vt" id="cc-vt-table">&#9638;</span><span class="cc-vt on" id="cc-vt-chart">&#8767;</span><span class="cc-vt">{ }</span><span class="cc-filter">&#9662; Search…</span><span class="cc-quick">&#10022; Quick actions</span></div>
+                <div class="cc-results">
+                  <div class="cc-chart" id="cc-chart"><canvas id="cc-cv" aria-label="Streaming results chart"></canvas><div class="cc-legend" id="cc-legend"></div></div>
+                  <div class="cc-table" id="cc-table" hidden><table><thead id="cc-thead"></thead><tbody id="cc-tbody"></tbody></table></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="video-card" id="video-card">
+            <div class="video-k">Official demo · Confluent, an IBM Company · Aug 2026</div>
+            <div class="video-box" id="video-box"><img src="https://i.ytimg.com/vi/knU4XB-90Nw/hqdefault.jpg" alt="Confluent demo video: real-time forecasting with IBM Granite Time Series models, Apache Flink and Apache Kafka" loading="lazy" width="480" height="360"><button class="video-play" id="video-play" type="button" aria-label="Play the Confluent demo video"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg></button><span class="video-dur">3 models · Flink · Kafka</span></div>
+            <div class="video-t">Real-Time Forecasting with IBM Granite Time Series Models, Apache Flink and Apache Kafka</div>
+            <div class="video-d">TTM, FlowState and PatchTST-FM called from Flink SQL on Confluent Cloud. Zero config, model flexibility, lower cost.</div>
+            <a class="video-l" href="https://www.youtube.com/watch?v=knU4XB-90Nw" target="_blank" rel="noopener">Open on YouTube &#8594;</a>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot">
+        <div class="readouts"><div class="readout"><b id="cc-ro-rows">0</b><span>rows streamed</span></div><div class="readout"><b class="green" id="cc-ro-state">Running</b><span>statement</span></div><div class="readout"><b>CFUs</b><span>billed as Flink compute</span></div></div>
+        <div class="hint">Simulated workspace. The real console is the video on the right.</div>
       </div>
     </div>
     <div class="marquee" aria-label="Runs with"><div class="mq-label">Runs where your stream runs</div><div class="mq-track"><div class="mq-inner" id="mq"></div></div></div>
@@ -1409,7 +1521,60 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   function onMove(ev){const k=hoverIndex(layout,cv,ev);if(k!==st.hover)st.dirty=true;st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];const z=Z[st.conf]||2.5758;let html='<b>'+label(r.i)+'</b><br>actual '+r.v.toFixed(sim.dec)+' '+sim.unit;if(r.pred!=null){html+='<br>expected '+r.pred.toFixed(sim.dec)+'<br>band '+(r.pred-z*r.sig).toFixed(sim.dec)+' to '+(r.pred+z*r.sig).toFixed(sim.dec);if(st.mode==='ad')html+='<br>is_anomaly '+(layout.isAnom(r)?'<b>TRUE</b>':'FALSE');}tip.innerHTML=html;tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.7?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
   cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});cv.c.addEventListener('mouseleave',()=>{st.hover=-1;st.dirty=true;tip.style.display='none';});
   App.listeners.push(()=>{sql();readouts();st.dirty=true;});
+  App.live={get sim(){return sim;},st,label,sqlText:()=>$('#live-sql').dataset.sql||'',setPaused(v){if(st.paused!==v)$('#live-pause').click();}};
   sql();readouts();
+})();
+
+/* ============ 01 confluent cloud workspace (simulated) ============ */
+(function(){
+  const el=$('#st-console');if(!el||!App.live)return;
+  const L=App.live;const cv=new Cv($('#cc-cv'));
+  const st={view:'chart',running:true,rows:0,lastN:-1,pending:false,dirty:true};
+  const CC={ink:'#1f2937',ink2:'#6b7280',grid:'#e5e7eb',actual:'#6d28d9',fc:'#0a5fd6',band:'rgba(10,95,214,.12)',flag:'#dc2626'};
+  const now=new Date();const stamp=now.toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+  $('#cc-date').textContent='📅 '+stamp;
+  const wsname='workspace-'+now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0')+'-'+String(now.getHours()).padStart(2,'0')+String(now.getMinutes()).padStart(2,'0')+'02';
+  $('#cc-tabname').textContent=wsname;$('#cc-title').textContent=wsname;$('#cc-stmt').textContent=wsname.slice(0,22)+'…';
+  function pretty(q){/* break the one-line statement into workspace-style lines */
+    return q.replace(/, AI_/,',\n  AI_').replace(/\(([a-z_]+), event_time, JSON_OBJECT/,'(\n    $1, event_time,\n    JSON_OBJECT').replace(/\)\) OVER \(/,')\n  ) OVER (').replace(/ ORDER BY event_time RANGE/,'\n          ORDER BY event_time\n          RANGE').replace(/ AS (anomaly|forecast) FROM /,'\n  ) AS $1\nFROM ').replace(/CURRENT ROW\n  \)/,'CURRENT ROW)');}
+  function code(){const q=pretty(L.sqlText());const lines=q.split('\n');$('#cc-code').innerHTML=lines.map((ln,i)=>'<span class="ln">'+(i+1)+'</span>'+highlight(ln)).join('\n');}
+  function setState(s){const r=$('#cc-state');r.className='cc-run'+(s==='Running'?'':s==='Pending'?' pending':' stopped');r.innerHTML='<i></i>'+s;$('#cc-ro-state').textContent=s;$('#cc-ro-state').className=s==='Running'?'green':s==='Pending'?'blue':'red';$('#cc-stop').textContent=s==='Running'?'Stop':'Run';$('#cc-run').innerHTML=(s==='Running'?'Stop':'Run')+' <svg viewBox="0 0 16 16" aria-hidden="true"><path d="'+(s==='Running'?'M4 4h8v8H4z':'M4 3l9 5-9 5z')+'" fill="currentColor"/></svg>';}
+  function toggleRun(){if(st.pending)return;if(st.running){st.running=false;L.setPaused(true);setState('Stopped');}else{st.pending=true;setState('Pending');setTimeout(()=>{st.pending=false;st.running=true;L.setPaused(false);setState('Running');st.dirty=true;},reduced?50:900);}}
+  $('#cc-run').addEventListener('click',toggleRun);$('#cc-stop').addEventListener('click',toggleRun);
+  function setView(v){st.view=v;chipSet('cc-view',v);$('#cc-chart').hidden=v!=='chart';$('#cc-table').hidden=v!=='table';$('#cc-vt-chart').classList.toggle('on',v==='chart');$('#cc-vt-table').classList.toggle('on',v==='table');st.dirty=true;if(v==='chart')requestAnimationFrame(()=>{cv.fit();st.dirty=true;});}
+  chipGroup('cc-view',setView);$('#cc-vt-chart').addEventListener('click',()=>setView('chart'));$('#cc-vt-table').addEventListener('click',()=>setView('table'));
+  function fmtV(v){return v==null?'null':v.toFixed(L.sim.dec);}
+  function table(){const sim=L.sim,s=L.st,z=Z[s.conf]||2.5758;const rows=sim.rows.slice(-9).reverse();
+    if(s.mode==='ad'){$('#cc-thead').innerHTML='<tr><th>event_time</th><th>'+sim.col+'</th><th>is_anomaly</th><th>forecast_value</th><th>lower_bound</th><th>upper_bound</th><th>rmse</th></tr>';
+      $('#cc-tbody').innerHTML=rows.map((r,i)=>{const a=r.pred!=null&&(r.v>r.pred+z*r.sig||r.v<r.pred-z*r.sig);return '<tr'+(i===0?' class="new"':'')+'><td>'+L.label(r.i)+'</td><td>'+fmtV(r.v)+'</td><td'+(a?' class="t"':'')+'>'+(r.pred==null?'null':a?'TRUE':'FALSE')+'</td><td>'+fmtV(r.pred)+'</td><td>'+(r.pred==null?'null':fmtV(r.pred-z*r.sig))+'</td><td>'+(r.pred==null?'null':fmtV(r.pred+z*r.sig))+'</td><td>'+(r.sig==null?'null':(r.sig*0.8).toFixed(Math.max(2,sim.dec)))+'</td></tr>';}).join('');}
+    else{const f=sim.fc(s.h)||[];const last=sim.rows[sim.rows.length-1];$('#cc-thead').innerHTML='<tr><th>event_time</th><th>'+sim.col+'</th><th>forecast[1].timestamp</th><th>forecast[1].mean</th><th>q10</th><th>q90</th><th>metadata</th></tr>';
+      $('#cc-tbody').innerHTML=rows.map((r,i)=>{const p=f[0];return '<tr'+(i===0?' class="new"':'')+'><td>'+L.label(r.i)+'</td><td>'+fmtV(r.v)+'</td><td>'+L.label(r.i+1)+'</td><td>'+(p?fmtV(p.mean+(r.v-last.v)*0.3):'null')+'</td><td>'+(p?fmtV(p.mean-Z80*p.sig+(r.v-last.v)*0.3):'null')+'</td><td>'+(p?fmtV(p.mean+Z80*p.sig+(r.v-last.v)*0.3):'null')+'</td><td>{"model":"'+sqlModel()+'","horizon":'+s.h+'}</td></tr>';}).join('');}}
+  function chart(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;const sim=L.sim,s=L.st,z=Z[s.conf]||2.5758;const h=s.mode==='fc'?s.h:0;
+    const padL=44,padR=30,padT=10,padB=22,pw=W-padL-padR,ph=H-padT-padB;const nVis=Math.max(40,Math.min(140,Math.floor(pw/5)));
+    const vis=sim.rows.slice(Math.max(0,sim.rows.length-(nVis-h)));const f=h?sim.fc(h):null;
+    let lo=Infinity,hi=-Infinity;vis.forEach(r=>{lo=Math.min(lo,r.v);hi=Math.max(hi,r.v);if(r.pred!=null){lo=Math.min(lo,r.pred-z*r.sig);hi=Math.max(hi,r.pred+z*r.sig);}});if(f)f.forEach(p=>{lo=Math.min(lo,p.mean-Z80*p.sig);hi=Math.max(hi,p.mean+Z80*p.sig);});
+    const pad=(hi-lo)*0.1||1;lo-=pad;hi+=pad;const total=vis.length+h;const X=k=>padL+(k/Math.max(1,total-1))*pw,Y=v=>padT+(1-(v-lo)/(hi-lo))*ph;
+    ctx.clearRect(0,0,W,H);ctx.font='10px "IBM Plex Mono", Menlo, monospace';ctx.textBaseline='middle';ctx.strokeStyle=CC.grid;ctx.lineWidth=1;ctx.fillStyle=CC.ink2;ctx.textAlign='right';
+    niceTicks(lo,hi,4).forEach(v=>{const y=Math.round(Y(v))+0.5;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(padL+pw,y);ctx.stroke();ctx.fillText(v>=1000?(v/1000).toFixed(1)+'k':v.toFixed(sim.dec),padL-6,y);});
+    ctx.textAlign='center';ctx.textBaseline='alphabetic';const nLab=Math.max(2,Math.floor(pw/120));for(let j=0;j<=nLab;j++){const k=Math.round(j*(vis.length-1)/nLab);const r=vis[k];if(r)ctx.fillText(L.label(r.i),X(k),H-7);}ctx.textBaseline='middle';
+    const pts=vis.map((r,k)=>({k,r})).filter(p=>p.r.pred!=null);
+    if(pts.length>1){ctx.beginPath();pts.forEach((p,j)=>{const y=Y(p.r.pred+z*p.r.sig);j?ctx.lineTo(X(p.k),y):ctx.moveTo(X(p.k),y);});for(let j=pts.length-1;j>=0;j--)ctx.lineTo(X(pts[j].k),Y(pts[j].r.pred-z*pts[j].r.sig));ctx.closePath();ctx.fillStyle=CC.band;ctx.fill();
+      ctx.strokeStyle=CC.fc;ctx.lineWidth=1.3;ctx.beginPath();pts.forEach((p,j)=>{j?ctx.lineTo(X(p.k),Y(p.r.pred)):ctx.moveTo(X(p.k),Y(p.r.pred));});ctx.stroke();}
+    ctx.strokeStyle=CC.actual;ctx.lineWidth=1.5;ctx.lineJoin='round';ctx.beginPath();vis.forEach((r,k)=>{k?ctx.lineTo(X(k),Y(r.v)):ctx.moveTo(X(k),Y(r.v));});ctx.stroke();
+    if(f&&vis.length){const k0=vis.length-1;ctx.beginPath();ctx.moveTo(X(k0),Y(vis[k0].v));f.forEach((p,j)=>ctx.lineTo(X(k0+1+j),Y(p.mean+Z80*p.sig)));for(let j=f.length-1;j>=0;j--)ctx.lineTo(X(k0+1+j),Y(f[j].mean-Z80*f[j].sig));ctx.closePath();ctx.fillStyle=CC.band;ctx.fill();ctx.strokeStyle=CC.fc;ctx.lineWidth=1.6;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(X(k0),Y(vis[k0].v));f.forEach((p,j)=>ctx.lineTo(X(k0+1+j),Y(p.mean)));ctx.stroke();ctx.setLineDash([]);}
+    vis.forEach((r,k)=>{if(s.mode==='ad'&&r.pred!=null&&(r.v>r.pred+z*r.sig||r.v<r.pred-z*r.sig)){ctx.fillStyle=CC.flag;ctx.beginPath();ctx.arc(X(k),Y(r.v),3.5,0,Math.PI*2);ctx.fill();}});
+    $('#cc-legend').innerHTML='<span style="--c:'+CC.actual+'">'+sim.col+'</span><span style="--c:'+CC.fc+'">'+(s.mode==='ad'?'forecast_value':'forecast[1].mean')+'</span>'+(s.mode==='ad'?'<span style="--c:'+CC.band.replace('.12','.9')+'">lower_bound · upper_bound</span>':'<span style="--c:'+CC.band.replace('.12','.9')+'">q10 · q90</span>')+'<span class="add">+ Add Column</span>';}
+  reg({el,resize(){cv.fit();st.dirty=true;},update(){const n=L.sim.rows.length?L.sim.rows[L.sim.rows.length-1].i:0;if(n!==st.lastN){if(st.lastN>=0&&st.running)st.rows+=Math.max(1,n-st.lastN);st.lastN=n;st.dirty=true;$('#cc-rows').innerHTML='&#9776; '+fmtInt(2996+st.rows);$('#cc-ro-rows').textContent=fmtInt(2996+st.rows);}},
+    draw(){if(!st.dirty)return;st.dirty=false;if(st.view==='chart')chart();else table();}});
+  const obs=new MutationObserver(()=>{code();st.dirty=true;});obs.observe($('#live-sql'),{childList:true,subtree:true,characterData:true});
+  code();setState('Running');setView('chart');
+  App.console={run(){if(!st.running&&!st.pending)toggleRun();},stop(){if(st.running)toggleRun();},view:setView};
+})();
+
+/* ============ official demo video (loads YouTube only on click) ============ */
+(function(){
+  const box=$('#video-box'),btn=$('#video-play');if(!box||!btn)return;
+  btn.addEventListener('click',()=>{const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/knU4XB-90Nw?autoplay=1&rel=0&modestbranding=1';f.title='Confluent demo: real-time forecasting with IBM Granite Time Series models';f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;box.innerHTML='';box.appendChild(f);});
 })();
 
 /* ============ 01 draw a signal ============ */
@@ -1846,9 +2011,14 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const tab=id=>click('#uctabs [aria-controls="'+id+'"]');
   const SCRIPT=[
     {focus:'#st-live',scroll:'#st-live',dur:7500,cap:'Every event is a decision. <em>Scored in flight.</em>',say:'Every event in your stream is a decision. Granite Time Series models score each one in flight, on Confluent. Poke it.',
+      pre:()=>{if(App.console)App.console.run();},
       run:async w=>{chipSet('live-mode','ad');click('#live-mode .chip[data-v="ad"]');click('#live-sc .chip[data-v="temp"]');await w(2600);click('#live-poke');}},
-    {focus:'#st-live',dur:5000,cap:'Forecast the next <em>32 steps</em>, with the band.',say:'Switch to forecast: the next thirty-two steps, with the band.',
-      run:async w=>{click('#live-mode .chip[data-v="fc"]');await w(900);setRange('#live-h',32);}},
+    {focus:'#st-console',scroll:'#st-console',dur:7000,cap:'Here it is in <em>Confluent Cloud</em>. One statement, Run, rows stream back.',say:'Here it is in Confluent Cloud. One statement in the Flink S Q L workspace. Press Run, and the results stream back.',
+      pre:()=>{if(App.console){App.console.view('chart');App.console.stop();}},
+      run:async w=>{await w(1400);if(App.console)App.console.run();await w(2600);if(App.console)App.console.view('table');}},
+    {focus:'#st-console',dur:5000,cap:'Forecast the next <em>32 steps</em>, with the band.',say:'Switch to forecast: the next thirty-two steps, with the band.',
+      pre:()=>{if(App.console)App.console.view('chart');},
+      run:async w=>{click('#live-mode .chip[data-v="fc"]');await w(700);setRange('#live-h',32);}},
     {focus:'#st-draw',scroll:'#st-draw',dur:6500,cap:'<em>No training.</em> It has never seen this signal.',say:'No training. It has never seen this signal, and it finds the pattern in milliseconds.',
       run:async w=>{click('#draw-clear');await w(700);click('#draw-preset .chip[data-v="heartbeat"]');await w(3600);click('#draw-model .chip[data-v="patchtstfm"]');}},
     {focus:'#st-agent',scroll:'#st-agent',scrollM:'#n2',dur:8000,cap:'Then an agent acts. <em>Under a second</em>, inside Confluent.',say:'Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent.',
