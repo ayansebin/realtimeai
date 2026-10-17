@@ -11,6 +11,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'narration')
 LINES = json.load(open(os.path.join(OUT, 'lines.json')))
 ENGINE = sys.argv[1] if len(sys.argv) > 1 else 'kokoro'
+VOICE = sys.argv[2] if len(sys.argv) > 2 else 'am_michael'
 
 
 def kokoro():
@@ -18,11 +19,14 @@ def kokoro():
     from kokoro import KPipeline
     pipe = KPipeline(lang_code='a', repo_id='hexgrad/Kokoro-82M')
     for l in LINES:
-        chunks = [audio for _, _, audio in pipe(l['text'], voice='af_heart', speed=1.0)]
+        chunks = [audio for _, _, audio in pipe(l['text'], voice=VOICE, speed=1.0)]
         audio = np.concatenate([np.asarray(c) for c in chunks])
         pad = np.zeros(int(24000 * 0.25), dtype=audio.dtype)
         sf.write(os.path.join(OUT, l['id'] + '.wav'), np.concatenate([pad, audio, pad]), 24000)
         print('kokoro', l['id'], round(len(audio) / 24000, 2), 's', flush=True)
+    for f in os.listdir(OUT):
+        if f.endswith('.mp3') and f[:2].isdigit() and int(f[:2]) > len(LINES):
+            os.remove(os.path.join(OUT, f))
 
 
 def piper():
@@ -38,6 +42,9 @@ def piper():
         print('piper', l['id'], flush=True)
     for ext in ('.onnx', '.onnx.json'):
         os.remove(os.path.join(OUT, 'voice' + ext))
+    for f in os.listdir(OUT):
+        if f.endswith('.mp3') and f[:2].isdigit() and int(f[:2]) > len(LINES):
+            os.remove(os.path.join(OUT, f))
 
 
 def encode():
@@ -50,7 +57,7 @@ def encode():
         os.remove(wav)
         man.append({'id': l['id'], 'file': l['id'] + '.mp3', 'dur': round(dur, 2), 'text': l['text']})
         print('mp3', l['id'], round(dur, 2), 's', os.path.getsize(mp3), 'bytes', flush=True)
-    json.dump({'engine': ENGINE, 'lines': man}, open(os.path.join(OUT, 'manifest.json'), 'w'), indent=1)
+    json.dump({'engine': ENGINE, 'voice': VOICE, 'lines': man}, open(os.path.join(OUT, 'manifest.json'), 'w'), indent=1)
 
 
 if __name__ == '__main__':

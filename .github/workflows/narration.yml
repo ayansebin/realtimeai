@@ -6,6 +6,10 @@ on:
         description: "kokoro (default) or piper"
         required: true
         default: kokoro
+      voice:
+        description: "Kokoro voice (am_michael, am_fenrir, am_puck, af_heart, bm_george ...)"
+        required: true
+        default: am_michael
 permissions:
   contents: write
 jobs:
@@ -27,11 +31,11 @@ jobs:
           fi
       - name: Generate
         run: |
-          python scripts/narration.py "${{ inputs.engine }}" || { echo "primary engine failed, falling back to piper"; pip install -q piper-tts; python scripts/narration.py piper; }
+          python scripts/narration.py "${{ inputs.engine }}" "${{ inputs.voice }}" || { echo "primary engine failed, falling back to piper"; pip install -q piper-tts; python scripts/narration.py piper; }
       - name: Commit
         run: |
           git config user.name "narration-bot"
           git config user.email "ayhansebin@gmail.com"
           git add narration
-          git commit -m "Generate demo narration (${{ inputs.engine }})" || echo "nothing to commit"
+          git commit -m "Generate demo narration (${{ inputs.engine }}, ${{ inputs.voice }})" || echo "nothing to commit"
           git push origin HEAD:main
