@@ -52,7 +52,7 @@ def encode():
     for l in LINES:
         wav = os.path.join(OUT, l['id'] + '.wav')
         mp3 = os.path.join(OUT, l['id'] + '.mp3')
-        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', wav, '-ar', '24000', '-ac', '1', '-codec:a', 'libmp3lame', '-b:a', '64k', mp3], check=True)
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', wav, '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-ar', '24000', '-ac', '1', '-codec:a', 'libmp3lame', '-b:a', '64k', mp3], check=True)
         dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=nw=1:nk=1', mp3]).decode().strip())
         os.remove(wav)
         man.append({'id': l['id'], 'file': l['id'] + '.mp3', 'dur': round(dur, 2), 'text': l['text']})
