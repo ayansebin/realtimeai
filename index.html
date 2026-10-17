@@ -490,7 +490,10 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
 @media (max-width:1100px){.inds{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.inds{grid-template-columns:1fr}}
-.ind{position:relative;display:grid;align-content:end;gap:.55rem;min-height:clamp(230px,23vw,320px);padding:1.1rem 1.1rem 1rem;border:1px solid var(--line);color:var(--ink);overflow:hidden;isolation:isolate;background:#000a2e}
+.ind{position:relative;display:grid;align-content:end;gap:.55rem;min-height:clamp(200px,20vw,280px);padding:1.1rem 1.1rem 1rem;border:1px solid var(--line);color:var(--ink);overflow:hidden;isolation:isolate;background:#000a2e;text-align:left;font:inherit;cursor:pointer;transition:border-color .15s}
+.ind[aria-selected="true"]{border-color:var(--blue-2);box-shadow:0 0 0 1px var(--blue-2) inset,0 0 24px rgba(69,137,255,.2)}
+.inds{margin-bottom:12px}
+.ind .is i{font-style:normal;font-size:.7rem;border:1px solid var(--line-2);background:rgba(0,7,20,.45);color:var(--ink-2);padding:.15rem .45rem}
 .ind::before{content:"";position:absolute;inset:0;background-image:var(--img);background-size:cover;background-position:center;filter:saturate(.85) contrast(1.05);transition:transform .6s cubic-bezier(.2,.8,.2,1);z-index:-2}
 .ind::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,46,.12) 0,rgba(0,7,20,.62) 38%,rgba(0,7,20,.95) 100%);z-index:-1}
 .ind:hover{border-color:var(--blue-2)}
@@ -1160,41 +1163,33 @@ FROM pos_sales;</code></pre></div>
 
     <div class="chapter-head sub">
       <h2>Where it lands first.</h2>
+      <p>Pick an industry. Each one is a live twin, sensor to decision and back.</p>
     </div>
 
-    <div class="inds" id="inds">
-      <div class="ind" style="--img:url(photos/cement-night.jpg)">
+    <div class="inds" role="tablist" id="indtabs" aria-label="Industries">
+      <button class="ind" role="tab" aria-selected="true" aria-controls="st-plant" type="button" style="--img:url(photos/cement-night.jpg)">
         <span class="il">Industrial AI<small>cement · steel · pulp and paper · chemicals · food</small></span>
         <b>Setpoints corrected inside the cycle.</b>
-        <span class="is"><button type="button" data-uc="uc-prod">Production optimization</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-search">Semantic search</button></span>
-        <a class="ig" href="#st-plant">See the plant &#8595;</a>
-      </div>
-      <div class="ind" style="--img:url(photos/banking-card2.jpg)">
-        <span class="il">Banking<small>payments · cards · markets</small></span>
-        <b>The odd swipe held before authorization.</b>
-        <span class="is"><button type="button" data-uc="uc-fraud">Fraud and security</button><button type="button" data-uc="uc-trade">Trading</button><button type="button" data-uc="uc-anom">Anomaly detection</button></span>
-        <a class="ig" href="#uc-fraud" data-uc="uc-fraud">See the demo &#8593;</a>
-      </div>
-      <div class="ind" style="--img:url(photos/retail-produce.jpg)">
+        <span class="is"><i>Production optimization</i><i>Predictive maintenance</i><i>Anomaly detection</i></span>
+      </button>
+      <button class="ind" role="tab" aria-selected="false" aria-controls="st-retail" type="button" style="--img:url(photos/retail-produce.jpg)">
         <span class="il">Retail<small>grocery · general merchandise · e-commerce</small></span>
         <b>Full shelves, no full back room.</b>
-        <span class="is"><button type="button" data-uc="uc-demand">Supply chain planning</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-fraud">Fraud and security</button></span>
-        <a class="ig" href="#uc-demand" data-uc="uc-demand">See the demo &#8593;</a>
-      </div>
-      <div class="ind" style="--img:url(photos/jet-engine.jpg)">
+        <span class="is"><i>Supply chain planning</i><i>Anomaly detection</i><i>Fraud and security</i></span>
+      </button>
+      <button class="ind" role="tab" aria-selected="false" aria-controls="st-bank" type="button" style="--img:url(photos/banking-card2.jpg)">
+        <span class="il">Banking<small>payments · cards · markets</small></span>
+        <b>The odd swipe held before authorization.</b>
+        <span class="is"><i>Fraud and security</i><i>Trading</i><i>Anomaly detection</i></span>
+      </button>
+      <button class="ind" role="tab" aria-selected="false" aria-controls="st-air" type="button" style="--img:url(photos/jet-engine.jpg)">
         <span class="il">Airlines<small>network · maintenance · ground operations</small></span>
         <b>See the disruption before the gate does.</b>
-        <span class="is"><button type="button" data-uc="uc-demand">Supply chain planning</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-prod">Production optimization</button></span>
-        <a class="ig" href="#uc-anom" data-uc="uc-anom">See the demo &#8593;</a>
-      </div>
+        <span class="is"><i>Anomaly detection</i><i>Production optimization</i><i>Supply chain planning</i></span>
+      </button>
     </div>
 
-    <div class="chapter-head sub">
-      <h2>Inside the plant.</h2>
-      <p>A cement line on Confluent.</p>
-    </div>
-
-    <div class="stage" id="st-plant">
+    <div class="stage" id="st-plant" role="tabpanel">
       <div class="stage-top">
         <div class="stage-title"><h3>From sensor to setpoint</h3><p>Pick a story, or click the kiln, the mill or the preheater.</p></div>
         <div class="ctl">
@@ -1229,6 +1224,51 @@ FROM pos_sales;</code></pre></div>
       <span class="n">04 / START</span>
       <h2>Run it on your stream.</h2>
       <p>Three moves. The first takes a minute.</p>
+    </div>
+
+    <div class="stage" id="st-retail" role="tabpanel" hidden>
+      <div class="stage-top">
+        <div class="stage-title"><h3>Store 112 and its supply chain</h3><p>Pick a story, or click the shelf, the checkout or the distribution center.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="rt-sc"><button class="chip" data-v="plan" aria-pressed="true">Supply chain planning</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button><button class="chip" data-v="fraud" aria-pressed="false">Fraud and security</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Lens</span><div class="chips" id="rt-focus"><button class="chip sm" data-v="all" aria-pressed="true">Everything</button><button class="chip sm" data-v="layout">The floor</button><button class="chip sm" data-v="sources">Systems of record</button><button class="chip sm" data-v="flow">Streaming intelligence</button><button class="chip sm" data-v="objectives">Business targets</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="plant-wrap" id="rt-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="rt-cv" aria-label="Animated store 112 and its supply chain: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="rt-tip"></div></div></div>
+        <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="rt-cap-k"></span><span class="plant-steps" id="rt-steps" aria-hidden="true"></span><button class="switch" id="rt-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="rt-cap-t"></p></div>
+      </div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="rt-r0">–</b><span>on-shelf availability · target 98%</span></div><div class="readout"><b id="rt-r1">–</b><span>waste · target 2%</span></div><div class="readout"><b id="rt-r2">–</b><span>inventory days · target 12</span></div><div class="readout"><b id="rt-r3">–</b><span>fraud loss, bps · target 5</span></div></div><div class="hint">Simulated store. The topics, the statements and the gates are the real ones.</div></div>
+    </div>
+
+    <div class="stage" id="st-bank" role="tabpanel" hidden>
+      <div class="stage-top">
+        <div class="stage-title"><h3>Payments and the trading desk</h3><p>Pick a story, or click the card switch, the ledger or the desk.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="bk-sc"><button class="chip" data-v="fraud" aria-pressed="true">Fraud and security</button><button class="chip" data-v="trade" aria-pressed="false">Trading</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Lens</span><div class="chips" id="bk-focus"><button class="chip sm" data-v="all" aria-pressed="true">Everything</button><button class="chip sm" data-v="layout">The floor</button><button class="chip sm" data-v="sources">Systems of record</button><button class="chip sm" data-v="flow">Streaming intelligence</button><button class="chip sm" data-v="objectives">Business targets</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="plant-wrap" id="bk-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="bk-cv" aria-label="Animated payments and the trading desk: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="bk-tip"></div></div></div>
+        <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="bk-cap-k"></span><span class="plant-steps" id="bk-steps" aria-hidden="true"></span><button class="switch" id="bk-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="bk-cap-t"></p></div>
+      </div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="bk-r0">–</b><span>fraud loss, bps · target 3</span></div><div class="readout"><b id="bk-r1">–</b><span>false declines · target 1%</span></div><div class="readout"><b id="bk-r2">–</b><span>slippage, bps · target 2</span></div><div class="readout"><b id="bk-r3">–</b><span>settlement on time · target 99.5%</span></div></div><div class="hint">Simulated bank. The topics, the statements and the gates are the real ones.</div></div>
+    </div>
+
+    <div class="stage" id="st-air" role="tabpanel" hidden>
+      <div class="stage-top">
+        <div class="stage-title"><h3>Hub operations, fleet and network</h3><p>Pick a story, or click the aircraft, the gate or the network.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="al-sc"><button class="chip" data-v="anom" aria-pressed="true">Anomaly detection</button><button class="chip" data-v="opt" aria-pressed="false">Production optimization</button><button class="chip" data-v="plan" aria-pressed="false">Supply chain planning</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Lens</span><div class="chips" id="al-focus"><button class="chip sm" data-v="all" aria-pressed="true">Everything</button><button class="chip sm" data-v="layout">The floor</button><button class="chip sm" data-v="sources">Systems of record</button><button class="chip sm" data-v="flow">Streaming intelligence</button><button class="chip sm" data-v="objectives">Business targets</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="plant-wrap" id="al-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="al-cv" aria-label="Animated hub operations, fleet and network: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="al-tip"></div></div></div>
+        <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="al-cap-k"></span><span class="plant-steps" id="al-steps" aria-hidden="true"></span><button class="switch" id="al-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="al-cap-t"></p></div>
+      </div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="al-r0">–</b><span>on-time departures · target 85%</span></div><div class="readout"><b id="al-r1">–</b><span>load factor · target 86%</span></div><div class="readout"><b id="al-r2">–</b><span>unplanned AOG per month · target 1</span></div><div class="readout"><b id="al-r3">–</b><span>turnaround, min · target 45</span></div></div><div class="hint">Simulated airline. The topics, the statements and the gates are the real ones.</div></div>
     </div>
     <div class="start-tiles">
       <div class="stile"><span class="sn">01</span><h3>Paste one statement</h3><p>Any topic with a value and a timestamp.</p>
@@ -1964,14 +2004,336 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   App.plant={start:startScenario,setAuto(v){st.auto=v;$('#pl-auto').setAttribute('aria-pressed',v);}};
 })();
 
-/* ============ 03 use cases: cards as tabs, industries ============ */
+/* ============ 03 industry twins: the same engine as the plant, one spec per industry ============ */
+function twin(spec){
+  const el=$('#'+spec.id);if(!el)return;
+  const p=spec.prefix;const q=k=>$('#'+p+'-'+k);
+  const cv=new Cv(q('cv'));const tip=q('tip');const inner=$('.plant-inner',el);const wrap=q('wrap');
+  const VW=1300,VH=680;
+  const P={bg:'#000a2e',line:'rgba(255,255,255,.16)',ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',blue:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',teal:'#3ddbd9',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b',steel:'#9fb3c8',steel2:'#6b7f94'};
+  const FONT='"IBM Plex Sans", Arial, sans-serif',MONOF='"IBM Plex Mono", Menlo, monospace';
+  const N=spec.nodes,SIG=spec.signals,SRC=spec.sources,TOPICS=spec.topics,FNK=spec.fn,DROWS=spec.decisions;
+  const CTRL={x:1000,y:34,w:270,h:118};
+  const CC={x:40,y:415,w:1230,h:200},KAFKA={x:60,y:440,w:305,h:160},FLINK={x:395,y:440,w:380,h:160},AG={x:800,y:440,w:195,h:160},DEC={x:1020,y:440,w:240,h:160};
+  const FN=FNK.map((k,i)=>({k,y:478+i*36}));DROWS.forEach((d,i)=>{d.y=482+i*36;});
+  const topicY=i=>KAFKA.y+36+i*24;
+  const cx=o=>o.x+o.w/2,cy=o=>o.y+o.h/2;
+  const pt=(x,y)=>({x,y});
+  /* ---------- state ---------- */
+  const st={sc:null,auto:true,focus:'all',t:0,phase:-1,phaseT:0,parts:[],hover:null,fn:FNK.map(()=>0),agent:0,dec:DROWS.map(()=>0),gate:0,highlight:null,callouts:[],kpi:{},kpiT:{},flags:{},sparks:{},_pct:-1,_ph:-1};
+  spec.kpis.forEach(k=>{st.kpi[k.key]=k.v0;st.kpiT[k.key]=k.v0;});
+  /* ---------- particles ---------- */
+  function plen(path){let L=0;for(let i=1;i<path.length;i++)L+=Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y);return L;}
+  function pat(path,d){for(let i=1;i<path.length;i++){const seg=Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y);if(d<=seg){const u=seg?d/seg:0;return {x:lerp(path[i-1].x,path[i].x,u),y:lerp(path[i-1].y,path[i].y,u)};}d-=seg;}return path[path.length-1];}
+  function spawn(path,o){st.parts.push(Object.assign({path,L:plen(path),d:0,speed:220,size:3,color:P.blue3,glow:true},o||{}));}
+  function sigPath(s){const b=SRC[s.src];return [pt(s.x,s.y),pt(s.x,s.y+22),pt(cx(b),s.y+22),pt(cx(b),b.y)];}
+  function srcToTopic(src,ti){const b=SRC[src];const y=topicY(ti);return [pt(cx(b),b.y+b.h),pt(cx(b),CC.y-10),pt(KAFKA.x+KAFKA.w+8,CC.y-10),pt(KAFKA.x+KAFKA.w+8,y),pt(KAFKA.x+KAFKA.w-4,y)];}
+  function topicToFn(ti,fi){return [pt(KAFKA.x+KAFKA.w,topicY(ti)),pt(KAFKA.x+KAFKA.w+16,topicY(ti)),pt(KAFKA.x+KAFKA.w+16,FN[fi].y),pt(FLINK.x+8,FN[fi].y)];}
+  function fnToAgent(fi){return [pt(FLINK.x+FLINK.w-8,FN[fi].y),pt(AG.x,FN[fi].y)];}
+  function agentToDec(di){return [pt(AG.x+AG.w,DROWS[di].y),pt(DEC.x,DROWS[di].y)];}
+  const ctrlIn=pt(CTRL.x+CTRL.w-30,CTRL.y+CTRL.h);
+  function decToCtrl(di){return [pt(DEC.x+DEC.w,DROWS[di].y),pt(1285,DROWS[di].y),pt(1285,ctrlIn.y+14),pt(ctrlIn.x,ctrlIn.y+14),pt(ctrlIn.x,ctrlIn.y)];}
+  function ctrlToNode(id){const n=N[id];const y0=CTRL.y+CTRL.h-24;const tx=n.x+n.w/2;return [pt(CTRL.x,y0),pt(tx+10,y0),pt(tx+10,n.y-4)];}
+  function decToSrc(di,src){const b=SRC[src];return [pt(DEC.x,DROWS[di].y),pt(DEC.x-14,DROWS[di].y),pt(DEC.x-14,399),pt(cx(b)+20,399),pt(cx(b)+20,b.y+b.h)];}
+  function srcToNode(src,id){const b=SRC[src];const n=N[id];return [pt(cx(b)+20,b.y),pt(cx(b)+20,302),pt(n.x+n.w/2-10,302),pt(n.x+n.w/2-10,n.y+n.h+4)];}
+  let amb=0;
+  function ambient(dt){amb+=dt;if(amb>420){amb=0;const s=SIG[Math.floor(Math.random()*SIG.length)];spawn(sigPath(s),{speed:200,size:2.2,color:P.blue3,onEnd:()=>{spawn(srcToTopic(s.src,s.topic),{speed:260,size:2.2,color:P.blue3,onEnd:()=>{if(Math.random()<0.5){const fi=Math.random()<0.6?0:1;spawn(topicToFn(s.topic,fi),{speed:260,size:2.2,color:P.blue4});}}});}});}}
+  function flow(nodes,ti,fi,color,toFn){const ns=[].concat(nodes);SIG.filter(s=>ns.indexOf(s.node)>=0).forEach((s,k)=>{setTimeout(()=>{spawn(sigPath(s),{color,speed:230,size:3,onEnd:()=>{spawn(srcToTopic(s.src,s.topic),{color,speed:280,size:3,onEnd:()=>{if(toFn)spawn(topicToFn(ti,fi),{color,speed:280,size:3,onEnd:()=>{spawn(fnToAgent(fi),{color,speed:280,size:3});}});}});}});},k*260);});}
+  /* scenario api */
+  const api={
+    hl:id=>{st.highlight=id;},co:list=>{st.callouts=list;},flow,fn:a=>{st.fn=a;},agent:v=>{st.agent=v;},dec:a=>{st.dec=a;},gate:v=>{st.gate=v;},kpi:o=>{Object.assign(st.kpiT,o);},flag:(k,v)=>{st.flags[k]=v;},
+    spark:(sig,o)=>{if(!o){delete st.sparks[sig];return;}const s=SIG.find(x=>x.id===sig);const d=[];for(let i=0;i<40;i++)d.push(o.from+(o.noise||0.1)*(o.hi-o.lo)*0.1*gauss());st.sparks[sig]=Object.assign({sig:s,data:d,cur:o.from,x:s.x+(o.dx||12),y:s.y+(o.dy||-70)},o);},
+    toGate:(di,color)=>{st.agent=1;const a=st.dec.slice();a[di]=1;st.dec=a;spawn(agentToDec(di),{color,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(di),{color,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});},
+    fromGate:(id,color,onEnd)=>{st.gate=2;spawn(ctrlToNode(id),{color,speed:300,size:3.5,onEnd});},
+    toSrc:(di,src,color,onEnd)=>{st.agent=1;const a=st.dec.slice();a[di]=1;st.dec=a;spawn(agentToDec(di),{color,speed:240,size:3.5,onEnd:()=>{spawn(decToSrc(di,src),{color,speed:320,size:3.5,onEnd});}});},
+    srcToNode:(src,id,color,onEnd)=>{spawn(srcToNode(src,id),{color,speed:300,size:3.5,onEnd});},
+    P,st
+  };
+  const stepsEl=q('steps');stepsEl.innerHTML='<i></i>'.repeat(5);const steps=$$('i',stepsEl);
+  function panTo(vx){if(!st.auto||!wrap||wrap.scrollWidth<=wrap.clientWidth+10)return;const left=clamp(vx*S-wrap.clientWidth/2,0,wrap.scrollWidth-wrap.clientWidth);try{wrap.scrollTo({left,behavior:'smooth'});}catch(e){wrap.scrollLeft=left;}}
+  function startScenario(k){const sc=spec.scenarios[k];if(!sc)return;st.sc=k;chipSet(p+'-sc',k);st.phase=-1;st.phaseT=0;st.fn=FNK.map(()=>0);st.agent=0;st.dec=DROWS.map(()=>0);st.gate=0;st.callouts=[];st.highlight=null;st.flags={};st.sparks={};spec.kpis.forEach(x=>{st.kpiT[x.key]=x.v0;});q('cap-k').textContent=sc.name;nextPhase();}
+  function nextPhase(){const sc=spec.scenarios[st.sc];st.phase++;st.phaseT=0;if(st.phase>=sc.phases.length){if(st.auto){const keys=Object.keys(spec.scenarios);startScenario(keys[(keys.indexOf(st.sc)+1)%keys.length]);}else{st.phase=sc.phases.length-1;st.phaseT=-1e9;}return;}const ph=sc.phases[st.phase];q('cap-t').textContent=ph.cap;ph.on(api);if(st.callouts.length){const c0=st.callouts[0];panTo(c0.to?(c0.x+130+c0.to.x)/2:c0.x+130);}}
+  /* ---------- update ---------- */
+  function update(dt){st.t+=dt;ambient(dt);
+    for(let i=st.parts.length-1;i>=0;i--){const pp=st.parts[i];pp.d+=pp.speed*dt/1000;if(pp.d>=pp.L){st.parts.splice(i,1);if(pp.onEnd)pp.onEnd();}}
+    if(st.phase>=0){const ph=spec.scenarios[st.sc].phases[st.phase];if(st.phaseT<1e8){st.phaseT+=dt;if(st.phaseT>ph.d)nextPhase();}}
+    const k=1-Math.pow(0.02,dt/1000);for(const key in st.kpiT)st.kpi[key]=lerp(st.kpi[key],st.kpiT[key],k);
+    if(st.phase>=0){const ph2=spec.scenarios[st.sc].phases[st.phase];const pct=st.phaseT<-1e8?100:Math.round(clamp(st.phaseT/ph2.d,0,1)*50)*2;if(pct!==st._pct||st.phase!==st._ph){st._pct=pct;st._ph=st.phase;steps.forEach((e,i)=>{e.className=i<st.phase?'on':i===st.phase?'cur':'';if(i===st.phase)e.style.setProperty('--p',pct+'%');});}}
+    if(st.t%400<dt){Object.keys(st.sparks).forEach(key=>{const s=st.sparks[key];s.cur=lerp(s.cur,s.to,0.08);s.data.push(clamp(s.cur+(s.noise||0.1)*(s.hi-s.lo)*0.1*gauss(),s.lo,s.hi));s.data.shift();});}
+    spec.kpis.forEach((x,i)=>{const e=q('r'+i);if(!e)return;const v=st.kpi[x.key];e.textContent=x.fmt?x.fmt(v):v.toFixed(x.dec||0)+(x.u||'');e.className=(x.up?v>=x.tg:v<=x.tg)?'green':'';});}
+  /* ---------- drawing ---------- */
+  let ctx,S=1;
+  const X=x=>x*S,Y=y=>y*S;
+  function alphaFor(layer){const f=st.focus;if(f==='all')return 1;const m={layout:{plant:1,sources:.22,flow:.18,objectives:.25},sources:{plant:.4,sources:1,flow:.2,objectives:.25},flow:{plant:.4,sources:.5,flow:1,objectives:.35},objectives:{plant:.35,sources:.2,flow:.2,objectives:1}};return (m[f]||{})[layer]||1;}
+  function font(px,mono,w){ctx.font=(w||400)+' '+Math.max(8,px*S)+'px '+(mono?MONOF:FONT);}
+  function text(t,x,y,o){o=o||{};font(o.px||11,o.mono,o.w);ctx.fillStyle=o.c||P.ink2;ctx.textAlign=o.a||'left';ctx.textBaseline=o.b||'middle';if('letterSpacing' in ctx)ctx.letterSpacing=o.ls?(o.ls*S)+'px':'0px';ctx.fillText(t,X(x),Y(y));if('letterSpacing' in ctx)ctx.letterSpacing='0px';}
+  function eyebrow(t,x,y,o){text(t,x,y,Object.assign({px:8.5,w:500,ls:0.9,c:P.ink3},o||{}));}
+  function metal(y,h){const g=ctx.createLinearGradient(0,Y(y),0,Y(y+h));g.addColorStop(0,'rgba(140,160,185,.30)');g.addColorStop(.45,'rgba(0,7,20,.55)');g.addColorStop(1,'rgba(0,7,20,.85)');return g;}
+  function rpath(x,y,w,h,r){r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+  function rr(x,y,w,h,r,fill,stroke,lw){rpath(X(x),Y(y),w*S,h*S,r*S);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=(lw||1)*S;ctx.stroke();}}
+  function line(pts,c,lw,dash){ctx.beginPath();pts.forEach((o,i)=>i?ctx.lineTo(X(o.x),Y(o.y)):ctx.moveTo(X(o.x),Y(o.y)));ctx.strokeStyle=c;ctx.lineWidth=(lw||1)*S;if(dash)ctx.setLineDash(dash.map(d=>d*S));ctx.stroke();ctx.setLineDash([]);}
+  function dot(x,y,r,c){ctx.fillStyle=c;ctx.beginPath();ctx.arc(X(x),Y(y),r*S,0,Math.PI*2);ctx.fill();}
+  function glow(c,b){ctx.shadowColor=c;ctx.shadowBlur=b*S;}
+  function noglow(){ctx.shadowBlur=0;}
+  function hl(id){return st.highlight===id;}
+  function road(a,b,c){line([a,b],c||P.steel2,2);const L=Math.hypot(b.x-a.x,b.y-a.y);const n=Math.floor(L/14);const ph=(st.t/60)%14;for(let i=0;i<n;i++){const d=i*14+ph;if(d>L)continue;const u=d/L;ctx.fillStyle=P.steel;ctx.fillRect(X(lerp(a.x,b.x,u))-1.5*S,Y(lerp(a.y,b.y,u))-1.5*S,3*S,3*S);}}
+  function spark(s){const {x,y,data,lo,hi,limit,label,unit,color}=s;const w=110,h=46;rr(x,y,w,h,2,'rgba(0,7,20,.85)',P.line,1);const top=y+15,ch=h-20,n=data.length;text(label,x+6,y+8,{px:8,mono:true,c:P.ink3});text(data[n-1].toFixed(s.dec==null?1:s.dec)+' '+unit,x+w-6,y+8,{px:8.5,mono:true,a:'right',c:color});ctx.beginPath();data.forEach((v,i)=>{const px=x+5+(w-10)*i/(n-1),py=top+ch-(clamp(v,lo,hi)-lo)/(hi-lo)*ch;i?ctx.lineTo(X(px),Y(py)):ctx.moveTo(X(px),Y(py));});ctx.strokeStyle=color;ctx.lineWidth=1.4*S;ctx.stroke();if(limit!=null){const ly=top+ch-(limit-lo)/(hi-lo)*ch;line([pt(x+5,ly),pt(x+w-5,ly)],P.red,1,[2,2]);}}
+  function callout(o){const padx=8,lh=14,w=Math.max(...o.l.map(t=>{font(10.5,true);return ctx.measureText(t).width/S;}))+padx*2,h=o.l.length*lh+10;let x=o.x,y=o.y;if(x+w>1290)x=1290-w;if(o.to){const sx=clamp(o.to.x,x,x+w),sy=clamp(o.to.y,y,y+h);ctx.save();ctx.globalAlpha*=0.8;line([pt(sx,sy),pt(o.to.x,o.to.y)],o.c,1);dot(o.to.x,o.to.y,2.5,o.c);ctx.restore();}ctx.save();glow(o.c,10);rr(x,y,w,h,2,'rgba(0,7,20,.92)',o.c,1);noglow();ctx.restore();ctx.fillStyle=o.c;ctx.fillRect(X(x),Y(y),2*S,h*S);o.l.forEach((t,i)=>text(t,x+padx,y+7+lh*i+lh/2-2,{px:10.5,mono:true,c:i===0?P.ink:P.ink2}));}
+  const D={ctx:null,X,Y,text,rr,line,dot,metal,glow,noglow,P,pt,road,st,N,hl,S:1,font};
+  /* node icons: simple geometry inside the box */
+  const ICON={
+    factory(n,c){const x=n.x,y=n.y,w=n.w,h=n.h;ctx.beginPath();ctx.moveTo(X(x),Y(y+h));ctx.lineTo(X(x),Y(y+22));for(let i=0;i<3;i++){const sx=x+i*w/3;ctx.lineTo(X(sx+w/3*0.55),Y(y+4));ctx.lineTo(X(sx+w/3),Y(y+22));}ctx.lineTo(X(x+w),Y(y+h));ctx.closePath();ctx.fillStyle=metal(y,h);ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=1.2*S;ctx.stroke();rr(x+w-22,y-14,8,20,1,'rgba(0,7,20,.7)',c,1);},
+    warehouse(n,c){rr(n.x,n.y,n.w,n.h,3,metal(n.y,n.h),c,1.2);for(let r=0;r<3;r++)for(let k=0;k<4;k++){const bx=n.x+10+k*(n.w-20)/4,by=n.y+10+r*(n.h-26)/3;rr(bx+2,by,(n.w-20)/4-6,(n.h-26)/3-5,1,'rgba(159,179,200,.18)',null);}
+      rr(n.x+n.w/2-14,n.y+n.h-18,28,18,1,'rgba(0,7,20,.8)',c,1);},
+    store(n,c){rr(n.x,n.y+12,n.w,n.h-12,3,metal(n.y,n.h),c,1.2);for(let i=0;i<Math.floor(n.w/16);i++){ctx.fillStyle=i%2?'rgba(69,137,255,.55)':'rgba(244,244,244,.5)';ctx.fillRect(X(n.x+i*16),Y(n.y+6),16*S,8*S);}rr(n.x,n.y+2,n.w,12,2,null,c,1);},
+    shelves(n,c){rr(n.x,n.y,n.w,n.h,2,'rgba(0,7,20,.6)',c,1.2);const lvl=st.flags.shelf==null?0.8:st.flags.shelf;for(let r=0;r<3;r++){const sy=n.y+8+r*(n.h-10)/3;line([pt(n.x+4,sy+(n.h-10)/3-3),pt(n.x+n.w-4,sy+(n.h-10)/3-3)],P.steel2,1);const slots=6;for(let k=0;k<slots;k++){const bx=n.x+6+k*(n.w-12)/slots;if(k<Math.round(slots*(r===1?lvl:Math.min(1,lvl+0.15))))rr(bx,sy,(n.w-12)/slots-3,(n.h-10)/3-7,1,r===1?'rgba(111,220,140,.55)':'rgba(120,169,255,.35)',null);}}},
+    pos(n,c,id){rr(n.x,n.y,n.w,n.h,3,metal(n.y,n.h),c,1.2);rr(n.x+10,n.y+8,n.w-20,n.h*0.42,1,'rgba(69,137,255,.25)',c,1);for(let r=0;r<2;r++)for(let k=0;k<4;k++)rr(n.x+12+k*(n.w-24)/4,n.y+n.h*0.42+14+r*10,(n.w-24)/4-4,6,1,'rgba(159,179,200,.35)',null);
+      if(st.flags.held===id){ctx.save();glow(P.red,10);rr(n.x+n.w-30,n.y-20,30,16,1,'rgba(0,7,20,.9)',P.red,1);noglow();ctx.restore();text('HOLD',n.x+n.w-15,n.y-12,{px:8.5,mono:true,a:'center',c:P.red,w:600});}},
+    online(n,c){rr(n.x+10,n.y+6,n.w-20,n.h-22,2,metal(n.y,n.h),c,1.2);rr(n.x,n.y+n.h-16,n.w,8,1,'rgba(0,7,20,.8)',c,1);const k=Math.floor(st.t/500)%4;for(let i=0;i<4;i++)rr(n.x+20+i*(n.w-40)/4,n.y+16,(n.w-40)/4-5,n.h-42,1,i===k?'rgba(69,137,255,.5)':'rgba(255,255,255,.08)',null);},
+    phone(n,c){const pw=28,ph=48;for(let i=0;i<3;i++){const px=n.x+12+i*(n.w-24)/3,py=n.y+(n.h-ph)/2;rr(px,py,pw,ph,4,metal(py,ph),c,1.2);rr(px+4,py+6,pw-8,ph-16,1,'rgba(69,137,255,'+(0.15+0.25*((Math.floor(st.t/400)+i)%3===0))+')',null);}},
+    switch(n,c,id){rr(n.x,n.y,n.w,n.h,3,metal(n.y,n.h),c,1.2);const hx=cx(n),hy=cy(n);for(let i=0;i<6;i++){const a=i*Math.PI/3+st.t/4000;const ex=hx+Math.cos(a)*(n.w*0.36),ey=hy+Math.sin(a)*(n.h*0.34);line([pt(hx,hy),pt(ex,ey)],'rgba(120,169,255,.45)',1);dot(ex,ey,3,P.blue3);}ctx.save();glow(P.blue3,10);dot(hx,hy,6,P.blue3);noglow();ctx.restore();
+      if(st.flags.held===id){ctx.save();glow(P.red,10);rr(n.x+n.w-30,n.y-20,30,16,1,'rgba(0,7,20,.9)',P.red,1);noglow();ctx.restore();text('HOLD',n.x+n.w-15,n.y-12,{px:8.5,mono:true,a:'center',c:P.red,w:600});}},
+    ledger(n,c){rr(n.x,n.y,n.w,n.h,3,metal(n.y,n.h),c,1.2);for(let r=0;r<4;r++){const ly=n.y+12+r*((n.h-20)/4);line([pt(n.x+10,ly),pt(n.x+n.w-10,ly)],'rgba(159,179,200,.35)',1);rr(n.x+n.w-34,ly-4,24,6,1,'rgba(111,220,140,.4)',null);}},
+    chart(n,c){rr(n.x,n.y,n.w,n.h,3,metal(n.y,n.h),c,1.2);const nb=14;const sh=Math.floor(st.t/600);for(let i=0;i<nb;i++){const seed=Math.sin((i+sh)*12.9898)*43758.5453;const r=seed-Math.floor(seed);const bx=n.x+8+i*(n.w-16)/nb;const mid=n.y+n.h*0.55+Math.sin((i+sh)/2.2)*n.h*0.18;const o=mid-(r-0.5)*n.h*0.2,cl=mid+(r-0.5)*n.h*0.16;const up=cl<o;ctx.strokeStyle=up?P.green:P.red;ctx.lineWidth=1*S;ctx.beginPath();ctx.moveTo(X(bx+3),Y(Math.min(o,cl)-6));ctx.lineTo(X(bx+3),Y(Math.max(o,cl)+6));ctx.stroke();ctx.fillStyle=up?P.green:P.red;ctx.fillRect(X(bx+1),Y(Math.min(o,cl)),4*S,Math.max(2,Math.abs(cl-o))*S);}},
+    desk(n,c){rr(n.x,n.y,n.w,n.h,3,metal(n.y,n.h),c,1.2);for(let i=0;i<3;i++){const mx=n.x+10+i*(n.w-20)/3;rr(mx,n.y+10,(n.w-20)/3-6,n.h-32,1,'rgba(69,137,255,.2)',P.steel2,1);ctx.strokeStyle=i===1?P.green:P.blue3;ctx.lineWidth=1*S;ctx.beginPath();for(let k=0;k<=8;k++){const px=mx+3+k*((n.w-20)/3-12)/8,py=n.y+14+(n.h-40)*(0.5+0.35*Math.sin(k/1.3+st.t/700+i));k?ctx.lineTo(X(px),Y(py)):ctx.moveTo(X(px),Y(py));}ctx.stroke();}},
+    gate(n,c){rr(n.x,n.y,n.w,n.h,3,metal(n.y,n.h),c,1.2);/* bridge */rr(n.x+n.w*0.55,n.y+10,n.w*0.45-6,14,1,'rgba(159,179,200,.25)',c,1);/* aircraft nose */const ax=n.x+18,ay=n.y+n.h*0.62;ctx.beginPath();ctx.moveTo(X(ax),Y(ay));ctx.quadraticCurveTo(X(ax+16),Y(ay-18),X(ax+70),Y(ay-14));ctx.lineTo(X(ax+n.w*0.62),Y(ay-14));ctx.lineTo(X(ax+n.w*0.62),Y(ay+10));ctx.lineTo(X(ax+34),Y(ay+12));ctx.quadraticCurveTo(X(ax+8),Y(ay+12),X(ax),Y(ay));ctx.closePath();ctx.fillStyle='rgba(244,244,244,.85)';ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=1*S;ctx.stroke();
+      /* turnaround timer */const tm=st.flags.turn==null?38:st.flags.turn;text('turnaround '+Math.round(tm)+' min',n.x+n.w-8,n.y+n.h-10,{px:8.5,mono:true,a:'right',c:tm>45?P.yellow:P.green});},
+    ramp(n,c){rr(n.x,n.y,n.w,n.h,3,'rgba(0,7,20,.5)',c,1.2);for(let i=0;i<3;i++){const vx=n.x+10+((st.t/(30+i*9)+i*40)%(n.w-30));const vy=n.y+12+i*16;rr(vx,vy,18,9,1,'rgba(0,7,20,.8)',[P.green,P.orange,P.blue3][i],1);dot(vx+4,vy+10,2,P.steel);dot(vx+14,vy+10,2,P.steel);}},
+    plane(n,c){const x=n.x,y=n.y+n.h/2,w=n.w;ctx.save();if(st.flags.engine)glow(P.yellow,12);ctx.beginPath();ctx.moveTo(X(x),Y(y));ctx.quadraticCurveTo(X(x+10),Y(y-12),X(x+30),Y(y-12));ctx.lineTo(X(x+w-30),Y(y-12));ctx.quadraticCurveTo(X(x+w-6),Y(y-12),X(x+w),Y(y));ctx.quadraticCurveTo(X(x+w-6),Y(y+10),X(x+w-30),Y(y+10));ctx.lineTo(X(x+30),Y(y+10));ctx.quadraticCurveTo(X(x+10),Y(y+10),X(x),Y(y));ctx.closePath();ctx.fillStyle='rgba(244,244,244,.9)';ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=1.2*S;ctx.stroke();noglow();ctx.restore();
+      /* tail and wings */ctx.fillStyle='rgba(159,179,200,.8)';ctx.beginPath();ctx.moveTo(X(x+22),Y(y-12));ctx.lineTo(X(x+30),Y(y-34));ctx.lineTo(X(x+52),Y(y-34));ctx.lineTo(X(x+48),Y(y-12));ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(X(x+w*0.42),Y(y+10));ctx.lineTo(X(x+w*0.3),Y(y+34));ctx.lineTo(X(x+w*0.48),Y(y+34));ctx.lineTo(X(x+w*0.62),Y(y+10));ctx.closePath();ctx.fill();
+      /* engines */[0.48,0.7].forEach((u,i)=>{const ex=x+w*u,ey=y+22;const hot=st.flags.engine&&i===0;ctx.save();if(hot)glow(P.yellow,10);rr(ex-9,ey-7,18,14,5,hot?'rgba(241,194,27,.45)':'rgba(0,7,20,.8)',hot?P.yellow:c,1);noglow();ctx.restore();});},
+    hangar(n,c){ctx.beginPath();ctx.moveTo(X(n.x),Y(n.y+n.h));ctx.lineTo(X(n.x),Y(n.y+n.h*0.5));ctx.quadraticCurveTo(X(n.x+n.w/2),Y(n.y-n.h*0.4),X(n.x+n.w),Y(n.y+n.h*0.5));ctx.lineTo(X(n.x+n.w),Y(n.y+n.h));ctx.closePath();ctx.fillStyle=metal(n.y,n.h);ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=1.2*S;ctx.stroke();rr(n.x+n.w*0.25,n.y+n.h*0.45,n.w*0.5,n.h*0.55,1,'rgba(0,7,20,.8)',c,1);
+      if(st.flags.wo){ctx.save();glow(P.orange,10);rr(n.x+n.w-30,n.y-22,28,18,2,'rgba(0,7,20,.9)',P.orange,1);noglow();ctx.restore();text('WO',n.x+n.w-16,n.y-13,{px:9,mono:true,a:'center',c:P.orange,w:600});}},
+    map(n,c){rr(n.x,n.y,n.w,n.h,3,'rgba(0,7,20,.5)',c,1.2);const hub={x:n.x+n.w*0.42,y:n.y+n.h*0.6};const dest=[[0.1,0.3],[0.2,0.8],[0.62,0.25],[0.8,0.5],[0.9,0.85],[0.55,0.9]].map(([u,v])=>({x:n.x+n.w*u,y:n.y+n.h*v}));dest.forEach((d,i)=>{const hot=st.flags.route===i;ctx.beginPath();ctx.moveTo(X(hub.x),Y(hub.y));const mx=(hub.x+d.x)/2,my=Math.min(hub.y,d.y)-18;ctx.quadraticCurveTo(X(mx),Y(my),X(d.x),Y(d.y));ctx.strokeStyle=hot?P.green:'rgba(120,169,255,.35)';ctx.lineWidth=(hot?1.6:1)*S;ctx.stroke();dot(d.x,d.y,2.5,hot?P.green:P.blue3);const u=(st.t/4000+i*0.17)%1;const px=(1-u)*(1-u)*hub.x+2*(1-u)*u*mx+u*u*d.x,py=(1-u)*(1-u)*hub.y+2*(1-u)*u*my+u*u*d.y;dot(px,py,1.8,hot?P.green:P.blue4);});ctx.save();glow(P.blue3,8);dot(hub.x,hub.y,4,P.blue3);noglow();ctx.restore();},
+    box(n,c){rr(n.x,n.y,n.w,n.h,3,metal(n.y,n.h),c,1.2);}
+  };
+  function drawNode(id){const n=N[id];const lit=hl(id);const c=lit?(n.hlColor||P.blue3):P.steel;ctx.save();if(lit)glow(c,14);(ICON[n.type]||ICON.box)(n,c,id);noglow();ctx.restore();if(n.label)text(n.label,n.x+n.w/2,n.labelPos==='below'?n.y+n.h+14:n.y-(n.labelDy||12),{px:10,a:'center',c:P.ink2});if(n.sub)text(n.sub,n.x+n.w/2,(n.labelPos==='below'?n.y+n.h+28:n.y-(n.labelDy||12)+14),{px:8.5,mono:true,a:'center',c:P.ink3});}
+  function draw(){if(!cv.W)return;ctx=cv.ctx;S=cv.W/VW;D.ctx=ctx;D.S=S;const W=cv.W,Hh=cv.H;ctx.clearRect(0,0,W,Hh);
+    ctx.strokeStyle='rgba(255,255,255,.04)';ctx.lineWidth=1;for(let x=0;x<VW;x+=50){ctx.beginPath();ctx.moveTo(X(x),0);ctx.lineTo(X(x),Hh);ctx.stroke();}for(let y=0;y<VH;y+=50){ctx.beginPath();ctx.moveTo(0,Y(y));ctx.lineTo(W,Y(y));ctx.stroke();}
+    eyebrow(spec.floorLabel,48,24);eyebrow('SYSTEMS OF RECORD',48,312);eyebrow('CONFLUENT CLOUD · STREAMING INTELLIGENCE',48,404,{c:P.blue3});
+    line([pt(40,300),pt(1270,300)],'rgba(255,255,255,.08)',1,[2,6]);line([pt(40,392),pt(1270,392)],'rgba(255,255,255,.08)',1,[2,6]);
+    /* floor */
+    ctx.globalAlpha=alphaFor('plant');
+    (spec.routes||[]).forEach(r=>{road(pt(r.x1,r.y1),pt(r.x2,r.y2));});
+    Object.keys(N).forEach(drawNode);
+    if(spec.extra)spec.extra(D);
+    Object.keys(st.sparks).forEach(k=>spark(st.sparks[k]));
+    SIG.forEach(s=>{const on=st.hover===s||hl(s.node);const c=on?P.blue4:P.blue3;ctx.save();if(on)glow(c,10);dot(s.x,s.y,on?4:3,c);noglow();ctx.restore();ctx.strokeStyle='rgba(69,137,255,.35)';ctx.lineWidth=1*S;ctx.beginPath();ctx.arc(X(s.x),Y(s.y),7*S,0,Math.PI*2);ctx.stroke();if(on||st.focus==='layout'||st.focus==='sources')text(s.id,s.x+9,s.y-8,{px:8.5,mono:true,c:P.blue4});});
+    ctx.globalAlpha=1;
+    /* objectives */
+    ctx.globalAlpha=alphaFor('objectives');
+    ctx.save();if(st.gate===1)glow(P.yellow,16);rr(CTRL.x,CTRL.y,CTRL.w,CTRL.h,2,'rgba(0,7,20,.75)',st.gate===1?P.yellow:st.gate===2?P.green:P.line,1.2);noglow();ctx.restore();
+    eyebrow(spec.ctrlLabel,CTRL.x+10,CTRL.y+12);
+    spec.kpis.forEach((o,i)=>{const yy=CTRL.y+28+i*19;const v=st.kpi[o.key];text(o.k,CTRL.x+10,yy,{px:9,c:P.ink2});const bx=CTRL.x+104,bw=104;rr(bx,yy-4,bw,8,1,'rgba(255,255,255,.08)');const u=clamp((v-o.lo)/(o.hi-o.lo),0,1);const good=o.up?v>=o.tg:v<=o.tg;ctx.fillStyle=good?P.green:P.yellow;ctx.fillRect(X(bx),Y(yy-4),bw*u*S,8*S);const tu=clamp((o.tg-o.lo)/(o.hi-o.lo),0,1);ctx.fillStyle=P.ink;ctx.fillRect(X(bx+bw*tu)-1*S,Y(yy-6),2*S,12*S);text((o.fmt?o.fmt(v):v.toFixed(o.dec||0)+(o.u||'')),CTRL.x+CTRL.w-10,yy,{px:9,mono:true,a:'right',c:good?P.green:P.yellow});});
+    text(spec.objective,CTRL.x+10,CTRL.y+CTRL.h-10,{px:8.5,mono:true,c:P.ink3});
+    if(st.gate===1)text(spec.gateLabel||'operator gate: approve?',CTRL.x+CTRL.w-10,CTRL.y+12,{px:8.5,mono:true,a:'right',c:P.yellow});
+    if(st.gate===2)text('approved ✓',CTRL.x+CTRL.w-10,CTRL.y+12,{px:8.5,mono:true,a:'right',c:P.green});
+    ctx.globalAlpha=1;
+    /* sources */
+    ctx.globalAlpha=alphaFor('sources');
+    Object.keys(SRC).forEach(key=>{const b=SRC[key];const lit=st.flags.src===key;ctx.save();if(lit)glow(P.orange,12);rr(b.x,b.y,b.w,b.h,2,'rgba(0,7,20,.7)',lit?P.orange:P.line,1.2);noglow();ctx.restore();text(b.label,b.x+10,b.y+17,{px:10.5,c:P.ink,w:500});text(b.sub,b.x+10,b.y+34,{px:9,c:P.ink3});line([pt(cx(b),b.y+b.h),pt(cx(b),CC.y-10),pt(KAFKA.x+KAFKA.w+8,CC.y-10)],'rgba(69,137,255,.14)',1);});
+    if(st.flags.srcNote)text(st.flags.srcNote.t,SRC[st.flags.srcNote.src].x+75,SRC[st.flags.srcNote.src].y-10,{px:9,mono:true,a:'center',c:P.orange});
+    SIG.forEach(s=>{const b=SRC[s.src];line([pt(s.x,s.y),pt(s.x,s.y+22),pt(cx(b),s.y+22),pt(cx(b),b.y)],'rgba(69,137,255,.10)',1);});
+    ctx.globalAlpha=1;
+    /* confluent */
+    ctx.globalAlpha=alphaFor('flow');
+    rr(CC.x,CC.y,CC.w,CC.h,2,'rgba(0,29,108,.18)','rgba(69,137,255,.35)',1);
+    line([pt(KAFKA.x+KAFKA.w,KAFKA.y+80),pt(FLINK.x,KAFKA.y+80)],'rgba(120,169,255,.25)',1,[3,4]);line([pt(FLINK.x+FLINK.w,KAFKA.y+80),pt(AG.x,KAFKA.y+80)],'rgba(190,149,255,.3)',1,[3,4]);line([pt(AG.x+AG.w,KAFKA.y+80),pt(DEC.x,KAFKA.y+80)],'rgba(190,149,255,.3)',1,[3,4]);
+    line(decToCtrl(0),'rgba(111,220,140,.14)',1);
+    rr(KAFKA.x,KAFKA.y,KAFKA.w,KAFKA.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('KAFKA TOPICS',KAFKA.x+10,KAFKA.y+14);
+    TOPICS.forEach((t,i)=>{const y=topicY(i);text(t,KAFKA.x+14,y,{px:10,mono:true,c:P.blue4});const ph2=(st.t/30+i*7)%16;ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1*S;ctx.setLineDash([3*S,13*S]);ctx.lineDashOffset=-ph2*S;ctx.beginPath();ctx.moveTo(X(KAFKA.x+150),Y(y));ctx.lineTo(X(KAFKA.x+KAFKA.w-10),Y(y));ctx.stroke();ctx.setLineDash([]);});
+    rr(FLINK.x,FLINK.y,FLINK.w,FLINK.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('FLINK SQL · ONE STATEMENT PER DECISION',FLINK.x+10,FLINK.y+14);
+    FN.forEach((f,i)=>{const lit=st.fn[i];ctx.save();if(lit)glow(P.blue,14);rr(FLINK.x+14,f.y-11,170,22,2,lit?'rgba(15,98,254,.9)':'rgba(255,255,255,.05)',lit?P.blue3:P.line,1);noglow();ctx.restore();text(f.k,FLINK.x+24,f.y,{px:10,mono:true,c:lit?'#fff':P.ink2,w:lit?500:400});});
+    text('Granite Time Series models',FLINK.x+196,FN[0].y,{px:10,c:P.ink2,w:500});text('TTM · FlowState · PatchTST-FM · TSPulse',FLINK.x+196,FN[0].y+16,{px:8.5,c:P.ink3});text('zero-shot · hosted by Confluent',FLINK.x+196,FN[1].y+8,{px:9,c:P.ink3});text('backtest MASE · WAPE · CRPS',FLINK.x+196,FN[2].y,{px:9,c:P.ink3});
+    ctx.save();if(st.agent)glow(P.purple,14);rr(AG.x,AG.y,AG.w,AG.h,2,st.agent?'rgba(49,19,94,.55)':'rgba(0,7,20,.6)',st.agent?P.purple:P.line,1);noglow();ctx.restore();eyebrow('STREAMING AGENTS',AG.x+10,AG.y+14,{c:st.agent?P.purple:P.ink3});
+    ['CREATE TOOL → function','CREATE AGENT → prompt + tools','AI_RUN_AGENT per event','reflection before release'].forEach((t,i)=>text(t,AG.x+12,AG.y+40+i*20,{px:9.5,mono:true,c:st.agent?P.ink:P.ink2}));
+    text('5 expert gates',AG.x+AG.w-10,AG.y+AG.h-14,{px:9,mono:true,a:'right',c:P.purple});
+    rr(DEC.x,DEC.y,DEC.w,DEC.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow(spec.decLabel||'DECISIONS · BACK TO THE FLOOR',DEC.x+10,DEC.y+14);
+    DROWS.forEach((d,i)=>{const lit=st.dec[i];ctx.save();if(lit)glow(d.c,12);rr(DEC.x+12,d.y-11,DEC.w-24,22,2,lit?'rgba(0,7,20,.9)':'rgba(255,255,255,.04)',lit?d.c:P.line,1);noglow();ctx.restore();text(d.k,DEC.x+22,d.y,{px:10,mono:true,c:lit?d.c:P.ink2});});
+    st.parts.forEach(pp=>{const o=pat(pp.path,pp.d);ctx.save();if(pp.glow)glow(pp.color,10);dot(o.x,o.y,pp.size,pp.color);noglow();ctx.restore();});
+    ctx.globalAlpha=1;
+    st.callouts.forEach(callout);
+    const lg=spec.legend||[['telemetry',P.blue3],['decision',P.green],['work order',P.orange],['alert',P.red],['agent',P.purple]];let lx=560;lg.forEach(([t,c])=>{dot(lx,24,3,c);text(t,lx+8,24,{px:8.5,c:P.ink3});lx+=ctx.measureText(t).width/S+26;});}
+  /* ---------- interaction ---------- */
+  const HOT=[].concat(SIG.map(s=>({x:s.x,y:s.y,r:12,html:'<b>'+s.id+'</b> '+s.name+'<br>unit '+s.unit+' · source '+SRC[s.src].label+'<br>topic '+TOPICS[s.topic],s})),
+    Object.keys(N).map(k=>({x:cx(N[k]),y:cy(N[k]),r:Math.max(N[k].w,N[k].h)/2+6,node:k,html:'<b>'+(N[k].label||k)+'</b>'+(N[k].sc?'<br>click: '+spec.scenarios[N[k].sc].name:'')})),
+    Object.keys(SRC).map(k=>({x:cx(SRC[k]),y:cy(SRC[k]),r:40,html:'<b>'+SRC[k].label+'</b><br>'+SRC[k].sub+' → Kafka via connector'})),
+    [{x:cx(KAFKA),y:cy(KAFKA),r:70,html:'<b>Kafka topics</b><br>one topic per source, Schema Registry contracts'},{x:cx(FLINK),y:cy(FLINK),r:70,html:'<b>Flink SQL</b><br>'+FNK.join(' · ')},{x:cx(AG),y:cy(AG),r:60,html:'<b>Streaming Agents</b><br>reason on the forecast and the flag, call tools, write decisions'},{x:cx(DEC),y:cy(DEC),r:60,html:'<b>Decisions</b><br>'+DROWS.map(d=>d.k).join(' · ')},{x:cx(CTRL),y:cy(CTRL),r:70,html:'<b>'+spec.ctrlName+'</b><br>objectives, targets and the gate'}]);
+  function vpos(ev){const r=cv.c.getBoundingClientRect();const e=ev.touches?ev.touches[0]:ev;return {x:(e.clientX-r.left)/S,y:(e.clientY-r.top)/S};}
+  function hit(o){let best=null,bd=1e9;HOT.forEach(h=>{const d=Math.hypot(h.x-o.x,h.y-o.y);if(d<h.r&&d<bd){bd=d;best=h;}});return best;}
+  cv.c.addEventListener('mousemove',ev=>{const o=vpos(ev);const h=hit(o);st.hover=h&&h.s?h.s:null;if(!h){tip.style.display='none';cv.c.style.cursor='default';return;}tip.innerHTML=h.html;tip.style.display='block';const r=inner.getBoundingClientRect();const px=(ev.clientX-r.left),py=(ev.clientY-r.top);tip.style.left=(px>r.width*0.7?px-10-tip.offsetWidth:px+12)+'px';tip.style.top=(py+10)+'px';cv.c.style.cursor=(h.node&&N[h.node].sc)?'pointer':'default';});
+  cv.c.addEventListener('mouseleave',()=>{tip.style.display='none';st.hover=null;});
+  cv.c.addEventListener('click',ev=>{const h=hit(vpos(ev));if(h&&h.node&&N[h.node].sc){st.auto=false;q('auto').setAttribute('aria-pressed','false');startScenario(N[h.node].sc);}});
+  chipGroup(p+'-sc',v=>{startScenario(v);});
+  chipGroup(p+'-focus',v=>{st.focus=v;});
+  q('auto').addEventListener('click',e=>{st.auto=!st.auto;e.currentTarget.setAttribute('aria-pressed',st.auto);if(st.auto&&st.phaseT<-1e8)nextPhase();});
+  reg({el,resize(){cv.fit();},update,draw});
+  cv.fit();startScenario(Object.keys(spec.scenarios)[0]);
+}
+
+/* ---------- Retail: store 112 and its supply chain ---------- */
+twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b'};return {
+  id:'st-retail',prefix:'rt',floorLabel:'STORE 112 · GROCERY · ITS SUPPLY CHAIN',ctrlLabel:'CATEGORY PLANNER · BUSINESS TARGETS',ctrlName:'Category planner',objective:'objective: availability ≥ 98 % · waste ↓ · fraud loss ↓',gateLabel:'planner gate: approve?',
+  nodes:{
+    supplier:{x:50,y:100,w:110,h:70,label:'Supplier',type:'factory'},
+    dc:{x:215,y:95,w:150,h:85,label:'Distribution center',type:'warehouse',sc:'plan'},
+    store:{x:470,y:70,w:250,h:150,label:'Store 112',type:'store'},
+    shelf:{x:490,y:112,w:100,h:88,label:'Aisle 4 · dairy',labelPos:'below',labelDy:0,type:'shelves',sc:'anom'},
+    pos:{x:612,y:122,w:92,h:70,label:'Checkout',labelPos:'below',type:'pos',sc:'fraud'},
+    online:{x:770,y:95,w:130,h:80,label:'App · e-commerce',type:'online'}
+  },
+  routes:[{x1:160,y1:140,x2:215,y2:140},{x1:365,y1:140,x2:470,y2:140}],
+  signals:[
+    {id:'POS-112',name:'scans per minute',unit:'/min',x:650,y:118,node:'pos',src:'pos',topic:0},
+    {id:'SHELF-A4',name:'on-shelf units, camera',unit:'units',x:540,y:108,node:'shelf',src:'wms',topic:1},
+    {id:'BACK-112',name:'back room on hand',unit:'units',x:700,y:80,node:'store',src:'wms',topic:1},
+    {id:'DC-INV',name:'DC on hand',unit:'cases',x:290,y:90,node:'dc',src:'wms',topic:1},
+    {id:'WEB-ORD',name:'online orders',unit:'/h',x:835,y:92,node:'online',src:'ecom',topic:2},
+    {id:'PRICE-F',name:'price and promo file',unit:'rows',x:505,y:76,node:'store',src:'erp',topic:3},
+    {id:'AUTH-112',name:'card authorizations',unit:'/min',x:690,y:150,node:'pos',src:'pay',topic:4},
+    {id:'TRUCK-7',name:'delivery ETA',unit:'min',x:420,y:120,node:'dc',src:'tms',topic:5}
+  ],
+  sources:{pos:{x:80,y:325,w:150,h:50,label:'POS · checkout',sub:'scans, real time'},wms:{x:255,y:325,w:150,h:50,label:'Inventory · WMS',sub:'on hand, hourly'},ecom:{x:430,y:325,w:150,h:50,label:'E-commerce',sub:'orders, clicks'},erp:{x:605,y:325,w:150,h:50,label:'ERP · pricing',sub:'promos, costs'},pay:{x:780,y:325,w:150,h:50,label:'Payments',sub:'card auths, 50 ms'},tms:{x:955,y:325,w:150,h:50,label:'Logistics · TMS',sub:'trucks, ETAs'}},
+  topics:['pos.transactions','store.inventory','ecom.orders','erp.prices','payments.auth','logistics.eta'],
+  fn:['AI_FORECAST','AI_DETECT_ANOMALIES','TS_OPTIMIZE'],
+  decisions:[{k:'Purchase order → DC',c:P.green},{k:'Task → store team',c:P.orange},{k:'Hold card → checkout',c:P.red}],
+  kpis:[{k:'On-shelf availability',key:'osa',v0:96.2,u:'%',dec:1,lo:90,hi:100,tg:98,up:true},{k:'Waste',key:'waste',v0:2.6,u:' %',dec:1,lo:0,hi:5,tg:2,up:false},{k:'Inventory days',key:'days',v0:14,u:' d',dec:0,lo:5,hi:25,tg:12,up:false},{k:'Fraud loss',key:'fraud',v0:9,u:' bps',dec:0,lo:0,hi:20,tg:5,up:false}],
+  legend:[['telemetry',P.blue3],['purchase order',P.green],['task',P.orange],['hold',P.red],['agent',P.purple]],
+  extra(D){const t=D.st.t;/* truck DC → store */const tx=365+((t/35)%105);if(D.st.flags.truck){D.rr(tx,124,34,16,2,'rgba(0,7,20,.6)',D.P.green,1);D.rr(tx-14,130,14,10,2,'rgba(0,7,20,.6)',D.P.green,1);[tx-8,tx+8,tx+26].forEach(wx=>D.dot(wx,142,3,D.P.steel2));}
+    /* shoppers */for(let i=0;i<3;i++){const sx=480+((t/(50+i*13)+i*70)%230);D.dot(sx,208,2.5,'rgba(166,200,255,.6)');}},
+  scenarios:{
+    plan:{name:'Supply chain planning',phases:[
+      {d:2600,cap:'Oat milk sells 40 a day in store 112. A promo starts next week. The forecast at P90 says 68 a day, lead time 2 days.',on:a=>{a.hl('shelf');a.co([{x:560,y:232,c:P.yellow,to:{x:540,y:108},l:['SKU 44102 oat milk 1L · 40/day','promo next week · AI_FORECAST P90: 68/day','lead time 2 d · on hand 140']}]);a.kpi({osa:96.2});a.flow(['shelf','pos','store'],0,0,P.yellow);}},
+      {d:2600,cap:'AI_FORECAST runs on the sales topic with the promo as a driver. The band sets the reorder point: 136 units before the promo day.',on:a=>{a.fn([1,0,0]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 28 d · quantiles P50 P90','reorder point 136 · order up to 376']}]);a.flow(['shelf','store'],1,0,P.blue3,true);}},
+      {d:2600,cap:'The agent raises PO-8821 for 240 units to the distribution center, inside the planner budget. The planner approves.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: PO-8821 · 240 units · DC → store 112','ships day 5 · arrives day 7 · budget ok','→ planner gate']}]);a.toGate(0,P.green);}},
+      {d:3400,cap:'Approved. The order lands in the WMS, the truck rolls, the shelf is full on promo day. Availability 99%, waste flat.',on:a=>{a.fromGate('dc',P.green,()=>{a.flag('src','wms');a.flag('srcNote',{src:'wms',t:'PO-8821 · 240 units · picked'});a.flag('truck',true);a.flag('shelf',0.95);a.kpi({osa:99.1,days:11});a.co([{x:560,y:232,c:P.green,to:{x:540,y:108},l:['shelf full on promo day · 99.1 % availability','inventory days 14 → 11 · waste flat']}]);});}},
+      {d:1800,cap:'Every SKU, every store, every hour. 100,000 SKUs on one statement.',on:a=>{}}
+    ]},
+    anom:{name:'Anomaly detection',phases:[
+      {d:2600,cap:'Oat milk sales drop to 6 on a Tuesday. The shelf camera shows a gap, the back room still has 140 units.',on:a=>{a.hl('shelf');a.flag('shelf',0.15);a.spark('SHELF-A4',{from:38,to:6,lo:0,hi:60,limit:18,label:'POS-112 units/h',unit:'',dec:0,color:P.red,dx:-180,dy:-60});a.co([{x:600,y:232,c:P.red,to:{x:540,y:108},l:['POS-112 sales 38 → 6 /h · shelf gap','BACK-112 back room on hand 140']}]);a.flow(['shelf','store'],0,1,P.red);}},
+      {d:2600,cap:'AI_DETECT_ANOMALIES flags the dip against the band. No labels, no rules per SKU.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['is_anomaly TRUE · lower_bound 22','weekend peaks inside the band: not flagged']}]);a.flow(['shelf'],0,1,P.red,true);}},
+      {d:2600,cap:'The agent diagnoses: stock in the back room, not on the shelf. A task goes to the store team, not a purchase order.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: gap with stock on hand = replenish shelf','task store team · no PO · no markdown']}]);a.toGate(1,P.orange);}},
+      {d:3200,cap:'Shelf refilled in 20 minutes. 1,100 units of lost sales avoided this week across the category.',on:a=>{a.fromGate('shelf',P.orange,()=>{a.flag('shelf',0.9);a.spark('SHELF-A4',null);a.kpi({osa:98.6});a.co([{x:600,y:232,c:P.green,to:{x:540,y:108},l:['shelf refilled in 20 min','1,100 units of lost sales avoided']}]);});}},
+      {d:1800,cap:'Same statement on 100,000 SKUs. A flag becomes the right action, the same day.',on:a=>{}}
+    ]},
+    fraud:{name:'Fraud and security',phases:[
+      {d:2600,cap:'At checkout, card ••4417 tries 14 small authorizations in two minutes.',on:a=>{a.hl('pos');a.spark('AUTH-112',{from:1,to:14,lo:0,hi:16,limit:6,label:'AUTH ••4417 /min',unit:'',dec:0,color:P.red,dx:70,dy:70});a.co([{x:890,y:200,c:P.red,to:{x:690,y:150},l:['card ••4417 · 14 auths in 2 min · $1 to $4','normal for this card: 2 a week']}]);a.flow(['pos'],4,1,P.red);}},
+      {d:2600,cap:'AI_DETECT_ANOMALIES scores every card against its own normal: 4.8σ outside the band. Card testing pattern.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['is_anomaly TRUE · 4.8 σ · per card_id','pattern: card testing']}]);a.flow(['pos'],4,1,P.red,true);}},
+      {d:2600,cap:'The agent holds the card, alerts the issuer and keeps the lane open for everyone else.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: hold ••4417 · alert issuer','lane stays open · no rule rewrite']}]);a.toGate(2,P.red);}},
+      {d:3200,cap:'Held before the authorization window closes, under 50 ms. $2,400 of loss avoided on one card.',on:a=>{a.fromGate('pos',P.red,()=>{a.flag('held','pos');a.spark('AUTH-112',null);a.kpi({fraud:4});a.co([{x:890,y:200,c:P.green,to:{x:690,y:150},l:['held in 41 ms · issuer notified','$2,400 loss avoided · false declines flat']}]);});}},
+      {d:1800,cap:'Every card has its own normal. Rules are not rewritten for each new attack.',on:a=>{}}
+    ]}
+  }};})());
+
+/* ---------- Banking: payments and the trading desk ---------- */
+twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b'};return {
+  id:'st-bank',prefix:'bk',floorLabel:'PAYMENTS · DIGITAL BANKING · TRADING DESK',ctrlLabel:'RISK OFFICE · BUSINESS TARGETS',ctrlName:'Risk office',objective:'objective: fraud loss ↓ · false declines ↓ · slippage ↓ · settlement on time',gateLabel:'risk gate: approve?',
+  nodes:{
+    cardholders:{x:50,y:95,w:120,h:80,label:'Cardholders · devices',type:'phone'},
+    merchants:{x:225,y:100,w:130,h:70,label:'Merchants · ATMs',type:'pos'},
+    switch:{x:425,y:85,w:160,h:100,label:'Card switch · authorization',type:'switch',sc:'fraud'},
+    core:{x:640,y:80,w:150,h:70,label:'Core banking · settlement',type:'ledger',sc:'anom'},
+    desk:{x:840,y:205,w:150,h:70,label:'Trading desk · execution',labelPos:'below',type:'desk',sc:'trade'},
+    markets:{x:840,y:80,w:140,h:110,label:'Markets · exchanges',type:'chart'}
+  },
+  routes:[{x1:170,y1:135,x2:225,y2:135},{x1:355,y1:135,x2:425,y2:135},{x1:585,y1:135,x2:640,y2:115},{x1:915,y1:205,x2:915,y2:190}],
+  signals:[
+    {id:'AUTH-RT',name:'authorization stream',unit:'/s',x:505,y:80,node:'switch',src:'switch',topic:0},
+    {id:'ATM-W',name:'ATM withdrawals',unit:'/min',x:290,y:95,node:'merchants',src:'switch',topic:0},
+    {id:'LOGIN',name:'app logins and sessions',unit:'/min',x:110,y:90,node:'cardholders',src:'digital',topic:1},
+    {id:'SETTLE',name:'settlement latency',unit:'ms',x:715,y:75,node:'core',src:'core',topic:2},
+    {id:'BARS-1M',name:'1-minute bars, volume',unit:'shares',x:910,y:75,node:'markets',src:'mkt',topic:3},
+    {id:'ORD-FLOW',name:'order flow and fills',unit:'/min',x:870,y:200,node:'desk',src:'oms',topic:4},
+    {id:'PROFILE',name:'customer limits and KYC',unit:'rows',x:760,y:75,node:'core',src:'crm',topic:5}
+  ],
+  sources:{switch:{x:80,y:325,w:150,h:50,label:'Card switch',sub:'auths, 20k per second'},digital:{x:255,y:325,w:150,h:50,label:'Digital banking',sub:'logins, sessions'},core:{x:430,y:325,w:150,h:50,label:'Core banking',sub:'ledger, settlement'},mkt:{x:605,y:325,w:150,h:50,label:'Market data',sub:'bars, ticks'},oms:{x:780,y:325,w:150,h:50,label:'OMS · EMS',sub:'orders, fills'},crm:{x:955,y:325,w:150,h:50,label:'CRM · KYC',sub:'profiles, limits'}},
+  topics:['payments.auth','digital.events','core.settlement','market.bars','oms.orders','crm.profiles'],
+  fn:['AI_FORECAST','AI_DETECT_ANOMALIES','TS_OPTIMIZE'],
+  decisions:[{k:'Slices → OMS',c:P.green},{k:'Reroute → settlement',c:P.orange},{k:'Hold → authorization',c:P.red}],
+  kpis:[{k:'Fraud loss',key:'fraud',v0:6,u:' bps',dec:1,lo:0,hi:12,tg:3,up:false},{k:'False declines',key:'fd',v0:1.4,u:' %',dec:1,lo:0,hi:3,tg:1,up:false},{k:'Slippage',key:'slip',v0:3.1,u:' bps',dec:1,lo:0,hi:6,tg:2,up:false},{k:'Settlement on time',key:'sot',v0:99.1,u:' %',dec:1,lo:95,hi:100,tg:99.5,up:true}],
+  legend:[['telemetry',P.blue3],['order slice',P.green],['reroute',P.orange],['hold',P.red],['agent',P.purple]],
+  extra(D){const t=D.st.t;/* auth pulses between merchants and the switch */for(let i=0;i<4;i++){const u=((t/900)+i*0.25)%1;D.dot(355+u*70,135,2,'rgba(166,200,255,.7)');}if(D.st.flags.lat){const a=0.5+0.5*Math.sin(t/150);D.text('latency '+Math.round(D.st.flags.lat)+' ms',715,165,{px:9,mono:true,a:'center',c:D.st.flags.lat>400?D.P.red:D.P.green});}},
+  scenarios:{
+    fraud:{name:'Fraud and security',phases:[
+      {d:2600,cap:'Card ••4417: three authorizations in 90 seconds, two countries, amounts far above its normal.',on:a=>{a.hl('switch');a.spark('AUTH-RT',{from:40,to:1194,lo:0,hi:1400,limit:420,label:'••4417 amount',unit:'$',dec:0,color:P.red,dx:-205,dy:105});a.co([{x:600,y:232,c:P.red,to:{x:505,y:80},l:['••4417 · $1,194 · $334 · $174 in 90 s','two countries · normal for this card: $46']}]);a.flow(['switch','merchants'],0,1,P.red);}},
+      {d:2600,cap:'AI_DETECT_ANOMALIES scores the amount against the card’s own band inside the authorization window.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['is_anomaly TRUE · upper_bound $420','scored in 38 ms · per card_id']}]);a.flow(['switch'],0,1,P.red,true);}},
+      {d:2600,cap:'The agent holds the authorization, pushes a step-up to the cardholder and keeps the card alive for the real owner.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: hold · step-up to cardholder','merchant notified · no blanket block']}]);a.toGate(2,P.red);}},
+      {d:3200,cap:'Cardholder confirms fraud in the app. $1,700 held, card reissued, no false decline for the next trip abroad.',on:a=>{a.fromGate('switch',P.red,()=>{a.flag('held','switch');a.spark('AUTH-RT',null);a.kpi({fraud:2.8,fd:1.1});a.co([{x:600,y:232,c:P.green,to:{x:505,y:80},l:['$1,702 held · card reissued','trip abroad next week: band learns the new normal']}]);});}},
+      {d:1800,cap:'Every card has its own normal. 20,000 authorizations a second on one statement.',on:a=>{}}
+    ]},
+    trade:{name:'Trading',phases:[
+      {d:2600,cap:'The desk has 100,000 shares to work by the close. Volume per minute comes off the exchange feed as bars.',on:a=>{a.hl('desk');a.co([{x:540,y:232,c:P.yellow,to:{x:870,y:200},l:['order 100,000 shares · participation cap 10 %','tape: 42k shares/min and falling']}]);a.flow(['markets','desk'],3,0,P.yellow);}},
+      {d:2600,cap:'AI_FORECAST projects the next 30 minutes of volume with a band. The slices are sized from the band, not from yesterday.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 30 bars · P10 to P90','1.2M shares forecast · 30 slices · done 14:11']}]);a.flow(['markets'],3,0,P.blue3,true);}},
+      {d:2600,cap:'The agent writes the slice schedule to the OMS and watches the band for a burst.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: 30 slices · largest 5,700 now','pause rule: burst above the band']}]);a.toSrc(0,'oms',P.green,()=>{a.flag('src','oms');a.flag('srcNote',{src:'oms',t:'30 slices scheduled'});a.srcToNode('oms','desk',P.green,()=>{a.kpi({slip:1.6});});});}},
+      {d:3200,cap:'A news burst hits at 13:52. The slices pause, the forecast refreshes on the next bar, the order completes at 14:13 inside the cap.',on:a=>{a.co([{x:540,y:232,c:P.green,to:{x:870,y:200},l:['burst 125k/min · slices paused 2 min','filled 14:13 · slippage 3.1 → 1.6 bps']}]);a.kpi({slip:1.6});}},
+      {d:1800,cap:'Every symbol, every minute. The risk desk scores volatility with the same statement.',on:a=>{}}
+    ]},
+    anom:{name:'Anomaly detection',phases:[
+      {d:2600,cap:'Settlement latency on the primary rail jumps from 120 to 480 ms at 14:02. Nothing has failed yet.',on:a=>{a.hl('core');a.flag('lat',480);a.spark('SETTLE',{from:120,to:480,lo:0,hi:600,limit:300,label:'SETTLE latency',unit:'ms',dec:0,color:P.red,dx:-75,dy:78});a.co([{x:620,y:232,c:P.red,to:{x:715,y:75},l:['SETTLE p95 120 → 480 ms · 14:02','rail A · queue growing']}]);a.flow(['core'],2,1,P.red);}},
+      {d:2600,cap:'AI_DETECT_ANOMALIES flags the latency against its own band, before the SLA breach.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['is_anomaly TRUE · upper_bound 300 ms','forecast: SLA breach in 11 min']}]);a.flow(['core'],2,1,P.red,true);}},
+      {d:2600,cap:'The agent checks the secondary rail and the queue depth, then proposes rerouting the batch. Operations approves.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: rail B healthy · 40 ms','reroute batch 7 · notify treasury']}]);a.toGate(1,P.orange);}},
+      {d:3200,cap:'Rerouted. Settlement on time at 99.6%, the SLA never tripped, the incident ticket was opened with the evidence attached.',on:a=>{a.fromGate('core',P.orange,()=>{a.flag('lat',60);a.spark('SETTLE',null);a.kpi({sot:99.6});a.co([{x:620,y:232,c:P.green,to:{x:715,y:75},l:['batch 7 on rail B · 60 ms','on time 99.6 % · SLA kept']}]);});}},
+      {d:1800,cap:'Payments operations, scored per rail and per batch, not per rulebook.',on:a=>{}}
+    ]}
+  }};})());
+
+/* ---------- Airlines: hub operations, fleet and network ---------- */
+twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b'};return {
+  id:'st-air',prefix:'al',floorLabel:'HUB OPERATIONS · FLEET · NETWORK',ctrlLabel:'OPERATIONS CONTROL · BUSINESS TARGETS',ctrlName:'Operations control',objective:'objective: on-time ≥ 85 % · load factor ↑ · unplanned AOG ↓',gateLabel:'ops gate: approve?',
+  nodes:{
+    gate:{x:50,y:95,w:180,h:105,label:'Gate B12 · turnaround',type:'gate',sc:'opt'},
+    ramp:{x:265,y:160,w:150,h:65,label:'Ramp · ground crew',labelPos:'below',type:'ramp'},
+    aircraft:{x:470,y:110,w:200,h:70,label:'Flight 214 · climb',labelDy:50,type:'plane',sc:'anom'},
+    hangar:{x:720,y:170,w:150,h:80,label:'Maintenance hangar',labelPos:'below',type:'hangar'},
+    network:{x:720,y:50,w:250,h:100,label:'Network · 180 routes',type:'map',sc:'plan'}
+  },
+  routes:[{x1:230,y1:150,x2:265,y2:150}],
+  signals:[
+    {id:'EGT-1',name:'engine 1 exhaust gas temp',unit:'°C',x:566,y:168,node:'aircraft',src:'acars',topic:0},
+    {id:'VIB-1',name:'engine 1 vibration',unit:'ips',x:610,y:168,node:'aircraft',src:'acars',topic:0},
+    {id:'TURN-B12',name:'turnaround clock',unit:'min',x:140,y:90,node:'gate',src:'aodb',topic:1},
+    {id:'BAGS-B12',name:'bag loading progress',unit:'%',x:340,y:155,node:'ramp',src:'bhs',topic:2},
+    {id:'BOOK-LIS',name:'bookings per route, daily',unit:'seats',x:845,y:45,node:'network',src:'pss',topic:3},
+    {id:'WX-HUB',name:'weather and slots',unit:'METAR',x:940,y:45,node:'network',src:'wx',topic:4},
+    {id:'CREW-214',name:'crew duty remaining',unit:'min',x:190,y:90,node:'gate',src:'crew',topic:5}
+  ],
+  sources:{acars:{x:80,y:325,w:150,h:50,label:'ACARS · QAR',sub:'engine data, per flight'},aodb:{x:255,y:325,w:150,h:50,label:'AODB · gates',sub:'turnarounds, stands'},bhs:{x:430,y:325,w:150,h:50,label:'Baggage · ramp',sub:'scans, loaders'},pss:{x:605,y:325,w:150,h:50,label:'PSS · bookings',sub:'reservations, fares'},wx:{x:780,y:325,w:150,h:50,label:'Weather · ATC',sub:'METAR, slots'},crew:{x:955,y:325,w:150,h:50,label:'Crew · MRO',sub:'rosters, work orders'}},
+  topics:['engine.telemetry','ops.turnaround','ramp.events','bookings.daily','weather.hub','crew.roster'],
+  fn:['AI_FORECAST','AI_DETECT_ANOMALIES','TS_OPTIMIZE'],
+  decisions:[{k:'Plan → gate · network',c:P.green},{k:'Work order → hangar',c:P.orange},{k:'Alert → ops control',c:P.red}],
+  kpis:[{k:'On-time departures',key:'otp',v0:82,u:' %',dec:0,lo:60,hi:100,tg:85,up:true},{k:'Load factor',key:'lf',v0:84,u:' %',dec:0,lo:60,hi:100,tg:86,up:true},{k:'Unplanned AOG',key:'aog',v0:3,u:' /mo',dec:0,lo:0,hi:6,tg:1,up:false},{k:'Turnaround',key:'turn',v0:52,u:' min',dec:0,lo:30,hi:70,tg:45,up:false}],
+  legend:[['telemetry',P.blue3],['plan',P.green],['work order',P.orange],['alert',P.red],['agent',P.purple]],
+  extra(D){const t=D.st.t;/* contrail behind the climbing aircraft */for(let i=0;i<6;i++){const u=((t/700)+i/6)%1;D.dot(470-10-u*60,145+u*6,2-u*1.5,'rgba(166,200,255,'+(0.5*(1-u)).toFixed(2)+')');}},
+  scenarios:{
+    anom:{name:'Anomaly detection',phases:[
+      {d:2600,cap:'Flight 214 on climb. Engine 1 exhaust gas temperature runs 12 °C above its own band, vibration is normal.',on:a=>{a.hl('aircraft');a.flag('engine',true);a.spark('EGT-1',{from:612,to:638,lo:560,hi:680,limit:640,label:'EGT-1',unit:'°C',dec:0,color:P.yellow,dx:-150,dy:-120});a.co([{x:430,y:232,c:P.yellow,to:{x:566,y:168},l:['EGT-1 626 → 638 °C on climb · band to 628','VIB-1 normal · N1 normal']}]);a.flow(['aircraft'],0,1,P.yellow);}},
+      {d:2600,cap:'AI_DETECT_ANOMALIES scores every parameter per engine, per flight. No failure labels needed.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.yellow,to:{x:495,y:600},l:['is_anomaly TRUE · 3.6 σ · engine 1','trend: margin to redline gone in 9 flights']}]);a.flow(['aircraft'],0,1,P.yellow,true);}},
+      {d:2600,cap:'The agent matches the pattern to a borescope finding, reserves the slot in tonight’s overnight check and books the part.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: pattern = HPT blade erosion','WO tonight · part reserved · crew swap not needed']}]);a.toSrc(1,'crew',P.orange,()=>{a.flag('src','crew');a.flag('srcNote',{src:'crew',t:'WO-7731 · overnight · hangar 2'});a.srcToNode('crew','hangar',P.orange,()=>{a.flag('wo',true);});});}},
+      {d:3200,cap:'Aircraft flies its day, swaps the part overnight. An AOG with 6 cancelled flights avoided.',on:a=>{a.flag('engine',false);a.spark('EGT-1',null);a.kpi({aog:2});a.co([{x:430,y:232,c:P.green,to:{x:566,y:168},l:['overnight fix · 0 cancellations','AOG avoided · 6 flights protected']}]);}},
+      {d:1800,cap:'Every engine, every flight, one statement. The fleet learns from itself.',on:a=>{}}
+    ]},
+    opt:{name:'Production optimization',phases:[
+      {d:2600,cap:'The inbound aircraft for gate B12 is 14 minutes late. The turnaround clock says 52 minutes against a 45 minute plan.',on:a=>{a.hl('gate');a.flag('turn',52);a.co([{x:240,y:40,c:P.yellow,to:{x:140,y:90},l:['inbound +14 min · plan 45 · forecast 52 min','crew duty remaining 190 min · bags 40 %']}]);a.kpi({turn:52});a.flow(['gate','ramp'],1,0,P.yellow);}},
+      {d:2600,cap:'AI_FORECAST projects bag loading, fueling and boarding. TS_OPTIMIZE re-sequences the ramp inside the safety rules.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['bags done 11:42 · fuel 11:38 · boarding 11:47','search: parallel fueling · second loader · 2 gates']}]);a.flow(['ramp'],2,2,P.blue3,true);}},
+      {d:2600,cap:'The agent proposes a second loader and fueling during boarding. Operations control approves at the gate.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: second loader · fuel during boarding','turnaround 52 → 41 min · crew within duty','→ ops gate']}]);a.toGate(0,P.green);}},
+      {d:3400,cap:'Approved. The plan reaches the ramp, the aircraft leaves 3 minutes late instead of 14. The connection bank holds.',on:a=>{a.fromGate('gate',P.green,()=>{a.flag('turn',41);a.kpi({turn:41,otp:88});a.co([{x:240,y:40,c:P.green,to:{x:140,y:90},l:['departed +3 min · 212 connections held','turnaround 41 min · on-time 88 %']}]);});}},
+      {d:1800,cap:'Every turnaround, every gate, every day. The same models run the ramp and the kiln.',on:a=>{}}
+    ]},
+    plan:{name:'Supply chain planning',phases:[
+      {d:2600,cap:'Hub to Lisbon, Friday. Bookings come in daily per route. The forecast says the flight fills to 96% with 11 days to go.',on:a=>{a.hl('network');a.flag('route',3);a.spark('BOOK-LIS',{from:120,to:168,lo:60,hi:190,limit:174,label:'BOOK-LIS seats',unit:'',dec:0,color:P.blue3,dx:100,dy:130});a.co([{x:960,y:232,c:P.yellow,to:{x:845,y:45},l:['HUB–LIS Fri · 168 of 174 seats forecast','P90: full 3 days early · fare class Y open']}]);a.kpi({lf:84});a.flow(['network'],3,0,P.yellow);}},
+      {d:2600,cap:'AI_FORECAST runs per route and per fare class, with the weather topic as a driver for the hub.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['180 routes · 6 fare classes · horizon 21 d','demand P50 P90 · catering and fuel from the same band']}]);a.flow(['network'],3,0,P.blue3,true);}},
+      {d:2600,cap:'The agent closes the lowest fare class, releases 8 seats on the evening flight and sizes catering and fuel for the load.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: close class Q · +8 seats evening','catering 168 meals · fuel for 86 % load']}]);a.toSrc(0,'pss',P.green,()=>{a.flag('src','pss');a.flag('srcNote',{src:'pss',t:'class Q closed · +8 seats'});a.srcToNode('pss','network',P.green,()=>{a.kpi({lf:88});});});}},
+      {d:3200,cap:'Load factor 88% across the bank, no spoiled seats, no missed meals.',on:a=>{a.co([{x:960,y:232,c:P.green,to:{x:845,y:45},l:['Friday bank 88 % load · +$41k revenue','0 spoiled seats · catering exact']}]);}},
+      {d:1800,cap:'Bookings, parts, meals and fuel from one forecast. Every route, every day.',on:a=>{}}
+    ]}
+  }};})());
+
+/* ============ 03 use cases and industries: cards as tabs ============ */
 (function(){
-  const tabs=$('#uctabs');if(!tabs)return;const btns=$$('[role=tab]',tabs);
-  function select(b){btns.forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on?'true':'false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p){p.hidden=!on;if(on){const s=p.__stage;if(s&&s.resize)requestAnimationFrame(()=>s.resize());}}});}
-  btns.forEach(b=>b.addEventListener('click',()=>select(b)));
   const scrollTo=el=>el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
-  function go(id){const b=btns.find(x=>x.getAttribute('aria-controls')===id);if(b){select(b);const p=document.getElementById(id);scrollTo(window.innerWidth<=760&&p?p:tabs);return;}const t=document.getElementById(id);if(t)scrollTo(t);}
-  $$('#inds [data-uc]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();go(a.dataset.uc);}));
+  ['uctabs','indtabs'].forEach(id=>{const tabs=document.getElementById(id);if(!tabs)return;const btns=$$('[role=tab]',tabs);
+    function select(b){btns.forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on?'true':'false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p){p.hidden=!on;if(on){const s=p.__stage;if(s&&s.resize)requestAnimationFrame(()=>s.resize());}}});}
+    btns.forEach(b=>b.addEventListener('click',()=>{select(b);if(window.innerWidth<=760){const p=document.getElementById(b.getAttribute('aria-controls'));if(p)scrollTo(p);}}));});
 })();
 
 /* ============ 03 use case minis: a live miniature of each demo on its card ============ */
