@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Real-Time Intelligence on Confluent">
 <meta name="twitter:description" content="Predict the next stockout. Optimize for service level. Granite Time Series models and Streaming Agents on Confluent, live simulations you can touch.">
 <meta name="twitter:image" content="https://realtimeintelligence.io/og-image.png">
-<meta name="theme-color" content="#122148">
+<meta name="theme-color" content="#172b5e">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Real-Time Intelligence on Confluent","url":"https://realtimeintelligence.io/","description":"IBM Granite Time Series foundation models and Streaming Agents run natively on Confluent Cloud for Apache Flink. Interactive simulations of forecasting, anomaly detection, optimization and semantic search in the stream.","about":[{"@type":"Thing","name":"Time series foundation models"},{"@type":"Thing","name":"Apache Flink SQL"},{"@type":"Thing","name":"Streaming Agents"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
 <style>
 /* Dark, cinematic take on IBM Carbon (Gray 100 / Blue 60) with Confluent navy. Stages are full-width interactive panels. Square corners, Plex type. */
 :root{
-  --bg:#0e1a3c; --bg-2:#122148; --bg-3:#172a5a; --bg-4:#213a7c;
+  --bg:#12224e; --bg-2:#172b5e; --bg-3:#1e3775; --bg-4:#2b4ba1;
   --panel:rgba(255,255,255,.035); --panel-2:rgba(255,255,255,.07); --panel-3:rgba(255,255,255,.11);
   --ink:#f4f4f4; --ink-2:#c1c7cd; --ink-3:#8d99a8; --ink-4:#697077;
   --line:rgba(255,255,255,.11); --line-2:rgba(255,255,255,.22);
@@ -46,7 +46,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans)
   background-image:
     radial-gradient(1100px 560px at 12% -8%, rgba(0,45,156,.55), transparent 65%),
     radial-gradient(900px 500px at 92% 8%, rgba(15,98,254,.18), transparent 60%),
-    linear-gradient(180deg, var(--bg-2) 0, var(--bg) 55%, #0b1530 100%);
+    linear-gradient(180deg, var(--bg-2) 0, var(--bg) 55%, #0e1b3e 100%);
   background-attachment:fixed}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg-2)}
 h1,h2,h3,h4{margin:0;font-weight:300;line-height:1.12;text-wrap:balance;letter-spacing:-.01em}
@@ -1455,7 +1455,7 @@ function chipSet(id,v){const g=document.getElementById(id);if(!g)return;$$('.chi
 $$('.tabs').forEach(tabs=>{const btns=$$('[role=tab]',tabs);btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>{x.setAttribute('aria-selected',x===b?'true':'false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p)p.hidden=(x!==b);});}));});
 
 /* ============ colors ============ */
-const C={ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',ink4:'#697077',grid:'rgba(255,255,255,.09)',blue:'#0f62fe',blue2:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',band:'rgba(120,169,255,.16)',red:'#fa4d56',red2:'#ff8389',green:'#42be65',green2:'#6fdc8c',orange:'#ff832b',purple:'#be95ff',teal:'#08bdba',teal2:'#3ddbd9',bg:'#122148',yellow:'#f1c21b'};
+const C={ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',ink4:'#697077',grid:'rgba(255,255,255,.09)',blue:'#0f62fe',blue2:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',band:'rgba(120,169,255,.16)',red:'#fa4d56',red2:'#ff8389',green:'#42be65',green2:'#6fdc8c',orange:'#ff832b',purple:'#be95ff',teal:'#08bdba',teal2:'#3ddbd9',bg:'#172b5e',yellow:'#f1c21b'};
 const MONO='11px "IBM Plex Mono", Menlo, monospace';
 
 /* ============ canvas + stage loop ============ */
@@ -1770,7 +1770,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const el=$('#st-plant');if(!el)return;
   const cv=new Cv($('#pl-cv'));const tip=$('#pl-tip');const inner=$('.plant-inner',el);
   const VW=1300,VH=680;
-  const P={bg:'#122148',line:'rgba(255,255,255,.16)',ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',blue:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',teal:'#3ddbd9',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b',steel:'#9fb3c8',steel2:'#6b7f94'};
+  const P={bg:'#172b5e',line:'rgba(255,255,255,.16)',ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',blue:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',teal:'#3ddbd9',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b',steel:'#9fb3c8',steel2:'#6b7f94'};
   const FONT='"IBM Plex Sans", Arial, sans-serif',MONOF='"IBM Plex Mono", Menlo, monospace';
   /* ---------- layout (virtual coordinates) ---------- */
   const EQ={
@@ -2005,7 +2005,7 @@ function twin(spec){
   const p=spec.prefix;const q=k=>$('#'+p+'-'+k);
   const cv=new Cv(q('cv'));const tip=q('tip');const inner=$('.plant-inner',el);const wrap=q('wrap');
   const VW=1300,VH=680;
-  const P={bg:'#000a2e',line:'rgba(255,255,255,.16)',ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',blue:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',teal:'#3ddbd9',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b',steel:'#9fb3c8',steel2:'#6b7f94'};
+  const P={bg:'#172b5e',line:'rgba(255,255,255,.16)',ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',blue:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',teal:'#3ddbd9',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b',steel:'#9fb3c8',steel2:'#6b7f94'};
   const FONT='"IBM Plex Sans", Arial, sans-serif',MONOF='"IBM Plex Mono", Menlo, monospace';
   const N=spec.nodes,SIG=spec.signals,SRC=spec.sources,TOPICS=spec.topics,FNK=spec.fn,DROWS=spec.decisions;
   const CTRL={x:1000,y:34,w:270,h:118};
