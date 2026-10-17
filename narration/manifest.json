@@ -1,0 +1,53 @@
+{
+ "engine": "kokoro",
+ "lines": [
+  {
+   "id": "01",
+   "file": "01.mp3",
+   "dur": 8.3,
+   "text": "Every event in your stream is a decision. Granite Time Series models score each one in flight, on Confluent. Poke it."
+  },
+  {
+   "id": "02",
+   "file": "02.mp3",
+   "dur": 4.49,
+   "text": "Switch to forecast: the next thirty-two steps, with the band."
+  },
+  {
+   "id": "03",
+   "file": "03.mp3",
+   "dur": 5.88,
+   "text": "No training. It has never seen this signal, and it finds the pattern in milliseconds."
+  },
+  {
+   "id": "04",
+   "file": "04.mp3",
+   "dur": 7.56,
+   "text": "Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent."
+  },
+  {
+   "id": "05",
+   "file": "05.mp3",
+   "dur": 8.23,
+   "text": "Thirty bespoke models become two. Six months become eight weeks. Accuracy from ninety-three to ninety-nine percent."
+  },
+  {
+   "id": "06",
+   "file": "06.mp3",
+   "dur": 5.74,
+   "text": "Every card has its own normal. The odd swipe is held before authorization."
+  },
+  {
+   "id": "07",
+   "file": "07.mp3",
+   "dur": 5.81,
+   "text": "The kiln finds its own setpoint inside the guardrails. The operator approves."
+  },
+  {
+   "id": "08",
+   "file": "08.mp3",
+   "dur": 4.44,
+   "text": "One statement of Flink S Q L. Join the Early Access."
+  }
+ ]
+}
