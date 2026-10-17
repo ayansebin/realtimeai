@@ -1,0 +1,46 @@
+name: playground
+on:
+  workflow_dispatch:
+    inputs:
+      models:
+        description: "comma list of ttm,flowstate,patchtstfm,tspulse (empty = all)"
+        required: false
+        default: ""
+      datasets:
+        description: "comma list of dataset ids (empty = all)"
+        required: false
+        default: ""
+permissions:
+  contents: write
+jobs:
+  playground:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install granite-tsfm (CPU torch)
+        run: |
+          python -m pip install -q --upgrade pip
+          pip install -q "torch>=2.10,<2.12" --index-url https://download.pytorch.org/whl/cpu
+          pip install -q "git+https://github.com/ibm-granite/granite-tsfm@main" pandas numpy pyyaml
+          python -c "import torch, tsfm_public; print('torch', torch.__version__, 'tsfm', tsfm_public.__version__)"
+      - name: Build
+        env:
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          TOKENIZERS_PARALLELISM: "false"
+        run: |
+          python scripts/playground.py "${{ inputs.models }}" "${{ inputs.datasets }}" || echo "builder exited with an error, partial results are kept"
+          ls -la data/pg
+      - name: Commit
+        run: |
+          git config user.name "playground-bot"
+          git config user.email "ayhansebin@gmail.com"
+          git add data/pg
+          git commit -m "Build playground data (${{ inputs.models || 'all' }} / ${{ inputs.datasets || 'all' }})" || echo "nothing to commit"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin HEAD:main && break
+            sleep 10
+          done
