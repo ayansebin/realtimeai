@@ -27,7 +27,7 @@ jobs:
           git config user.email "ayhansebin@gmail.com"
           if [ "${{ inputs.mode }}" != "fetch" ]; then
             git checkout -B photo-candidates
-            for d in photos/_cand photos/_cand2; do [ -d "$d" ] && git add -f "$d"; done
+            for d in photos/_cand photos/_cand2 photos/_cand3; do [ -d "$d" ] && git add -f "$d"; done
             git commit -m "Photo candidate sheets" || echo "nothing to commit"
             git push -f origin photo-candidates
           else

@@ -267,6 +267,50 @@ def fetch():
     json.dump(credits, open(os.path.join(PH, 'credits.json'), 'w'), indent=1)
 
 
+def sheets3():
+    """airline candidates: Wikimedia Commons quality images plus stock sources on Openverse"""
+    out = os.path.join(PH, '_cand3')
+    os.makedirs(out, exist_ok=True)
+    TW, TH, COLS = 300, 200, 4
+    index = {}
+    jobs = []
+    for q in ['airport', 'airplane', 'airliner', 'aircraft', 'airport terminal', 'runway', 'air travel', 'jet engine', 'boarding gate']:
+        jobs.append(('ov:' + q, lambda q=q: openverse_sources(q)))
+    for q in ['airliner', 'airport apron', 'airport night', 'aircraft takeoff', 'airport terminal', 'jet engine',
+              'airliner landing', 'airport dusk', 'aircraft maintenance hangar', 'airport ground crew', 'airliner wing',
+              'boeing 787', 'airbus a350', 'airbus a320', 'boeing 737', 'airport ramp']:
+        jobs.append(('wm:' + q, lambda q=q: commons_search(q + ' incategory:"Quality images"') or commons_search(q + ' incategory:"Featured pictures on Wikimedia Commons"') or commons_search(q)))
+    for key, fn in jobs:
+        good = fn()
+        index[key] = good
+        thumbs = []
+        for i, x in enumerate(good):
+            im = None
+            r = get(x.get('thumbnail') or x['url'])
+            if r:
+                try:
+                    im = Image.open(io.BytesIO(r.content)).convert('RGB')
+                except Exception:
+                    im = None
+            if im is None:
+                im = Image.new('RGB', (TW, TH), (40, 40, 40))
+            im = ImageOps.fit(im, (TW, TH), Image.LANCZOS)
+            d = ImageDraw.Draw(im)
+            d.rectangle([0, 0, 34, 20], fill=(0, 0, 0))
+            d.text((6, 4), str(i), fill=(255, 230, 0))
+            d.rectangle([TW - 110, 0, TW, 20], fill=(0, 0, 0))
+            d.text((TW - 106, 4), (str(x.get('license') or '')[:12] + ' ' + str(x.get('width') or '?')), fill=(180, 220, 255))
+            thumbs.append(im)
+        rows = max(1, (len(thumbs) + COLS - 1) // COLS)
+        sheet = Image.new('RGB', (COLS * TW, rows * TH), (0, 0, 0))
+        for i, t in enumerate(thumbs):
+            sheet.paste(t, ((i % COLS) * TW, (i // COLS) * TH))
+        fn_ = key.replace(':', '_').replace(' ', '_')
+        sheet.save(os.path.join(out, fn_ + '.jpg'), quality=72, optimize=True)
+        print('sheet', key, len(good), flush=True)
+    json.dump(index, open(os.path.join(out, 'index.json'), 'w'), indent=1)
+
+
 if __name__ == '__main__':
     mode = sys.argv[1] if len(sys.argv) > 1 else 'fetch'
-    {'sheets': sheets, 'sheets2': sheets2, 'fetch': fetch}[mode]()
+    {'sheets': sheets, 'sheets2': sheets2, 'sheets3': sheets3, 'fetch': fetch}[mode]()
