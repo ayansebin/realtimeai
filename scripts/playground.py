@@ -106,6 +106,7 @@ UCI = "https://archive.ics.uci.edu/static/public/"
 
 @dataset(id="steel", name="Steel plant energy", domain="Manufacturing", kind="public", cls="sub", freq="15min",
          season=96, unit="kWh", fs_scale=0.25, ttm_freq="15min",
+         end="2018-12-21",
          source={"name": "Steel Industry Energy Consumption, UCI Machine Learning Repository (DAEWOO Steel, Gwangyang)",
                  "url": "https://archive.ics.uci.edu/dataset/851/steel+industry+energy+consumption", "license": "CC BY 4.0"},
          blurb="Energy drawn by a steel plant every 15 minutes through 2018. Shifts, weekends and load types show up as rhythm.")
@@ -132,6 +133,7 @@ def load_traffic():
 
 @dataset(id="bikes", name="Bike sharing demand", domain="Retail and mobility", kind="public", cls="sub", freq="h",
          season=24, unit="rentals / h", fs_scale=1.0, ttm_freq="h",
+         end="2012-12-20",
          source={"name": "Bike Sharing Dataset, UCI Machine Learning Repository (Capital Bikeshare, Washington DC)",
                  "url": "https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset", "license": "CC BY 4.0"},
          blurb="Hourly rentals across a city bike system in 2012. Commute peaks on weekdays, one broad hump on weekends, weather in between.")
@@ -166,21 +168,10 @@ def load_grid():
 
 @dataset(id="retail", name="US retail sales", domain="Retail", kind="public", cls="mon", freq="MS",
          season=12, unit="$ millions", fs_scale=2.0, ttm_freq="M",
-         source={"name": "Monthly Retail Trade Survey, retail trade sales, not seasonally adjusted, US Census Bureau",
-                 "url": "https://www.census.gov/retail/index.html", "license": "Public domain (US government data)"},
+         source={"name": "Retail Sales: Retail Trade, not seasonally adjusted (RSXFSN), US Census Bureau via FRED",
+                 "url": "https://fred.stlouisfed.org/series/RSXFSN", "license": "Public domain (US government data)"},
          blurb="Monthly US retail trade sales since 1992, not seasonally adjusted. Trend, a strong December, the 2008 dip and the 2020 shock.")
 def load_retail():
-    try:
-        raw = fetch("https://api.census.gov/data/timeseries/eits/marts?get=cell_value,time_slot_id,category_code,data_type_code,seasonally_adj&for=us:*&time=from+1992&category_code=44X72&data_type_code=SM&seasonally_adj=no")
-        rows = json.loads(raw)
-        hdr = rows[0]
-        df = pd.DataFrame(rows[1:], columns=hdr)
-        df = df[(df["category_code"] == "44X72") & (df["data_type_code"] == "SM") & (df["seasonally_adj"] == "no")]
-        ts = pd.to_datetime(df["time"], format="%Y-%m")
-        s = pd.Series(pd.to_numeric(df["cell_value"], errors="coerce").values, index=ts)
-        return regularize(s, "MS")
-    except Exception as e:  # noqa: BLE001
-        log("  census api failed, trying FRED:", repr(e)[:160])
     raw = fetch("https://fred.stlouisfed.org/graph/fredgraph.csv?id=RSXFSN")
     df = pd.read_csv(io.BytesIO(raw))
     df.columns = ["date", "v"]
@@ -501,6 +492,8 @@ def build(meta, only=None):
         s = loaded
     cls = meta["cls"]
     n = max(slice_len(cls), {"sub": 0, "day": 2200, "mon": 0}[cls])
+    if meta.get("end"):
+        s = s[: meta["end"]]
     s = s.dropna()
     if len(s) < n:
         n = len(s)
