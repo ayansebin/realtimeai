@@ -401,7 +401,8 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 /* rotating word */
 .h-display .rot{position:relative;white-space:nowrap}
 .h-display .caret{display:inline-block;width:3px;height:.85em;background:var(--blue-3);vertical-align:-.08em;margin-left:.08em;animation:blink .9s steps(1) infinite}
-.h-display .caret.c2{animation-delay:.45s}
+.h-display .caret.c2{animation-delay:.45s;background:var(--green-2)}
+.h-display em.rot2{color:var(--green-2)}
 
 /* hero stats + marquee */
 .stats{display:flex;flex-wrap:wrap;gap:.6rem 2.2rem;margin-top:.4rem}
@@ -609,7 +610,7 @@ body.walking{overflow:hidden}
   <div class="wrap" id="top">
     <div class="hero-head">
       <div class="pills"><span class="pill live">Early Access on Confluent Cloud</span></div>
-      <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em>.</h1>
+      <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
       <p class="lede">Streaming data is where the mission-critical decisions live. One statement of Flink SQL forecasts every series, flags what is off and finds the setpoint, inside the stream, with no training. Touch anything on this page.</p>
       <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>1 min, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
     </div>
