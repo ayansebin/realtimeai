@@ -641,6 +641,51 @@ body.walking{overflow:hidden}
 .toast{font-size:.8rem;color:var(--green-2);min-height:1.2em}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){.pipe-svg .flow,.pill.live::before{animation:none}*{transition-duration:.01ms!important}}
+
+/* ---------- refinement layer: one accent for actions, quiet selection, no glow ---------- */
+.chip[aria-pressed="true"],.chip.on{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.55);color:#fff}
+.chip.purple[aria-pressed="true"]{background:rgba(190,149,255,.14);border-color:rgba(190,149,255,.7);color:#fff}
+.chip{border-color:rgba(255,255,255,.16)}
+.chip:hover{border-color:rgba(255,255,255,.32)}
+.btn.play{box-shadow:none}
+.btn.play small,.btn.play2 small{display:none}
+.brand .dot,.hint::before,.pill.live::before,.pitch-live i,.walk-k i,.arch-row i,.arch-row.purple i,.node.lit .nl i,.node.agent.lit .nl i,.pitch-prog i::after{box-shadow:none}
+.pill.live::before{animation:none}
+input[type=range]::-webkit-slider-thumb{box-shadow:0 0 0 1px var(--blue-2)}
+input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
+.uc[aria-selected="true"],.ind[aria-selected="true"],.mcard.on{box-shadow:0 0 0 1px var(--blue-2) inset}
+.node.lit{box-shadow:0 0 0 1px var(--blue-2)}
+.node.agent.lit{box-shadow:0 0 0 1px var(--purple)}
+.way.on{box-shadow:0 0 0 1px rgba(69,137,255,.35)}
+.tile.hit{box-shadow:0 0 0 1px var(--teal)}
+.lane .lb i,.bar.hi i::after,.boxes.now i.keep,.trust-i i{box-shadow:none}
+.arch-engine{box-shadow:none}
+.particle{box-shadow:0 0 8px rgba(69,137,255,.6)}
+.particle.purple{box-shadow:0 0 8px rgba(190,149,255,.6)}
+.quad .dotp{box-shadow:0 0 10px rgba(69,137,255,.5)}
+.bubbles .b{box-shadow:none}
+.hero .stage{box-shadow:0 24px 60px rgba(0,0,0,.18)}
+/* demo headers: plain, the photos live on the industry cards only */
+.ucpanel.has-cover .stage-top{min-height:0;padding-bottom:0}
+.ucpanel.has-cover .stage-top::before,.ucpanel.has-cover .stage-top::after{display:none}
+/* calmer chapter rhythm */
+.chapter-head p{color:var(--ink-3)}
+.chapter-head .n{color:var(--ink-3)}
+.stage-title p{color:var(--ink-3)}
+.foot details summary{cursor:pointer;color:var(--ink-3);list-style:none}
+.foot details summary::-webkit-details-marker{display:none}
+.foot details[open] summary{margin-bottom:.4rem}
+.three-k{flex-direction:column;align-items:flex-start;justify-content:center;gap:.25rem}
+.three-k i{width:auto;height:auto;border-radius:0;background:none;color:var(--ink-3);font-family:var(--font-mono);font-size:.72rem;font-weight:400;display:block}
+.three-k b{font-size:1.05rem}
+@media (max-width:900px){.three-k{flex-direction:row;align-items:baseline;gap:.6rem}}
+.tn-toggle button.on{background:rgba(255,255,255,.1);color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.55) inset}
+#th-play[aria-pressed],#live-pause[aria-pressed="true"]{background:transparent;border-color:var(--line-2);color:var(--ink)}
+.lane .lb i{background:linear-gradient(90deg,rgba(69,137,255,.8),rgba(61,219,217,.7))}
+.ind::before{filter:saturate(.55) contrast(1.02) brightness(.85)}
+.ind::after{background:linear-gradient(180deg,rgba(10,20,50,.25) 0,rgba(10,20,50,.7) 42%,rgba(10,20,50,.96) 100%)}
+.pcard .pimg{filter:saturate(.7)}
+.chapter{padding-block:clamp(64px,7vw,112px) 0}
 </style>
 </head>
 <body>
@@ -726,7 +771,7 @@ body.walking{overflow:hidden}
 
     <div class="stage" id="uc-opt">
       <div class="stage-top">
-        <div class="stage-title"><h3>Which setting earns the most and still meets spec?</h3><p>Two knobs, three objectives: quality, energy, margin. The model forecasts what every setting does. The optimizer maps the trade-offs, respects the limits, and the operator approves.</p></div>
+        <div class="stage-title"><h3>Which setting earns the most and still meets spec?</h3><p>Two knobs, three objectives. The operator approves.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">How much we feed, t/h</span><label class="range"><input type="range" id="op-feed" min="150" max="210" value="196" aria-label="Feed rate"><output id="op-feedv">196</output></label></div>
           <div class="ctl-group"><span class="eyebrow">How hot we run, °C</span><label class="range"><input type="range" id="op-temp" min="1400" max="1500" value="1418" aria-label="Kiln temperature"><output id="op-tempv">1418</output></label></div>
@@ -803,7 +848,7 @@ body.walking{overflow:hidden}
     </div>
 
     <div class="chapter-head sub">
-      <h2>Then something acts on it.</h2>
+      <h2>An agent acts on it.</h2>
       <p>An agent reads the forecast and the flag, reasons, and writes the decision to a topic. Experts set the gates.</p>
     </div>
 
@@ -910,8 +955,8 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <div class="chapter-head sub">
-      <h2>Four models. One family. 44M+ downloads.</h2>
-      <p>Pick one. Every simulation follows.</p>
+      <h2>Four models, one family.</h2>
+      <p>44M+ downloads on Hugging Face. Pick one and every simulation on the page follows.</p>
     </div>
 
     <div class="stage" id="st-models">
@@ -944,17 +989,17 @@ FROM pos_sales;</code></pre></div>
       <div class="stage-body">
         <div class="three">
           <div class="three-row">
-            <div class="three-k"><i>1</i><b>Productivity</b></div>
+            <div class="three-k"><i>01</i><b>Productivity</b></div>
             <div class="three-cv"><canvas class="stage-canvas" id="th-prod" aria-label="Bespoke models take months per use case, Granite goes live in days and stacks use cases"></canvas></div>
             <div class="three-impact"><b>10×</b><span>faster time to value</span><b>5×</b><span>lower skill required</span></div>
           </div>
           <div class="three-row">
-            <div class="three-k"><i>2</i><b>Accuracy</b></div>
+            <div class="three-k"><i>02</i><b>Accuracy</b></div>
             <div class="three-cv acc"><canvas class="stage-canvas" id="th-acc" aria-label="Rules and classic ML plateau near 93 percent, Granite starts at 97 zero-shot and climbs to 99"></canvas></div>
             <div class="three-impact"><b>5 to 10%</b><span>accuracy improvement</span></div>
           </div>
           <div class="three-row">
-            <div class="three-k"><i>3</i><b>Responsiveness</b></div>
+            <div class="three-k"><i>03</i><b>Responsiveness</b></div>
             <div class="three-cv"><canvas class="stage-canvas" id="th-resp" aria-label="A signal takes days to become a decision by batch and under a second in the stream"></canvas></div>
             <div class="three-impact"><b>Days &#8594; seconds</b><span>from signal to decision</span></div>
           </div>
@@ -1036,14 +1081,14 @@ FROM pos_sales;</code></pre></div>
 
     <div class="chapter-head sub">
       <h2>Real outcomes on real streams.</h2>
-      <p>5 to 10× productivity. Every point of accuracy worth millions. Client identities withheld.</p>
+      <p>In production with design partners. Client identities withheld.</p>
     </div>
     <div class="stage" id="st-proof">
       <div class="stage-body">
         <div class="proof" id="proof">
           <div class="pcard"><span class="pk">Telco · network operations <em>production</em></span><b>0<small> tickets without a cause</small></b><div class="pimg" style="--img:url(photos/telecom-s.jpg)"><canvas data-spark="telco"></canvas></div><div class="pt">IBM Network Intelligence, Granite TSPulse</div><div class="pd">Telemetry in, anomalies out, agentic root cause, remediation human-in-the-loop or autonomous.</div><div class="tags"><span>TSPulse</span><span>agentic RCA</span><span>MCP tools</span></div></div>
-          <div class="pcard"><span class="pk">Financial services · markets <em>production</em></span><b data-count="10" data-prefix="~" data-suffix="% RMSE">~0%</b><div class="pimg" style="--img:url(photos/banking-charts-s.jpg)"><canvas data-spark="fin"></canvas></div><div class="pt">Multivariate asset forecasts, Granite TTM</div><div class="pd">Per asset class, against the incumbent model. Zero-shot first, tuned where the backtest paid.</div><div class="tags"><span>TTM</span><span>multivariate</span><span>backtested</span></div></div>
-          <div class="pcard"><span class="pk">Grocery · planning <em>reference design</em></span><b data-count="10" data-prefix="+5 to " data-suffix=" pts">+0 pts</b><div class="pimg" style="--img:url(photos/retail-shelves-s.jpg)"><canvas data-spark="grocery"></canvas></div><div class="pt">Every SKU in every store, hourly</div><div class="pd">Around 100,000 SKUs across thousands of stores. Reorder point and purchase order raised in the stream from the P10 to P90 band.</div><div class="tags"><span>AI_FORECAST</span><span>P10 to P90</span><span>Tableflow</span></div></div>
+          <div class="pcard"><span class="pk">Financial services · markets <em>production</em></span><b>~10%<small> lower RMSE</small></b><div class="pimg" style="--img:url(photos/banking-charts-s.jpg)"><canvas data-spark="fin"></canvas></div><div class="pt">Multivariate asset forecasts, Granite TTM</div><div class="pd">Per asset class, against the incumbent model. Zero-shot first, tuned where the backtest paid.</div><div class="tags"><span>TTM</span><span>multivariate</span><span>backtested</span></div></div>
+          <div class="pcard"><span class="pk">Grocery · planning <em>reference design</em></span><b>+5 to 10<small> accuracy points</small></b><div class="pimg" style="--img:url(photos/retail-shelves-s.jpg)"><canvas data-spark="grocery"></canvas></div><div class="pt">Every SKU in every store, hourly</div><div class="pd">Around 100,000 SKUs across thousands of stores. Reorder point and purchase order raised in the stream from the P10 to P90 band.</div><div class="tags"><span>AI_FORECAST</span><span>P10 to P90</span><span>Tableflow</span></div></div>
         </div>
       </div>
     </div>
@@ -1071,7 +1116,7 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <!-- production optimization -->
-    <div class="stage ucpanel has-cover" id="uc-prod" role="tabpanel" style="--img:url(photos/cement-plant.jpg);--pos:60%">
+    <div class="stage ucpanel" id="uc-prod" role="tabpanel">
       <div class="stage-top">
         <div class="stage-title"><h3>The kiln finds its own setpoint</h3></div>
         <div class="ctl">
@@ -1091,11 +1136,11 @@ FROM pos_sales;</code></pre></div>
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">2 to 5×</b><span>faster optimization</span></div><div class="readout"><b>93 → 99%</b><span>quality accuracy</span></div><div class="readout"><b>$2</b><span>per ton</span></div></div><div class="sqlline"><code id="pr-sql"></code></div></div>
+      <div class="stage-foot"><div class="sqlline"><code id="pr-sql"></code></div></div>
     </div>
 
     <!-- anomaly -->
-    <div class="stage ucpanel has-cover" id="uc-anom" role="tabpanel" style="--img:url(photos/retail-empty.jpg)" hidden>
+    <div class="stage ucpanel" id="uc-anom" role="tabpanel" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>From a flag to the right action</h3></div>
         <div class="ctl">
@@ -1117,7 +1162,7 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <!-- demand -->
-    <div class="stage ucpanel has-cover" id="uc-demand" role="tabpanel" style="--img:url(photos/retail-aisle.jpg);--pos:55%" hidden>
+    <div class="stage ucpanel" id="uc-demand" role="tabpanel" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>Every SKU, every store, every hour</h3></div>
         <div class="ctl">
@@ -1140,7 +1185,7 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <!-- fraud -->
-    <div class="stage ucpanel has-cover" id="uc-fraud" role="tabpanel" hidden style="--img:url(photos/banking-card.jpg)">
+    <div class="stage ucpanel" id="uc-fraud" role="tabpanel" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>Every card has its own normal</h3></div>
         <div class="ctl">
@@ -1162,7 +1207,7 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <!-- search -->
-    <div class="stage ucpanel has-cover" id="uc-search" role="tabpanel" style="--img:url(photos/workers.jpg)" hidden>
+    <div class="stage ucpanel" id="uc-search" role="tabpanel" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>Find every signal that looks like this</h3></div>
         <div class="ctl">
@@ -1185,7 +1230,7 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <!-- trading -->
-    <div class="stage ucpanel has-cover" id="uc-trade" role="tabpanel" style="--img:url(photos/banking-charts.jpg);--pos:45%" hidden>
+    <div class="stage ucpanel" id="uc-trade" role="tabpanel" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>Pace the order with the tape</h3></div>
         <div class="ctl">
@@ -1237,7 +1282,7 @@ FROM pos_sales;</code></pre></div>
 
     <div class="stage" id="st-plant" role="tabpanel">
       <div class="stage-top">
-        <div class="stage-title"><h3>From sensor to setpoint</h3><p>Pick a story, or click the kiln, the mill or the preheater.</p></div>
+        <div class="stage-title"><h3>From sensor to setpoint</h3><p>Pick a story, or click the equipment.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Story</span>
             <div class="chips" id="pl-sc"><button class="chip" data-v="opt" aria-pressed="true">Production optimization</button><button class="chip" data-v="pdm" aria-pressed="false">Predictive maintenance</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
@@ -1272,7 +1317,7 @@ FROM pos_sales;</code></pre></div>
 
     <div class="stage" id="st-retail" role="tabpanel" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Store 112 and its supply chain</h3><p>Pick a story, or click the shelf, the checkout or the distribution center.</p></div>
+        <div class="stage-title"><h3>Store 112 and its supply chain</h3><p>Pick a story, or click the equipment.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="rt-sc"><button class="chip" data-v="plan" aria-pressed="true">Supply chain planning</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button><button class="chip" data-v="fraud" aria-pressed="false">Fraud and security</button></div></div>
         </div>
@@ -1286,7 +1331,7 @@ FROM pos_sales;</code></pre></div>
 
     <div class="stage" id="st-bank" role="tabpanel" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Payments and the trading desk</h3><p>Pick a story, or click the card switch, the ledger or the desk.</p></div>
+        <div class="stage-title"><h3>Payments and the trading desk</h3><p>Pick a story, or click the equipment.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="bk-sc"><button class="chip" data-v="fraud" aria-pressed="true">Fraud and security</button><button class="chip" data-v="trade" aria-pressed="false">Trading</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
         </div>
@@ -1300,7 +1345,7 @@ FROM pos_sales;</code></pre></div>
 
     <div class="stage" id="st-air" role="tabpanel" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Hub operations, fleet and network</h3><p>Pick a story, or click the aircraft, the gate or the network.</p></div>
+        <div class="stage-title"><h3>Hub operations, fleet and network</h3><p>Pick a story, or click the equipment.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="al-sc"><button class="chip" data-v="anom" aria-pressed="true">Anomaly detection</button><button class="chip" data-v="opt" aria-pressed="false">Production optimization</button><button class="chip" data-v="plan" aria-pressed="false">Supply chain planning</button></div></div>
         </div>
@@ -1467,7 +1512,7 @@ FROM motor_telemetry;</code></pre></div>
 <footer class="foot">
   <div class="wrap">
     <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. October 2026.</span></div>
-    <div class="row" id="credits">Photos: <a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:Cementera,_Yura,_Per%C3%BA,_2015-08-01,_DD_129-131_HDR.JPG" target="_blank" rel="noopener">Cementera, Yura, Perú</a> by Diego Delso (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.flickr.com/photos/149400054@N04/54435322282" target="_blank" rel="noopener">Power plant workers in PPE</a> by EU-Ukraine cooperation (CC BY-SA 2.0) · <a href="https://www.rawpixel.com/image/5904812/photo-image-public-domain-free" target="_blank" rel="noopener">Supermarket aisle</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19" target="_blank" rel="noopener">Empty shelves, supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div>
+    <details class="row" id="credits"><summary>Photo credits</summary><div><a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div></details>
     <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="#reference">Technical reference</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
   </div>
@@ -1499,6 +1544,9 @@ $$('.codebox').forEach(box=>{const btn=$('.copy',box),pre=$('pre',box);if(!btn||
 function chipGroup(id,onChange){const g=document.getElementById(id);if(!g)return;const btns=$$('.chip',g);btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));onChange(b.dataset.v,b);}));}
 function chipSet(id,v){const g=document.getElementById(id);if(!g)return;$$('.chip',g).forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===v?'true':'false'));}
 $$('.tabs').forEach(tabs=>{const btns=$$('[role=tab]',tabs);btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>{x.setAttribute('aria-selected',x===b?'true':'false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p)p.hidden=(x!==b);});}));});
+
+/* one restrained light source: every canvas glow is kept faint */
+(function(){const d=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'shadowBlur');if(d&&d.set)Object.defineProperty(CanvasRenderingContext2D.prototype,'shadowBlur',{get:d.get,set(v){d.set.call(this,v*0.3);},configurable:true});})();
 
 /* ============ colors ============ */
 const C={ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',ink4:'#697077',grid:'rgba(255,255,255,.09)',blue:'#0f62fe',blue2:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',band:'rgba(120,169,255,.16)',red:'#fa4d56',red2:'#ff8389',green:'#42be65',green2:'#6fdc8c',orange:'#ff832b',purple:'#be95ff',teal:'#08bdba',teal2:'#3ddbd9',bg:'#172b5e',yellow:'#f1c21b'};
@@ -1799,7 +1847,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   const cvs={prod:new Cv($('#th-prod')),acc:new Cv($('#th-acc')),resp:new Cv($('#th-resp'))};
   const st={t:0,playing:true,dur:reduced?1:16000,decisions:0,evAcc:0,events:[]};
   const MONO_='"IBM Plex Mono", Menlo, monospace',SANS_='"IBM Plex Sans", Arial, sans-serif';
-  function txt(ctx,s,x,y,o){o=o||{};ctx.font=(o.w||400)+' '+(o.px||10)+'px '+(o.mono===false?SANS_:MONO_);ctx.fillStyle=o.c||C.ink3;ctx.textAlign=o.a||'left';ctx.textBaseline='middle';ctx.fillText(s,x,y);}
+  function txt(ctx,s,x,y,o){o=o||{};ctx.font=(o.w||400)+' '+Math.max(9.5,o.px||10)+'px '+(o.mono===false?SANS_:MONO_);ctx.fillStyle=o.c||C.ink3;ctx.textAlign=o.a||'left';ctx.textBaseline='middle';ctx.fillText(s,x,y);}
   function dash(ctx,x1,y1,x2,y2,c){ctx.setLineDash([3,4]);ctx.strokeStyle=c||C.grid;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.setLineDash([]);}
   function people(ctx,x,y,n,c){for(let i=0;i<n;i++){const px=x+i*11;ctx.fillStyle=c;ctx.beginPath();ctx.arc(px,y-5,2.6,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.moveTo(px-4,y+5);ctx.quadraticCurveTo(px,y-2,px+4,y+5);ctx.closePath();ctx.fill();}}
   /* two halves side by side, or stacked on a narrow canvas */
@@ -1815,7 +1863,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
       for(let u=0;u<2;u++){const y=top+14+u*30;const s0=u*BESPOKE;txt(ctx,'use case '+(u+1),r.x,y-11,{px:8,c:C.ink3});let acc=s0;PH.forEach(([name,d],i)=>{const a=acc,b=acc+d;acc=b;if(m<=a)return;const x1=r.x+a/12*r.w,x2=r.x+Math.min(m,b)/12*r.w;ctx.fillStyle=i%2?'rgba(159,179,200,.35)':'rgba(159,179,200,.22)';ctx.fillRect(x1,y-5,Math.max(1,x2-x1),10);if(x2-x1>34)txt(ctx,name,x1+3,y,{px:8,c:C.ink2});});
         if(m>=s0+BESPOKE){live++;const x1=r.x+(s0+BESPOKE)/12*r.w,x2=r.x+cur/12*r.w;ctx.fillStyle='rgba(111,220,140,.8)';ctx.fillRect(x1,y-3,Math.max(2,x2-x1),6);ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=8;ctx.fillStyle=C.green2;ctx.beginPath();ctx.arc(x1,y,3.5,0,Math.PI*2);ctx.fill();ctx.restore();txt(ctx,'live',x1+8,y-11,{px:8,c:C.green2});}}
       people(ctx,r.x+6,bot-4,5,'rgba(159,179,200,.8)');txt(ctx,'5 experts',r.x+62,bot-4,{px:8.5,c:C.ink3});
-      header(ctx,r,'TODAY · BESPOKE MODELS','live '+live+' · first value in '+(m>=BESPOKE?'7 mo':'…'),C.ink3);
+      header(ctx,r,'TODAY · BESPOKE MODELS','live '+live+' · first value in 7 mo',C.ink3);
       const x=r.x+cur/12*r.w;ctx.strokeStyle='rgba(244,244,244,.5)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(x)+0.5,top-2);ctx.lineTo(Math.round(x)+0.5,bot);ctx.stroke();}
     /* right: a new decision every month, live in a week */
     {const r=R,top=r.y+24,bot=r.y+r.h-16;monthAxis(ctx,r,top-2,bot);const n=12,lh=(bot-14-top)/n;let liveR=0;
