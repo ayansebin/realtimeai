@@ -90,6 +90,8 @@ button{font:inherit;color:inherit}
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
 .btn.ghost:hover{background:var(--panel-3);color:var(--ink)}
 .btn.sm{min-height:36px;padding:.3rem .8rem;font-size:.85rem;gap:.75rem}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn.ghost[aria-pressed="true"]{border-color:var(--blue-2);color:#fff;background:rgba(15,98,254,.28)}
 .btn-row{display:flex;flex-wrap:wrap;gap:.6rem .75rem}
 .chips{display:flex;flex-wrap:wrap;gap:.4rem}
 .chip{display:inline-flex;align-items:center;gap:.4rem;min-height:34px;padding:.25rem .8rem;border:1px solid var(--line-2);background:transparent;color:var(--ink-2);cursor:pointer;font-size:.85rem;line-height:1;transition:background .12s,color .12s,border-color .12s;white-space:nowrap}
@@ -1006,21 +1008,45 @@ FROM pos_sales;</code></pre></div>
   <div class="wrap">
     <div class="chapter-head">
       <span class="n">03 / USE CASES</span>
-      <h2>Six decisions.</h2>
+      <h2>Mission-critical enterprise decisions.</h2>
       <p>Pick one. Every demo is live.</p>
     </div>
 
     <div class="ucgrid" role="tablist" id="uctabs" aria-label="Use cases">
-      <a class="uc" href="#uc-opt" id="uc-go-opt"><i>01</i><canvas class="uc-cv" data-mini="opt" aria-hidden="true"></canvas><b>Production optimization</b><code>AI_FORECAST · TS_OPTIMIZE</code></a>
-      <button class="uc" role="tab" aria-selected="true" aria-controls="uc-anom" type="button"><i>02</i><canvas class="uc-cv" data-mini="anom" aria-hidden="true"></canvas><b>Anomaly detection</b><code>AI_DETECT_ANOMALIES</code></button>
+      <button class="uc" role="tab" aria-selected="true" aria-controls="uc-prod" type="button"><i>01</i><canvas class="uc-cv" data-mini="prod" aria-hidden="true"></canvas><b>Production optimization</b><code>AI_FORECAST · TS_OPTIMIZE</code></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-anom" type="button"><i>02</i><canvas class="uc-cv" data-mini="anom" aria-hidden="true"></canvas><b>Anomaly detection</b><code>AI_DETECT_ANOMALIES</code></button>
       <button class="uc" role="tab" aria-selected="false" aria-controls="uc-demand" type="button"><i>03</i><canvas class="uc-cv" data-mini="fc" aria-hidden="true"></canvas><b>Supply chain planning</b><code>AI_FORECAST</code></button>
       <button class="uc" role="tab" aria-selected="false" aria-controls="uc-fraud" type="button"><i>04</i><canvas class="uc-cv" data-mini="fraud" aria-hidden="true"></canvas><b>Fraud and security</b><code>AI_DETECT_ANOMALIES</code></button>
       <button class="uc" role="tab" aria-selected="false" aria-controls="uc-search" type="button"><i>05</i><canvas class="uc-cv" data-mini="search" aria-hidden="true"></canvas><b>Semantic search</b><code>TS_EMBED · TS_SEARCH</code></button>
       <button class="uc" role="tab" aria-selected="false" aria-controls="uc-trade" type="button"><i>06</i><canvas class="uc-cv" data-mini="trade" aria-hidden="true"></canvas><b>Trading</b><code>AI_FORECAST</code></button>
     </div>
 
+    <!-- production optimization -->
+    <div class="stage ucpanel has-cover" id="uc-prod" role="tabpanel" style="--img:url(photos/cement-plant.jpg);--pos:60%">
+      <div class="stage-top">
+        <div class="stage-title"><h3>The kiln finds its own setpoint</h3></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Re-optimize every</span><div class="chips" id="pr-cycle"><button class="chip sm" data-v="2">2 h</button><button class="chip sm" data-v="4" aria-pressed="true">4 h</button><button class="chip sm" data-v="8">8 h</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Spec</span><div class="chips" id="pr-spec"><button class="chip sm" data-v="98">98%</button><button class="chip sm" data-v="98.5" aria-pressed="true">98.5%</button><button class="chip sm" data-v="99">99%</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="pr-inject"><button class="chip sm" data-v="feed">Raw feed change</button><button class="chip sm" data-v="fuel">Fuel quality drop</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="side">
+          <div class="canvas-wrap"><canvas class="stage-canvas" id="pr-cv" aria-label="Kiln quality over the shift with the forecast band, the re-optimize cycles and the setpoints"></canvas></div>
+          <div class="panel">
+            <div class="ph">Operator console · kiln 1</div>
+            <div class="kv"><span>quality now</span><b id="pr-q">–</b><span>forecast, as is</span><b id="pr-fq" class="blue">–</b><span>feed</span><b id="pr-spf">–</b><span>kiln</span><b id="pr-spt">–</b><span>vs leaving them alone</span><b id="pr-m" class="green">–</b></div>
+            <div class="action" id="pr-action"><small>proposed change</small><span id="pr-actiont">–</span></div>
+            <div class="btn-row"><button class="btn sm" id="pr-approve" type="button" disabled>Approve <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button class="btn sm ghost" id="pr-auto" type="button" aria-pressed="false">Auto-approve</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">2 to 5×</b><span>faster optimization</span></div><div class="readout"><b>93 → 99%</b><span>quality accuracy</span></div><div class="readout"><b>$2</b><span>per ton</span></div></div><div class="sqlline"><code id="pr-sql"></code></div></div>
+    </div>
+
     <!-- anomaly -->
-    <div class="stage ucpanel has-cover" id="uc-anom" role="tabpanel" style="--img:url(photos/retail-empty.jpg)">
+    <div class="stage ucpanel has-cover" id="uc-anom" role="tabpanel" style="--img:url(photos/retail-empty.jpg)" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>From a flag to the right action</h3></div>
         <div class="ctl">
@@ -1140,7 +1166,7 @@ FROM pos_sales;</code></pre></div>
       <div class="ind" style="--img:url(photos/cement-night.jpg)">
         <span class="il">Industrial AI<small>cement · steel · pulp and paper · chemicals · food</small></span>
         <b>Setpoints corrected inside the cycle.</b>
-        <span class="is"><button type="button" data-uc="uc-opt">Production optimization</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-search">Semantic search</button></span>
+        <span class="is"><button type="button" data-uc="uc-prod">Production optimization</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-search">Semantic search</button></span>
         <a class="ig" href="#st-plant">See the plant &#8595;</a>
       </div>
       <div class="ind" style="--img:url(photos/banking-card2.jpg)">
@@ -1158,7 +1184,7 @@ FROM pos_sales;</code></pre></div>
       <div class="ind" style="--img:url(photos/jet-engine.jpg)">
         <span class="il">Airlines<small>network · maintenance · ground operations</small></span>
         <b>See the disruption before the gate does.</b>
-        <span class="is"><button type="button" data-uc="uc-demand">Supply chain planning</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-opt">Production optimization</button></span>
+        <span class="is"><button type="button" data-uc="uc-demand">Supply chain planning</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-prod">Production optimization</button></span>
         <a class="ig" href="#uc-anom" data-uc="uc-anom">See the demo &#8593;</a>
       </div>
     </div>
@@ -1360,7 +1386,7 @@ FROM motor_telemetry;</code></pre></div>
 <footer class="foot">
   <div class="wrap">
     <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. October 2026.</span></div>
-    <div class="row" id="credits">Photos: <a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.flickr.com/photos/149400054@N04/54435322282" target="_blank" rel="noopener">Power plant workers in PPE</a> by EU-Ukraine cooperation (CC BY-SA 2.0) · <a href="https://www.rawpixel.com/image/5904812/photo-image-public-domain-free" target="_blank" rel="noopener">Supermarket aisle</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19" target="_blank" rel="noopener">Empty shelves, supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div>
+    <div class="row" id="credits">Photos: <a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:Cementera,_Yura,_Per%C3%BA,_2015-08-01,_DD_129-131_HDR.JPG" target="_blank" rel="noopener">Cementera, Yura, Perú</a> by Diego Delso (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.flickr.com/photos/149400054@N04/54435322282" target="_blank" rel="noopener">Power plant workers in PPE</a> by EU-Ukraine cooperation (CC BY-SA 2.0) · <a href="https://www.rawpixel.com/image/5904812/photo-image-public-domain-free" target="_blank" rel="noopener">Supermarket aisle</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19" target="_blank" rel="noopener">Empty shelves, supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div>
     <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="#reference">Technical reference</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
   </div>
@@ -2015,22 +2041,107 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
           for(let j=1;j<=m;j++){const hgt=this.base(s.i+j-1)*0.32*(H-12);ctx.fillStyle='rgba(66,190,101,.85)';ctx.fillRect(X(n-1+j)+1,H-6-hgt,Math.max(1,bw-2),hgt);}}
         ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(X(n))+0.5,4);ctx.lineTo(Math.round(X(n))+0.5,H-4);ctx.stroke();}
     },
-    /* optimization: the trade-off cloud, the frontier drawing in, the pick glowing */
-    opt:{
-      init(s){s.r=prng(13);s.pts=[];for(let i=0;i<70;i++){const e=s.r();const q=Math.max(0.02,1-(e-0.55)*(e-0.55)*4-s.r()*0.5);s.pts.push({e,q,m:q-0.4*e});}s.ph=0;
-        const c=s.pts.slice().sort((a,b)=>a.e-b.e);s.front=[];let bq=-1;c.forEach(p=>{if(p.q>bq){s.front.push(p);bq=p.q;}});
-        const ok=s.pts.filter(p=>p.q>0.78&&p.e<0.7).sort((a,b)=>b.m-a.m);s.pick=ok[0]||s.front[s.front.length-1];},
-      update(s,dt){s.ph=(s.ph+dt/4000)%1;},
-      draw(s,ctx,W,H){const X=e=>6+e*(W-12),Y=q=>H-6-q*(H-12);
-        ctx.setLineDash([3,2]);ctx.strokeStyle='rgba(250,77,86,.7)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(4,Math.round(Y(0.78))+0.5);ctx.lineTo(W-4,Math.round(Y(0.78))+0.5);ctx.moveTo(Math.round(X(0.7))+0.5,4);ctx.lineTo(Math.round(X(0.7))+0.5,H-4);ctx.stroke();ctx.setLineDash([]);
-        s.pts.forEach(p=>{const u=Math.max(0,Math.min(1,(p.m+0.2)/0.9));ctx.fillStyle=u>0.75?C.yellow:u>0.5?C.teal:u>0.25?C.blue2:'#2b4a9a';ctx.globalAlpha=(p.q>0.78&&p.e<0.7)?0.95:0.55;ctx.beginPath();ctx.arc(X(p.e),Y(p.q),1.7,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;
-        const prog=Math.min(1,s.ph*1.6);const n=Math.max(2,Math.ceil(s.front.length*prog));
-        ctx.strokeStyle='#fff';ctx.lineWidth=1.3;ctx.beginPath();s.front.slice(0,n).forEach((p,i)=>i?ctx.lineTo(X(p.e),Y(p.q)):ctx.moveTo(X(p.e),Y(p.q)));ctx.stroke();
-        if(prog>=1){const pulse=0.5+0.5*Math.sin(s.ph*40);ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=8+6*pulse;ctx.fillStyle=C.green2;ctx.beginPath();ctx.arc(X(s.pick.e),Y(s.pick.q),3.5,0,Math.PI*2);ctx.fill();ctx.restore();ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.beginPath();ctx.arc(X(s.pick.e),Y(s.pick.q),6,0,Math.PI*2);ctx.stroke();}}
+    /* production optimization: quality drifts toward spec, a re-optimize tick, the setpoints step, quality recovers */
+    prod:{
+      init(s){s.r=prng(21);s.v=[];s.acc=0;s.cnt=0;for(let i=0;i<60;i++)this.push(s);},
+      push(s){s.cnt++;const c=s.cnt%52;let b;if(c<14)b=0.74;else if(c<28)b=0.74-(c-14)*0.024;else if(c<33)b=0.4+(c-28)*0.075;else b=0.78;
+        const odd=Math.floor(s.cnt/52)%2;const A=odd?[0.3,0.6]:[0.45,0.35],B=odd?[0.45,0.35]:[0.3,0.6];const sp=c<28?A:B;
+        s.v.push({q:b+(s.r()-0.5)*0.06,tick:c===28,f:sp[0],t:sp[1]});if(s.v.length>60)s.v.shift();},
+      update(s,dt){s.acc+=dt;while(s.acc>120){s.acc-=120;this.push(s);}},
+      draw(s,ctx,W,H){const n=s.v.length;const top=H*0.64;const X=k=>4+k/(n-1)*(W-8),Y=q=>4+(1-q)*(top-8);
+        ctx.setLineDash([3,2]);ctx.strokeStyle='rgba(250,77,86,.75)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(4,Math.round(Y(0.55))+0.5);ctx.lineTo(W-4,Math.round(Y(0.55))+0.5);ctx.stroke();ctx.setLineDash([]);
+        s.v.forEach((p,k)=>{if(p.tick){ctx.fillStyle=C.green2;ctx.fillRect(Math.round(X(k))-0.5,4,1.5,H-8);}});
+        ctx.strokeStyle=C.ink;ctx.lineWidth=1.4;ctx.beginPath();s.v.forEach((p,k)=>{k?ctx.lineTo(X(k),Y(p.q)):ctx.moveTo(X(k),Y(p.q));});ctx.stroke();
+        const last=s.v[n-1];ctx.fillStyle=last.q<0.55?C.red2:'#fff';ctx.beginPath();ctx.arc(X(n-1),Y(last.q),2.4,0,Math.PI*2);ctx.fill();
+        const sy=top+5,sh=H-sy-4;const SY=v=>sy+sh-v*sh;
+        [['f',C.green2],['t',C.orange]].forEach(([key,col])=>{ctx.strokeStyle=col;ctx.lineWidth=1.3;ctx.beginPath();s.v.forEach((p,k)=>{const y=SY(p[key]);if(k===0)ctx.moveTo(X(k),y);else{ctx.lineTo(X(k),SY(s.v[k-1][key]));ctx.lineTo(X(k),y);}});ctx.stroke();});}
     }
   };
   cvs.forEach(c=>{const kind=c.dataset.mini,M=K[kind];if(!M)return;const cv=new Cv(c);const st={};M.init(st);if(reduced){st.ph=0.75;}
     reg({el:c.closest('.uc')||c,resize(){cv.fit();},update(dt){if(!reduced)M.update(st,Math.min(dt,120));},draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W){cv.fit();return;}ctx.clearRect(0,0,W,H);ctx.lineJoin='round';ctx.lineCap='round';M.draw(st,ctx,W,H);}});});
+})();
+
+/* ============ 03 production optimization: the kiln finds its own setpoint, the operator approves ============ */
+(function(){
+  const el=$('#uc-prod');if(!el)return;
+  const cv=new Cv($('#pr-cv'));
+  const GF=205,GT=1485,ECAP=98,BAR=10;/* one bar is ten minutes */
+  const H=24;/* four hours of forecast */
+  const st={spec:98.5,cycle:4,auto:false,acc:0,dirty:true,i:0,f:184,t:1450,tf:184,tt:1450,fs:178,ts:1462,rows:[],prop:null,pend:0,since:0,flash:0,f0:184,t0:1450,rt:0};
+  /* the plant: quality peaks at (fs,ts), which drifts; energy rises with heat and falls with throughput */
+  const quality=(f,t,fs,ts)=>clamp(99-0.0028*(f-fs)*(f-fs)-0.0017*(t-ts)*(t-ts),85,99);
+  const energy=(f,t)=>90+0.11*(t-1400)-0.06*(f-150);
+  const obj=(f,t,fs,ts)=>1.3*(quality(f,t,fs,ts)-93)-0.045*(energy(f,t)-100)+0.02*(f-150);
+  const SCALE=0.41;/* dollars per ton per objective unit, same scale as the trade-off stage */
+  const inLimits=(f,t)=>f<=GF&&t<=GT&&energy(f,t)<=ECAP;
+  const n1=n=>Math.round(n).toLocaleString('en-US');
+  const money=v=>(v>=0?'+':'')+'$'+v.toFixed(2)+'/t';
+  const label=k=>{const h=k*BAR/60;return (h<0?'-':h>0?'+':'')+Math.abs(h).toFixed(0)+' h';};
+  function optimize(){let best=null;for(let f=150;f<=210;f+=1)for(let t=1400;t<=1500;t+=2){if(!inLimits(f,t))continue;const q=quality(f,t,st.fs,st.ts);const ok=q>=st.spec;const m=obj(f,t,st.fs,st.ts);const key=(ok?1e3:0)+(ok?m:q);if(!best||key>best.key)best={f,t,q,m,ok,key};}return best;}
+  function propose(kind){const b=optimize();if(!b)return;const cur={f:st.tf,t:st.tt};const dq=quality(b.f,b.t,st.fs,st.ts)-quality(cur.f,cur.t,st.fs,st.ts);const move=Math.abs(b.f-cur.f)>1||Math.abs(b.t-cur.t)>2;
+    const row=st.rows[st.rows.length-1];if(row)row.mark=kind;
+    if(move&&dq>0.03){st.prop={f:b.f,t:b.t,q:b.q,ok:b.ok,gain:(obj(b.f,b.t,st.fs,st.ts)-obj(cur.f,cur.t,st.fs,st.ts))*SCALE,kind};st.pend=0;}else{st.prop=null;}
+    st.since=0;st.dirty=true;}
+  function approve(){if(!st.prop)return;st.tf=st.prop.f;st.tt=st.prop.t;st.prop=null;st.flash=6;const row=st.rows[st.rows.length-1];if(row)row.mark='apply';st.dirty=true;}
+  function step(){st.i++;st.since++;
+    /* the optimum drifts a little every bar */
+    st.fs=clamp(st.fs+0.12*gauss(),162,194);st.ts=clamp(st.ts+0.2*gauss(),1438,1484);
+    /* setpoints ramp to their targets */
+    st.f+= (st.tf-st.f)*0.4;st.t+=(st.tt-st.t)*0.4;if(Math.abs(st.tf-st.f)<0.3)st.f=st.tf;if(Math.abs(st.tt-st.t)<0.5)st.t=st.tt;
+    const q=quality(st.f,st.t,st.fs,st.ts)+0.09*gauss();
+    st.rows.push({i:st.i,q,f:st.f,t:st.t,mark:null});if(st.rows.length>72)st.rows.shift();
+    if(st.flash>0)st.flash--;
+    /* scheduled re-optimization, and an exception when the forecast slips under spec */
+    const fq=quality(st.tf,st.tt,st.fs,st.ts);
+    if(st.since>=st.cycle*6)propose('cycle');
+    else if(!st.prop&&fq<st.spec-0.05&&st.since>=3)propose('exc');
+    if(st.prop&&st.auto){st.pend++;if(st.pend>=2)approve();}
+    st.dirty=true;}
+  function sql(){$('#pr-sql').innerHTML=highlight("SELECT kiln_id, event_time, AI_FORECAST(free_lime, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 24)) OVER (PARTITION BY kiln_id ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f, TS_OPTIMIZE(f, JSON_OBJECT('objective' VALUE 'margin', 'spec' VALUE "+st.spec+", 'every' VALUE '"+st.cycle+"h')) AS setpoint FROM kiln_telemetry;");}
+  function panel(){const row=st.rows[st.rows.length-1];if(!row)return;const fq=quality(st.tf,st.tt,st.fs,st.ts);
+    $('#pr-q').textContent=row.q.toFixed(1)+'%';$('#pr-q').className=row.q<st.spec?'red':'';
+    $('#pr-fq').textContent=fq.toFixed(1)+'%';$('#pr-fq').className=fq<st.spec?'red':'blue';
+    $('#pr-spf').textContent=n1(st.tf)+' t/h';$('#pr-spt').textContent=n1(st.tt)+' °C';
+    const gain=(obj(st.tf,st.tt,st.fs,st.ts)-obj(st.f0,st.t0,st.fs,st.ts))*SCALE;$('#pr-m').textContent=money(gain);$('#pr-m').className=gain>=0?'green':'red';
+    const a=$('#pr-action'),ap=$('#pr-approve');a.classList.remove('red','green');
+    if(st.prop){a.classList.add('red');ap.disabled=false;$('#pr-actiont').textContent=(st.prop.kind==='exc'?'Forecast slips under spec. ':'')+'Feed '+n1(st.prop.f)+' t/h at '+n1(st.prop.t)+' °C: quality '+st.prop.q.toFixed(1)+'% forecast, '+money(st.prop.gain)+(st.prop.ok?'':', best reachable')+'. '+(st.auto?'Auto-approving.':'Waiting for the operator.');}
+    else{a.classList.add('green');ap.disabled=true;const left=Math.max(0,st.cycle*6-st.since)*BAR;$('#pr-actiont').textContent=(st.flash>0?'Applied, ramping now. ':'Setpoints hold. ')+'Next re-optimize in '+(left>=60?Math.floor(left/60)+' h'+(left%60?' '+left%60+' min':''):left+' min')+'.';}}
+  let ctx,W,Hh;
+  function txt(s,x,y,o){o=o||{};ctx.font=(o.w||400)+' '+(o.px||10)+'px "IBM Plex Mono", Menlo, monospace';ctx.fillStyle=o.c||C.ink3;ctx.textAlign=o.a||'left';ctx.textBaseline='middle';ctx.fillText(s,x,y);}
+  function draw(){if(!st.dirty)return;st.dirty=false;ctx=cv.ctx;W=cv.W;Hh=cv.H;if(!W)return;ctx.clearRect(0,0,W,Hh);
+    const narrow=W<600;const padL=narrow?40:48,padR=narrow?12:18,padT=26,padB=24,sh=narrow?34:44;const pw=W-padL-padR,ph=Hh-padT-padB-sh-10;
+    const rows=st.rows,n=rows.length,total=n+H;const X=k=>padL+k/(total-1)*pw;
+    let lo=st.spec-2.2;rows.forEach(r=>{lo=Math.min(lo,r.q-0.3);});lo=Math.max(85,lo);const hi=99.7;const Y=q=>padT+(hi-q)/(hi-lo)*ph;
+    /* grid */ctx.strokeStyle=C.grid;ctx.lineWidth=1;niceTicks(lo,hi,4).forEach(q=>{if(q<lo||q>hi)return;const y=Math.round(Y(q))+0.5;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(padL+pw,y);ctx.stroke();txt(q.toFixed(1)+'%',padL-6,y,{a:'right'});});
+    for(let k=-60;k<=H;k+=12){const idx=n-1+k;if(idx<0||idx>total-1)continue;txt(k===0?'now':label(k),X(idx),Hh-8,{a:'center'});}
+    /* spec */ctx.setLineDash([5,4]);ctx.strokeStyle='rgba(250,77,86,.85)';ctx.beginPath();ctx.moveTo(padL,Math.round(Y(st.spec))+0.5);ctx.lineTo(padL+pw,Math.round(Y(st.spec))+0.5);ctx.stroke();ctx.setLineDash([]);txt('spec '+st.spec+'%',padL+4,Y(st.spec)+10,{c:C.red2});
+    /* markers */let mi=0;rows.forEach((r,k)=>{if(!r.mark)return;const x=Math.round(X(k))+0.5;const col=r.mark==='apply'?C.green2:r.mark==='exc'?C.yellow:'rgba(255,255,255,.35)';ctx.strokeStyle=col;ctx.setLineDash(r.mark==='apply'?[]:[3,3]);ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,padT+ph+sh+10);ctx.stroke();ctx.setLineDash([]);if(!narrow)txt(r.mark==='apply'?'applied':r.mark==='exc'?'off spec: re-optimize':'re-optimize',x+4,padT+8+(mi%2)*12,{px:9,c:col});mi++;});
+    /* forecast under the current setpoints, and under the proposal */
+    const k0=n-1;const fcur=[],fprop=[];for(let k=1;k<=H;k++){const u=Math.min(1,k/3);const f=st.f+(st.tf-st.f)*u,t=st.t+(st.tt-st.t)*u;fcur.push(quality(f,t,st.fs,st.ts));if(st.prop){const pf=st.f+(st.prop.f-st.f)*u,pt=st.t+(st.prop.t-st.t)*u;fprop.push(quality(pf,pt,st.fs,st.ts));}}
+    const sg=k=>0.22+0.07*Math.sqrt(k);
+    ctx.beginPath();ctx.moveTo(X(k0),Y(rows[k0].q));fcur.forEach((q,j)=>ctx.lineTo(X(k0+1+j),Y(Math.min(hi,q+sg(j+1)))));for(let j=H-1;j>=0;j--)ctx.lineTo(X(k0+1+j),Y(fcur[j]-sg(j+1)));ctx.closePath();ctx.fillStyle=C.band;ctx.fill();
+    ctx.setLineDash([5,4]);ctx.strokeStyle=C.blue3;ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(X(k0),Y(rows[k0].q));fcur.forEach((q,j)=>ctx.lineTo(X(k0+1+j),Y(q)));ctx.stroke();
+    if(st.prop){ctx.strokeStyle=C.green2;ctx.beginPath();ctx.moveTo(X(k0),Y(rows[k0].q));fprop.forEach((q,j)=>ctx.lineTo(X(k0+1+j),Y(q)));ctx.stroke();ctx.setLineDash([]);txt('with the change',X(k0+H)-2,Y(fprop[H-1])-10,{a:'right',c:C.green2});txt('as is',X(k0+H)-2,Y(fcur[H-1])+11,{a:'right',c:C.blue3});}
+    else{ctx.setLineDash([]);txt('forecast',X(k0+H)-2,Y(fcur[H-1])-10,{a:'right',c:C.blue3});}
+    /* actual */ctx.save();ctx.shadowColor='rgba(166,200,255,.9)';ctx.shadowBlur=10;ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.lineJoin='round';ctx.beginPath();rows.forEach((r,k)=>{k?ctx.lineTo(X(k),Y(r.q)):ctx.moveTo(X(k),Y(r.q));});ctx.stroke();ctx.restore();
+    const last=rows[k0];ctx.save();ctx.shadowColor=last.q<st.spec?C.red:'#fff';ctx.shadowBlur=12;ctx.fillStyle=last.q<st.spec?C.red2:'#fff';ctx.beginPath();ctx.arc(X(k0),Y(last.q),4.5,0,Math.PI*2);ctx.fill();ctx.restore();
+    ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(X(k0))+0.5,padT);ctx.lineTo(Math.round(X(k0))+0.5,padT+ph+sh+10);ctx.stroke();
+    /* setpoint strip */const sy=padT+ph+10;ctx.strokeStyle=C.grid;ctx.beginPath();ctx.moveTo(padL,sy-4+0.5);ctx.lineTo(padL+pw,sy-4+0.5);ctx.stroke();
+    const FY=f=>sy+sh-4-(f-150)/60*(sh-8),TY=t=>sy+sh-4-(t-1400)/100*(sh-8);
+    const strip=(key,fn,col)=>{ctx.strokeStyle=col;ctx.lineWidth=1.8;ctx.beginPath();rows.forEach((r,k)=>{const y=fn(r[key]);if(k===0)ctx.moveTo(X(k),y);else{ctx.lineTo(X(k),fn(rows[k-1][key]));ctx.lineTo(X(k),y);}});ctx.stroke();
+      if(st.prop){ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(X(k0),fn(rows[k0][key]));ctx.lineTo(X(k0+3),fn(key==='f'?st.prop.f:st.prop.t));ctx.lineTo(X(k0+H),fn(key==='f'?st.prop.f:st.prop.t));ctx.stroke();ctx.setLineDash([]);}};
+    strip('f',FY,C.green2);strip('t',TY,C.orange);
+    txt('feed '+n1(st.f)+' t/h',padL+4,sy+4,{px:9,c:C.green2});txt('kiln '+n1(st.t)+' °C',padL+pw-4,sy+4,{px:9,c:C.orange,a:'right'});
+    panel();}
+  /* warm up a shift of history */
+  for(let i=0;i<60;i++){step();}st.prop=null;st.rows.forEach(r=>r.mark=null);st.since=Math.floor(st.cycle*6*0.4);
+  reg({el,resize(){cv.fit();st.dirty=true;draw();},update(dt){st.acc+=dt;if(st.acc>(reduced?1600:700)){st.acc=0;step();}},draw});
+  chipGroup('pr-cycle',v=>{st.cycle=Number(v);st.since=Math.min(st.since,st.cycle*6-1);sql();st.dirty=true;});
+  chipGroup('pr-spec',v=>{st.spec=Number(v);sql();st.dirty=true;});
+  chipGroup('pr-inject',(v,b)=>{if(v==='feed')st.fs=clamp(st.fs-11,162,194);else st.ts=clamp(st.ts+15,1438,1484);st.acc=1e9;setTimeout(()=>b.setAttribute('aria-pressed','false'),600);});
+  $('#pr-approve').addEventListener('click',approve);
+  $('#pr-auto').addEventListener('click',e=>{st.auto=!st.auto;e.currentTarget.setAttribute('aria-pressed',st.auto?'true':'false');st.dirty=true;});
+  App.listeners.push(()=>{sql();st.dirty=true;});sql();
 })();
 
 /* ============ 03 demand ============ */
