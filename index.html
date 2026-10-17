@@ -238,7 +238,7 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 @media (max-width:900px){.decay{grid-template-columns:1fr}}
 .decay svg{width:100%;height:auto;display:block}
 .lanes{display:grid;gap:.9rem}
-.lane{display:grid;grid-template-columns:8.5rem 1fr;gap:.9rem;align-items:center}
+.lane{display:grid;grid-template-columns:13.5rem 1fr;gap:.9rem;align-items:center}
 @media (max-width:520px){.lane{grid-template-columns:1fr}}
 .lane .ln{font-size:.9rem;color:var(--ink)}
 .lane .ln small{display:block;font-size:.72rem;color:var(--ink-3)}
@@ -463,6 +463,33 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .cta .lede{max-width:40ch}
 .foot .tag{color:var(--ink);font-weight:500}
 
+/* photos */
+.inds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+@media (max-width:900px){.inds{grid-template-columns:1fr}}
+.ind{position:relative;display:grid;align-content:end;gap:.35rem;min-height:clamp(220px,26vw,320px);padding:1.1rem 1.1rem 1rem;border:1px solid var(--line);color:var(--ink);text-decoration:none;overflow:hidden;isolation:isolate;background:#000a2e}
+.ind::before{content:"";position:absolute;inset:0;background-image:var(--img);background-size:cover;background-position:center;filter:saturate(.85) contrast(1.05);transition:transform .6s cubic-bezier(.2,.8,.2,1);z-index:-2}
+.ind::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,46,.15) 0,rgba(0,7,20,.55) 45%,rgba(0,7,20,.92) 100%);z-index:-1}
+.ind:hover{text-decoration:none;color:var(--ink);border-color:var(--blue-2)}
+.ind:hover::before{transform:scale(1.05)}
+.ind .il{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-3)}
+.ind b{font-weight:300;font-size:clamp(1.15rem,1.6vw,1.45rem);line-height:1.25;text-wrap:balance}
+.ind .is{font-size:.82rem;color:var(--ink-2)}
+.ucpanel.has-cover .stage-top{position:relative;isolation:isolate;min-height:150px;padding-bottom:16px}
+.ucpanel.has-cover .stage-top::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--img);background-size:cover;background-position:center var(--pos,40%);filter:saturate(.8)}
+.ucpanel.has-cover .stage-top::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(0,7,20,.94) 0,rgba(0,7,20,.82) 40%,rgba(0,7,20,.55) 100%),linear-gradient(180deg,rgba(0,7,20,0) 60%,rgba(0,7,20,.95) 100%)}
+.nimg{height:64px;background-image:var(--img);background-size:cover;background-position:center;border:1px solid var(--line);margin:.1rem 0 .2rem;position:relative}
+.nimg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,7,20,.1),rgba(0,7,20,.5))}
+.lane .ln{display:grid;grid-template-columns:64px 1fr;gap:.7rem;align-items:center}
+.lane .ln span{min-width:0}
+.lane .lt{display:block;width:64px;height:44px;background-image:var(--img);background-size:cover;background-position:center;border:1px solid var(--line);filter:saturate(.85)}
+.pimg{position:relative;aspect-ratio:16/8;background-image:var(--img);background-size:cover;background-position:center;border:1px solid var(--line);overflow:hidden;filter:saturate(.85)}
+.pimg.top{background-position:center 25%}
+.pimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,7,20,.05) 0,rgba(0,7,20,.2) 50%,rgba(0,7,20,.85) 100%)}
+.pimg canvas{position:absolute;left:0;right:0;bottom:0;width:100%;height:56px;z-index:1}
+.pcard .pimg+b{margin-top:.2rem}
+#credits{font-size:.72rem;color:var(--ink-4)}
+#credits a{color:var(--ink-3)}
+
 /* cta band + footer */
 .cta{margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(15,98,254,.25),rgba(0,29,108,.35));padding:clamp(40px,5vw,72px) 0}
 .cta .wrap{display:flex;flex-wrap:wrap;gap:1.5rem 3rem;align-items:center;justify-content:space-between}
@@ -624,7 +651,7 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
         <div class="pipe" id="pipe">
           <svg class="pipe-svg" id="pipe-svg" aria-hidden="true"></svg>
           <div class="particle" id="pt"></div>
-          <div class="node" id="n0"><div class="nl"><i></i>Kafka topic</div><div class="nt" id="n0t">pos_sales</div><div class="nb" id="n0b">waiting for an event</div></div>
+          <div class="node" id="n0"><div class="nl"><i></i>Kafka topic</div><div class="nimg" id="n0img" style="--img:url(photos/retail-shelves-s.jpg)"></div><div class="nt" id="n0t">pos_sales</div><div class="nb" id="n0b">waiting for an event</div></div>
           <div class="node" id="n1"><div class="nl"><i></i>AI_FORECAST</div><div class="nt">Granite TTM</div><div class="nb" id="n1b"></div></div>
           <div class="node" id="n2"><div class="nl"><i></i>AI_DETECT_ANOMALIES</div><div class="nt">99% band</div><div class="nb" id="n2b"></div></div>
           <div class="node agent" id="n3"><div class="nl"><i></i>Streaming Agent</div><div class="nt">AI_RUN_AGENT</div><div class="nb" id="n3b"></div></div>
@@ -785,10 +812,10 @@ FROM pos_sales;</code></pre></div>
             </div>
           </div>
           <div class="lanes" id="lanes">
-            <div class="lane"><div class="ln">Card fraud<small>a stolen card, first swipe</small></div><div class="lb"><i></i><span></span><em></em></div></div>
-            <div class="lane"><div class="ln">Stockout<small>a store, a hot SKU, a weekend</small></div><div class="lb"><i></i><span></span><em></em></div></div>
-            <div class="lane"><div class="ln">Network fault<small>a cell site, drop rate rising</small></div><div class="lb"><i></i><span></span><em></em></div></div>
-            <div class="lane"><div class="ln">Kiln drift<small>quality sliding, energy climbing</small></div><div class="lb"><i></i><span></span><em></em></div></div>
+            <div class="lane"><div class="ln"><i class="lt" style="--img:url(photos/banking-card2-s.jpg)"></i><span>Card fraud<small>a stolen card, first swipe</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
+            <div class="lane"><div class="ln"><i class="lt" style="--img:url(photos/retail-empty-s.jpg)"></i><span>Stockout<small>a store, a hot SKU, a weekend</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
+            <div class="lane"><div class="ln"><i class="lt" style="--img:url(photos/telecom-dish-s.jpg)"></i><span>Network fault<small>a cell site, drop rate rising</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
+            <div class="lane"><div class="ln"><i class="lt" style="--img:url(photos/blast-furnace-s.jpg)"></i><span>Kiln drift<small>quality sliding, energy climbing</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
           </div>
         </div>
       </div>
@@ -851,12 +878,12 @@ FROM pos_sales;</code></pre></div>
     <div class="stage" id="st-proof">
       <div class="stage-body">
         <div class="proof" id="proof">
-          <div class="pcard"><span class="pk">Telco · network operations <em>production</em></span><b>0<small> tickets without a cause</small></b><canvas data-spark="telco"></canvas><div class="pt">IBM Network Intelligence, Granite TSPulse</div><div class="pd">Telemetry in, anomalies out, agentic root cause, remediation human-in-the-loop or autonomous.</div><div class="tags"><span>TSPulse</span><span>agentic RCA</span><span>MCP tools</span></div></div>
-          <div class="pcard"><span class="pk">Cement · production <em>production</em></span><b data-count="99" data-prefix="93 → " data-suffix="%">93%</b><canvas data-spark="cement"></canvas><div class="pt">Process and quality models per mill</div><div class="pd">30 regression models became 2. 6 months became 8 to 10 weeks. $2 per ton EBITDA, tens to hundreds of millions in benefit.</div><div class="tags"><span>fine-tuned per mill</span><span>setpoints</span></div></div>
-          <div class="pcard"><span class="pk">Financial services · markets <em>production</em></span><b data-count="10" data-prefix="~" data-suffix="% RMSE">~0%</b><canvas data-spark="fin"></canvas><div class="pt">Multivariate asset forecasts, Granite TTM</div><div class="pd">Per asset class, against the incumbent model. Zero-shot first, tuned where the backtest paid.</div><div class="tags"><span>TTM</span><span>multivariate</span><span>backtested</span></div></div>
-          <div class="pcard"><span class="pk">Grocery · planning <em>reference design</em></span><b data-count="10" data-prefix="+5 to " data-suffix=" pts">+0 pts</b><canvas data-spark="grocery"></canvas><div class="pt">Every SKU in every store, hourly</div><div class="pd">Around 100,000 SKUs across thousands of stores. Reorder point and purchase order raised in the stream from the P10 to P90 band.</div><div class="tags"><span>AI_FORECAST</span><span>P10 to P90</span><span>Tableflow</span></div></div>
-          <div class="pcard"><span class="pk">Retail · stores <em>demo</em></span><b data-count="1096" data-suffix=" days">0 days</b><canvas data-spark="retail"></canvas><div class="pt">Scored by one running statement</div><div class="pd">A stockout dip, an unplanned spike and a feed gap flagged the same day. 99.9% band, 512-day context, no labels.</div><div class="tags"><span>AI_DETECT_ANOMALIES</span><span>streaming mode</span></div></div>
-          <div class="pcard"><span class="pk">Process industries <em>solution</em></span><b>2<small> to </small>5×</b><canvas data-spark="opt"></canvas><div class="pt">Faster process optimization</div><div class="pd">Steel, cement, paper. Forecasts with control variables, a setpoint optimizer and guardrails, operators approve at the gate.</div><div class="tags"><span>TS_OPTIMIZE</span><span>workbench</span></div></div>
+          <div class="pcard"><span class="pk">Telco · network operations <em>production</em></span><b>0<small> tickets without a cause</small></b><div class="pimg" style="--img:url(photos/telecom-s.jpg)"><canvas data-spark="telco"></canvas></div><div class="pt">IBM Network Intelligence, Granite TSPulse</div><div class="pd">Telemetry in, anomalies out, agentic root cause, remediation human-in-the-loop or autonomous.</div><div class="tags"><span>TSPulse</span><span>agentic RCA</span><span>MCP tools</span></div></div>
+          <div class="pcard"><span class="pk">Cement · production <em>production</em></span><b data-count="99" data-prefix="93 → " data-suffix="%">93%</b><div class="pimg" style="--img:url(photos/cement-plant-s.jpg)"><canvas data-spark="cement"></canvas></div><div class="pt">Process and quality models per mill</div><div class="pd">30 regression models became 2. 6 months became 8 to 10 weeks. $2 per ton EBITDA, tens to hundreds of millions in benefit.</div><div class="tags"><span>fine-tuned per mill</span><span>setpoints</span></div></div>
+          <div class="pcard"><span class="pk">Financial services · markets <em>production</em></span><b data-count="10" data-prefix="~" data-suffix="% RMSE">~0%</b><div class="pimg" style="--img:url(photos/banking-charts-s.jpg)"><canvas data-spark="fin"></canvas></div><div class="pt">Multivariate asset forecasts, Granite TTM</div><div class="pd">Per asset class, against the incumbent model. Zero-shot first, tuned where the backtest paid.</div><div class="tags"><span>TTM</span><span>multivariate</span><span>backtested</span></div></div>
+          <div class="pcard"><span class="pk">Grocery · planning <em>reference design</em></span><b data-count="10" data-prefix="+5 to " data-suffix=" pts">+0 pts</b><div class="pimg" style="--img:url(photos/retail-shelves-s.jpg)"><canvas data-spark="grocery"></canvas></div><div class="pt">Every SKU in every store, hourly</div><div class="pd">Around 100,000 SKUs across thousands of stores. Reorder point and purchase order raised in the stream from the P10 to P90 band.</div><div class="tags"><span>AI_FORECAST</span><span>P10 to P90</span><span>Tableflow</span></div></div>
+          <div class="pcard"><span class="pk">Retail · stores <em>demo</em></span><b data-count="1096" data-suffix=" days">0 days</b><div class="pimg" style="--img:url(photos/retail-bananas-s.jpg)"><canvas data-spark="retail"></canvas></div><div class="pt">Scored by one running statement</div><div class="pd">A stockout dip, an unplanned spike and a feed gap flagged the same day. 99.9% band, 512-day context, no labels.</div><div class="tags"><span>AI_DETECT_ANOMALIES</span><span>streaming mode</span></div></div>
+          <div class="pcard"><span class="pk">Process industries <em>solution</em></span><b>2<small> to </small>5×</b><div class="pimg" style="--img:url(photos/factory-structure-s.jpg)"><canvas data-spark="opt"></canvas></div><div class="pt">Faster process optimization</div><div class="pd">Steel, cement, paper. Forecasts with control variables, a setpoint optimizer and guardrails, operators approve at the gate.</div><div class="tags"><span>TS_OPTIMIZE</span><span>workbench</span></div></div>
         </div>
       </div>
     </div>
@@ -884,15 +911,22 @@ FROM pos_sales;</code></pre></div>
       <p>Four simulators. Each one is one Flink SQL function on a live topic.</p>
     </div>
 
+    <div class="inds" id="inds">
+      <a class="ind" href="#uc-opt" data-tab="uc-opt" style="--img:url(photos/factory.jpg)"><span class="il">Factory</span><b>Quality held at 99%. Setpoints corrected inside the cycle.</b><span class="is">Production optimization &#8594;</span></a>
+      <a class="ind" href="#uc-demand" data-tab="uc-demand" style="--img:url(photos/retail-produce.jpg)"><span class="il">Retail</span><b>Every SKU in every store, forecast hourly. Orders raised in the stream.</b><span class="is">Demand and replenishment &#8594;</span></a>
+      <a class="ind" href="#uc-fraud" data-tab="uc-fraud" style="--img:url(photos/banking.jpg)"><span class="il">Banking</span><b>Every card has its own normal. The odd swipe is held before authorization.</b><span class="is">Fraud and payments &#8594;</span></a>
+    </div>
+
     <div class="uctabs" role="tablist" id="uctabs">
       <button role="tab" aria-selected="true" aria-controls="uc-demand"><i></i>Demand and replenishment</button>
       <button role="tab" aria-selected="false" aria-controls="uc-anom"><i></i>Anomaly to action</button>
+      <button role="tab" aria-selected="false" aria-controls="uc-fraud"><i></i>Fraud and payments</button>
       <button role="tab" aria-selected="false" aria-controls="uc-opt"><i></i>Production optimization</button>
       <button role="tab" aria-selected="false" aria-controls="uc-search"><i></i>Semantic search</button>
     </div>
 
     <!-- demand -->
-    <div class="stage ucpanel" id="uc-demand" role="tabpanel">
+    <div class="stage ucpanel has-cover" id="uc-demand" role="tabpanel" style="--img:url(photos/retail-aisle.jpg);--pos:55%">
       <div class="stage-top">
         <div class="stage-title"><h3>Every SKU, every store, every hour</h3><p>Forecast 28 days with quantiles. The reorder point and the purchase order come from the band.</p></div>
         <div class="ctl">
@@ -916,7 +950,7 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <!-- anomaly -->
-    <div class="stage ucpanel" id="uc-anom" role="tabpanel" hidden>
+    <div class="stage ucpanel has-cover" id="uc-anom" role="tabpanel" style="--img:url(photos/retail-empty.jpg)" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>From a flag to the right action</h3><p>Daily sales scored against the band. No labels, no second pipeline. Inject a cause and see what the team does.</p></div>
         <div class="ctl">
@@ -938,8 +972,31 @@ FROM pos_sales;</code></pre></div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b id="an-scored">0</b><span>days scored</span></div><div class="readout"><b id="an-flagged" class="red">0</b><span>flagged</span></div><div class="readout"><b>same day</b><span>time to action</span></div></div><div class="sqlline"><code id="an-sql"></code></div></div>
     </div>
 
+    <!-- fraud -->
+    <div class="stage ucpanel has-cover" id="uc-fraud" role="tabpanel" hidden style="--img:url(photos/banking-card.jpg)">
+      <div class="stage-top">
+        <div class="stage-title"><h3>Every card has its own normal</h3><p>Amounts scored per card as they are authorized. One context per card, thousands of cards per core. Inject an attack.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="fr-inject"><button class="chip sm" data-v="stolen">Stolen card</button><button class="chip sm" data-v="testing">Card testing</button><button class="chip sm" data-v="travel">Trip abroad</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="fr-conf"><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.5" aria-pressed="true">99.5%</button><button class="chip sm" data-v="99.9" aria-pressed="false">99.9%</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="side">
+          <div class="canvas-wrap"><canvas class="stage-canvas" id="fr-cv" aria-label="Card payment amounts with the expected band and flagged transactions"></canvas><div class="tip" id="fr-tip"></div></div>
+          <div class="panel">
+            <div class="ph">Latest flag · card &#8226;&#8226;4417</div>
+            <div class="kv"><span>time</span><b id="fr-time">–</b><span>amount</span><b id="fr-amt">–</b><span>expected band</span><b id="fr-band">–</b><span>pattern</span><b id="fr-cause" class="red">–</b></div>
+            <div class="action" id="fr-action"><small>decision in the stream</small><span id="fr-actiont">No flags. Normal spend for this card.</span></div>
+            <div class="tiny">AI_DETECT_ANOMALIES per card_id, confidencePercentage <span id="fr-confv">99.5</span>, rmse in the output row. Agent holds, steps up or allows.</div>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="fr-scored">0</b><span>authorizations scored</span></div><div class="readout"><b id="fr-flagged" class="red">0</b><span>held</span></div><div class="readout"><b>&lt;50 ms</b><span>inside the auth window</span></div></div><div class="sqlline"><code id="fr-sql"></code></div></div>
+    </div>
+
     <!-- optimization -->
-    <div class="stage ucpanel" id="uc-opt" role="tabpanel" hidden>
+    <div class="stage ucpanel has-cover" id="uc-opt" role="tabpanel" style="--img:url(photos/cement-night.jpg)" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>Find the setpoint, keep the guardrails</h3><p>Forecast quality and energy from the controls, then search the surface. 2 to 5× faster process optimization.</p></div>
         <div class="ctl">
@@ -963,7 +1020,7 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <!-- search -->
-    <div class="stage ucpanel" id="uc-search" role="tabpanel" hidden>
+    <div class="stage ucpanel has-cover" id="uc-search" role="tabpanel" style="--img:url(photos/workers.jpg)" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>Find every signal that looks like this</h3><p>Embed the stream with TSPulse, search by shape. Sketch a pattern or pick one.</p></div>
         <div class="ctl">
@@ -1136,6 +1193,7 @@ FROM motor_telemetry;</code></pre></div>
 <footer class="foot">
   <div class="wrap">
     <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. Early Access, October 2026.</span></div>
+    <div class="row" id="credits">Photos: <a href="https://stocksnap.io/photo/steel-industry-1PR1SGKS69" target="_blank" rel="noopener">Steel Industry</a> by Ant Rozetsky (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:Cementera,_Yura,_Per%C3%BA,_2015-08-01,_DD_129-131_HDR.JPG" target="_blank" rel="noopener">Cementera, Yura, Perú</a> by Diego Delso (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:DSC06651_Blast_Furnace_4,_voestalpine_Leoben-Donawitz,_2026.jpg" target="_blank" rel="noopener">Blast Furnace 4, Leoben-Donawitz</a> by Aciarium (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6037545/factory-structure-free-public-domain-cc0-photo" target="_blank" rel="noopener">Factory structure</a> by rawpixel (CC0) · <a href="https://www.flickr.com/photos/149400054@N04/54435322282" target="_blank" rel="noopener">Power plant workers in PPE</a> by EU-Ukraine cooperation (CC BY-SA 2.0) · <a href="https://www.rawpixel.com/image/5904812/photo-image-public-domain-free" target="_blank" rel="noopener">Supermarket aisle</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19" target="_blank" rel="noopener">Empty shelves, supermarket</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/bananas-fruits-D0C5D92CD9" target="_blank" rel="noopener">Bananas Fruits</a> by Ryan McGuire (CC0) · <a href="https://stocksnap.io/photo/building-architecture-ONN4Z188GF" target="_blank" rel="noopener">Building Architecture</a> by Vladimir Kudinov (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://commons.wikimedia.org/wiki/File:Zaldiaran_-_Antenas_01.jpg" target="_blank" rel="noopener">Zaldiaran antenas</a> by Basotxerri (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0). Edited for color and crop.</div>
     <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="#reference">Technical reference</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
   </div>
@@ -1375,6 +1433,8 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   function centers(){const pr=pipe.getBoundingClientRect();return nodes.map(n=>{const r=n.getBoundingClientRect();return {l:r.left-pr.left,r:r.right-pr.left,t:r.top-pr.top,b:r.bottom-pr.top,cx:r.left-pr.left+r.width/2,cy:r.top-pr.top+r.height/2};});}
   function links(){const c=centers();const segs=[];for(let i=0;i<4;i++){const a=c[i],b=c[i+1];if(b.l>=a.r-2){segs.push({x1:a.r,y1:a.cy,x2:b.l,y2:b.cy});}else{segs.push({x1:a.cx,y1:a.b,x2:b.cx,y2:b.t});}}svg.setAttribute('viewBox','0 0 '+pipe.clientWidth+' '+pipe.clientHeight);svg.innerHTML=segs.map(s=>{const mx=(s.x1+s.x2)/2;const d=Math.abs(s.y2-s.y1)<2?'M'+s.x1+' '+s.y1+' L'+s.x2+' '+s.y2:'M'+s.x1+' '+s.y1+' C'+s.x1+' '+(s.y1+s.y2)/2+' '+s.x2+' '+(s.y1+s.y2)/2+' '+s.x2+' '+s.y2;return '<path d="'+d+'"/><path class="flow" d="'+d+'"/>';}).join('');return segs;}
   let segs=links();
+  const NIMG={retail:'retail-shelves',fraud:'banking-card',network:'telecom-storm',kiln:'factory-pipes'};
+  function setImg(k){const el=$('#n0img');if(el)el.style.setProperty('--img','url(photos/'+(NIMG[k]||'retail-shelves')+'-s.jpg)');}
   function setNode(i,body,cls){const n=nodes[i];n.classList.remove('flag','ok');if(cls)n.classList.add(cls);$('#n'+i+'b').textContent=body;}
   function lit(i){nodes.forEach((n,j)=>n.classList.toggle('lit',j===i));}
   const log=$('#ag-log');
@@ -1383,7 +1443,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   const wait=ms=>new Promise(r=>setTimeout(r,reduced?10:ms));
   async function run(){if(st.running)return;st.running=true;segs=links();const s=SC[st.sc];const t0=performance.now();
     nodes.forEach(n=>n.classList.remove('lit','flag','ok'));[1,2,3,4].forEach(i=>$('#n'+i+'b').textContent='');
-    $('#n0t').textContent=s.topic;$('#n4t').textContent=s.out;$('#n1 .nt').textContent='Granite '+MODELS[App.model].name;
+    $('#n0t').textContent=s.topic;$('#n4t').textContent=s.out;$('#n1 .nt').textContent='Granite '+MODELS[App.model].name;setImg(st.sc);
     const stamp=new Date();const hh=String(stamp.getHours()).padStart(2,'0'),mm=String(stamp.getMinutes()).padStart(2,'0'),ss=String(stamp.getSeconds()).padStart(2,'0');
     logLine('t','['+hh+':'+mm+':'+ss+'] event '+s.topic+' · '+s.n0.replace(/\n/g,' · '));
     lit(0);setNode(0,s.n0);pt.style.left=segs[0].x1+'px';pt.style.top=segs[0].y1+'px';await wait(350);
@@ -1394,7 +1454,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     pt.style.opacity=0;st.count++;$('#ag-count').textContent=st.count;$('#ag-ms').textContent=(s.ms.reduce((a,b)=>a+b,0)+Math.round(Math.random()*40))+' ms';
     st.running=false;}
   $('#ag-run').addEventListener('click',run);
-  chipGroup('ag-sc',v=>{st.sc=v;$('#n0t').textContent=SC[v].topic;$('#n4t').textContent=SC[v].out;if(!st.running&&!st.auto)run();});
+  chipGroup('ag-sc',v=>{st.sc=v;$('#n0t').textContent=SC[v].topic;$('#n4t').textContent=SC[v].out;setImg(v);if(!st.running&&!st.auto)run();});
   const keys=Object.keys(SC);
   function autoTick(){if(!st.auto)return;if(!st.running){st.sc=keys[(keys.indexOf(st.sc)+1)%keys.length];chipSet('ag-sc',st.sc);run();}st.timer=setTimeout(autoTick,4200);}
   $('#ag-auto').addEventListener('click',e=>{st.auto=!st.auto;e.currentTarget.setAttribute('aria-pressed',st.auto);if(st.auto){autoTick();}else clearTimeout(st.timer);});
@@ -1439,7 +1499,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   line.setAttribute('d',d);fill.setAttribute('d',d+' L'+x1+' '+y1+' L'+x0+' '+y1+' Z');
   const when=x=>{const seg=x*4,i=Math.floor(seg),t=seg-i;if(i>=4)return '1 week';const units=[['s',1,59],['min',1,59],['h',1,23],['d',1,6]];const u=units[i];const v=Math.round(lerp(u[1],u[2],t));return v+' '+u[0];};
   function set(v){const x=v/100;const px=lerp(x0,x1,x),py=lerp(y1,y0,avg(x));dot.setAttribute('cx',px);dot.setAttribute('cy',py);vl.setAttribute('x1',px);vl.setAttribute('x2',px);pct.setAttribute('x',px>330?px-14:px+12);pct.setAttribute('text-anchor',px>330?'end':'start');pct.setAttribute('y',Math.max(52,py+6));pct.textContent=Math.round(avg(x)*100)+'%';
-    lanes.forEach((l,i)=>{const r=LANES[i].f(x);$('i',l).style.width=(r*100)+'%';$('span',l).textContent=LANES[i].txt(x);$('em',l).textContent=Math.round(r*100)+'%';});$('#decay-when').textContent=when(x);}
+    lanes.forEach((l,i)=>{const r=LANES[i].f(x);$('.lb i',l).style.width=(r*100)+'%';$('.lb span',l).textContent=LANES[i].txt(x);$('.lb em',l).textContent=Math.round(r*100)+'%';});$('#decay-when').textContent=when(x);}
   const sl=$('#decay-t');sl.addEventListener('input',e=>set(Number(e.target.value)));set(0);
   once(el,()=>{if(reduced)return;let v=0;const t0=performance.now();function f(t){v=Math.min(38,(t-t0)/60);sl.value=v;set(v);if(v<38)requestAnimationFrame(f);}setTimeout(()=>requestAnimationFrame(f),500);});
 })();
@@ -1455,7 +1515,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     if(type==='fin'){const v=[];let x=0.5;for(let i=0;i<n;i++){x=clamp(x+0.05*gauss(),0.1,0.9);v.push(x);}ctx.strokeStyle=C.ink2;ctx.lineWidth=1.4;ctx.beginPath();v.forEach((y,i)=>i?ctx.lineTo(X(i),Y(y)):ctx.moveTo(X(i),Y(y)));ctx.stroke();ctx.strokeStyle=C.blue3;ctx.setLineDash([3,3]);ctx.beginPath();for(let i=40;i<n;i++){const y=v[40]+(v[i]-v[40])*0.6;i===40?ctx.moveTo(X(i),Y(y)):ctx.lineTo(X(i),Y(y));}ctx.stroke();ctx.setLineDash([]);}
     if(type==='grocery'){const f=i=>0.45+0.25*Math.sin(i/1.1)+0.08*Math.sin(i/7);const sp=38;ctx.strokeStyle=C.ink2;ctx.lineWidth=1.4;ctx.beginPath();for(let i=0;i<=sp;i++){const y=Y(clamp(f(i)+0.05*gauss(),0.05,0.95));i?ctx.lineTo(X(i),y):ctx.moveTo(X(i),y);}ctx.stroke();ctx.fillStyle='rgba(120,169,255,.22)';ctx.beginPath();ctx.moveTo(X(sp),Y(f(sp)));for(let i=sp;i<n;i++)ctx.lineTo(X(i),Y(f(i)+0.12));for(let i=n-1;i>=sp;i--)ctx.lineTo(X(i),Y(f(i)-0.12));ctx.closePath();ctx.fill();ctx.strokeStyle=C.blue3;ctx.setLineDash([3,3]);ctx.beginPath();for(let i=sp;i<n;i++){i===sp?ctx.moveTo(X(i),Y(f(i))):ctx.lineTo(X(i),Y(f(i)));}ctx.stroke();ctx.setLineDash([]);}
     if(type==='retail'){const v=[];for(let i=0;i<n;i++){let y=0.5+0.22*Math.sin(i*2*Math.PI/7)+0.04*gauss();if(i===20||i===21)y=0.12;if(i===38)y=0.95;if(i===50)y=0.02;v.push(clamp(y,0.02,0.98));}ctx.fillStyle='rgba(120,169,255,.14)';ctx.beginPath();for(let i=0;i<n;i++){const y=Y(0.5+0.22*Math.sin(i*2*Math.PI/7)+0.2);i?ctx.lineTo(X(i),y):ctx.moveTo(X(i),y);}for(let i=n-1;i>=0;i--)ctx.lineTo(X(i),Y(0.5+0.22*Math.sin(i*2*Math.PI/7)-0.2));ctx.closePath();ctx.fill();ctx.strokeStyle=C.ink2;ctx.lineWidth=1.4;ctx.beginPath();v.forEach((y,i)=>i?ctx.lineTo(X(i),Y(y)):ctx.moveTo(X(i),Y(y)));ctx.stroke();[20,21,38,50].forEach(i=>{ctx.fillStyle=C.red2;ctx.shadowColor=C.red;ctx.shadowBlur=10;ctx.beginPath();ctx.arc(X(i),Y(v[i]),3.2,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;});}
-    if(type==='opt'){const img=ctx.createLinearGradient(0,0,W,0);img.addColorStop(0,'rgba(0,45,156,.6)');img.addColorStop(0.6,'rgba(8,189,186,.5)');img.addColorStop(1,'rgba(241,194,27,.6)');ctx.fillStyle=img;ctx.fillRect(2,4,W-4,H-8);ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(X(4),Y(0.2));ctx.quadraticCurveTo(X(30),Y(0.85),X(52),Y(0.55));ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(4),Y(0.2),3,0,Math.PI*2);ctx.fill();ctx.strokeStyle=C.yellow;ctx.beginPath();ctx.arc(X(52),Y(0.55),5,0,Math.PI*2);ctx.stroke();}
+    if(type==='opt'){const img=ctx.createLinearGradient(0,0,W,0);img.addColorStop(0,'rgba(0,45,156,.35)');img.addColorStop(0.6,'rgba(8,189,186,.3)');img.addColorStop(1,'rgba(241,194,27,.35)');ctx.fillStyle=img;ctx.fillRect(2,4,W-4,H-8);ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(X(4),Y(0.2));ctx.quadraticCurveTo(X(30),Y(0.85),X(52),Y(0.55));ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(4),Y(0.2),3,0,Math.PI*2);ctx.fill();ctx.strokeStyle=C.yellow;ctx.beginPath();ctx.arc(X(52),Y(0.55),5,0,Math.PI*2);ctx.stroke();}
   }
   function all(){$$('canvas[data-spark]',el).forEach(c=>spark(c,c.dataset.spark));}
   reg({el,resize:all});all();
@@ -1481,7 +1541,9 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
 /* ============ 03 tabs ============ */
 (function(){
   const tabs=$('#uctabs');if(!tabs)return;const btns=$$('[role=tab]',tabs);
-  btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on?'true':'false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p){p.hidden=!on;if(on){const s=p.__stage;if(s&&s.resize)requestAnimationFrame(()=>s.resize());}}});}));
+  function select(b){btns.forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on?'true':'false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p){p.hidden=!on;if(on){const s=p.__stage;if(s&&s.resize)requestAnimationFrame(()=>s.resize());}}});}
+  btns.forEach(b=>b.addEventListener('click',()=>select(b)));
+  $$('#inds .ind').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const id=a.dataset.tab;const b=btns.find(x=>x.getAttribute('aria-controls')===id);if(b){select(b);tabs.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});}}));
 })();
 
 /* ============ 03 demand ============ */
@@ -1547,6 +1609,32 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   chipGroup('an-inject',(v,b)=>{if(v==='stockout')sim.mq=[0.25,0.2];else if(v==='spike')sim.mq=[2.4];else sim.mq=[0,0];st.acc=1e9;setTimeout(()=>b.setAttribute('aria-pressed','false'),600);});
   chipGroup('an-conf',v=>{st.conf=Number(v);st.dirty=true;sql();panel();});
   function onMove(ev){const k=hoverIndex(layout,cv,ev);if(k!==st.hover)st.dirty=true;st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];const z=Z[st.conf]||3.29;let html='<b>'+dateOf(r.i)+'</b><br>units '+Math.round(r.v);if(r.pred!=null)html+='<br>band '+Math.round(r.pred-z*r.sig)+' to '+Math.round(r.pred+z*r.sig)+'<br>is_anomaly '+(layout.isAnom(r)?'<b>TRUE</b>':'FALSE');tip.innerHTML=html;tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.7?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
+  cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});cv.c.addEventListener('mouseleave',()=>{st.hover=-1;st.dirty=true;tip.style.display='none';});
+  App.listeners.push(()=>{sql();st.dirty=true;});sql();panel();
+})();
+
+/* ============ 03 fraud ============ */
+(function(){
+  const el=$('#uc-fraud');if(!el)return;
+  const sim=new Sim({base:46,amp:15,amp2:5,period:72,noise:3,stepSec:60,spike:240,dec:0,unit:'$',floor:0,maxRows:420,warm:300});
+  const cv=new Cv($('#fr-cv'));const tip=$('#fr-tip');let layout=null;
+  const st={conf:99.5,acc:0,scored:48210,hover:-1,dirty:true};
+  sim.maxRows=260;
+  const BASE=Date.UTC(2026,9,16,8,0,0);
+  const label=i=>{const d=new Date(BASE+i*60000);const p=n=>String(n).padStart(2,'0');return p(d.getUTCHours())+':'+p(d.getUTCMinutes());};
+  const money=v=>'$'+Math.round(v).toLocaleString('en-US');
+  function classify(r,z){const up=r.pred+z*r.sig,lo=r.pred-z*r.sig;if(r.v>up&&r.v>3*r.pred)return ['stolen card pattern','hold the authorization, step-up auth, push to the cardholder','red'];if(r.v>up)return ['unusual spend for this card','step-up auth, allow on confirmation, learn the new normal','red'];if(r.v<lo&&r.v<3)return ['card testing','decline, block the merchant, alert the issuer','red'];return ['below normal','allow','green'];}
+  function sql(){$('#fr-sql').innerHTML=highlight("SELECT card_id, event_time, amount, AI_DETECT_ANOMALIES(amount, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+st.conf+")) OVER (PARTITION BY card_id ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS a FROM card_payments;");}
+  function panel(){const z=Z[st.conf]||2.81;const flagged=sim.rows.filter(r=>r.pred!=null&&(r.v>r.pred+z*r.sig||r.v<r.pred-z*r.sig));$('#fr-flagged').textContent=flagged.length;$('#fr-scored').textContent=fmtInt(st.scored);$('#fr-confv').textContent=st.conf;const a=$('#fr-action');a.classList.remove('red','green');
+    /* report the biggest flag of the last few, not the tail of a spike */
+    const recent=flagged.slice(-4);const top=recent.length?recent.reduce((m,r)=>Math.abs(r.v-r.pred)/r.sig>Math.abs(m.v-m.pred)/m.sig?r:m):null;
+    if(!flagged.length){$('#fr-time').textContent='–';$('#fr-amt').textContent='–';$('#fr-band').textContent='–';$('#fr-cause').textContent='none';$('#fr-actiont').textContent='No flags. Normal spend for this card.';a.classList.add('green');return;}
+    const r=top;const c=classify(r,z);$('#fr-time').textContent=label(r.i);$('#fr-amt').textContent=money(r.v);$('#fr-band').textContent=money(Math.max(0,r.pred-z*r.sig))+' to '+money(r.pred+z*r.sig);$('#fr-cause').textContent=c[0];$('#fr-actiont').textContent=c[1];a.classList.add(c[2]);}
+  function draw(){if(!st.dirty)return;st.dirty=false;layout=drawStream(cv,sim,{mode:'ad',z:Z[st.conf]||2.81,h:0,nVis:90,label,hover:st.hover,floorZero:true,fmtY:v=>'$'+Math.round(v)});}
+  reg({el,resize(){cv.fit();st.dirty=true;draw();},update(dt){st.acc+=dt;if(st.acc>(reduced?2400:1000)){st.acc=0;sim.step();st.scored+=1+Math.floor(Math.random()*3);st.dirty=true;panel();}},draw});
+  chipGroup('fr-inject',(v,b)=>{if(v==='stolen')sim.q=[1194,334,174];else if(v==='testing')sim.mq=[0.02,0.02,0.02,0.02,0.02,0.02];else sim.mq=[2.2,1.8,2.6,2.0,1.9];st.acc=1e9;setTimeout(()=>b.setAttribute('aria-pressed','false'),600);});
+  chipGroup('fr-conf',v=>{st.conf=Number(v);st.dirty=true;sql();panel();});
+  function onMove(ev){const k=hoverIndex(layout,cv,ev);if(k!==st.hover)st.dirty=true;st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];const z=Z[st.conf]||2.81;let html='<b>'+label(r.i)+'</b><br>amount '+money(r.v);if(r.pred!=null)html+='<br>band '+money(Math.max(0,r.pred-z*r.sig))+' to '+money(r.pred+z*r.sig)+'<br>is_anomaly '+(layout.isAnom(r)?'<b>TRUE</b>':'FALSE');tip.innerHTML=html;tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.7?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
   cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});cv.c.addEventListener('mouseleave',()=>{st.hover=-1;st.dirty=true;tip.style.display='none';});
   App.listeners.push(()=>{sql();st.dirty=true;});sql();panel();
 })();

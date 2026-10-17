@@ -1,30 +1,172 @@
 {
  "photos": [
-  {"name": "factory", "title": "Steel Industry", "creator": "Ant Rozetsky", "license": "CC0", "landing": "https://stocksnap.io/photo/steel-industry-1PR1SGKS69", "url": "https://cdn.stocksnap.io/img-thumbs/960w/1PR1SGKS69.jpg"},
-  {"name": "cement-night", "title": "Cimenterie Jbal Ressas la nuit", "creator": "Smailtn", "license": "CC BY-SA 4.0", "landing": "https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg", "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Cimenterie_Jbal_Ressas_la_nuit.jpg"},
-  {"name": "cement-plant", "title": "Cementera, Yura, Perú", "creator": "Diego Delso", "license": "CC BY-SA 4.0", "landing": "https://commons.wikimedia.org/wiki/File:Cementera,_Yura,_Per%C3%BA,_2015-08-01,_DD_129-131_HDR.JPG", "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Cementera%2C_Yura%2C_Per%C3%BA%2C_2015-08-01%2C_DD_129-131_HDR.JPG"},
-  {"name": "blast-furnace", "title": "Blast Furnace 4, Leoben-Donawitz", "creator": "Aciarium", "license": "CC BY-SA 4.0", "landing": "https://commons.wikimedia.org/wiki/File:DSC06651_Blast_Furnace_4,_voestalpine_Leoben-Donawitz,_2026.jpg", "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/DSC06651_Blast_Furnace_4%2C_voestalpine_Leoben-Donawitz%2C_2026.jpg"},
-  {"name": "factory-hall", "title": "Factory building", "creator": "rawpixel", "license": "CC0", "landing": "https://www.rawpixel.com/image/5909105/image-background-public-domain-free", "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgzNDM5MDYtaW1hZ2Uta3d2dmszYnUuanBn.jpg"},
-  {"name": "factory-pipes", "title": "Factory pipe system", "creator": "rawpixel", "license": "CC0", "landing": "https://www.rawpixel.com/image/5914150/image-background-public-domain-free", "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4MTA4OTMyNS1pbWFnZS1rd3Z3ZDM4dy5qcGc.jpg"},
-  {"name": "factory-structure", "title": "Factory structure", "creator": "rawpixel", "license": "CC0", "landing": "https://www.rawpixel.com/image/6037545/factory-structure-free-public-domain-cc0-photo", "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZnJnZXJtYW55X2R1aXNidXJnX2luZHVzdHJ5X2NoZW1pY2FsLWltYWdlLWt5YmRuOTkyLWt5YmVvcmFyLmpwZw.jpg"},
-  {"name": "industrial-factory", "title": "Industrial Factory", "creator": "Leeroy", "license": "CC0", "landing": "https://stocksnap.io/photo/industrial-factory-B144524308", "url": "https://cdn.stocksnap.io/img-thumbs/960w/B144524308.jpg"},
-  {"name": "workers", "title": "Power plant workers in PPE", "creator": "EU-Ukraine cooperation", "license": "CC BY-SA 2.0", "landing": "https://www.flickr.com/photos/149400054@N04/54435322282", "url": "https://live.staticflickr.com/65535/54435322282_bc04e10b56_b.jpg"},
-  {"name": "retail-aisle", "title": "Supermarket aisle", "creator": "rawpixel", "license": "CC0", "landing": "https://www.rawpixel.com/image/5904812/photo-image-public-domain-free", "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4ODgyMzk5LWltYWdlLWt3dnV3Zm9iLmpwZw.jpg"},
-  {"name": "retail-shelves", "title": "Vegetables in a supermarket", "creator": "rawpixel", "license": "CC0", "landing": "https://www.rawpixel.com/image/6082112/vegetables-supermarket", "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZmwyMzIyMjM4MDU2NC1pbWFnZS1reWNqcXdzeC5qcGc.jpg"},
-  {"name": "retail-produce", "title": "Vegetables in a supermarket", "creator": "rawpixel", "license": "CC0", "landing": "https://www.rawpixel.com/image/6081498/vegetables-supermarket", "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZmwyMzg1MDUyMTM1NS1pbWFnZS1reWNqcThkbS5qcGc.jpg"},
-  {"name": "retail-empty", "title": "Empty shelves, supermarket", "creator": "rawpixel", "license": "CC0", "landing": "https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19", "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZmw0OTgxMTU5NjQwNy1pbWFnZS1reWNpc2tqeC5qcGc.jpg"},
-  {"name": "retail-soda", "title": "Supermarket #13", "creator": "claralieu", "license": "CC BY 2.0", "landing": "https://www.flickr.com/photos/189561381@N07/51912750301", "url": "https://live.staticflickr.com/65535/51912750301_700fb437da_b.jpg"},
-  {"name": "retail-bananas", "title": "Bananas Fruits", "creator": "Ryan McGuire", "license": "CC0", "landing": "https://stocksnap.io/photo/bananas-fruits-D0C5D92CD9", "url": "https://cdn.stocksnap.io/img-thumbs/960w/D0C5D92CD9.jpg"},
-  {"name": "banking", "title": "Building Architecture", "creator": "Vladimir Kudinov", "license": "CC0", "landing": "https://stocksnap.io/photo/building-architecture-ONN4Z188GF", "url": "https://cdn.stocksnap.io/img-thumbs/960w/ONN4Z188GF.jpg"},
-  {"name": "banking-office", "title": "Office Work", "creator": "Charles Forerunner", "license": "CC0", "landing": "https://stocksnap.io/photo/office-work-HZCASACP3N", "url": "https://cdn.stocksnap.io/img-thumbs/960w/HZCASACP3N.jpg"},
-  {"name": "banking-tower", "title": "Office Building", "creator": "Verne Ho", "license": "CC0", "landing": "https://stocksnap.io/photo/office-building-7HRFNYC7GU", "url": "https://cdn.stocksnap.io/img-thumbs/960w/7HRFNYC7GU.jpg"},
-  {"name": "banking-card", "title": "Credit card payment", "creator": "rawpixel", "license": "CC0", "landing": "https://www.rawpixel.com/image/8809237/credit-card-payment-shopping", "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL2lzMTUwNzItaW1hZ2UuanBn.jpg"},
-  {"name": "banking-card2", "title": "Creditcard Money", "creator": "Michal Jarmoluk", "license": "CC0", "landing": "https://stocksnap.io/photo/creditcard-money-71MH9ATF4S", "url": "https://cdn.stocksnap.io/img-thumbs/960w/71MH9ATF4S.jpg"},
-  {"name": "banking-charts", "title": "Stockmarket Charts", "creator": "Negative Space", "license": "CC0", "landing": "https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3", "url": "https://cdn.stocksnap.io/img-thumbs/960w/G3YOGRBLF3.jpg"},
-  {"name": "banking-nyse", "title": "New York Stock Exchange, interior lit edition", "creator": "wwward0", "license": "CC0", "landing": "https://www.flickr.com/photos/15802578@N00/51693281831", "url": "https://live.staticflickr.com/65535/51693281831_33b0a5827b_b.jpg"},
-  {"name": "banking-wallst", "title": "Wall Street, New York Stock Exchange", "creator": "Carlos Delgado", "license": "CC BY-SA 3.0", "landing": "https://commons.wikimedia.org/wiki/File:Wall_Street_-_New_York_Stock_Exchange.jpg", "url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Wall_Street_-_New_York_Stock_Exchange.jpg"},
-  {"name": "telecom", "title": "Telecommunications mast at sunset", "creator": "W.carter", "license": "CC BY-SA 4.0", "landing": "https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg", "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Telecommunications_mast_at_sunset.jpg"},
-  {"name": "telecom-dish", "title": "Zaldiaran antenas", "creator": "Basotxerri", "license": "CC BY-SA 4.0", "landing": "https://commons.wikimedia.org/wiki/File:Zaldiaran_-_Antenas_01.jpg", "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Zaldiaran_-_Antenas_01.jpg"},
-  {"name": "telecom-storm", "title": "We belong to the light, we belong to the thunder", "creator": "dullhunk", "license": "CC BY-SA 2.0", "landing": "https://www.flickr.com/photos/14829735@N00/51750792923", "url": "https://live.staticflickr.com/65535/51750792923_2b0d97c769_b.jpg"}
+  {
+   "name": "factory",
+   "title": "Steel Industry",
+   "creator": "Ant Rozetsky",
+   "license": "CC0",
+   "landing": "https://stocksnap.io/photo/steel-industry-1PR1SGKS69",
+   "url": "https://cdn.stocksnap.io/img-thumbs/960w/1PR1SGKS69.jpg"
+  },
+  {
+   "name": "cement-night",
+   "title": "Cimenterie Jbal Ressas la nuit",
+   "creator": "Smailtn",
+   "license": "CC BY-SA 4.0",
+   "landing": "https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Cimenterie_Jbal_Ressas_la_nuit.jpg"
+  },
+  {
+   "name": "cement-plant",
+   "title": "Cementera, Yura, Per\u00fa",
+   "creator": "Diego Delso",
+   "license": "CC BY-SA 4.0",
+   "landing": "https://commons.wikimedia.org/wiki/File:Cementera,_Yura,_Per%C3%BA,_2015-08-01,_DD_129-131_HDR.JPG",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Cementera%2C_Yura%2C_Per%C3%BA%2C_2015-08-01%2C_DD_129-131_HDR.JPG"
+  },
+  {
+   "name": "blast-furnace",
+   "title": "Blast Furnace 4, Leoben-Donawitz",
+   "creator": "Aciarium",
+   "license": "CC BY-SA 4.0",
+   "landing": "https://commons.wikimedia.org/wiki/File:DSC06651_Blast_Furnace_4,_voestalpine_Leoben-Donawitz,_2026.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/DSC06651_Blast_Furnace_4%2C_voestalpine_Leoben-Donawitz%2C_2026.jpg"
+  },
+  {
+   "name": "factory-hall",
+   "title": "Factory building",
+   "creator": "rawpixel",
+   "license": "CC0",
+   "landing": "https://www.rawpixel.com/image/5909105/image-background-public-domain-free",
+   "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgzNDM5MDYtaW1hZ2Uta3d2dmszYnUuanBn.jpg"
+  },
+  {
+   "name": "factory-pipes",
+   "title": "Factory pipe system",
+   "creator": "rawpixel",
+   "license": "CC0",
+   "landing": "https://www.rawpixel.com/image/5914150/image-background-public-domain-free",
+   "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4MTA4OTMyNS1pbWFnZS1rd3Z3ZDM4dy5qcGc.jpg"
+  },
+  {
+   "name": "factory-structure",
+   "title": "Factory structure",
+   "creator": "rawpixel",
+   "license": "CC0",
+   "landing": "https://www.rawpixel.com/image/6037545/factory-structure-free-public-domain-cc0-photo",
+   "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZnJnZXJtYW55X2R1aXNidXJnX2luZHVzdHJ5X2NoZW1pY2FsLWltYWdlLWt5YmRuOTkyLWt5YmVvcmFyLmpwZw.jpg"
+  },
+  {
+   "name": "workers",
+   "title": "Power plant workers in PPE",
+   "creator": "EU-Ukraine cooperation",
+   "license": "CC BY-SA 2.0",
+   "landing": "https://www.flickr.com/photos/149400054@N04/54435322282",
+   "url": "https://live.staticflickr.com/65535/54435322282_bc04e10b56_b.jpg"
+  },
+  {
+   "name": "retail-aisle",
+   "title": "Supermarket aisle",
+   "creator": "rawpixel",
+   "license": "CC0",
+   "landing": "https://www.rawpixel.com/image/5904812/photo-image-public-domain-free",
+   "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4ODgyMzk5LWltYWdlLWt3dnV3Zm9iLmpwZw.jpg"
+  },
+  {
+   "name": "retail-shelves",
+   "title": "Vegetables in a supermarket",
+   "creator": "rawpixel",
+   "license": "CC0",
+   "landing": "https://www.rawpixel.com/image/6082112/vegetables-supermarket",
+   "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZmwyMzIyMjM4MDU2NC1pbWFnZS1reWNqcXdzeC5qcGc.jpg"
+  },
+  {
+   "name": "retail-produce",
+   "title": "Vegetables in a supermarket",
+   "creator": "rawpixel",
+   "license": "CC0",
+   "landing": "https://www.rawpixel.com/image/6081498/vegetables-supermarket",
+   "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZmwyMzg1MDUyMTM1NS1pbWFnZS1reWNqcThkbS5qcGc.jpg"
+  },
+  {
+   "name": "retail-empty",
+   "title": "Empty shelves, supermarket",
+   "creator": "rawpixel",
+   "license": "CC0",
+   "landing": "https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19",
+   "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZmw0OTgxMTU5NjQwNy1pbWFnZS1reWNpc2tqeC5qcGc.jpg"
+  },
+  {
+   "name": "retail-bananas",
+   "title": "Bananas Fruits",
+   "creator": "Ryan McGuire",
+   "license": "CC0",
+   "landing": "https://stocksnap.io/photo/bananas-fruits-D0C5D92CD9",
+   "url": "https://cdn.stocksnap.io/img-thumbs/960w/D0C5D92CD9.jpg"
+  },
+  {
+   "name": "banking",
+   "title": "Building Architecture",
+   "creator": "Vladimir Kudinov",
+   "license": "CC0",
+   "landing": "https://stocksnap.io/photo/building-architecture-ONN4Z188GF",
+   "url": "https://cdn.stocksnap.io/img-thumbs/960w/ONN4Z188GF.jpg"
+  },
+  {
+   "name": "banking-office",
+   "title": "Office Work",
+   "creator": "Charles Forerunner",
+   "license": "CC0",
+   "landing": "https://stocksnap.io/photo/office-work-HZCASACP3N",
+   "url": "https://cdn.stocksnap.io/img-thumbs/960w/HZCASACP3N.jpg"
+  },
+  {
+   "name": "banking-card",
+   "title": "Credit card payment",
+   "creator": "rawpixel",
+   "license": "CC0",
+   "landing": "https://www.rawpixel.com/image/8809237/credit-card-payment-shopping",
+   "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL2lzMTUwNzItaW1hZ2UuanBn.jpg"
+  },
+  {
+   "name": "banking-card2",
+   "title": "Creditcard Money",
+   "creator": "Michal Jarmoluk",
+   "license": "CC0",
+   "landing": "https://stocksnap.io/photo/creditcard-money-71MH9ATF4S",
+   "url": "https://cdn.stocksnap.io/img-thumbs/960w/71MH9ATF4S.jpg"
+  },
+  {
+   "name": "banking-charts",
+   "title": "Stockmarket Charts",
+   "creator": "Negative Space",
+   "license": "CC0",
+   "landing": "https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3",
+   "url": "https://cdn.stocksnap.io/img-thumbs/960w/G3YOGRBLF3.jpg"
+  },
+  {
+   "name": "telecom",
+   "title": "Telecommunications mast at sunset",
+   "creator": "W.carter",
+   "license": "CC BY-SA 4.0",
+   "landing": "https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Telecommunications_mast_at_sunset.jpg"
+  },
+  {
+   "name": "telecom-dish",
+   "title": "Zaldiaran antenas",
+   "creator": "Basotxerri",
+   "license": "CC BY-SA 4.0",
+   "landing": "https://commons.wikimedia.org/wiki/File:Zaldiaran_-_Antenas_01.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Zaldiaran_-_Antenas_01.jpg"
+  },
+  {
+   "name": "telecom-storm",
+   "title": "We belong to the light, we belong to the thunder",
+   "creator": "dullhunk",
+   "license": "CC BY-SA 2.0",
+   "landing": "https://www.flickr.com/photos/14829735@N00/51750792923",
+   "url": "https://live.staticflickr.com/65535/51750792923_2b0d97c769_b.jpg"
+  }
  ]
 }
