@@ -9,14 +9,14 @@
 <link rel="canonical" href="https://realtimeintelligence.io/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Real-Time Intelligence on Confluent">
-<meta property="og:description" content="Predict the next minute. Optimize the next move. Granite Time Series models and Streaming Agents on Confluent, live simulations you can touch.">
+<meta property="og:description" content="Predict the next stockout. Optimize for service level. Granite Time Series models and Streaming Agents on Confluent, live simulations you can touch.">
 <meta property="og:url" content="https://realtimeintelligence.io/">
 <meta property="og:image" content="https://realtimeintelligence.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Real-Time Intelligence on Confluent">
-<meta name="twitter:description" content="Predict the next minute. Optimize the next move. Granite Time Series models and Streaming Agents on Confluent, live simulations you can touch.">
+<meta name="twitter:description" content="Predict the next stockout. Optimize for service level. Granite Time Series models and Streaming Agents on Confluent, live simulations you can touch.">
 <meta name="twitter:image" content="https://realtimeintelligence.io/og-image.png">
 <meta name="theme-color" content="#000a2e">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -401,6 +401,7 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 /* rotating word */
 .h-display .rot{position:relative;white-space:nowrap}
 .h-display .caret{display:inline-block;width:3px;height:.85em;background:var(--blue-3);vertical-align:-.08em;margin-left:.08em;animation:blink .9s steps(1) infinite}
+.h-display .caret.c2{animation-delay:.45s}
 
 /* hero stats + marquee */
 .stats{display:flex;flex-wrap:wrap;gap:.6rem 2.2rem;margin-top:.4rem}
@@ -608,7 +609,7 @@ body.walking{overflow:hidden}
   <div class="wrap" id="top">
     <div class="hero-head">
       <div class="pills"><span class="pill live">Early Access on Confluent Cloud</span></div>
-      <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize the next move.</h1>
+      <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em>.</h1>
       <p class="lede">Streaming data is where the mission-critical decisions live. One statement of Flink SQL forecasts every series, flags what is off and finds the setpoint, inside the stream, with no training. Touch anything on this page.</p>
       <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>1 min, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
     </div>
@@ -2031,13 +2032,15 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
 
 /* ============ hero: rotating word + marquee ============ */
 (function(){
-  const el=$('#rot');if(!el)return;
-  const words=['stockout','fraud','outage','kiln drift','grid peak','price swing','anomaly','minute'];
-  if(reduced){el.textContent='minute';return;}
-  let i=0,typing=false;
-  function type(word,done){let k=0;typing=true;const tick=()=>{el.textContent=word.slice(0,++k);if(k<word.length)setTimeout(tick,55);else{typing=false;done();}};tick();}
-  function erase(done){const tick=()=>{el.textContent=el.textContent.slice(0,-1);if(el.textContent.length)setTimeout(tick,28);else done();};tick();}
-  function cycle(){setTimeout(()=>erase(()=>{i=(i+1)%words.length;type(words[i],cycle);}),2400);}
+  const el=$('#rot'),el2=$('#rot2');if(!el)return;
+  /* what we predict, and what the optimizer is pointed at */
+  const pairs=[['stockout','service level'],['fraud','risk'],['outage','uptime'],['kiln drift','energy'],['grid peak','cost'],['price swing','margin'],['quality slip','yield'],['anomaly','security']];
+  if(reduced){el.textContent='stockout';if(el2)el2.textContent='service level';return;}
+  let i=0;
+  function type(node,word,done){let k=0;const tick=()=>{node.textContent=word.slice(0,++k);if(k<word.length)setTimeout(tick,55);else done();};tick();}
+  function erase(node,done){const tick=()=>{node.textContent=node.textContent.slice(0,-1);if(node.textContent.length)setTimeout(tick,28);else done();};tick();}
+  function cycle(){setTimeout(()=>erase(el,()=>{i=(i+1)%pairs.length;type(el,pairs[i][0],()=>{if(!el2){cycle();return;}erase(el2,()=>type(el2,pairs[i][1],cycle));});}),2600);}
+  if(el2&&!el2.textContent)el2.textContent=pairs[0][1];
   cycle();
   const mq=$('#mq');if(mq){const items=['Confluent Cloud','Apache Flink','Apache Kafka','Schema Registry','Tableflow','Apache Iceberg','Hugging Face','granite-tsfm','Streaming Agents','Confluent MCP','pgvector','Claude Code','IBM Bob','Codex','AWS · Azure · GCP'];const html=items.map(t=>'<span>'+t+'</span>').join('');mq.innerHTML=html+html;}
 })();
