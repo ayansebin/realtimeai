@@ -673,8 +673,10 @@ body.walking{overflow:hidden}
             <div class="chips" id="live-mode">
               <button class="chip" data-v="ad" aria-pressed="true">Detect anomalies</button>
               <button class="chip" data-v="fc" aria-pressed="false">Forecast</button>
+              <button class="chip" data-v="opt" aria-pressed="false">Optimize</button>
+              <button class="chip" data-v="search" aria-pressed="false">Search</button>
             </div></div>
-          <div class="ctl-group" id="live-ctl-h" hidden><span class="eyebrow">Horizon</span>
+          <div class="ctl-group" id="live-ctl-h" hidden><span class="eyebrow" id="live-h-label">Horizon</span>
             <label class="range"><input type="range" id="live-h" min="4" max="48" value="16" aria-label="Horizon"><output id="live-hv">16</output></label></div>
           <div class="ctl-group" id="live-ctl-c"><span class="eyebrow">Confidence</span>
             <div class="chips" id="live-conf">
@@ -687,12 +689,12 @@ body.walking{overflow:hidden}
         </div>
       </div>
       <div class="stage-body">
-        <div class="canvas-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="Live stream with forecast band and anomaly flags"></canvas><div class="tip" id="live-tip"></div></div>
+        <div class="canvas-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="Live stream with anomaly flags, the forecast band, the optimized path inside its window, and similar windows found in the history"></canvas><div class="tip" id="live-tip"></div></div>
       </div>
       <div class="stage-foot">
         <div class="readouts">
           <div class="readout"><b id="ro-events">0</b><span>events scored</span></div>
-          <div class="readout"><b id="ro-flags" class="red">0</b><span>flags</span></div>
+          <div class="readout"><b id="ro-flags" class="red">0</b><span id="ro-flags-l">flags</span></div>
           <div class="readout"><b id="ro-model" class="blue">TTM</b><span>model</span></div>
           <div class="readout"><b id="ro-lat">~3 ms</b><span>per call, CPU</span></div>
         </div>
@@ -1562,18 +1564,57 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     load:{table:'meter_readings',col:'load_kw',key:'meter_id',unit:'kW',base:860,amp:150,amp2:40,period:96,noise:11,stepSec:900,spike:-330,dec:0}
   };
   Object.values(SC).forEach(c=>c.warm=420);
-  const st={sc:'temp',mode:'ad',conf:99,h:16,paused:false,events:0,acc:0,hover:-1};
+  /* what TS_OPTIMIZE keeps inside the window on each stream, and the lever it moves */
+  const OPT={
+    temp:{lo:31.0,hi:32.2,keep:'keep 31.0 to 32.2 °C',lever:'heater setpoint',obj:'min energy',move:d=>(d>0?'heater −':'heater +')+Math.abs(d*1.1).toFixed(1)+' °C'},
+    latency:{hi:140,keep:'keep ≤ 140 ms',lever:'replicas',obj:'min cost',move:d=>'scale out +'+Math.max(1,Math.ceil(d/12))+' replicas'},
+    payments:{thr:true,keep:'hold threshold from the band',lever:'hold threshold',obj:'false declines ≤ 1 %',move:d=>'hold above $'+Math.round(d)},
+    load:{hi:1000,keep:'keep ≤ 1,000 kW',lever:'demand response',obj:'min peak charge',move:d=>'shed '+Math.round(d/10)*10+' kW'}
+  };
+  const st={sc:'temp',mode:'ad',conf:99,h:16,paused:false,events:0,acc:0,hover:-1,moves:0,matches:0,best:0};
   let sim=new Sim(SC.temp);st.events=sim.rows.length;
   const cv=new Cv($('#live-cv'));const tip=$('#live-tip');let layout=null;
   const BASE=Date.UTC(2026,9,16,9,0,0);
   const label=i=>{const d=new Date(BASE+i*sim.stepSec*1000);const p=n=>String(n).padStart(2,'0');return p(d.getUTCHours())+':'+p(d.getUTCMinutes())+(sim.stepSec<60?':'+p(d.getUTCSeconds()):'');};
-  function sql(){const s=sim;const q=st.mode==='ad'?"SELECT event_time, "+s.col+", AI_DETECT_ANOMALIES("+s.col+", event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+Number(st.conf).toFixed(1)+")) OVER (PARTITION BY "+s.key+" ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS anomaly FROM "+s.table+";":"SELECT event_time, "+s.col+", AI_FORECAST("+s.col+", event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE "+st.h+")) OVER (PARTITION BY "+s.key+" ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS forecast FROM "+s.table+";";$('#live-sql').innerHTML=highlight(q);$('#live-sql').dataset.sql=q;}
+  function sql(){const s=sim;const over=" OVER (PARTITION BY "+s.key+" ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)";let q;
+    if(st.mode==='ad')q="SELECT event_time, "+s.col+", AI_DETECT_ANOMALIES("+s.col+", event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+Number(st.conf).toFixed(1)+"))"+over+" AS anomaly FROM "+s.table+";";
+    else if(st.mode==='fc')q="SELECT event_time, "+s.col+", AI_FORECAST("+s.col+", event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE "+st.h+"))"+over+" AS forecast FROM "+s.table+";";
+    else if(st.mode==='opt'){const o=OPT[st.sc];q="SELECT event_time, "+s.col+", TS_OPTIMIZE(AI_FORECAST("+s.col+", event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE "+st.h+")), JSON_OBJECT('keep' VALUE '"+(o.thr?'band_p99':(o.lo!=null?o.lo+'..':'..')+(o.hi!=null?o.hi:''))+"', 'lever' VALUE '"+o.lever.replace(/ /g,'_')+"', 'objective' VALUE '"+o.obj.replace(/ /g,'_').replace('≤','le')+"'))"+over+" AS setpoint FROM "+s.table+";";}
+    else q="SELECT event_time, TS_SEARCH(TS_EMBED("+s.col+", event_time, JSON_OBJECT('model' VALUE 'tspulse', 'window' VALUE "+st.h+")), JSON_OBJECT('k' VALUE 3, 'index' VALUE '"+s.table+"_windows'))"+over+" AS matches FROM "+s.table+";";
+    $('#live-sql').innerHTML=highlight(q);$('#live-sql').dataset.sql=q;}
   function readouts(){$('#ro-events').textContent=fmtInt(st.events);const m=MODELS[App.model];$('#ro-model').textContent=m.name;$('#ro-lat').textContent='~'+m.ms+' ms';}
   st.dirty=true;
-  function draw(){if(!st.dirty)return;st.dirty=false;layout=drawStream(cv,sim,{mode:st.mode,z:Z[st.conf]||2.5758,h:st.h,hover:st.hover,label,nVis:st.mode==='fc'?Math.min(Math.max(30,Math.floor((cv.W-66)/7)),Math.max(60,st.h*3)):undefined});if(layout)$('#ro-flags').textContent=layout.flags;}
+  const znorm=a=>{const m=mean(a),s=std(a)||1;return a.map(v=>(v-m)/s);};
+  const dist=(a,b)=>{let d=0;for(let i=0;i<a.length;i++)d+=(a[i]-b[i])*(a[i]-b[i]);return d;};
+  function optAfter(L){const o=OPT[st.sc],f=L.f;if(!f||!f.length)return;const ctx=cv.ctx;const k0=L.vis.length-1;const FX=j=>L.X(k0+j);const x1=FX(1),x2=FX(f.length);ctx.font=MONO;ctx.textBaseline='middle';
+    if(o.thr){const thr=Math.max.apply(null,f.map(p=>p.mean+2.81*p.sig))*1.05;const y=Math.round(L.Y(Math.min(thr,L.hi)))+0.5;ctx.setLineDash([5,4]);ctx.strokeStyle=C.red2;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x1,y);ctx.lineTo(x2,y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=C.red2;ctx.textAlign='left';ctx.fillText(o.move(thr)+' · '+o.obj,x1+6,y-10);st.moves=1;st.moveText='TS_OPTIMIZE · '+o.move(thr);return;}
+    const lo=o.lo!=null?o.lo:L.lo,hi=o.hi!=null?o.hi:L.hi;const yh=L.Y(Math.min(hi,L.hi)),yl=L.Y(Math.max(lo,L.lo));
+    ctx.fillStyle='rgba(66,190,101,.09)';ctx.fillRect(x1,yh,x2-x1,yl-yh);ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(111,220,140,.8)';ctx.lineWidth=1;ctx.beginPath();if(o.hi!=null){ctx.moveTo(x1,Math.round(yh)+0.5);ctx.lineTo(x2,Math.round(yh)+0.5);}if(o.lo!=null){ctx.moveTo(x1,Math.round(yl)+0.5);ctx.lineTo(x2,Math.round(yl)+0.5);}ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=C.green2;ctx.textAlign='right';ctx.fillText(o.keep,x2-2,(o.hi!=null?yh:yl)+(o.hi!=null?10:-10));
+    const m=(o.hi!=null&&o.lo!=null)?(o.hi-o.lo)*0.08:(L.hi-L.lo)*0.04;let excess=0;f.forEach(p=>{if(o.hi!=null&&p.mean>o.hi-m)excess=Math.max(excess,p.mean-(o.hi-m));if(o.lo!=null&&p.mean<o.lo+m)excess=Math.min(excess,p.mean-(o.lo+m));});
+    if(excess!==0){ctx.save();ctx.shadowColor=C.green;ctx.shadowBlur=8;ctx.setLineDash([6,4]);ctx.strokeStyle=C.green2;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(L.X(k0),L.Y(L.vis[k0].v));f.forEach((p,j)=>{const u=Math.min(1,(j+1)/4);const t=clamp(p.mean,o.lo!=null?o.lo+m:-1e9,o.hi!=null?o.hi-m:1e9);ctx.lineTo(FX(j+1),L.Y(lerp(p.mean,t,u)));});ctx.stroke();ctx.restore();ctx.setLineDash([]);
+      st.moves=1;st.moveText='TS_OPTIMIZE · '+o.move(excess)+' · '+o.obj;ctx.fillStyle=C.green2;ctx.textAlign='left';ctx.fillText(st.moveText,x1+6,L.padT+22);}
+    else{st.moves=0;st.moveText='inside the window · no move';ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText(st.moveText,x1+6,L.padT+22);}}
+  function searchAfter(L){const vis=L.vis,n=vis.length,W=st.h;const ctx=cv.ctx;ctx.font=MONO;ctx.textBaseline='middle';if(n<3*W){st.matches=0;return;}
+    const zq=znorm(vis.slice(n-W).map(r=>r.v));const cands=[];for(let s0=0;s0<=n-2*W;s0+=2){const d=dist(znorm(vis.slice(s0,s0+W).map(r=>r.v)),zq);cands.push({s:s0,d});}
+    cands.sort((a,b)=>a.d-b.d);const picks=[];for(const c of cands){if(picks.every(p=>Math.abs(p.s-c.s)>=W)){picks.push(c);if(picks.length===3)break;}}
+    picks.forEach(p=>{p.score=Math.max(0,1-p.d/(2*W));});
+    const top=L.padT,h=L.ph;
+    picks.forEach((p,i)=>{const xa=L.X(p.s),xb=L.X(p.s+W-1);const a=0.35+0.65*p.score;ctx.fillStyle='rgba(69,137,255,'+(0.08+0.14*p.score).toFixed(2)+')';ctx.fillRect(xa,top,xb-xa,h);ctx.strokeStyle='rgba(120,169,255,'+a.toFixed(2)+')';ctx.lineWidth=1;ctx.strokeRect(Math.round(xa)+0.5,top+0.5,xb-xa,h-1);ctx.fillStyle=i===0?C.blue4:C.blue3;ctx.textAlign='left';ctx.fillText(p.score.toFixed(2)+' · '+label(vis[p.s].i),xa+4,top+10);});
+    const qa=L.X(n-W),qb=L.X(n-1);ctx.setLineDash([4,3]);ctx.strokeStyle='rgba(244,244,244,.8)';ctx.strokeRect(Math.round(qa)+0.5,top+0.5,qb-qa,h-1);ctx.setLineDash([]);ctx.fillStyle=C.ink;ctx.textAlign='right';ctx.fillText('query · last '+W,qb-4,top+10);
+    st.matches=picks.length;st.best=picks.length?picks[0].score:0;}
+  function draw(){if(!st.dirty)return;st.dirty=false;
+    if(st.mode==='opt'){const o=OPT[st.sc];let xr=[o.lo!=null?o.lo:1e9,o.hi!=null?o.hi:-1e9];if(o.thr){const f0=sim.fc(st.h);if(f0)xr=[1e9,Math.max.apply(null,f0.map(p=>p.mean+2.81*p.sig))*1.05*1.04];}layout=drawStream(cv,sim,{mode:'fc',z:Z[st.conf]||2.5758,h:st.h,hover:st.hover,label,nVis:Math.min(Math.max(30,Math.floor((cv.W-66)/7)),Math.max(60,st.h*3)),extraRange:xr,after:optAfter});}
+    else if(st.mode==='search'){layout=drawStream(cv,sim,{mode:'raw',z:0,h:0,hover:st.hover,label,nVis:Math.min(240,Math.max(90,Math.floor((cv.W-66)/5))),glow:false,after:searchAfter});}
+    else layout=drawStream(cv,sim,{mode:st.mode,z:Z[st.conf]||2.5758,h:st.h,hover:st.hover,label,nVis:st.mode==='fc'?Math.min(Math.max(30,Math.floor((cv.W-66)/7)),Math.max(60,st.h*3)):undefined});
+    if(!layout)return;const rf=$('#ro-flags'),rl=$('#ro-flags-l');
+    if(st.mode==='ad'){rf.textContent=layout.flags;rf.className='red';rl.textContent='flags';}
+    else if(st.mode==='fc'){rf.textContent='+'+st.h;rf.className='blue';rl.textContent='steps ahead, with band';}
+    else if(st.mode==='opt'){rf.textContent=st.moves;rf.className=st.moves?'green':'';rl.textContent=st.moves?'setpoint move proposed':'inside the window';}
+    else{rf.textContent=st.matches;rf.className='blue';rl.textContent='similar windows · best '+st.best.toFixed(2);}}
   const stage=reg({el,resize(){cv.fit();st.dirty=true;draw();},update(dt){if(st.paused)return;st.acc+=dt;const rate=reduced?1400:650;let n=0;while(st.acc>rate){st.acc-=rate;sim.step();st.events++;n++;}if(n){st.dirty=true;readouts();}},draw});
   chipGroup('live-sc',v=>{st.sc=v;sim=new Sim(SC[v]);st.events+=sim.rows.length;st.hover=-1;st.dirty=true;sql();readouts();});
-  chipGroup('live-mode',v=>{st.mode=v;$('#live-ctl-h').hidden=v!=='fc';$('#live-ctl-c').hidden=v!=='ad';st.dirty=true;sql();});
+  chipGroup('live-mode',v=>{st.mode=v;$('#live-ctl-h').hidden=!(v==='fc'||v==='opt'||v==='search');$('#live-h-label').textContent=v==='search'?'Window':'Horizon';$('#live-ctl-c').hidden=v!=='ad';st.dirty=true;sql();});
   chipGroup('live-conf',v=>{st.conf=Number(v);st.dirty=true;sql();});
   $('#live-h').addEventListener('input',e=>{st.h=Number(e.target.value);$('#live-hv').textContent=st.h;st.dirty=true;sql();});
   $('#live-poke').addEventListener('click',()=>{sim.q=[sim.spike,sim.spike*.45,sim.spike*.15];if(st.paused){sim.step();st.events++;st.dirty=true;readouts();}});
