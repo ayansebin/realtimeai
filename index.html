@@ -156,7 +156,8 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 .pill.live{border-color:rgba(66,190,101,.6);color:var(--green-2)}
 .pill.live::before{content:"";width:6px;height:6px;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 1.6s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-.h-display{font-size:clamp(2.4rem,6.2vw,5rem);font-weight:300;line-height:1.02;letter-spacing:-.02em;max-width:14ch}
+.h-display{font-size:clamp(2.4rem,6vw,4.8rem);font-weight:300;line-height:1.04;letter-spacing:-.02em;max-width:26ch}
+@media (max-width:600px){.h-display br{display:none}}
 .h-display em{font-style:normal;color:var(--blue-3)}
 .lede{font-size:clamp(1.1rem,1.7vw,1.4rem);font-weight:300;color:var(--ink-2);max-width:48ch}
 .hero .stage{box-shadow:0 30px 80px rgba(0,0,0,.45)}
@@ -386,6 +387,82 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .links a:hover{color:var(--ink)}
 .links a::before{content:"\2192";color:var(--blue-3);font-family:var(--font-mono)}
 
+/* topbar + nav stat */
+.topbar{background:linear-gradient(90deg,rgba(15,98,254,.35),rgba(105,41,196,.3));border-bottom:1px solid var(--line);font-size:.8rem;color:var(--ink-2)}
+.topbar .wrap{display:flex;gap:1rem;align-items:center;justify-content:center;min-height:34px;flex-wrap:wrap}
+.topbar b{color:var(--ink);font-weight:500;margin-right:.35rem;border:1px solid rgba(255,255,255,.35);padding:.05rem .4rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase}
+.topbar a{color:var(--ink);white-space:nowrap}
+@media (max-width:760px){.topbar{display:none}}
+.nav-stat{display:inline-flex;align-items:baseline;gap:.35rem;font-size:.8rem;color:var(--ink-2);white-space:nowrap;border:1px solid var(--line-2);padding:.3rem .6rem}
+.nav-stat b{font-weight:500;color:var(--ink)}
+.nav-stat:hover{text-decoration:none;color:var(--ink);background:var(--panel-2)}
+@media (max-width:900px){.nav-stat{display:none}}
+
+/* rotating word */
+.h-display .rot{position:relative;white-space:nowrap}
+.h-display .caret{display:inline-block;width:3px;height:.85em;background:var(--blue-3);vertical-align:-.08em;margin-left:.08em;animation:blink .9s steps(1) infinite}
+
+/* hero stats + marquee */
+.stats{display:flex;flex-wrap:wrap;gap:.6rem 2.2rem;margin-top:.4rem}
+.stat{display:grid;gap:.05rem}
+.stat b{font-weight:300;font-size:1.7rem;line-height:1.05;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat span{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.marquee{margin-top:14px;margin-bottom:clamp(40px,5vw,72px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:1.5rem;overflow:hidden;min-height:48px}
+.mq-label{flex:none;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding-right:1.5rem;border-right:1px solid var(--line)}
+.mq-track{flex:1;min-width:0;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mq-inner{display:flex;gap:2.2rem;width:max-content;animation:mq 46s linear infinite;font-size:.86rem;color:var(--ink-2);white-space:nowrap}
+.mq-inner span{display:inline-flex;align-items:center;gap:.5rem}
+.mq-inner span::before{content:"";width:6px;height:6px;background:var(--blue-2);opacity:.8}
+.marquee:hover .mq-inner{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (max-width:760px){.mq-label{display:none}}
+@media (prefers-reduced-motion:reduce){.mq-inner{animation:none}.h-display .caret{animation:none}}
+
+/* architecture */
+.arch{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) minmax(0,1fr);gap:clamp(18px,4vw,64px);align-items:start}
+@media (max-width:900px){.arch{grid-template-columns:1fr;gap:18px}}
+.arch-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.arch-col{position:relative;z-index:2;display:grid;gap:8px;align-content:start}
+.arch-h{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);display:flex;gap:.6rem;align-items:center;margin-bottom:.2rem}
+.arch-h span{font-family:var(--font-mono);color:var(--blue-3)}
+.arch-node{background:rgba(0,7,20,.75);border:1px solid var(--line-2);padding:.55rem .75rem;font-size:.88rem;color:var(--ink)}
+.arch-f{font-size:.74rem;color:var(--ink-3);margin-top:.3rem}
+.arch-engine{background:linear-gradient(180deg,rgba(0,29,108,.55),rgba(0,13,60,.7));border:1px solid var(--blue-2);box-shadow:0 0 0 1px rgba(69,137,255,.25),0 0 50px rgba(15,98,254,.25);padding:.5rem;display:grid;gap:6px}
+.arch-row{display:grid;grid-template-columns:10px 1fr;gap:.2rem .6rem;align-items:center;background:rgba(0,7,20,.55);border:1px solid var(--line);padding:.55rem .7rem}
+.arch-row i{width:10px;height:10px;background:var(--blue-2);box-shadow:0 0 10px var(--blue-2);grid-row:1/3}
+.arch-row b{font-weight:500;font-size:.9rem;color:var(--ink)}
+.arch-row span{font-size:.74rem;color:var(--ink-3);grid-column:2;line-height:1.35}
+.arch-row.purple i{background:var(--purple);box-shadow:0 0 10px var(--purple)}
+.arch-row.purple{border-color:rgba(190,149,255,.4)}
+.arch-col.mid .arch-f{text-align:center}
+
+/* proof labels + trust */
+.pcard .pk em{font-style:normal;margin-left:.4rem;border:1px solid var(--line-2);padding:.05rem .4rem;font-size:.62rem;color:var(--ink-2);letter-spacing:.06em}
+.pcard .pk{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem}
+.trust{border:1px solid var(--line);background:var(--panel);padding:clamp(16px,2.4vw,26px) clamp(16px,2.4vw,28px);display:grid;gap:1rem}
+.trust-h{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.trust-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+@media (max-width:1100px){.trust-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){.trust-grid{grid-template-columns:1fr 1fr}}
+.trust-i{display:grid;gap:.25rem;font-size:.85rem;color:var(--ink);align-content:start}
+.trust-i i{width:12px;height:12px;border:2px solid var(--green-2);box-shadow:0 0 10px rgba(66,190,101,.6);margin-bottom:.2rem}
+.trust-i b{font-weight:500;font-size:.86rem;line-height:1.3}
+.trust-i span{font-size:.75rem;color:var(--ink-3);line-height:1.35}
+
+/* two ways */
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media (max-width:900px){.ways{grid-template-columns:1fr}}
+.way{background:rgba(0,7,20,.5);border:1px solid var(--line);padding:1.2rem 1.1rem 1.1rem;display:grid;gap:.8rem;align-content:start}
+.way.on{border-color:var(--blue-2);box-shadow:0 0 0 1px rgba(69,137,255,.35),0 0 40px rgba(15,98,254,.18);background:rgba(0,29,108,.3)}
+.way .wk{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.way.on .wk{color:var(--blue-3)}
+.way h3{font-size:1.4rem;font-weight:300}
+.way p{color:var(--ink-2);font-size:.9rem}
+.way pre{margin:0;background:rgba(0,0,0,.45);border:1px solid var(--line);padding:.7rem .8rem;font-size:.76rem;line-height:1.5;overflow:auto;color:var(--ink-2)}
+.way pre .k{color:var(--blue-3)}.way pre .f{color:var(--purple)}.way pre .s{color:var(--green-2)}.way pre .n{color:var(--orange)}
+.cta .lede{max-width:40ch}
+.foot .tag{color:var(--ink);font-weight:500}
+
 /* cta band + footer */
 .cta{margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(15,98,254,.25),rgba(0,29,108,.35));padding:clamp(40px,5vw,72px) 0}
 .cta .wrap{display:flex;flex-wrap:wrap;gap:1.5rem 3rem;align-items:center;justify-content:space-between}
@@ -401,6 +478,7 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 </head>
 <body>
 <a class="sr" href="#innovation">Skip to content</a>
+<div class="topbar"><div class="wrap"><span><b>New</b> Streaming Agents and the Granite functions are in Early Access on Confluent Cloud.</span><a href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Sign up &#8594;</a></div></div>
 <nav class="nav" aria-label="Main">
   <div class="wrap">
     <a class="brand" href="#top"><span class="dot"></span>Real-time intelligence <span class="co">Granite Time Series on Confluent</span></a>
@@ -410,6 +488,7 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
       <a href="#usecases" data-ch="usecases"><b>03</b>Use cases</a>
       <a href="#start" data-ch="start"><b>04</b>Start</a>
     </div>
+    <a class="nav-stat" href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener"><b>44M+</b> downloads</a>
     <a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </div>
 </nav>
@@ -419,8 +498,15 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
   <div class="wrap" id="top">
     <div class="hero-head">
       <div class="pills"><span class="pill live">Early Access</span><span class="pill">IBM Granite Time Series</span><span class="pill">Confluent Cloud for Apache Flink</span><span class="pill">Streaming Agents</span></div>
-      <h1 class="h-display">See the next minute <em>before it happens.</em></h1>
-      <p class="lede">Forecast, detect and act inside the stream. One line of Flink SQL. No training. Touch anything on this page.</p>
+      <h1 class="h-display">See the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>before it happens.</h1>
+      <p class="lede">One statement of Flink SQL predicts demand, payments, energy, network telemetry, asset prices and anomalies inside the stream. No training. Touch anything on this page.</p>
+      <div class="stats" id="hero-stats">
+        <div class="stat"><b>44M+</b><span>model downloads</span></div>
+        <div class="stat"><b>#1</b><span>GIFT-Eval, zero-shot</span></div>
+        <div class="stat"><b>10 to 60×</b><span>faster throughput</span></div>
+        <div class="stat"><b>millions</b><span>of series, one statement</span></div>
+        <div class="stat"><b>seconds</b><span>to predict, not days</span></div>
+      </div>
     </div>
 
     <div class="stage" id="st-live">
@@ -464,6 +550,7 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
         <div class="sqlline"><code id="live-sql"></code><button class="btn sm ghost" id="live-copy">Copy SQL</button></div>
       </div>
     </div>
+    <div class="marquee" aria-label="Runs with"><div class="mq-label">Runs where your stream runs</div><div class="mq-track"><div class="mq-inner" id="mq"></div></div></div>
   </div>
 </header>
 
@@ -574,6 +661,50 @@ FROM pos_sales;</code></pre></div>
           </div>
         </details>
       </div>
+    </div>
+
+    <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
+      <h2>One stream. Every decision.</h2>
+      <p>Connect the systems where your series already live. Flink runs the models on every event. Decisions land as topics, tables, alerts and agent calls.</p>
+    </div>
+
+    <div class="stage" id="st-arch">
+      <div class="stage-body">
+        <div class="arch" id="arch">
+          <canvas class="arch-cv" id="arch-cv" aria-hidden="true"></canvas>
+          <div class="arch-col" id="arch-in">
+            <div class="arch-h"><span>01</span>Streams in</div>
+            <div class="arch-node">POS and e-commerce</div>
+            <div class="arch-node">Card payments</div>
+            <div class="arch-node">SCADA and historians</div>
+            <div class="arch-node">Network telemetry</div>
+            <div class="arch-node">Market data</div>
+            <div class="arch-node">Meters and IoT</div>
+            <div class="arch-f">120+ connectors, Schema Registry contracts</div>
+          </div>
+          <div class="arch-col mid" id="arch-mid">
+            <div class="arch-h"><span>02</span>Confluent Cloud</div>
+            <div class="arch-engine">
+              <div class="arch-row"><i></i><b>Kafka topics</b><span>every series, every event, in order</span></div>
+              <div class="arch-row"><i></i><b>Flink SQL</b><span>AI_FORECAST · AI_DETECT_ANOMALIES · TS_EMBED · TS_SEARCH · TS_OPTIMIZE</span></div>
+              <div class="arch-row"><i></i><b>Granite Time Series models</b><span>hosted by Confluent, zero-shot, your data stays in your org</span></div>
+              <div class="arch-row purple"><i></i><b>Streaming Agents</b><span>CREATE TOOL · CREATE AGENT · AI_RUN_AGENT, gates for experts</span></div>
+            </div>
+            <div class="arch-f">one statement per decision, billed as Flink compute</div>
+          </div>
+          <div class="arch-col" id="arch-out">
+            <div class="arch-h"><span>03</span>Decisions out</div>
+            <div class="arch-node">Purchase orders topic</div>
+            <div class="arch-node">Holds and alerts</div>
+            <div class="arch-node">Tickets with a cause</div>
+            <div class="arch-node">Setpoint recommendations</div>
+            <div class="arch-node">Tableflow to Iceberg</div>
+            <div class="arch-node">Apps, BI and agents via MCP</div>
+            <div class="arch-f">consumed as events, tables or tool calls</div>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b>1</b><span>statement</span></div><div class="readout"><b id="arch-count">0</b><span>decisions in flight</span></div><div class="readout"><b class="purple">0</b><span>models to train</span></div></div><div class="hint">Nothing leaves Confluent Cloud. Models run next to the topic.</div></div>
     </div>
 
     <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
@@ -714,16 +845,31 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <div class="chapter-head" style="margin-top:clamp(40px,5vw,72px)">
-      <h2>Proof in production.</h2>
-      <p>Three engagements on live operational data.</p>
+      <h2>Real outcomes on real streams.</h2>
+      <p>Engagements, demos and reference designs. Client identities withheld.</p>
     </div>
     <div class="stage" id="st-proof">
       <div class="stage-body">
         <div class="proof" id="proof">
-          <div class="pcard"><span class="pk">Telco · network operations</span><b>0<small> tickets without a cause</small></b><canvas data-spark="telco"></canvas><div class="pt">IBM Network Intelligence, Granite TSPulse</div><div class="pd">Telemetry in, anomalies out, agentic root cause, remediation human-in-the-loop or autonomous. Tickets open only when a cause is confirmed.</div><div class="tags"><span>TSPulse</span><span>agentic RCA</span><span>MCP tools</span></div></div>
-          <div class="pcard"><span class="pk">Cement · production</span><b data-count="99" data-prefix="93 → " data-suffix="%">93%</b><canvas data-spark="cement"></canvas><div class="pt">Process and quality models per mill</div><div class="pd">24 to 30 regression models became 2 foundation models. 6 months became 8 to 10 weeks. $2 per ton EBITDA, tens to hundreds of millions in benefit.</div><div class="tags"><span>fine-tuned per mill</span><span>setpoints</span></div></div>
-          <div class="pcard"><span class="pk">Financial services · markets</span><b data-count="10" data-prefix="~" data-suffix="% RMSE">~0%</b><canvas data-spark="fin"></canvas><div class="pt">Multivariate asset forecasts, Granite TTM</div><div class="pd">Per asset class, against the incumbent model. Zero-shot first, tuned where the backtest paid.</div><div class="tags"><span>TTM</span><span>multivariate</span><span>backtested</span></div></div>
+          <div class="pcard"><span class="pk">Telco · network operations <em>production</em></span><b>0<small> tickets without a cause</small></b><canvas data-spark="telco"></canvas><div class="pt">IBM Network Intelligence, Granite TSPulse</div><div class="pd">Telemetry in, anomalies out, agentic root cause, remediation human-in-the-loop or autonomous.</div><div class="tags"><span>TSPulse</span><span>agentic RCA</span><span>MCP tools</span></div></div>
+          <div class="pcard"><span class="pk">Cement · production <em>production</em></span><b data-count="99" data-prefix="93 → " data-suffix="%">93%</b><canvas data-spark="cement"></canvas><div class="pt">Process and quality models per mill</div><div class="pd">30 regression models became 2. 6 months became 8 to 10 weeks. $2 per ton EBITDA, tens to hundreds of millions in benefit.</div><div class="tags"><span>fine-tuned per mill</span><span>setpoints</span></div></div>
+          <div class="pcard"><span class="pk">Financial services · markets <em>production</em></span><b data-count="10" data-prefix="~" data-suffix="% RMSE">~0%</b><canvas data-spark="fin"></canvas><div class="pt">Multivariate asset forecasts, Granite TTM</div><div class="pd">Per asset class, against the incumbent model. Zero-shot first, tuned where the backtest paid.</div><div class="tags"><span>TTM</span><span>multivariate</span><span>backtested</span></div></div>
+          <div class="pcard"><span class="pk">Grocery · planning <em>reference design</em></span><b data-count="10" data-prefix="+5 to " data-suffix=" pts">+0 pts</b><canvas data-spark="grocery"></canvas><div class="pt">Every SKU in every store, hourly</div><div class="pd">Around 100,000 SKUs across thousands of stores. Reorder point and purchase order raised in the stream from the P10 to P90 band.</div><div class="tags"><span>AI_FORECAST</span><span>P10 to P90</span><span>Tableflow</span></div></div>
+          <div class="pcard"><span class="pk">Retail · stores <em>demo</em></span><b data-count="1096" data-suffix=" days">0 days</b><canvas data-spark="retail"></canvas><div class="pt">Scored by one running statement</div><div class="pd">A stockout dip, an unplanned spike and a feed gap flagged the same day. 99.9% band, 512-day context, no labels.</div><div class="tags"><span>AI_DETECT_ANOMALIES</span><span>streaming mode</span></div></div>
+          <div class="pcard"><span class="pk">Process industries <em>solution</em></span><b>2<small> to </small>5×</b><canvas data-spark="opt"></canvas><div class="pt">Faster process optimization</div><div class="pd">Steel, cement, paper. Forecasts with control variables, a setpoint optimizer and guardrails, operators approve at the gate.</div><div class="tags"><span>TS_OPTIMIZE</span><span>workbench</span></div></div>
         </div>
+      </div>
+    </div>
+
+    <div class="trust" id="trust">
+      <div class="trust-h">Governed by design</div>
+      <div class="trust-grid">
+        <div class="trust-i"><i></i><b>RBAC on every function</b><span>who can call what, per topic</span></div>
+        <div class="trust-i"><i></i><b>Schema Registry contracts</b><span>the shape of every stream, enforced</span></div>
+        <div class="trust-i"><i></i><b>Audit log</b><span>every agent call written down</span></div>
+        <div class="trust-i"><i></i><b>Five expert gates</b><span>data, model, accuracy, release, drift</span></div>
+        <div class="trust-i"><i></i><b>Runs inside your Confluent Cloud org</b><span>models hosted next to the topic</span></div>
+        <div class="trust-i"><i></i><b>Apache 2.0 models</b><span>open weights on Hugging Face</span></div>
       </div>
     </div>
   </div>
@@ -863,6 +1009,19 @@ FROM your_topic;</code></pre>
       <div class="stile"><span class="sn">03</span><h3>Book a working session</h3><p>Bring a topic and a decision. IBM and Confluent teams, one afternoon, your data.</p><a class="btn sm ghost" href="#briefing">Build the note <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v10M4 8l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </div>
 
+    <div class="ways" id="ways">
+      <div class="way"><span class="wk">Open source · free forever</span><h3>Run the models yourself</h3><p>Granite Time Series models under Apache 2.0 on Hugging Face. The granite-tsfm library, notebooks and benchmarks on GitHub. CPU is enough for TTM and TSPulse.</p>
+        <pre><code class="py">pip install granite-tsfm
+from tsfm_public import TinyTimeMixerForPrediction
+model = TinyTimeMixerForPrediction.from_pretrained(
+  "ibm-granite/granite-timeseries-ttm-r3")</code></pre>
+        <div class="btn-row"><a class="btn sm ghost" href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a class="btn sm ghost" href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a></div></div>
+      <div class="way on"><span class="wk">Managed on Confluent · Early Access</span><h3>Call them from Flink SQL</h3><p>Models hosted by Confluent, no infrastructure, no training loop. AI_FORECAST and AI_DETECT_ANOMALIES today, TS_EMBED, TS_SEARCH and TS_OPTIMIZE next, Streaming Agents on top. Billed as Flink compute.</p>
+        <pre><code class="sql">AI_FORECAST(value, event_time,
+  JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 12))</code></pre>
+        <div class="btn-row"><a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Join Early Access</a><a class="btn sm ghost" href="#briefing">Book a session</a></div></div>
+    </div>
+
     <div class="stage" id="briefing" style="margin-top:12px">
       <div class="stage-top"><div class="stage-title"><h3>Briefing note</h3><p>Fill in four lines. Copy the note into an email to your IBM or Confluent contact.</p></div></div>
       <div class="stage-body">
@@ -970,13 +1129,13 @@ FROM motor_telemetry;</code></pre></div>
 
 <div class="cta">
   <div class="wrap">
-    <h2>Your stream already knows what happens next. Let it say so.</h2>
+    <div><h2>The future of forecasting is streaming.</h2><p class="lede" style="margin-top:.5rem">Every event is a decision. Make it before the next one arrives.</p></div>
     <div class="btn-row"><a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Join Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a><button class="btn ghost" id="share-link">Share this page</button><span class="toast" id="share-toast"></span></div>
   </div>
 </div>
 <footer class="foot">
   <div class="wrap">
-    <div class="row"><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. Early Access, October 2026.</span></div>
+    <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. Early Access, October 2026.</span></div>
     <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="#reference">Technical reference</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
   </div>
@@ -1001,6 +1160,7 @@ const FN='AI_FORECAST|AI_DETECT_ANOMALIES|AI_RUN_AGENT|TS_EMBED|TS_SEARCH|TS_OPT
 const TOK=new RegExp("(--[^\\n]*)|('(?:[^'\\\\]|\\\\.)*')|(\\b(?:"+FN+")\\b)|(\\b\\d+(?:[\\.,]\\d+)?\\b)|(\\b(?:"+KW+")\\b)","g");
 function highlight(sql){return esc(sql).replace(TOK,(m,c,s,f,n,k)=>{if(c)return'<span class="c">'+m+'</span>';if(s)return'<span class="s">'+m+'</span>';if(f)return'<span class="f">'+m+'</span>';if(n)return'<span class="n">'+m+'</span>';return'<span class="k">'+m+'</span>';});}
 $$('code.sql').forEach(el=>{el.innerHTML=highlight(el.textContent);});
+$$('code.py').forEach(el=>{el.innerHTML=esc(el.textContent).replace(/(&quot;[^&]*&quot;|"[^"]*")/g,'<span class="s">$1</span>').replace(/\b(pip|install|from|import)\b/g,'<span class="k">$1</span>');});
 function copyText(text,btn,done){const label=btn?btn.textContent:'';const ok=()=>{if(btn){btn.textContent='Copied';setTimeout(()=>btn.textContent=label,1600);}if(done)done(true);};const fail=()=>{if(done)done(false);};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,fail);}else fail();}
 function selectEl(el){try{const r=document.createRange();r.selectNodeContents(el);const s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
 $$('.codebox').forEach(box=>{const btn=$('.copy',box),pre=$('pre',box);if(!btn||!pre)return;btn.addEventListener('click',()=>copyText(pre.textContent,btn,ok=>{if(!ok){selectEl(pre);btn.textContent='Select and copy';setTimeout(()=>btn.textContent='Copy SQL',2000);}}));});
@@ -1285,7 +1445,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
 })();
 
 /* ============ 02 dials, proof count-ups ============ */
-function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'',suf=b.dataset.suffix||'';const t0=performance.now(),dur=reduced?1:1400;function f(t){const u=clamp((t-t0)/dur,0,1);b.textContent=pre+Math.round(target*ease(u))+suf;if(u<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
+function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'',suf=b.dataset.suffix||'';const t0=performance.now(),dur=reduced?1:1400;function f(t){const u=clamp((t-t0)/dur,0,1);b.textContent=pre+fmtInt(target*ease(u))+suf;if(u<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
 (function(){const d=$('#dials');if(d)once(d,()=>{d.classList.add('in');$$('b[data-count]',d).forEach(countUp);});})();
 (function(){
   const el=$('#st-proof');if(!el)return;
@@ -1293,6 +1453,9 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     if(type==='telco'){const v=[];for(let i=0;i<n;i++)v.push(0.35+0.12*Math.sin(i/3)+0.05*gauss()+(i===22||i===41?0.45:0));ctx.strokeStyle=C.ink2;ctx.lineWidth=1.4;ctx.beginPath();v.forEach((y,i)=>i?ctx.lineTo(X(i),Y(y)):ctx.moveTo(X(i),Y(y)));ctx.stroke();[22,41].forEach(i=>{ctx.fillStyle=C.red2;ctx.shadowColor=C.red;ctx.shadowBlur=10;ctx.beginPath();ctx.arc(X(i),Y(v[i]),3.5,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;});}
     if(type==='cement'){const a=[],f=[];for(let i=0;i<n;i++){a.push(0.5+0.25*Math.sin(i/6)+0.05*gauss());f.push(0.5+0.25*Math.sin(i/6)+0.012*gauss());}ctx.strokeStyle=C.ink2;ctx.lineWidth=1.4;ctx.beginPath();a.forEach((y,i)=>i?ctx.lineTo(X(i),Y(y)):ctx.moveTo(X(i),Y(y)));ctx.stroke();ctx.strokeStyle=C.green2;ctx.setLineDash([3,3]);ctx.beginPath();f.forEach((y,i)=>i?ctx.lineTo(X(i),Y(y)):ctx.moveTo(X(i),Y(y)));ctx.stroke();ctx.setLineDash([]);}
     if(type==='fin'){const v=[];let x=0.5;for(let i=0;i<n;i++){x=clamp(x+0.05*gauss(),0.1,0.9);v.push(x);}ctx.strokeStyle=C.ink2;ctx.lineWidth=1.4;ctx.beginPath();v.forEach((y,i)=>i?ctx.lineTo(X(i),Y(y)):ctx.moveTo(X(i),Y(y)));ctx.stroke();ctx.strokeStyle=C.blue3;ctx.setLineDash([3,3]);ctx.beginPath();for(let i=40;i<n;i++){const y=v[40]+(v[i]-v[40])*0.6;i===40?ctx.moveTo(X(i),Y(y)):ctx.lineTo(X(i),Y(y));}ctx.stroke();ctx.setLineDash([]);}
+    if(type==='grocery'){const f=i=>0.45+0.25*Math.sin(i/1.1)+0.08*Math.sin(i/7);const sp=38;ctx.strokeStyle=C.ink2;ctx.lineWidth=1.4;ctx.beginPath();for(let i=0;i<=sp;i++){const y=Y(clamp(f(i)+0.05*gauss(),0.05,0.95));i?ctx.lineTo(X(i),y):ctx.moveTo(X(i),y);}ctx.stroke();ctx.fillStyle='rgba(120,169,255,.22)';ctx.beginPath();ctx.moveTo(X(sp),Y(f(sp)));for(let i=sp;i<n;i++)ctx.lineTo(X(i),Y(f(i)+0.12));for(let i=n-1;i>=sp;i--)ctx.lineTo(X(i),Y(f(i)-0.12));ctx.closePath();ctx.fill();ctx.strokeStyle=C.blue3;ctx.setLineDash([3,3]);ctx.beginPath();for(let i=sp;i<n;i++){i===sp?ctx.moveTo(X(i),Y(f(i))):ctx.lineTo(X(i),Y(f(i)));}ctx.stroke();ctx.setLineDash([]);}
+    if(type==='retail'){const v=[];for(let i=0;i<n;i++){let y=0.5+0.22*Math.sin(i*2*Math.PI/7)+0.04*gauss();if(i===20||i===21)y=0.12;if(i===38)y=0.95;if(i===50)y=0.02;v.push(clamp(y,0.02,0.98));}ctx.fillStyle='rgba(120,169,255,.14)';ctx.beginPath();for(let i=0;i<n;i++){const y=Y(0.5+0.22*Math.sin(i*2*Math.PI/7)+0.2);i?ctx.lineTo(X(i),y):ctx.moveTo(X(i),y);}for(let i=n-1;i>=0;i--)ctx.lineTo(X(i),Y(0.5+0.22*Math.sin(i*2*Math.PI/7)-0.2));ctx.closePath();ctx.fill();ctx.strokeStyle=C.ink2;ctx.lineWidth=1.4;ctx.beginPath();v.forEach((y,i)=>i?ctx.lineTo(X(i),Y(y)):ctx.moveTo(X(i),Y(y)));ctx.stroke();[20,21,38,50].forEach(i=>{ctx.fillStyle=C.red2;ctx.shadowColor=C.red;ctx.shadowBlur=10;ctx.beginPath();ctx.arc(X(i),Y(v[i]),3.2,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;});}
+    if(type==='opt'){const img=ctx.createLinearGradient(0,0,W,0);img.addColorStop(0,'rgba(0,45,156,.6)');img.addColorStop(0.6,'rgba(8,189,186,.5)');img.addColorStop(1,'rgba(241,194,27,.6)');ctx.fillStyle=img;ctx.fillRect(2,4,W-4,H-8);ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(X(4),Y(0.2));ctx.quadraticCurveTo(X(30),Y(0.85),X(52),Y(0.55));ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(4),Y(0.2),3,0,Math.PI*2);ctx.fill();ctx.strokeStyle=C.yellow;ctx.beginPath();ctx.arc(X(52),Y(0.55),5,0,Math.PI*2);ctx.stroke();}
   }
   function all(){$$('canvas[data-spark]',el).forEach(c=>spark(c,c.dataset.spark));}
   reg({el,resize:all});all();
@@ -1478,6 +1641,57 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     $('#note-out').textContent=txt;$('#note-out').hidden=false;$('#copy-note').hidden=false;$('#note-toast').textContent='';$('#note-out').scrollIntoView({behavior:'smooth',block:'nearest'});});
     $('#copy-note').addEventListener('click',()=>{const pre=$('#note-out');copyText(pre.textContent,$('#copy-note'),ok=>{$('#note-toast').textContent=ok?'Copied. Paste it into an email to your IBM or Confluent contact.':'Copy is blocked here. The text is selected, use your keyboard shortcut.';if(!ok)selectEl(pre);});});}
   const share=$('#share-link');if(share)share.addEventListener('click',()=>{if(navigator.share){navigator.share({title:document.title,url:location.href}).catch(()=>{});return;}copyText(location.href,null,ok=>{$('#share-toast').textContent=ok?'Link copied.':'Copy the address from your browser bar.';});});
+})();
+
+/* ============ hero: rotating word + marquee ============ */
+(function(){
+  const el=$('#rot');if(!el)return;
+  const words=['stockout','fraud','outage','kiln drift','grid peak','price swing','anomaly','minute'];
+  if(reduced){el.textContent='minute';return;}
+  let i=0,typing=false;
+  function type(word,done){let k=0;typing=true;const tick=()=>{el.textContent=word.slice(0,++k);if(k<word.length)setTimeout(tick,55);else{typing=false;done();}};tick();}
+  function erase(done){const tick=()=>{el.textContent=el.textContent.slice(0,-1);if(el.textContent.length)setTimeout(tick,28);else done();};tick();}
+  function cycle(){setTimeout(()=>erase(()=>{i=(i+1)%words.length;type(words[i],cycle);}),2400);}
+  cycle();
+  const mq=$('#mq');if(mq){const items=['Confluent Cloud','Apache Flink','Apache Kafka','Schema Registry','Tableflow','Apache Iceberg','Hugging Face','granite-tsfm','Streaming Agents','Confluent MCP','pgvector','Claude Code','IBM Bob','Codex','AWS · Azure · GCP'];const html=items.map(t=>'<span>'+t+'</span>').join('');mq.innerHTML=html+html;}
+})();
+
+/* ============ architecture particles ============ */
+(function(){
+  const el=$('#st-arch');if(!el)return;
+  const arch=$('#arch'),cv=new Cv($('#arch-cv'));
+  const ins=$$('#arch-in .arch-node'),outs=$$('#arch-out .arch-node'),rows=$$('#arch-mid .arch-row');
+  let A=null;const parts=[];let count=0;
+  function anchors(){const ar=arch.getBoundingClientRect();const rel=r=>({l:r.left-ar.left,r:r.right-ar.left,t:r.top-ar.top,b:r.bottom-ar.top,cx:r.left-ar.left+r.width/2,cy:r.top-ar.top+r.height/2});const stacked=window.innerWidth<=900;
+    A={stacked,ins:ins.map(n=>rel(n.getBoundingClientRect())),outs:outs.map(n=>rel(n.getBoundingClientRect())),rows:rows.map(n=>rel(n.getBoundingClientRect())),eng:rel($('#arch-mid .arch-engine').getBoundingClientRect())};}
+  function bez(p0,p1,p2,p3,t){const u=1-t;return {x:u*u*u*p0.x+3*u*u*t*p1.x+3*u*t*t*p2.x+t*t*t*p3.x,y:u*u*u*p0.y+3*u*u*t*p1.y+3*u*t*t*p2.y+t*t*t*p3.y};}
+  function spawn(){const i=Math.floor(Math.random()*A.ins.length),o=Math.floor(Math.random()*A.outs.length);parts.push({i,o,t:0,speed:0.0022+Math.random()*0.0012,row:0});}
+  function rail(pin,pout,u){const R=A.rows,x=R[0].l+16,y0=R[0].cy,y1=R[R.length-1].cy;if(u<0.15){const v=u/0.15;return {pt:{x:lerp(pin.x,x,v),y:lerp(pin.y,y0,v)},phase:1,row:0};}if(u<0.85){const v=(u-0.15)/0.7;return {pt:{x,y:lerp(y0,y1,v)},phase:1,row:Math.min(R.length-1,Math.floor(v*R.length))};}const v=(u-0.85)/0.15;return {pt:{x:lerp(x,pout.x,v),y:lerp(y1,pout.y,v)},phase:1,row:R.length-1};}
+  function pos(p){const s=A.ins[p.i],d=A.outs[p.o],e=A.eng;
+    if(!A.stacked){
+      const t=p.t;
+      if(t<0.3){const u=t/0.3;return {pt:bez({x:s.r,y:s.cy},{x:s.r+(e.l-s.r)*0.5,y:s.cy},{x:e.l-(e.l-s.r)*0.4,y:e.cy},{x:e.l,y:e.cy},u),phase:0};}
+      if(t<0.6){const u=(t-0.3)/0.3;return rail({x:e.l,y:e.cy},{x:e.r,y:e.cy},u);}
+      const u=(t-0.6)/0.4;return {pt:bez({x:e.r,y:e.cy},{x:e.r+(d.l-e.r)*0.4,y:e.cy},{x:d.l-(d.l-e.r)*0.5,y:d.cy},{x:d.l,y:d.cy},u),phase:2};
+    }else{
+      const t=p.t;
+      if(t<0.3){const u=t/0.3;return {pt:bez({x:s.cx,y:s.b},{x:s.cx,y:s.b+(e.t-s.b)*0.5},{x:e.cx,y:e.t-(e.t-s.b)*0.4},{x:e.cx,y:e.t},u),phase:0};}
+      if(t<0.6){const u=(t-0.3)/0.3;return rail({x:e.cx,y:e.t},{x:e.cx,y:e.b},u);}
+      const u=(t-0.6)/0.4;return {pt:bez({x:e.cx,y:e.b},{x:e.cx,y:e.b+(d.t-e.b)*0.5},{x:d.cx,y:d.t-(d.t-e.b)*0.4},{x:d.cx,y:d.t},u),phase:2};
+    }}
+  let acc=0;
+  reg({el,resize(){cv.fit();anchors();},update(dt){if(!A)anchors();acc+=dt;const every=reduced?1400:330;while(acc>every){acc-=every;if(parts.length<26)spawn();}
+      for(let k=parts.length-1;k>=0;k--){const p=parts[k];p.t+=p.speed*dt/16;if(p.t>=1){parts.splice(k,1);count++;}}
+      $('#arch-count').textContent=parts.filter(p=>p.t>0.3).length;},
+    draw(){if(!A||!cv.W)return;const ctx=cv.ctx;ctx.clearRect(0,0,cv.W,cv.H);
+      /* faint lanes */
+      ctx.strokeStyle='rgba(120,169,255,.10)';ctx.lineWidth=1;
+      const e=A.eng;A.ins.forEach(s=>{ctx.beginPath();if(!A.stacked){ctx.moveTo(s.r,s.cy);ctx.bezierCurveTo(s.r+(e.l-s.r)*0.5,s.cy,e.l-(e.l-s.r)*0.4,e.cy,e.l,e.cy);}else{ctx.moveTo(s.cx,s.b);ctx.bezierCurveTo(s.cx,s.b+(e.t-s.b)*0.5,e.cx,e.t-(e.t-s.b)*0.4,e.cx,e.t);}ctx.stroke();});
+      A.outs.forEach(d=>{ctx.beginPath();if(!A.stacked){ctx.moveTo(e.r,e.cy);ctx.bezierCurveTo(e.r+(d.l-e.r)*0.4,e.cy,d.l-(d.l-e.r)*0.5,d.cy,d.l,d.cy);}else{ctx.moveTo(e.cx,e.b);ctx.bezierCurveTo(e.cx,e.b+(d.t-e.b)*0.5,d.cx,d.t-(d.t-e.b)*0.4,d.cx,d.t);}ctx.stroke();});
+      parts.forEach(p=>{const q=pos(p);const c=q.phase===0?C.blue3:q.phase===1?(q.row>=3?C.purple:'#fff'):C.green2;ctx.save();ctx.shadowColor=q.phase===1&&q.row<3?C.blue2:c;ctx.shadowBlur=14;ctx.fillStyle=c;ctx.beginPath();ctx.arc(q.pt.x,q.pt.y,q.phase===1?4.5:3.2,0,Math.PI*2);ctx.fill();ctx.restore();});
+      rows.forEach((r,i)=>{const lit=parts.some(p=>{const q=pos(p);return q.phase===1&&q.row===i;});r.style.borderColor=lit?(i===3?'rgba(190,149,255,.8)':'rgba(69,137,255,.8)'):'';});
+    }});
+  anchors();
 })();
 
 /* ============ nav scroll spy ============ */
