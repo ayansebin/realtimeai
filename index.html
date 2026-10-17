@@ -488,14 +488,14 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
 @media (max-width:1100px){.inds{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.inds{grid-template-columns:1fr}}
-.ind{position:relative;display:grid;align-content:end;gap:.6rem;min-height:clamp(300px,30vw,420px);padding:1.1rem 1.1rem 1rem;border:1px solid var(--line);color:var(--ink);overflow:hidden;isolation:isolate;background:#000a2e}
+.ind{position:relative;display:grid;align-content:end;gap:.55rem;min-height:clamp(230px,23vw,320px);padding:1.1rem 1.1rem 1rem;border:1px solid var(--line);color:var(--ink);overflow:hidden;isolation:isolate;background:#000a2e}
 .ind::before{content:"";position:absolute;inset:0;background-image:var(--img);background-size:cover;background-position:center;filter:saturate(.85) contrast(1.05);transition:transform .6s cubic-bezier(.2,.8,.2,1);z-index:-2}
 .ind::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,46,.12) 0,rgba(0,7,20,.62) 38%,rgba(0,7,20,.95) 100%);z-index:-1}
 .ind:hover{border-color:var(--blue-2)}
 .ind:hover::before{transform:scale(1.05)}
 .ind .il{display:grid;gap:.15rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-3)}
 .ind .il small{font-size:.66rem;letter-spacing:.04em;text-transform:none;color:var(--ink-3)}
-.ind b{font-weight:300;font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.35;text-wrap:pretty}
+.ind b{font-weight:300;font-size:clamp(1.1rem,1.5vw,1.4rem);line-height:1.3;text-wrap:balance}
 .ind .is{display:flex;flex-wrap:wrap;gap:.3rem}
 .ind .is button{font:inherit;font-size:.72rem;border:1px solid var(--line-2);background:rgba(0,7,20,.45);color:var(--ink-2);padding:.18rem .5rem;cursor:pointer;transition:border-color .15s,color .15s}
 .ind .is button:hover{border-color:var(--blue-2);color:#fff}
@@ -505,25 +505,14 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .ucgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:12px}
 @media (max-width:1100px){.ucgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:600px){.ucgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
-.uc{position:relative;display:grid;grid-template-rows:auto auto 1fr auto auto;gap:.45rem;text-align:left;background:rgba(0,7,20,.32);border:1px solid var(--line);padding:.9rem .95rem .85rem;color:var(--ink);text-decoration:none;cursor:pointer;font:inherit;transition:border-color .15s,background .15s;min-width:0}
+.uc{position:relative;display:grid;gap:.5rem;align-content:start;text-align:left;background:rgba(0,7,20,.32);border:1px solid var(--line);padding:.8rem .85rem .75rem;color:var(--ink);text-decoration:none;cursor:pointer;font:inherit;transition:border-color .15s,background .15s;min-width:0}
 .uc:hover{border-color:var(--line-2);background:rgba(0,29,108,.3);text-decoration:none;color:var(--ink)}
 .uc[aria-selected="true"]{border-color:var(--blue-2);box-shadow:0 0 0 1px var(--blue-2) inset,0 0 24px rgba(69,137,255,.18);background:rgba(0,29,108,.45)}
-.uc .uc-k{display:flex;align-items:center;justify-content:space-between;color:var(--blue-3)}
-.uc .uc-k svg{width:38px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.uc .uc-k svg .dot{fill:currentColor;stroke:none}
-.uc .uc-k svg .ring{stroke:var(--red-2)}
-.uc .uc-k svg .thin{stroke-dasharray:2 2;opacity:.7}
-.uc .uc-k svg .band{opacity:.35}
-.uc .uc-k svg .bars{stroke-width:2.2}
-.uc .uc-k i{font-style:normal;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-3)}
-.uc b{font-weight:400;font-size:1.02rem;line-height:1.25}
-.uc p{margin:0;font-size:.82rem;color:var(--ink-2);line-height:1.4}
-.uc .uc-m{display:grid;gap:.15rem;margin-top:auto;padding-top:.3rem}
-.uc .uc-m code{font-family:var(--font-mono);font-size:.66rem;color:var(--purple);letter-spacing:.02em;overflow-wrap:anywhere}
-.uc .uc-m em{font-style:normal;font-size:.8rem;color:var(--green-2)}
-.uc .uc-go{font-size:.78rem;color:var(--blue-3)}
-.uc[aria-selected="true"] .uc-go{color:#fff}
-@media (max-width:600px){.uc p{display:none}.uc{padding:.75rem .8rem;grid-template-rows:auto 1fr auto auto}.uc b{font-size:.95rem}}
+.uc i{position:absolute;top:.55rem;right:.7rem;font-style:normal;font-family:var(--font-mono);font-size:.68rem;color:var(--ink-3)}
+.uc .uc-cv{display:block;width:100%;height:72px;margin-top:.6rem}
+.uc b{font-weight:400;font-size:1rem;line-height:1.25}
+.uc code{font-family:var(--font-mono);font-size:.64rem;color:var(--purple);letter-spacing:.02em;overflow-wrap:anywhere}
+@media (max-width:600px){.uc{padding:.65rem .7rem .6rem}.uc .uc-cv{height:60px}.uc b{font-size:.92rem}}
 .ucpanel[role=tabpanel]{scroll-margin-top:calc(var(--nav-h) + 8px)}
 .ucpanel.has-cover .stage-top{position:relative;isolation:isolate;min-height:150px;padding-bottom:16px}
 .ucpanel.has-cover .stage-top::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--img);background-size:cover;background-position:center var(--pos,40%);filter:saturate(.8)}
@@ -1017,59 +1006,23 @@ FROM pos_sales;</code></pre></div>
   <div class="wrap">
     <div class="chapter-head">
       <span class="n">03 / USE CASES</span>
-      <h2>Six decisions. One statement each.</h2>
-      <p>Pick the decision. Each one is a Flink SQL function on a live topic, with a demo you can play with.</p>
+      <h2>Six decisions.</h2>
+      <p>Pick one. Every demo is live.</p>
     </div>
 
     <div class="ucgrid" role="tablist" id="uctabs" aria-label="Use cases">
-      <a class="uc" href="#uc-opt" id="uc-go-opt">
-        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 14C6 14 8 3 12 3s6 11 11 11"/><circle cx="12" cy="3" r="1.8" class="dot"/></svg><i>01</i></span>
-        <b>Production optimization</b>
-        <p>Which setting earns the most and still meets spec. The forecast model is the plant model, so the optimizer can search inside the guardrails.</p>
-        <span class="uc-m"><code>AI_FORECAST · TS_OPTIMIZE</code><em>$2 per ton</em></span>
-        <span class="uc-go">See the optimizer &#8593;</span>
-      </a>
-      <button class="uc" role="tab" aria-selected="true" aria-controls="uc-anom" type="button">
-        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 11h6l3-9 3 9h10"/><circle cx="10" cy="2" r="2.2" class="ring"/></svg><i>02</i></span>
-        <b>Anomaly detection</b>
-        <p>Every series against its own band, no labels. A flag becomes a work order, an expedite or a data fix, the same day.</p>
-        <span class="uc-m"><code>AI_DETECT_ANOMALIES</code><em>same day</em></span>
-        <span class="uc-go">Try it</span>
-      </button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-demand" type="button">
-        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 12C5 12 7 5 11 5s5 7 11 7" class="band"/><path d="M1 9C5 9 7 2 11 2s5 7 11 7"/><path d="M1 3l22 11" class="thin"/></svg><i>03</i></span>
-        <b>Supply chain planning</b>
-        <p>Every SKU, every store, every hour, with quantiles. The purchase order comes from the band, not from last week.</p>
-        <span class="uc-m"><code>AI_FORECAST</code><em>+5 to 10 accuracy points</em></span>
-        <span class="uc-go">Try it</span>
-      </button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-fraud" type="button">
-        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><circle cx="4" cy="10" r="1.4" class="dot"/><circle cx="9" cy="12" r="1.4" class="dot"/><circle cx="14" cy="9" r="1.4" class="dot"/><circle cx="19" cy="11" r="1.4" class="dot"/><circle cx="17" cy="3" r="2.4" class="ring"/></svg><i>04</i></span>
-        <b>Fraud and security</b>
-        <p>Every card, every account, every endpoint has its own normal. The odd one is held inside the authorization window.</p>
-        <span class="uc-m"><code>AI_DETECT_ANOMALIES</code><em>&lt;50 ms</em></span>
-        <span class="uc-go">Try it</span>
-      </button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-search" type="button">
-        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 12l4-8 3 8 3-6"/><path d="M13 12l4-8 3 8 3-6" class="thin"/></svg><i>05</i></span>
-        <b>Semantic search</b>
-        <p>Embed the stream, search by shape. Find every signal that looks like this one, across lines, plants and years.</p>
-        <span class="uc-m"><code>TS_EMBED · TS_SEARCH</code><em>GPU-free</em></span>
-        <span class="uc-go">Try it</span>
-      </button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-trade" type="button">
-        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M2 14V8M6 14V5M10 14V9M14 14V3" class="bars"/><path d="M16 7l7-3" class="thin"/></svg><i>06</i></span>
-        <b>Trading</b>
-        <p>Forecast the tape, not the price. The execution algo paces a large order with the volume band and pauses on a burst.</p>
-        <span class="uc-m"><code>AI_FORECAST</code><em>every symbol, every minute</em></span>
-        <span class="uc-go">Try it</span>
-      </button>
+      <a class="uc" href="#uc-opt" id="uc-go-opt"><i>01</i><canvas class="uc-cv" data-mini="opt" aria-hidden="true"></canvas><b>Production optimization</b><code>AI_FORECAST · TS_OPTIMIZE</code></a>
+      <button class="uc" role="tab" aria-selected="true" aria-controls="uc-anom" type="button"><i>02</i><canvas class="uc-cv" data-mini="anom" aria-hidden="true"></canvas><b>Anomaly detection</b><code>AI_DETECT_ANOMALIES</code></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-demand" type="button"><i>03</i><canvas class="uc-cv" data-mini="fc" aria-hidden="true"></canvas><b>Supply chain planning</b><code>AI_FORECAST</code></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-fraud" type="button"><i>04</i><canvas class="uc-cv" data-mini="fraud" aria-hidden="true"></canvas><b>Fraud and security</b><code>AI_DETECT_ANOMALIES</code></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-search" type="button"><i>05</i><canvas class="uc-cv" data-mini="search" aria-hidden="true"></canvas><b>Semantic search</b><code>TS_EMBED · TS_SEARCH</code></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-trade" type="button"><i>06</i><canvas class="uc-cv" data-mini="trade" aria-hidden="true"></canvas><b>Trading</b><code>AI_FORECAST</code></button>
     </div>
 
     <!-- anomaly -->
     <div class="stage ucpanel has-cover" id="uc-anom" role="tabpanel" style="--img:url(photos/retail-empty.jpg)">
       <div class="stage-top">
-        <div class="stage-title"><h3>From a flag to the right action</h3><p>Daily sales against the band, no labels. Inject a cause.</p></div>
+        <div class="stage-title"><h3>From a flag to the right action</h3></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="an-inject"><button class="chip sm" data-v="stockout">Stockout dip</button><button class="chip sm" data-v="spike">Unplanned spike</button><button class="chip sm" data-v="gap">Feed gap</button></div></div>
           <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="an-conf"><button class="chip sm" data-v="95" aria-pressed="false">95%</button><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.9" aria-pressed="true">99.9%</button></div></div>
@@ -1082,7 +1035,6 @@ FROM pos_sales;</code></pre></div>
             <div class="ph">Latest flag</div>
             <div class="kv"><span>day</span><b id="an-day">–</b><span>actual</span><b id="an-act">–</b><span>band</span><b id="an-band">–</b><span>likely cause</span><b id="an-cause" class="red">–</b></div>
             <div class="action" id="an-action"><small>what the team does</small><span id="an-actiont">No flags. Weekend peaks are expected, not flagged.</span></div>
-            <div class="tiny">AI_DETECT_ANOMALIES, confidencePercentage <span id="an-confv">99.9</span>, context 512 days, streaming mode.</div>
           </div>
         </div>
       </div>
@@ -1092,7 +1044,7 @@ FROM pos_sales;</code></pre></div>
     <!-- demand -->
     <div class="stage ucpanel has-cover" id="uc-demand" role="tabpanel" style="--img:url(photos/retail-aisle.jpg);--pos:55%" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Every SKU, every store, every hour</h3><p>28 days with quantiles. The purchase order comes from the band.</p></div>
+        <div class="stage-title"><h3>Every SKU, every store, every hour</h3></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Promo next week</span><label class="range"><input type="range" id="dm-promo" min="0" max="100" value="0" aria-label="Promo uplift"><output id="dm-promov">0%</output></label></div>
           <div class="ctl-group"><span class="eyebrow">Service level</span><div class="chips" id="dm-sl"><button class="chip sm" data-v="50" aria-pressed="false">P50</button><button class="chip sm" data-v="90" aria-pressed="true">P90</button><button class="chip sm" data-v="95" aria-pressed="false">P95</button></div></div>
@@ -1106,7 +1058,6 @@ FROM pos_sales;</code></pre></div>
             <div class="ph">Agent decision</div>
             <div class="kv"><span>SKU</span><b>oat milk 1L</b><span>store</span><b>112</b><span>lead time</span><b>2 days</b><span>next 7 days</span><b id="dm-lead">–</b><span>reorder point</span><b id="dm-rop" class="blue">–</b><span>stock runs out</span><b id="dm-out" class="red">–</b></div>
             <div class="action" id="dm-action"><small>purchase order</small><span id="dm-actiont">–</span></div>
-            <div class="tiny">AI_FORECAST, model <span id="dm-model">ttm</span>, horizon 28, maxContextSize 730. Promo applied as an exogenous driver.</div>
           </div>
         </div>
       </div>
@@ -1116,7 +1067,7 @@ FROM pos_sales;</code></pre></div>
     <!-- fraud -->
     <div class="stage ucpanel has-cover" id="uc-fraud" role="tabpanel" hidden style="--img:url(photos/banking-card.jpg)">
       <div class="stage-top">
-        <div class="stage-title"><h3>Every card has its own normal</h3><p>Amounts scored per card at authorization. Inject an attack.</p></div>
+        <div class="stage-title"><h3>Every card has its own normal</h3></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="fr-inject"><button class="chip sm" data-v="stolen">Stolen card</button><button class="chip sm" data-v="testing">Card testing</button><button class="chip sm" data-v="travel">Trip abroad</button></div></div>
           <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="fr-conf"><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.5" aria-pressed="true">99.5%</button><button class="chip sm" data-v="99.9" aria-pressed="false">99.9%</button></div></div>
@@ -1129,7 +1080,6 @@ FROM pos_sales;</code></pre></div>
             <div class="ph">Latest flag · card &#8226;&#8226;4417</div>
             <div class="kv"><span>time</span><b id="fr-time">–</b><span>amount</span><b id="fr-amt">–</b><span>expected band</span><b id="fr-band">–</b><span>pattern</span><b id="fr-cause" class="red">–</b></div>
             <div class="action" id="fr-action"><small>decision in the stream</small><span id="fr-actiont">No flags. Normal spend for this card.</span></div>
-            <div class="tiny">AI_DETECT_ANOMALIES per card_id, confidencePercentage <span id="fr-confv">99.5</span>, rmse in the output row. Agent holds, steps up or allows.</div>
           </div>
         </div>
       </div>
@@ -1139,7 +1089,7 @@ FROM pos_sales;</code></pre></div>
     <!-- search -->
     <div class="stage ucpanel has-cover" id="uc-search" role="tabpanel" style="--img:url(photos/workers.jpg)" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Find every signal that looks like this</h3><p>Embed the stream, search by shape. Sketch a pattern or pick one.</p></div>
+        <div class="stage-title"><h3>Find every signal that looks like this</h3></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Pattern</span><div class="chips" id="se-q"><button class="chip sm" data-v="spike">Spike and recover</button><button class="chip sm" data-v="ramp">Ramp up</button><button class="chip sm" data-v="step">Step down</button><button class="chip sm" data-v="osc">Oscillation</button><button class="chip sm" data-v="flat">Flatline</button></div></div>
           <div class="ctl-group"><span class="eyebrow">&nbsp;</span><div class="btn-row"><button class="btn sm ghost" id="se-clear">Clear</button></div></div>
@@ -1153,7 +1103,6 @@ FROM pos_sales;</code></pre></div>
             <div class="qbox" id="qbox"><canvas id="se-cv" aria-label="Sketch a query shape"></canvas><div class="ghost">sketch a shape here</div></div>
             <div class="kv"><span>matches</span><b id="se-n">–</b><span>best score</span><b id="se-best" class="blue">–</b><span>index</span><b>pgvector · Iceberg</b></div>
             <div class="action" id="se-action"><small>semantic tag</small><span id="se-actiont">–</span></div>
-            <div class="tiny">TS_EMBED on each window, TS_SEARCH by cosine similarity. Time series RAG for agents.</div>
           </div>
         </div>
       </div>
@@ -1163,7 +1112,7 @@ FROM pos_sales;</code></pre></div>
     <!-- trading -->
     <div class="stage ucpanel has-cover" id="uc-trade" role="tabpanel" style="--img:url(photos/banking-charts.jpg);--pos:45%" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Pace the order with the tape</h3><p>Traded volume forecast for the next 30 minutes. The execution algo sizes every slice from the band.</p></div>
+        <div class="stage-title"><h3>Pace the order with the tape</h3></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Shares to work</span><div class="chips" id="tr-size"><button class="chip sm" data-v="50000">50k</button><button class="chip sm" data-v="100000" aria-pressed="true">100k</button><button class="chip sm" data-v="250000">250k</button></div></div>
           <div class="ctl-group"><span class="eyebrow">Participation cap</span><div class="chips" id="tr-cap"><button class="chip sm" data-v="5">5%</button><button class="chip sm" data-v="10" aria-pressed="true">10%</button><button class="chip sm" data-v="20">20%</button></div></div>
@@ -1177,7 +1126,6 @@ FROM pos_sales;</code></pre></div>
             <div class="ph">Execution plan · one symbol</div>
             <div class="kv"><span>order</span><b id="tr-order">100,000 shares</b><span>volume next 30 min</span><b id="tr-vol">–</b><span>next slice</span><b id="tr-slice" class="blue">–</b><span>done by</span><b id="tr-done">–</b></div>
             <div class="action" id="tr-action"><small>what the algo does</small><span id="tr-actiont">–</span></div>
-            <div class="tiny">AI_FORECAST on 1-minute bars, horizon 30, per symbol. The risk desk scores volatility with the same statement.</div>
           </div>
         </div>
       </div>
@@ -1186,31 +1134,30 @@ FROM pos_sales;</code></pre></div>
 
     <div class="chapter-head sub">
       <h2>Where it lands first.</h2>
-      <p>Same models, same statement. Four industries where the decisions are already in the stream.</p>
     </div>
 
     <div class="inds" id="inds">
       <div class="ind" style="--img:url(photos/cement-night.jpg)">
         <span class="il">Industrial AI<small>cement · steel · pulp and paper · chemicals · food</small></span>
-        <b>A plant manager wants quality at spec without burning the energy budget. The kiln corrects its own setpoint inside the cycle, and the next failure goes on the schedule a week early.</b>
+        <b>Setpoints corrected inside the cycle.</b>
         <span class="is"><button type="button" data-uc="uc-opt">Production optimization</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-search">Semantic search</button></span>
         <a class="ig" href="#st-plant">See the plant &#8595;</a>
       </div>
       <div class="ind" style="--img:url(photos/banking-card2.jpg)">
         <span class="il">Banking<small>payments · cards · markets</small></span>
-        <b>A fraud lead wants the odd swipe held before authorization, not disputed after. Every card scores against its own normal in the auth window, and the desk paces its orders with the tape.</b>
+        <b>The odd swipe held before authorization.</b>
         <span class="is"><button type="button" data-uc="uc-fraud">Fraud and security</button><button type="button" data-uc="uc-trade">Trading</button><button type="button" data-uc="uc-anom">Anomaly detection</button></span>
         <a class="ig" href="#uc-fraud" data-uc="uc-fraud">See the demo &#8593;</a>
       </div>
       <div class="ind" style="--img:url(photos/retail-produce.jpg)">
         <span class="il">Retail<small>grocery · general merchandise · e-commerce</small></span>
-        <b>A category planner wants full shelves without a full back room. Every SKU in every store is forecast hourly, the purchase order is raised in the stream, the stockout is flagged the same day.</b>
+        <b>Full shelves, no full back room.</b>
         <span class="is"><button type="button" data-uc="uc-demand">Supply chain planning</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-fraud">Fraud and security</button></span>
         <a class="ig" href="#uc-demand" data-uc="uc-demand">See the demo &#8593;</a>
       </div>
       <div class="ind" style="--img:url(photos/jet-engine.jpg)">
         <span class="il">Airlines<small>network · maintenance · ground operations</small></span>
-        <b>An operations controller wants to see the disruption before the gate does. Bookings per route forecast daily, engine telemetry scored per flight, turnaround slips flagged while the aircraft is still on stand.</b>
+        <b>See the disruption before the gate does.</b>
         <span class="is"><button type="button" data-uc="uc-demand">Supply chain planning</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-opt">Production optimization</button></span>
         <a class="ig" href="#uc-anom" data-uc="uc-anom">See the demo &#8593;</a>
       </div>
@@ -1218,7 +1165,7 @@ FROM pos_sales;</code></pre></div>
 
     <div class="chapter-head sub">
       <h2>Inside the plant.</h2>
-      <p>A cement line on Confluent. Sensor to setpoint and back.</p>
+      <p>A cement line on Confluent.</p>
     </div>
 
     <div class="stage" id="st-plant">
@@ -2001,6 +1948,91 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   $$('#inds [data-uc]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();go(a.dataset.uc);}));
 })();
 
+/* ============ 03 use case minis: a live miniature of each demo on its card ============ */
+(function(){
+  const cvs=$$('#uctabs canvas[data-mini]');if(!cvs.length)return;
+  function prng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+  const K={
+    /* anomaly: a scrolling line against its band, the odd point lights up red */
+    anom:{
+      init(s){s.r=prng(7);s.v=[];s.i=0;s.acc=0;s.timer=1600;s.burst=0;s.dir=1;for(let i=0;i<60;i++)this.push(s);},
+      base(i){return 0.5+0.22*Math.sin(i/6)+0.08*Math.sin(i/2.3);},
+      push(s){const b=this.base(s.i);let v=b+(s.r()-0.5)*0.12;if(s.burst>0){v=b+s.dir*0.34;s.burst--;}s.v.push({v,b,f:Math.abs(v-b)>0.2});s.i++;if(s.v.length>60)s.v.shift();},
+      update(s,dt){s.acc+=dt;s.timer-=dt;if(s.timer<0){s.burst=2;s.dir=s.r()<0.5?-1:1;s.timer=2200+s.r()*1800;}while(s.acc>110){s.acc-=110;this.push(s);}},
+      draw(s,ctx,W,H){const n=s.v.length;const X=k=>4+k/(n-1)*(W-8),Y=v=>H-6-v*(H-12);
+        ctx.beginPath();s.v.forEach((p,k)=>{k?ctx.lineTo(X(k),Y(p.b+0.2)):ctx.moveTo(X(k),Y(p.b+0.2));});for(let k=n-1;k>=0;k--)ctx.lineTo(X(k),Y(s.v[k].b-0.2));ctx.closePath();ctx.fillStyle=C.band;ctx.fill();
+        ctx.strokeStyle=C.ink;ctx.lineWidth=1.4;ctx.beginPath();s.v.forEach((p,k)=>{k?ctx.lineTo(X(k),Y(p.v)):ctx.moveTo(X(k),Y(p.v));});ctx.stroke();
+        s.v.forEach((p,k)=>{if(!p.f)return;ctx.save();ctx.shadowColor=C.red;ctx.shadowBlur=10;ctx.fillStyle=C.red2;ctx.beginPath();ctx.arc(X(k),Y(p.v),3,0,Math.PI*2);ctx.fill();ctx.restore();});}
+    },
+    /* supply chain: history, a forecast band fanning out, the stock line and the purchase order */
+    fc:{
+      init(s){s.r=prng(3);s.v=[];s.i=0;s.acc=0;s.ph=0;for(let i=0;i<36;i++)this.push(s);},
+      base(i){return 0.45+0.2*Math.sin(i/4.5);},
+      push(s){s.v.push(this.base(s.i)+(s.r()-0.5)*0.12);s.i++;if(s.v.length>36)s.v.shift();},
+      update(s,dt){s.acc+=dt;s.ph=(s.ph+dt/3800)%1;while(s.acc>260){s.acc-=260;this.push(s);}},
+      draw(s,ctx,W,H){const n=s.v.length,hz=20,total=n+hz;const X=k=>4+k/(total-1)*(W-8),Y=v=>H-6-v*(H-12);
+        const k0=n-1;const m=Math.ceil(hz*Math.min(1,s.ph*1.4));
+        if(m>1){ctx.beginPath();ctx.moveTo(X(k0),Y(s.v[k0]));for(let j=1;j<=m;j++){const mu=this.base(s.i+j-1),sg=0.05+0.012*j;ctx.lineTo(X(k0+j),Y(mu+sg));}for(let j=m;j>=1;j--){const mu=this.base(s.i+j-1),sg=0.05+0.012*j;ctx.lineTo(X(k0+j),Y(mu-sg));}ctx.closePath();ctx.fillStyle=C.band;ctx.fill();
+          ctx.setLineDash([3,2]);ctx.strokeStyle=C.blue3;ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(X(k0),Y(s.v[k0]));for(let j=1;j<=m;j++)ctx.lineTo(X(k0+j),Y(this.base(s.i+j-1)));ctx.stroke();ctx.setLineDash([]);
+          const stk=j=>Math.max(0.06,0.44-j*0.038+(j>=11?0.34:0));ctx.beginPath();ctx.moveTo(X(k0),Y(0));for(let j=0;j<=m;j++)ctx.lineTo(X(k0+j),Y(stk(j)));ctx.lineTo(X(k0+m),Y(0));ctx.closePath();ctx.fillStyle='rgba(8,189,186,.16)';ctx.fill();ctx.strokeStyle=C.teal2;ctx.lineWidth=1.2;ctx.beginPath();for(let j=0;j<=m;j++){j?ctx.lineTo(X(k0+j),Y(stk(j))):ctx.moveTo(X(k0+j),Y(stk(j)));}ctx.stroke();
+          if(m>=9){ctx.fillStyle=C.green2;ctx.fillRect(Math.round(X(k0+9))-0.5,4,1.5,H-8);}}
+        ctx.strokeStyle=C.ink;ctx.lineWidth=1.4;ctx.beginPath();s.v.forEach((v,k)=>{k?ctx.lineTo(X(k),Y(v)):ctx.moveTo(X(k),Y(v));});ctx.stroke();
+        ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(X(k0))+0.5,4);ctx.lineTo(Math.round(X(k0))+0.5,H-4);ctx.stroke();}
+    },
+    /* fraud: a stream of payments inside the band, the big one is held */
+    fraud:{
+      init(s){s.r=prng(11);s.d=[];s.acc=0;s.timer=2000;for(let i=0;i<40;i++)this.push(s,false);},
+      push(s,big){const a=big?0.84+s.r()*0.12:0.1+s.r()*0.3+(s.r()<0.15?0.2:0);s.d.push({a,big});if(s.d.length>40)s.d.shift();},
+      update(s,dt){s.acc+=dt;s.timer-=dt;while(s.acc>150){s.acc-=150;let big=false;if(s.timer<0){big=true;s.timer=2400+s.r()*2000;}this.push(s,big);}},
+      draw(s,ctx,W,H){const n=s.d.length;const X=k=>6+k/(n-1)*(W-12),Y=a=>H-6-a*(H-12);
+        ctx.fillStyle='rgba(120,169,255,.13)';ctx.fillRect(4,Y(0.68),W-8,Y(0.05)-Y(0.68));
+        ctx.setLineDash([3,3]);ctx.strokeStyle='rgba(120,169,255,.55)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(4,Math.round(Y(0.68))+0.5);ctx.lineTo(W-4,Math.round(Y(0.68))+0.5);ctx.stroke();ctx.setLineDash([]);
+        s.d.forEach((p,k)=>{if(p.big){ctx.save();ctx.shadowColor=C.red;ctx.shadowBlur=10;ctx.fillStyle=C.red2;ctx.beginPath();ctx.arc(X(k),Y(p.a),3.2,0,Math.PI*2);ctx.fill();ctx.restore();ctx.strokeStyle=C.red2;ctx.lineWidth=1;ctx.beginPath();ctx.arc(X(k),Y(p.a),6,0,Math.PI*2);ctx.stroke();}else{ctx.fillStyle='rgba(244,244,244,.8)';ctx.beginPath();ctx.arc(X(k),Y(p.a),1.8,0,Math.PI*2);ctx.fill();}});}
+    },
+    /* search: a query shape on the left, the matching windows light up on the right */
+    search:{
+      shapes:{spike:t=>t<0.3?t/0.3:t<0.45?1-(t-0.3)/0.15:0.05,ramp:t=>0.1+0.85*t,step:t=>t<0.5?0.9:0.2,osc:t=>0.5+0.42*Math.sin(t*12)},
+      init(s){s.r=prng(5);s.keys=['spike','ramp','step','osc'];s.q=0;s.timer=0;s.pulse=0;s.tiles=[];for(let i=0;i<8;i++)s.tiles.push({k:s.keys[i%4],noise:0.04+s.r()*0.08,seed:s.r()*10});s.tiles.sort(()=>s.r()-0.5);},
+      update(s,dt){s.timer-=dt;s.pulse+=dt;if(s.timer<0){s.q=(s.q+1)%4;s.timer=2600;s.pulse=0;}},
+      draw(s,ctx,W,H){const pad=4;const qw=Math.min(56,Math.floor(W*0.28));const qk=s.keys[s.q];
+        const shp=(fn,x,y,w,h,noise,seed,col,lw)=>{ctx.strokeStyle=col;ctx.lineWidth=lw;ctx.beginPath();for(let i=0;i<=24;i++){const t=i/24;const v=Math.max(0,Math.min(1,fn(t)+(noise?Math.sin(i*2.7+seed)*noise:0)));const px=x+t*w,py=y+h-v*h;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.stroke();};
+        ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=1;ctx.strokeRect(pad+0.5,pad+0.5,qw,H-2*pad);
+        shp(this.shapes[qk],pad+6,pad+7,qw-12,H-2*pad-14,0,0,C.ink,1.5);
+        const gx=pad+qw+8,gw=W-gx-pad,cols=4,rows=2;const tw=(gw-(cols-1)*4)/cols,th=(H-2*pad-4)/rows;const lit=Math.min(1,s.pulse/450);
+        s.tiles.forEach((t,i)=>{const x=gx+(i%cols)*(tw+4),y=pad+Math.floor(i/cols)*(th+4);const on=t.k===qk;ctx.fillStyle=on?'rgba(69,137,255,'+(0.1+0.28*lit)+')':'rgba(255,255,255,.04)';ctx.fillRect(x,y,tw,th);ctx.strokeStyle=on?'rgba(120,169,255,'+(0.45+0.55*lit)+')':'rgba(255,255,255,.12)';ctx.strokeRect(x+0.5,y+0.5,tw-1,th-1);shp(this.shapes[t.k],x+3,y+4,tw-6,th-8,t.noise,t.seed,on?C.blue4:C.ink3,1);});}
+    },
+    /* trading: volume bars, the forecast band, the planned slices underneath */
+    trade:{
+      init(s){s.r=prng(9);s.v=[];s.i=0;s.acc=0;s.ph=0;for(let i=0;i<30;i++)this.push(s);},
+      base(i){return 0.42+0.2*Math.sin(i/5)+0.08*Math.sin(i/1.7);},
+      push(s){s.v.push(Math.max(0.08,this.base(s.i)+(s.r()-0.5)*0.2));s.i++;if(s.v.length>30)s.v.shift();},
+      update(s,dt){s.acc+=dt;s.ph=(s.ph+dt/3400)%1;while(s.acc>300){s.acc-=300;this.push(s);}},
+      draw(s,ctx,W,H){const n=s.v.length,hz=16,total=n+hz;const bw=(W-8)/total;const X=k=>4+k*bw,Y=v=>H-6-v*(H-12);
+        s.v.forEach((v,k)=>{ctx.fillStyle='rgba(244,244,244,.7)';ctx.fillRect(X(k)+0.5,Y(v),Math.max(1,bw-1.5),H-6-Y(v));});
+        const m=Math.ceil(hz*Math.min(1,s.ph*1.4));
+        if(m>1){const cx=j=>X(n-1+j)+bw/2;ctx.beginPath();for(let j=1;j<=m;j++){const mu=this.base(s.i+j-1),sg=0.06+0.01*j;ctx.lineTo(cx(j),Y(mu+sg));}for(let j=m;j>=1;j--){const mu=this.base(s.i+j-1),sg=0.06+0.01*j;ctx.lineTo(cx(j),Y(mu-sg));}ctx.closePath();ctx.fillStyle=C.band;ctx.fill();
+          ctx.setLineDash([3,2]);ctx.strokeStyle=C.blue3;ctx.lineWidth=1.2;ctx.beginPath();for(let j=1;j<=m;j++){const y=Y(this.base(s.i+j-1));j===1?ctx.moveTo(cx(j),y):ctx.lineTo(cx(j),y);}ctx.stroke();ctx.setLineDash([]);
+          for(let j=1;j<=m;j++){const hgt=this.base(s.i+j-1)*0.32*(H-12);ctx.fillStyle='rgba(66,190,101,.85)';ctx.fillRect(X(n-1+j)+1,H-6-hgt,Math.max(1,bw-2),hgt);}}
+        ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(X(n))+0.5,4);ctx.lineTo(Math.round(X(n))+0.5,H-4);ctx.stroke();}
+    },
+    /* optimization: the trade-off cloud, the frontier drawing in, the pick glowing */
+    opt:{
+      init(s){s.r=prng(13);s.pts=[];for(let i=0;i<70;i++){const e=s.r();const q=Math.max(0.02,1-(e-0.55)*(e-0.55)*4-s.r()*0.5);s.pts.push({e,q,m:q-0.4*e});}s.ph=0;
+        const c=s.pts.slice().sort((a,b)=>a.e-b.e);s.front=[];let bq=-1;c.forEach(p=>{if(p.q>bq){s.front.push(p);bq=p.q;}});
+        const ok=s.pts.filter(p=>p.q>0.78&&p.e<0.7).sort((a,b)=>b.m-a.m);s.pick=ok[0]||s.front[s.front.length-1];},
+      update(s,dt){s.ph=(s.ph+dt/4000)%1;},
+      draw(s,ctx,W,H){const X=e=>6+e*(W-12),Y=q=>H-6-q*(H-12);
+        ctx.setLineDash([3,2]);ctx.strokeStyle='rgba(250,77,86,.7)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(4,Math.round(Y(0.78))+0.5);ctx.lineTo(W-4,Math.round(Y(0.78))+0.5);ctx.moveTo(Math.round(X(0.7))+0.5,4);ctx.lineTo(Math.round(X(0.7))+0.5,H-4);ctx.stroke();ctx.setLineDash([]);
+        s.pts.forEach(p=>{const u=Math.max(0,Math.min(1,(p.m+0.2)/0.9));ctx.fillStyle=u>0.75?C.yellow:u>0.5?C.teal:u>0.25?C.blue2:'#2b4a9a';ctx.globalAlpha=(p.q>0.78&&p.e<0.7)?0.95:0.55;ctx.beginPath();ctx.arc(X(p.e),Y(p.q),1.7,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;
+        const prog=Math.min(1,s.ph*1.6);const n=Math.max(2,Math.ceil(s.front.length*prog));
+        ctx.strokeStyle='#fff';ctx.lineWidth=1.3;ctx.beginPath();s.front.slice(0,n).forEach((p,i)=>i?ctx.lineTo(X(p.e),Y(p.q)):ctx.moveTo(X(p.e),Y(p.q)));ctx.stroke();
+        if(prog>=1){const pulse=0.5+0.5*Math.sin(s.ph*40);ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=8+6*pulse;ctx.fillStyle=C.green2;ctx.beginPath();ctx.arc(X(s.pick.e),Y(s.pick.q),3.5,0,Math.PI*2);ctx.fill();ctx.restore();ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.beginPath();ctx.arc(X(s.pick.e),Y(s.pick.q),6,0,Math.PI*2);ctx.stroke();}}
+    }
+  };
+  cvs.forEach(c=>{const kind=c.dataset.mini,M=K[kind];if(!M)return;const cv=new Cv(c);const st={};M.init(st);if(reduced){st.ph=0.75;}
+    reg({el:c.closest('.uc')||c,resize(){cv.fit();},update(dt){if(!reduced)M.update(st,Math.min(dt,120));},draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W){cv.fit();return;}ctx.clearRect(0,0,W,H);ctx.lineJoin='round';ctx.lineCap='round';M.draw(st,ctx,W,H);}});});
+})();
+
 /* ============ 03 demand ============ */
 (function(){
   const el=$('#uc-demand');if(!el)return;
@@ -2020,7 +2052,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     return {f,q,mu,rop,out,proj,pos,po:first?first.po:-1,qty:first?first.qty:0,arrive:first?first.arrive:-1,week:mu.slice(0,7).reduce((a,b)=>a+b,0)};}
   function panel(r){if(!r)return;$('#dm-lead').textContent=Math.round(r.week)+' units';$('#dm-rop').textContent=Math.round(r.rop)+' units';$('#dm-out').textContent=r.out<0?'not in 28 d':'day '+r.out;$('#dm-out').className=r.out<0?'green':'red';const a=$('#dm-action');a.classList.remove('red','green');
     if(r.po<0){a.classList.add('green');$('#dm-actiont').textContent='No order this cycle. Stock covers the horizon at P'+st.sl+'.';}else{const dry=r.out>0&&r.out<=r.arrive;a.classList.add(dry?'red':'green');$('#dm-actiont').textContent='Order '+r.qty+' units '+(r.po===0?'now':'on day '+r.po)+', arrives day '+r.arrive+'.'+(dry?' Shelf runs dry on day '+r.out+' first: expedite.':' Service level held at P'+st.sl+'.')+(r.pos.length>1?' '+(r.pos.length-1)+' more PO'+(r.pos.length>2?'s':'')+' in the window.':'');}
-    $('#dm-model').textContent=sqlModel();}
+    {const e=$('#dm-model');if(e)e.textContent=sqlModel();}}
   function sql(){$('#dm-sql').innerHTML=highlight("SELECT sku, event_time, AI_FORECAST(units_sold, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 28, 'maxContextSize' VALUE 730)) OVER (PARTITION BY sku ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f FROM daily_sales;");}
   function draw(){if(!st.dirty)return;st.dirty=false;const r=compute();st.res=r;const z=Z[st.sl]||0;
     drawStream(cv,sim,{mode:'fc',z,h:H,nVis:84,label,stepName:' days',floorZero:true,fcOpts:{mult:k=>k<=7?1+st.promo:1},padR:58,
@@ -2056,7 +2088,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const dateOf=i=>{const d=new Date(Date.UTC(2026,2,1)+i*86400000);return DAYS[(d.getUTCDay()+6)%7]+' '+d.getUTCDate()+' '+MON[d.getUTCMonth()];};
   function classify(r,z){if(r.v<=0.5)return ['feed gap','route to data operations, no stock decision'];if(r.v<r.pred-z*r.sig)return ['stockout','replenish or expedite the store today'];return ['unplanned spike','check the price file and the promo before tomorrow'];}
   function sql(){$('#an-sql').innerHTML=highlight("SELECT store_id, sku, sale_date, AI_DETECT_ANOMALIES(units, sale_date, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+st.conf+", 'maxContextSize' VALUE 512)) OVER (PARTITION BY store_id, sku ORDER BY sale_date RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS a FROM daily_sales;");}
-  function panel(){const z=Z[st.conf]||3.29;const flagged=sim.rows.filter(r=>r.pred!=null&&(r.v>r.pred+z*r.sig||r.v<r.pred-z*r.sig));$('#an-flagged').textContent=flagged.length;$('#an-scored').textContent=fmtInt(st.scored);$('#an-confv').textContent=st.conf;const a=$('#an-action');a.classList.remove('red','green');
+  function panel(){const z=Z[st.conf]||3.29;const flagged=sim.rows.filter(r=>r.pred!=null&&(r.v>r.pred+z*r.sig||r.v<r.pred-z*r.sig));$('#an-flagged').textContent=flagged.length;$('#an-scored').textContent=fmtInt(st.scored);{const e=$('#an-confv');if(e)e.textContent=st.conf;}const a=$('#an-action');a.classList.remove('red','green');
     if(!flagged.length){$('#an-day').textContent='–';$('#an-act').textContent='–';$('#an-band').textContent='–';$('#an-cause').textContent='none';$('#an-actiont').textContent='No flags. Weekend peaks are expected, not flagged.';a.classList.add('green');return;}
     const r=flagged[flagged.length-1];const c=classify(r,z);$('#an-day').textContent=dateOf(r.i);$('#an-act').textContent=Math.round(r.v)+' units';$('#an-band').textContent=Math.round(r.pred-z*r.sig)+' to '+Math.round(r.pred+z*r.sig);$('#an-cause').textContent=c[0];$('#an-actiont').textContent=c[1];a.classList.add('red');}
   function draw(){if(!st.dirty)return;st.dirty=false;layout=drawStream(cv,sim,{mode:'ad',z:Z[st.conf]||3.29,h:0,nVis:70,label:i=>dateOf(i).slice(4),hover:st.hover,floorZero:true});}
@@ -2080,7 +2112,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const money=v=>'$'+Math.round(v).toLocaleString('en-US');
   function classify(r,z){const up=r.pred+z*r.sig,lo=r.pred-z*r.sig;if(r.v>up&&r.v>3*r.pred)return ['stolen card pattern','hold the authorization, step-up auth, push to the cardholder','red'];if(r.v>up)return ['unusual spend for this card','step-up auth, allow on confirmation, learn the new normal','red'];if(r.v<lo&&r.v<3)return ['card testing','decline, block the merchant, alert the issuer','red'];return ['below normal','allow','green'];}
   function sql(){$('#fr-sql').innerHTML=highlight("SELECT card_id, event_time, amount, AI_DETECT_ANOMALIES(amount, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+st.conf+")) OVER (PARTITION BY card_id ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS a FROM card_payments;");}
-  function panel(){const z=Z[st.conf]||2.81;const flagged=sim.rows.filter(r=>r.pred!=null&&(r.v>r.pred+z*r.sig||r.v<r.pred-z*r.sig));$('#fr-flagged').textContent=flagged.length;$('#fr-scored').textContent=fmtInt(st.scored);$('#fr-confv').textContent=st.conf;const a=$('#fr-action');a.classList.remove('red','green');
+  function panel(){const z=Z[st.conf]||2.81;const flagged=sim.rows.filter(r=>r.pred!=null&&(r.v>r.pred+z*r.sig||r.v<r.pred-z*r.sig));$('#fr-flagged').textContent=flagged.length;$('#fr-scored').textContent=fmtInt(st.scored);{const e=$('#fr-confv');if(e)e.textContent=st.conf;}const a=$('#fr-action');a.classList.remove('red','green');
     /* report the biggest flag of the last few, not the tail of a spike */
     const recent=flagged.slice(-4);const top=recent.length?recent.reduce((m,r)=>Math.abs(r.v-r.pred)/r.sig>Math.abs(m.v-m.pred)/m.sig?r:m):null;
     if(!flagged.length){$('#fr-time').textContent='–';$('#fr-amt').textContent='–';$('#fr-band').textContent='–';$('#fr-cause').textContent='none';$('#fr-actiont').textContent='No flags. Normal spend for this card.';a.classList.add('green');return;}
