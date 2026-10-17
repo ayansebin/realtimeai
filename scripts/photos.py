@@ -207,11 +207,20 @@ def openverse_sources(q):
 
 
 def flickr_variants(url):
+    """candidate download URLs, best first"""
+    url = url.split('?')[0]
     m = re.match(r'(https://live\.staticflickr\.com/\d+/\d+_[0-9a-f]+)_([a-z0-9]+)\.(jpg|png)$', url)
-    if not m:
-        return [url]
-    base, ext = m.group(1), m.group(3)
-    return [f'{base}_k.{ext}', f'{base}_h.{ext}', f'{base}_b.{ext}', url]
+    if m:
+        base, ext = m.group(1), m.group(3)
+        return [f'{base}_k.{ext}', f'{base}_h.{ext}', f'{base}_b.{ext}', url]
+    m = re.match(r'https://upload\.wikimedia\.org/wikipedia/commons/([0-9a-f])/([0-9a-f]{2})/([^/]+)$', url)
+    if m:
+        a, b, name = m.groups()
+        return [f'https://upload.wikimedia.org/wikipedia/commons/thumb/{a}/{b}/{name}/2200px-{name}', url]
+    m = re.match(r'https://cdn\.stocksnap\.io/img-thumbs/960w/([A-Z0-9]+)\.jpg$', url)
+    if m:
+        return [f'https://cdn.stocksnap.io/img-thumbs/1920w/{m.group(1)}.jpg', url]
+    return [url]
 
 
 def fetch():
