@@ -1,0 +1,135 @@
+== steel
+  ttm: ok, 30.0 ms per forecast, 13.8 s total
+  flowstate: ok, 1432.2 ms per forecast, 15.8 s total
+  patchtstfm: ok, 5590.0 ms per forecast, 62.0 s total
+  snaive: ok, 0.0 ms per forecast, 0.0 s total
+  tspulse: ok, 17456 ms for 3104 points
+== traffic
+  dataset traffic FAILED: FileNotFoundError('.csv')
+Traceback (most recent call last):
+  File "/home/runner/work/realtimeai/realtimeai/scripts/playground.py", line 524, in main
+    out = build(meta, only)
+          ^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/realtimeai/realtimeai/scripts/playground.py", line 462, in build
+    loaded = meta["load"]()
+             ^^^^^^^^^^^^^^
+  File "/home/runner/work/realtimeai/realtimeai/scripts/playground.py", line 112, in load_traffic
+    df = pd.read_csv(io.BytesIO(unzip_first(raw, ".csv")))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/realtimeai/realtimeai/scripts/playground.py", line 47, in unzip_first
+    raise FileNotFoundError(suffix)
+FileNotFoundError: .csv
+
+== bikes
+  ttm: ok, 26.8 ms per forecast, 0.3 s total
+  flowstate: ok, 1682.4 ms per forecast, 17.1 s total
+  patchtstfm: ok, 5601.0 ms per forecast, 56.0 s total
+  snaive: ok, 0.0 ms per forecast, 0.0 s total
+  tspulse: ok, 17578 ms for 3104 points
+== grid
+  dataset grid FAILED: ValueError('time data "NSW" doesn\'t match format "%Y-%m-%d %H-%M-%S". You might want to try:\n    - passing `format` if your strings have a consistent format;\n    - passing `format=\'ISO8601\'` if your strings are all ISO8601 but not necessarily in exactly the same format;\n    - passing `format=\
+etimes.py", line 1074, in to_datetime
+    result = convert_listlike(np.array([arg]), format)[0]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/pandas/core/tools/datetimes.py", line 435, in _convert_listlike_datetimes
+    return _array_strptime_with_fallback(arg, name, utc, format, exact, errors)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/pandas/core/tools/datetimes.py", line 470, in _array_strptime_with_fallback
+    result, tz_out = array_strptime(arg, fmt, exact=exact, errors=errors, utc=utc)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/tslibs/strptime.pyx", line 564, in pandas._libs.tslibs.strptime.array_strptime
+  File "pandas/_libs/tslibs/strptime.pyx", line 512, in pandas._libs.tslibs.strptime.array_strptime
+  File "pandas/_libs/tslibs/strptime.pyx", line 618, in pandas._libs.tslibs.strptime._parse_with_format
+ValueError: time data "NSW" doesn't match format "%Y-%m-%d %H-%M-%S". You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+
+== retail
+  dataset retail FAILED: TimeoutError('The read operation timed out')
+gs)
+             ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/urllib/request.py", line 1404, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/urllib/request.py", line 1365, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/http/client.py", line 1443, in getresponse
+    response.begin()
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/http/client.py", line 337, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/http/client.py", line 298, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/socket.py", line 718, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/ssl.py", line 1327, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/ssl.py", line 1179, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+== wti
+  dataset wti FAILED: TimeoutError('The read operation timed out')
+gs)
+             ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/urllib/request.py", line 1404, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/urllib/request.py", line 1365, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/http/client.py", line 1443, in getresponse
+    response.begin()
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/http/client.py", line 337, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/http/client.py", line 298, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/socket.py", line 718, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/ssl.py", line 1327, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/ssl.py", line 1179, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+
+== subway
+  ttm: ok, 6.8 ms per forecast, 1.0 s total
+  flowstate: ok, 450.2 ms per forecast, 3.8 s total
+  patchtstfm: ok, 5568.6 ms per forecast, 44.6 s total
+  snaive: ok, 0.0 ms per forecast, 0.0 s total
+== syn-kiln
+  ttm: ok, 27.0 ms per forecast, 0.3 s total
+  flowstate: ok, 1644.6 ms per forecast, 16.6 s total
+  patchtstfm: ok, 5570.3 ms per forecast, 55.7 s total
+  snaive: ok, 0.0 ms per forecast, 0.0 s total
+  tspulse: ok, 17559 ms for 3104 points
+== syn-sku
+  ttm: ok, 26.7 ms per forecast, 0.3 s total
+  flowstate: ok, 1678.4 ms per forecast, 16.8 s total
+  patchtstfm: ok, 5571.4 ms per forecast, 55.7 s total
+  snaive: ok, 0.0 ms per forecast, 0.0 s total
+  tspulse: ok, 17442 ms for 3104 points
+== syn-cards
+  ttm: ok, 26.5 ms per forecast, 0.3 s total
+  flowstate: ok, 1319.7 ms per forecast, 13.4 s total
+  patchtstfm: ok, 5591.3 ms per forecast, 55.9 s total
+  snaive: ok, 0.0 ms per forecast, 0.0 s total
+  tspulse: ok, 17472 ms for 3104 points
+== syn-api
+  ttm: ok, 26.8 ms per forecast, 0.3 s total
+  flowstate: ok, 1325.0 ms per forecast, 13.3 s total
+  patchtstfm: ok, 5579.4 ms per forecast, 55.8 s total
+  snaive: ok, 0.0 ms per forecast, 0.0 s total
+  tspulse: ok, 17685 ms for 3104 points
+done: ['steel', 'bikes', 'subway', 'syn-kiln', 'syn-sku', 'syn-cards', 'syn-api']
