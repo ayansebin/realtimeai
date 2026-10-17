@@ -322,7 +322,9 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 .uctabs button[aria-selected="true"] i{background:#fff}
 @media (max-width:760px){.uctabs button{flex:1 1 calc(50% - .4rem);justify-content:flex-start;padding:.55rem .7rem;font-size:.84rem}}
 .ucpanel .canvas-wrap{height:clamp(260px,40vh,420px)}
-.ucpanel .opt-wrap{height:clamp(300px,46vh,460px)}
+.opt-col{display:grid;grid-template-rows:1fr auto;gap:.5rem;min-width:0}
+.opt-wrap{min-height:clamp(320px,44vh,480px)}
+.op-cap{padding:.1rem .2rem}
 .side{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px}
 @media (max-width:900px){.side{grid-template-columns:1fr}}
 .panel{background:rgba(0,7,20,.32);border:1px solid var(--line);padding:.9rem 1rem;display:grid;gap:.7rem;align-content:start}
@@ -686,8 +688,9 @@ body.walking{overflow:hidden}
 
     <div class="stage" id="uc-opt">
       <div class="stage-top">
-        <div class="stage-title"><h3>Which setting earns the most and still meets spec?</h3><p>A kiln has two big knobs: how much you feed it and how hot you run it. The model forecasts what every combination does to quality and energy. The optimizer picks the best one inside the limits.</p></div>
+        <div class="stage-title"><h3>Which setting earns the most and still meets spec?</h3><p>Two knobs, three objectives: quality, energy, margin. The model forecasts what every setting does. The optimizer searches, respects the limits, and the operator approves.</p></div>
         <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">View</span><div class="chips" id="op-view"><button class="chip sm" data-v="land" aria-pressed="true">Landscape</button><button class="chip sm" data-v="pareto">Trade-offs</button><button class="chip sm" data-v="loop">Loop</button></div></div>
           <div class="ctl-group"><span class="eyebrow">How much we feed, t/h</span><label class="range"><input type="range" id="op-feed" min="150" max="210" value="196" aria-label="Feed rate"><output id="op-feedv">196</output></label></div>
           <div class="ctl-group"><span class="eyebrow">How hot we run, °C</span><label class="range"><input type="range" id="op-temp" min="1400" max="1500" value="1418" aria-label="Kiln temperature"><output id="op-tempv">1418</output></label></div>
           <div class="ctl-group"><span class="eyebrow">&nbsp;</span><div class="btn-row"><button class="btn sm" id="op-go">Optimize <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button class="btn sm ghost" id="op-reset">Reset</button></div></div>
@@ -695,7 +698,7 @@ body.walking{overflow:hidden}
       </div>
       <div class="stage-body">
         <div class="side">
-          <div class="canvas-wrap opt-wrap"><canvas class="stage-canvas" id="op-cv" aria-label="Objective surface over feed rate and kiln temperature with the search path"></canvas></div>
+          <div class="opt-col"><div class="canvas-wrap opt-wrap"><canvas class="stage-canvas" id="op-cv" aria-label="Optimization views: landscape with local and global maxima, trade-off frontier, and the forecast and optimize loop"></canvas></div><div class="tiny op-cap" id="op-cap"></div></div>
           <div class="panel op-panel">
             <div class="ph">Before and after</div>
             <table class="op-table" id="op-table">
@@ -1968,73 +1971,143 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   App.listeners.push(()=>{sql();st.dirty=true;});sql();panel();
 })();
 
-/* ============ 03 optimization ============ */
+/* ============ 03 optimization: landscape, trade-offs, loop ============ */
 (function(){
   const el=$('#uc-opt');if(!el)return;
   const cv=new Cv($('#op-cv'));
-  const F0=150,F1=210,T0=1400,T1=1500,GF=205,GT=1485,SPEC=98.5;
+  const F0=150,F1=210,T0=1400,T1=1500,GF=205,GT=1485,SPEC=98.5,ECAP=98;
   const quality=(f,t)=>clamp(99-0.0028*(f-178)*(f-178)-0.0017*(t-1462)*(t-1462)+0.00003*(f-178)*(t-1462),85,99);
   const energy=(f,t)=>90+0.11*(t-1400)-0.06*(f-150);
-  const rawMargin=(f,t)=>1.3*(quality(f,t)-93)-0.045*(energy(f,t)-100)+0.02*(f-150);
-  const inside=(f,t)=>f<=GF&&t<=GT;
+  const raw=(f,t)=>1.3*(quality(f,t)-93)-0.045*(energy(f,t)-100)+0.02*(f-150);
+  /* two smaller hills make the landscape honest: a hill-climber can get stuck on them */
+  const bump=(f,t)=>2.3*Math.exp(-((f-158)*(f-158)/60+(t-1432)*(t-1432)/520))+1.4*Math.exp(-((f-203)*(f-203)/40+(t-1479)*(t-1479)/260));
+  const obj=(f,t)=>raw(f,t)+bump(f,t);
+  const inLimits=(f,t)=>f<=GF&&t<=GT&&energy(f,t)<=ECAP;
   const inSpec=(f,t)=>quality(f,t)>=SPEC;
-  const st={f:196,t:1418,f0:196,t0:1418,path:[],anim:null,opt:null,best:null,stepT:-1};
-  let best=-1e9;for(let f=F0;f<=GF;f+=0.5)for(let t=T0;t<=GT;t+=0.5){const m=rawMargin(f,t);if(m>best){best=m;st.opt={f,t,m};}}
-  /* scale the surface so the move from the default setpoint to the optimum is worth the $2 per ton seen in production */
-  const SCALE=2/(best-rawMargin(st.f0,st.t0));
-  const margin=(f,t)=>rawMargin(f,t)*SCALE;
-  /* the candidate grid the optimizer talks about */
-  const GRID={n:0,ok:0};for(let f=F0;f<=F1;f+=1)for(let t=T0;t<=T1;t+=2.5){GRID.n++;if(inside(f,t)&&inSpec(f,t))GRID.ok++;}
-  let heat=null;
-  function buildHeat(){const w=180,h=120;const img=cv.ctx.createImageData(w,h);let lo=1e9,hi=-1e9;const vals=[],specs=[];for(let j=0;j<h;j++)for(let i=0;i<w;i++){const f=F0+(F1-F0)*i/(w-1),t=T1-(T1-T0)*j/(h-1);const m=margin(f,t);vals.push(m);specs.push(clamp((quality(f,t)-(SPEC-0.35))/0.35,0,1));lo=Math.min(lo,m);hi=Math.max(hi,m);}
-    for(let k=0;k<vals.length;k++){const u=(vals[k]-lo)/(hi-lo);let c=ramp(u);const sp=specs[k];if(sp<1)c=c.map(v=>Math.round(v*(0.42+0.58*sp)));img.data[k*4]=c[0];img.data[k*4+1]=c[1];img.data[k*4+2]=c[2];img.data[k*4+3]=255;}
-    const oc=document.createElement('canvas');oc.width=w;oc.height=h;oc.getContext('2d').putImageData(img,0,0);heat=oc;}
-  function ramp(u){const stops=[[0,[0,10,46]],[0.35,[0,45,156]],[0.6,[15,98,254]],[0.8,[8,189,186]],[1,[241,194,27]]];for(let i=1;i<stops.length;i++){if(u<=stops[i][0]){const a=stops[i-1],b=stops[i];const t=(u-a[0])/(b[0]-a[0]);return [0,1,2].map(c=>Math.round(lerp(a[1][c],b[1][c],t)));}}return stops[stops.length-1][1];}
-  const fm=(f,t)=>{const m=margin(f,t)-margin(st.f0,st.t0);return (m>=0?'+':'')+'$'+m.toFixed(2)+'/t';};
-  function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;if(!heat)buildHeat();const padL=56,padR=16,padT=34,padB=34,pw=W-padL-padR,ph=H-padT-padB;
+  const feasible=(f,t)=>inLimits(f,t)&&inSpec(f,t);
+  const st={view:'land',f:196,t:1418,f0:196,t0:1418,best:null,anim:null,paths:[],prog:0,loopT:0,hover:null};
+  /* the global optimum inside the limits and the spec */
+  let gbest=-1e9,gopt=null;for(let f=F0;f<=F1;f+=0.5)for(let t=T0;t<=T1;t+=0.5){if(!feasible(f,t))continue;const m=obj(f,t);if(m>gbest){gbest=m;gopt={f,t};}}
+  const SCALE=2/(gbest-obj(st.f0,st.t0));
+  const margin=(f,t)=>obj(f,t)*SCALE;
+  const gain=(f,t)=>margin(f,t)-margin(st.f0,st.t0);
+  const fm=(f,t)=>{const m=gain(f,t);return (m>=0?'+':'')+'$'+m.toFixed(2)+'/t';};
+  const n1=n=>Math.round(n).toLocaleString('en-US');
+  /* candidate grid the optimizer talks about */
+  const GRID={n:0,ok:0,pts:[]};for(let f=F0;f<=F1;f+=2)for(let t=T0;t<=T1;t+=5){GRID.n++;const ok=feasible(f,t);if(ok)GRID.ok++;GRID.pts.push({f,t,q:quality(f,t),e:energy(f,t),m:margin(f,t),ok});}
+  /* pareto front: higher quality, lower energy, inside the limits */
+  const front=(()=>{const c=GRID.pts.filter(p=>inLimits(p.f,p.t)).slice().sort((a,b)=>a.e-b.e||b.q-a.q);const out=[];let bestQ=-1;c.forEach(p=>{if(p.q>bestQ+1e-9){out.push(p);bestQ=p.q;}});return out;})();
+  const ramp=u=>{const stops=[[0,[0,10,46]],[0.35,[0,45,156]],[0.6,[15,98,254]],[0.8,[8,189,186]],[1,[241,194,27]]];u=clamp(u,0,1);for(let i=1;i<stops.length;i++){if(u<=stops[i][0]){const a=stops[i-1],b=stops[i];const t=(u-a[0])/(b[0]-a[0]);return [0,1,2].map(c=>Math.round(lerp(a[1][c],b[1][c],t)));}}return stops[stops.length-1][1];};
+  const rgb=(c,a)=>'rgba('+c[0]+','+c[1]+','+c[2]+','+(a==null?1:a)+')';
+  let zlo=1e9,zhi=-1e9;for(let f=F0;f<=F1;f+=2)for(let t=T0;t<=T1;t+=4){const z=obj(f,t);zlo=Math.min(zlo,z);zhi=Math.max(zhi,z);}
+  zlo=zhi-7.5;/* show the top of the landscape, the deep corners are flat floor */
+  const zn=z=>clamp((z-zlo)/(zhi-zlo),0,1);
+  /* hill climbs from several starting points */
+  function climb(f,t){const path=[{f,t}];for(let i=0;i<60;i++){const h=0.5;const gf=(obj(f+h,t)-obj(f-h,t))/(2*h),gt=(obj(f,t+h)-obj(f,t-h))/(2*h);const nf=clamp(f+gf*18,F0,GF),nt=clamp(t+gt*150,T0,GT);if(Math.abs(nf-f)<0.02&&Math.abs(nt-t)<0.2)break;f=nf;t=nt;path.push({f,t});}return path;}
+  const isGlobal=p=>Math.hypot(p.f-gopt.f,(p.t-gopt.t)/2)<3;
+
+  /* ---------- deterministic series for the loop view ---------- */
+  let seed=7;const rnd=()=>{seed=(seed*1664525+1013904223)%4294967296;return seed/4294967296;};
+  const LOOP={H:12,N:36,cycle:4,q:[],f:[],t:[],fc:[]};
+  (function(){let f=st.f0,t=st.t0;for(let i=0;i<LOOP.N;i++){if(i>=LOOP.H&&(i-LOOP.H)%LOOP.cycle===0){const k=Math.min(1,(i-LOOP.H)/LOOP.cycle/3);f=lerp(st.f0,gopt.f,k);t=lerp(st.t0,gopt.t,k);}LOOP.f.push(f);LOOP.t.push(t);const base=quality(f,t);LOOP.q.push(base+(rnd()-0.5)*0.9+(i<LOOP.H?-0.4*Math.sin(i/2):0));}})();
+
+  /* ---------- drawing ---------- */
+  let ctx,W,H;
+  function font(px,mono,w){ctx.font=(w||400)+' '+px+'px '+(mono?'"IBM Plex Mono", Menlo, monospace':'"IBM Plex Sans", Arial, sans-serif');}
+  function txt(s,x,y,o){o=o||{};font(o.px||11,o.mono!==false,o.w);ctx.fillStyle=o.c||C.ink3;ctx.textAlign=o.a||'left';ctx.textBaseline=o.b||'middle';if(o.halo){ctx.save();ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=4;ctx.fillText(s,x,y);ctx.restore();}else ctx.fillText(s,x,y);}
+  function draw(){ctx=cv.ctx;W=cv.W;H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);if(st.view==='land')drawLand();else if(st.view==='pareto')drawPareto();else drawLoop();panel();}
+
+  /* landscape: a contour map of the forecast margin, read like a hiking map */
+  let surf=null,surfKey='';
+  function buildSurface(x0,y0,pw,ph){const key=pw+'x'+ph;if(surf&&surfKey===key)return;surfKey=key;const oc=document.createElement('canvas');const dpr=Math.min(2,window.devicePixelRatio||1);oc.width=Math.round(pw*dpr);oc.height=Math.round(ph*dpr);const c=oc.getContext('2d');c.scale(dpr,dpr);
+    const w=150,h=100;const img=c.createImageData(w,h);const Z=new Float32Array(w*h);for(let j=0;j<h;j++)for(let i=0;i<w;i++){const f=F0+(F1-F0)*i/(w-1),t=T1-(T1-T0)*j/(h-1);const z=obj(f,t);Z[j*w+i]=z;const u=zn(z);let col=ramp(u);const sp=clamp((quality(f,t)-(SPEC-0.35))/0.35,0,1);if(sp<1)col=col.map(v=>Math.round(v*(0.45+0.55*sp)));if(!inLimits(f,t))col=col.map(v=>Math.round(v*0.5));const k=(j*w+i)*4;img.data[k]=col[0];img.data[k+1]=col[1];img.data[k+2]=col[2];img.data[k+3]=255;}
+    const tmp=document.createElement('canvas');tmp.width=w;tmp.height=h;tmp.getContext('2d').putImageData(img,0,0);c.imageSmoothingEnabled=true;c.drawImage(tmp,0,0,pw,ph);
+    /* contour lines by marching squares */
+    const levels=[];for(let k=1;k<=14;k++)levels.push(zlo+(zhi-zlo)*k/15);
+    const X=i=>i/(w-1)*pw,Y=j=>j/(h-1)*ph;
+    c.lineWidth=1;levels.forEach((lv,li)=>{c.strokeStyle='rgba(255,255,255,'+(0.12+0.5*li/levels.length)+')';c.beginPath();for(let j=0;j<h-1;j++)for(let i=0;i<w-1;i++){const a=Z[j*w+i],b=Z[j*w+i+1],d=Z[(j+1)*w+i+1],e=Z[(j+1)*w+i];const idx=(a>=lv?8:0)|(b>=lv?4:0)|(d>=lv?2:0)|(e>=lv?1:0);if(idx===0||idx===15)continue;const pts=[];const lerpP=(p,q,vp,vq)=>{const u=(lv-vp)/((vq-vp)||1e-9);return {x:lerp(p.x,q.x,u),y:lerp(p.y,q.y,u)};};const A={x:X(i),y:Y(j)},B={x:X(i+1),y:Y(j)},D={x:X(i+1),y:Y(j+1)},E={x:X(i),y:Y(j+1)};const top=()=>lerpP(A,B,a,b),right=()=>lerpP(B,D,b,d),bottom=()=>lerpP(E,D,e,d),left=()=>lerpP(A,E,a,e);
+      const seg=(p,q)=>{c.moveTo(p.x,p.y);c.lineTo(q.x,q.y);};
+      switch(idx){case 1:case 14:seg(left(),bottom());break;case 2:case 13:seg(bottom(),right());break;case 3:case 12:seg(left(),right());break;case 4:case 11:seg(top(),right());break;case 5:seg(top(),left());seg(bottom(),right());break;case 6:case 9:seg(top(),bottom());break;case 7:case 8:seg(top(),left());break;case 10:seg(top(),right());seg(left(),bottom());break;}}
+      c.stroke();});
+    surf=oc;}
+  function drawLand(){const padL=56,padR=16,padT=34,padB=40;const pw=W-padL-padR,ph=H-padT-padB;buildSurface(padL,padT,pw,ph);
     const X=f=>padL+(f-F0)/(F1-F0)*pw,Y=t=>padT+(T1-t)/(T1-T0)*ph;
-    ctx.clearRect(0,0,W,H);ctx.imageSmoothingEnabled=true;ctx.drawImage(heat,padL,padT,pw,ph);
-    /* beyond the limits */
-    ctx.fillStyle='rgba(0,0,0,.6)';ctx.fillRect(X(GF),padT,padL+pw-X(GF),ph);ctx.fillRect(padL,padT,pw,Y(GT)-padT);
-    ctx.strokeStyle='rgba(250,77,86,.85)';ctx.setLineDash([5,4]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(X(GF)+0.5,padT);ctx.lineTo(X(GF)+0.5,padT+ph);ctx.moveTo(padL,Y(GT)+0.5);ctx.lineTo(padL+pw,Y(GT)+0.5);ctx.stroke();ctx.setLineDash([]);
-    ctx.font=MONO;ctx.fillStyle=C.red2;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText('limit: max temp '+GT+' °C',padL+6,Y(GT)-10);
-    ctx.save();ctx.translate(X(GF)+12,padT+ph-8);ctx.rotate(-Math.PI/2);ctx.fillText('limit: max feed '+GF+' t/h',0,0);ctx.restore();
-    /* spec outline: where the forecast quality meets 98.5 % */
-    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();let started=false;for(let a=0;a<=360;a+=3){const r=a*Math.PI/180;let lo=0,hi=200;for(let k=0;k<18;k++){const mid=(lo+hi)/2;const f=178+Math.cos(r)*mid*0.6,t=1462+Math.sin(r)*mid;if(inSpec(f,t))lo=mid;else hi=mid;}const f=178+Math.cos(r)*lo*0.6,t=1462+Math.sin(r)*lo;if(f<F0||f>F1||t<T0||t>T1){started=false;continue;}started?ctx.lineTo(X(f),Y(t)):ctx.moveTo(X(f),Y(t));started=true;}ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle='rgba(255,255,255,.8)';ctx.textAlign='center';ctx.fillText('meets spec, quality ≥ '+SPEC+'%',X(178),Y(1462)-ph*0.3);
-    ctx.fillStyle='rgba(255,255,255,.5)';ctx.textAlign='left';ctx.fillText('below spec',padL+6,padT+ph-12);
-    /* legend: margin per ton */
-    const lw=140,lx=padL+pw-lw-14,ly=padT-20;const g=ctx.createLinearGradient(lx,0,lx+lw,0);[[0,[0,10,46]],[0.35,[0,45,156]],[0.6,[15,98,254]],[0.8,[8,189,186]],[1,[241,194,27]]].forEach(([u,c])=>g.addColorStop(u,'rgb('+c.join(',')+')'));ctx.fillStyle=g;ctx.fillRect(lx,ly,lw,7);ctx.fillStyle=C.ink3;ctx.textAlign='right';ctx.fillText('less',lx-6,ly+4);ctx.textAlign='left';ctx.fillText('more margin per ton',lx+lw+6,ly+4);
-    ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText('Forecast margin for every setting',padL,padT-16);
-    /* axes */
-    ctx.fillStyle=C.ink3;ctx.textAlign='center';ctx.textBaseline='alphabetic';[150,170,190,210].forEach(f=>ctx.fillText(f,X(f),H-18));ctx.save();ctx.translate(14,padT+ph/2);ctx.rotate(-Math.PI/2);ctx.fillText('kiln temperature, °C',0,0);ctx.restore();ctx.textAlign='right';ctx.textBaseline='middle';[1400,1425,1450,1475,1500].forEach(t=>ctx.fillText(t,padL-6,Y(t)));ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText('feed rate, tons per hour',padL+pw/2,H-4);
-    /* search path */
-    if(st.path.length>1){ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.setLineDash([2,3]);ctx.beginPath();st.path.forEach((p,i)=>i?ctx.lineTo(X(p.f),Y(p.t)):ctx.moveTo(X(p.f),Y(p.t)));ctx.stroke();ctx.setLineDash([]);}
-    const o=st.opt;if(st.best){ctx.save();ctx.strokeStyle='#0b1530';ctx.lineWidth=3.5;ctx.beginPath();ctx.arc(X(o.f),Y(o.t),10,0,Math.PI*2);ctx.stroke();ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();ctx.restore();ctx.save();ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=4;ctx.fillStyle='#fff';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText('after · '+fm(o.f,o.t),X(o.f)+15,Y(o.t)-12);ctx.restore();}
-    if(st.path.length>1){const p0=st.path[0];ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(X(p0.f),Y(p0.t),5,0,Math.PI*2);ctx.stroke();ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText('before · '+fm(p0.f,p0.t),X(p0.f)+10,Y(p0.t)+12);}
-    ctx.save();ctx.shadowColor='#fff';ctx.shadowBlur=14;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(st.f),Y(st.t),6,0,Math.PI*2);ctx.fill();ctx.restore();ctx.strokeStyle=C.bg;ctx.lineWidth=2;ctx.stroke();
-    const near=Math.hypot(X(st.f)-X(o.f),Y(st.t)-Y(o.t))<14;ctx.fillStyle=C.ink;ctx.textAlign='left';ctx.textBaseline='middle';if(!near)ctx.fillText('now · '+fm(st.f,st.t),X(st.f)+10,Y(st.t)-12);
-    panel();}
-  const n1=n=>n.toLocaleString('en-US');
-  function panel(){const s0=st.path.length>1?st.path[0]:{f:st.f,t:st.t};const q=quality(s0.f,s0.t),e=energy(s0.f,s0.t);
-    $('#op-f0').textContent=Math.round(s0.f)+' t/h';$('#op-t0').textContent=n1(Math.round(s0.t))+' °C';$('#op-q0').textContent=q.toFixed(1)+'%';$('#op-q0').className=q>=SPEC?'':'dim';$('#op-e0').textContent=e.toFixed(0)+' kWh/t';$('#op-m0').textContent=(s0.f===st.f0&&s0.t===st.t0)?'baseline':fm(s0.f,s0.t);
-    $('#op-feedv').textContent=Math.round(st.f);$('#op-tempv').textContent=Math.round(st.t);$('#op-feed').value=Math.round(st.f);$('#op-temp').value=Math.round(st.t);
-    const b=st.best;['f1','t1','q1','e1','m1'].forEach((k,i)=>{const td=$('#op-'+k);if(!b){td.textContent='–';td.className='dim';return;}td.className='';td.textContent=[Math.round(b.f)+' t/h',n1(Math.round(b.t))+' °C',quality(b.f,b.t).toFixed(1)+'%',energy(b.f,b.t).toFixed(0)+' kWh/t',fm(b.f,b.t)][i];});}
-  function steps(k,texts){$$('#op-steps>div').forEach((d,i)=>{d.className=i<k?'done':i===k?'on':'';});if(texts)texts.forEach((t,i)=>{if(t)$('#op-s'+(i+1)).textContent=t;});}
-  function optimize(){if(st.anim)cancelAnimationFrame(st.anim);st.best=null;const path=[{f:st.f,t:st.t}];let f=st.f,t=st.t;for(let i=0;i<48;i++){const h=0.5;const gf=(rawMargin(f+h,t)-rawMargin(f-h,t))/(2*h),gt=(rawMargin(f,t+h)-rawMargin(f,t-h))/(2*h);f=clamp(f+gf*22,F0,GF);t=clamp(t+gt*180,T0,GT);path.push({f,t});if(Math.abs(gf)<0.002&&Math.abs(gt)<0.0003)break;}
-    const tot=path.length-1;const t0=performance.now(),dur=reduced?1:2200;st.path=[path[0]];
-    steps(0,['Forecasting quality and energy for '+n1(GRID.n)+' settings …','Drop the ones that miss spec or cross a limit','Pick the most profitable, send to the operator']);
-    $('#op-actiont').textContent='Searching …';
-    function step(now){const el2=now-t0;if(el2>700&&el2<=1300)steps(1,[null,'Dropping '+n1(GRID.n-GRID.ok)+' settings that miss spec or cross a limit …',null]);else if(el2>1300)steps(2,[null,null,'Picking the most profitable of '+n1(GRID.ok)+' …']);
-      const u=ease(clamp((now-t0)/dur,0,1));const idx=u*tot;const i=Math.min(tot-1,Math.floor(idx)),r=idx-i;const p=path[i],q=path[i+1]||p;st.f=lerp(p.f,q.f,r);st.t=lerp(p.t,q.t,r);st.path=path.slice(0,i+1).concat([{f:st.f,t:st.t}]);
-      if(u<1)st.anim=requestAnimationFrame(step);else{st.anim=null;st.best={f:st.f,t:st.t};steps(3,[null,null,'Best of '+n1(GRID.ok)+' settings, sent to the operator']);const a=$('#op-action');a.classList.remove('red');a.classList.add('green');$('#op-actiont').textContent='Feed '+Math.round(st.f)+' t/h at '+n1(Math.round(st.t))+' °C: quality '+quality(st.f,st.t).toFixed(1)+'%, '+fm(st.f,st.t).replace('/t',' per ton')+'. Waiting for the operator to approve.';}}
-    st.anim=requestAnimationFrame(step);}
+    ctx.drawImage(surf,padL,padT,pw,ph);
+    txt('Forecast margin for every setting. Rings are height, like a hiking map. Bright: meets spec and limits.',padL,16,{px:11,c:C.ink2});
+    /* limits */ctx.strokeStyle='rgba(250,77,86,.85)';ctx.setLineDash([5,4]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(X(GF)+.5,padT);ctx.lineTo(X(GF)+.5,padT+ph);ctx.moveTo(padL,Y(GT)+.5);ctx.lineTo(padL+pw,Y(GT)+.5);ctx.stroke();ctx.setLineDash([]);
+    txt('limit: max temp '+n1(GT)+' °C',padL+6,Y(GT)-10,{px:10,c:C.red2});ctx.save();ctx.translate(X(GF)+12,padT+ph-8);ctx.rotate(-Math.PI/2);ctx.fillStyle=C.red2;ctx.textAlign='left';ctx.fillText('limit: max feed '+GF+' t/h',0,0);ctx.restore();
+    /* axes */ctx.fillStyle=C.ink3;[150,170,190,210].forEach(f=>txt(f,X(f),H-padB+14,{px:10,a:'center'}));[1400,1425,1450,1475,1500].forEach(t=>txt(n1(t),padL-6,Y(t),{px:10,a:'right'}));ctx.save();ctx.translate(14,padT+ph/2);ctx.rotate(-Math.PI/2);ctx.fillStyle=C.ink3;ctx.textAlign='center';ctx.fillText('kiln temperature, °C',0,0);ctx.restore();txt('feed rate, tons per hour',padL+pw/2,H-10,{px:10,a:'center'});
+    /* climbs */
+    const prog=st.prog;st.paths.forEach(pa=>{const n=Math.max(1,Math.ceil(pa.path.length*prog));ctx.beginPath();for(let i=0;i<n;i++){const p=pa.path[i];i?ctx.lineTo(X(p.f),Y(p.t)):ctx.moveTo(X(p.f),Y(p.t));}ctx.strokeStyle=pa.main?'#fff':'rgba(255,255,255,.7)';ctx.lineWidth=pa.main?2:1.3;ctx.setLineDash(pa.main?[]:[3,3]);ctx.stroke();ctx.setLineDash([]);
+      const s=pa.path[0];ctx.fillStyle=pa.main?'#fff':'rgba(255,255,255,.75)';ctx.beginPath();ctx.arc(X(s.f),Y(s.t),pa.main?4:3,0,Math.PI*2);ctx.fill();if(prog>0)txt(pa.main?'before · '+fm(s.f,s.t):'start',X(s.f)+8,Y(s.t)+12,{px:10,c:pa.main?C.ink2:C.ink3,halo:true});
+      if(prog>=1){const e=pa.path[pa.path.length-1];const g=isGlobal(e);if(!g){ctx.strokeStyle=C.yellow;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(X(e.f),Y(e.t),7,0,Math.PI*2);ctx.stroke();txt('local maximum · '+fm(e.f,e.t)+(inSpec(e.f,e.t)?'':' · off spec'),X(e.f)+11,Y(e.t)-10,{px:10,c:C.yellow,halo:true});}}});
+    if(st.best){ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=14;ctx.fillStyle=C.green2;ctx.beginPath();ctx.arc(X(gopt.f),Y(gopt.t),6,0,Math.PI*2);ctx.fill();ctx.restore();ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(X(gopt.f),Y(gopt.t),10,0,Math.PI*2);ctx.stroke();txt('global maximum · '+fm(gopt.f,gopt.t)+' · feed '+n1(gopt.f)+', '+n1(gopt.t)+' °C',X(gopt.f)+14,Y(gopt.t)-14,{px:11,c:C.green2,halo:true,w:500});}
+    else{ctx.save();ctx.shadowColor='#fff';ctx.shadowBlur=12;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(st.f),Y(st.t),5,0,Math.PI*2);ctx.fill();ctx.restore();txt('now · '+fm(st.f,st.t),X(st.f)+10,Y(st.t)-12,{px:11,c:C.ink,halo:true});}}
+
+  /* trade-offs: every candidate setting in quality vs energy, the frontier, the constraints, the pick */
+  function drawPareto(){const padL=60,padR=20,padT=36,padB=40;const pw=W-padL-padR,ph=H-padT-padB;const E0=85,E1=104,Q0=92,Q1=99.6;
+    const X=e=>padL+(e-E0)/(E1-E0)*pw,Y=q=>padT+(Q1-q)/(Q1-Q0)*ph;
+    txt('Every point is a setting the model forecast. Up is better quality, left is less energy.',padL,16,{px:11,c:C.ink2});
+    /* grid */ctx.strokeStyle=C.grid;ctx.lineWidth=1;[92,94,96,98,99.5].forEach(q=>{ctx.beginPath();ctx.moveTo(padL,Y(q)+.5);ctx.lineTo(padL+pw,Y(q)+.5);ctx.stroke();txt(q+'%',padL-8,Y(q),{px:10,a:'right'});});[86,90,94,98,102].forEach(e=>{txt(e,X(e),H-padB+14,{px:10,a:'center'});});
+    ctx.save();ctx.translate(14,padT+ph/2);ctx.rotate(-Math.PI/2);ctx.fillStyle=C.ink3;ctx.textAlign='center';ctx.fillText('quality forecast',0,0);ctx.restore();txt('energy forecast, kWh per ton',padL+pw/2,H-10,{px:10,a:'center'});
+    /* constraints */ctx.fillStyle='rgba(250,77,86,.06)';ctx.fillRect(padL,Y(SPEC),pw,padT+ph-Y(SPEC));ctx.fillRect(X(ECAP),padT,padL+pw-X(ECAP),ph);ctx.strokeStyle='rgba(250,77,86,.85)';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(padL,Y(SPEC)+.5);ctx.lineTo(padL+pw,Y(SPEC)+.5);ctx.moveTo(X(ECAP)+.5,padT);ctx.lineTo(X(ECAP)+.5,padT+ph);ctx.stroke();ctx.setLineDash([]);
+    txt('spec: quality ≥ '+SPEC+'%',padL+6,Y(SPEC)+12,{px:10,c:C.red2});txt('energy cap '+ECAP+' kWh/t',X(ECAP)+6,padT+ph-12,{px:10,c:C.red2});
+    /* candidates */const prog=st.prog;const shown=Math.ceil(GRID.pts.length*Math.min(1,prog*2));GRID.pts.forEach((p,i)=>{if(i>=shown&&st.anim)return;const c=ramp(zn(p.m/SCALE));ctx.fillStyle=rgb(c,p.ok?0.95:0.35);ctx.beginPath();ctx.arc(X(p.e),Y(p.q),p.ok?2.6:1.8,0,Math.PI*2);ctx.fill();});
+    /* frontier */if(prog>0.5||!st.anim){const k=st.anim?clamp((prog-0.5)*2.5,0,1):1;const n=Math.max(2,Math.ceil(front.length*k));ctx.beginPath();front.slice(0,n).forEach((p,i)=>i?ctx.lineTo(X(p.e),Y(p.q)):ctx.moveTo(X(p.e),Y(p.q)));ctx.strokeStyle='#fff';ctx.lineWidth=1.8;ctx.stroke();if(k>=1)txt('the frontier: '+front.length+' settings where you cannot improve one without hurting the other',X(front[Math.floor(front.length*0.55)].e)+8,Y(front[Math.floor(front.length*0.55)].q)+16,{px:10,c:C.ink,halo:true});}
+    /* now and pick */const nq=quality(st.f,st.t),ne=energy(st.f,st.t);
+    if(st.best){const q=quality(gopt.f,gopt.t),e=energy(gopt.f,gopt.t);ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=14;ctx.fillStyle=C.green2;ctx.beginPath();ctx.arc(X(e),Y(q),6,0,Math.PI*2);ctx.fill();ctx.restore();txt('chosen · best margin inside spec and cap · '+fm(gopt.f,gopt.t),X(e)+12,Y(q)+16,{px:11,c:C.green2,halo:true,w:500});const s0=st.start||{f:st.f0,t:st.t0};const q0=quality(s0.f,s0.t),e0=energy(s0.f,s0.t);ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(X(e0),Y(q0),5,0,Math.PI*2);ctx.stroke();txt('before · '+fm(s0.f,s0.t),X(e0)+10,Y(q0)+14,{px:10,c:C.ink2,halo:true});}
+    else{ctx.save();ctx.shadowColor='#fff';ctx.shadowBlur=12;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(ne),Y(nq),5,0,Math.PI*2);ctx.fill();ctx.restore();txt('now · '+fm(st.f,st.t),X(ne)+10,Y(nq)-12,{px:11,c:C.ink,halo:true});}}
+
+  /* loop: forecast, optimize, apply, every cycle */
+  function drawLoop(){const padL=52,padR=16,padT=36,padB=70;const pw=W-padL-padR,ph=H-padT-padB;const sh=46;const Q0=93,Q1=100;
+    const X=i=>padL+i/(LOOP.N-1)*pw,Y=q=>padT+(Q1-q)/(Q1-Q0)*(ph-sh-10);
+    txt('Every cycle: forecast the next hours, optimize the setpoint, apply it, then do it again with new data.',padL,16,{px:11,c:C.ink2});
+    const cur=st.best?LOOP.N-1:LOOP.H-1+Math.round((LOOP.N-LOOP.H)*st.prog);
+    ctx.strokeStyle=C.grid;[94,96,98,100].forEach(q=>{ctx.beginPath();ctx.moveTo(padL,Y(q)+.5);ctx.lineTo(padL+pw,Y(q)+.5);ctx.stroke();txt(q+'%',padL-8,Y(q),{px:10,a:'right'});});
+    ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(250,77,86,.8)';ctx.beginPath();ctx.moveTo(padL,Y(SPEC)+.5);ctx.lineTo(padL+pw,Y(SPEC)+.5);ctx.stroke();ctx.setLineDash([]);txt('spec '+SPEC+'%',padL+4,Y(SPEC)-8,{px:10,c:C.red2});
+    for(let i=0;i<=LOOP.N;i+=6)txt((i-LOOP.H)+' h',X(Math.min(i,LOOP.N-1)),padT+ph-sh+4,{px:10,a:i===0?'left':'center'});
+    /* cycles */for(let i=LOOP.H;i<=cur;i+=LOOP.cycle){ctx.strokeStyle='rgba(255,255,255,.18)';ctx.beginPath();ctx.moveTo(X(i)+.5,padT);ctx.lineTo(X(i)+.5,padT+ph);ctx.stroke();txt('re-optimize',X(i)+4,padT+10,{px:9,c:C.ink3});}
+    /* forecast band from the cursor */if(cur<LOOP.N-1){const hz=Math.min(8,LOOP.N-1-cur);const f=LOOP.f[cur],t=LOOP.t[cur];const q=quality(f,t);ctx.beginPath();for(let k=0;k<=hz;k++){ctx.lineTo(X(cur+k),Y(Math.min(Q1,q+0.5+0.25*Math.sqrt(k))));}for(let k=hz;k>=0;k--){ctx.lineTo(X(cur+k),Y(q-0.5-0.25*Math.sqrt(k)));}ctx.closePath();ctx.fillStyle=C.band;ctx.fill();ctx.strokeStyle=C.blue3;ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.beginPath();for(let k=0;k<=hz;k++){ctx.lineTo(X(cur+k),Y(q));}ctx.stroke();ctx.setLineDash([]);txt('forecast',X(cur+hz)-2,Y(q)-10,{px:10,c:C.blue3,a:'right'});}
+    /* actual quality */ctx.beginPath();for(let i=0;i<=cur;i++){i?ctx.lineTo(X(i),Y(LOOP.q[i])):ctx.moveTo(X(i),Y(LOOP.q[i]));}ctx.strokeStyle=C.ink;ctx.lineWidth=1.6;ctx.stroke();
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(cur),Y(LOOP.q[cur]),4,0,Math.PI*2);ctx.fill();txt('quality',padL+4,Y(LOOP.q[0])-10,{px:10,c:C.ink2});
+    /* setpoint strip */const sy=padT+ph-sh+16;ctx.strokeStyle=C.grid;ctx.beginPath();ctx.moveTo(padL,sy-6);ctx.lineTo(padL+pw,sy-6);ctx.stroke();
+    const FY=f=>sy+sh-16-(f-F0)/(F1-F0)*(sh-20),TY=t=>sy+sh-16-(t-T0)/(T1-T0)*(sh-20);
+    ctx.beginPath();for(let i=0;i<=cur;i++){const y=FY(LOOP.f[i]);if(i===0)ctx.moveTo(X(i),y);else{ctx.lineTo(X(i),FY(LOOP.f[i-1]));ctx.lineTo(X(i),y);}}ctx.strokeStyle=C.green2;ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();for(let i=0;i<=cur;i++){const y=TY(LOOP.t[i]);if(i===0)ctx.moveTo(X(i),y);else{ctx.lineTo(X(i),TY(LOOP.t[i-1]));ctx.lineTo(X(i),y);}}ctx.strokeStyle=C.orange;ctx.lineWidth=2;ctx.stroke();
+    txt('setpoints · feed '+n1(LOOP.f[cur])+' t/h',padL+pw-120,sy+sh-6,{px:10,c:C.green2,a:'right'});txt('kiln '+n1(LOOP.t[cur])+' °C',padL+pw-4,sy+sh-6,{px:10,c:C.orange,a:'right'});}
+
+  /* ---------- panel ---------- */
+  function panel(){const s0=st.start||{f:st.f,t:st.t};const q=quality(s0.f,s0.t),e=energy(s0.f,s0.t);
+    $('#op-f0').textContent=n1(s0.f)+' t/h';$('#op-t0').textContent=n1(s0.t)+' °C';$('#op-q0').textContent=q.toFixed(1)+'%';$('#op-q0').className=q>=SPEC?'':'dim';$('#op-e0').textContent=e.toFixed(0)+' kWh/t';$('#op-m0').textContent=(s0.f===st.f0&&s0.t===st.t0)?'baseline':fm(s0.f,s0.t);
+    $('#op-feedv').textContent=n1(st.f);$('#op-tempv').textContent=n1(st.t);$('#op-feed').value=Math.round(st.f);$('#op-temp').value=Math.round(st.t);
+    const b=st.best;['f1','t1','q1','e1','m1'].forEach((k,i)=>{const td=$('#op-'+k);if(!b){td.textContent='–';td.className='dim';return;}td.className='';td.textContent=[n1(b.f)+' t/h',n1(b.t)+' °C',quality(b.f,b.t).toFixed(1)+'%',energy(b.f,b.t).toFixed(0)+' kWh/t',fm(b.f,b.t)][i];});}
+  const STEPS={land:['Forecast quality, energy and margin for every setting','Climb from several starting points, local peaks included','Keep the global maximum inside spec and limits'],
+    pareto:['Forecast quality and energy for every setting','Find the frontier: better quality costs more energy','Pick the best margin inside spec and the energy cap'],
+    loop:['Forecast the next hours from the live stream','Optimize the setpoint against that forecast','Apply it, then re-run as new data arrives']};
+  function steps(k,texts){$$('#op-steps>div').forEach((d,i)=>{d.className=i<k?'done':i===k?'on':'';});(texts||STEPS[st.view]).forEach((t,i)=>{if(t)$('#op-s'+(i+1)).textContent=t;});}
+  const CAP={land:'Read it like a hiking map: rings are height, the summit is the best margin. A climber starting on the wrong side stops on a small hill, so the optimizer starts from several points and keeps the highest one that still meets spec.',
+    pareto:'There is no single best: better quality costs energy. The frontier shows the honest trade-offs, and the pick is the most profitable point that respects both limits.',
+    loop:'Not a one-off study. Every cycle the stream brings new data, the forecast refreshes, and the setpoint moves a little. The operator approves each change.'};
+
+  /* ---------- actions ---------- */
+  function optimize(){if(st.anim)cancelAnimationFrame(st.anim);st.best=null;st.start={f:st.f,t:st.t};st.prog=0;
+    const starts=[{f:st.f,t:st.t,main:true},{f:155,t:1410},{f:204,t:1484},{f:168,t:1478}];st.paths=starts.map(s=>({path:climb(s.f,s.t),main:!!s.main}));
+    const t0=performance.now(),dur=reduced?1:2600;$('#op-actiont').textContent='Searching …';
+    const S=STEPS[st.view];steps(0,[st.view==='land'?'Forecasting '+n1(GRID.n)+' settings, drawing the landscape …':st.view==='pareto'?'Forecasting quality and energy for '+n1(GRID.n)+' settings …':S[0],S[1],S[2]]);
+    function frame(now){const u=clamp((now-t0)/dur,0,1);st.prog=ease(u);
+      if(u>0.4&&u<=0.75)steps(1,[null,st.view==='land'?'Climbing from '+starts.length+' starting points, '+(starts.length-1)+' of them end on a local hill …':st.view==='pareto'?'Finding the frontier: '+front.length+' settings where you cannot improve one without hurting the other …':S[1],null]);
+      else if(u>0.75)steps(2,[null,null,st.view==='land'?'Keeping the global maximum, '+n1(GRID.n-GRID.ok)+' settings ruled out by spec or limits …':st.view==='pareto'?'Picking the best margin of '+n1(GRID.ok)+' feasible settings …':S[2]]);
+      if(u<1)st.anim=requestAnimationFrame(frame);else{st.anim=null;st.best={f:gopt.f,t:gopt.t};st.f=gopt.f;st.t=gopt.t;steps(3,[null,null,st.view==='loop'?'Applied, re-run every cycle':'Best of '+n1(GRID.ok)+' feasible settings, sent to the operator']);const a=$('#op-action');a.classList.remove('red');a.classList.add('green');$('#op-actiont').textContent='Feed '+n1(gopt.f)+' t/h at '+n1(gopt.t)+' °C: quality '+quality(gopt.f,gopt.t).toFixed(1)+'%, '+fm(gopt.f,gopt.t).replace('/t',' per ton')+'. Waiting for the operator to approve.';}}
+    st.anim=requestAnimationFrame(frame);}
+  function manual(){if(st.anim)cancelAnimationFrame(st.anim);st.anim=null;st.best=null;st.start=null;st.paths=[];st.prog=0;steps(-1);$('#op-actiont').textContent='Your setting. Press Optimize to search from here.';}
+  function setView(v){st.view=v;chipSet('op-view',v);$('#op-cap').textContent=CAP[v];if(st.best){st.paths=[{path:climb(st.start.f,st.start.t),main:true},{path:climb(155,1410)},{path:climb(204,1484)},{path:climb(168,1478)}];st.prog=1;}steps(st.best?3:-1);}
   reg({el,resize(){cv.fit();},draw});
-  const manual=()=>{st.path=[];st.best=null;steps(-1,['Forecast quality and energy for every setting','Drop the ones that miss spec or cross a limit','Pick the most profitable, send to the operator']);$('#op-actiont').textContent='Your setting. Press Optimize to search from here.';};
+  chipGroup('op-view',setView);
   $('#op-feed').addEventListener('input',e=>{st.f=Number(e.target.value);manual();});
   $('#op-temp').addEventListener('input',e=>{st.t=Number(e.target.value);manual();});
   $('#op-go').addEventListener('click',optimize);
-  $('#op-reset').addEventListener('click',()=>{if(st.anim)cancelAnimationFrame(st.anim);st.anim=null;st.f=st.f0;st.t=st.t0;manual();$('#op-actiont').textContent='Press Optimize';});
+  $('#op-reset').addEventListener('click',()=>{st.f=st.f0;st.t=st.t0;manual();$('#op-actiont').textContent='Press Optimize';});
+  setView('land');
 })();
 
 /* ============ 03 semantic search ============ */
