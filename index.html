@@ -604,7 +604,7 @@ body.walking{overflow:hidden}
       <a href="/playground" data-ch="playground"><b>05</b>Playground</a>
     </div>
     <button class="nav-stat nav-pitch" id="nav-pitch" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg> Demo</button>
-    <a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Early Access <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    <a class="btn sm" href="#briefing">Book a session <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </div>
 </nav>
 
@@ -612,7 +612,7 @@ body.walking{overflow:hidden}
 <header class="chapter hero" id="innovation">
   <div class="wrap" id="top">
     <div class="hero-head">
-      <div class="pills"><span class="pill live">Early Access on Confluent Cloud</span></div>
+      <div class="pills"><span class="pill live">Now on Confluent Cloud</span></div>
       <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
       <p class="lede">Streaming data is where the mission-critical decisions live. One statement of Flink SQL forecasts, flags and finds the setpoint, inside the stream, with no training.</p>
       <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>1 min, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
@@ -793,7 +793,7 @@ CREATE AGENT replenisher WITH (
 INSERT INTO purchase_orders
 SELECT store_id, sku, AI_RUN_AGENT('replenisher', ROW(store_id, sku, units_sold, event_time))
 FROM pos_sales;</code></pre></div>
-            <p class="tiny">Streaming Agents syntax shown as in the Confluent Early Access previews. Function names and clauses can change before GA.</p>
+            <p class="tiny">Streaming Agents syntax as previewed by Confluent. Names and clauses can change before GA.</p>
           </div>
         </details>
       </div>
@@ -854,7 +854,7 @@ FROM pos_sales;</code></pre></div>
           <button class="mcard on" data-m="ttm"><span class="use">in use</span><span class="mk">Mixer · default</span><h4>TTM</h4><span class="mp">'model' VALUE 'ttm'</span><canvas data-glyph="point"></canvas><span class="ml">Tiny mixing networks, CPU-friendly. About 100,000 series a night on CPU.</span><span class="mb"><span>NeurIPS 2024</span><span>10 to 60× throughput</span><span>horizon ≤ 96</span></span></button>
           <button class="mcard" data-m="flowstate"><span class="use">in use</span><span class="mk">State space</span><h4>FlowState</h4><span class="mp">'model' VALUE 'flowstate'</span><canvas data-glyph="smooth"></canvas><span class="ml">A running summary updated with every point. Sub-second and hourly data alike.</span><span class="mb"><span>ICML 2026</span><span>sampling-rate equivariant</span><span>context ≤ 4,096</span></span></button>
           <button class="mcard" data-m="patchtstfm"><span class="use">in use</span><span class="mk">Transformer</span><h4>PatchTST-FM</h4><span class="mp">'model' VALUE 'patchtstfm'</span><canvas data-glyph="quant"></canvas><span class="ml">Reads the series patch by patch and returns the full distribution, q10 to q90.</span><span class="mb"><span class="gold">#1 GIFT-Eval</span><span>context ≤ 8,064</span><span>2026</span></span></button>
-          <button class="mcard" data-m="tspulse"><span class="use">in use</span><span class="mk">Dual space · next</span><h4>TSPulse</h4><span class="mp">TS_EMBED · TS_SEARCH</span><canvas data-glyph="embed"></canvas><span class="ml">One small model for anomaly detection, classification, gap-filling and similarity search. GPU-free.</span><span class="mb"><span class="gold">#1 TSB-AD</span><span>ICLR 2026</span><span>Early Access next</span></span></button>
+          <button class="mcard" data-m="tspulse"><span class="use">in use</span><span class="mk">Dual space · next</span><h4>TSPulse</h4><span class="mp">TS_EMBED · TS_SEARCH</span><canvas data-glyph="embed"></canvas><span class="ml">One small model for anomaly detection, classification, gap-filling and similarity search. GPU-free.</span><span class="mb"><span class="gold">#1 TSB-AD</span><span>ICLR 2026</span><span>next</span></span></button>
         </div>
       </div>
     </div>
@@ -1116,7 +1116,7 @@ FROM pos_sales;</code></pre></div>
         RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f
 FROM your_topic;</code></pre>
         <button class="btn sm ghost" id="start-copy">Copy SQL</button></div>
-      <div class="stile"><span class="sn">02</span><h3>Get Early Access</h3><p>Models hosted by Confluent. AI_FORECAST and AI_DETECT_ANOMALIES today, TS_EMBED, TS_SEARCH and TS_OPTIMIZE next. <a href="#" class="walk-link">Console walkthrough</a>.</p><a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Sign up with Confluent <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+      <div class="stile"><span class="sn">02</span><h3>Call it from Flink SQL</h3><p>Models hosted by Confluent. AI_FORECAST and AI_DETECT_ANOMALIES today, TS_EMBED, TS_SEARCH and TS_OPTIMIZE next.</p><a class="btn sm walk-link" href="#">Watch the walkthrough <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg></a></div>
       <div class="stile"><span class="sn">03</span><h3>Book a working session</h3><p>Bring a topic and a decision. One afternoon, your data.</p><a class="btn sm ghost" href="#briefing">Build the note <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v10M4 8l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </div>
 
@@ -1207,7 +1207,7 @@ FROM motor_telemetry;</code></pre></div>
             <tr><td><code>patchtstfm</code></td><td>up to 8,176</td><td>16 to 8,064</td><td>Context plus horizon up to 8,192. Long horizons, full distributions.</td></tr>
             <tr><td><code>timesfm-2.5</code></td><td>model limit</td><td>multiple of 32</td><td>Google Research model, also available in both functions.</td></tr>
           </tbody></table></div>
-        <p class="tiny">Output of AI_FORECAST: <code>forecast ARRAY&lt;ROW&lt;timestamp, mean, q10, q50, q90&gt;&gt;</code> and <code>metadata</code>. Output of AI_DETECT_ANOMALIES: <code>is_anomaly, forecast_value, lower_bound, upper_bound, actual_value, timestamp, rmse</code>. Inputs: value DOUBLE, timestamp TIMESTAMP(3), evenly spaced for best results. Billed as Flink compute. Early Access features are for evaluation and non-production testing.</p>
+        <p class="tiny">Output of AI_FORECAST: <code>forecast ARRAY&lt;ROW&lt;timestamp, mean, q10, q50, q90&gt;&gt;</code> and <code>metadata</code>. Output of AI_DETECT_ANOMALIES: <code>is_anomaly, forecast_value, lower_bound, upper_bound, actual_value, timestamp, rmse</code>. Inputs: value DOUBLE, timestamp TIMESTAMP(3), evenly spaced for best results. Billed as Flink compute.</p>
         <div class="links">
           <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">AI_FORECAST reference</a>
           <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/detect-anomalies.html" target="_blank" rel="noopener">AI_DETECT_ANOMALIES reference</a>
@@ -1240,7 +1240,7 @@ FROM motor_telemetry;</code></pre></div>
           <li><b>The results chart</b><span>Actual against the AI forecast, drawn inside the workspace, and the baseline it beats.</span></li>
           <li><b>Switch models with one word</b><span>TTM, FlowState or PatchTST-FM in the <code>'model'</code> option. Same statement, three models, lower cost on fully managed Confluent Cloud.</span></li>
         </ol>
-        <div class="btn-row"><a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Join Early Access</a><a class="btn sm ghost" href="https://www.youtube.com/watch?v=knU4XB-90Nw" target="_blank" rel="noopener">Open on YouTube</a><button class="btn sm ghost" id="walk-to-demo" type="button">Play the live demo</button></div>
+        <div class="btn-row"><a class="btn sm ghost" href="https://www.youtube.com/watch?v=knU4XB-90Nw" target="_blank" rel="noopener">Open on YouTube</a><button class="btn sm ghost" id="walk-to-demo" type="button">Play the live demo</button></div>
       </div>
     </div>
   </div>
@@ -1257,12 +1257,12 @@ FROM motor_telemetry;</code></pre></div>
   </div>
   <div class="pitch-end" id="pitch-end" hidden>
     <div class="pitch-end-h">One statement of Flink SQL. Your stream already knows what happens next.</div>
-    <div class="btn-row"><a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Join Early Access</a><a class="btn ghost" href="#briefing" id="pitch-brief">Book a working session</a><button class="btn ghost" id="pitch-replay" type="button">Replay</button></div>
+    <div class="btn-row"><a class="btn" href="#briefing" id="pitch-brief">Book a working session</a><a class="btn ghost" href="/playground">Open the playground</a><button class="btn ghost" id="pitch-replay" type="button">Replay</button></div>
   </div>
 </div>
 <footer class="foot">
   <div class="wrap">
-    <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. Early Access, October 2026.</span></div>
+    <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. October 2026.</span></div>
     <div class="row" id="credits">Photos: <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.flickr.com/photos/149400054@N04/54435322282" target="_blank" rel="noopener">Power plant workers in PPE</a> by EU-Ukraine cooperation (CC BY-SA 2.0) · <a href="https://www.rawpixel.com/image/5904812/photo-image-public-domain-free" target="_blank" rel="noopener">Supermarket aisle</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19" target="_blank" rel="noopener">Empty shelves, supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0). Edited for color and crop.</div>
     <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="#reference">Technical reference</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
@@ -2028,7 +2028,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const sc=$('#start-copy');if(sc)sc.addEventListener('click',()=>copyText($('#start-sql').textContent,sc,ok=>{if(!ok)selectEl($('#start-sql'));}));
   const form=$('#brief-form');
   if(form){form.addEventListener('submit',e=>{e.preventDefault();const g=id=>($('#'+id).value||'').trim();const name=g('f-name')||'[your name]',company=g('f-company')||'[company]',use=g('f-use'),env=g('f-env'),stream=g('f-stream')||'[the stream and the decision]';
-    const txt='Subject: Early Access request, IBM Granite Time Series models on Confluent\n\nHello,\n\nWe would like to evaluate IBM Granite Time Series models on Confluent for '+use.toLowerCase()+'.\n\nName: '+name+'\nCompany: '+company+'\nStreaming today: '+env+'\n\nThe stream and the decision:\n'+stream+'\n\nCould we set up a working session with the IBM and Confluent teams and have Early Access enabled for our Confluent Cloud organization? We can share a topic and a sample statement to start.\n\nThanks,\n'+name;
+    const txt='Subject: Working session request, IBM Granite Time Series models on Confluent\n\nHello,\n\nWe would like to evaluate IBM Granite Time Series models on Confluent for '+use.toLowerCase()+'.\n\nName: '+name+'\nCompany: '+company+'\nStreaming today: '+env+'\n\nThe stream and the decision:\n'+stream+'\n\nCould we set up a working session with the IBM and Confluent teams and get the time series functions enabled for our Confluent Cloud organization? We can share a topic and a sample statement to start.\n\nThanks,\n'+name;
     $('#note-out').textContent=txt;$('#note-out').hidden=false;$('#copy-note').hidden=false;$('#note-toast').textContent='';$('#note-out').scrollIntoView({behavior:'smooth',block:'nearest'});});
     $('#copy-note').addEventListener('click',()=>{const pre=$('#note-out');copyText(pre.textContent,$('#copy-note'),ok=>{$('#note-toast').textContent=ok?'Copied. Paste it into an email to your IBM or Confluent contact.':'Copy is blocked here. The text is selected, use your keyboard shortcut.';if(!ok)selectEl(pre);});});}
   const share=$('#share-link');if(share)share.addEventListener('click',()=>{if(navigator.share){navigator.share({title:document.title,url:location.href}).catch(()=>{});return;}copyText(location.href,null,ok=>{$('#share-toast').textContent=ok?'Link copied.':'Copy the address from your browser bar.';});});
@@ -2109,7 +2109,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
       run:async w=>{await w(1500);click('#fr-inject .chip[data-v="stolen"]');}},
     {focus:'#uc-opt',scroll:'#uc-opt',pre:()=>{tab('uc-opt');click('#op-reset');},dur:6000,cap:'The kiln finds <em>its own setpoint</em>.',say:'The kiln finds its own setpoint inside the guardrails. The operator approves.',
       run:async w=>{await w(1200);click('#op-go');}},
-    {focus:'.start-tiles',scroll:'#start',dur:4500,cap:'One statement of Flink SQL. <em>Join Early Access.</em>',say:'One statement of Flink SQL. Join the Early Access.',
+    {focus:'.start-tiles',scroll:'#start',dur:4500,cap:'One statement of Flink SQL. <em>Run it on your stream.</em>',say:'One statement of Flink SQL. Run it on your stream.',
       run:async w=>{}}
   ];
   const st={on:false,i:-1,paused:false,voice:true,token:0,utter:null,t0:0,elapsed:0,audio:null,blocked:false};
