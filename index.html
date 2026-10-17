@@ -485,16 +485,46 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .foot .tag{color:var(--ink);font-weight:500}
 
 /* photos */
-.inds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
-@media (max-width:900px){.inds{grid-template-columns:1fr}}
-.ind{position:relative;display:grid;align-content:end;gap:.35rem;min-height:clamp(220px,26vw,320px);padding:1.1rem 1.1rem 1rem;border:1px solid var(--line);color:var(--ink);text-decoration:none;overflow:hidden;isolation:isolate;background:#000a2e}
+.inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+@media (max-width:1100px){.inds{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.inds{grid-template-columns:1fr}}
+.ind{position:relative;display:grid;align-content:end;gap:.6rem;min-height:clamp(300px,30vw,420px);padding:1.1rem 1.1rem 1rem;border:1px solid var(--line);color:var(--ink);overflow:hidden;isolation:isolate;background:#000a2e}
 .ind::before{content:"";position:absolute;inset:0;background-image:var(--img);background-size:cover;background-position:center;filter:saturate(.85) contrast(1.05);transition:transform .6s cubic-bezier(.2,.8,.2,1);z-index:-2}
-.ind::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,46,.15) 0,rgba(0,7,20,.36) 45%,rgba(0,7,20,.92) 100%);z-index:-1}
-.ind:hover{text-decoration:none;color:var(--ink);border-color:var(--blue-2)}
+.ind::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,10,46,.12) 0,rgba(0,7,20,.62) 38%,rgba(0,7,20,.95) 100%);z-index:-1}
+.ind:hover{border-color:var(--blue-2)}
 .ind:hover::before{transform:scale(1.05)}
-.ind .il{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-3)}
-.ind b{font-weight:300;font-size:clamp(1.15rem,1.6vw,1.45rem);line-height:1.25;text-wrap:balance}
-.ind .is{font-size:.82rem;color:var(--ink-2)}
+.ind .il{display:grid;gap:.15rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-3)}
+.ind .il small{font-size:.66rem;letter-spacing:.04em;text-transform:none;color:var(--ink-3)}
+.ind b{font-weight:300;font-size:clamp(1rem,1.25vw,1.2rem);line-height:1.35;text-wrap:pretty}
+.ind .is{display:flex;flex-wrap:wrap;gap:.3rem}
+.ind .is button{font:inherit;font-size:.72rem;border:1px solid var(--line-2);background:rgba(0,7,20,.45);color:var(--ink-2);padding:.18rem .5rem;cursor:pointer;transition:border-color .15s,color .15s}
+.ind .is button:hover{border-color:var(--blue-2);color:#fff}
+.ind .ig{font-size:.82rem;color:var(--blue-3);text-decoration:none;justify-self:start}
+.ind .ig:hover{text-decoration:underline}
+/* use case cards */
+.ucgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:12px}
+@media (max-width:1100px){.ucgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){.ucgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+.uc{position:relative;display:grid;grid-template-rows:auto auto 1fr auto auto;gap:.45rem;text-align:left;background:rgba(0,7,20,.32);border:1px solid var(--line);padding:.9rem .95rem .85rem;color:var(--ink);text-decoration:none;cursor:pointer;font:inherit;transition:border-color .15s,background .15s;min-width:0}
+.uc:hover{border-color:var(--line-2);background:rgba(0,29,108,.3);text-decoration:none;color:var(--ink)}
+.uc[aria-selected="true"]{border-color:var(--blue-2);box-shadow:0 0 0 1px var(--blue-2) inset,0 0 24px rgba(69,137,255,.18);background:rgba(0,29,108,.45)}
+.uc .uc-k{display:flex;align-items:center;justify-content:space-between;color:var(--blue-3)}
+.uc .uc-k svg{width:38px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.uc .uc-k svg .dot{fill:currentColor;stroke:none}
+.uc .uc-k svg .ring{stroke:var(--red-2)}
+.uc .uc-k svg .thin{stroke-dasharray:2 2;opacity:.7}
+.uc .uc-k svg .band{opacity:.35}
+.uc .uc-k svg .bars{stroke-width:2.2}
+.uc .uc-k i{font-style:normal;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-3)}
+.uc b{font-weight:400;font-size:1.02rem;line-height:1.25}
+.uc p{margin:0;font-size:.82rem;color:var(--ink-2);line-height:1.4}
+.uc .uc-m{display:grid;gap:.15rem;margin-top:auto;padding-top:.3rem}
+.uc .uc-m code{font-family:var(--font-mono);font-size:.66rem;color:var(--purple);letter-spacing:.02em;overflow-wrap:anywhere}
+.uc .uc-m em{font-style:normal;font-size:.8rem;color:var(--green-2)}
+.uc .uc-go{font-size:.78rem;color:var(--blue-3)}
+.uc[aria-selected="true"] .uc-go{color:#fff}
+@media (max-width:600px){.uc p{display:none}.uc{padding:.75rem .8rem;grid-template-rows:auto 1fr auto auto}.uc b{font-size:.95rem}}
+.ucpanel[role=tabpanel]{scroll-margin-top:calc(var(--nav-h) + 8px)}
 .ucpanel.has-cover .stage-top{position:relative;isolation:isolate;min-height:150px;padding-bottom:16px}
 .ucpanel.has-cover .stage-top::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--img);background-size:cover;background-position:center var(--pos,40%);filter:saturate(.8)}
 .ucpanel.has-cover .stage-top::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(0,7,20,.94) 0,rgba(0,7,20,.82) 40%,rgba(0,7,20,.36) 100%),linear-gradient(180deg,rgba(0,7,20,0) 60%,rgba(0,7,20,.95) 100%)}
@@ -520,7 +550,7 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .nav-pitch svg{width:10px;height:10px;color:var(--blue-3)}
 .nav-pitch:hover{background:rgba(15,98,254,.18)}
 @media (max-width:900px){.nav-pitch{display:inline-flex;padding:.3rem .5rem}.nav-pitch svg{display:none}}
-body.pitching .stage:not(.pitch-focus),body.pitching .chapter-head,body.pitching .inds,body.pitching .trust,body.pitching .start-tiles,body.pitching .ways,body.pitching .cta,body.pitching .marquee,body.pitching .hero-head{opacity:.22;filter:saturate(.3);transition:opacity .6s,filter .6s}
+body.pitching .stage:not(.pitch-focus),body.pitching .chapter-head,body.pitching .inds,body.pitching .ucgrid,body.pitching .trust,body.pitching .start-tiles,body.pitching .ways,body.pitching .cta,body.pitching .marquee,body.pitching .hero-head{opacity:.22;filter:saturate(.3);transition:opacity .6s,filter .6s}
 body.pitching .stage,body.pitching .chapter-head,body.pitching .hero-head{transition:opacity .6s,filter .6s}
 body.pitching .stage.pitch-focus{box-shadow:0 0 0 1px var(--blue-2),0 0 0 6px rgba(69,137,255,.18),0 30px 90px rgba(0,0,0,.28);z-index:5}
 body.pitching .pitch-focus{opacity:1!important;filter:none!important}
@@ -987,52 +1017,80 @@ FROM pos_sales;</code></pre></div>
   <div class="wrap">
     <div class="chapter-head">
       <span class="n">03 / USE CASES</span>
-      <h2>Inside the plant.</h2>
-      <p>A cement line on Confluent. Sensor to setpoint and back.</p>
+      <h2>Six decisions. One statement each.</h2>
+      <p>Pick the decision. Each one is a Flink SQL function on a live topic, with a demo you can play with.</p>
     </div>
 
-    <div class="stage" id="st-plant">
+    <div class="ucgrid" role="tablist" id="uctabs" aria-label="Use cases">
+      <a class="uc" href="#uc-opt" id="uc-go-opt">
+        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 14C6 14 8 3 12 3s6 11 11 11"/><circle cx="12" cy="3" r="1.8" class="dot"/></svg><i>01</i></span>
+        <b>Production optimization</b>
+        <p>Which setting earns the most and still meets spec. The forecast model is the plant model, so the optimizer can search inside the guardrails.</p>
+        <span class="uc-m"><code>AI_FORECAST · TS_OPTIMIZE</code><em>$2 per ton</em></span>
+        <span class="uc-go">See the optimizer &#8593;</span>
+      </a>
+      <button class="uc" role="tab" aria-selected="true" aria-controls="uc-anom" type="button">
+        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 11h6l3-9 3 9h10"/><circle cx="10" cy="2" r="2.2" class="ring"/></svg><i>02</i></span>
+        <b>Anomaly detection</b>
+        <p>Every series against its own band, no labels. A flag becomes a work order, an expedite or a data fix, the same day.</p>
+        <span class="uc-m"><code>AI_DETECT_ANOMALIES</code><em>same day</em></span>
+        <span class="uc-go">Try it</span>
+      </button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-demand" type="button">
+        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 12C5 12 7 5 11 5s5 7 11 7" class="band"/><path d="M1 9C5 9 7 2 11 2s5 7 11 7"/><path d="M1 3l22 11" class="thin"/></svg><i>03</i></span>
+        <b>Supply chain planning</b>
+        <p>Every SKU, every store, every hour, with quantiles. The purchase order comes from the band, not from last week.</p>
+        <span class="uc-m"><code>AI_FORECAST</code><em>+5 to 10 accuracy points</em></span>
+        <span class="uc-go">Try it</span>
+      </button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-fraud" type="button">
+        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><circle cx="4" cy="10" r="1.4" class="dot"/><circle cx="9" cy="12" r="1.4" class="dot"/><circle cx="14" cy="9" r="1.4" class="dot"/><circle cx="19" cy="11" r="1.4" class="dot"/><circle cx="17" cy="3" r="2.4" class="ring"/></svg><i>04</i></span>
+        <b>Fraud and security</b>
+        <p>Every card, every account, every endpoint has its own normal. The odd one is held inside the authorization window.</p>
+        <span class="uc-m"><code>AI_DETECT_ANOMALIES</code><em>&lt;50 ms</em></span>
+        <span class="uc-go">Try it</span>
+      </button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-search" type="button">
+        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 12l4-8 3 8 3-6"/><path d="M13 12l4-8 3 8 3-6" class="thin"/></svg><i>05</i></span>
+        <b>Semantic search</b>
+        <p>Embed the stream, search by shape. Find every signal that looks like this one, across lines, plants and years.</p>
+        <span class="uc-m"><code>TS_EMBED · TS_SEARCH</code><em>GPU-free</em></span>
+        <span class="uc-go">Try it</span>
+      </button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-trade" type="button">
+        <span class="uc-k"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M2 14V8M6 14V5M10 14V9M14 14V3" class="bars"/><path d="M16 7l7-3" class="thin"/></svg><i>06</i></span>
+        <b>Trading</b>
+        <p>Forecast the tape, not the price. The execution algo paces a large order with the volume band and pauses on a burst.</p>
+        <span class="uc-m"><code>AI_FORECAST</code><em>every symbol, every minute</em></span>
+        <span class="uc-go">Try it</span>
+      </button>
+    </div>
+
+    <!-- anomaly -->
+    <div class="stage ucpanel has-cover" id="uc-anom" role="tabpanel" style="--img:url(photos/retail-empty.jpg)">
       <div class="stage-top">
-        <div class="stage-title"><h3>From sensor to setpoint</h3><p>Pick a story, or click the kiln, the mill or the preheater.</p></div>
+        <div class="stage-title"><h3>From a flag to the right action</h3><p>Daily sales against the band, no labels. Inject a cause.</p></div>
         <div class="ctl">
-          <div class="ctl-group"><span class="eyebrow">Story</span>
-            <div class="chips" id="pl-sc"><button class="chip" data-v="opt" aria-pressed="true">Production optimization</button><button class="chip" data-v="pdm" aria-pressed="false">Predictive maintenance</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
-          <div class="ctl-group"><span class="eyebrow">Lens</span>
-            <div class="chips" id="pl-focus"><button class="chip sm" data-v="all" aria-pressed="true">Everything</button><button class="chip sm" data-v="layout">The floor</button><button class="chip sm" data-v="sources">Systems of record</button><button class="chip sm" data-v="flow">Streaming intelligence</button><button class="chip sm" data-v="objectives">Business targets</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="an-inject"><button class="chip sm" data-v="stockout">Stockout dip</button><button class="chip sm" data-v="spike">Unplanned spike</button><button class="chip sm" data-v="gap">Feed gap</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="an-conf"><button class="chip sm" data-v="95" aria-pressed="false">95%</button><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.9" aria-pressed="true">99.9%</button></div></div>
         </div>
       </div>
       <div class="stage-body">
-        <div class="plant-wrap" id="plant-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="pl-cv" aria-label="Animated cement line: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="pl-tip"></div></div></div>
-        <div class="plant-cap" id="pl-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="pl-cap-k">Production optimization</span><span class="plant-steps" id="pl-steps" aria-hidden="true"></span><button class="switch" id="pl-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="pl-cap-t">Free lime is trending up. The quality forecast says 97.1% in 40 minutes, below the 98.5% target.</p></div>
-      </div>
-      <div class="stage-foot">
-        <div class="readouts">
-          <div class="readout"><b id="pl-q">97.1%</b><span>quality in spec · target 98.5</span></div>
-          <div class="readout"><b id="pl-e">94</b><span>kWh per ton · target 92</span></div>
-          <div class="readout"><b id="pl-t">196</b><span>t/h throughput</span></div>
-          <div class="readout"><b id="pl-m" class="green">$0.00</b><span>margin vs baseline, per ton</span></div>
-          <div class="readout"><b id="pl-d" class="blue">0 h</b><span>downtime avoided</span></div>
+        <div class="side">
+          <div class="canvas-wrap"><canvas class="stage-canvas" id="an-cv" aria-label="Daily sales with anomaly band and flagged days"></canvas><div class="tip" id="an-tip"></div></div>
+          <div class="panel">
+            <div class="ph">Latest flag</div>
+            <div class="kv"><span>day</span><b id="an-day">–</b><span>actual</span><b id="an-act">–</b><span>band</span><b id="an-band">–</b><span>likely cause</span><b id="an-cause" class="red">–</b></div>
+            <div class="action" id="an-action"><small>what the team does</small><span id="an-actiont">No flags. Weekend peaks are expected, not flagged.</span></div>
+            <div class="tiny">AI_DETECT_ANOMALIES, confidencePercentage <span id="an-confv">99.9</span>, context 512 days, streaming mode.</div>
+          </div>
         </div>
-        <div class="hint">Simulated line. The topics, the statements and the gates are the real ones.</div>
       </div>
-    </div>
-
-    <div class="chapter-head sub">
-      <h2>Try it on your world.</h2>
-      <p>One Flink SQL function each. Real models on real data in the <a href="/playground">playground</a>.</p>
-    </div>
-
-    </div>
-
-    <div class="uctabs" role="tablist" id="uctabs">
-      <button role="tab" aria-selected="true" aria-controls="uc-demand"><i></i>Demand and replenishment</button>
-      <button role="tab" aria-selected="false" aria-controls="uc-anom"><i></i>Anomaly to action</button>
-      <button role="tab" aria-selected="false" aria-controls="uc-fraud"><i></i>Fraud and payments</button>
-      <button role="tab" aria-selected="false" aria-controls="uc-search"><i></i>Semantic search</button>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="an-scored">0</b><span>days scored</span></div><div class="readout"><b id="an-flagged" class="red">0</b><span>flagged</span></div><div class="readout"><b>same day</b><span>time to action</span></div></div><div class="sqlline"><code id="an-sql"></code></div></div>
     </div>
 
     <!-- demand -->
-    <div class="stage ucpanel has-cover" id="uc-demand" role="tabpanel" style="--img:url(photos/retail-aisle.jpg);--pos:55%">
+    <div class="stage ucpanel has-cover" id="uc-demand" role="tabpanel" style="--img:url(photos/retail-aisle.jpg);--pos:55%" hidden>
       <div class="stage-top">
         <div class="stage-title"><h3>Every SKU, every store, every hour</h3><p>28 days with quantiles. The purchase order comes from the band.</p></div>
         <div class="ctl">
@@ -1053,29 +1111,6 @@ FROM pos_sales;</code></pre></div>
         </div>
       </div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">+5 to 10</b><span>accuracy points</span></div><div class="readout"><b>100k</b><span>SKUs, thousands of stores</span></div><div class="readout"><b>hourly</b><span>not weekly</span></div></div><div class="sqlline"><code id="dm-sql"></code></div></div>
-    </div>
-
-    <!-- anomaly -->
-    <div class="stage ucpanel has-cover" id="uc-anom" role="tabpanel" style="--img:url(photos/retail-empty.jpg)" hidden>
-      <div class="stage-top">
-        <div class="stage-title"><h3>From a flag to the right action</h3><p>Daily sales against the band, no labels. Inject a cause.</p></div>
-        <div class="ctl">
-          <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="an-inject"><button class="chip sm" data-v="stockout">Stockout dip</button><button class="chip sm" data-v="spike">Unplanned spike</button><button class="chip sm" data-v="gap">Feed gap</button></div></div>
-          <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="an-conf"><button class="chip sm" data-v="95" aria-pressed="false">95%</button><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.9" aria-pressed="true">99.9%</button></div></div>
-        </div>
-      </div>
-      <div class="stage-body">
-        <div class="side">
-          <div class="canvas-wrap"><canvas class="stage-canvas" id="an-cv" aria-label="Daily sales with anomaly band and flagged days"></canvas><div class="tip" id="an-tip"></div></div>
-          <div class="panel">
-            <div class="ph">Latest flag</div>
-            <div class="kv"><span>day</span><b id="an-day">–</b><span>actual</span><b id="an-act">–</b><span>band</span><b id="an-band">–</b><span>likely cause</span><b id="an-cause" class="red">–</b></div>
-            <div class="action" id="an-action"><small>what the team does</small><span id="an-actiont">No flags. Weekend peaks are expected, not flagged.</span></div>
-            <div class="tiny">AI_DETECT_ANOMALIES, confidencePercentage <span id="an-confv">99.9</span>, context 512 days, streaming mode.</div>
-          </div>
-        </div>
-      </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="an-scored">0</b><span>days scored</span></div><div class="readout"><b id="an-flagged" class="red">0</b><span>flagged</span></div><div class="readout"><b>same day</b><span>time to action</span></div></div><div class="sqlline"><code id="an-sql"></code></div></div>
     </div>
 
     <!-- fraud -->
@@ -1123,6 +1158,93 @@ FROM pos_sales;</code></pre></div>
         </div>
       </div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b>1.1M</b><span>parameters</span></div><div class="readout"><b>GPU-free</b><span>embedding</span></div></div><div class="sqlline"><code id="se-sql"></code></div></div>
+    </div>
+
+    <!-- trading -->
+    <div class="stage ucpanel has-cover" id="uc-trade" role="tabpanel" style="--img:url(photos/banking-charts.jpg);--pos:45%" hidden>
+      <div class="stage-top">
+        <div class="stage-title"><h3>Pace the order with the tape</h3><p>Traded volume forecast for the next 30 minutes. The execution algo sizes every slice from the band.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Shares to work</span><div class="chips" id="tr-size"><button class="chip sm" data-v="50000">50k</button><button class="chip sm" data-v="100000" aria-pressed="true">100k</button><button class="chip sm" data-v="250000">250k</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Participation cap</span><div class="chips" id="tr-cap"><button class="chip sm" data-v="5">5%</button><button class="chip sm" data-v="10" aria-pressed="true">10%</button><button class="chip sm" data-v="20">20%</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="tr-inject"><button class="chip sm" data-v="news">News burst</button><button class="chip sm" data-v="quiet">Quiet tape</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="side">
+          <div class="canvas-wrap"><canvas class="stage-canvas" id="tr-cv" aria-label="Traded volume per minute, the 30 minute forecast band and the planned slices"></canvas></div>
+          <div class="panel">
+            <div class="ph">Execution plan · one symbol</div>
+            <div class="kv"><span>order</span><b id="tr-order">100,000 shares</b><span>volume next 30 min</span><b id="tr-vol">–</b><span>next slice</span><b id="tr-slice" class="blue">–</b><span>done by</span><b id="tr-done">–</b></div>
+            <div class="action" id="tr-action"><small>what the algo does</small><span id="tr-actiont">–</span></div>
+            <div class="tiny">AI_FORECAST on 1-minute bars, horizon 30, per symbol. The risk desk scores volatility with the same statement.</div>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">every symbol</b><span>one statement</span></div><div class="readout"><b>&lt;10 ms</b><span>per bar</span></div><div class="readout"><b>P10 to P90</b><span>a band, not a point</span></div></div><div class="sqlline"><code id="tr-sql"></code></div></div>
+    </div>
+
+    <div class="chapter-head sub">
+      <h2>Where it lands first.</h2>
+      <p>Same models, same statement. Four industries where the decisions are already in the stream.</p>
+    </div>
+
+    <div class="inds" id="inds">
+      <div class="ind" style="--img:url(photos/cement-night.jpg)">
+        <span class="il">Industrial AI<small>cement · steel · pulp and paper · chemicals · food</small></span>
+        <b>A plant manager wants quality at spec without burning the energy budget. The kiln corrects its own setpoint inside the cycle, and the next failure goes on the schedule a week early.</b>
+        <span class="is"><button type="button" data-uc="uc-opt">Production optimization</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-search">Semantic search</button></span>
+        <a class="ig" href="#st-plant">See the plant &#8595;</a>
+      </div>
+      <div class="ind" style="--img:url(photos/banking-card2.jpg)">
+        <span class="il">Banking<small>payments · cards · markets</small></span>
+        <b>A fraud lead wants the odd swipe held before authorization, not disputed after. Every card scores against its own normal in the auth window, and the desk paces its orders with the tape.</b>
+        <span class="is"><button type="button" data-uc="uc-fraud">Fraud and security</button><button type="button" data-uc="uc-trade">Trading</button><button type="button" data-uc="uc-anom">Anomaly detection</button></span>
+        <a class="ig" href="#uc-fraud" data-uc="uc-fraud">See the demo &#8593;</a>
+      </div>
+      <div class="ind" style="--img:url(photos/retail-produce.jpg)">
+        <span class="il">Retail<small>grocery · general merchandise · e-commerce</small></span>
+        <b>A category planner wants full shelves without a full back room. Every SKU in every store is forecast hourly, the purchase order is raised in the stream, the stockout is flagged the same day.</b>
+        <span class="is"><button type="button" data-uc="uc-demand">Supply chain planning</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-fraud">Fraud and security</button></span>
+        <a class="ig" href="#uc-demand" data-uc="uc-demand">See the demo &#8593;</a>
+      </div>
+      <div class="ind" style="--img:url(photos/jet-engine.jpg)">
+        <span class="il">Airlines<small>network · maintenance · ground operations</small></span>
+        <b>An operations controller wants to see the disruption before the gate does. Bookings per route forecast daily, engine telemetry scored per flight, turnaround slips flagged while the aircraft is still on stand.</b>
+        <span class="is"><button type="button" data-uc="uc-demand">Supply chain planning</button><button type="button" data-uc="uc-anom">Anomaly detection</button><button type="button" data-uc="uc-opt">Production optimization</button></span>
+        <a class="ig" href="#uc-anom" data-uc="uc-anom">See the demo &#8593;</a>
+      </div>
+    </div>
+
+    <div class="chapter-head sub">
+      <h2>Inside the plant.</h2>
+      <p>A cement line on Confluent. Sensor to setpoint and back.</p>
+    </div>
+
+    <div class="stage" id="st-plant">
+      <div class="stage-top">
+        <div class="stage-title"><h3>From sensor to setpoint</h3><p>Pick a story, or click the kiln, the mill or the preheater.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Story</span>
+            <div class="chips" id="pl-sc"><button class="chip" data-v="opt" aria-pressed="true">Production optimization</button><button class="chip" data-v="pdm" aria-pressed="false">Predictive maintenance</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Lens</span>
+            <div class="chips" id="pl-focus"><button class="chip sm" data-v="all" aria-pressed="true">Everything</button><button class="chip sm" data-v="layout">The floor</button><button class="chip sm" data-v="sources">Systems of record</button><button class="chip sm" data-v="flow">Streaming intelligence</button><button class="chip sm" data-v="objectives">Business targets</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="plant-wrap" id="plant-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="pl-cv" aria-label="Animated cement line: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="pl-tip"></div></div></div>
+        <div class="plant-cap" id="pl-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="pl-cap-k">Production optimization</span><span class="plant-steps" id="pl-steps" aria-hidden="true"></span><button class="switch" id="pl-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="pl-cap-t">Free lime is trending up. The quality forecast says 97.1% in 40 minutes, below the 98.5% target.</p></div>
+      </div>
+      <div class="stage-foot">
+        <div class="readouts">
+          <div class="readout"><b id="pl-q">97.1%</b><span>quality in spec · target 98.5</span></div>
+          <div class="readout"><b id="pl-e">94</b><span>kWh per ton · target 92</span></div>
+          <div class="readout"><b id="pl-t">196</b><span>t/h throughput</span></div>
+          <div class="readout"><b id="pl-m" class="green">$0.00</b><span>margin vs baseline, per ton</span></div>
+          <div class="readout"><b id="pl-d" class="blue">0 h</b><span>downtime avoided</span></div>
+        </div>
+        <div class="hint">Simulated line. The topics, the statements and the gates are the real ones.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1291,7 +1413,7 @@ FROM motor_telemetry;</code></pre></div>
 <footer class="foot">
   <div class="wrap">
     <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. October 2026.</span></div>
-    <div class="row" id="credits">Photos: <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.flickr.com/photos/149400054@N04/54435322282" target="_blank" rel="noopener">Power plant workers in PPE</a> by EU-Ukraine cooperation (CC BY-SA 2.0) · <a href="https://www.rawpixel.com/image/5904812/photo-image-public-domain-free" target="_blank" rel="noopener">Supermarket aisle</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19" target="_blank" rel="noopener">Empty shelves, supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0). Edited for color and crop.</div>
+    <div class="row" id="credits">Photos: <a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.flickr.com/photos/149400054@N04/54435322282" target="_blank" rel="noopener">Power plant workers in PPE</a> by EU-Ukraine cooperation (CC BY-SA 2.0) · <a href="https://www.rawpixel.com/image/5904812/photo-image-public-domain-free" target="_blank" rel="noopener">Supermarket aisle</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6075188/photo-image-public-domain-covid-19" target="_blank" rel="noopener">Empty shelves, supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div>
     <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="#reference">Technical reference</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
   </div>
@@ -1869,12 +1991,14 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   App.plant={start:startScenario,setAuto(v){st.auto=v;$('#pl-auto').setAttribute('aria-pressed',v);}};
 })();
 
-/* ============ 03 tabs ============ */
+/* ============ 03 use cases: cards as tabs, industries ============ */
 (function(){
   const tabs=$('#uctabs');if(!tabs)return;const btns=$$('[role=tab]',tabs);
   function select(b){btns.forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on?'true':'false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p){p.hidden=!on;if(on){const s=p.__stage;if(s&&s.resize)requestAnimationFrame(()=>s.resize());}}});}
   btns.forEach(b=>b.addEventListener('click',()=>select(b)));
-  $$('#inds .ind').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const id=a.dataset.tab;const b=btns.find(x=>x.getAttribute('aria-controls')===id);if(b){select(b);tabs.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});}}));
+  const scrollTo=el=>el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+  function go(id){const b=btns.find(x=>x.getAttribute('aria-controls')===id);if(b){select(b);const p=document.getElementById(id);scrollTo(window.innerWidth<=760&&p?p:tabs);return;}const t=document.getElementById(id);if(t)scrollTo(t);}
+  $$('#inds [data-uc]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();go(a.dataset.uc);}));
 })();
 
 /* ============ 03 demand ============ */
@@ -1968,6 +2092,48 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   function onMove(ev){const k=hoverIndex(layout,cv,ev);if(k!==st.hover)st.dirty=true;st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];const z=Z[st.conf]||2.81;let html='<b>'+label(r.i)+'</b><br>amount '+money(r.v);if(r.pred!=null)html+='<br>band '+money(Math.max(0,r.pred-z*r.sig))+' to '+money(r.pred+z*r.sig)+'<br>is_anomaly '+(layout.isAnom(r)?'<b>TRUE</b>':'FALSE');tip.innerHTML=html;tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.7?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
   cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});cv.c.addEventListener('mouseleave',()=>{st.hover=-1;st.dirty=true;tip.style.display='none';});
   App.listeners.push(()=>{sql();st.dirty=true;});sql();panel();
+})();
+
+/* ============ 03 trading: pace the order with the tape ============ */
+(function(){
+  const el=$('#uc-trade');if(!el)return;
+  /* traded volume per minute, shares. a slow intraday wave plus a faster ripple */
+  const sim=new Sim({base:42000,amp:14000,amp2:4500,period:78,noise:3800,stepSec:60,dec:0,floor:2000,maxRows:420,warm:260});
+  const cv=new Cv($('#tr-cv'));
+  const st={size:100000,cap:0.10,acc:0,dirty:true,res:null,mode:'normal'};
+  const H=30;
+  const OPEN=9*60+30;/* 09:30, minutes */
+  const label=i=>{const m=OPEN+(i%390);const p=n=>String(n).padStart(2,'0');return p(Math.floor(m/60))+':'+p(m%60);};
+  const k1=v=>v>=1e6?(v/1e6).toFixed(1)+'M':Math.round(v/1000)+'k';
+  const sh=v=>Math.round(v).toLocaleString('en-US');
+  function compute(){const f=sim.fc(H);if(!f)return null;let rem=st.size,vol=0,done=-1;const slices=[];
+    for(let k=0;k<H;k++){const mu=Math.max(0,f[k].mean);vol+=mu;const s=Math.min(rem,Math.round(st.cap*mu/100)*100);slices.push(s);rem-=s;if(rem<=0&&done<0)done=k+1;}
+    const last=sim.rows[sim.rows.length-1];let mode='normal';if(last&&last.pred!=null){if(last.v>last.pred+2.6*last.sig)mode='burst';else if(last.v<last.pred-1.6*last.sig)mode='quiet';}
+    return {f,slices,done,rem,vol,first:slices[0],mode,last};}
+  function panel(r){if(!r)return;$('#tr-order').textContent=sh(st.size)+' shares';$('#tr-vol').textContent=k1(r.vol)+' shares';$('#tr-slice').textContent=r.mode==='burst'?'paused':sh(r.first)+' shares';
+    const n=sim.rows.length-1;$('#tr-done').textContent=r.done>0?label(sim.rows[n].i+r.done):'not in 30 min';$('#tr-done').className=r.done>0?'green':'red';
+    const a=$('#tr-action');a.classList.remove('red','green');
+    if(r.mode==='burst'){a.classList.add('red');$('#tr-actiont').textContent='Volume burst, '+k1(r.last.v)+' this minute against a band to '+k1(r.last.pred+2.6*r.last.sig)+'. Pause the slices, re-forecast on the next bar, let the risk desk see it.';}
+    else if(r.done>0){a.classList.add('green');$('#tr-actiont').textContent='Work '+sh(st.size)+' shares at '+Math.round(st.cap*100)+'% of forecast volume: '+sh(r.first)+' this minute, done by '+label(sim.rows[n].i+r.done)+'.'+(r.mode==='quiet'?' Tape is quiet, slices shrink with it.':'');}
+    else{a.classList.add('red');$('#tr-actiont').textContent='At '+Math.round(st.cap*100)+'% participation only '+sh(st.size-r.rem)+' of '+sh(st.size)+' shares fill in 30 minutes. Raise the cap or extend the window.';}}
+  function sql(){$('#tr-sql').innerHTML=highlight("SELECT symbol, bar_time, AI_FORECAST(volume, bar_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 30, 'maxContextSize' VALUE 512)) OVER (PARTITION BY symbol ORDER BY bar_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f FROM minute_bars;");}
+  function draw(){if(!st.dirty)return;st.dirty=false;const r=compute();st.res=r;
+    drawStream(cv,sim,{mode:'fc',z:0,h:H,nVis:95,label,stepName:' min',floorZero:true,fmtY:k1,padR:20,
+      after(L){if(!r)return;const ctx=cv.ctx;const k0=L.vis.length-1;const FX=j=>L.X(k0+j);const base=L.padT+L.ph;const smax=Math.max.apply(null,r.slices.concat([1]));const sh_=Math.min(L.ph*0.28,70);
+        /* planned slices under the band */
+        ctx.font=MONO;ctx.textBaseline='middle';
+        const bw=Math.max(2,(FX(1)-FX(0))*0.6);
+        r.slices.forEach((s,k)=>{if(s<=0)return;const hgt=Math.max(2,s/smax*sh_);const x=FX(k+1)-bw/2;ctx.fillStyle=r.mode==='burst'?'rgba(255,131,137,.45)':'rgba(66,190,101,.75)';ctx.fillRect(x,base-hgt,bw,hgt);});
+        ctx.fillStyle=r.mode==='burst'?C.red2:C.green2;ctx.textAlign='left';ctx.fillText(r.mode==='burst'?'slices paused':'planned slices · '+Math.round(st.cap*100)+'% of forecast',FX(1)+2,base-sh_-10);
+        if(r.done>0){const x=Math.round(FX(r.done))+0.5;ctx.strokeStyle=C.green2;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,L.padT+28);ctx.lineTo(x,base);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=C.green2;ctx.textAlign=r.done>H*0.7?'right':'left';ctx.fillText('order done',x+(r.done>H*0.7?-5:5),L.padT+36);}
+        if(r.mode==='burst'){const x=L.X(k0);ctx.save();ctx.shadowColor=C.red;ctx.shadowBlur=14;ctx.fillStyle=C.red2;ctx.beginPath();ctx.arc(x,L.Y(r.last.v),6,0,Math.PI*2);ctx.fill();ctx.restore();ctx.fillStyle=C.red2;ctx.textAlign='right';ctx.fillText('burst',x-10,L.Y(r.last.v)-12);}
+      }});
+    panel(r);}
+  reg({el,resize(){cv.fit();st.dirty=true;draw();},update(dt){st.acc+=dt;if(st.acc>(reduced?3000:1400)){st.acc=0;sim.step();st.dirty=true;}},draw});
+  chipGroup('tr-size',v=>{st.size=Number(v);st.dirty=true;});
+  chipGroup('tr-cap',v=>{st.cap=Number(v)/100;st.dirty=true;});
+  chipGroup('tr-inject',(v,b)=>{if(v==='news')sim.mq=[3.4,2.8,2.2,1.7,1.3];else sim.mq=[0.45,0.4,0.42,0.5,0.6,0.7];st.acc=1e9;setTimeout(()=>b.setAttribute('aria-pressed','false'),600);});
+  App.listeners.push(()=>{sql();st.dirty=true;});sql();
 })();
 
 /* ============ 03 optimization: trade-offs ============ */
