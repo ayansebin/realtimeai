@@ -811,10 +811,11 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
 
     <div class="stage" id="st-draw">
       <div class="stage-top">
-        <div class="stage-title"><h3>Draw a signal</h3><p>Drag across the canvas, or start from a shape.</p></div>
+        <div class="stage-title"><h3>Draw a signal</h3><p>A multi-seasonal signal with a trend. Pick a shape, or draw your own.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Shapes</span>
             <div class="chips" id="draw-preset">
+              <button class="chip sm" data-v="complex" aria-pressed="true">Multi-seasonal</button>
               <button class="chip sm" data-v="seasonal">Seasonal</button>
               <button class="chip sm" data-v="ramp">Ramp</button>
               <button class="chip sm" data-v="heartbeat">Heartbeat</button>
@@ -1767,13 +1768,17 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   const up=ev=>{if(!st.drawing)return;st.drawing=false;if(st.pts.length>5)finish();else{st.pts=[];wrap.classList.remove('has');}};
   cv.c.addEventListener('pointerup',up);cv.c.addEventListener('pointercancel',up);cv.c.addEventListener('lostpointercapture',up);
   const PRESETS={
+    /* default: a daily double peak, a faster ripple, a slow trend and a weekly lift, with a little seeded noise */
+    complex:(()=>{let sd=11;const r=()=>{sd=(sd*1664525+1013904223)%4294967296;return sd/4294967296-0.5;};return i=>0.4+0.12*i/(N-1)+0.15*Math.sin(2*Math.PI*i/24)+0.09*Math.sin(4*Math.PI*i/24+0.9)+0.04*Math.sin(2*Math.PI*i/6+0.4)+(Math.floor(i/24)%5===3?0.06:0)*Math.max(0,Math.sin(Math.PI*(i%24)/24))+0.035*r();})(),
     seasonal:i=>0.5+0.26*Math.sin(2*Math.PI*i/24)+0.08*Math.sin(2*Math.PI*i/8+1)+0.03*gauss(),
     ramp:i=>0.18+0.55*i/(N-1)+0.07*Math.sin(2*Math.PI*i/16)+0.03*gauss(),
     heartbeat:i=>{const p=i%30;const b=p<3?0.25:p<5?0.95:p<7?0.1:p<10?0.6:0.45;return b+0.025*gauss();},
     walk:(()=>{let v=0.5;return i=>{v=clamp(v+0.045*gauss(),0.08,0.92);return v;};})(),
     steps:i=>{const lvl=[0.3,0.3,0.62,0.62,0.45,0.78][Math.floor(i/20)%6];return lvl+0.025*gauss();}
   };
-  chipGroup('draw-preset',v=>{const g=PRESETS[v];if(!g)return;const s=[];for(let i=0;i<N;i++)s.push(clamp(g(i),0.02,0.98));st.samples=s;st.pts=[];run();});
+  function preset(v){const g=PRESETS[v];if(!g)return;const s=[];for(let i=0;i<N;i++)s.push(clamp(g(i),0.02,0.98));st.samples=s;st.pts=[];run();}
+  chipGroup('draw-preset',preset);
+  preset('complex');
   chipGroup('draw-model',v=>{st.model=v;if(st.samples)run();});
   $('#draw-h').addEventListener('input',e=>{st.h=Number(e.target.value);$('#draw-hv').textContent=st.h;if(st.samples)run();});
   $('#draw-clear').addEventListener('click',()=>{st.samples=null;st.fc=null;st.pts=[];wrap.classList.remove('has');$$('#draw-preset .chip').forEach(c=>c.setAttribute('aria-pressed','false'));$('#dr-period').textContent='–';$('#dr-time').textContent='–';});
