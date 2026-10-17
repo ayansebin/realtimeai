@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="IBM Granite Time Series models run natively on Confluent Cloud for Apache Flink. Forecasting and anomaly detection called from Flink SQL, now in Early Access.">
+<meta name="description" content="Real-time intelligence on Confluent: IBM Granite Time Series foundation models and Streaming Agents on Confluent Cloud for Apache Flink. Forecasting, anomaly detection and optimization called from Flink SQL, now in Early Access.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://realtimeintelligence.io/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="IBM Granite Time Series on Confluent">
+<meta property="og:title" content="Real-Time Intelligence on Confluent">
 <meta property="og:description" content="Forecast, detect and optimize inside the stream. Granite Time Series models called from Flink SQL on Confluent Cloud, in Early Access.">
 <meta property="og:url" content="https://realtimeintelligence.io/">
 <meta property="og:image" content="https://realtimeintelligence.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="IBM Granite Time Series on Confluent">
+<meta name="twitter:title" content="Real-Time Intelligence on Confluent">
 <meta name="twitter:description" content="Forecast, detect and optimize inside the stream. Granite Time Series models called from Flink SQL on Confluent Cloud, in Early Access.">
 <meta name="twitter:image" content="https://realtimeintelligence.io/og-image.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"IBM Granite Time Series on Confluent","url":"https://realtimeintelligence.io/","description":"IBM Granite Time Series models run natively on Confluent Cloud for Apache Flink. Forecasting and anomaly detection called from Flink SQL, now in Early Access.","about":[{"@type":"Thing","name":"Time series foundation models"},{"@type":"Thing","name":"Apache Flink SQL"},{"@type":"Thing","name":"Real-time anomaly detection and forecasting"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Real-Time Intelligence on Confluent","url":"https://realtimeintelligence.io/","description":"IBM Granite Time Series models run natively on Confluent Cloud for Apache Flink. Forecasting and anomaly detection called from Flink SQL, now in Early Access.","about":[{"@type":"Thing","name":"Time series foundation models"},{"@type":"Thing","name":"Apache Flink SQL"},{"@type":"Thing","name":"Real-time anomaly detection and forecasting"}]}</script>
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<title>IBM Granite Time Series on Confluent</title>
+<title>Real-Time Intelligence on Confluent</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -371,12 +371,42 @@ details.techref summary::after{content:"+";font-weight:300;font-size:1.4rem;colo
 details.techref[open] summary::after{content:"\2212"}
 details.techref .inner{padding:0 1.25rem 1.25rem;display:grid;gap:1.5rem}
 .chapter{scroll-margin-top:72px}
+@media (max-width:760px){.brand .co{display:none}}
+.loop{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.stage{background:var(--surface);border:1px solid var(--line);padding:1.25rem;display:grid;gap:.5rem;align-content:start;min-width:0;border-top:3px solid var(--accent)}
+.stage .st{font-family:var(--font-mono);font-size:.72rem;color:var(--accent-ink);letter-spacing:.05em}
+.stage h3{font-size:1.1rem;font-weight:500}
+.stage .what{color:var(--ink);font-size:.95rem}
+.stage .how{color:var(--ink-2);font-size:.88rem;line-height:1.5}
+.stage .gate{font-size:.8rem;color:var(--ink);border-top:1px solid var(--line);padding-top:.6rem;margin-top:.25rem}
+.stage .gate::before{content:"";display:inline-block;width:8px;height:8px;background:var(--good);margin-right:.45rem;vertical-align:0}
+.timeline{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));border:1px solid var(--line);background:var(--surface)}
+.timeline>div{display:grid;gap:.35rem;padding:1.1rem 1.25rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);align-content:start;min-width:0}
+.timeline .yr{font-family:var(--font-mono);font-size:.8rem;color:var(--accent-ink)}
+.timeline .t{font-weight:500;font-size:1.05rem}
+.timeline .d{font-size:.85rem;color:var(--ink-2);line-height:1.5}
+.tbl.impact .big{display:block;font-size:1.35rem;font-weight:300;color:var(--ink);line-height:1.2;margin-bottom:.15rem}
+.stats{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));border-top:1px solid var(--line);padding-top:.9rem}
+.stats>div{display:grid;gap:.15rem;min-width:0}
+.stats .big{font-size:1.3rem;font-weight:300;line-height:1.15;letter-spacing:-.01em}
+.stats .lab{font-size:.78rem;color:var(--ink-3);line-height:1.35}
+details.uc-more{border:1px solid var(--line);background:var(--bg-alt)}
+details.uc-more summary{cursor:pointer;list-style:none;padding:.75rem 1rem;font-size:.9rem;font-weight:500;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+details.uc-more summary::-webkit-details-marker{display:none}
+details.uc-more summary::after{content:"+";font-weight:300;font-size:1.3rem;color:var(--ink-3);flex:none}
+details.uc-more[open] summary::after{content:"\2212"}
+details.uc-more .inner{padding:0 1rem 1rem;display:grid;gap:.75rem}
+details.uc-more .tbl{min-width:0}
+details.uc-more .tbl-wrap{border:1px solid var(--line)}
+#domains .card p{font-size:.9rem}
+.lanes-grid{display:grid;gap:1.5rem;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.lanes-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 section[id],[id^="uc-"],#decisions,#quickstart,#resources{scroll-margin-top:72px}
 </style>
 <a class="sr" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Page">
   <div class="wrap">
-    <a class="brand" href="#top">IBM Granite Time Series <span class="sep">/</span> <span class="co">on Confluent</span></a>
+    <a class="brand" href="#top">Real-time intelligence <span class="sep">/</span> <span class="co">Granite Time Series on Confluent</span></a>
     <div class="nav-links" id="nav-links">
       <a href="#innovation"><span class="n">01</span>Innovation</a>
       <a href="#value"><span class="n">02</span>Value</a>
@@ -391,9 +421,9 @@ section[id],[id^="uc-"],#decisions,#quickstart,#resources{scroll-margin-top:72px
 <section class="hero navy" id="top">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <div class="eyebrow"><span class="pill live">Early Access</span><span class="pill">Confluent Cloud for Apache Flink</span><span class="pill">AWS first, Confluent Platform next</span></div>
+      <div class="eyebrow"><span class="pill live">Early Access</span><span class="pill">Confluent Cloud for Apache Flink</span><span class="pill">AWS first, Confluent Platform next</span><span class="pill">Models and agents</span></div>
       <h1 class="h-display">Forecast, detect and optimize inside the stream.</h1>
-      <p class="lede">IBM Granite Time Series models now run natively on Confluent Cloud for Apache Flink. One SQL call scores every event as it arrives. No model training, no feature engineering, no separate ML stack.</p>
+      <p class="lede">IBM Granite Time Series models now run natively on Confluent Cloud for Apache Flink. One SQL call scores every event as it arrives, and Streaming Agents act on the result. No model training, no feature engineering, no separate ML stack.</p>
       <div class="btn-row">
         <a class="btn" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Enroll in Early Access <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
         <a class="btn ghost" href="#innovation">See how it works <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg></a>
@@ -458,7 +488,7 @@ section[id],[id^="uc-"],#decisions,#quickstart,#resources{scroll-margin-top:72px
 <section class="band" style="border-top:0;padding-block:0">
   <div class="wrap" style="transform:translateY(-1px)">
     <div class="proof" aria-label="Proof points">
-      <div><span class="big">44M+</span><span class="what">downloads of IBM Granite Time Series models on Hugging Face</span><span class="src">Joint IBM and Confluent announcement, September 2026</span></div>
+      <div><span class="big">44M+</span><span class="what">downloads of IBM Granite Time Series models on Hugging Face, across 10 models since the 2024 launch</span><span class="src">Joint IBM and Confluent announcement, September 2026</span></div>
       <div><span class="big">#1</span><span class="what">zero-shot model under a commercial-friendly license on GIFT-Eval, CRPS and MASE</span><span class="src">PatchTST-FM-r2 model card, as of August 31, 2026</span></div>
       <div><span class="big">#1</span><span class="what">on the TSB-AD anomaly detection leaderboard, univariate and multivariate</span><span class="src">TSPulse paper, arXiv 2505.13033</span></div>
       <div><span class="big">1M to 385M</span><span class="what">parameters. CPU inference, no GPU required</span><span class="src">Hugging Face model cards, October 2026</span></div>
@@ -483,7 +513,7 @@ section[id],[id^="uc-"],#decisions,#quickstart,#resources{scroll-margin-top:72px
     <span class="num">Chapter 01 of 04</span>
     <h2 class="h2">Time series foundation models, running where the data already moves.</h2>
     <p>IBM Granite Time Series models are hosted inside Confluent Cloud and called from Flink SQL like any other function. This chapter covers the architecture, the SQL, the model portfolio, the public benchmarks and what ships next.</p>
-    <nav class="subnav" aria-label="In this chapter"><a href="#how">How it works</a><a href="#sql">The Flink SQL</a><a href="#models">The models</a><a href="#benchmarks">Benchmarks</a><a href="#roadmap">Roadmap</a></nav>
+    <nav class="subnav" aria-label="In this chapter"><a href="#how">How it works</a><a href="#sql">The Flink SQL</a><a href="#models">The models</a><a href="#benchmarks">Benchmarks</a><a href="#agents">Agents</a><a href="#roadmap">Roadmap</a></nav>
   </div>
 </section>
 <section class="band" id="how">
@@ -538,7 +568,7 @@ section[id],[id^="uc-"],#decisions,#quickstart,#resources{scroll-margin-top:72px
             <text x="690" y="204">PARTITION BY key</text>
             <text x="690" y="226" fill="var(--ink-3)" font-size="12">checkpointed state</text>
           </g>
-          <text x="496" y="266" font-size="12" fill="var(--accent-ink)">zero configuration · no provider credentials · billed in CFUs</text>
+          <text x="496" y="266" font-size="12" fill="var(--accent-ink)">next in Early Access: TS_EMBED · TS_SEARCH · TS_OPTIMIZE</text>
           <!-- results -->
           <rect x="900" y="30" width="270" height="236" fill="var(--surface)" stroke="var(--line-strong)"/>
           <text x="916" y="58" font-size="12" fill="var(--ink-3)" letter-spacing="1">RESULT TOPICS, FANOUT</text>
@@ -843,6 +873,15 @@ FROM motor_telemetry;</code></pre></div>
       </article>
     </div>
 
+    <h3 class="h3" style="margin:3rem 0 .25rem">Four architectures, four papers</h3>
+    <p class="small muted" style="margin-bottom:1rem">Each family comes from peer-reviewed research, with weights, code and benchmark reproductions published alongside.</p>
+<div class="timeline" id="research" aria-label="Research lineage of the model families">
+  <div><span class="yr">2024</span><span class="t">TTM</span><span class="d">Tiny Time Mixers: fast pre-trained models for zero and few-shot forecasting. NeurIPS 2024. Lightweight MLP-Mixer backbone, channel independent, tiny footprint.</span></div>
+  <div><span class="yr">2025</span><span class="t">FlowState</span><span class="d">Sampling-rate-equivariant forecasting. ICML 2026. State-space encoder with a functional basis decoder, so one model generalizes across sampling rates.</span></div>
+  <div><span class="yr">2026</span><span class="t">PatchTST-FM</span><span class="d">Revisiting the generic transformer. Patched transformer backbone trained supervised and self-supervised, scaling with generic attention.</span></div>
+  <div><span class="yr">2026</span><span class="t">TSPulse</span><span class="d">Tiny pre-trained models with disentangled representation. ICLR 2026. Time and frequency embeddings with dual decoders, one backbone for many tasks.</span></div>
+</div>
+
     <div class="chooser" style="margin-top:3rem">
       <div>
         <h3 class="h3" style="margin-bottom:.25rem">Which model should you start with?</h3>
@@ -931,13 +970,42 @@ FROM motor_telemetry;</code></pre></div>
         <p class="tiny">Source: TSPulse: Dual Space Tiny Pre-Trained Models for Rapid Time-Series Analysis, arXiv 2505.13033. Bar for classification drawn at the top of its range.</p>
       </div>
     </div>
-    <div class="grid c3" style="margin-top:1.5rem">
+    <div class="grid c4" style="margin-top:1.5rem">
+      <div class="card"><span class="eyebrow">Throughput</span><p>TTM delivers 10 to 60× faster accelerator throughput than the larger models it is compared against, and thousands of inferences per second on CPU. Small is what makes per-event scoring across thousands of series affordable.</p></div>
       <div class="card"><span class="eyebrow">GIFT-Eval, forecasting</span><p>97 tasks from 55 datasets across 7 domains, short to long horizons. PatchTST-FM-r2 is the top zero-shot model under a commercial-friendly license on CRPS and MASE and #2 among all zero-shot, replicable models (Aug 31, 2026). FlowState led point forecasting among zero-shot, replicable models without data leakage at release (March 2026).</p><a class="small" href="https://huggingface.co/spaces/Salesforce/GIFT-Eval" target="_blank" rel="noopener">Live leaderboard</a></div>
       <div class="card"><span class="eyebrow">TSB-AD, anomaly detection</span><p>TSPulse ranks first on both the univariate and multivariate leaderboards, outperforming statistical baselines by 24 percent and larger foundation models by at least 33 percent, with about a million parameters and GPU-free inference.</p><a class="small" href="https://research.ibm.com/blog/tspulse-time-series-ai-model" target="_blank" rel="noopener">IBM Research on TSPulse</a></div>
       <div class="card"><span class="eyebrow">Your own stream</span><p>Public benchmarks pick a shortlist. Your data picks the model. During Early Access, run the same statement with each <code>model</code> value and compare the rolling <code>rmse</code> field and the flagged rows on your topics. The IBM and Confluent teams work through the results with you.</p><a class="small" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Enroll and benchmark</a></div>
     </div>
   </div>
-</section><section class="band" id="roadmap">
+</section><section class="band alt" id="agents">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Agents</span>
+      <h2 class="h2">Agents run the loop. Experts approve at every gate.</h2>
+      <p class="muted">Two layers of agents, both on Confluent. At build time, coding agents work through Confluent's managed MCP servers, scoped by your RBAC and written to the audit log. At run time, the loop becomes Streaming Agents in Flink SQL. Every pass learns from live data, and a person signs off before anything changes.</p>
+    </div>
+    <div class="loop">
+      <div class="stage"><span class="st">Stage 1</span><h3>Data prep</h3><p class="what">Streams profiled and aligned.</p><p class="how">Topics, schemas and samples through Confluent MCP, then Flink SQL joins, windows, resampling and gap fill. Schema Registry contracts guarantee the shape of every stream.</p><p class="gate">Gate: validate the data and the demand drivers</p></div>
+      <div class="stage"><span class="st">Stage 2</span><h3>Model use</h3><p class="what">Zero shot first. Fine-tune if it pays.</p><p class="how">TTM for throughput, PatchTST-FM for long context and probabilistic output, TSPulse for detection and search. LoRA fine-tuning only when the backtest shows it pays.</p><p class="gate">Gate: approve the model choice</p></div>
+      <div class="stage"><span class="st">Stage 3</span><h3>Benchmark</h3><p class="what">Backtest, champion-challenger.</p><p class="how">Rolling backtests on MASE, WAPE and CRPS against a seasonal naive baseline and the incumbent model, with champion-challenger before promotion.</p><p class="gate">Gate: sign off accuracy and bias</p></div>
+      <div class="stage"><span class="st">Stage 4</span><h3>Deploy</h3><p class="what">A versioned Flink SQL function.</p><p class="how"><code>CREATE TOOL</code> wraps <code>AI_FORECAST</code> or <code>AI_DETECT_ANOMALIES</code>, <code>CREATE AGENT</code> binds a model, prompt and tools, <code>AI_RUN_AGENT</code> executes per event and agents chain. Under RBAC, billed as Flink compute.</p><p class="gate">Gate: approve the release and its guardrails</p></div>
+      <div class="stage"><span class="st">Stage 5</span><h3>Learn</h3><p class="what">Drift watched, retuned.</p><p class="how">Actuals joined to forecasts in the stream, bias and drift tracked, and a drafter-critic reflection reviews before any retune is triggered.</p><p class="gate">Gate: review drift before retraining</p></div>
+    </div>
+    <div class="split even" style="margin-top:1.5rem">
+      <div class="card">
+        <span class="eyebrow">Build time</span>
+        <h3>Coding agents, through managed MCP</h3>
+        <p>Claude Code, Codex or IBM Bob agents build the pipeline through Confluent's managed MCP servers: global for environments, clusters, connectors and metrics, regional for topics, schemas and sample messages. Time series MCP tools cover profiling, backtesting and deployment, and the playbooks ship as skills so the same workflow runs in whichever assistant the team already uses.</p>
+      </div>
+      <div class="card">
+        <span class="eyebrow">Run time</span>
+        <h3>Streaming Agents, in Flink SQL</h3>
+        <p>The loop runs as Streaming Agents on the enriched topics. Agents chain the way a fraud pipeline does, risk assessor to investigator to decision, with operator gates and governance built in. The result is days to a governed forecast rather than months, and an architecture that keeps improving because every model or agent release lands in the same loop and scales with the stream.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="band" id="roadmap">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Roadmap</span>
@@ -960,6 +1028,7 @@ FROM motor_telemetry;</code></pre></div>
         <h3>Optimization and semantic intelligence</h3>
         <ul class="list">
           <li>TSPulse for anomaly detection, embeddings and similarity search in the stream</li>
+          <li>Three new Flink functions on the models: <code>TS_EMBED</code>, <code>TS_SEARCH</code> and <code>TS_OPTIMIZE</code></li>
           <li>Production optimization: forecasts conditioned on controllable settings, optimized against a stated KPI inside constraints</li>
           <li>Semantic intelligence: embed each window as it arrives, search history for precedents, classify and fill gaps</li>
           <li>Enablement materials, demo datasets and client working sessions</li>
@@ -985,7 +1054,7 @@ FROM motor_telemetry;</code></pre></div>
     <span class="num">Chapter 02 of 04</span>
     <h2 class="h2">The value is the time between an event and knowing about it.</h2>
     <p>Why scoring in the stream beats scoring in the warehouse for the decisions that pay for speed, told from the side of the people who own those decisions.</p>
-    <nav class="subnav" aria-label="In this chapter"><a href="#why">Why the stream</a><a href="#decisions">Three decisions</a><a href="#compare">Warehouse vs stream</a><a href="#benefits">What you get</a></nav>
+    <nav class="subnav" aria-label="In this chapter"><a href="#why">Why the stream</a><a href="#decisions">Three decisions</a><a href="#impact">Impact</a><a href="#journey">The journey</a><a href="#compare">Warehouse vs stream</a><a href="#proof">Proof in production</a><a href="#benefits">What you get</a></nav>
   </div>
 </section>
 <section class="band" id="why">
@@ -1061,7 +1130,77 @@ FROM motor_telemetry;</code></pre></div>
       </article>
     </div>
   </div>
-</section><section class="band alt" id="compare">
+</section><section class="band" id="impact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Productivity, accuracy, responsiveness</span>
+      <h2 class="h2">Three dials move when the model meets the stream.</h2>
+      <p class="muted">The client pain point is the same everywhere: forecasting, anomaly detection and optimization still mean one bespoke model at a time and months of expert work on each, so decisions are made on safety margins after the window has closed.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl impact">
+        <thead><tr><th style="width:16%">Dial</th><th>The problem today</th><th>With Granite models in the stream</th><th style="width:24%">Impact</th></tr></thead>
+        <tbody>
+          <tr><td>Productivity</td><td>Bespoke models, months of expert work, hard to scale</td><td>Zero-shot models reused across use cases, value in days</td><td><span class="big">10×</span> faster time to value<br><span class="big">5×</span> lower skill required</td></tr>
+          <tr><td>Accuracy</td><td>Rules and classic ML plateau, and lost accuracy is lost margin</td><td>Benchmark-leading models, with savings validated in the millions</td><td><span class="big">5 to 10%</span> accuracy improvement</td></tr>
+          <tr><td>Responsiveness</td><td>Mission-critical operations hedge with safety margins</td><td>Scored live in the stream, decided in the window, adaptive</td><td><span class="big">Days to seconds</span> from signal to decision</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiny" style="margin-top:.75rem">Impact figures as reported across IBM design-partner engagements in cement, steel, pulp and paper, food and telecommunications. Results vary by process and data.</p>
+  </div>
+</section>
+<section class="band alt" id="journey">
+  <div class="wrap">
+    <div class="split">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">The journey</span>
+        <h2 class="h2">From bespoke and batch to the autonomous enterprise.</h2>
+        <p class="muted">Most teams start bottom left: bespoke models on batch data. Moving right brings time series foundation models and agents. Moving up brings real time. The destination is top right: real-time decision intelligence with foundation models and governed agents on Confluent.</p>
+      </div>
+      <figure class="fig">
+        <svg viewBox="0 0 680 430" role="img" aria-label="Two by two grid. Horizontal axis from bespoke models to agentic with time series foundation models. Vertical axis from batch to real time. Bottom left: bespoke and batch, where most teams are today. Top left: real-time, hand-built. Bottom right: foundation models and agents, offline. Top right: the destination, autonomous enterprise on Confluent." style="width:100%;height:auto;display:block;font-family:var(--font-sans)">
+          <rect x="62" y="22" width="298" height="176" fill="var(--surface)"/>
+          <rect x="362" y="22" width="298" height="176" fill="var(--accent-soft)"/>
+          <rect x="62" y="202" width="298" height="176" fill="var(--surface)"/>
+          <rect x="362" y="202" width="298" height="176" fill="var(--surface)"/>
+          <g stroke="var(--line-strong)" stroke-width="1" fill="none">
+            <rect x="62" y="22" width="598" height="356"/><line x1="361" y1="22" x2="361" y2="378"/><line x1="62" y1="200" x2="660" y2="200"/>
+          </g>
+          <g font-size="11" fill="var(--ink-3)" letter-spacing="1">
+            <text x="76" y="44">REAL-TIME, HAND-BUILT</text>
+            <text x="376" y="44" fill="var(--accent-ink)">AUTONOMOUS ENTERPRISE</text>
+            <text x="76" y="224">BESPOKE AND BATCH</text>
+            <text x="376" y="224">FOUNDATION MODELS, OFFLINE</text>
+          </g>
+          <g font-size="13" fill="var(--ink)">
+            <text x="76" y="72">Rules and classic ML in the stream</text>
+            <text x="76" y="92" fill="var(--ink-2)">Fast, but accuracy plateaus</text>
+            <text x="376" y="72">Foundation models on Confluent Flink</text>
+            <text x="376" y="92" fill="var(--ink-2)">Governed agents act in the window</text>
+            <text x="76" y="252">One model per problem, months of work</text>
+            <text x="76" y="272" fill="var(--ink-2)">Decisions after the window has closed</text>
+            <text x="376" y="252">Zero-shot models, agents in batch jobs</text>
+            <text x="376" y="272" fill="var(--ink-2)">Accurate, but acting on yesterday's data</text>
+          </g>
+          <g fill="var(--accent)" stroke="var(--surface)" stroke-width="2">
+            <circle cx="90" cy="348" r="7"/><circle cx="632" cy="168" r="7"/>
+          </g>
+          <g font-size="12" fill="var(--ink-2)">
+            <text x="104" y="352">most teams today</text>
+            <text x="618" y="172" text-anchor="end">the destination</text>
+          </g>
+          <g font-size="12" fill="var(--ink-3)">
+            <text x="361" y="404" text-anchor="middle">Bespoke models   →   Agentic with time series foundation models</text>
+            <text x="36" y="200" text-anchor="middle" transform="rotate(-90 36 200)">Batch   →   Real-time</text>
+          </g>
+        </svg>
+        <figcaption>Time series foundation models and Confluent move teams along both axes at once.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<section class="band" id="compare">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">In the warehouse or in the stream</span>
@@ -1084,7 +1223,36 @@ FROM motor_telemetry;</code></pre></div>
     </div>
     <p class="tiny" style="margin-top:.75rem">Warehouse function names belong to their vendors and are listed for orientation. Capabilities change, check each vendor's documentation.</p>
   </div>
-</section><section class="band" id="benefits">
+</section><section class="band" id="proof">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Proof in production</span>
+      <h2 class="h2">Three engagements where Granite Time Series models run on live operational data.</h2>
+    </div>
+    <div class="grid c3">
+      <article class="card">
+        <span class="eyebrow">Telecommunications</span>
+        <h3>Network operations with TSPulse anomaly detection</h3>
+        <p>IBM Network Intelligence runs domain-trained time series foundation models with ultra-low latency inference on streaming metrics, events and logs from IP, radio and broadband networks. Anomalies become observations, agentic root cause analysis grounded in operating guides and config knowledge confirms or discards each one, and a ticket is opened only when a cause is confirmed.</p>
+        <dl class="kv"><dt>Flow</dt><dd>Datapoints to observations to validated investigations to confirmed issues with remediation plans</dd><dt>Modes</dt><dd>Assist and agentic, human in the loop or autonomous remediation</dd></dl>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Cement production</span>
+        <h3>Process and quality models per mill</h3>
+        <p>Traditional regression meant 8 to 10 models per cement grade and 24 to 30 models per mill, six months to deliver one mill. With two foundation models, one for process parameters and one for qualities, fine-tuned per mill, one mill takes 8 to 10 weeks and the same model captures every grade.</p>
+        <div class="stats"><div><span class="big">93% to 99%</span><span class="lab">accuracy</span></div><div><span class="big">$2 per ton</span><span class="lab">EBITDA improvement</span></div><div><span class="big">$10s to 100s M</span><span class="lab">financial benefit from savings and added production</span></div></div>
+      </article>
+      <article class="card">
+        <span class="eyebrow">Financial services</span>
+        <h3>Multivariate asset forecasts with Granite TTM</h3>
+        <p>A fintech fuses market indicators, estimated ESG signals, news sentiment and control inputs, fine-tunes one TTM per asset class, and deploys it for multi-horizon forecasts with uncertainty estimates behind investment strategies and portfolios. Inference runs on CPU.</p>
+        <div class="stats"><div><span class="big">About 10%</span><span class="lab">RMSE improvement over the current approach</span></div><div><span class="big">One model</span><span class="lab">per asset group, rapid adaptation to new assets and markets</span></div></div>
+      </article>
+    </div>
+    <p class="tiny" style="margin-top:.75rem">Results as reported by the engagements. Client identities withheld.</p>
+  </div>
+</section>
+<section class="band alt" id="benefits">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">What you get</span>
@@ -1120,7 +1288,13 @@ FROM motor_telemetry;</code></pre></div>
       <h2 class="h2">Four lanes, one pattern: the signal becomes a trigger.</h2>
       <p class="muted">All four compress the time between an event and knowing about it. In the stream that gap shrinks from days to seconds, and the result feeds the systems, agents and people that act: investigate, triage what matters, and loop in a human with context already gathered.</p>
     </div>
-    <div class="grid c2">
+<div class="grid c4" id="domains" style="margin-bottom:2rem">
+  <div class="card"><span class="eyebrow">IT infrastructure</span><p>Predicting storage, network and compute utilization to prevent outages.</p></div>
+  <div class="card"><span class="eyebrow">Supply chain</span><p>Forecasting demand to manage inventory and reduce carrying costs.</p></div>
+  <div class="card"><span class="eyebrow">Financial services</span><p>Revenue prediction, fraud detection and risk assessment.</p></div>
+  <div class="card"><span class="eyebrow">Manufacturing and industrial</span><p>Predictive maintenance and anomaly detection in physical processes.</p></div>
+</div>
+    <div class="lanes-grid">
       <article class="card" id="uc-forecast">
         <span class="eyebrow">Forecasting and planning</span>
         <h3>One model is a model factory</h3>
@@ -1130,6 +1304,20 @@ FROM motor_telemetry;</code></pre></div>
           <dt>Reads</dt><dd>Orders, point of sale, inventory movements, promotions and weather as drivers</dd>
           <dt>Outcome</dt><dd>Fewer stockouts and markdowns, revenue protected on the shelf, working capital freed</dd>
         </dl>
+        <details class="uc-more" id="uc-forecast-more">
+  <summary>Worked example: demand forecasting at a national grocery retailer</summary>
+  <div class="inner">
+    <p class="small muted">Thousands of stores, about 100,000 SKUs, fresh and ambient, on a weekly promotion cycle. The planning cycle runs continuously on Confluent: sense sell-out, stock, promotions and events as they happen, forecast every SKU and store with <code>AI_FORECAST</code>, plan safety stock from the P10 to P90 band, execute when the reorder point is hit and the purchase order is raised in the stream, and learn as actuals feed back with planners reviewing by exception.</p>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Today</th><th>On Confluent</th></tr></thead><tbody>
+      <tr><td>Nightly extract, lagging shipments</td><td>Sell-out and demand drivers as they happen</td></tr>
+      <tr><td>One model per category, days to retrain</td><td>Zero shot, every SKU in every store</td></tr>
+      <tr><td>Weekly forecast to DC replenishment</td><td>Hourly, with reorder point and purchase order in the stream</td></tr>
+      <tr><td>Safety stock by rule of thumb</td><td>P10 to P90, a service level choice</td></tr>
+      <tr><td>Planners crunch numbers in spreadsheets</td><td>Planners review by exception</td></tr>
+    </tbody></table></div>
+    <p class="small"><strong>Outcome:</strong> forecast accuracy up 5 to 10 points, fewer stockouts, expedites and waste.</p>
+  </div>
+</details>
         <div><span class="tag blue">Retail</span><span class="tag blue">Consumer goods</span><span class="tag blue">Logistics</span><span class="tag blue">Energy demand</span></div>
       </article>
       <article class="card" id="uc-anomaly">
@@ -1141,6 +1329,19 @@ FROM motor_telemetry;</code></pre></div>
           <dt>Reads</dt><dd>Payments, sessions, service latency, cell-site KPIs, vibration and temperature</dd>
           <dt>Outcome</dt><dd>Block the payment before the money moves, open the work order before the failure, catch the outage before customers do</dd>
         </dl>
+        <details class="uc-more" id="uc-anomaly-more">
+  <summary>Worked example: sales anomaly detection at a multi-store retailer</summary>
+  <div class="inner">
+    <p class="small muted">Every store and SKU scored daily against a forecast band, with no labelled data and no second pipeline. <code>AI_DETECT_ANOMALIES</code> runs in streaming mode with <code>confidencePercentage</code> 99.9 and 512 days of context, so weekend peaks are expected rather than flagged. In the demo, a running job scored 1,096 days and flagged three.</p>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Cause</th><th>Flag</th><th>Action</th></tr></thead><tbody>
+      <tr><td>Stockout</td><td>Actual below the lower bound while demand holds</td><td>Replenish or expedite the store the same day</td></tr>
+      <tr><td>Pricing or promotion error</td><td>A spike or dip lines up with a price change</td><td>Check the price file, fix before the next day</td></tr>
+      <tr><td>Promotion did not land</td><td>The expected lift in the band never arrives</td><td>Rebalance stock and marketing before it ends</td></tr>
+      <tr><td>Broken data feed</td><td>Zeros or flat values where the band expects sales</td><td>Route to data operations, no false stock decision</td></tr>
+    </tbody></table></div>
+    <p class="small"><strong>Outcome:</strong> same-day flags with the bounds that explain them.</p>
+  </div>
+</details>
         <div><span class="tag blue">Banking and payments</span><span class="tag blue">IT and telecom operations</span><span class="tag blue">Industrial assets</span><span class="tag blue">Security</span></div>
       </article>
       <article class="card" id="uc-optimize">
@@ -1152,6 +1353,17 @@ FROM motor_telemetry;</code></pre></div>
           <dt>Reads</dt><dd>Line and process telemetry, setpoints, quality measurements, energy meters</dd>
           <dt>Outcome</dt><dd>Months of bespoke modelling become days. One point on a line turning over hundreds of millions is a seven-figure line</dd>
         </dl>
+        <details class="uc-more" id="uc-optimize-more">
+  <summary>How it is delivered: workbench plus runtime on Confluent</summary>
+  <div class="inner">
+    <p class="small muted">Process optimization in steel, cement, paper and other manufacturing processes runs 2 to 5× faster, with a much lower expert entry barrier. Two components:</p>
+    <ul class="list small">
+      <li><strong>Solution workbench:</strong> an app-guided interface for data preparation, model training, serving and inference, and multi-cycle process optimization, on managed compute (OpenShift clusters or Ray).</li>
+      <li><strong>Runtime deployment:</strong> Granite-based forecasting operators on Confluent with exogenous and control variables for multivariate streams, bring your own tuned or trained model, and an optimization operator. Sensor streams arrive from SCADA and historians through Kafka and Flink, and setpoint recommendations flow back the same way to operators and process engineers.</li>
+    </ul>
+    <p class="small"><strong>Outcome:</strong> proven direct impact on top or bottom line, with the cement engagement above as the reference.</p>
+  </div>
+</details>
         <div><span class="tag blue">Manufacturing</span><span class="tag blue">Process industries</span><span class="tag blue">Oil, gas and utilities</span><span class="tag blue">Data centers</span></div>
       </article>
       <article class="card" id="uc-semantic">
@@ -1163,6 +1375,17 @@ FROM motor_telemetry;</code></pre></div>
           <dt>Reads</dt><dd>Any stream with history: the runs that drifted this way and what fixed them, the demand curves a new SKU resembles, the confirmed cases a session rhymes with</dd>
           <dt>Outcome</dt><dd>The context an agent retrieves before it acts. Faster triage, fewer repeat incidents</dd>
         </dl>
+        <details class="uc-more" id="uc-semantic-more">
+  <summary>How it is delivered: semantic operators and a real-time time series context</summary>
+  <div class="inner">
+    <p class="small muted">Pre-built, fast Granite-based semantic operators applied on streaming data: anomaly detection, forecasting, time series vector embedding, time series search and semantic tagging. Forecasts and alerts land in Apache Iceberg, embeddings land in Kafka and a vector database such as pgvector, and analyst dashboards, data scientists and AI applications consume them.</p>
+    <ul class="list small">
+      <li>An in-memory semantic time series store enabled by Confluent.</li>
+      <li>Real-time time series context for streaming agents and applications.</li>
+      <li>Time series RAG use cases enabled by embeddings: the runs that drifted this way and what fixed them, matched as they arrive.</li>
+    </ul>
+  </div>
+</details>
         <div><span class="tag blue">Operations</span><span class="tag blue">Fraud investigation</span><span class="tag blue">Quality</span><span class="tag blue">Agentic workflows</span></div>
       </article>
     </div>
