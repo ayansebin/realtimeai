@@ -107,6 +107,105 @@ def sheets():
     json.dump(index, open(os.path.join(out, 'index.json'), 'w'), indent=1)
 
 
+def commons_search(q, limit=24):
+    r = get('https://commons.wikimedia.org/w/api.php', params={
+        'action': 'query', 'generator': 'search', 'gsrsearch': q, 'gsrnamespace': 6, 'gsrlimit': limit,
+        'prop': 'imageinfo', 'iiprop': 'url|extmetadata|size', 'iiurlwidth': 1600, 'format': 'json'})
+    out = []
+    if not r:
+        return out
+    pages = (r.json().get('query') or {}).get('pages') or {}
+    for pg in sorted(pages.values(), key=lambda x: x.get('index', 0)):
+        ii = (pg.get('imageinfo') or [{}])[0]
+        md = ii.get('extmetadata') or {}
+        lic = (md.get('LicenseShortName', {}).get('value') or '')
+        if not re.search(r'CC0|CC BY(-SA)?( \d\.\d)?$|Public domain', lic, re.I):
+            continue
+        w, h = ii.get('width') or 0, ii.get('height') or 0
+        if w < 1200 or h > w:
+            continue
+        artist = re.sub(r'<[^>]+>', '', md.get('Artist', {}).get('value') or '')[:60]
+        out.append({'id': pg.get('pageid'), 'title': pg.get('title', '').replace('File:', ''), 'creator': artist,
+                    'license': lic, 'source': 'wikimedia', 'url': ii.get('url'), 'thumbnail': ii.get('thumburl'),
+                    'foreign_landing_url': ii.get('descriptionurl'), 'width': w, 'height': h})
+    return out
+
+
+def sheets2():
+    """second pass: stock-quality sources on Openverse, and Wikimedia Commons quality/featured images"""
+    out = os.path.join(PH, '_cand2')
+    os.makedirs(out, exist_ok=True)
+    TW, TH, COLS = 300, 200, 4
+    index = {}
+    jobs = []
+    for q in ['factory', 'industrial', 'industry worker', 'machine', 'warehouse', 'supermarket', 'store', 'shopping',
+              'retail', 'finance', 'money', 'bank', 'business city', 'office', 'server', 'payment', 'credit card',
+              'cash register', 'technology', 'engineer', 'steel', 'pipeline', 'power', 'logistics']:
+        jobs.append(('ov:' + q, lambda q=q: openverse_sources(q)))
+    for q in ['cement plant', 'steel works', 'blast furnace', 'factory hall', 'industrial robot', 'control room',
+              'refinery night', 'supermarket', 'grocery', 'shopping mall', 'retail', 'stock exchange', 'trading floor',
+              'bank', 'credit card', 'ATM', 'data center', 'cell tower', 'telecommunications', 'power station',
+              'substation', 'container port', 'kiln', 'manufacturing', 'assembly line', 'skyline night', 'cargo']:
+        jobs.append(('wm:' + q, lambda q=q: commons_search(q + ' incategory:"Quality images"') or commons_search(q + ' incategory:"Featured pictures on Wikimedia Commons"')))
+    for key, fn in jobs:
+        good = fn()
+        index[key] = good
+        thumbs = []
+        for i, x in enumerate(good):
+            im = None
+            r = get(x.get('thumbnail') or x['url'])
+            if r:
+                try:
+                    im = Image.open(io.BytesIO(r.content)).convert('RGB')
+                except Exception:
+                    im = None
+            if im is None:
+                im = Image.new('RGB', (TW, TH), (40, 40, 40))
+            im = ImageOps.fit(im, (TW, TH), Image.LANCZOS)
+            d = ImageDraw.Draw(im)
+            d.rectangle([0, 0, 34, 20], fill=(0, 0, 0))
+            d.text((6, 4), str(i), fill=(255, 230, 0))
+            d.rectangle([TW - 110, 0, TW, 20], fill=(0, 0, 0))
+            d.text((TW - 106, 4), (str(x.get('license') or '')[:12] + ' ' + str(x.get('width') or '?')), fill=(180, 220, 255))
+            thumbs.append(im)
+        rows = max(1, (len(thumbs) + COLS - 1) // COLS)
+        sheet = Image.new('RGB', (COLS * TW, rows * TH), (0, 0, 0))
+        for i, t in enumerate(thumbs):
+            sheet.paste(t, ((i % COLS) * TW, (i // COLS) * TH))
+        fn_ = key.replace(':', '_').replace(' ', '_')
+        sheet.save(os.path.join(out, fn_ + '.jpg'), quality=72, optimize=True)
+        print('sheet', key, len(good), flush=True)
+    json.dump(index, open(os.path.join(out, 'index.json'), 'w'), indent=1)
+
+
+def openverse_sources(q):
+    res = []
+    for page in (1, 2):
+        r = get('https://api.openverse.org/v1/images/',
+                params={'q': q, 'license_type': 'commercial', 'category': 'photograph', 'source': 'stocksnap,rawpixel,wordpress',
+                        'page_size': 20, 'page': page})
+        if not r:
+            break
+        try:
+            res += r.json().get('results', [])
+        except Exception:
+            break
+        time.sleep(0.6)
+    good = []
+    for x in res:
+        if x.get('license') not in OK_LIC:
+            continue
+        if BAD.search((x.get('creator') or '') + ' ' + (x.get('title') or '')):
+            continue
+        w, h = x.get('width') or 0, x.get('height') or 0
+        if w and h and w < h:
+            continue
+        good.append({k: x.get(k) for k in ('id', 'title', 'creator', 'creator_url', 'license', 'license_version',
+                                           'license_url', 'source', 'provider', 'url', 'thumbnail',
+                                           'foreign_landing_url', 'width', 'height', 'attribution')})
+    return good[:24]
+
+
 def flickr_variants(url):
     m = re.match(r'(https://live\.staticflickr\.com/\d+/\d+_[0-9a-f]+)_([a-z0-9]+)\.(jpg|png)$', url)
     if not m:
@@ -161,4 +260,4 @@ def fetch():
 
 if __name__ == '__main__':
     mode = sys.argv[1] if len(sys.argv) > 1 else 'fetch'
-    {'sheets': sheets, 'fetch': fetch}[mode]()
+    {'sheets': sheets, 'sheets2': sheets2, 'fetch': fetch}[mode]()

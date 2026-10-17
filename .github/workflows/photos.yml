@@ -25,9 +25,9 @@ jobs:
         run: |
           git config user.name "photo-bot"
           git config user.email "ayhansebin@gmail.com"
-          if [ "${{ inputs.mode }}" = "sheets" ]; then
+          if [ "${{ inputs.mode }}" != "fetch" ]; then
             git checkout -B photo-candidates
-            git add -f photos/_cand
+            git add -f photos/_cand photos/_cand2
             git commit -m "Photo candidate sheets" || echo "nothing to commit"
             git push -f origin photo-candidates
           else
