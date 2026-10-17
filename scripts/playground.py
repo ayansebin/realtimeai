@@ -34,17 +34,32 @@ def log(*a):
     LOGF.flush()
 
 
-def fetch(url, timeout=180):
-    req = urllib.request.Request(url, headers={"User-Agent": "realtimeintelligence.io playground builder"})
-    return urllib.request.urlopen(req, timeout=timeout).read()
+def fetch(url, timeout=120, tries=3):
+    last = None
+    for i in range(tries):
+        try:
+            req = urllib.request.Request(url, headers={
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) realtimeintelligence.io playground builder",
+                "Accept": "text/csv,application/json,application/zip,*/*;q=0.8"})
+            return urllib.request.urlopen(req, timeout=timeout).read()
+        except Exception as e:  # noqa: BLE001
+            last = e
+            log(f"  fetch attempt {i + 1} failed for {url[:90]}: {repr(e)[:120]}")
+            time.sleep(5 * (i + 1))
+    raise last
 
 
 def unzip_first(data, suffix):
+    import gzip
+
     z = zipfile.ZipFile(io.BytesIO(data))
     for n in z.namelist():
         if n.lower().endswith(suffix):
             return z.read(n)
-    raise FileNotFoundError(suffix)
+    for n in z.namelist():
+        if n.lower().endswith(suffix + ".gz"):
+            return gzip.decompress(z.read(n))
+    raise FileNotFoundError(suffix + " in " + ", ".join(z.namelist()))
 
 
 def regularize(s, freq):
@@ -141,7 +156,8 @@ def load_grid():
     lines = txt.split("\n")
     i = next(k for k, l in enumerate(lines) if l.strip().lower() == "@data")
     row = lines[i + 1].strip()
-    name, start, vals = row.split(":", 2)
+    parts = row.split(":")
+    vals, start = parts[-1], parts[-2]
     start = pd.to_datetime(start.strip(), format="%Y-%m-%d %H-%M-%S")
     v = np.array([float(x) if x != "?" else np.nan for x in vals.split(",")])
     s = pd.Series(v, index=pd.date_range(start, periods=len(v), freq="30min"))
@@ -150,11 +166,22 @@ def load_grid():
 
 @dataset(id="retail", name="US retail sales", domain="Retail", kind="public", cls="mon", freq="MS",
          season=12, unit="$ millions", fs_scale=2.0, ttm_freq="M",
-         source={"name": "Advance Retail Sales: Retail Trade (RSXFS), US Census Bureau via FRED",
-                 "url": "https://fred.stlouisfed.org/series/RSXFS", "license": "Public domain (US government data)"},
-         blurb="Monthly US retail trade sales since 1992. Trend, a strong December, the 2008 dip and the 2020 shock.")
+         source={"name": "Monthly Retail Trade Survey, retail trade sales, not seasonally adjusted, US Census Bureau",
+                 "url": "https://www.census.gov/retail/index.html", "license": "Public domain (US government data)"},
+         blurb="Monthly US retail trade sales since 1992, not seasonally adjusted. Trend, a strong December, the 2008 dip and the 2020 shock.")
 def load_retail():
-    raw = fetch("https://fred.stlouisfed.org/graph/fredgraph.csv?id=RSXFS")
+    try:
+        raw = fetch("https://api.census.gov/data/timeseries/eits/marts?get=cell_value,time_slot_id,category_code,data_type_code,seasonally_adj&for=us:*&time=from+1992&category_code=44X72&data_type_code=SM&seasonally_adj=no")
+        rows = json.loads(raw)
+        hdr = rows[0]
+        df = pd.DataFrame(rows[1:], columns=hdr)
+        df = df[(df["category_code"] == "44X72") & (df["data_type_code"] == "SM") & (df["seasonally_adj"] == "no")]
+        ts = pd.to_datetime(df["time"], format="%Y-%m")
+        s = pd.Series(pd.to_numeric(df["cell_value"], errors="coerce").values, index=ts)
+        return regularize(s, "MS")
+    except Exception as e:  # noqa: BLE001
+        log("  census api failed, trying FRED:", repr(e)[:160])
+    raw = fetch("https://fred.stlouisfed.org/graph/fredgraph.csv?id=RSXFSN")
     df = pd.read_csv(io.BytesIO(raw))
     df.columns = ["date", "v"]
     df = df[df["v"] != "."]
@@ -162,17 +189,24 @@ def load_retail():
     return regularize(s, "MS")
 
 
-@dataset(id="wti", name="WTI crude oil price", domain="Markets", kind="public", cls="day", freq="B",
-         season=1, unit="$ / barrel", fs_scale=0.0656, ttm_freq="D",
-         source={"name": "Crude Oil Prices: West Texas Intermediate (DCOILWTICO), US EIA via FRED",
-                 "url": "https://fred.stlouisfed.org/series/DCOILWTICO", "license": "Public domain (US government data)"},
-         blurb="Daily spot price of WTI crude. No seasonality to lean on, so the band is the whole story.")
-def load_wti():
-    raw = fetch("https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILWTICO")
-    df = pd.read_csv(io.BytesIO(raw))
-    df.columns = ["date", "v"]
-    df = df[df["v"] != "."]
-    s = pd.Series(df["v"].astype(float).values, index=pd.to_datetime(df["date"]))
+@dataset(id="treasury", name="US 10-year Treasury yield", domain="Markets", kind="public", cls="day", freq="B",
+         season=1, unit="% yield", fs_scale=0.0656, ttm_freq="D",
+         source={"name": "Daily Treasury Par Yield Curve Rates, US Department of the Treasury",
+                 "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve", "license": "Public domain (US government data)"},
+         blurb="The 10-year yield, every trading day. No seasonality to lean on, so the band is the whole story.")
+def load_treasury():
+    frames = []
+    year = pd.Timestamp.now().year
+    for y in range(year - 9, year + 1):
+        url = (f"https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/{y}/all"
+               f"?type=daily_treasury_yield_curve&field_tdr_date_value={y}&page&_format=csv")
+        try:
+            frames.append(pd.read_csv(io.BytesIO(fetch(url, tries=2))))
+        except Exception as e:  # noqa: BLE001
+            log(f"  treasury {y} failed: {repr(e)[:120]}")
+    df = pd.concat(frames, ignore_index=True)
+    col = [c for c in df.columns if c.strip().lower() in ("10 yr", "10 yr ")][0]
+    s = pd.Series(pd.to_numeric(df[col], errors="coerce").values, index=pd.to_datetime(df["Date"]))
     return regularize(s, "B")
 
 
@@ -202,12 +236,12 @@ def load_kiln():
     rng = np.random.default_rng(42)
     n = slice_len("sub")
     t = np.arange(n)
-    y = 1420 + 9 * np.sin(2 * np.pi * t / 240) + 3 * np.sin(2 * np.pi * t / 61) + 0.004 * (t - n / 2)
-    y = y + np.cumsum(rng.normal(0, 0.12, n)) * 0.6 + rng.normal(0, 0.9, n)
+    y = 1420 + 9 * np.sin(2 * np.pi * t / 240) + 2.5 * np.sin(2 * np.pi * t / 61) + 0.003 * (t - n / 2)
+    y = y + np.cumsum(rng.normal(0, 0.05, n)) * 0.6 + rng.normal(0, 0.8, n)
     labels = []
     # variance burst
     a, b = 1500, 1540
-    y[a:b] += rng.normal(0, 7, b - a)
+    y[a:b] += rng.normal(0, 11, b - a)
     labels.append([a, b, "noise burst"])
     # spike
     a, b = 2600, 2606
@@ -215,7 +249,7 @@ def load_kiln():
     labels.append([a, b, "spike"])
     # level shift
     a, b = 2900, 3010
-    y[a:b] -= 14
+    y[a:b] -= 22
     labels.append([a, b, "level shift"])
     s = pd.Series(y, index=pd.date_range("2026-03-02", periods=n, freq="min"))
     return s, labels
@@ -466,7 +500,7 @@ def build(meta, only=None):
     else:
         s = loaded
     cls = meta["cls"]
-    n = slice_len(cls)
+    n = max(slice_len(cls), {"sub": 0, "day": 2200, "mon": 0}[cls])
     s = s.dropna()
     if len(s) < n:
         n = len(s)
@@ -516,16 +550,20 @@ def build(meta, only=None):
 def main():
     only = set(sys.argv[1].split(",")) if len(sys.argv) > 1 and sys.argv[1] else None
     want = set(sys.argv[2].split(",")) if len(sys.argv) > 2 and sys.argv[2] else None
-    index = []
     for meta in DATASETS:
         if want and meta["id"] not in want:
             continue
         try:
-            out = build(meta, only)
+            build(meta, only)
         except Exception as e:
             log(f"  dataset {meta['id']} FAILED: {repr(e)[:300]}")
             log(traceback.format_exc()[-1500:])
+    index = []
+    for meta in DATASETS:
+        f = OUT / f"{meta['id']}.json"
+        if not f.exists():
             continue
+        out = json.loads(f.read_text())
         v = np.array([x if x is not None else np.nan for x in out["values"]], dtype=float)
         step = max(1, len(v) // 120)
         spark = [r4(x) for x in v[::step][:120]]
@@ -536,7 +574,7 @@ def main():
             "anomaly": out["ad"].get("tspulse", {}).get("status") == "ok",
             "labels": len(out["labels"]),
         })
-    (OUT / "index.json").write_text(json.dumps({"built": pd.Timestamp.utcnow().isoformat(), "datasets": index},
+    (OUT / "index.json").write_text(json.dumps({"built": pd.Timestamp.now("UTC").isoformat(), "datasets": index},
                                                separators=(",", ":")))
     log("done:", [d["id"] for d in index])
 
