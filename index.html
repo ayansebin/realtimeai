@@ -506,6 +506,18 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .ind .is button:hover{border-color:var(--blue-2);color:#fff}
 .ind .ig{font-size:.82rem;color:var(--blue-3);text-decoration:none;justify-self:start}
 .ind .ig:hover{text-decoration:underline}
+.three{display:grid;gap:10px}
+.three-row{display:grid;grid-template-columns:150px minmax(0,1fr) 180px;gap:12px;align-items:stretch;background:rgba(0,7,20,.32);border:1px solid var(--line);padding:10px 12px;min-width:0}
+.three-k{display:flex;gap:.6rem;align-items:center}
+.three-k i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:.8rem;font-weight:500;flex:none}
+.three-k b{font-weight:400;font-size:1rem}
+.three-cv{position:relative;height:152px;min-width:0}
+.three-cv canvas{display:block;width:100%;height:100%}
+.three-impact{display:grid;gap:.05rem;align-content:center;border-left:1px solid var(--line);padding-left:14px}
+.three-impact b{font-weight:300;font-size:1.9rem;line-height:1.05;color:var(--ink)}
+.three-impact span{font-size:.74rem;color:var(--ink-3);margin-bottom:.35rem}
+@media (max-width:900px){.three-row{grid-template-columns:1fr}.three-impact{border-left:0;padding-left:0;grid-auto-flow:column;align-items:end;justify-content:start;gap:.1rem 1.2rem}.three-impact span{margin-bottom:0}.three-cv{height:170px}}
+@media (max-width:600px){.three-cv{height:270px}.three-cv.acc{height:200px}}
 /* use case cards */
 .ucgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:12px}
 @media (max-width:1100px){.ucgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -920,6 +932,38 @@ FROM pos_sales;</code></pre></div>
   <div class="wrap">
     <div class="chapter-head">
       <span class="n">02 / VALUE</span>
+      <h2>Productivity, accuracy, responsiveness.</h2>
+      <p>One bespoke model at a time, or every decision scored in the stream. Press play.</p>
+    </div>
+
+    <div class="stage" id="st-three">
+      <div class="stage-top">
+        <div class="stage-title"><h3>Three things change</h3><p>Today on the left, the stream on the right. One year, sped up.</p></div>
+        <div class="ctl"><div class="ctl-group"><span class="eyebrow">&nbsp;</span><div class="btn-row"><button class="btn sm ghost" id="th-play" type="button" aria-pressed="true">Pause</button><button class="btn sm ghost" id="th-replay" type="button">Replay</button></div></div></div>
+      </div>
+      <div class="stage-body">
+        <div class="three">
+          <div class="three-row">
+            <div class="three-k"><i>1</i><b>Productivity</b></div>
+            <div class="three-cv"><canvas class="stage-canvas" id="th-prod" aria-label="Bespoke models take months per use case, Granite goes live in days and stacks use cases"></canvas></div>
+            <div class="three-impact"><b>10×</b><span>faster time to value</span><b>5×</b><span>lower skill required</span></div>
+          </div>
+          <div class="three-row">
+            <div class="three-k"><i>2</i><b>Accuracy</b></div>
+            <div class="three-cv acc"><canvas class="stage-canvas" id="th-acc" aria-label="Rules and classic ML plateau near 93 percent, Granite starts at 97 zero-shot and climbs to 99"></canvas></div>
+            <div class="three-impact"><b>5 to 10%</b><span>accuracy improvement</span></div>
+          </div>
+          <div class="three-row">
+            <div class="three-k"><i>3</i><b>Responsiveness</b></div>
+            <div class="three-cv"><canvas class="stage-canvas" id="th-resp" aria-label="A signal takes days to become a decision by batch and under a second in the stream"></canvas></div>
+            <div class="three-impact"><b>Days &#8594; seconds</b><span>from signal to decision</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot"><div class="hint">Illustrative. Impact figures from design partner engagements.</div></div>
+    </div>
+
+    <div class="chapter-head sub">
       <h2>Value decays by the minute.</h2>
       <p>Slide the moment you act. Watch what is left of the decision.</p>
     </div>
@@ -1747,6 +1791,79 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   function all(){$$('canvas[data-glyph]',el).forEach(c=>glyph(c,c.dataset.glyph));}
   reg({el,resize:all});all();
   ['#bubbles','#bench'].forEach(id=>{const x=$(id);if(x)once(x,()=>x.classList.add('in'));});
+})();
+
+/* ============ 02 three things change: productivity, accuracy, responsiveness ============ */
+(function(){
+  const el=$('#st-three');if(!el)return;
+  const cvs={prod:new Cv($('#th-prod')),acc:new Cv($('#th-acc')),resp:new Cv($('#th-resp'))};
+  const st={t:0,playing:true,dur:reduced?1:16000,decisions:0,evAcc:0,events:[]};
+  const MONO_='"IBM Plex Mono", Menlo, monospace',SANS_='"IBM Plex Sans", Arial, sans-serif';
+  function txt(ctx,s,x,y,o){o=o||{};ctx.font=(o.w||400)+' '+(o.px||10)+'px '+(o.mono===false?SANS_:MONO_);ctx.fillStyle=o.c||C.ink3;ctx.textAlign=o.a||'left';ctx.textBaseline='middle';ctx.fillText(s,x,y);}
+  function dash(ctx,x1,y1,x2,y2,c){ctx.setLineDash([3,4]);ctx.strokeStyle=c||C.grid;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.setLineDash([]);}
+  function people(ctx,x,y,n,c){for(let i=0;i<n;i++){const px=x+i*11;ctx.fillStyle=c;ctx.beginPath();ctx.arc(px,y-5,2.6,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.moveTo(px-4,y+5);ctx.quadraticCurveTo(px,y-2,px+4,y+5);ctx.closePath();ctx.fill();}}
+  /* two halves side by side, or stacked on a narrow canvas */
+  function halves(W,H){const narrow=W<600,pad=8;if(narrow){const hh=(H-8)/2;return {narrow,L:{x:pad,y:0,w:W-2*pad,h:hh},R:{x:pad,y:hh+8,w:W-2*pad,h:hh}};}const gap=30,w=(W-gap-2*pad)/2;return {narrow,L:{x:pad,y:0,w,h:H},R:{x:pad+w+gap,y:0,w,h:H}};}
+  function header(ctx,r,label,right,c){const nr=r.w<480;if(nr)label=label.replace('IN THE STREAM','STREAM').replace(', ONE STATEMENT','').replace(', PER EVENT','').replace(' MODELS','');txt(ctx,label,r.x,r.y+11,{px:9,w:500,c:c||C.ink3});if(right){if(nr)right=right.replace(' per decision','').replace('first value in','first value');txt(ctx,right,r.x+r.w,r.y+11,{px:9,a:'right',c:c||C.ink3});}}
+  function monthAxis(ctx,r,top,bot){[0,3,6,9,12].forEach(k=>{const x=r.x+k/12*r.w;dash(ctx,x,top,x,bot);txt(ctx,k+(k?' mo':''),x,r.y+r.h-6,{px:8.5,a:k===0?'left':k===12?'right':'center'});});}
+
+  /* productivity: one bespoke model at a time against one statement per decision, over a year */
+  const PH=[['data',1.5],['features',1.5],['train',2],['validate',1],['deploy',1]];const BESPOKE=7;
+  function drawProd(ctx,W,H,t){const m=t*12,cur=Math.min(m,12);const {L,R}=halves(W,H);
+    /* left: two use cases, seven months each */
+    let live=0;{const r=L,top=r.y+24,bot=r.y+r.h-16;monthAxis(ctx,r,top-2,bot);
+      for(let u=0;u<2;u++){const y=top+14+u*30;const s0=u*BESPOKE;txt(ctx,'use case '+(u+1),r.x,y-11,{px:8,c:C.ink3});let acc=s0;PH.forEach(([name,d],i)=>{const a=acc,b=acc+d;acc=b;if(m<=a)return;const x1=r.x+a/12*r.w,x2=r.x+Math.min(m,b)/12*r.w;ctx.fillStyle=i%2?'rgba(159,179,200,.35)':'rgba(159,179,200,.22)';ctx.fillRect(x1,y-5,Math.max(1,x2-x1),10);if(x2-x1>34)txt(ctx,name,x1+3,y,{px:8,c:C.ink2});});
+        if(m>=s0+BESPOKE){live++;const x1=r.x+(s0+BESPOKE)/12*r.w,x2=r.x+cur/12*r.w;ctx.fillStyle='rgba(111,220,140,.8)';ctx.fillRect(x1,y-3,Math.max(2,x2-x1),6);ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=8;ctx.fillStyle=C.green2;ctx.beginPath();ctx.arc(x1,y,3.5,0,Math.PI*2);ctx.fill();ctx.restore();txt(ctx,'live',x1+8,y-11,{px:8,c:C.green2});}}
+      people(ctx,r.x+6,bot-4,5,'rgba(159,179,200,.8)');txt(ctx,'5 experts',r.x+62,bot-4,{px:8.5,c:C.ink3});
+      header(ctx,r,'TODAY · BESPOKE MODELS','live '+live+' · first value in '+(m>=BESPOKE?'7 mo':'…'),C.ink3);
+      const x=r.x+cur/12*r.w;ctx.strokeStyle='rgba(244,244,244,.5)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(x)+0.5,top-2);ctx.lineTo(Math.round(x)+0.5,bot);ctx.stroke();}
+    /* right: a new decision every month, live in a week */
+    {const r=R,top=r.y+24,bot=r.y+r.h-16;monthAxis(ctx,r,top-2,bot);const n=12,lh=(bot-14-top)/n;let liveR=0;
+      for(let u=0;u<n;u++){const y=top+u*lh+lh/2;const s0=u,go=u+0.25;if(m<=s0)continue;const x1=r.x+s0/12*r.w,x2=r.x+Math.min(m,go)/12*r.w;ctx.fillStyle='rgba(120,169,255,.5)';ctx.fillRect(x1,y-2,Math.max(1,x2-x1),4);if(m>=go){liveR++;const xg=r.x+go/12*r.w,xe=r.x+cur/12*r.w;ctx.fillStyle='rgba(111,220,140,.75)';ctx.fillRect(xg,y-2,Math.max(2,xe-xg),4);}}
+      if(liveR&&m<12){const xc=r.x+cur/12*r.w;ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=8;ctx.fillStyle=C.green2;ctx.beginPath();ctx.arc(xc,top+(liveR-1)*lh+lh/2,3,0,Math.PI*2);ctx.fill();ctx.restore();}
+      people(ctx,r.x+6,bot-4,1,C.blue3);txt(ctx,'1 analyst, SQL',r.x+18,bot-4,{px:8.5,c:C.blue3});
+      header(ctx,r,'IN THE STREAM · GRANITE, ONE STATEMENT','live '+liveR+' · first value in 6 d',C.blue3);
+      const x=r.x+cur/12*r.w;ctx.strokeStyle='rgba(244,244,244,.5)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(x)+0.5,top-2);ctx.lineTo(Math.round(x)+0.5,bot);ctx.stroke();}}
+
+  /* accuracy: rules and classic ML plateau, the foundation model starts high and climbs */
+  const aCls=m=>86+7*(1-Math.exp(-m/2.2)),aGr=m=>97+2*(1-Math.exp(-m/1.2));
+  function drawAcc(ctx,W,H,t){const m=t*12;const narrow=W<600;const padL=38,padR=narrow?8:150,top=narrow?36:22,bot=H-18;const pw=W-padL-padR,ph=bot-top;const X=x=>padL+x/12*pw,Y=a=>top+(100-a)/(100-84)*ph;
+    [86,90,94,98].forEach(a=>{dash(ctx,padL,Math.round(Y(a))+0.5,padL+pw,Math.round(Y(a))+0.5);txt(ctx,a+'%',padL-6,Y(a),{px:8.5,a:'right'});});[0,3,6,9,12].forEach(k=>txt(ctx,k+(k?' mo':''),X(k),H-7,{px:8.5,a:k===0?'left':k===12?'right':'center'}));
+    const N=60;const P=[];for(let i=0;i<=N;i++){const x=m*i/N;P.push({x,c:aCls(x),g:aGr(x)});}
+    if(m>0.05){ctx.beginPath();P.forEach((p,i)=>i?ctx.lineTo(X(p.x),Y(p.g)):ctx.moveTo(X(p.x),Y(p.g)));for(let i=P.length-1;i>=0;i--)ctx.lineTo(X(P[i].x),Y(P[i].c));ctx.closePath();ctx.fillStyle='rgba(111,220,140,.12)';ctx.fill();
+      ctx.strokeStyle='rgba(159,179,200,.9)';ctx.lineWidth=2;ctx.beginPath();P.forEach((p,i)=>i?ctx.lineTo(X(p.x),Y(p.c)):ctx.moveTo(X(p.x),Y(p.c)));ctx.stroke();
+      ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=8;ctx.strokeStyle=C.green2;ctx.lineWidth=2;ctx.beginPath();P.forEach((p,i)=>i?ctx.lineTo(X(p.x),Y(p.g)):ctx.moveTo(X(p.x),Y(p.g)));ctx.stroke();ctx.restore();}
+    const last=P[P.length-1];
+    if(narrow){txt(ctx,'TODAY · RULES AND CLASSIC ML',padL,11,{px:9,w:500,c:C.ink3});txt(ctx,'IN THE STREAM · GRANITE',padL,24,{px:9,w:500,c:C.blue3});}
+    else{txt(ctx,'TODAY · RULES AND CLASSIC ML',padL,11,{px:9,w:500,c:C.ink3});txt(ctx,'IN THE STREAM · GRANITE',padL+pw,11,{px:9,w:500,a:'right',c:C.blue3});}
+    const lx=Math.min(X(last.x)+8,padL+pw-70);txt(ctx,'plateau '+last.c.toFixed(1)+'%',lx,Y(last.c)+(m>1?4:12),{px:9,c:C.ink2});txt(ctx,(m<0.3?'zero-shot ':'')+last.g.toFixed(1)+'%',lx,Y(last.g)-(m>1?4:0),{px:9,c:C.green2,w:500});
+    let area=0;for(let i=1;i<P.length;i++){area+=(P[i].x-P[i-1].x)*((P[i].g-P[i].c+P[i-1].g-P[i-1].c)/2);}const usd=area*0.032;
+    if(narrow){txt(ctx,'gap '+(last.g-last.c).toFixed(1)+' pts · $'+usd.toFixed(1)+'M margin recovered',padL+pw,Y(86.6),{px:8.5,a:'right',c:C.green2});}
+    else{const bx=W-padR+18;txt(ctx,'gap '+(last.g-last.c).toFixed(1)+' pts',bx,top+22,{px:9,c:C.ink2});txt(ctx,'$'+usd.toFixed(1)+'M',bx,top+46,{px:20,mono:false,c:C.green2,w:300});txt(ctx,'margin recovered',bx,top+66,{px:8.5,c:C.ink3});txt(ctx,'one mill, illustrative',bx,top+80,{px:8,c:C.ink4});}}
+
+  /* responsiveness: a signal travels to a decision, by batch and in the stream */
+  const BATCH=[['signal',0],['nightly ETL',10],['weekly model run',40],['report',12],['meeting',12],['action',2]];const BATCH_S=['signal','ETL','model run','report','meeting','action'];const BT=76;
+  const STREAM=['event','Flink SQL','agent','gate','action'];
+  function fmtH(h){const d=Math.floor(h/24),hh=Math.floor(h%24);return (d?d+' d ':'')+hh+' h';}
+  function track(ctx,r,label,right,c,stops,pos,hedge,hedgeC,winText,winFrac,closed){const hc=c==='batch'?C.ink3:C.blue3;const hw=r.w<420?64:80;const pad=14;const bx=r.x+pad,bw=r.w-pad*2-hw-22;const y1=r.y+40,y2=r.y+r.h-30;
+    header(ctx,r,label,right,hc);
+    ctx.strokeStyle=c==='batch'?'rgba(159,179,200,.4)':'rgba(120,169,255,.5)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(bx,y1);ctx.lineTo(bx+bw,y1);ctx.stroke();
+    const lastX={0:-1e9,1:-1e9};stops.forEach((s,i)=>{const x=bx+s.u*bw;ctx.fillStyle=s.done?(c==='batch'?'rgba(159,179,200,.9)':C.blue3):'rgba(159,179,200,.3)';ctx.beginPath();ctx.arc(x,y1,4,0,Math.PI*2);ctx.fill();const row=i%2;const w=s.n.length*5.2;const lx=i===0?x+w/2:i===stops.length-1?x-w/2:x;if(lx-w/2<lastX[row]+6)return;lastX[row]=lx+w/2;txt(ctx,s.n,x,y1+(row?15:-14),{px:8,a:i===0?'left':i===stops.length-1?'right':'center',c:s.done?C.ink2:C.ink3});});
+    pos.forEach(p=>{const x=bx+p.u*bw;ctx.save();ctx.shadowColor=p.c;ctx.shadowBlur=10;ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(x,y1,4,0,Math.PI*2);ctx.fill();ctx.restore();});
+    const hx=bx+bw+22;txt(ctx,'safety margin',hx,y1-14,{px:8,c:C.ink3});ctx.fillStyle=hedgeC.replace('1)','.25)');ctx.fillRect(hx,y1-5,hw,10);ctx.fillStyle=hedgeC;ctx.fillRect(hx,y1-5,hw*hedge/0.2,10);txt(ctx,'+'+Math.round(hedge*100)+' % hedge',hx,y1+15,{px:8,c:hedgeC});
+    dash(ctx,r.x,y2-6,r.x+r.w,y2-6);const wx=bx+winFrac*bw;ctx.fillStyle=closed?'rgba(241,194,27,.12)':'rgba(111,220,140,.15)';ctx.fillRect(bx,y2-2,wx-bx,8);txt(ctx,winText,bx,y2+14,{px:8,c:closed?C.yellow:C.green2});if(closed==='yes')txt(ctx,'closed before the decision',wx+6,y2+2,{px:8,c:C.red2});}
+  function drawResp(ctx,W,H,t){const {L,R}=halves(W,H);const h=t*BT;let acc=0;const nr=L.w<480;const stops=BATCH.map(([n,d],i)=>{acc+=d;return {n:nr?BATCH_S[i]:n,u:acc/BT,done:h>=acc};});
+    track(ctx,L,'TODAY · BATCH','elapsed '+fmtH(Math.min(h,BT)),'batch',stops,[{u:Math.min(h,BT)/BT,c:'#fff'}],0.15,'rgba(255,131,137,1)','decision window · 24 h',24/BT,h>24?'yes':'wait');
+    track(ctx,R,'IN THE STREAM · GRANITE, PER EVENT','0.8 s per decision · '+st.decisions+' decided','stream',STREAM.map((n,i)=>({n,u:i/(STREAM.length-1),done:true})),st.events.map(e=>({u:e.u,c:e.u<0.98?'#fff':C.green2})),0.02,'rgba(111,220,140,1)','decided inside the window, every time',1,false);
+}
+
+  function draw(){const t=st.t;[['prod',drawProd],['acc',drawAcc],['resp',drawResp]].forEach(([k,fn])=>{const cv=cvs[k];const ctx=cv.ctx;if(!cv.W){cv.fit();return;}ctx.clearRect(0,0,cv.W,cv.H);fn(ctx,cv.W,cv.H,t);});}
+  function update(dt){if(!st.playing)return;st.t+=dt/st.dur;if(st.t>=1.15){st.t=0;st.decisions=0;st.events=[];}
+    st.evAcc+=dt;if(st.evAcc>620){st.evAcc=0;st.events.push({u:0});}
+    st.events.forEach(e=>{e.u+=dt/800;});for(let i=st.events.length-1;i>=0;i--){if(st.events[i].u>=1){st.events.splice(i,1);st.decisions++;}}}
+  reg({el,resize(){Object.values(cvs).forEach(c=>c.fit());},update,draw});
+  const btn=$('#th-play');if(btn)btn.addEventListener('click',()=>{st.playing=!st.playing;btn.textContent=st.playing?'Pause':'Play';btn.setAttribute('aria-pressed',st.playing);});
+  const rp=$('#th-replay');if(rp)rp.addEventListener('click',()=>{st.t=0;st.decisions=0;st.events=[];st.playing=true;if(btn){btn.textContent='Pause';btn.setAttribute('aria-pressed','true');}});
 })();
 
 /* ============ 02 decay ============ */
