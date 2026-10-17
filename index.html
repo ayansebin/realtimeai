@@ -120,6 +120,9 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;background:var(--blue
 .chapter-head .n{font-family:var(--font-mono);font-size:.8rem;color:var(--blue-3);letter-spacing:.1em}
 .chapter-head h2{font-size:clamp(2rem,4.6vw,3.6rem);max-width:24ch}
 .chapter-head p{color:var(--ink-2);font-size:clamp(1.05rem,1.5vw,1.3rem);font-weight:300;max-width:52ch}
+.chapter-head.sub{margin-top:clamp(56px,7vw,104px);gap:.5rem}
+.chapter-head.sub h2{font-size:clamp(1.6rem,3vw,2.4rem)}
+.chapter-head.sub p{font-size:clamp(1rem,1.3vw,1.15rem)}
 .stage{position:relative;background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);margin-bottom:clamp(28px,3.5vw,56px);overflow:hidden}
 .stage::before{content:"";position:absolute;inset:0;pointer-events:none;background:
   linear-gradient(var(--grid) 1px, transparent 1px) 0 0/100% 48px,
@@ -611,13 +614,13 @@ body.walking{overflow:hidden}
     <div class="hero-head">
       <div class="pills"><span class="pill live">Early Access on Confluent Cloud</span></div>
       <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
-      <p class="lede">Streaming data is where the mission-critical decisions live. One statement of Flink SQL forecasts every series, flags what is off and finds the setpoint, inside the stream, with no training. Touch anything on this page.</p>
+      <p class="lede">Streaming data is where the mission-critical decisions live. One statement of Flink SQL forecasts, flags and finds the setpoint, inside the stream, with no training.</p>
       <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>1 min, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
     </div>
 
     <div class="stage" id="st-live">
       <div class="stage-top">
-        <div class="stage-title"><h3>Live stream</h3><p>Events arrive, the model scores each one in flight. Poke it and watch the flag.</p></div>
+        <div class="stage-title"><h3>Live stream</h3><p>Every event scored in flight. Poke it.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Stream</span>
             <div class="chips" id="live-sc">
@@ -664,12 +667,12 @@ body.walking{overflow:hidden}
     <div class="chapter-head">
       <span class="n">01 / INNOVATION</span>
       <h2>Forecast it. Then optimize it.</h2>
-      <p>A signal's value decays with time. A pump caught drifting today is a work order, the same pump next week is an outage. The same foundation model that forecasts every series is also a model of the plant, so an optimizer can search the setpoints against the KPI, inside the guardrails, and explain the answer.</p>
+      <p>A pump caught drifting today is a work order, next week it is an outage. The model that forecasts the series is also a model of the plant, so an optimizer can search the setpoints inside the guardrails.</p>
     </div>
 
     <div class="stage" id="uc-opt">
       <div class="stage-top">
-        <div class="stage-title"><h3>Every plant runs on a model of itself</h3><p>Keeping it honest is the hard part. Here the forecaster is the simulator: move the controls, read the forecast, then let the optimizer search the surface for the setpoint that meets the KPI inside the guardrails.</p></div>
+        <div class="stage-title"><h3>Every plant runs on a model of itself</h3><p>Move the controls, read the forecast, press Optimize.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Feed rate t/h</span><label class="range"><input type="range" id="op-feed" min="150" max="210" value="196" aria-label="Feed rate"><output id="op-feedv">196</output></label></div>
           <div class="ctl-group"><span class="eyebrow">Kiln temp °C</span><label class="range"><input type="range" id="op-temp" min="1400" max="1500" value="1418" aria-label="Kiln temperature"><output id="op-tempv">1418</output></label></div>
@@ -683,21 +686,21 @@ body.walking{overflow:hidden}
             <div class="ph">Forecast at this setpoint</div>
             <div class="kv"><span>quality</span><b id="op-q">–</b><span>energy</span><b id="op-e">–</b><span>margin vs now</span><b id="op-m" class="green">–</b><span>guardrails</span><b id="op-g">inside</b></div>
             <div class="action green" id="op-action"><small>setpoint recommendation</small><span id="op-actiont">Press Optimize</span></div>
-            <div class="tiny">TS_OPTIMIZE searches the forecasts with the control variables as inputs. Explained, re-run as inputs change, approved by the operator at the gate.</div>
+            <div class="tiny">TS_OPTIMIZE over the forecasts. Explained, re-run as inputs change, approved at the gate.</div>
           </div>
         </div>
       </div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">2 to 5×</b><span>faster optimization</span></div><div class="readout"><b>93 → 99%</b><span>quality accuracy</span></div><div class="readout"><b>$2</b><span>per ton</span></div></div><div class="hint">Design partners in cement, steel, pulp and paper, food and telecommunications</div></div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
+    <div class="chapter-head sub">
       <h2>No training. Draw anything.</h2>
-      <p>Zero-shot means the model has never seen your signal. Sketch one, let go, and watch it forecast.</p>
+      <p>The model has never seen your signal. Sketch one and watch it forecast.</p>
     </div>
 
     <div class="stage" id="st-draw">
       <div class="stage-top">
-        <div class="stage-title"><h3>Draw a signal</h3><p>Drag across the canvas with your finger or mouse. Or start from a shape.</p></div>
+        <div class="stage-title"><h3>Draw a signal</h3><p>Drag across the canvas, or start from a shape.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Shapes</span>
             <div class="chips" id="draw-preset">
@@ -733,9 +736,9 @@ body.walking{overflow:hidden}
       </div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
+    <div class="chapter-head sub">
       <h2>Then something acts on it.</h2>
-      <p>A Streaming Agent reads the forecast and the flag, reasons, and writes the decision back to a topic. Experts set the gates.</p>
+      <p>An agent reads the forecast and the flag, reasons, and writes the decision to a topic. Experts set the gates.</p>
     </div>
 
     <div class="stage" id="st-agent">
@@ -796,9 +799,9 @@ FROM pos_sales;</code></pre></div>
       </div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
+    <div class="chapter-head sub">
       <h2>One stream. Every decision.</h2>
-      <p>Connect the systems where your series already live. Flink keeps the history per series and runs the models on every event. Decisions land as topics, tables, alerts and agent calls.</p>
+      <p>Flink runs the models on every event. Decisions land as topics, tables, alerts and agent calls.</p>
     </div>
 
     <div class="stage" id="st-arch">
@@ -840,9 +843,9 @@ FROM pos_sales;</code></pre></div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b>1</b><span>statement</span></div><div class="readout"><b id="arch-count">0</b><span>decisions in flight</span></div><div class="readout"><b class="purple">0</b><span>models to train</span></div></div><div class="hint">Nothing leaves Confluent Cloud. Models run next to the topic.</div></div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
+    <div class="chapter-head sub">
       <h2>Four models. One family. 44M+ downloads.</h2>
-      <p>Pick one. Every simulation on this page follows your choice.</p>
+      <p>Pick one. Every simulation follows.</p>
     </div>
 
     <div class="stage" id="st-models">
@@ -864,7 +867,7 @@ FROM pos_sales;</code></pre></div>
     <div class="chapter-head">
       <span class="n">02 / VALUE</span>
       <h2>Value decays by the minute.</h2>
-      <p>A warning is worth the most the moment it is raised. Slide the moment you act and watch what is left of the decision.</p>
+      <p>Slide the moment you act. Watch what is left of the decision.</p>
     </div>
 
     <div class="stage" id="st-decay">
@@ -896,12 +899,12 @@ FROM pos_sales;</code></pre></div>
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="hint">Illustrative curves. The shape is the point: most of the value lives in the first minutes.</div><div class="readouts"><div class="readout"><b id="decay-when">1 s</b><span>you act after</span></div></div></div>
+      <div class="stage-foot"><div class="hint">Illustrative curves</div><div class="readouts"><div class="readout"><b id="decay-when">1 s</b><span>you act after</span></div></div></div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
+    <div class="chapter-head sub">
       <h2>From 30 models to 2.</h2>
-      <p>Most forecasting is still a statistical model and gut feel dressed up as a decision. A cement producer, one mill. Flip it.</p>
+      <p>A cement producer, one mill. Flip it.</p>
     </div>
     <div class="stage" id="st-thennow">
       <div class="stage-body">
@@ -933,9 +936,9 @@ FROM pos_sales;</code></pre></div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">$2</b><span>EBITDA per ton</span></div><div class="readout"><b>$10s to 100s M</b><span>financial benefit</span></div></div><div class="hint">Client identities withheld</div></div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
+    <div class="chapter-head sub">
       <h2>Real outcomes on real streams.</h2>
-      <p>Early engagements and reference designs. Productivity gains of 5 to 10×, and every point of accuracy worth millions. Client identities withheld.</p>
+      <p>5 to 10× productivity. Every point of accuracy worth millions. Client identities withheld.</p>
     </div>
     <div class="stage" id="st-proof">
       <div class="stage-body">
@@ -957,12 +960,12 @@ FROM pos_sales;</code></pre></div>
     <div class="chapter-head">
       <span class="n">03 / USE CASES</span>
       <h2>Inside the plant.</h2>
-      <p>A cement line on Confluent. Every sensor becomes a stream, every stream a decision, and every decision lands back on the floor.</p>
+      <p>A cement line on Confluent. Sensor to setpoint and back.</p>
     </div>
 
     <div class="stage" id="st-plant">
       <div class="stage-top">
-        <div class="stage-title"><h3>From sensor to setpoint</h3><p>Watch a signal leave the floor, become a decision, and come back. Pick a story, or click the kiln, the mill or the preheater.</p></div>
+        <div class="stage-title"><h3>From sensor to setpoint</h3><p>Pick a story, or click the kiln, the mill or the preheater.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Story</span>
             <div class="chips" id="pl-sc"><button class="chip" data-v="opt" aria-pressed="true">Production optimization</button><button class="chip" data-v="pdm" aria-pressed="false">Predictive maintenance</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
@@ -986,9 +989,9 @@ FROM pos_sales;</code></pre></div>
       </div>
     </div>
 
-    <div class="chapter-head" style="margin-top:clamp(56px,7vw,104px)">
+    <div class="chapter-head sub">
       <h2>Try it on your world.</h2>
-      <p>Each simulator is one Flink SQL function on a live topic. For the real models on real public data, open the <a href="/playground">playground</a>.</p>
+      <p>One Flink SQL function each. Real models on real data in the <a href="/playground">playground</a>.</p>
     </div>
 
     </div>
@@ -1003,7 +1006,7 @@ FROM pos_sales;</code></pre></div>
     <!-- demand -->
     <div class="stage ucpanel has-cover" id="uc-demand" role="tabpanel" style="--img:url(photos/retail-aisle.jpg);--pos:55%">
       <div class="stage-top">
-        <div class="stage-title"><h3>Every SKU, every store, every hour</h3><p>Forecast 28 days with quantiles. The reorder point and the purchase order come from the band.</p></div>
+        <div class="stage-title"><h3>Every SKU, every store, every hour</h3><p>28 days with quantiles. The purchase order comes from the band.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Promo next week</span><label class="range"><input type="range" id="dm-promo" min="0" max="100" value="0" aria-label="Promo uplift"><output id="dm-promov">0%</output></label></div>
           <div class="ctl-group"><span class="eyebrow">Service level</span><div class="chips" id="dm-sl"><button class="chip sm" data-v="50" aria-pressed="false">P50</button><button class="chip sm" data-v="90" aria-pressed="true">P90</button><button class="chip sm" data-v="95" aria-pressed="false">P95</button></div></div>
@@ -1027,7 +1030,7 @@ FROM pos_sales;</code></pre></div>
     <!-- anomaly -->
     <div class="stage ucpanel has-cover" id="uc-anom" role="tabpanel" style="--img:url(photos/retail-empty.jpg)" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>From a flag to the right action</h3><p>Daily sales scored against the band. No labels, no second pipeline. Inject a cause and see what the team does.</p></div>
+        <div class="stage-title"><h3>From a flag to the right action</h3><p>Daily sales against the band, no labels. Inject a cause.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="an-inject"><button class="chip sm" data-v="stockout">Stockout dip</button><button class="chip sm" data-v="spike">Unplanned spike</button><button class="chip sm" data-v="gap">Feed gap</button></div></div>
           <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="an-conf"><button class="chip sm" data-v="95" aria-pressed="false">95%</button><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.9" aria-pressed="true">99.9%</button></div></div>
@@ -1050,7 +1053,7 @@ FROM pos_sales;</code></pre></div>
     <!-- fraud -->
     <div class="stage ucpanel has-cover" id="uc-fraud" role="tabpanel" hidden style="--img:url(photos/banking-card.jpg)">
       <div class="stage-top">
-        <div class="stage-title"><h3>Every card has its own normal</h3><p>Amounts scored per card as they are authorized. One context per card, thousands of cards per core. Inject an attack.</p></div>
+        <div class="stage-title"><h3>Every card has its own normal</h3><p>Amounts scored per card at authorization. Inject an attack.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="fr-inject"><button class="chip sm" data-v="stolen">Stolen card</button><button class="chip sm" data-v="testing">Card testing</button><button class="chip sm" data-v="travel">Trip abroad</button></div></div>
           <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="fr-conf"><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.5" aria-pressed="true">99.5%</button><button class="chip sm" data-v="99.9" aria-pressed="false">99.9%</button></div></div>
@@ -1073,7 +1076,7 @@ FROM pos_sales;</code></pre></div>
     <!-- search -->
     <div class="stage ucpanel has-cover" id="uc-search" role="tabpanel" style="--img:url(photos/workers.jpg)" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Find every signal that looks like this</h3><p>Embed the stream with TSPulse, search by shape. Sketch a pattern or pick one.</p></div>
+        <div class="stage-title"><h3>Find every signal that looks like this</h3><p>Embed the stream, search by shape. Sketch a pattern or pick one.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Pattern</span><div class="chips" id="se-q"><button class="chip sm" data-v="spike">Spike and recover</button><button class="chip sm" data-v="ramp">Ramp up</button><button class="chip sm" data-v="step">Step down</button><button class="chip sm" data-v="osc">Oscillation</button><button class="chip sm" data-v="flat">Flatline</button></div></div>
           <div class="ctl-group"><span class="eyebrow">&nbsp;</span><div class="btn-row"><button class="btn sm ghost" id="se-clear">Clear</button></div></div>
@@ -1102,10 +1105,10 @@ FROM pos_sales;</code></pre></div>
     <div class="chapter-head">
       <span class="n">04 / START</span>
       <h2>Run it on your stream.</h2>
-      <p>Three moves. The first one takes a minute. The models are Apache 2.0 on <a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a> if you would rather run them yourself.</p>
+      <p>Three moves. The first takes a minute.</p>
     </div>
     <div class="start-tiles">
-      <div class="stile"><span class="sn">01</span><h3>Paste one statement</h3><p>Any topic with a value and a timestamp. Flink SQL on Confluent Cloud.</p>
+      <div class="stile"><span class="sn">01</span><h3>Paste one statement</h3><p>Any topic with a value and a timestamp.</p>
         <pre><code class="sql" id="start-sql">SELECT event_time, value,
   AI_FORECAST(value, event_time,
     JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 12))
@@ -1113,12 +1116,12 @@ FROM pos_sales;</code></pre></div>
         RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f
 FROM your_topic;</code></pre>
         <button class="btn sm ghost" id="start-copy">Copy SQL</button></div>
-      <div class="stile"><span class="sn">02</span><h3>Get Early Access</h3><p>Granite models hosted by Confluent. AI_FORECAST and AI_DETECT_ANOMALIES today, TS_EMBED, TS_SEARCH and TS_OPTIMIZE next. <a href="#" class="walk-link">See the console walkthrough</a>.</p><a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Sign up with Confluent <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
-      <div class="stile"><span class="sn">03</span><h3>Book a working session</h3><p>Bring a topic and a decision. IBM and Confluent teams, one afternoon, your data. Or start in the <a href="/playground">playground</a> with real public streams.</p><a class="btn sm ghost" href="#briefing">Build the note <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v10M4 8l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+      <div class="stile"><span class="sn">02</span><h3>Get Early Access</h3><p>Models hosted by Confluent. AI_FORECAST and AI_DETECT_ANOMALIES today, TS_EMBED, TS_SEARCH and TS_OPTIMIZE next. <a href="#" class="walk-link">Console walkthrough</a>.</p><a class="btn sm" href="https://events.confluent.io/early-access-flink-features" target="_blank" rel="noopener">Sign up with Confluent <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
+      <div class="stile"><span class="sn">03</span><h3>Book a working session</h3><p>Bring a topic and a decision. One afternoon, your data.</p><a class="btn sm ghost" href="#briefing">Build the note <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v10M4 8l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </div>
 
     <div class="stage" id="briefing" style="margin-top:12px">
-      <div class="stage-top"><div class="stage-title"><h3>Briefing note</h3><p>Fill in four lines. Copy the note into an email to your IBM or Confluent contact.</p></div></div>
+      <div class="stage-top"><div class="stage-title"><h3>Briefing note</h3><p>Four lines. Copy it into an email to your IBM or Confluent contact.</p></div></div>
       <div class="stage-body">
         <form class="form" id="brief-form">
           <label>Name<input id="f-name" autocomplete="name" placeholder="Your name"></label>
@@ -1133,7 +1136,7 @@ FROM your_topic;</code></pre>
     </div>
 
     <details class="ref" id="reference">
-      <summary>Technical reference for engineers: functions, parameters, limits, links</summary>
+      <summary>Technical reference: functions, parameters, limits</summary>
       <div class="rb">
         <div class="tabs" role="tablist">
           <button role="tab" aria-selected="true" aria-controls="r1">Forecast</button>
