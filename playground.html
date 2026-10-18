@@ -1071,24 +1071,76 @@ body.pitching #st-live .stage-top{display:none}
 /* ---- playground ---- */
 .pg-hero .hero-head{margin-bottom:0}
 .pg-built{font-family:var(--font-mono);font-size:.78rem;color:var(--ink-3);margin-top:.4rem}
-.pg-group{margin-bottom:1.6rem}
-.pg-group>.eyebrow{margin-bottom:.6rem}
-.dsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:12px}
-.dcard{position:relative;text-align:left;background:rgba(0,7,20,.32);border:1px solid var(--line);padding:.9rem 1rem .85rem;display:grid;gap:.45rem;align-content:start;cursor:pointer;color:var(--ink);transition:border-color .15s,background .15s;font:inherit;border-radius:0}
-.dcard:hover{border-color:var(--line-2);background:rgba(255,255,255,.05)}
-.dcard[aria-pressed="true"]{border-color:var(--blue-2);box-shadow:0 0 0 1px var(--blue-2) inset,0 0 24px rgba(69,137,255,.18)}
-.dcard canvas{display:block;width:100%;height:44px}
-.dcard .dk{font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);display:flex;justify-content:space-between;gap:.5rem}
-.dcard .dk em{font-style:normal;color:var(--green-2)}
-.dcard .dk em.syn{color:var(--purple)}
-.dcard h4{margin:0;font-size:1.02rem;font-weight:500;line-height:1.25}
-.dcard p{margin:0;font-size:.8rem;color:var(--ink-2);line-height:1.4}
-.dcard .dm{font-family:var(--font-mono);font-size:.7rem;color:var(--ink-3)}
+.chapter.hero.pg-hero{padding-top:clamp(84px,9vw,118px);padding-bottom:0}
+.pg-hero .h-display{font-size:clamp(2.2rem,5vw,3.8rem)}
+.pg-steps{list-style:none;margin:1.1rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem 1.4rem}
+.pg-steps li{display:flex;align-items:center;gap:.5rem;font-size:.95rem;color:var(--ink-2)}
+.pg-steps b,.pg-rail-h b,.pg-ck b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#0f62fe;color:#fff;font-family:var(--font-mono);font-size:.72rem;font-weight:600;flex:none}
+.pg-app{padding-top:clamp(22px,3vw,40px)}
+.pg-shell{display:grid;grid-template-columns:280px minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:900px){.pg-shell{grid-template-columns:minmax(0,1fr)}}
+.pg-rail,.pg-shell>*{min-width:0}
+.pg-rail{position:sticky;top:76px;background:#f8f7f3;border:1px solid rgba(22,22,22,.16);padding:12px;color:#161616;--ink:#161616;--ink-2:#3e3e3e;--ink-3:#6a6a66}
+.pg-rail-h{display:flex;align-items:center;gap:.55rem;font-weight:500;font-size:.98rem;margin:0 0 .6rem}
+.pg-rail-g{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#6a6a66;margin:.75rem 0 .4rem}
+.pg-hint{display:none}
+.dslist{display:grid;gap:4px}
+body .dcard,.dcard{display:grid;grid-template-columns:52px minmax(0,1fr);gap:.6rem;align-items:center;text-align:left;font:inherit;cursor:pointer;padding:.42rem .5rem;background:transparent;border:1px solid transparent;border-radius:3px;color:#161616;box-shadow:none;filter:none;transition:background .15s,border-color .15s}
+body .dcard:hover,.dcard:hover{background:rgba(15,98,254,.06);border-color:rgba(15,98,254,.25);filter:none}
+body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;border-color:#0f62fe;color:#fff;box-shadow:none}
+.dcard canvas{display:block;width:52px;height:26px;background:#1b2746;border-radius:2px}
+.dcard .dn{display:grid;min-width:0}
+.dcard .dn b{font-weight:500;font-size:.88rem;line-height:1.25}
+.dcard .dn small{font-size:.72rem;color:#6a6a66;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dcard[aria-pressed="true"] .dn small{color:#c6d0e0}
+@media (max-width:900px){
+  .pg-rail{position:static;padding:10px 0 4px;background:none;border:0;color:var(--ink)}
+  .pg-rail-h{padding:0 2px}
+  .pg-hint{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.72rem;color:#6a6a66;margin:0 2px .45rem}
+  .pg-rail-g{display:none}
+  .pg-rail{display:block}
+  .pg-rail .dslist{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;scrollbar-width:none;gap:6px;margin:0 -16px;padding:2px 16px 8px}
+  .pg-rail .dslist::-webkit-scrollbar{display:none}
+  .pg-rail #ds-synth{margin-top:0}
+  body .dcard,.dcard{flex:0 0 auto;scroll-snap-align:start;background:#f8f7f3;border-color:rgba(22,22,22,.16);grid-template-columns:44px auto;padding:.4rem .6rem}
+  .dcard canvas{width:44px;height:22px}
+  .dcard .dn b{font-size:.84rem;white-space:nowrap}
+}
+#st-pg{min-width:0}
+.pg-top{padding:clamp(14px,2vw,20px) clamp(16px,2.4vw,28px) 0}
+.pg-top h3{font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:300}
+#st-pg .stage-title{max-width:none}
+.pg-ctl{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 22px;padding:14px clamp(16px,2.4vw,28px) 6px}
+.pg-c{display:grid;gap:.4rem}
+.pg-ck{display:flex;align-items:center;gap:.45rem;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.pg-go{margin-left:auto}
+.pg-go .btn.play{min-height:44px;padding:0 1.3rem;font-size:1rem}
+@media (max-width:600px){.pg-go{margin-left:0;width:100%}.pg-go .btn.play{width:100%;justify-content:center}}
+.pg-more{margin:4px clamp(16px,2.4vw,28px) 4px;font-size:.88rem;color:var(--ink-2)}
+.pg-more summary,.pg-cmp summary,.pg-src summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:.45rem;font-size:.86rem;color:var(--ink-2)}
+.pg-more summary::-webkit-details-marker,.pg-cmp summary::-webkit-details-marker,.pg-src summary::-webkit-details-marker{display:none}
+.pg-more summary::before,.pg-cmp summary::before,.pg-src summary::before{content:'';width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .2s;margin-right:.15rem}
+.pg-more[open] summary::before,.pg-cmp[open] summary::before,.pg-src[open] summary::before{transform:rotate(45deg)}
+.pg-more-in{display:flex;flex-wrap:wrap;gap:12px 26px;padding:.7rem 0 .2rem}
+#st-pg .stage-body{padding-top:8px}
+.pg-result{padding:0 clamp(16px,2.4vw,28px) 14px}
+.pg-say{margin:.2rem 0 .8rem;font-size:clamp(1rem,1.4vw,1.12rem);line-height:1.5;color:var(--ink)}
+.pg-say b{font-weight:500;color:#fff}.pg-say b.g{color:#6fdc8c}.pg-say b.r{color:#ff8389}
+.pg-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:760px){.pg-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pg-tile{display:grid;gap:.2rem;background:rgba(10,18,40,.35);border:1px solid var(--line);padding:.7rem .8rem}
+.pg-tile b{font-weight:300;font-size:1.55rem;line-height:1.1;color:#fff}
+.pg-tile b.green{color:#6fdc8c}.pg-tile b.blue{color:#78a9ff}.pg-tile b.dim{color:var(--ink-4)}
+.pg-tile span{font-size:.78rem;color:var(--ink-3);line-height:1.35}
+.pg-cmp{margin:0 clamp(16px,2.4vw,28px) 14px;border-top:1px solid var(--line);padding-top:.7rem}
+.pg-cmp-in{padding-top:.7rem;display:grid;gap:.6rem}
+.pg-src{margin-top:1.2rem}
+.pg-src .pg-built{margin:.8rem 0 .4rem}
 .pg-status{display:flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:.8rem;color:var(--ink-2);min-height:1.6em;margin-bottom:.5rem;flex-wrap:wrap}
 .pg-status .dot{width:8px;height:8px;background:var(--ink-4);flex:none}
 .pg-status.busy .dot{background:var(--yellow);box-shadow:0 0 10px var(--yellow);animation:blink .8s steps(1) infinite}
 .pg-status.ok .dot{background:var(--green-2);box-shadow:0 0 10px var(--green-2)}
-.pg-chart{position:relative;width:100%;height:clamp(260px,38vw,520px);background:rgba(0,0,0,.25);border:1px solid var(--line)}
+.pg-chart{position:relative;width:100%;height:clamp(260px,32vw,420px);background:rgba(0,0,0,.25);border:1px solid var(--line)}
 .pg-legend{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;margin-top:.6rem;font-size:.78rem;color:var(--ink-3);align-items:center}
 .pg-legend i{display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:.4rem;background:var(--ink)}
 .pg-legend i.band{height:8px;background:var(--band)}
@@ -1107,7 +1159,7 @@ body.pitching #st-live .stage-top{display:none}
 .pg-table th.r,.pg-table td.r{text-align:right}
 .pg-table td{padding:.45rem .4rem;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:.8rem;color:var(--ink-2)}
 .pg-table td:first-child{font-family:var(--font-sans);color:var(--ink)}
-.pg-table tr.best td.r{color:var(--green-2)}
+.pg-table tr.best td.r:not(:last-child){color:var(--green-2)}
 .pg-table tr.cur td:first-child{color:var(--blue-3)}
 .pg-table tr.na td{color:var(--ink-4)}
 .pg-note{margin:0;font-size:.8rem;color:var(--ink-3);line-height:1.45}
@@ -1145,75 +1197,69 @@ body.pitching #st-live .stage-top{display:none}
   <div class="wrap">
     <div class="hero-head">
       <div class="pills"><span class="pill live">Playground · real data, real models</span></div>
-      <h1 class="h-display">Try the models<br> on real streams.</h1>
-      <p class="lede">Pick a dataset, pick a model, run. Every forecast and every anomaly score on this page was produced by the actual Granite Time Series models, zero-shot, on a CPU.</p>
-      <div class="pg-built" id="pg-built"></div>
+      <h1 class="h-display">Try the models on real streams.</h1>
+      <p class="lede">Pick a stream and press Run. The model only sees the past, and you see how close it came to what really happened.</p>
+      <ol class="pg-steps"><li><b>1</b>Pick a stream</li><li><b>2</b>Choose a job and a model</li><li><b>3</b>Run and compare</li></ol>
     </div>
   </div>
 </header>
 
-<section class="chapter" id="pick" style="padding-top:clamp(40px,5vw,72px)">
+<section class="chapter pg-app" id="pick">
   <div class="wrap">
-    <div class="chapter-head">
-      <span class="n">01 / DATASET</span>
-      <h2>Pick a stream.</h2>
-      <p>Public datasets under open licenses, and seeded synthetic ones with labeled events so detection can be scored.</p>
-    </div>
-    <div class="pg-group"><div class="eyebrow">Public</div><div class="dsgrid" id="ds-public"><div class="pg-empty">Loading datasets…</div></div></div>
-    <div class="pg-group"><div class="eyebrow">Synthetic, with ground truth</div><div class="dsgrid" id="ds-synth"></div></div>
-  </div>
-</section>
+    <div class="pg-shell">
+      <aside class="pg-rail" aria-label="Streams">
+        <div class="pg-rail-h"><b>1</b>Pick a stream</div>
+        <div class="pg-hint" aria-hidden="true"><span>11 streams</span><span>Swipe for more &#8594;</span></div>
+        <div class="pg-rail-g">Real data</div>
+        <div class="dslist" id="ds-public"><div class="pg-empty">Loading streams…</div></div>
+        <div class="pg-rail-g">Synthetic, with known events</div>
+        <div class="dslist" id="ds-synth"></div>
+      </aside>
 
-<section class="chapter" id="run" style="padding-top:clamp(40px,5vw,72px)">
-  <div class="wrap">
-    <div class="chapter-head">
-      <span class="n">02 / RUN</span>
-      <h2 id="run-title">Forecast it.</h2>
-      <p>Choose the task and the model, then run. The values after the origin were never shown to the model; the metrics come from that holdout.</p>
-    </div>
-
-    <div class="stage" id="st-pg">
-      <div class="stage-top">
-        <div class="stage-title"><h3 id="pg-name">Pick a dataset above</h3><p id="pg-blurb">The chart fills in once you choose a stream.</p></div>
-        <div class="ctl">
-          <div class="ctl-group"><span class="eyebrow">Task</span><div class="chips" id="pg-task"><button class="chip" data-v="fc" aria-pressed="true">Forecast</button><button class="chip" data-v="ad" aria-pressed="false">Detect anomalies</button></div></div>
-          <div class="ctl-group"><span class="eyebrow">Model</span><div class="chips" id="pg-model"></div></div>
-          <div class="ctl-group" id="g-h"><span class="eyebrow">Horizon</span><div class="chips" id="pg-h"></div></div>
-          <div class="ctl-group" id="g-origin"><span class="eyebrow">Forecast from</span><div class="range"><button class="chip sm" id="pg-prev" aria-label="Earlier origin">&#8249;</button><input type="range" id="pg-origin" min="0" max="9" value="9" aria-label="Forecast origin"><button class="chip sm" id="pg-next" aria-label="Later origin">&#8250;</button><output id="pg-origin-out"></output></div></div>
-          <div class="ctl-group" id="g-thr" hidden><span class="eyebrow">Threshold</span><div class="range"><input type="range" id="pg-thr" min="10" max="98" value="50" aria-label="Anomaly threshold"><output id="pg-thr-out">0.50</output></div></div>
-          <div class="ctl-group"><span class="eyebrow">&nbsp;</span><div class="btn-row"><button class="btn play" id="pg-run" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Run<small id="pg-run-sub">real output</small></button></div></div>
+      <div class="stage" id="st-pg">
+        <div class="pg-top"><div class="stage-title"><h3 id="pg-name">Loading a stream</h3><p id="pg-blurb">The chart fills in as soon as a stream is picked.</p></div></div>
+        <div class="pg-ctl">
+          <div class="pg-c"><span class="pg-ck"><b>2</b>Job</span><div class="chips seg" id="pg-task"><button class="chip" data-v="fc" aria-pressed="true">Forecast</button><button class="chip" data-v="ad" aria-pressed="false">Find anomalies</button></div></div>
+          <div class="pg-c"><span class="pg-ck">Model</span><div class="chips" id="pg-model"></div></div>
+          <div class="pg-c" id="g-thr" hidden><span class="pg-ck">Alert threshold</span><div class="range"><input type="range" id="pg-thr" min="10" max="98" value="50" aria-label="Alert threshold"><output id="pg-thr-out">0.50</output></div></div>
+          <div class="pg-c pg-go"><span class="pg-ck"><b>3</b>Run</span><button class="btn play" id="pg-run" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Run<small id="pg-run-sub">real output</small></button></div>
         </div>
+        <details class="pg-more" id="pg-more"><summary>More options</summary>
+          <div class="pg-more-in">
+            <div class="ctl-group" id="g-h"><span class="eyebrow">How far ahead</span><div class="chips" id="pg-h"></div></div>
+            <div class="ctl-group" id="g-origin"><span class="eyebrow">Forecast from</span><div class="range"><button class="chip sm" id="pg-prev" aria-label="Earlier start">&#8249;</button><input type="range" id="pg-origin" min="0" max="9" value="9" aria-label="Forecast start"><button class="chip sm" id="pg-next" aria-label="Later start">&#8250;</button><output id="pg-origin-out"></output></div></div>
+          </div>
+        </details>
+        <div class="stage-body">
+          <div class="pg-status" id="pg-status"><span class="dot"></span><span id="pg-status-t">Loading…</span></div>
+          <div class="pg-chart"><canvas class="stage-canvas" id="pg-cv" aria-label="Chart of the selected stream with the model output"></canvas><div class="tip" id="pg-tip"></div></div>
+          <div class="pg-legend" id="pg-legend"></div>
+        </div>
+        <div class="pg-result">
+          <p class="pg-say" id="pg-say">Press Run to see the model against what really happened.</p>
+          <div class="pg-tiles" id="pg-readouts"></div>
+        </div>
+        <details class="pg-cmp" id="pg-cmp"><summary>Compare all models on this stream</summary>
+          <div class="pg-cmp-in"><div class="eyebrow" id="pg-table-k"></div><table class="pg-table" id="pg-table"></table><p class="pg-note" id="pg-table-note"></p></div>
+        </details>
+        <div class="stage-foot"><div class="hint">Real model outputs, precomputed on a CPU runner. Nothing leaves your browser. On Confluent the same models run on every event of your Kafka topics.</div></div>
       </div>
-      <div class="stage-body">
-        <div class="pg-status" id="pg-status"><span class="dot"></span><span id="pg-status-t">Pick a dataset to begin.</span></div>
-        <div class="pg-chart"><canvas class="stage-canvas" id="pg-cv" aria-label="Chart of the selected stream with the model output"></canvas><div class="tip" id="pg-tip"></div></div>
-        <div class="pg-legend" id="pg-legend"></div>
-      </div>
-      <div class="stage-foot">
-        <div class="readouts" id="pg-readouts"></div>
-        <div class="hint">Precomputed with the open models on a 2-vCPU GitHub Actions runner. Nothing leaves your browser.</div>
-      </div>
-    </div>
-
-    <div class="pg-grid2">
-      <div class="pg-card"><div class="eyebrow" id="pg-table-k">All models on this stream</div><table class="pg-table" id="pg-table"></table><p class="pg-note" id="pg-table-note">MASE is scaled by the seasonal naive error over the same context: 1.00 means as good as repeating last cycle, lower is better. Coverage is the share of actuals inside the 10 to 90 band.</p></div>
-      <div class="pg-card"><div class="eyebrow">On Confluent</div><p class="pg-note">The models you just ran are the ones Confluent hosts, scored on every event of your Kafka topics, with no training loop.</p></div>
     </div>
   </div>
 </section>
 
-<section class="chapter" id="how" style="padding-top:clamp(40px,5vw,72px)">
+<section class="chapter" id="how">
   <div class="wrap">
     <div class="chapter-head">
-      <span class="n">03 / HOW</span>
+      <span class="n">HOW IT WORKS</span>
       <h2>What you are looking at.</h2>
     </div>
     <div class="pg-how">
-      <div><b>Real models, zero-shot</b><p>Granite TTM r3, FlowState r1.1, PatchTST-FM r2 and TSPulse r1, the open weights on Hugging Face, run through the granite-tsfm library on a CPU runner. No training and no tuning on these datasets.</p></div>
-      <div><b>An honest holdout</b><p>Each forecast origin sees only the past. The actual values drawn after the origin were held out. MASE compares the error with a seasonal naive forecast over the same context; coverage checks the band against what really happened.</p></div>
-      <div><b>Open data</b><p>Public datasets are CC BY 4.0 or public domain and are credited below. Synthetic datasets are generated with a fixed seed and carry labeled events, so detection can be scored against ground truth.</p></div>
+      <div><b>Real models, zero-shot</b><p>TTM r3, FlowState r1.1, PatchTST-FM r2 and TSPulse r1, the open weights on Hugging Face, run with no training and no tuning on these streams.</p></div>
+      <div><b>An honest test</b><p>The model only sees the past. What really happened next was held back, so the scores show how it would have done live.</p></div>
+      <div><b>Open data</b><p>Real streams are open licensed. Synthetic ones come with known events, so you can check what detection caught and what it missed.</p></div>
     </div>
-    <div class="pg-sources" id="pg-sources"></div>
+    <details class="pg-src"><summary>Sources, licenses and build details</summary><div class="pg-built" id="pg-built"></div><div class="pg-sources" id="pg-sources"></div></details>
   </div>
 </section>
 
@@ -1263,7 +1309,7 @@ async function loadIndex(){try{const r=await fetch('/data/pg/index.json',{cache:
   const q=new URLSearchParams(location.search);const id=q.get('ds');const first=st.index.datasets.find(d=>d.id===id)||st.index.datasets[0];if(q.get('task')==='ad')st.task='ad';
   if(first)selectDataset(first.id,false);}
 function renderCards(){const pub=$('#ds-public'),syn=$('#ds-synth');pub.innerHTML='';syn.innerHTML='';st.index.datasets.forEach(d=>{const b=document.createElement('button');b.className='dcard';b.type='button';b.dataset.id=d.id;b.setAttribute('aria-pressed','false');
-    b.innerHTML='<div class="dk"><span>'+esc(d.domain)+'</span><em class="'+(d.kind==='synthetic'?'syn':'')+'">'+(d.kind==='synthetic'?'synthetic':esc(d.source.license.replace('Public domain (US government data)','public domain').replace('Open data (NY State terms of use)','open data')))+'</em></div><h4>'+esc(d.name)+'</h4><canvas aria-hidden="true"></canvas><p>'+esc(d.blurb)+'</p><div class="dm">'+esc(freqLabel[d.freq]||d.freq)+' · '+d.n.toLocaleString('en-US')+' points · '+esc(d.unit)+'</div>';
+    b.innerHTML='<canvas aria-hidden="true"></canvas><span class="dn"><b>'+esc(d.name)+'</b><small>'+esc(d.domain)+' · '+esc(freqLabel[d.freq]||d.freq)+'</small></span>';
     (d.kind==='synthetic'?syn:pub).appendChild(b);b.addEventListener('click',()=>selectDataset(d.id,true));requestAnimationFrame(()=>spark($('canvas',b),d.spark));});}
 function spark(c,data){const r=c.getBoundingClientRect();const dpr=Math.min(2,window.devicePixelRatio||1);c.width=Math.round(r.width*dpr);c.height=Math.round(r.height*dpr);const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);const w=r.width,h=r.height;const v=data.filter(y=>y!=null);if(v.length<2)return;const lo=Math.min(...v),hi=Math.max(...v);const Y=y=>h-3-(h-6)*((y-lo)/((hi-lo)||1));x.beginPath();v.forEach((y,i)=>{const px=w*i/(v.length-1);i?x.lineTo(px,Y(y)):x.moveTo(px,Y(y));});x.strokeStyle=C.blue3;x.lineWidth=1.2;x.stroke();x.lineTo(w,h);x.lineTo(0,h);x.closePath();x.fillStyle='rgba(120,169,255,.10)';x.fill();}
 function renderSources(){const el=$('#pg-sources');el.innerHTML='<div class="eyebrow">Sources and licenses</div>'+st.index.datasets.map(d=>'<div>'+esc(d.name)+' · '+(d.source.url?'<a href="'+esc(d.source.url)+'" target="_blank" rel="noopener">'+esc(d.source.name)+'</a>':esc(d.source.name))+' · '+esc(d.source.license)+(d.kind==='public'?' · sliced to the last '+d.n.toLocaleString('en-US')+' points, gaps interpolated':'')+'</div>').join('')+'<div>Models: Granite TTM r3, FlowState r1.1 and TSPulse r1 under Apache 2.0; PatchTST-FM r2 under OpenMDW 1.0 or Apache 2.0. Run with <a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">granite-tsfm</a>.</div>';}
@@ -1278,9 +1324,9 @@ async function selectDataset(id,scroll){$$('.dcard').forEach(b=>b.setAttribute('
   $('#pg-name').textContent=ds.name;$('#pg-blurb').textContent=ds.blurb;
   const q=new URLSearchParams(location.search);q.set('ds',id);if(st.task==='ad')q.set('task','ad');else q.delete('task');history.replaceState(null,'',location.pathname+'?'+q.toString());
   renderControls();renderTable();renderSQL();renderReadouts();renderLegend();
-  setStatus('',(st.task==='fc'?'context ready · ':'stream ready · ')+ds.n.toLocaleString('en-US')+' events on '+topicOf(id)+' · press Run');
   fit();draw();
-  if(scroll){const top=$('#st-pg').getBoundingClientRect().top+window.scrollY-72;window.scrollTo({top,behavior:'smooth'});}}
+  if(scroll){const b=$('.dcard[data-id="'+id+'"]');if(b&&b.parentElement.scrollWidth>b.parentElement.clientWidth+4){try{b.parentElement.scrollTo({left:Math.max(0,b.offsetLeft-16),behavior:'smooth'});}catch(e){}}}
+  run(false);}
 function defaultThr(ds){const a=ds.ad&&ds.ad.tspulse&&ds.ad.tspulse.status==='ok'?ds.ad.tspulse.score.slice().sort((x,y)=>x-y):null;if(!a)return 0.5;const q=a[Math.floor(a.length*0.985)]||0.5;return clamp(Math.round(Math.max(0.5,q+0.02)*20)/20,0.5,0.95);}
 function hOptions(ds){const h=ds.fc.h;return h>=96?[24,48,96]:h>=30?[7,14,30]:[6,12].filter(x=>x<=h);}
 function setStatus(cls,text){const el=$('#pg-status');el.className='pg-status'+(cls?' '+cls:'');$('#pg-status-t').innerHTML=text;}
@@ -1295,10 +1341,9 @@ function renderControls(){const ds=st.ds;
   const hh=$('#pg-h');hh.innerHTML='';hOptions(ds).forEach(h=>{const b=document.createElement('button');b.className='chip sm';b.textContent=h+' '+stepWord(ds,h);b.setAttribute('aria-pressed',st.h===h?'true':'false');b.addEventListener('click',()=>{st.h=h;st.ran=false;renderControls();renderTable();renderSQL();renderReadouts();if(st.once)run(true);else draw();});hh.appendChild(b);});
   const o=$('#pg-origin');o.max=ds.fc.origins.length-1;o.value=st.oi;$('#pg-origin-out').textContent=fmtDate(ds,ds.fc.origins[st.oi]);
   $('#pg-thr').value=Math.round(st.thr*100);$('#pg-thr-out').textContent=st.thr.toFixed(2);
-  $('#run-title').textContent=st.task==='fc'?'Forecast it.':'Find what is off.';
-  $('#pg-run-sub').textContent=st.task==='fc'?'real forecast':'real scores';}
+  $('#pg-run-sub').textContent='again';const cmp=$('#pg-cmp');if(cmp)cmp.hidden=st.task!=='fc';}
 function stepWord(ds,h){return ({min:'min','5min':'× 5 min','15min':'× 15 min','30min':'× 30 min',h:'h',D:'days',B:'days',MS:'months'})[ds.freq]||'steps';}
-$$('#pg-task .chip').forEach(b=>b.addEventListener('click',()=>{if(b.disabled)return;st.task=b.dataset.v;st.ran=false;st.once=false;st.anim=null;st.view=null;if(st.task==='fc'){const ok=Object.keys(st.ds.fc.models).filter(k=>k!=='snaive'&&st.ds.fc.models[k].status==='ok');if(ok.indexOf(st.model)<0)st.model=ok[0];}renderControls();renderTable();renderSQL();renderReadouts();renderLegend();const q=new URLSearchParams(location.search);if(st.task==='ad')q.set('task','ad');else q.delete('task');history.replaceState(null,'',location.pathname+'?'+q.toString());setStatus('',st.task==='fc'?'forecast mode · press Run':'anomaly mode · TSPulse scores every point · press Run');draw();}));
+$$('#pg-task .chip').forEach(b=>b.addEventListener('click',()=>{if(b.disabled)return;st.task=b.dataset.v;st.ran=false;st.once=false;st.anim=null;st.view=null;if(st.task==='fc'){const ok=Object.keys(st.ds.fc.models).filter(k=>k!=='snaive'&&st.ds.fc.models[k].status==='ok');if(ok.indexOf(st.model)<0)st.model=ok[0];}renderControls();renderTable();renderSQL();renderReadouts();renderLegend();const q=new URLSearchParams(location.search);if(st.task==='ad')q.set('task','ad');else q.delete('task');history.replaceState(null,'',location.pathname+'?'+q.toString());run(false);}));
 $('#pg-origin').addEventListener('input',e=>{st.oi=+e.target.value;st.ran=false;st.anim=null;$('#pg-origin-out').textContent=fmtDate(st.ds,st.ds.fc.origins[st.oi]);renderReadouts();if(st.once)run(true);else{setStatus('','origin moved · press Run');draw();}});
 $('#pg-prev').addEventListener('click',()=>{if(st.oi>0){st.oi--;$('#pg-origin').value=st.oi;$('#pg-origin').dispatchEvent(new Event('input'));}});
 $('#pg-next').addEventListener('click',()=>{if(st.oi<st.ds.fc.origins.length-1){st.oi++;$('#pg-origin').value=st.oi;$('#pg-origin').dispatchEvent(new Event('input'));}});
@@ -1314,33 +1359,42 @@ function flagged(ds,thr){const s=ds.ad&&ds.ad.tspulse&&ds.ad.tspulse.status==='o
 function adScore(ds,thr){const wins=flagged(ds,thr);const labels=ds.labels||[];const overl=(w,l)=>w.a<l[1]+8&&w.b>l[0]-8;const caught=labels.filter(l=>wins.some(w=>overl(w,l))).length;const falseAlarms=wins.filter(w=>!labels.some(l=>overl(w,l))).length;return {wins,caught,total:labels.length,falseAlarms};}
 
 /* ---------- panels ---------- */
-function renderReadouts(){const ds=st.ds,el=$('#pg-readouts');if(!ds){el.innerHTML='';return;}
-  const dim=!st.ran;const ro=(v,k,cls)=>'<div class="readout"><b class="'+(dim?'dim':cls||'')+'">'+(dim?'–':v)+'</b><span>'+k+'</span></div>';
-  if(st.task==='fc'){const m=metrics(ds,st.model,st.oi,st.h);const mm=ds.fc.models[st.model];const nv=metrics(ds,'snaive',st.oi,st.h);
-    el.innerHTML=ro(m?m.mase.toFixed(2):'–','MASE · lower is better',m&&nv&&m.mase<nv.mase?'green':'')+ro(m&&!isNaN(m.wape)?(m.wape*100).toFixed(1)+'%':'–','WAPE')+ro(m&&!isNaN(m.cov)?Math.round(m.cov*100)+'%':'n/a','inside 10 to 90 band',m&&m.cov>=.7?'green':'')+ro(nv?nv.mase.toFixed(2):'–','seasonal naive MASE')+ro(mm&&mm.ms!=null?(mm.ms<10?mm.ms.toFixed(1):Math.round(mm.ms))+' ms':'–','per forecast, CPU','blue');}
-  else{const s=adScore(ds,st.thr);el.innerHTML=ro(s.wins.length,'windows above '+st.thr.toFixed(2),s.wins.length?'':'')+(s.total?ro(s.caught+' of '+s.total,'labeled events caught',s.caught===s.total?'green':'')+ro(s.falseAlarms,'false alarms',s.falseAlarms===0?'green':''):ro('n/a','no ground truth'))+ro(ds.ad.tspulse&&ds.ad.tspulse.ms!=null?(ds.ad.tspulse.ms/1000).toFixed(1)+' s':'–',ds.n.toLocaleString('en-US')+' points, CPU','blue');}}
-function renderTable(){const ds=st.ds,t=$('#pg-table');if(!ds)return;const h=st.h;$('#pg-table-k').textContent='All models on this stream · '+h+' '+stepWord(ds,h)+' ahead · average over '+ds.fc.origins.length+' origins';
+function renderReadouts(){const ds=st.ds,el=$('#pg-readouts'),say=$('#pg-say');if(!ds){el.innerHTML='';return;}
+  const dim=!st.ran;const tile=(v,k,cls)=>'<div class="pg-tile"><b class="'+(dim?'dim':cls||'')+'">'+(dim?'–':v)+'</b><span>'+k+'</span></div>';
+  if(st.task==='fc'){const m=metrics(ds,st.model,st.oi,st.h);const mm=ds.fc.models[st.model];const nv=metrics(ds,'snaive',st.oi,st.h);const nm=(mm&&mm.label)||MODEL_NAMES[st.model];
+    const gain=m&&nv&&nv.mase?(1-m.mase/nv.mase):NaN,ahead=st.h+' '+stepWord(ds,st.h);
+    el.innerHTML=tile(m&&!isNaN(m.wape)?(m.wape*100).toFixed(1)+'%':'–','average error against what really happened')+
+      tile(isNaN(gain)?'–':(gain>=0?Math.round(gain*100)+'% better':Math.round(-gain*100)+'% worse'),'than simply repeating the last cycle',gain>=0?'green':'')+
+      tile(m&&!isNaN(m.cov)?Math.round(m.cov*100)+'%':'n/a','of real values inside the likely range',m&&m.cov>=.7?'green':'')+
+      tile(mm&&mm.ms!=null?(mm.ms<10?mm.ms.toFixed(1):Math.round(mm.ms))+' ms':'–','per forecast on a CPU','blue');
+    say.innerHTML=dim?'Running '+esc(nm)+' on '+esc(ahead)+' ahead…':
+      '<b>'+esc(nm)+'</b> forecast '+esc(ahead)+' ahead with <b>'+(m?(m.wape*100).toFixed(1)+'%':'–')+'</b> average error'+(isNaN(gain)?'':', <b class="'+(gain>=0?'g':'r')+'">'+(gain>=0?Math.round(gain*100)+'% better':Math.round(-gain*100)+'% worse')+'</b> than repeating the last cycle')+(m&&!isNaN(m.cov)?'. '+Math.round(m.cov*100)+'% of what really happened fell inside its likely range.':'.');}
+  else{const s=adScore(ds,st.thr),ms=ds.ad.tspulse&&ds.ad.tspulse.ms!=null?(ds.ad.tspulse.ms/1000).toFixed(1)+' s':'–';
+    el.innerHTML=tile(s.wins.length,'windows above the alert threshold')+(s.total?tile(s.caught+' of '+s.total,'known events caught',s.caught===s.total?'green':'')+tile(s.falseAlarms,'false alarms',s.falseAlarms===0?'green':''):tile('n/a','no known events on real data'))+tile(ms,'to score '+ds.n.toLocaleString('en-US')+' points on a CPU','blue');
+    say.innerHTML=dim?'TSPulse is scoring every point of this stream…':
+      '<b>TSPulse</b> scored all '+ds.n.toLocaleString('en-US')+' points and flagged <b>'+s.wins.length+'</b> window'+(s.wins.length===1?'':'s')+(s.total?', catching <b class="'+(s.caught===s.total?'g':'r')+'">'+s.caught+' of '+s.total+'</b> known events with '+s.falseAlarms+' false alarm'+(s.falseAlarms===1?'':'s')+'.':'.')+' Move the threshold or pick a window below to zoom in.';}}
+function renderTable(){const ds=st.ds,t=$('#pg-table');if(!ds)return;const h=st.h;$('#pg-table-k').textContent=h+' '+stepWord(ds,h)+' ahead · averaged over '+ds.fc.origins.length+' start points';
   const keys=['ttm','flowstate','patchtstfm','snaive'];const rows=keys.map(k=>({k,m:ds.fc.models[k],a:avgMetrics(ds,k,h)}));const best=rows.filter(r=>r.a).sort((x,y)=>x.a.mase-y.a.mase)[0];
-  t.innerHTML='<tr><th>Model</th><th class="r">MASE</th><th class="r">WAPE</th><th class="r">Coverage</th><th class="r">ms</th></tr>'+rows.map(r=>{const na=!r.a;return '<tr class="'+(best&&r===best?'best ':'')+(r.k===st.model?'cur ':'')+(na?'na':'')+'"><td>'+esc((r.m&&r.m.label)||MODEL_NAMES[r.k])+(na?' <span style="font-family:var(--font-mono);font-size:.7rem;color:var(--ink-4)">not for this frequency</span>':'')+'</td><td class="r">'+(na?'–':r.a.mase.toFixed(2))+'</td><td class="r">'+(na||isNaN(r.a.wape)?'–':(r.a.wape*100).toFixed(1)+'%')+'</td><td class="r">'+(na||isNaN(r.a.cov)?'–':Math.round(r.a.cov*100)+'%')+'</td><td class="r">'+(r.m&&r.m.ms!=null&&r.k!=='snaive'?(r.m.ms<10?r.m.ms.toFixed(1):Math.round(r.m.ms)):'–')+'</td></tr>';}).join('');
-  $('#pg-table-note').textContent=st.task==='fc'?'MASE is scaled by the seasonal naive error over the same context: 1.00 means as good as repeating the last cycle, lower is better. Coverage is the share of held-out actuals inside the 10 to 90 band. Latency is per forecast on a shared CPU runner.':'Forecast metrics for this stream. Switch the task to compare detection at your threshold.';}
+  t.innerHTML='<tr><th>Model</th><th class="r">vs simple guess</th><th class="r">avg error</th><th class="r">in range</th><th class="r">ms</th></tr>'+rows.map(r=>{const na=!r.a;return '<tr class="'+(best&&r===best?'best ':'')+(r.k===st.model?'cur ':'')+(na?'na':'')+'"><td>'+esc((r.m&&r.m.label)||MODEL_NAMES[r.k])+(na?' <span style="font-family:var(--font-mono);font-size:.7rem;color:var(--ink-4)">not for this frequency</span>':'')+'</td><td class="r">'+(na?'–':r.a.mase.toFixed(2))+'</td><td class="r">'+(na||isNaN(r.a.wape)?'–':(r.a.wape*100).toFixed(1)+'%')+'</td><td class="r">'+(na||isNaN(r.a.cov)?'–':Math.round(r.a.cov*100)+'%')+'</td><td class="r">'+(r.m&&r.m.ms!=null&&r.k!=='snaive'?(r.m.ms<10?r.m.ms.toFixed(1):Math.round(r.m.ms)):'–')+'</td></tr>';}).join('');
+  $('#pg-table-note').textContent='Averaged over every start point. vs simple guess is MASE, where 1.00 equals repeating the last cycle and lower is better. avg error is WAPE. in range is the share of real values inside the 10 to 90 band. ms is per forecast on a shared CPU runner.';}
 function renderSQL(){const ds=st.ds;if(!ds)return;const topic=topicOf(ds.id);let sql;if(st.task==='fc'){sql="SELECT event_time, value,\n  AI_FORECAST(value, event_time,\n    JSON_OBJECT('model' VALUE '"+(MODEL_SQL[st.model]||'ttm')+"', 'horizon' VALUE "+st.h+",\n                'quantiles' VALUE '0.1,0.5,0.9'))\n  OVER (PARTITION BY series_id ORDER BY event_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS forecast\nFROM `"+topic+"`;";}
   else{sql="SELECT event_time, value,\n  AI_DETECT_ANOMALIES(value, event_time,\n    JSON_OBJECT('model' VALUE 'tspulse', 'threshold' VALUE "+st.thr.toFixed(2)+"))\n  OVER (PARTITION BY series_id ORDER BY event_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS flag\nFROM `"+topic+"`;";}
   const q=$('#pg-sql');if(q)q.innerHTML=highlight(sql);}
 function renderLegend(){const ds=st.ds,el=$('#pg-legend');if(!ds){el.innerHTML='';return;}
-  if(st.task==='fc'){el.innerHTML='<span><i style="background:'+C.ink+'"></i>context the model saw</span><span><i style="background:'+C.ink3+'"></i>actual, held out</span><span><i style="background:'+C.blue3+'"></i>'+esc(MODEL_NAMES[st.model])+' forecast</span><span><i class="band"></i>10 to 90 band</span><span><i style="background:'+C.ink4+';height:1px"></i>seasonal naive</span>';}
-  else{const s=adScore(ds,st.thr);el.innerHTML='<span><i style="background:'+C.ink+'"></i>stream</span><span><i style="background:'+C.orange+'"></i>TSPulse score</span><span><i class="ev"></i>above threshold</span>'+(ds.labels&&ds.labels.length?'<span><i class="gt"></i>labeled event</span>':'')+'<button class="evb" data-v="all" type="button">Full view</button>'+s.wins.slice(0,8).map((w,i)=>'<button class="evb" data-v="'+i+'" type="button">#'+(i+1)+' '+esc(fmtDate(ds,w.a,true))+' · peak '+w.peak.toFixed(2)+'</button>').join('');
+  if(st.task==='fc'){el.innerHTML='<span><i style="background:'+C.ink+'"></i>history the model saw</span><span><i style="background:'+C.ink3+'"></i>what really happened</span><span><i style="background:'+C.blue3+'"></i>'+esc(MODEL_NAMES[st.model])+' forecast</span><span><i class="band"></i>likely range</span><span><i style="background:'+C.ink4+';height:1px"></i>simple guess</span>';}
+  else{const s=adScore(ds,st.thr);el.innerHTML='<span><i style="background:'+C.ink+'"></i>stream</span><span><i style="background:'+C.orange+'"></i>anomaly score</span><span><i class="ev"></i>flagged</span>'+(ds.labels&&ds.labels.length?'<span><i class="gt"></i>known event</span>':'')+'<button class="evb" data-v="all" type="button">Full view</button>'+s.wins.slice(0,8).map((w,i)=>'<button class="evb" data-v="'+i+'" type="button">#'+(i+1)+' '+esc(fmtDate(ds,w.a,true))+' · peak '+w.peak.toFixed(2)+'</button>').join('');
     $$('.evb',el).forEach(b=>b.addEventListener('click',()=>{if(b.dataset.v==='all'){st.view=null;}else{const w=s.wins[+b.dataset.v];const span=Math.max(240,(w.b-w.a)*6);st.view=[clamp(Math.round((w.a+w.b)/2-span/2),0,ds.n-1),clamp(Math.round((w.a+w.b)/2+span/2),1,ds.n)];}draw();}));}}
 
 /* ---------- run animation ---------- */
 function run(fast){const ds=st.ds;if(!ds)return;if(st.task==='fc'&&!(ds.fc.models[st.model]&&ds.fc.models[st.model].status==='ok'))return;
   const sc=fast?0.35:1;const t0=performance.now();st.anim={t0,p:0};st.ran=false;st.once=true;renderReadouts();
   const topic=topicOf(ds.id);const m=st.task==='fc'?ds.fc.models[st.model]:ds.ad.tspulse;
-  const steps=st.task==='fc'?[[0,'reading <b>'+topic+'</b> · '+(m.ctx||ds.fc.ctx).toLocaleString('en-US')+' events of context'],[520,'forecasting with '+(MODEL_NAMES[st.model]||'TTM')+' · horizon '+st.h],[1000,'forecast ready · '+(m.ms<10?m.ms.toFixed(1):Math.round(m.ms))+' ms on CPU · scoring the holdout']]
-    :[[0,'reading <b>'+topic+'</b> · '+ds.n.toLocaleString('en-US')+' events'],[520,'scoring with TSPulse · time and frequency reconstruction'],[1000,'scored '+ds.n.toLocaleString('en-US')+' points · '+(ds.ad.tspulse.ms/1000).toFixed(1)+' s on CPU']];
+  void topic;const steps=st.task==='fc'?[[0,'reading '+(m.ctx||ds.fc.ctx).toLocaleString('en-US')+' points of history'],[520,'forecasting with '+(MODEL_NAMES[st.model]||'TTM')],[1000,'checking against what really happened']]
+    :[[0,'reading '+ds.n.toLocaleString('en-US')+' points'],[520,'scoring every point with TSPulse'],[1000,'marking what is off']];
   let si=-1;
   function frame(){if(!st.anim||st.anim.t0!==t0)return;const t=(performance.now()-t0)/sc;while(si+1<steps.length&&t>=steps[si+1][0]){si++;setStatus(si<2?'busy':'ok',steps[si][1]);}
     st.anim.p=clamp((t-1000)/(st.task==='fc'?900:1500),0,1);st.anim.scan=clamp(t/520,0,1);draw();
-    if(t<2600){requestAnimationFrame(frame);}else{st.anim=null;st.ran=true;renderReadouts();renderTable();draw();if(st.task==='fc'){const mt=metrics(ds,st.model,st.oi,st.h),nv=metrics(ds,'snaive',st.oi,st.h);setStatus('ok','done · MASE '+(mt?mt.mase.toFixed(2):'–')+(nv?' · seasonal naive '+nv.mase.toFixed(2):'')+' · '+st.h+' '+stepWord(ds,st.h)+' ahead · lower is better · try another origin or model');}else{const s=adScore(ds,st.thr);setStatus('ok','done · '+s.wins.length+' window'+(s.wins.length===1?'':'s')+' above '+st.thr.toFixed(2)+(s.total?' · '+s.caught+' of '+s.total+' labeled events caught':'')+' · move the threshold');}}}
+    if(t<2600){requestAnimationFrame(frame);}else{st.anim=null;st.ran=true;renderReadouts();renderTable();draw();setStatus('ok',st.task==='fc'?'done · try another model, or a different start under More options':'done · try a different threshold');}}
   requestAnimationFrame(frame);}
 
 /* ---------- drawing ---------- */
@@ -1355,7 +1409,7 @@ function drawFc(ds){const o=ds.fc.origins[st.oi],h=st.h,m=ds.fc.models[st.model]
   if(!isFinite(lo)){lo=0;hi=1;}const padY=(hi-lo)*0.1||1;const nonneg=lo>=0;lo-=padY;hi+=padY;if(nonneg&&lo<0)lo=0;
   const X=i=>PAD.l+(W-PAD.l-PAD.r)*(i-x0)/(x1-x0),Y=v=>PAD.t+(H-PAD.t-PAD.b)*(1-(v-lo)/(hi-lo));
   grid(lo,hi,Y,ds.unit);xticks(ds,x0,x1,X);
-  /* origin line */const ox=X(o);ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ox,PAD.t);ctx.lineTo(ox,H-PAD.b);ctx.stroke();ctx.setLineDash([]);font(10,true);ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText('forecast origin · '+fmtDate(ds,o),ox+6,PAD.t+10);
+  /* origin line */const ox=X(o);ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ox,PAD.t);ctx.lineTo(ox,H-PAD.b);ctx.stroke();ctx.setLineDash([]);font(10,true);ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText('forecast starts · '+fmtDate(ds,o),ox+6,PAD.t+10);
   /* context */line(vals,x0,o+1,X,Y,C.ink,1.4);
   /* held-out actuals, revealed with the forecast */if(reveal>0)line(vals,o-1,o+Math.max(1,Math.ceil(h*reveal)),X,Y,C.ink3,1.2,[4,3]);
   /* naive */if(nv&&nv.status==='ok'&&reveal>0){const pts=[vals[o-1]].concat(nv.point[st.oi].slice(0,Math.ceil(h*reveal)));series(pts,o-1,X,Y,C.ink4,1,[2,3]);}
