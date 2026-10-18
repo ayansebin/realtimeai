@@ -855,16 +855,40 @@ body.pitching .csgrid{opacity:.22;filter:saturate(.3);transition:opacity .6s,fil
 .hf b.warn{color:#ff8389}.hf b.ok{color:#6fdc8c}
 .hf .hf-s{font-size:.8rem;line-height:1.4;color:var(--ink-3)}
 .hf.on{background:rgba(15,98,254,.14);box-shadow:inset 0 2px 0 #4589ff}
-#hf-ctx.on{box-shadow:inset 0 2px 0 #3ddbd9;background:rgba(8,189,186,.1)}
-#hf-dec.on{box-shadow:inset 0 2px 0 #42be65;background:rgba(66,190,101,.1)}
+#hf-ad.on{box-shadow:inset 0 2px 0 #fa4d56;background:rgba(250,77,86,.1)}
+#hf-op.on{box-shadow:inset 0 2px 0 #42be65;background:rgba(66,190,101,.1)}
+button.hf{background:none;border:0;border-radius:0;color:inherit;font:inherit;text-align:left;cursor:pointer;width:100%;margin:0}
+button.hf:hover{background:rgba(255,255,255,.05)}
+button.hf:focus-visible{outline:2px solid #4589ff;outline-offset:-2px}
 @media (min-width:761px) and (max-width:1100px){.hf-k em{display:none}}
 @media (max-width:760px){.hflow{grid-template-columns:1fr}.hf+.hf{border-left:0;border-top:1px solid var(--line)}.hf{padding:11px 16px 12px;gap:.2rem}.hf b{font-size:1.05rem}}
 /* one color language from the headline to the chart: blue predicts, teal is the real-time context, green is the optimized decision */
 .hero-kicker{font-size:clamp(1.2rem,2.1vw,1.75rem);font-weight:400;line-height:1.25;letter-spacing:-.012em;color:var(--ink);max-width:36ch;margin-bottom:-.25rem;text-wrap:balance}
 .hero-kicker .k-ts{color:#0f62fe}
 .hero-kicker .k-ctx{color:#007d79}
-#hf-ctx .hf-k i{color:#3ddbd9}#hf-ts .hf-k i{color:#78a9ff}#hf-dec .hf-k i{color:#6fdc8c}
-#hx-ctx .chip[aria-pressed="true"]{background:rgba(8,189,186,.18);border-color:rgba(61,219,217,.85);color:#fff}
+#hf-fc .hf-k i{color:#78a9ff}#hf-ad .hf-k i{color:#ff8389}#hf-op .hf-k i{color:#6fdc8c}
+/* the hero follows one logic: industries, one universal layer, three outcomes */
+.hx-top{display:grid;gap:12px;padding:clamp(16px,2.2vw,24px) clamp(16px,2.4vw,28px) 0}
+.hx-inds{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.hx-ind{position:relative;display:flex;align-items:center;justify-content:center;gap:.45rem;min-height:38px;padding:.35rem .6rem;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.04);color:var(--ink-2);font:inherit;font-size:.86rem;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.hx-ind svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round}
+.hx-ind:hover{background:rgba(255,255,255,.09);color:#fff}
+.hx-ind[aria-pressed="true"]{background:rgba(51,177,255,.2);border-color:#33b1ff;color:#fff}
+.hx-ind::after{content:"";position:absolute;left:50%;bottom:-10px;width:6px;height:6px;border-right:1.5px solid rgba(61,219,217,.55);border-bottom:1.5px solid rgba(61,219,217,.55);transform:translateX(-50%) rotate(45deg)}
+.hx-ind[aria-pressed="true"]::after{border-color:#3ddbd9}
+.hx-ind:focus-visible{outline:2px solid #4589ff;outline-offset:2px}
+.hx-layer{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:4px;padding:.7rem 1.1rem;border-radius:10px;background:linear-gradient(90deg,#08bdba,#33b1ff);color:#04213b}
+.hx-layer span{flex:1;text-align:center;font-weight:600;font-size:clamp(.84rem,1.25vw,1.02rem);letter-spacing:.005em}
+.hx-layer b{font-weight:700;font-size:.84rem;white-space:nowrap}
+.hx-checks{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.35rem 1.15rem;font-size:.8rem;color:#7fe4e4}
+.hx-lead{color:var(--ink-2)}
+.hx-ck{display:inline-flex;align-items:center;gap:.4rem;transition:color .3s,text-shadow .3s}
+.hx-ck::before{content:"";width:9px;height:5px;border-left:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-2px) rotate(-45deg)}
+.hx-ck.on{color:#fff;text-shadow:0 0 14px rgba(61,219,217,.9)}
+@media (max-width:760px){.hx-inds{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.hx-ind{font-size:.78rem;min-height:34px;padding:.3rem .35rem;gap:.3rem}.hx-ind::after{display:none}
+  .hx-layer{flex-wrap:wrap;justify-content:space-between;padding:.6rem .8rem;gap:.3rem .8rem}.hx-layer span{flex-basis:100%;order:-1;font-size:.84rem}.hx-lead{display:none}.hx-checks{font-size:.74rem;gap:.3rem .9rem}}
+body.pitching #st-live .hx-inds,body.pitching #st-live .hx-checks{display:none}
+body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(300px,42vh,460px)}
 /* during the demo the line and its three cards fit on one screen */
 body.pitching #st-live .stage-top{display:none}
 @media (max-width:760px){body.pitching .hero .canvas-wrap.hx-wrap{height:38vh}}
@@ -898,24 +922,25 @@ body.pitching #st-live .stage-top{display:none}
     </div>
 
     <div class="stage" id="st-live">
-      <div class="stage-top">
-        <div class="stage-title"><h3>One tempering line, live on Confluent</h3><p>Its temperature streams in with real-time context: the room, the line speed and the cocoa batch.</p></div>
-        <div class="ctl">
-          <div class="ctl-group"><span class="eyebrow">Change the context</span>
-            <div class="chips" id="hx-ctx">
-              <button class="chip" data-v="room" aria-pressed="false">Warmer room</button>
-              <button class="chip" data-v="speed" aria-pressed="false">Faster line</button>
-              <button class="chip" data-v="batch" aria-pressed="false">New cocoa batch</button>
-            </div></div>
+      <div class="hx-top">
+        <div class="hx-inds" aria-label="Pick an industry">
+        <button type="button" class="hx-ind" data-ind="banking" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6.2L8 2.5l6 3.7M3.2 6.5v6M6.4 6.5v6M9.6 6.5v6M12.8 6.5v6M2 13.5h12"/></svg>Banking</button>
+        <button type="button" class="hx-ind" data-ind="retail" aria-pressed="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 2.5h2l1.6 7.3h7.1l1.4-5.3H4.2"/><circle cx="6.6" cy="12.9" r="1"/><circle cx="11.6" cy="12.9" r="1"/></svg>Retail</button>
+        <button type="button" class="hx-ind" data-ind="manufacturing" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 14V7l4 2.4V7l4 2.4V3h3.5v11z"/></svg>Manufacturing</button>
+        <button type="button" class="hx-ind" data-ind="telecom" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="5.2" r="1.2"/><path d="M8 6.6v7.9M5.6 14.5h4.8M4.9 2.4a4.4 4.4 0 0 0 0 5.6M11.1 2.4a4.4 4.4 0 0 1 0 5.6"/></svg>Telecom</button>
+        <button type="button" class="hx-ind" data-ind="healthcare" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8.5h3l1.6-3.4 2.2 6.6 1.6-3.2h4.6"/></svg>Healthcare</button>
+        <button type="button" class="hx-ind" data-ind="energy" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.2 1.5L3.6 9h4.2l-1.1 5.5L12.4 7H8.2z"/></svg>Energy</button>
         </div>
+        <div class="hx-layer"><b>IBM Granite Time Series</b><span>Universal time series foundation layer · stream-native, real-time</span><b>Confluent</b></div>
+        <div class="hx-checks"><span class="hx-lead">One model for every stream, not one per use case or SKU:</span><span class="hx-ck" data-ck="dist">varying distributions</span><span class="hx-ck" data-ck="inter">complex interdependencies</span><span class="hx-ck" data-ck="decay">time-decaying value</span></div>
       </div>
       <div class="stage-body">
-        <div class="canvas-wrap hx-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="A tempering line streaming its temperature inside a spec window, with the room, line speed and cocoa batch streaming in as context. The forecast that reads the context sees the drift coming, the forecast without it does not, and the optimizer moves the heater in time."></canvas><div class="tip" id="live-tip"></div></div>
+        <div class="canvas-wrap hx-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="One live stream for the chosen industry. The forecast that reads its real-time context sees the change coming, an anomaly is flagged as it happens, and the decision is optimized before the plan fails."></canvas><div class="tip" id="live-tip"></div></div>
       </div>
       <div class="hflow" id="hflow">
-        <div class="hf" id="hf-ctx"><span class="hf-k"><i>01</i>Real-time context<em>Confluent</em></span><b id="hf-ctx-b">Room 22 °C · line 100 % · batch 4471</b><span class="hf-s" id="hf-ctx-s">three context topics, joined to the stream as it flows</span></div>
-        <div class="hf" id="hf-ts"><span class="hf-k"><i>02</i>Time series intelligence<em>IBM Granite</em></span><b id="hf-ts-b">Inside spec for the next 6 min</b><span class="hf-s" id="hf-ts-s">IBM Granite TTM, ~3 ms per reading</span></div>
-        <div class="hf" id="hf-dec"><span class="hf-k"><i>03</i>Optimized decision<em>TS_OPTIMIZE</em></span><b id="hf-dec-b">Hold the setpoint</b><span class="hf-s" id="hf-dec-s">inside the window, at the least energy</span></div>
+        <button type="button" class="hf" id="hf-fc"><span class="hf-k"><i>01</i>Forecasting<em>AI_FORECAST</em></span><b id="hf-fc-b">Next 4 h: about 290 bottles</b><span class="hf-s" id="hf-fc-s">read with its context topics, ~3 ms per event</span></button>
+        <button type="button" class="hf" id="hf-ad"><span class="hf-k"><i>02</i>Anomaly detection<em>AI_DETECT_ANOMALIES</em></span><b id="hf-ad-b">Every event inside the expected range</b><span class="hf-s" id="hf-ad-s">each one scored the moment it arrives</span></button>
+        <button type="button" class="hf" id="hf-op"><span class="hf-k"><i>03</i>Optimization<em>TS_OPTIMIZE</em></span><b id="hf-op-b">Next truck as planned: 180</b><span class="hf-s" id="hf-op-s">covers the forecast at 98 % service level</span></button>
       </div>
     </div>
   </div>
@@ -925,46 +950,6 @@ body.pitching #st-live .stage-top{display:none}
   <div class="wrap">
     <div class="chapter-head">
       <span class="n">01 / INNOVATION</span>
-      <h2>Forecast it. Then optimize it.</h2>
-      <p>A pump caught drifting today is a work order, next week it is an outage. The model that forecasts the series is also a model of the plant, so an optimizer can search the setpoints inside the guardrails.</p>
-    </div>
-
-    <div class="stage" id="uc-opt">
-      <div class="stage-top">
-        <div class="stage-title"><h3>Which setting earns the most and still meets spec?</h3><p>Two knobs, three objectives. The operator approves.</p></div>
-        <div class="ctl">
-          <div class="ctl-group"><span class="eyebrow">How much we feed, t/h</span><label class="range"><input type="range" id="op-feed" min="150" max="210" value="196" aria-label="Feed rate"><output id="op-feedv">196</output></label></div>
-          <div class="ctl-group"><span class="eyebrow">How hot we run, °C</span><label class="range"><input type="range" id="op-temp" min="1400" max="1500" value="1418" aria-label="Kiln temperature"><output id="op-tempv">1418</output></label></div>
-          <div class="ctl-group"><span class="eyebrow">&nbsp;</span><div class="btn-row"><button class="btn sm" id="op-go">Optimize <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button class="btn sm ghost" id="op-reset">Reset</button></div></div>
-        </div>
-      </div>
-      <div class="stage-body">
-        <div class="side">
-          <div class="opt-col"><div class="canvas-wrap opt-wrap"><canvas class="stage-canvas" id="op-cv" aria-label="Trade-off chart: every candidate setting plotted by forecast quality and energy, the frontier, the spec and energy limits, and the chosen setpoint"></canvas></div><div class="tiny op-cap" id="op-cap">There is no single best: better quality costs energy. The frontier shows the honest trade-offs, and the pick is the most profitable point that respects both limits. Hover a point to read it.</div></div>
-          <div class="panel op-panel">
-            <div class="ph">Before and after</div>
-            <table class="op-table" id="op-table">
-              <tr><th></th><th>Before</th><th>After</th></tr>
-              <tr><td>Feed</td><td id="op-f0">196 t/h</td><td id="op-f1">–</td></tr>
-              <tr><td>Temperature</td><td id="op-t0">1,418 °C</td><td id="op-t1">–</td></tr>
-              <tr><td>Quality</td><td id="op-q0">94.8%</td><td id="op-q1">–</td></tr>
-              <tr><td>Energy</td><td id="op-e0">89 kWh/t</td><td id="op-e1">–</td></tr>
-              <tr><td>Margin</td><td id="op-m0">baseline</td><td id="op-m1">–</td></tr>
-            </table>
-            <div class="op-steps" id="op-steps">
-              <div><i>1</i><span id="op-s1">Forecast quality and energy for every setting</span></div>
-              <div><i>2</i><span id="op-s2">Find the frontier: better quality costs more energy</span></div>
-              <div><i>3</i><span id="op-s3">Pick the best margin inside spec and the energy cap</span></div>
-            </div>
-            <div class="action green" id="op-action"><small>recommendation</small><span id="op-actiont">Press Optimize</span></div>
-            <div class="tiny" id="op-impact">Illustrative: at 1.2 million tons a year, $2 a ton is about $2.4M a year for one mill.</div>
-          </div>
-        </div>
-      </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">2 to 5×</b><span>faster optimization</span></div><div class="readout"><b>93 → 99%</b><span>quality accuracy</span></div><div class="readout"><b>$2</b><span>per ton</span></div></div><div class="hint">Design partners in cement, steel, pulp and paper, food and telecommunications</div></div>
-    </div>
-
-    <div class="chapter-head sub">
       <h2>An agent acts on it.</h2>
       <p>An agent reads the forecast and the flag, reasons, and writes the decision to a topic. Experts set the gates.</p>
     </div>
@@ -1680,188 +1665,231 @@ function drawStream(cv,sim,o){
 }
 function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundingClientRect();const px=(ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left;let best=-1,bd=1e9;layout.vis.forEach((r,k)=>{const d=Math.abs(layout.X(k)-px);if(d<bd){bd=d;best=k;}});return bd>24?-1:best;}
 
-/* ============ 01 hero: time series intelligence meets real-time context ============ */
-/* One tempering line. Its temperature streams in on Confluent, and so does its context: the room, the line speed and
-   the cocoa batch. A change in context reaches the line minutes later, so a forecast that reads the context sees the
-   drift coming while a forecast of the series alone sees nothing. The optimizer then plans the heater, timed to when
-   the change arrives, so the line never leaves its window. */
+/* ============ 01 hero: every industry, one time series foundation layer, three outcomes ============ */
+/* The same layer runs on every stream: a store's sales, an ATM cluster's cash, a production line, a cell site, an
+   emergency department, a building's power. For each one the line shows the three outcomes: a forecast that reads its
+   real-time context, an anomaly flagged as it happens, and a decision optimized before its value decays.
+   The industries take turns, about twenty seconds each, and the headline types the one on screen. */
 (function(){
   const el=$('#st-live');if(!el)return;
   const cv=new Cv($('#live-cv')),tip=$('#live-tip');
-  const LO=31.0,HI=32.2,BASE=31.6,TAU=6,ZB=2.5758,NOISE=0.045,HN=24,SEC=15;
-  const T0=Date.UTC(2026,9,16,8,20,0);
-  /* each context topic: what it reports, how long it takes to reach the line, and what it does there */
-  const CTX={
-    room:{lag:8,k:0.3,ref:22,on:26,rate:0.5,topic:'weather topic',up:'Room up 4 °C',down:'Room back to 22 °C',tagUp:'room +4 °C',tagDown:'room −4 °C'},
-    speed:{lag:4,k:-0.06,ref:100,on:115,topic:'MES topic',up:'Line speed up 15 %',down:'Line speed back to 100 %',tagUp:'speed +15 %',tagDown:'speed −15 %'},
-    batch:{lag:7,k:0.7,ref:0,on:1,topic:'ERP topic',up:'New batch, more cocoa butter',down:'New batch, standard recipe',tagUp:'new batch',tagDown:'new batch'}
+  const HN=48,ZB=2.5758,LOOP=33,CTX_AT=3,AN_AT=10,OPT_AT=16;
+  const ORDER=['retail','manufacturing','telecom','healthcare','energy','banking'];
+  const rel=steps=>{const m=Math.round(Math.abs(steps)*5),h=Math.floor(m/60),mm=m%60;return (h?h+' h':'')+(h&&mm?' ':'')+(mm||!h?mm+' min':'');};
+  const k$=v=>'$'+Math.round(v)+'k';
+  /* each stream: its shape, its context topic, the anomaly it can show, and the decision it needs */
+  const IND={
+    retail:{pair:['stockout','service level'],topic:'pos_sales · store 112 · bottled water',unit:'bottles per hour',kind:'stock',base:60,cv:0.12,amp:0.16,
+      ctx:{mul:0.8,delay:6,len:48,tag:'heat wave · 34 °C',title:'Heat wave: demand up 80 %',src:'weather topic'},
+      an:{type:'drop',f:1,len:4,tag:'no sales',title:s=>'No sales for 20 min, '+s.anStock+' in stock',act:'Shelf empty? The store gets an alert now.',after:'Shelf refilled, sales back'},
+      stock:{s0:190,plan:180,first:21,every:48,lot:24,fmt:v=>String(Math.round(v))},
+      fc:s=>'Next 4 h: about '+Math.round(s.sum/10)*10+' bottles',
+      op:{steady:s=>'Next truck as planned: '+s.plan,steadyS:'covers the forecast at 98 % service level',risk:t=>'Shelf runs out in '+t,riskS:'at today\'s order. TS_OPTIMIZE plans the next truck.',
+        riskTag:t=>'shelf empty in '+t,planTag:q=>'next truck · '+q,done:d=>'Order '+d.q+' on the next truck',doneS:d=>'+'+d.add+' bottles · no stockout · 98 % service level',doneTag:d=>'truck · '+d.q+' (+'+d.add+')'}},
+    banking:{pair:['fraud','risk'],topic:'atm_withdrawals · branch 22',unit:'$k per hour',kind:'stock',base:18,cv:0.18,amp:0.14,
+      ctx:{mul:0.7,delay:4,len:48,tag:'payroll landed',title:'Payroll landed: withdrawals up 70 %',src:'payments topic'},
+      an:{type:'spike',add:54,len:2,tag:'4× at ATM 3',title:()=>'ATM 3 at 4× normal in 10 min',act:'Skimming? ATM 3 is paused and the cards blocked.',after:'ATM 3 back in service, cash safe'},
+      stock:{s0:58,plan:54,first:21,every:48,lot:6,fmt:k$},
+      fc:s=>'Next 4 h: about '+k$(s.sum)+' withdrawn',
+      op:{steady:s=>'Next cash run as planned: '+k$(s.plan),steadyS:'covers the forecast with little idle cash',risk:t=>'ATMs run dry in '+t,riskS:'at the planned cash run. TS_OPTIMIZE plans the load.',
+        riskTag:t=>'ATMs dry in '+t,planTag:q=>'next cash run · '+k$(q),done:d=>'Load '+k$(d.q)+' on the next cash run',doneS:d=>'+'+k$(d.add)+' · no ATM runs dry · less idle cash at risk',doneTag:d=>'cash run · '+k$(d.q)+' (+'+k$(d.add)+')'}},
+    manufacturing:{pair:['quality slip','yield'],topic:'line_temp · tempering line 2',unit:'°C',kind:'spec',base:31.6,sd:0.045,lo:31.0,hi:32.2,
+      ctx:{add:1.2,delay:12,len:48,tag:'room +4 °C',title:'Room up 4 °C: the line will run hot',src:'building topic'},
+      an:{type:'spike',add:1.0,len:2,tag:'+1 °C spike',title:()=>'Zone 3 spiked by 1 °C in 10 min',act:'A sticking relay? Maintenance gets a work order.',after:'Zone 3 back to normal'},
+      fc:()=> 'Inside spec for the next 4 h',
+      op:{steady:()=>'Hold the setpoint',steadyS:'inside the window, at the least energy',risk:t=>'Leaves spec in '+t,riskS:'TS_OPTIMIZE plans the heater.',
+        riskTag:t=>'out of spec in '+t,done:()=>'Heater −1.2 °C, timed to the room heat',doneS:()=>'stays in spec · 5 % less energy',doneTag:()=>'heater −1.2 °C'}},
+    telecom:{pair:['outage','uptime'],topic:'cell_traffic · site 4017',unit:'Gbps',kind:'cap',act:'raise',base:6.2,cv:0.06,amp:0.17,dec:1,limit:10,limitTag:'capacity 10 Gbps',raise:5,
+      ctx:{mul:0.75,delay:5,len:40,tag:'stadium event',title:'Stadium event: traffic up 75 %',src:'events topic'},
+      an:{type:'drop',f:0.6,len:4,tag:'−60 %',title:()=>'Sector 2 traffic down 60 %',act:'Fiber degradation? A ticket opens with the cause.',after:'Sector 2 restored'},
+      fc:s=>'Peak in the next 4 h: '+s.peak.toFixed(1)+' Gbps',
+      op:{steady:()=>'One carrier is enough',steadyS:'traffic stays under 10 Gbps',risk:t=>'Over capacity in '+t,riskS:'The crowd needs more than one carrier.',
+        riskTag:t=>'congestion in '+t,done:d=>'Extra carrier on '+(d.left>0?'in '+rel(d.left):'now'),doneS:()=>'no congestion · 0 dropped sessions',doneTag:()=>'+1 carrier'}},
+    healthcare:{pair:['surge','wait times'],topic:'ed_arrivals · one hospital',unit:'patients per hour',kind:'cap',act:'raise',base:10,cv:0.12,amp:0.18,dec:0,limit:15,limitTag:'safe capacity 15 per hour',raise:6,
+      ctx:{mul:0.55,delay:6,len:44,tag:'flu alert',title:'Flu alert: arrivals up 55 %',src:'public health topic'},
+      an:{type:'drop',f:1,len:4,tag:'feed silent',title:()=>'No triage events for 20 min',act:'Kiosk offline? IT is paged before patients wait.',after:'Triage feed back'},
+      fc:s=>'Next 4 h: about '+Math.round(s.sum)+' arrivals',
+      op:{steady:()=>'Staffing as planned',steadyS:'arrivals stay under safe capacity',risk:t=>'Over safe capacity in '+t,riskS:'TS_OPTIMIZE plans the staffing.',
+        riskTag:t=>'over capacity in '+t,done:d=>d.left>0?'Call in 2 nurses, starting in '+rel(d.left):'Call in 2 nurses now',doneS:()=>'waits stay under 30 min',doneTag:()=>'+2 nurses'}},
+    energy:{pair:['grid peak','cost'],topic:'meter_readings · building 7',unit:'kW',kind:'cap',act:'lower',base:720,cv:0.035,amp:0.14,dec:0,limit:1000,limitTag:'peak limit 1,000 kW',
+      ctx:{mul:0.38,delay:6,len:40,tag:'cold snap · −8 °C',title:'Cold snap: load up 38 %',src:'weather topic'},
+      an:{type:'spike',add:180,len:3,tag:'+180 kW',title:()=>'Heat pump 4 stuck at full power',act:'+180 kW out of nowhere. Maintenance is paged.',after:'Heat pump 4 fixed'},
+      fc:s=>'Peak in the next 4 h: '+fmtInt(s.peak)+' kW',
+      op:{steady:()=>'No load shift needed',steadyS:'the peak stays under 1,000 kW',risk:t=>'Over the 1,000 kW limit in '+t,riskS:'A demand charge ahead. TS_OPTIMIZE plans the load.',
+        riskTag:t=>'over the limit in '+t,done:()=>'Pre-heat now, EV charging after the peak',doneS:()=>'peak under 1,000 kW · saves $4,800 this month',doneTag:()=>'pre-heat · EV later'}}
   };
-  const KEYS=['room','speed','batch'];
-  const AUTO=[['room',true],['batch',true],['speed',true],['room',false],['batch',false],['speed',false]];
-  const st={};
-  const seas=n=>0.16*Math.sin(2*Math.PI*n/40)+0.06*Math.sin(2*Math.PI*n/13+1.3);
-  const rowAt=m=>{const r=st.rows,i=r.length?m-r[0].i:-1;return i>=0&&i<r.length?r[i]:null;};
-  const hhmm=i=>{const d=new Date(T0+i*SEC*1000);const p=x=>String(x).padStart(2,'0');return p(d.getUTCHours())+':'+p(d.getUTCMinutes());};
-  const mins=steps=>Math.max(1,Math.round(steps*SEC/60));
-  function init(){Object.assign(st,{n:0,rows:[],tgt:{room:22,speed:100,batch:0},cur:{room:22,speed:100,batch:0},hand:{room:22,speed:100,batch:0},
-      follow:{room:true,speed:true,batch:true},batchId:4471,z:0,eff:0,ctl:0,ev:[],dec:[],alert:0,pendN:0,hold:false,holdUntil:0,
-      acc:0,events:1260,hover:-1,fc:null,ghost:null,evT:-1e9,decT:-1e9,dirty:true});
-    for(let i=0;i<170;i++)step(true);st.fc=forecast(HN);}
-  if(!st.autoAt)st.autoAt=0;st.autoI=0;
-  /* context reported at a future step jj, as far as the stream already knows it */
-  function futureCtx(k,jj){if(k==='room'){const c=st.cur.room,d=st.tgt.room-c;return c+Math.sign(d)*Math.min(Math.abs(d),CTX.room.rate*jj);}return st.tgt[k];}
-  function forecast(h,noContext){const out=[],n0=st.n-1;let eff=st.eff,ctl=st.ctl;
-    for(let j=1;j<=h;j++){const m=n0+j,zz=st.z*Math.pow(0.5,j),sig=0.075*Math.sqrt(1+0.12*j);
-      if(noContext){out.push({mean:BASE+seas(m)+st.eff+st.ctl+zz,sig});continue;}
-      let E=0,U=0;
-      KEYS.forEach(k=>{const C_=CTX[k],src=m-C_.lag;let cc,hh;
-        if(src<=n0){const r=rowAt(src);cc=r?r.c[k]:C_.ref;hh=r?r.h[k]:C_.ref;}
-        else{cc=futureCtx(k,src-n0);hh=st.follow[k]?cc:st.hand[k];}
-        E+=C_.k*(cc-C_.ref);U-=C_.k*(hh-C_.ref);});
-      eff+=(E-eff)/TAU;ctl+=(U-ctl)/TAU;out.push({mean:BASE+seas(m)+eff+ctl+zz,sig});}
-    return out;}
-  function step(warm){const n=st.n;
-    const c={room:st.cur.room,speed:st.tgt.speed,batch:st.tgt.batch};const d=st.tgt.room-c.room;c.room+=Math.sign(d)*Math.min(Math.abs(d),CTX.room.rate);st.cur=c;
-    KEYS.forEach(k=>{if(st.follow[k])st.hand[k]=c[k];});
-    let E=0,U=0;KEYS.forEach(k=>{const C_=CTX[k],r=rowAt(n-C_.lag);E+=C_.k*((r?r.c[k]:C_.ref)-C_.ref);U-=C_.k*((r?r.h[k]:C_.ref)-C_.ref);});
-    const f1=st.rows.length>2?forecast(1)[0]:null;
-    st.eff+=(E-st.eff)/TAU;st.ctl+=(U-st.ctl)/TAU;st.z=0.5*st.z+NOISE*gauss();
-    const v=BASE+seas(n)+st.eff+st.ctl+st.z;
-    st.rows.push({i:n,v,pred:f1?f1.mean:null,sig:f1?f1.sig:null,c,h:{room:st.hand.room,speed:st.hand.speed,batch:st.hand.batch}});
-    if(st.rows.length>320)st.rows.shift();st.n++;st.events++;
-    if(warm)return;
-    st.fc=forecast(HN);
-    /* the first step at which the forecast leaves the window */
-    let a=0;for(let j=0;j<st.fc.length;j++){const m=st.fc[j].mean;if(m>HI-0.03||m<LO+0.03){a=j+1;break;}}st.alert=a;
-    const open=KEYS.some(k=>!st.follow[k]);
-    if(st.hold&&performance.now()>st.holdUntil)st.hold=false;
-    if(a&&open){if(!st.pendN)st.pendN=st.n+4;if(!st.hold&&st.n>=st.pendN)decide();}
-    else if(open&&!st.hold){const le=st.ev[st.ev.length-1];if(!le||st.n-le.n>6)adopt();}
-    else st.pendN=0;
-    st.ghost=(st.alert&&open)?forecast(HN,true):null;}
-  /* the controller takes the new context on board: from the change onward the heater mirrors what reaches the line */
-  function adopt(){KEYS.forEach(k=>{if(st.follow[k])return;st.follow[k]=true;const e=[...st.ev].reverse().find(x=>x.key===k);const from=e?e.n:st.n;st.rows.forEach(r=>{if(r.i>=from)r.h[k]=r.c[k];});st.hand[k]=st.cur[k];});st.pendN=0;}
-  const steadyU=()=>-KEYS.reduce((s,k)=>s+CTX[k].k*((st.follow[k]?st.tgt[k]:st.hand[k])-CTX[k].ref),0);
-  function decide(){if(!KEYS.some(k=>!st.follow[k]))return;const before=steadyU();const le=st.ev[st.ev.length-1];adopt();const delta=steadyU()-before;
-    if(Math.abs(delta)>=0.05){const at=le?Math.max(st.n,le.n+CTX[le.key].lag):st.n;st.dec.push({n:st.n-1,delta,at});st.decT=performance.now();}
-    st.fc=forecast(HN);st.alert=0;st.ghost=null;st.dirty=true;}
-  function setCtx(k,on){const C_=CTX[k],v=on?C_.on:C_.ref;chipPress(k,on);if(st.tgt[k]===v)return;
-    st.tgt[k]=v;if(k==='batch')st.batchId++;
-    if(st.follow[k]){st.follow[k]=false;st.hand[k]=st.cur[k];}
-    st.ev.push({n:st.n,key:k,on,text:on?C_.up:C_.down,tag:on?C_.tagUp:C_.tagDown});st.evT=performance.now();st.pendN=0;
-    st.fc=forecast(HN);st.ghost=forecast(HN,true);st.dirty=true;}
-  const chips=$$('#hx-ctx .chip');
-  function chipPress(k,on){chips.forEach(b=>{if(b.dataset.v===k)b.setAttribute('aria-pressed',on?'true':'false');});}
-  chips.forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.v,on=st.tgt[k]===CTX[k].ref;st.autoAt=performance.now()+40000;setCtx(k,on);}));
+  const st={};let cfg=IND.retail,key='retail';
+  const wave=n=>1+cfg.amp*Math.sin(2*Math.PI*n/72)+cfg.amp*0.4*Math.sin(2*Math.PI*n/24+1.1);
+  const seasAdd=n=>0.16*Math.sin(2*Math.PI*n/40)+0.06*Math.sin(2*Math.PI*n/13+1.3);
+  const eff=n=>{const c=st.ctx;if(!c)return 0;const a=n-(c.n+cfg.ctx.delay);if(a<0)return 0;const up=Math.min(1,a/4),down=a>cfg.ctx.len?Math.max(0,1-(a-cfg.ctx.len)/8):1;return up*down;};
+  /* the expected level: with the context, or as a series-only model would see it from now */
+  function level(n,noCtxFrom){const e=noCtxFrom!=null?eff(noCtxFrom):eff(n);
+    if(cfg.kind==='spec')return cfg.base+seasAdd(n)+cfg.ctx.add*e;return cfg.base*wave(n)*(1+cfg.ctx.mul*e);}
+  const ctl=n=>st.plan.get(n)||0;
+  const sigOf=v=>cfg.kind==='spec'?cfg.sd*1.6:Math.max(0.02*cfg.base,cfg.cv*v);
+  const cap=n=>cfg.limit+(st.raise&&n>=st.raise.at?cfg.raise:0);
+  function init(k){key=k||key;cfg=IND[key];
+    Object.assign(st,{n:0,rows:[],z:0,ctx:null,an:null,anStock:0,plan:new Map(),raise:null,dec:null,stock:cfg.kind==='stock'?cfg.stock.s0:0,deliv:null,lastDeliv:null,
+      fc:[],ghost:null,out:0,loopAt:0,hold:0,ctxT:-1e9,anT:-1e9,decT:-1e9,swT:performance.now(),events:12400+Math.floor(Math.random()*400),hover:-1});
+    for(let i=0;i<170;i++)step(true);
+    if(cfg.kind==='stock')st.deliv={at:st.n+30,q:cfg.stock.plan,opt:false};
+    st.loopAt=st.n;forecast();
+    $$('.hx-ind').forEach(b=>b.setAttribute('aria-pressed',b.dataset.ind===key?'true':'false'));flash('dist');}
+  function step(warm){const n=st.n,lv=level(n);
+    st.z=0.5*st.z+(cfg.kind==='spec'?cfg.sd:cfg.cv*0.87)*gauss();
+    let v=cfg.kind==='spec'?lv+st.z+ctl(n):lv*(1+st.z)+ctl(n);
+    const a=st.an;if(a&&n>=a.n&&n<a.n+cfg.an.len){if(cfg.an.type==='drop')v*=1-cfg.an.f;else v+=cfg.an.add;}
+    v=Math.max(0,v);
+    if(cfg.kind==='stock'&&!warm){let units=v/12;units=Math.min(units,Math.max(0,st.stock));st.stock-=units;v=units*12;
+      if(st.deliv&&n>=st.deliv.at){st.stock+=st.deliv.q;st.lastDeliv={n,q:st.deliv.q,opt:st.deliv.opt};st.deliv={at:n+cfg.stock.every,q:cfg.stock.plan,opt:false};}}
+    const pred=lv+ctl(n),sig=sigOf(pred);
+    st.rows.push({i:n,v,pred,sig,anom:v>pred+ZB*sig||v<pred-ZB*sig});if(st.rows.length>260)st.rows.shift();
+    st.n++;st.events++;if(warm)return;
+    forecast();loop();}
+  function forecast(){const n0=st.n-1,f=[],g=[];let sum=0,peak=0;
+    for(let j=1;j<=HN;j++){const m=n0+j,mu=level(m)+ctl(m);f.push({mean:mu,sig:sigOf(mu)*Math.sqrt(1+0.03*j)});sum+=mu/12;peak=Math.max(peak,mu);g.push({mean:level(m,n0)});}
+    st.fc=f;st.sum=sum;st.peak=peak;st.ghost=(st.ctx&&!st.dec&&st.n-st.ctx.n<36)?g:null;st.out=shortfall();}
+  /* steps until the plan fails: the shelf or the ATMs run empty, or the forecast crosses its limit */
+  function shortfall(q){const n0=st.n-1,f=st.fc;
+    if(cfg.kind==='stock'){let s=st.stock;const d=st.deliv;for(let j=1;j<=HN;j++){const m=n0+j;s-=f[j-1].mean/12;if(d&&m===d.at)s+=q!=null?q:d.q;if(d&&m===d.at+cfg.stock.every)s+=cfg.stock.plan;if(s<=0)return j;}return 0;}
+    for(let j=1;j<=HN;j++){const m=n0+j,mu=f[j-1].mean;if(cfg.kind==='spec'?(mu>cfg.hi||mu<cfg.lo):mu>cap(m))return j;}return 0;}
+  function context(){st.ctx={n:st.n};st.ctxT=performance.now();st.dec=null;st.plan=new Map();st.raise=null;
+    if(cfg.kind==='stock'){st.stock=cfg.stock.s0;st.deliv={at:st.n+cfg.stock.first,q:cfg.stock.plan,opt:false};}
+    forecast();flash('inter');}
+  function anomaly(){if(st.an&&st.n<st.an.n+cfg.an.len)return;st.an={n:st.n};st.anT=performance.now();st.anStock=Math.round(st.stock);}
+  function optimize(){if(st.dec)return;const n0=st.n-1;let d=null;
+    if(cfg.kind==='stock'){const D=st.deliv;let s=st.stock;for(let m=n0+1;m<D.at;m++)s-=(level(m)+ctl(m))/12;
+      let need=0;for(let m=D.at;m<D.at+cfg.stock.every;m++)need+=(level(m)+ctl(m))/12;
+      let q=Math.max(cfg.stock.plan,Math.ceil((need*1.08+cfg.stock.lot*1.25-Math.max(0,s))/cfg.stock.lot)*cfg.stock.lot);while(shortfall(q)&&q<cfg.stock.plan*4)q+=cfg.stock.lot;
+      D.q=q;D.opt=true;d={q,add:q-cfg.stock.plan,at:D.at};}
+    else if(cfg.kind==='spec'){for(let m=n0+1;m<n0+HN+80;m++)st.plan.set(m,-cfg.ctx.add*eff(m));d={at:n0+1};}
+    else if(cfg.act==='raise'){const j=st.out||HN;st.raise={at:n0+Math.max(1,j-2)};d={at:st.raise.at};}
+    else{let first=0,mx=0;for(let m=n0+1;m<n0+HN+80;m++){const over=level(m)-(cfg.limit-60);if(over>0){st.plan.set(m,-over);mx=Math.max(mx,over);if(!first)first=m;}}
+      if(first)for(let m=Math.max(n0+1,first-6);m<first;m++)st.plan.set(m,(st.plan.get(m)||0)+Math.min(0.3*mx,cfg.limit-80-level(m)));d={at:first||n0+1};}
+    d.n=n0;st.dec=d;st.decT=performance.now();forecast();flash('decay');}
+  /* the story, on the stream's own clock: context, anomaly, decision, then the next industry */
+  function loop(){if(st.hold>performance.now())return;const k=st.n-st.loopAt;
+    if(k===CTX_AT)context();else if(k===AN_AT)anomaly();else if(k>=OPT_AT&&st.out&&!st.dec&&st.ctx)optimize();
+    else if(k>=LOOP){const pinned=performance.now()-st.pinT<60000;switchTo(pinned?key:ORDER[(ORDER.indexOf(key)+1)%ORDER.length],false);}}
+  function switchTo(k,byUser){const pinT=byUser?performance.now():st.pinT;init(k);st.pinT=pinT;if(App.headline)App.headline(cfg.pair[0],cfg.pair[1]);}
+  $$('.hx-ind').forEach(b=>b.addEventListener('click',()=>switchTo(b.dataset.ind,true)));
+  /* the three checks on the layer light up when the line shows them */
+  const flashT={};function flash(k){flashT[k]=performance.now();}
+  function checks(){const now=performance.now();$$('.hx-ck').forEach(c=>c.classList.toggle('on',now-(flashT[c.dataset.ck]||-1e9)<3200));}
 
-  /* the three cards under the chart say what the chart shows, in words */
-  const fx={ctx:$('#hf-ctx'),ts:$('#hf-ts'),dec:$('#hf-dec')};const txt={};
+  /* the cards say what the line shows, in words, and replay their part on a tap */
+  const txt={};
   function put(id,v,cls){const e=$('#'+id);if(!e)return;if(txt[id]!==v){txt[id]=v;e.textContent=v;}if(cls!==undefined&&e.className!==cls)e.className=cls;}
-  function cards(){const now=performance.now(),le=st.ev[st.ev.length-1],ld=st.dec[st.dec.length-1],open=KEYS.some(k=>!st.follow[k]);
-    const fresh=le&&(now-st.evT<9000||open),m=MODELS[App.model]||MODELS.ttm;
-    if(fresh){put('hf-ctx-b',le.text,'');put('hf-ctx-s','from the '+CTX[le.key].topic+', it reaches the line in '+mins(CTX[le.key].lag)+' min');}
-    else{put('hf-ctx-b','Room '+Math.round(st.cur.room)+' °C · line '+Math.round(st.cur.speed)+' % · batch '+st.batchId,'');put('hf-ctx-s','three context topics, joined to the stream as it flows');}
-    const recentDec=ld&&now-st.decT<7000;
-    if(st.alert&&open){put('hf-ts-b','Leaves spec in about '+mins(st.alert)+' min','warn');put('hf-ts-s','Seen in the context. Without it, the forecast looks fine.');}
-    else if(recentDec){put('hf-ts-b','Back inside spec','ok');put('hf-ts-s','the forecast with the new setpoint');}
-    else{put('hf-ts-b','Inside spec for the next '+mins(HN)+' min','');put('hf-ts-s','IBM Granite '+m.name+', ~'+m.ms+' ms per reading');}
-    if(st.alert&&open){put('hf-dec-b','Planning the setpoint','');put('hf-dec-s','TS_OPTIMIZE searches inside the window');}
-    else if(recentDec){const up=ld.delta>0,pct=Math.max(1,Math.round(Math.abs(ld.delta)*4.2));put('hf-dec-b','Heater '+(up?'+':'−')+Math.abs(ld.delta).toFixed(1)+' °C','ok');
-      put('hf-dec-s',(ld.at>ld.n+1?'timed for '+hhmm(ld.at)+', as the change arrives':'applied now')+' · '+pct+' % '+(up?'more heat':'less energy'));}
-    else{put('hf-dec-b','Hold the setpoint','');put('hf-dec-s','inside the window, at the least energy');}
-    fx.ctx.classList.toggle('on',!!le&&now-st.evT<2600);fx.ts.classList.toggle('on',!!(st.alert&&open));fx.dec.classList.toggle('on',!!recentDec&&now-st.decT<4000);}
+  function cards(){const now=performance.now(),m=MODELS[App.model]||MODELS.ttm,rs=st.rows,L=rs.length,o=cfg.op;
+    const fresh=st.ctx&&(now-st.ctxT<9000||(!st.dec&&st.n-st.ctx.n<30));
+    if(fresh){put('hf-fc-b',cfg.ctx.title,'');put('hf-fc-s','From the '+cfg.ctx.src+'. Without it, the forecast sees nothing coming.');}
+    else{put('hf-fc-b',cfg.fc(st),'');put('hf-fc-s','read with its context topics, ~'+m.ms+' ms per event');}
+    const live=st.an&&st.n-st.an.n<=cfg.an.len+2&&L>1&&(rs[L-1].anom||rs[L-2].anom);
+    if(live){put('hf-ad-b',cfg.an.title(st),'warn');put('hf-ad-s',cfg.an.act);}
+    else if(st.an&&now-st.anT<12000&&st.n-st.an.n>cfg.an.len){put('hf-ad-b',cfg.an.after,'ok');put('hf-ad-s','caught in minutes, not at the end of the day');}
+    else{put('hf-ad-b','Every event inside the expected range','');put('hf-ad-s','each one scored the moment it arrives');}
+    if(st.dec){const d=Object.assign({left:st.dec.at-(st.n-1)},st.dec);put('hf-op-b',o.done(d),'ok');put('hf-op-s',o.doneS(d));}
+    else if(st.out){put('hf-op-b',o.risk(rel(st.out)),'warn');put('hf-op-s',o.riskS);}
+    else{put('hf-op-b',o.steady({plan:cfg.stock?cfg.stock.plan:0}),'');put('hf-op-s',o.steadyS);}
+    $('#hf-fc').classList.toggle('on',!!st.ctx&&now-st.ctxT<5000);$('#hf-ad').classList.toggle('on',!!live);
+    $('#hf-op').classList.toggle('on',(!!st.out&&!st.dec)||(!!st.dec&&now-st.decT<5000));}
+  $('#hf-fc').addEventListener('click',()=>{st.hold=0;st.loopAt=st.n-CTX_AT;context();});
+  $('#hf-ad').addEventListener('click',()=>{st.hold=0;anomaly();});
+  $('#hf-op').addEventListener('click',()=>{st.hold=0;if(st.out&&!st.dec)optimize();else{context();st.loopAt=st.n-OPT_AT+2;}});
 
   let layout=null;
-  function plate(ctx,text,x,y,align,color,bold){ctx.font=(bold?'600 ':'')+MONO;const w=ctx.measureText(text).width,x0=align==='right'?x-w:x;ctx.fillStyle='rgba(27,39,70,.9)';ctx.fillRect(x0-4,y-8,w+8,16);ctx.fillStyle=color;ctx.textAlign='left';ctx.fillText(text,x0,y);ctx.font=MONO;}
-  function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W||!H)return;const narrow=W<560;
-    const padL=narrow?47:54,padR=narrow?10:16,top=30,laneH=narrow?15:17,laneGap=5,lanesH=3*laneH+2*laneGap,axisH=20;
-    const mainH=H-top-axisH-lanesH-14,pw=W-padL-padR;
-    const nVis=Math.max(30,Math.min(120,Math.floor(pw*(narrow?0.6:0.83)/(narrow?4.6:8.2))));
-    const vis=st.rows.slice(Math.max(0,st.rows.length-nVis)),fc=st.fc||[],gh=st.ghost,total=vis.length+fc.length;
-    const X=k=>padL+(k/Math.max(1,total-1))*pw,k0=vis.length-1,xi=i=>X(i-vis[0].i);
-    let lo=LO-0.3,hi=HI+0.3;vis.forEach(r=>{lo=Math.min(lo,r.v);hi=Math.max(hi,r.v);});fc.forEach(p=>{lo=Math.min(lo,p.mean-Z80*p.sig);hi=Math.max(hi,p.mean+Z80*p.sig);});
-    const pad=(hi-lo)*0.06;lo-=pad;hi+=pad;const Y=v=>top+(1-(v-lo)/(hi-lo))*mainH;
+  function plate(ctx,text,x,y,align,color,bold){ctx.font=(bold?'600 ':'')+MONO;const w=ctx.measureText(text).width,x0=align==='right'?x-w:align==='center'?x-w/2:x;
+    ctx.fillStyle='rgba(27,39,70,.9)';ctx.fillRect(x0-4,y-8,w+8,16);ctx.fillStyle=color;ctx.textAlign='left';ctx.fillText(text,x0,y);ctx.font=MONO;}
+  const fmtV=v=>cfg.kind==='spec'?v.toFixed(1):cfg.dec?v.toFixed(cfg.dec):fmtInt(v);
+  function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W||!H||!st.rows.length)return;const narrow=W<560;
+    const padL=narrow?40:52,padR=narrow?10:16,top=30,axisH=22,mainH=H-top-axisH-6,pw=W-padL-padR,HD=narrow?36:HN;
+    const nVis=Math.max(30,Math.min(110,Math.floor(pw*(narrow?0.55:0.72)/(narrow?4.2:7.2))));
+    const vis=st.rows.slice(Math.max(0,st.rows.length-nVis)),fc=st.fc.slice(0,HD),gh=st.ghost?st.ghost.slice(0,HD):null,total=vis.length+fc.length;
+    const X=k=>padL+(k/Math.max(1,total-1))*pw,k0=vis.length-1,xi=i=>X(i-vis[0].i),xf=j=>X(k0+j),n0=st.n-1;
+    let lo=Infinity,hi=-Infinity;const see=v=>{lo=Math.min(lo,v);hi=Math.max(hi,v);};
+    vis.forEach(r=>{see(r.v);see(r.pred+ZB*r.sig);see(r.pred-ZB*r.sig);});fc.forEach(p=>{see(p.mean+Z80*p.sig);see(p.mean-Z80*p.sig);});if(gh)gh.forEach(p=>see(p.mean));
+    if(cfg.kind==='spec'){see(cfg.lo-0.25);see(cfg.hi+0.25);}else if(cfg.kind==='cap'){see(cfg.limit*1.06);if(st.raise)see(cfg.limit+cfg.raise);lo=0;}else lo=0;
+    const pad=(hi-lo)*0.08;hi+=pad;if(cfg.kind==='spec')lo-=pad;lo=Math.max(cfg.kind==='spec'?-1e9:0,lo);const Y=v=>top+(1-(v-lo)/(hi-lo))*mainH;
     ctx.clearRect(0,0,W,H);ctx.font=MONO;ctx.textBaseline='middle';
     /* live badge */
     const blink=reduced||Math.floor(performance.now()/700)%2===0;ctx.fillStyle=blink?C.green2:'rgba(111,220,140,.35)';ctx.fillRect(padL,9,7,7);
-    ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText(narrow?'LIVE · '+fmtInt(st.events)+' readings':'LIVE on Confluent · tempering_line · '+fmtInt(st.events)+' readings',padL+13,13);
-    if(!narrow){ctx.textAlign='right';ctx.fillStyle=C.ink3;ctx.fillText('one reading every '+SEC+' s',padL+pw,13);}
+    ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText((narrow?'LIVE · ':'LIVE on Confluent · ')+(narrow?cfg.topic.split(' · ')[0]:cfg.topic),padL+13,13);
+    ctx.textAlign='right';ctx.fillStyle=C.ink3;ctx.fillText(cfg.unit,padL+pw,13);
     /* grid */
     ctx.strokeStyle=C.grid;ctx.lineWidth=1;ctx.fillStyle=C.ink3;ctx.textAlign='right';
-    niceTicks(lo,hi,4).forEach(v=>{const y=Math.round(Y(v))+0.5;if(y<top-1||y>top+mainH+1)return;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(padL+pw,y);ctx.stroke();ctx.fillText(v.toFixed(1),padL-7,y);});
-    /* the window the line must stay in */
-    const yH=Y(HI),yL=Y(LO);ctx.fillStyle='rgba(66,190,101,.07)';ctx.fillRect(padL,yH,pw,yL-yH);ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(111,220,140,.55)';
-    ctx.beginPath();ctx.moveTo(padL,Math.round(yH)+0.5);ctx.lineTo(padL+pw,Math.round(yH)+0.5);ctx.moveTo(padL,Math.round(yL)+0.5);ctx.lineTo(padL+pw,Math.round(yL)+0.5);ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle=C.green2;ctx.textAlign='left';ctx.fillText(narrow?'spec':'spec 31.0 to 32.2 °C',padL+6,yH+10);
-    /* time axis */
-    ctx.fillStyle=C.ink3;ctx.textBaseline='alphabetic';const ay=top+mainH+15;const nLab=Math.max(2,Math.floor((X(k0)-padL)/120));
-    for(let j=0;j<=nLab;j++){const k=Math.round(j*k0/nLab);const r=vis[k];if(!r)continue;ctx.textAlign=j===0?'left':'center';if(j===nLab)continue;ctx.fillText(hhmm(r.i),X(k),ay);}
-    ctx.textAlign='right';ctx.fillText('+'+mins(HN)+' min',padL+pw,ay);ctx.textBaseline='middle';
-    /* band the model expected, behind the line */
-    const pts=vis.map((r,k)=>({k,r})).filter(p=>p.r.pred!=null);
-    if(pts.length>1){ctx.beginPath();pts.forEach((p,j)=>{const y=Y(p.r.pred+ZB*p.r.sig);j?ctx.lineTo(X(p.k),y):ctx.moveTo(X(p.k),y);});for(let j=pts.length-1;j>=0;j--){const p=pts[j];ctx.lineTo(X(p.k),Y(p.r.pred-ZB*p.r.sig));}ctx.closePath();ctx.fillStyle=C.band;ctx.fill();}
-    /* context and decision markers */
-    const ly0=top+mainH+axisH+8;
-    st.ev.forEach(e=>{if(e.n<vis[0].i)return;const x=Math.round(xi(e.n))+0.5;ctx.strokeStyle='rgba(61,219,217,.55)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,ly0+lanesH);ctx.stroke();ctx.setLineDash([]);});
-    st.dec.forEach(d=>{if(d.n<vis[0].i)return;const x=Math.round(xi(d.n))+0.5;ctx.strokeStyle='rgba(111,220,140,.6)';ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,top+mainH);ctx.stroke();
-      ctx.fillStyle=C.green2;ctx.beginPath();ctx.moveTo(x,top+mainH-9);ctx.lineTo(x+5,top+mainH-4);ctx.lineTo(x,top+mainH+1);ctx.lineTo(x-5,top+mainH-4);ctx.closePath();ctx.fill();
-      if(d.at>d.n+1&&d.at<vis[0].i+total){const xa=Math.round(xi(d.at))+0.5,yb=top+mainH-4;ctx.strokeStyle='rgba(111,220,140,.5)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(x+6,yb);ctx.lineTo(xa-5,yb);ctx.stroke();ctx.setLineDash([]);ctx.strokeStyle=C.green2;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(xa,yb-5);ctx.lineTo(xa+5,yb);ctx.lineTo(xa,yb+5);ctx.lineTo(xa-5,yb);ctx.closePath();ctx.stroke();ctx.lineWidth=1;}});
-    /* the actual line */
+    niceTicks(lo,hi,4).forEach(v=>{const y=Math.round(Y(v))+0.5;if(y<top-1||y>top+mainH+1)return;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(padL+pw,y);ctx.stroke();ctx.fillText(cfg.kind==='spec'?v.toFixed(1):cfg.dec?v.toFixed(cfg.dec):fmtInt(v),padL-7,y);});
+    /* the window or the limit the decision must respect */
+    if(cfg.kind==='spec'){const yH=Y(cfg.hi),yL=Y(cfg.lo);ctx.fillStyle='rgba(66,190,101,.07)';ctx.fillRect(padL,yH,pw,yL-yH);ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(111,220,140,.55)';
+      ctx.beginPath();ctx.moveTo(padL,Math.round(yH)+0.5);ctx.lineTo(padL+pw,Math.round(yH)+0.5);ctx.moveTo(padL,Math.round(yL)+0.5);ctx.lineTo(padL+pw,Math.round(yL)+0.5);ctx.stroke();ctx.setLineDash([]);}
+    if(cfg.kind==='cap'){ctx.setLineDash([5,4]);ctx.lineWidth=1.3;const ya=Y(cfg.limit),xr=st.raise&&st.raise.at-n0<=fc.length?xf(Math.max(0,st.raise.at-n0)):padL+pw;
+      ctx.strokeStyle='rgba(255,131,137,.7)';ctx.beginPath();ctx.moveTo(padL,Math.round(ya)+0.5);ctx.lineTo(xr,Math.round(ya)+0.5);ctx.stroke();
+      if(st.raise&&xr<padL+pw){const yb=Y(cfg.limit+cfg.raise);ctx.strokeStyle=C.green2;ctx.beginPath();ctx.moveTo(xr,Math.round(ya)+0.5);ctx.lineTo(xr,Math.round(yb)+0.5);ctx.lineTo(padL+pw,Math.round(yb)+0.5);ctx.stroke();}
+      ctx.setLineDash([]);ctx.lineWidth=1;}
+    /* the shortfall the forecast sees */
+    if(st.out&&st.out<=fc.length){if(cfg.kind==='stock'){const x0=xf(st.out),x1=xf(fc.length);ctx.fillStyle='rgba(250,77,86,.12)';ctx.fillRect(x0,top,x1-x0,mainH);
+        ctx.save();ctx.beginPath();ctx.rect(x0,top,x1-x0,mainH);ctx.clip();ctx.strokeStyle='rgba(255,131,137,.18)';for(let x=x0-mainH;x<x1;x+=9){ctx.beginPath();ctx.moveTo(x,top+mainH);ctx.lineTo(x+mainH,top);ctx.stroke();}ctx.restore();
+        ctx.strokeStyle=C.red2;ctx.beginPath();ctx.moveTo(Math.round(x0)+0.5,top);ctx.lineTo(Math.round(x0)+0.5,top+mainH);ctx.stroke();}
+      else{ctx.fillStyle='rgba(250,77,86,.22)';ctx.beginPath();let open=false;fc.forEach((p,j)=>{const m=n0+j+1,lim=cfg.kind==='spec'?(p.mean>cfg.hi?cfg.hi:p.mean<cfg.lo?cfg.lo:null):(p.mean>cap(m)?cap(m):null);
+          if(lim!=null){if(!open){ctx.moveTo(xf(j+1),Y(lim));open=true;}ctx.lineTo(xf(j+1),Y(p.mean));}});
+        for(let j=fc.length-1;j>=0;j--){const p=fc[j],m=n0+j+1,lim=cfg.kind==='spec'?(p.mean>cfg.hi?cfg.hi:p.mean<cfg.lo?cfg.lo:null):(p.mean>cap(m)?cap(m):null);if(lim!=null)ctx.lineTo(xf(j+1),Y(lim));}
+        if(open){ctx.closePath();ctx.fill();}}}
+    /* deliveries for the stock streams */
+    if(cfg.kind==='stock'){if(st.lastDeliv&&st.lastDeliv.n>=vis[0].i){const x=Math.round(xi(st.lastDeliv.n))+0.5;ctx.strokeStyle=st.lastDeliv.opt?'rgba(111,220,140,.45)':'rgba(185,195,211,.3)';ctx.beginPath();ctx.moveTo(x,top+mainH*0.55);ctx.lineTo(x,top+mainH);ctx.stroke();}
+      const ta=st.deliv?st.deliv.at-n0:0;if(ta>0&&ta<=fc.length){const x=Math.round(xf(ta))+0.5;ctx.strokeStyle=st.deliv.opt?'rgba(111,220,140,.85)':'rgba(185,195,211,.6)';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(x,top+12);ctx.lineTo(x,top+mainH);ctx.stroke();ctx.setLineDash([]);}}
+    /* the band the model expected, behind the line */
+    if(vis.length>1){ctx.beginPath();vis.forEach((r,k)=>{const y=Y(r.pred+ZB*r.sig);k?ctx.lineTo(X(k),y):ctx.moveTo(X(k),y);});for(let k=vis.length-1;k>=0;k--){const r=vis[k];ctx.lineTo(X(k),Y(Math.max(lo,r.pred-ZB*r.sig)));}ctx.closePath();ctx.fillStyle=C.band;ctx.fill();}
+    /* the context arrives */
+    if(st.ctx&&st.ctx.n>=vis[0].i){const x=Math.round(xi(st.ctx.n))+0.5;ctx.strokeStyle='rgba(61,219,217,.6)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,top+mainH);ctx.stroke();ctx.setLineDash([]);}
+    if(st.dec&&st.dec.n>=vis[0].i){const x=Math.round(xi(st.dec.n))+0.5;ctx.strokeStyle='rgba(111,220,140,.5)';ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,top+mainH);ctx.stroke();}
+    /* the line */
     ctx.save();ctx.shadowColor='rgba(166,200,255,.9)';ctx.shadowBlur=reduced?0:10;ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.lineJoin='round';ctx.lineCap='round';
     ctx.beginPath();vis.forEach((r,k)=>{k?ctx.lineTo(X(k),Y(r.v)):ctx.moveTo(X(k),Y(r.v));});ctx.stroke();ctx.restore();
+    /* what is not normal: outside the band two readings running */
+    const fl=vis.map((r,k)=>r.anom&&((vis[k-1]&&vis[k-1].anom)||(vis[k+1]&&vis[k+1].anom)));let firstF=-1,lastF=-1;
+    vis.forEach((r,k)=>{if(!fl[k])return;if(firstF<0)firstF=k;lastF=k;ctx.save();ctx.shadowColor=C.red;ctx.shadowBlur=reduced?0:12;ctx.beginPath();ctx.arc(X(k),Y(r.v),5,0,Math.PI*2);ctx.fillStyle=C.red2;ctx.fill();ctx.restore();});
     /* now */
     const r0=vis[k0],xn=Math.round(X(k0))+0.5;ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(xn,top);ctx.lineTo(xn,top+mainH);ctx.stroke();
     ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText('now',xn+5,top+8);
-    /* the forecast without context: it only knows the series, so it sees nothing coming */
-    if(gh){ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(185,195,211,.7)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(X(k0),Y(r0.v));gh.forEach((p,j)=>ctx.lineTo(X(k0+1+j),Y(p.mean)));ctx.stroke();ctx.setLineDash([]);
-      const pe=gh[gh.length-1];plate(ctx,narrow?'no context':'without context',X(k0+gh.length)-2,Y(pe.mean)+(pe.mean<(fc[fc.length-1]||pe).mean?14:-14),'right',C.ink2);}
-    /* the forecast with real-time context */
-    if(fc.length){const ok=performance.now()-st.decT<7000&&!st.alert,col=ok?C.green2:C.blue3;
-      ctx.beginPath();ctx.moveTo(X(k0),Y(r0.v));fc.forEach((p,j)=>ctx.lineTo(X(k0+1+j),Y(p.mean+Z80*p.sig)));for(let j=fc.length-1;j>=0;j--)ctx.lineTo(X(k0+1+j),Y(fc[j].mean-Z80*fc[j].sig));ctx.closePath();
-      ctx.fillStyle=ok?'rgba(111,220,140,.14)':C.band;ctx.fill();
-      ctx.save();ctx.shadowColor=ok?'rgba(66,190,101,.9)':'rgba(69,137,255,.9)';ctx.shadowBlur=reduced?0:8;ctx.lineWidth=2.2;ctx.setLineDash([6,4]);
-      let px=X(k0),py=Y(r0.v);fc.forEach((p,j)=>{const x=X(k0+1+j),y=Y(p.mean),out=p.mean>HI||p.mean<LO;ctx.strokeStyle=out?C.red2:col;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(x,y);ctx.stroke();px=x;py=y;});ctx.setLineDash([]);ctx.restore();
-      const pe=fc[fc.length-1];ctx.beginPath();ctx.arc(X(k0+fc.length),Y(pe.mean),4.5,0,Math.PI*2);ctx.fillStyle=(pe.mean>HI||pe.mean<LO)?C.red2:col;ctx.fill();ctx.strokeStyle=C.bg;ctx.lineWidth=2;ctx.stroke();
-      if(st.alert){const p=fc[st.alert-1],x=X(k0+st.alert),y=Y(p.mean);ctx.save();ctx.shadowColor=C.red;ctx.shadowBlur=reduced?0:12;ctx.beginPath();ctx.arc(x,y,5.5,0,Math.PI*2);ctx.fillStyle=C.red2;ctx.fill();ctx.restore();
-        const lab=(narrow?'out in ':'leaves spec in ')+mins(st.alert)+' min',up=p.mean>BASE;ctx.font=MONO;const lw=ctx.measureText(lab).width;let lx=x-10-lw;if(lx<xn+8)lx=Math.min(x+10,padL+pw-lw-4);plate(ctx,lab,lx,y+(up?-14:14),'left',C.red2);}
-      else plate(ctx,pe.mean.toFixed(1)+' °C',X(k0+fc.length)-10,Y(pe.mean)+(pe.mean>BASE?-14:14),'right',col);}
-    /* context lanes: what the other topics say, on the same clock */
-    const lanes=[{k:'room',lab:'room',lo:21,hi:27,fmt:v=>Math.round(v)+' °C'},{k:'speed',lab:'speed',lo:94,hi:121,fmt:v=>Math.round(v)+' %'},{k:'batch',lab:'batch'}];
-    lanes.forEach((L,li)=>{const y0=ly0+li*(laneH+laneGap),y1=y0+laneH;ctx.fillStyle='rgba(255,255,255,.04)';ctx.fillRect(padL,y0,pw,laneH);
-      ctx.fillStyle=C.ink3;ctx.textAlign='right';ctx.fillText(L.lab,padL-7,y0+laneH/2);
-      const xf=X(k0),xe=padL+pw;
-      if(L.k==='batch'){let s=0;const ids=[];let id=st.batchId-st.ev.filter(e=>e.key==='batch'&&e.n>vis[0].i).length;
-        for(let k=1;k<=vis.length;k++){if(k===vis.length||vis[k].c.batch!==vis[k-1].c.batch){const on=vis[s].c.batch>0;ctx.fillStyle=on?'rgba(61,219,217,.45)':'rgba(61,219,217,.16)';ctx.fillRect(X(s),y0+2,X(k-1)-X(s)+1,laneH-4);ids.push({x0:X(s),x1:X(k-1),id});s=k;id++;}}
-        ids.forEach(b=>{if(b.x1-b.x0>40){ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText(String(b.id),b.x0+5,y0+laneH/2);}});
-        ctx.strokeStyle='rgba(61,219,217,.4)';ctx.setLineDash([3,3]);ctx.strokeRect(xf+0.5,y0+2.5,xe-xf-1,laneH-5);ctx.setLineDash([]);
-        plate(ctx,String(st.batchId)+(st.tgt.batch?(narrow?' +butter':' · more cocoa butter'):''),xf+6,y0+laneH/2,'left',C.teal2);return;}
-      const yv=v=>y1-2-(clamp(v,L.lo,L.hi)-L.lo)/(L.hi-L.lo)*(laneH-4);
-      ctx.beginPath();vis.forEach((r,k)=>{k?ctx.lineTo(X(k),yv(r.c[L.k])):ctx.moveTo(X(k),yv(r.c[L.k]));});ctx.lineTo(xf,y1);ctx.lineTo(X(0),y1);ctx.closePath();ctx.fillStyle='rgba(61,219,217,.16)';ctx.fill();
-      ctx.strokeStyle=C.teal2;ctx.lineWidth=1.5;ctx.beginPath();vis.forEach((r,k)=>{k?ctx.lineTo(X(k),yv(r.c[L.k])):ctx.moveTo(X(k),yv(r.c[L.k]));});ctx.stroke();
-      ctx.setLineDash([3,3]);ctx.strokeStyle='rgba(61,219,217,.5)';ctx.beginPath();ctx.moveTo(xf,yv(st.cur[L.k]));for(let j=1;j<=fc.length;j++)ctx.lineTo(X(k0+j),yv(futureCtx(L.k,j)));ctx.stroke();ctx.setLineDash([]);
-      plate(ctx,L.fmt(futureCtx(L.k,fc.length)),xf+6,y0+laneH/2,'left',C.teal2);});
-    /* the latest context change and decision, named on the chart */
-    const le=st.ev[st.ev.length-1];if(le&&le.n>=vis[0].i){const x=xi(le.n),r=x>padL+90;plate(ctx,le.tag,x+(r?-7:7),top+8,r?'right':'left',C.teal2,true);}
-    const ld=st.dec[st.dec.length-1];if(ld&&ld.n>=vis[0].i){const x=xi(ld.n),r=x>padL+120;plate(ctx,'heater '+(ld.delta>0?'+':'−')+Math.abs(ld.delta).toFixed(1)+' °C',x+(r?-8:8),top+mainH-18,r?'right':'left',C.green2);}
-    /* hover */
-    if(st.hover>=0&&st.hover<vis.length){const r=vis[st.hover],x=Math.round(X(st.hover))+0.5;ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,ly0+lanesH);ctx.stroke();ctx.beginPath();ctx.arc(X(st.hover),Y(r.v),5,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle=C.bg;ctx.lineWidth=2;ctx.stroke();}
-    layout={X,Y,vis};}
+    /* the forecast without the context: it only knows the series, so it sees nothing coming */
+    if(gh){ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(185,195,211,.7)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(X(k0),Y(r0.v));gh.forEach((p,j)=>ctx.lineTo(xf(j+1),Y(p.mean)));ctx.stroke();ctx.setLineDash([]);}
+    /* the forecast with the context, green once the decision is in */
+    if(fc.length){const ok=!!st.dec&&!st.out,col=ok?C.green2:C.blue3;
+      ctx.beginPath();ctx.moveTo(X(k0),Y(r0.v));fc.forEach((p,j)=>ctx.lineTo(xf(j+1),Y(p.mean+Z80*p.sig)));for(let j=fc.length-1;j>=0;j--)ctx.lineTo(xf(j+1),Y(Math.max(lo,fc[j].mean-Z80*fc[j].sig)));ctx.closePath();
+      ctx.fillStyle=ok?'rgba(111,220,140,.13)':C.band;ctx.fill();
+      ctx.save();ctx.shadowColor=ok?'rgba(66,190,101,.9)':'rgba(69,137,255,.9)';ctx.shadowBlur=reduced?0:8;ctx.lineWidth=2.2;ctx.setLineDash([6,4]);let px=X(k0),py=Y(r0.v);
+      fc.forEach((p,j)=>{const m=n0+j+1,x=xf(j+1),y=Y(p.mean);const bad=cfg.kind==='stock'?(st.out&&j+1>=st.out):cfg.kind==='spec'?(p.mean>cfg.hi||p.mean<cfg.lo):p.mean>cap(m);
+        ctx.strokeStyle=bad?C.red2:col;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(x,y);ctx.stroke();px=x;py=y;});ctx.setLineDash([]);ctx.restore();}
+    /* labels, on plates so they never sit on a line */
+    const o=cfg.op;
+    if(cfg.kind==='spec')plate(ctx,narrow?'spec':'spec 31.0 to 32.2 °C',padL+6,Y(cfg.hi)+12,'left',C.green2);
+    if(cfg.kind==='cap')plate(ctx,narrow?'limit':cfg.limitTag,padL+6,Y(cfg.limit)-12,'left',C.red2);
+    if(st.ctx&&st.ctx.n>=vis[0].i){const x=xi(st.ctx.n),r=x>padL+140;plate(ctx,cfg.ctx.tag,x+(r?-7:7),top+8,r?'right':'left',C.teal2,true);}
+    if(firstF>=0){const xc=(X(firstF)+X(lastF))/2,yv=Math.min(...vis.slice(firstF,lastF+1).map(r=>Y(r.v)));const up=cfg.an.type==='spike';
+      const ya=top+44,yt=up?yv:Math.max(...vis.slice(firstF,lastF+1).map(r=>Y(r.v)));ctx.strokeStyle='rgba(255,131,137,.55)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(Math.round(xc)+0.5,ya+8);ctx.lineTo(Math.round(xc)+0.5,yt-7);ctx.stroke();ctx.setLineDash([]);plate(ctx,cfg.an.tag,xc,ya,'center',C.red2);}
+    if(gh){const pe=gh[gh.length-1],fe=fc[fc.length-1];plate(ctx,narrow?'no context':'without context',xf(gh.length)-2,Y(pe.mean)+(pe.mean<fe.mean?14:-14),'right',C.ink2);}
+    if(st.out&&st.out<=fc.length&&!st.dec){const lab=o.riskTag(rel(st.out));ctx.font=MONO;const w=ctx.measureText(lab).width,x0=xf(st.out);const lx=Math.min(x0+8+w,padL+pw-4);plate(ctx,lab,lx,top+26,'right',C.red2);}
+    if(cfg.kind==='stock'){const ta=st.deliv?st.deliv.at-n0:0;if(ta>0&&ta<=fc.length){const lab=st.deliv.opt?o.doneTag(st.dec):o.planTag(st.deliv.q);ctx.font=MONO;const w=ctx.measureText(lab).width,x=xf(ta);
+      plate(ctx,lab,Math.min(Math.max(x,padL+w/2+4),padL+pw-w/2-4),top+mainH-10,'center',st.deliv.opt?C.green2:C.ink2);}}
+    else if(st.dec){const at=st.dec.at-n0,x=at>0&&at<=fc.length?xf(at):X(k0);const lab=o.doneTag(st.dec);ctx.font=MONO;const w=ctx.measureText(lab).width;plate(ctx,lab,Math.min(Math.max(x,padL+w/2+4),padL+pw-w/2-4),top+mainH-10,'center',C.green2);}
+    /* time, relative to now */
+    ctx.fillStyle=C.ink3;ctx.textBaseline='alphabetic';const ay=top+mainH+16;
+    vis.forEach((r,k)=>{const back=n0-r.i;if(back>0&&back%24===0&&X(k)>padL+18){ctx.textAlign='center';ctx.fillText('−'+back/12+' h',X(k),ay);}});
+    ctx.textAlign='center';ctx.fillText('now',xn,ay);for(let j=24;j<=fc.length;j+=24){ctx.textAlign=j===fc.length?'right':'center';ctx.fillText('+'+j/12+' h',j===fc.length?padL+pw:xf(j),ay);}
+    ctx.textBaseline='middle';
+    if(st.hover>=0&&st.hover<vis.length){const r=vis[st.hover],x=Math.round(X(st.hover))+0.5;ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,top+mainH);ctx.stroke();ctx.beginPath();ctx.arc(X(st.hover),Y(r.v),5,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle=C.bg;ctx.lineWidth=2;ctx.stroke();}
+    layout={X,Y,vis,n0};}
   function onMove(ev){if(!layout)return;const k=hoverIndex(layout,cv,ev);st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];
-    tip.innerHTML='<b>'+hhmm(r.i)+'</b><br>line '+r.v.toFixed(2)+' °C'+(r.pred!=null?'<br>expected '+(r.pred-ZB*r.sig).toFixed(2)+' to '+(r.pred+ZB*r.sig).toFixed(2):'')+'<br>room '+r.c.room.toFixed(1)+' °C · speed '+Math.round(r.c.speed)+' %';
+    tip.innerHTML='<b>'+(layout.n0-r.i?rel(layout.n0-r.i)+' ago':'now')+'</b><br>'+fmtV(r.v)+' '+cfg.unit+'<br>expected '+fmtV(Math.max(0,r.pred-ZB*r.sig))+' to '+fmtV(r.pred+ZB*r.sig);
     tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.6?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
   cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});
   cv.c.addEventListener('mouseleave',()=>{st.hover=-1;tip.style.display='none';});
-  init();
-  reg({el,resize(){cv.fit();draw();},update(dt){const now=performance.now();st.acc+=dt;const rate=reduced?1400:650;let n=0;while(st.acc>rate){st.acc-=rate;step();n++;}
-      /* the line changes context by itself every so often, until the visitor takes over */
-      if(!st.autoAt)st.autoAt=now+3500;if(now>st.autoAt&&!st.hold&&!KEYS.some(k=>!st.follow[k])){const [k,on]=AUTO[st.autoI%AUTO.length];st.autoI++;setCtx(k,on);st.autoAt=now+19000;}
-      cards();},draw});
+  st.pinT=-1e9;init('retail');
+  reg({el,resize(){cv.fit();draw();},update(dt){st.acc=(st.acc||0)+dt;const rate=reduced?1400:650;while(st.acc>rate){st.acc-=rate;step();}cards();checks();},draw});
   App.listeners.push(()=>cards());
-  /* the demo drives the same line */
-  App.hero={reset(){init();chips.forEach(b=>b.setAttribute('aria-pressed','false'));st.autoAt=performance.now()+60000;st.autoI=0;st.dirty=true;},
-    ctx(k,on){st.autoAt=performance.now()+60000;setCtx(k,on!==false);},
-    hold(on){st.hold=!!on;st.holdUntil=performance.now()+16000;},
-    decide(){st.hold=false;decide();st.autoAt=performance.now()+30000;}};
+  /* the demo drives the same chart, on the store */
+  const hold=ms=>{st.hold=performance.now()+ms;};
+  App.hero={reset(){switchTo('retail',false);hold(60000);},ctx(){hold(60000);context();},anomaly(){hold(60000);anomaly();},
+    optimize(){hold(30000);if(!st.ctx)context();optimize();}};
 })();
 
 /* ============ 01 agent loop ============ */
@@ -2925,97 +2953,6 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   App.listeners.push(()=>{sql();st.dirty=true;});sql();
 })();
 
-/* ============ 03 optimization: trade-offs ============ */
-(function(){
-  const el=$('#uc-opt');if(!el)return;
-  const cv=new Cv($('#op-cv'));
-  const F0=150,F1=210,T0=1400,T1=1500,GF=205,GT=1485,SPEC=98.5,ECAP=98;
-  /* the forecast model: what every setting does to quality, energy and margin */
-  const quality=(f,t)=>clamp(99-0.0028*(f-178)*(f-178)-0.0017*(t-1462)*(t-1462)+0.00003*(f-178)*(t-1462),85,99);
-  const energy=(f,t)=>90+0.11*(t-1400)-0.06*(f-150);
-  const obj=(f,t)=>1.3*(quality(f,t)-93)-0.045*(energy(f,t)-100)+0.02*(f-150);
-  const inLimits=(f,t)=>f<=GF&&t<=GT&&energy(f,t)<=ECAP;
-  const inSpec=(f,t)=>quality(f,t)>=SPEC;
-  const feasible=(f,t)=>inLimits(f,t)&&inSpec(f,t);
-  const st={f:196,t:1418,f0:196,t0:1418,best:null,start:null,anim:null,prog:0,hover:null,lay:null};
-  /* the best setting inside the limits and the spec */
-  let gbest=-1e9,gopt=null;for(let f=F0;f<=F1;f+=0.5)for(let t=T0;t<=T1;t+=0.5){if(!feasible(f,t))continue;const m=obj(f,t);if(m>gbest){gbest=m;gopt={f,t};}}
-  const SCALE=2/(gbest-obj(st.f0,st.t0));
-  const margin=(f,t)=>obj(f,t)*SCALE;
-  const gain=(f,t)=>margin(f,t)-margin(st.f0,st.t0);
-  const fm=(f,t)=>{const m=gain(f,t);return (m>=0?'+':'')+'$'+m.toFixed(2)+'/t';};
-  const n1=n=>Math.round(n).toLocaleString('en-US');
-  /* every candidate setting the optimizer talks about, revealed left to right */
-  const GRID={n:0,ok:0,pts:[]};for(let f=F0;f<=F1;f+=2)for(let t=T0;t<=T1;t+=5){GRID.n++;const ok=feasible(f,t);if(ok)GRID.ok++;GRID.pts.push({f,t,q:quality(f,t),e:energy(f,t),m:margin(f,t),ok});}
-  GRID.pts.sort((a,b)=>a.e-b.e);
-  let mlo=1e9,mhi=-1e9;GRID.pts.forEach(p=>{mlo=Math.min(mlo,p.m);mhi=Math.max(mhi,p.m);});mlo=mhi-3.8;
-  /* the frontier: inside the limits, higher quality only by spending more energy */
-  const front=(()=>{const c=GRID.pts.filter(p=>inLimits(p.f,p.t)).slice().sort((a,b)=>a.e-b.e||b.q-a.q);const out=[];let bestQ=-1;c.forEach(p=>{if(p.q>bestQ+1e-9){out.push(p);bestQ=p.q;}});return out;})();
-  const ramp=u=>{const stops=[[0,[34,56,120]],[0.35,[14,72,200]],[0.6,[15,98,254]],[0.8,[8,189,186]],[1,[241,194,27]]];u=clamp(u,0,1);for(let i=1;i<stops.length;i++){if(u<=stops[i][0]){const a=stops[i-1],b=stops[i];const t=(u-a[0])/(b[0]-a[0]);return [0,1,2].map(c=>Math.round(lerp(a[1][c],b[1][c],t)));}}return stops[stops.length-1][1];};
-  const rgb=(c,a)=>'rgba('+c[0]+','+c[1]+','+c[2]+','+(a==null?1:a)+')';
-  const mcol=m=>ramp((m-mlo)/(mhi-mlo));
-
-  /* ---------- drawing ---------- */
-  let ctx,W,H;
-  function font(px,mono,w){ctx.font=(w||400)+' '+px+'px '+(mono?'"IBM Plex Mono", Menlo, monospace':'"IBM Plex Sans", Arial, sans-serif');}
-  function txt(s,x,y,o){o=o||{};font(o.px||11,o.mono!==false,o.w);ctx.fillStyle=o.c||C.ink3;ctx.textAlign=o.a||'left';ctx.textBaseline=o.b||'middle';if(o.halo){ctx.save();ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=4;ctx.fillText(s,x,y);ctx.restore();}else ctx.fillText(s,x,y);}
-  /* a small callout box that stays inside the plot */
-  function callout(lines,x,y,o){o=o||{};const px=o.px||10.5;font(px,true,o.w);let w=0;lines.forEach(l=>{w=Math.max(w,ctx.measureText(l.s).width);});w+=16;const h=lines.length*(px+5)+9;const L=st.lay;let bx=x+12,by=y-h/2;if(L.narrow||w>L.pw*0.6){bx=x-w/2;by=y+14;if(by+h>L.padT+L.ph-2)by=y-14-h;}else if(bx+w>L.padL+L.pw-2)bx=x-12-w;bx=clamp(bx,L.padL+2,L.padL+L.pw-w-2);by=clamp(by,L.padT+2,L.padT+L.ph-h-2);ctx.fillStyle='rgba(10,20,50,.94)';ctx.fillRect(bx,by,w,h);ctx.strokeStyle=o.border||'rgba(255,255,255,.35)';ctx.lineWidth=1;ctx.strokeRect(bx+.5,by+.5,w-1,h-1);lines.forEach((l,i)=>{txt(l.s,bx+8,by+7+(px+5)*i+px/2,{px,c:l.c||C.ink2,w:l.w});});}
-  function draw(){ctx=cv.ctx;W=cv.W;H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);
-    const narrow=W<600;const padL=narrow?46:60,padR=narrow?12:20,padT=36,padB=40;const pw=W-padL-padR,ph=H-padT-padB;const E0=86,E1=102,Q0=93.5,Q1=99.45;
-    const X=e=>padL+(e-E0)/(E1-E0)*pw,Y=q=>padT+(Q1-q)/(Q1-Q0)*ph;st.lay={padL,padT,pw,ph,E0,E1,Q0,Q1,narrow};
-    txt(narrow?'Up: better quality. Left: less energy.':W<820?'Every point is a setting. Up: better quality. Left: less energy.':'Every point is a setting the model forecast. Up is better quality, left is less energy.',padL,16,{px:11,c:C.ink2});
-    /* grid and axes */ctx.strokeStyle=C.grid;ctx.lineWidth=1;[94,95,96,97,98,99].forEach(q=>{ctx.beginPath();ctx.moveTo(padL,Y(q)+.5);ctx.lineTo(padL+pw,Y(q)+.5);ctx.stroke();txt(q+'%',padL-7,Y(q),{px:10,a:'right'});});
-    (narrow?[86,90,94,98,102]:[86,88,90,92,94,96,98,100,102]).forEach(e=>{txt(e,X(e),H-padB+14,{px:10,a:'center'});});
-    ctx.save();ctx.translate(narrow?10:14,padT+ph/2);ctx.rotate(-Math.PI/2);ctx.fillStyle=C.ink3;ctx.textAlign='center';ctx.fillText('quality forecast',0,0);ctx.restore();txt('energy forecast, kWh per ton',padL+pw/2,H-10,{px:10,a:'center'});
-    /* legend: the color is the margin */if(!narrow){const ly=14,bw=64;font(9,true);const hw=ctx.measureText('high').width;const lx=padL+pw-hw-6-bw;const g=ctx.createLinearGradient(lx,0,lx+bw,0);[0,.35,.6,.8,1].forEach(u=>g.addColorStop(u,rgb(ramp(u))));ctx.fillStyle=g;ctx.fillRect(lx,ly-4,bw,8);txt('high',lx+bw+6,ly,{px:9});txt('low',lx-6,ly,{px:9,a:'right'});font(9,true);const lw=ctx.measureText('low').width;txt('margin',lx-lw-18,ly,{px:10,a:'right',c:C.ink2});}
-    /* constraints */ctx.fillStyle='rgba(250,77,86,.06)';ctx.fillRect(padL,Y(SPEC),pw,padT+ph-Y(SPEC));ctx.fillRect(X(ECAP),padT,padL+pw-X(ECAP),ph);ctx.strokeStyle='rgba(250,77,86,.85)';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(padL,Y(SPEC)+.5);ctx.lineTo(padL+pw,Y(SPEC)+.5);ctx.moveTo(X(ECAP)+.5,padT);ctx.lineTo(X(ECAP)+.5,padT+ph);ctx.stroke();ctx.setLineDash([]);
-    txt('spec: quality ≥ '+SPEC+'%',padL+6,Y(SPEC)+11,{px:10,c:C.red2});txt(narrow?'cap '+ECAP:'energy cap '+ECAP+' kWh/t',X(ECAP)+6,padT+ph-12,{px:10,c:C.red2});
-    ctx.save();ctx.beginPath();ctx.rect(padL,padT,pw,ph);ctx.clip();
-    /* candidates */const prog=st.prog;const shown=st.anim?Math.ceil(GRID.pts.length*Math.min(1,prog*2)):GRID.pts.length;
-    for(let i=0;i<shown;i++){const p=GRID.pts[i];ctx.fillStyle=rgb(mcol(p.m),p.ok?0.95:0.5);ctx.beginPath();ctx.arc(X(p.e),Y(p.q),p.ok?2.8:2,0,Math.PI*2);ctx.fill();}
-    /* frontier */const fk=st.anim?clamp((prog-0.5)*2.5,0,1):1;const faint=!st.anim&&!st.seen;if(fk>0){const n=Math.max(2,Math.ceil(front.length*fk));ctx.beginPath();front.slice(0,n).forEach((p,i)=>i?ctx.lineTo(X(p.e),Y(p.q)):ctx.moveTo(X(p.e),Y(p.q)));ctx.strokeStyle=faint?'rgba(255,255,255,.35)':'#fff';ctx.lineWidth=faint?1.2:1.8;ctx.stroke();
-      if(fk>=1&&!faint){const a=front[Math.floor(front.length*0.5)];txt(narrow?'trade-off frontier':'trade-off frontier · '+front.length+' settings where better quality costs more energy',X(a.e)+10,Y(a.q)+14,{px:10,c:C.ink,halo:true});}}
-    /* now, before, chosen */const nq=quality(st.f,st.t),ne=energy(st.f,st.t);
-    if(st.best){const q=quality(gopt.f,gopt.t),e=energy(gopt.f,gopt.t);const s0=st.start||{f:st.f0,t:st.t0};const q0=quality(s0.f,s0.t),e0=energy(s0.f,s0.t);
-      ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(X(e0),Y(q0));ctx.lineTo(X(e),Y(q));ctx.stroke();ctx.setLineDash([]);
-      ctx.strokeStyle='rgba(255,255,255,.8)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(X(e0),Y(q0),5,0,Math.PI*2);ctx.stroke();txt('before · '+fm(s0.f,s0.t),X(e0)+10,Y(q0)+13,{px:10,c:C.ink2,halo:true});
-      ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=14;ctx.fillStyle=C.green2;ctx.beginPath();ctx.arc(X(e),Y(q),6,0,Math.PI*2);ctx.fill();ctx.restore();ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(X(e),Y(q),10,0,Math.PI*2);ctx.stroke();
-      if(!st.hover)callout(narrow?[{s:'chosen · '+fm(gopt.f,gopt.t),c:C.green2,w:500},{s:'feed '+n1(gopt.f)+' t/h · '+n1(gopt.t)+' °C'}]:[{s:'chosen · '+fm(gopt.f,gopt.t),c:C.green2,w:500},{s:'feed '+n1(gopt.f)+' t/h · '+n1(gopt.t)+' °C'},{s:'quality '+q.toFixed(1)+'% · '+e.toFixed(0)+' kWh/t'},{s:'best margin inside spec and cap',c:C.ink3}],X(e)+10,Y(q),{border:'rgba(111,220,140,.6)'});}
-    else{ctx.save();ctx.shadowColor='#fff';ctx.shadowBlur=12;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(ne),Y(nq),5,0,Math.PI*2);ctx.fill();ctx.restore();if(!st.hover)txt('now · '+fm(st.f,st.t)+(inSpec(st.f,st.t)?'':' · off spec'),X(ne)+10,Y(nq)-12,{px:11,c:C.ink,halo:true});}
-    /* hover */if(st.hover){const p=st.hover;ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(X(p.e),Y(p.q),6,0,Math.PI*2);ctx.stroke();callout([{s:'feed '+n1(p.f)+' t/h · '+n1(p.t)+' °C',c:C.ink,w:500},{s:'quality '+p.q.toFixed(1)+'% · '+p.e.toFixed(0)+' kWh/t'},{s:'margin '+fm(p.f,p.t)+(p.ok?'':inSpec(p.f,p.t)?' · over a limit':' · off spec'),c:p.ok?C.green2:C.red2}],X(p.e),Y(p.q));}
-    ctx.restore();panel();}
-
-  /* ---------- panel ---------- */
-  function panel(){const s0=st.start||{f:st.f,t:st.t};const q=quality(s0.f,s0.t),e=energy(s0.f,s0.t);
-    $('#op-f0').textContent=n1(s0.f)+' t/h';$('#op-t0').textContent=n1(s0.t)+' °C';$('#op-q0').textContent=q.toFixed(1)+'%';$('#op-q0').className=q>=SPEC?'':'dim';$('#op-e0').textContent=e.toFixed(0)+' kWh/t';$('#op-m0').textContent=(s0.f===st.f0&&s0.t===st.t0)?'baseline':fm(s0.f,s0.t);
-    $('#op-feedv').textContent=n1(st.f);$('#op-tempv').textContent=n1(st.t);$('#op-feed').value=Math.round(st.f);$('#op-temp').value=Math.round(st.t);
-    const b=st.best;['f1','t1','q1','e1','m1'].forEach((k,i)=>{const td=$('#op-'+k);if(!b){td.textContent='–';td.className='dim';return;}td.className='';td.textContent=[n1(b.f)+' t/h',n1(b.t)+' °C',quality(b.f,b.t).toFixed(1)+'%',energy(b.f,b.t).toFixed(0)+' kWh/t',fm(b.f,b.t)][i];});}
-  const STEPS=['Forecast quality and energy for every setting','Find the frontier: better quality costs more energy','Pick the best margin inside spec and the energy cap'];
-  function steps(k,texts){$$('#op-steps>div').forEach((d,i)=>{d.className=i<k?'done':i===k?'on':'';});(texts||STEPS).forEach((t,i)=>{if(t)$('#op-s'+(i+1)).textContent=t;});}
-
-  /* ---------- actions ---------- */
-  function optimize(){if(st.anim)cancelAnimationFrame(st.anim);st.best=null;st.start={f:st.f,t:st.t};st.prog=0;st.hover=null;
-    const t0=performance.now(),dur=reduced?1:2600;$('#op-actiont').textContent='Searching …';
-    steps(0,['Forecasting quality and energy for '+n1(GRID.n)+' settings …',STEPS[1],STEPS[2]]);
-    function frame(now){const u=clamp((now-t0)/dur,0,1);st.prog=ease(u);
-      if(u>0.4&&u<=0.75)steps(1,[null,'Finding the frontier: '+front.length+' settings where better quality costs more energy …',null]);
-      else if(u>0.75)steps(2,[null,null,'Picking the best margin of '+n1(GRID.ok)+' settings inside spec and the energy cap …']);
-      if(u<1)st.anim=requestAnimationFrame(frame);else{st.anim=null;st.seen=true;st.best={f:gopt.f,t:gopt.t};st.f=gopt.f;st.t=gopt.t;steps(3,[null,null,'Best of '+n1(GRID.ok)+' feasible settings, sent to the operator']);const a=$('#op-action');a.classList.remove('red');a.classList.add('green');$('#op-actiont').textContent='Feed '+n1(gopt.f)+' t/h at '+n1(gopt.t)+' °C: quality '+quality(gopt.f,gopt.t).toFixed(1)+'%, '+fm(gopt.f,gopt.t).replace('/t',' per ton')+'. Waiting for the operator to approve.';}}
-    st.anim=requestAnimationFrame(frame);}
-  function manual(){if(st.anim)cancelAnimationFrame(st.anim);st.anim=null;st.best=null;st.start=null;st.prog=0;steps(-1);$('#op-actiont').textContent='Your setting. Press Optimize to search from here.';}
-  /* hover a point to read it */
-  const c=$('#op-cv');
-  c.addEventListener('pointermove',ev=>{const L=st.lay;if(!L||st.anim)return;const r=c.getBoundingClientRect();const mx=ev.clientX-r.left,my=ev.clientY-r.top;let best=null,bd=144;GRID.pts.forEach(p=>{const x=L.padL+(p.e-L.E0)/(L.E1-L.E0)*L.pw,y=L.padT+(L.Q1-p.q)/(L.Q1-L.Q0)*L.ph;const d=(x-mx)*(x-mx)+(y-my)*(y-my);if(d<bd){bd=d;best=p;}});st.hover=best;c.style.cursor=best?'crosshair':'';});
-  c.addEventListener('pointerleave',()=>{st.hover=null;c.style.cursor='';});
-  reg({el,resize(){cv.fit();},draw});
-  $('#op-feed').addEventListener('input',e=>{st.f=Number(e.target.value);manual();});
-  $('#op-temp').addEventListener('input',e=>{st.t=Number(e.target.value);manual();});
-  $('#op-go').addEventListener('click',optimize);
-  $('#op-reset').addEventListener('click',()=>{st.f=st.f0;st.t=st.t0;manual();$('#op-actiont').textContent='Press Optimize';});
-  steps(-1);
-})();
-
 /* ============ 03 semantic search ============ */
 (function(){
   const el=$('#uc-search');if(!el)return;
@@ -3290,17 +3227,14 @@ const CS={
   const share=$('#share-link');if(share)share.addEventListener('click',()=>{if(navigator.share){navigator.share({title:document.title,url:location.href}).catch(()=>{});return;}copyText(location.href,null,ok=>{$('#share-toast').textContent=ok?'Link copied.':'Copy the address from your browser bar.';});});
 })();
 
-/* ============ hero: what we predict, and what the optimizer is pointed at ============ */
+/* ============ hero: the headline types the industry on the chart ============ */
 (function(){
   const el=$('#rot'),el2=$('#rot2');if(!el)return;
-  const pairs=[['stockout','service level'],['fraud','risk'],['outage','uptime'],['kiln drift','energy'],['grid peak','cost'],['price swing','margin'],['quality slip','yield'],['anomaly','security']];
-  if(reduced){el.textContent='stockout';if(el2)el2.textContent='service level';return;}
-  let i=0;
-  function type(node,word,done){let k=0;const tick=()=>{node.textContent=word.slice(0,++k);if(k<word.length)setTimeout(tick,55);else done();};tick();}
-  function erase(node,done){const tick=()=>{node.textContent=node.textContent.slice(0,-1);if(node.textContent.length)setTimeout(tick,28);else done();};tick();}
-  function cycle(){setTimeout(()=>erase(el,()=>{i=(i+1)%pairs.length;type(el,pairs[i][0],()=>{if(!el2){cycle();return;}erase(el2,()=>type(el2,pairs[i][1],cycle));});}),2600);}
-  if(el2&&!el2.textContent)el2.textContent=pairs[0][1];
-  cycle();
+  let token=0;
+  function type(node,word,t,done){let k=0;const tick=()=>{if(t!==token)return;node.textContent=word.slice(0,++k);if(k<word.length)setTimeout(tick,55);else done();};tick();}
+  function erase(node,t,done){const tick=()=>{if(t!==token)return;node.textContent=node.textContent.slice(0,-1);if(node.textContent.length)setTimeout(tick,28);else done();};tick();}
+  App.headline=(a,b)=>{const t=++token;if(reduced){el.textContent=a;if(el2)el2.textContent=b;return;}if(el.textContent===a&&(!el2||el2.textContent===b))return;
+    erase(el,t,()=>type(el,a,t,()=>{if(el2)erase(el2,t,()=>type(el2,b,t,()=>{}));}));};
 })();
 
 /* ============ architecture particles ============ */
@@ -3372,14 +3306,14 @@ const CS={
       say:'Time series intelligence meets real-time context. IBM Granite Time Series models now run live inside Confluent.',
       subs:['<em>Time series intelligence</em>','meets <em>real-time context</em>.','IBM Granite Time Series models now run','<em>live inside Confluent</em>.'],
       run:async w=>{if(App.hero)App.hero.reset();}},
-    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:8060,
-      say:'When the context changes, say a warmer room, the forecast sees it coming, minutes before the line drifts out of spec.',
-      subs:['When <em>the context changes</em>,','say a warmer room,','the forecast <em>sees it coming</em>,','minutes before the line drifts out of spec.'],
-      run:async(w,at)=>{await at('say a warmer room');if(App.hero){App.hero.hold(true);App.hero.ctx('room',true);}}},
-    {n:3,act:0,focus:'.hero-head,#st-live',dur:7700,
-      say:'Then it optimizes the setpoint to keep the line in spec, so mission-critical decisions land while they still matter.',
-      subs:['Then it <em>optimizes the setpoint</em>','to keep the line in spec,','so mission-critical decisions land','<em>while they still matter</em>.'],
-      run:async(w,at)=>{await at('optimizes the setpoint');if(App.hero)App.hero.decide();}},
+    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:8920,
+      say:'Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, and an empty shelf is flagged in seconds.',
+      subs:['Take <em>one store</em> on a hot day.','The forecast reads the heat wave','and <em>sees the stockout coming</em>,','and an empty shelf is <em>flagged in seconds</em>.'],
+      run:async(w,at)=>{await at('reads the heat wave');if(App.hero)App.hero.ctx();await at('and an empty shelf');if(App.hero)App.hero.anomaly();}},
+    {n:3,act:0,focus:'.hero-head,#st-live',dur:7580,
+      say:'Then it optimizes the next order to keep the shelf full, so mission-critical decisions land while they still matter.',
+      subs:['Then it <em>optimizes the next order</em>','to keep the shelf full,','so mission-critical decisions land','<em>while they still matter</em>.'],
+      run:async(w,at)=>{await at('optimizes the next order');if(App.hero)App.hero.optimize();}},
     {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#arch-mid',dur:9930,
       say:'Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration.',
       subs:['<em>Better together</em>:','Confluent <em>streams, connects and governs</em> the data,','and Granite turns each event <em>into a decision</em>,','with <em>zero configuration</em>.'],
@@ -3426,7 +3360,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-10-18g';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='2026-10-18h';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}

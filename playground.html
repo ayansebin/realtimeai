@@ -855,16 +855,40 @@ body.pitching .csgrid{opacity:.22;filter:saturate(.3);transition:opacity .6s,fil
 .hf b.warn{color:#ff8389}.hf b.ok{color:#6fdc8c}
 .hf .hf-s{font-size:.8rem;line-height:1.4;color:var(--ink-3)}
 .hf.on{background:rgba(15,98,254,.14);box-shadow:inset 0 2px 0 #4589ff}
-#hf-ctx.on{box-shadow:inset 0 2px 0 #3ddbd9;background:rgba(8,189,186,.1)}
-#hf-dec.on{box-shadow:inset 0 2px 0 #42be65;background:rgba(66,190,101,.1)}
+#hf-ad.on{box-shadow:inset 0 2px 0 #fa4d56;background:rgba(250,77,86,.1)}
+#hf-op.on{box-shadow:inset 0 2px 0 #42be65;background:rgba(66,190,101,.1)}
+button.hf{background:none;border:0;border-radius:0;color:inherit;font:inherit;text-align:left;cursor:pointer;width:100%;margin:0}
+button.hf:hover{background:rgba(255,255,255,.05)}
+button.hf:focus-visible{outline:2px solid #4589ff;outline-offset:-2px}
 @media (min-width:761px) and (max-width:1100px){.hf-k em{display:none}}
 @media (max-width:760px){.hflow{grid-template-columns:1fr}.hf+.hf{border-left:0;border-top:1px solid var(--line)}.hf{padding:11px 16px 12px;gap:.2rem}.hf b{font-size:1.05rem}}
 /* one color language from the headline to the chart: blue predicts, teal is the real-time context, green is the optimized decision */
 .hero-kicker{font-size:clamp(1.2rem,2.1vw,1.75rem);font-weight:400;line-height:1.25;letter-spacing:-.012em;color:var(--ink);max-width:36ch;margin-bottom:-.25rem;text-wrap:balance}
 .hero-kicker .k-ts{color:#0f62fe}
 .hero-kicker .k-ctx{color:#007d79}
-#hf-ctx .hf-k i{color:#3ddbd9}#hf-ts .hf-k i{color:#78a9ff}#hf-dec .hf-k i{color:#6fdc8c}
-#hx-ctx .chip[aria-pressed="true"]{background:rgba(8,189,186,.18);border-color:rgba(61,219,217,.85);color:#fff}
+#hf-fc .hf-k i{color:#78a9ff}#hf-ad .hf-k i{color:#ff8389}#hf-op .hf-k i{color:#6fdc8c}
+/* the hero follows one logic: industries, one universal layer, three outcomes */
+.hx-top{display:grid;gap:12px;padding:clamp(16px,2.2vw,24px) clamp(16px,2.4vw,28px) 0}
+.hx-inds{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.hx-ind{position:relative;display:flex;align-items:center;justify-content:center;gap:.45rem;min-height:38px;padding:.35rem .6rem;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.04);color:var(--ink-2);font:inherit;font-size:.86rem;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.hx-ind svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round}
+.hx-ind:hover{background:rgba(255,255,255,.09);color:#fff}
+.hx-ind[aria-pressed="true"]{background:rgba(51,177,255,.2);border-color:#33b1ff;color:#fff}
+.hx-ind::after{content:"";position:absolute;left:50%;bottom:-10px;width:6px;height:6px;border-right:1.5px solid rgba(61,219,217,.55);border-bottom:1.5px solid rgba(61,219,217,.55);transform:translateX(-50%) rotate(45deg)}
+.hx-ind[aria-pressed="true"]::after{border-color:#3ddbd9}
+.hx-ind:focus-visible{outline:2px solid #4589ff;outline-offset:2px}
+.hx-layer{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:4px;padding:.7rem 1.1rem;border-radius:10px;background:linear-gradient(90deg,#08bdba,#33b1ff);color:#04213b}
+.hx-layer span{flex:1;text-align:center;font-weight:600;font-size:clamp(.84rem,1.25vw,1.02rem);letter-spacing:.005em}
+.hx-layer b{font-weight:700;font-size:.84rem;white-space:nowrap}
+.hx-checks{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.35rem 1.15rem;font-size:.8rem;color:#7fe4e4}
+.hx-lead{color:var(--ink-2)}
+.hx-ck{display:inline-flex;align-items:center;gap:.4rem;transition:color .3s,text-shadow .3s}
+.hx-ck::before{content:"";width:9px;height:5px;border-left:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-2px) rotate(-45deg)}
+.hx-ck.on{color:#fff;text-shadow:0 0 14px rgba(61,219,217,.9)}
+@media (max-width:760px){.hx-inds{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.hx-ind{font-size:.78rem;min-height:34px;padding:.3rem .35rem;gap:.3rem}.hx-ind::after{display:none}
+  .hx-layer{flex-wrap:wrap;justify-content:space-between;padding:.6rem .8rem;gap:.3rem .8rem}.hx-layer span{flex-basis:100%;order:-1;font-size:.84rem}.hx-lead{display:none}.hx-checks{font-size:.74rem;gap:.3rem .9rem}}
+body.pitching #st-live .hx-inds,body.pitching #st-live .hx-checks{display:none}
+body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(300px,42vh,460px)}
 /* during the demo the line and its three cards fit on one screen */
 body.pitching #st-live .stage-top{display:none}
 @media (max-width:760px){body.pitching .hero .canvas-wrap.hx-wrap{height:38vh}}
