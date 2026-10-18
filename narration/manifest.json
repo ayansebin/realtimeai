@@ -5,14 +5,14 @@
   {
    "id": "01",
    "file": "01.mp3",
-   "dur": 9.12,
-   "text": "Foundation models unlocked unstructured data. The bigger prize is streaming data: which payment to stop, when the pump will fail."
+   "dur": 8.83,
+   "text": "Foundation models unlocked unstructured data. The bigger prize is streaming data, where the mission-critical decisions live."
   },
   {
    "id": "02",
    "file": "02.mp3",
-   "dur": 7.87,
-   "text": "Now I B M Granite Time Series models are live on Confluent, and work on series they have never seen."
+   "dur": 8.06,
+   "text": "Now I B M Granite Time Series models run inside Confluent, and work on series they have never seen."
   },
   {
    "id": "03",
@@ -23,32 +23,38 @@
   {
    "id": "04",
    "file": "04.mp3",
-   "dur": 7.13,
-   "text": "Confluent streams and governs the data with zero configuration, so models see live signals."
+   "dur": 10.03,
+   "text": "Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration."
   },
   {
    "id": "05",
    "file": "05.mp3",
-   "dur": 7.99,
-   "text": "That changes the economics: no bespoke model per series, no months of expert work, no safety margins."
+   "dur": 8.81,
+   "text": "That changes the economics: not a few hundred modeled series and safety margins on the rest, but every series, every cycle."
   },
   {
    "id": "06",
    "file": "06.mp3",
-   "dur": 8.33,
-   "text": "No data science army: a demand planner, a fraud analyst or a process engineer runs them on their own streams."
+   "dur": 9.14,
+   "text": "Six mission-critical decisions, no data science team required: production, anomalies, supply chain, fraud, search and trading."
   },
   {
    "id": "07",
    "file": "07.mp3",
-   "dur": 7.1,
-   "text": "On a factory line, it forecasts the shift, flags a slow drift, and finds the last run like this."
+   "dur": 5.23,
+   "text": "Live twins for industrial plants, retail, banking and airlines."
   },
   {
    "id": "08",
    "file": "08.mp3",
-   "dur": 8.04,
-   "text": "Forecasting, anomaly detection, optimization and search, on every stream. Contact us to start with yours."
+   "dur": 9.96,
+   "text": "Proven in the field: tickets only on confirmed causes in telco, thirty models to two in cement, ten percent lower error in finance."
+  },
+  {
+   "id": "09",
+   "file": "09.mp3",
+   "dur": 4.39,
+   "text": "Bring us a stream and a decision. Contact us to start."
   }
  ]
 }
