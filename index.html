@@ -1006,7 +1006,7 @@ FROM pos_sales;</code></pre></div>
       </div>
     </div>
 
-    <div class="chapter-head sub">
+    <div class="chapter-head sub" id="h-arch">
       <h2>One stream. Every decision.</h2>
       <p>Flink runs the models on every event. Decisions land as topics, tables, alerts and agent calls.</p>
     </div>
@@ -1495,7 +1495,7 @@ FROM pos_sales;</code></pre></div>
   </div>
 </div>
 <div class="pitch" id="pitch" hidden role="region" aria-label="Live demo">
-  <div class="pitch-top"><span class="pitch-live"><i></i><span class="tx">Live demo</span></span><span class="pitch-act" id="pitch-act">01 Innovation</span><span class="pitch-step" id="pitch-step">1 / 11</span>
+  <div class="pitch-top"><span class="pitch-live"><i></i><span class="tx">Live demo</span></span><span class="pitch-act" id="pitch-act">01 Innovation</span><span class="pitch-step" id="pitch-step">1 / 8</span>
     <span class="pitch-tr"><button class="pitch-x" id="pitch-min" type="button" aria-label="Minimize the demo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 12h10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="tx">Minimize</span></button><button class="pitch-x" id="pitch-exit" type="button" aria-label="Close the demo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="tx">Close</span><kbd>Esc</kbd></button></span></div>
   <div class="pitch-prog" id="pitch-prog" role="group" aria-label="Jump to a step"></div>
   <div class="pitch-cap" id="pitch-cap" aria-live="polite"></div>
@@ -1508,7 +1508,7 @@ FROM pos_sales;</code></pre></div>
   </div>
 </div>
 <div class="pitch-mini" id="pitch-mini" hidden role="region" aria-label="Demo paused">
-  <button class="pitch-mini-go" id="pitch-resume" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Resume the demo <span id="pitch-mini-step">1 / 11</span></button>
+  <button class="pitch-mini-go" id="pitch-resume" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Resume the demo <span id="pitch-mini-step">1 / 8</span></button>
   <button class="pitch-mini-x" id="pitch-mini-x" type="button" aria-label="Close the demo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
 </div>
 <footer class="foot">
@@ -3219,54 +3219,44 @@ const CS={
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>click('[role=tab][aria-controls="'+id+'"]');
-  /* one pitch in three acts: the pain and what is new, the value, where it applies and the proof, then the ask.
-     subs are the subtitles, timed to the voice by their length. at('phrase') waits for that phrase in the line */
+  /* one pitch, about a minute: the prize, what is new, what it tells you, the platform, the economics, who uses it,
+     a line on the floor, where the value lands. subs are the subtitles, timed to the voice by their length.
+     at('phrase') waits for that phrase in the line */
   const ACTS=['01 Innovation','02 Value','03 Use cases','Contact'];
+  const mode=v=>click('#live-mode .chip[data-v="'+v+'"]');
+  const lightCard=id=>{$$('#uctabs [role=tab]').forEach(x=>x.classList.toggle('tour-hi',x.getAttribute('aria-controls')===id));const c=$('#uctabs [aria-controls="'+id+'"]'),strip=$('#uctabs');if(c&&strip.scrollWidth>strip.clientWidth+4){try{strip.scrollTo({left:Math.max(0,c.offsetLeft-16),behavior:reduced?'auto':'smooth'});}catch(e){}}};
   const SCRIPT=[
-    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:5600,
-      say:'Your business runs on streams, but most decisions still wait for a batch job.',
-      subs:['Your business runs on <em>streams</em>,','but most decisions still wait for <em>a batch job</em>.'],
-      run:async w=>{chipSet('live-mode','ad');click('#live-mode .chip[data-v="ad"]');click('#live-sc .chip[data-v="temp"]');}},
-    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:9400,
-      say:'Now IBM Granite Time Series models run inside Confluent. Every event is scored the moment it arrives, with no training.',
-      subs:['Now IBM Granite Time Series models run <em>inside Confluent</em>.','Every event is scored <em>the moment it arrives</em>,','with <em>no training</em>.'],
-      run:async(w,at)=>{await at('Every event');click('#live-poke');}},
-    {n:3,act:0,focus:'.hero-head,#st-live',dur:6700,
-      say:'The same line of Flink SQL looks ahead, and forecasts the next thirty-two steps with a band.',
-      subs:['The same line of Flink SQL <em>looks ahead</em>,','and forecasts <em>the next 32 steps</em> with a band.'],
-      run:async(w,at)=>{click('#live-mode .chip[data-v="fc"]');await at('and forecasts');setRange('#live-h',32);}},
-    {n:4,act:0,focus:'#uc-opt',scroll:'#uc-opt',pre:()=>click('#op-reset'),dur:8400,
-      say:'Once you see what comes next, you can choose what to do. The optimizer finds the most profitable setting that still meets spec.',
-      subs:['Once you see what comes next,','you can <em>choose what to do</em>.','The optimizer finds <em>the most profitable setting</em>','that still meets spec.'],
-      run:async(w,at)=>{await at('you can choose');click('#op-go');}},
-    {n:5,act:0,focus:'#st-agent',scroll:'#st-agent',scrollM:'#n2',dur:6900,
-      say:'Then an agent closes the loop: forecast, flag, reasoning and purchase order, in under a second.',
-      subs:['Then an agent <em>closes the loop</em>:','forecast, flag, reasoning and purchase order,','in <em>under a second</em>.'],
-      run:async w=>{click('#ag-sc .chip[data-v="retail"]');await w(250);click('#ag-run');}},
-    {n:6,act:1,focus:'#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:8900,
-      say:'For your teams, that means going live in days instead of months, five to ten percent more accuracy, and decisions in seconds.',
-      subs:['For your teams: <em>live in days</em>, not months,','<em>5 to 10%</em> more accuracy,','and decisions <em>in seconds</em>.'],
+    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:9000,
+      say:'Foundation models unlocked unstructured data. The bigger prize is streaming data: which payment to stop, when the pump will fail.',
+      subs:['Foundation models unlocked <em>unstructured data</em>.','The bigger prize is <em>streaming data</em>:','which payment to stop, when the pump will fail.'],
+      run:async w=>{chipSet('live-mode','ad');mode('ad');click('#live-sc .chip[data-v="temp"]');}},
+    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:7800,
+      say:'Now IBM Granite Time Series models are live on Confluent, and work on series they have never seen.',
+      subs:['Now IBM Granite Time Series models are <em>live on Confluent</em>,','and work on series <em>they have never seen</em>.'],
+      run:async(w,at)=>{await at('and work on');click('#live-poke');}},
+    {n:3,act:0,focus:'.hero-head,#st-live',dur:7500,
+      say:'They tell you what comes next, how far it sits from normal, which history matches, and which settings hit the target.',
+      subs:['They tell you <em>what comes next</em>,','<em>how far it sits from normal</em>,','<em>which history matches</em>,','and <em>which settings hit the target</em>.'],
+      run:async(w,at)=>{await at('what comes next');mode('fc');await w(500);setRange('#live-h',32);await at('how far it sits');mode('ad');await w(400);click('#live-poke');await at('which history');mode('search');await at('which settings');mode('opt');}},
+    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#st-arch',dur:7000,
+      say:'Confluent streams and governs the data with zero configuration, so models see live signals.',
+      subs:['Confluent streams and governs the data','<em>with zero configuration</em>, so models see <em>live signals</em>.'],
       run:async w=>{}},
-    {n:7,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs',scroll:'#uctabs',dur:8000,
-      say:'And it works wherever a decision rides on a stream: production, anomalies, supply chain, fraud, search and trading.',
-      subs:['And it works wherever <em>a decision rides on a stream</em>:','production, anomalies, supply chain,','fraud, search and trading.'],
-      run:async(w,at)=>{const cards=$$('#uctabs [role=tab]'),strip=$('#uctabs');const s=SCRIPT[6];await at('production');const per=Math.max(500,(s.dur*(1-s.say.indexOf('production')/s.say.length))/cards.length);
-        for(const c of cards){cards.forEach(x=>x.classList.toggle('tour-hi',x===c));if(strip.scrollWidth>strip.clientWidth+4){try{strip.scrollTo({left:Math.max(0,c.offsetLeft-16),behavior:reduced?'auto':'smooth'});}catch(e){}}await w(per);}cards.forEach(x=>x.classList.remove('tour-hi'));}},
-    {n:8,act:2,focus:'#uc-fraud',scroll:'#uc-fraud',pre:()=>tab('uc-fraud'),dur:7200,
-      say:'Take card payments. Every card gets its own normal, so the odd swipe is held before it is approved.',
-      subs:['Take card payments.','Every card gets <em>its own normal</em>,','so the odd swipe is <em>held before it is approved</em>.'],
-      run:async(w,at)=>{await at('so the odd swipe');click('#fr-inject .chip[data-v="stolen"]');}},
-    {n:9,act:2,focus:'#cs-telco',scroll:'#cs-telco',pre:()=>{tab('cs-telco');click('#ni-mode .chip[data-v="assist"]');},dur:8200,
-      say:'It is already proven in the field. IBM Network Intelligence opens a ticket only when the cause is confirmed.',
-      subs:['It is already <em>proven in the field</em>.','IBM Network Intelligence opens a ticket','<em>only when the cause is confirmed</em>.'],
-      run:async w=>{await w(250);click('#ni-inject .chip[data-v="fiber"]');}},
-    {n:10,act:2,focus:'#cs-cement',scroll:'#cs-cement',pre:()=>{tab('cs-cement');if(App.cement)App.cement.set(false);},dur:7700,
-      say:'At a cement producer, thirty models became two, and accuracy rose from ninety-three to ninety-nine percent.',
-      subs:['At a cement producer, <em>30 models became 2</em>,','and accuracy rose from 93 to <em>99%</em>.'],
-      run:async(w,at)=>{await at('thirty models');if(App.cement)App.cement.set(true);}},
-    {n:11,act:3,focus:'.contact',scroll:'#contact',dur:6500,
-      say:'So bring us one stream and one decision. Contact us, and we will show you what it can do.',
-      subs:['So bring us <em>one stream and one decision</em>.','<em>Contact us</em>, and we will show you what it can do.'],
+    {n:5,act:1,focus:'#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:7900,
+      say:'That changes the economics: no bespoke model per series, no months of expert work, no safety margins.',
+      subs:['That changes <em>the economics</em>:','no bespoke model per series, no months of expert work,','<em>no safety margins</em>.'],
+      run:async w=>{}},
+    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs',scroll:'#uctabs',dur:8200,
+      say:'No data science army: a demand planner, a fraud analyst or a process engineer runs them on their own streams.',
+      subs:['No data science army:','a <em>demand planner</em>, a <em>fraud analyst</em> or a <em>process engineer</em>','runs them <em>on their own streams</em>.'],
+      run:async(w,at)=>{await at('a demand planner');lightCard('uc-demand');await at('a fraud analyst');lightCard('uc-fraud');await at('a process engineer');lightCard('uc-prod');await at('runs them');$$('#uctabs [role=tab]').forEach(x=>x.classList.add('tour-hi'));}},
+    {n:7,act:2,focus:'#st-plant',scroll:'#st-plant',pre:()=>{tab('st-plant');click('#pl-sc .chip[data-v="opt"]');},dur:7000,
+      say:'On a factory line, it forecasts the shift, flags a slow drift, and finds the last run like this.',
+      subs:['On a factory line, it <em>forecasts the shift</em>,','<em>flags a slow drift</em>,','and <em>finds the last run like this</em>.'],
+      run:async(w,at)=>{await at('flags a slow drift');click('#pl-sc .chip[data-v="anom"]');}},
+    {n:8,act:3,focus:'.contact',scroll:'#contact',dur:7900,
+      say:'Forecasting, anomaly detection, optimization and search, on every stream. Contact us to start with yours.',
+      subs:['Forecasting, anomaly detection, optimization and search, <em>on every stream</em>.','<em>Contact us</em> to start with yours.'],
       run:async w=>{}}
   ];
   const store={get(k){try{return localStorage.getItem(k);}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
@@ -3285,7 +3275,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-10-18c';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='2026-10-18e';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}
