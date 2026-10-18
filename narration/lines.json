@@ -1,10 +1,11 @@
 [
- {"id": "01", "text": "Every event in your stream is a decision. Granite Time Series models score each one in flight, on Confluent. Poke it."},
+ {"id": "01", "text": "Every event in your stream is a decision. I B M Granite Time Series models score each one in flight, on Confluent. Poke it."},
  {"id": "02", "text": "Switch to forecast: the next thirty-two steps, with the band."},
- {"id": "03", "text": "No training. It has never seen this signal, and it finds the pattern in milliseconds."},
+ {"id": "03", "text": "Then optimize it. The optimizer finds the setting that earns the most and still meets spec. The operator approves."},
  {"id": "04", "text": "Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent."},
- {"id": "05", "text": "Thirty bespoke models become two. Six months become eight weeks. Accuracy from ninety-three to ninety-nine percent."},
+ {"id": "05", "text": "Three things change. Ten times faster to value, five to ten percent more accurate, and decisions in seconds, not days."},
  {"id": "06", "text": "Every card has its own normal. The odd swipe is held before authorization."},
- {"id": "07", "text": "The kiln finds its own setpoint inside the guardrails. The operator approves."},
- {"id": "08", "text": "One statement of Flink S Q L. Run it on your stream."}
+ {"id": "07", "text": "I B M Network Intelligence. T S Pulse flags the anomaly, agents confirm the cause, and a ticket opens only when it is real."},
+ {"id": "08", "text": "Thirty models become two. Six months become eight to ten weeks. Accuracy from ninety-three to ninety-nine percent."},
+ {"id": "09", "text": "Bring us a stream and a decision. Contact us for opportunities."}
 ]
