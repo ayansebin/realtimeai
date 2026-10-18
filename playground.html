@@ -937,6 +937,18 @@ body.pitching .hx-layer{min-height:86px}
 .hf.done:not(:last-child)::after{border-color:var(--hl)}
 @media (max-width:760px){.hf:not(:last-child)::after{right:auto;left:30px;top:auto;bottom:-8px;transform:rotate(135deg)}.hf .hf-k{font-size:1rem}.hf .hf-k .hf-n{width:26px;height:26px}}
 @media (prefers-reduced-motion:reduce){.hf.on .hf-k .hf-n,.hf.on .hf-ic *,.hf.on .hf-t{animation:none}.hf.on .hf-t{color:#fff;background:none}}
+/* the layer as a system diagram: flat, gridded, crisp */
+.hx-layer{min-height:156px;border-radius:4px;box-shadow:none;border:1px solid rgba(255,255,255,.14);
+  background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:24px 24px}
+.hx-layer-in{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;padding:0}
+.hx-ben{border-radius:4px;border:1px solid rgba(255,255,255,.14);background:rgba(10,20,48,.55)}
+.hx-ben.on{border-color:#78a9ff;background:rgba(15,98,254,.16);box-shadow:inset 0 2px 0 #4589ff}
+@media (max-width:920px){.hx-layer{min-height:176px}}
+@media (min-width:600px) and (max-width:920px){.hx-layer{min-height:196px}}
+@media (min-width:921px){body.pitching .hx-layer{min-height:140px}}
+@media (min-width:921px) and (max-width:1180px){.hx-layer{min-height:196px}body.pitching .hx-layer{min-height:170px}}
+@media (max-width:920px){body.pitching .hx-layer{min-height:170px}}
+body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(260px,32vh,400px)}
 /* during the demo the line and its three cards fit on one screen */
 body.pitching #st-live .stage-top{display:none}
 @media (max-width:760px){body.pitching .hero .canvas-wrap.hx-wrap{height:38vh}}
