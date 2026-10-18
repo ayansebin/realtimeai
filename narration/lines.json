@@ -1,7 +1,7 @@
 [
  {"id": "01", "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run live inside Confluent."},
- {"id": "02", "text": "When the context changes, say a warmer room, the forecast sees it coming, minutes before the line drifts out of spec."},
- {"id": "03", "text": "Then it optimizes the setpoint to keep the line in spec, so mission-critical decisions land while they still matter."},
+ {"id": "02", "text": "Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, and an empty shelf is flagged in seconds."},
+ {"id": "03", "text": "Then it optimizes the next order to keep the shelf full, so mission-critical decisions land while they still matter."},
  {"id": "04", "text": "Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration."},
  {"id": "05", "text": "For your teams: ten times faster time to value, five to ten percent more accuracy, and decisions in seconds."},
  {"id": "06", "text": "Six mission-critical decisions, no data science team required: production, anomalies, supply chain, fraud, search and trading."},
