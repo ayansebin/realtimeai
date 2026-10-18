@@ -955,25 +955,27 @@ body.pitching .hx-layer{min-height:86px}
 .ax-k.ag{margin-left:.9rem}
 .ax-k.ag:hover,.ax-k.ag:focus-visible,.ax-k.ag.on,.ax-k.ag.tour-hi{border-color:#be95ff;background:rgba(190,149,255,.2)}
 @media (max-width:760px){.ax{padding:8px}.ax-gh.ibm,.ax-k.ag{margin-left:0}.ax-gh{width:100%;margin-top:.3rem}.ax-say{min-height:4.4em;font-size:1rem}}
-/* the joint value, lit as the event moves through the chart */
-.ax-vals{margin-top:1.5rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.12)}
-.ax-vh{margin-bottom:.9rem}
-.ax-vk{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#78a9ff;margin-bottom:.35rem}
-.ax-vh h3{margin:0;font-size:clamp(1.2rem,1.9vw,1.5rem);font-weight:400;color:#fff;line-height:1.25}
-.ax-vg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-@media (max-width:1000px){.ax-vg{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.ax-vg{grid-template-columns:1fr;gap:8px}}
-.ax-v{position:relative;display:grid;grid-template-columns:38px minmax(0,1fr);gap:.3rem .85rem;align-content:start;text-align:left;font:inherit;color:inherit;background:rgba(10,20,48,.62);border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:.95rem 1rem 1rem;cursor:pointer;overflow:hidden;transition:border-color .35s,background .35s}
-.ax-v::before{content:'';position:absolute;left:0;top:0;height:2px;width:0;background:#4589ff;transition:width .7s ease}
+/* the joint value: six numbered tiles, matched by markers on the chart */
+.ax-vals{margin-top:1.1rem}
+.ax-vh{margin-bottom:.75rem}
+.ax-vk{display:block;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#78a9ff;margin-bottom:.3rem}
+.ax-vh h3{margin:0;font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:400;color:#fff;line-height:1.3}
+.ax-vh h3 span{font-size:.82rem;color:var(--ink-3)}
+.ax-vg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+@media (max-width:1100px){.ax-vg{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.ax-vg{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.ax-vh h3 span{display:block}}
+.ax-v{position:relative;display:grid;gap:.35rem;align-content:start;text-align:left;font:inherit;color:inherit;background:rgba(10,20,48,.62);border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:.75rem .8rem .8rem;cursor:pointer;overflow:hidden;transition:border-color .35s,background .35s}
+.ax-v::before{content:'';position:absolute;left:0;top:0;height:2px;width:0;background:#4589ff;transition:width .6s ease}
 .ax-v.on::before,.ax-v:hover::before,.ax-v:focus-visible::before,.ax-v.tour-hi::before{width:100%}
-.ax-v.on,.ax-v:hover,.ax-v:focus-visible,.ax-v.tour-hi{border-color:#78a9ff;background:rgba(15,98,254,.16)}
-.ax-vi{grid-row:1/4;width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(166,200,255,.35);border-radius:3px;color:#a6c8ff;transition:background .35s,border-color .35s,color .35s}
-.ax-vi svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
-.ax-v b{font-weight:500;font-size:1rem;color:#fff;line-height:1.3}
-.ax-vt{font-size:.84rem;line-height:1.48;color:var(--ink-3)}
-.ax-vc{justify-self:start;margin-top:.4rem;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;color:#a6c8ff;border:1px solid rgba(166,200,255,.3);border-radius:2px;padding:.16rem .45rem;transition:color .35s,border-color .35s}
-.ax-v.on .ax-vi,.ax-v:hover .ax-vi,.ax-v:focus-visible .ax-vi,.ax-v.tour-hi .ax-vi{color:#fff;border-color:#78a9ff;background:rgba(15,98,254,.38)}
-.ax-v.on .ax-vc,.ax-v:hover .ax-vc,.ax-v.tour-hi .ax-vc{color:#fff;border-color:#78a9ff}
+.ax-v.on,.ax-v:hover,.ax-v:focus-visible,.ax-v.tour-hi{border-color:#78a9ff;background:rgba(15,98,254,.18)}
+.ax-vtop{display:flex;align-items:center;gap:.5rem;margin-bottom:.15rem}
+.ax-vn{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:#a6c8ff;border:1.2px solid rgba(166,200,255,.7);background:#0a1430;transition:background .35s,color .35s,border-color .35s}
+.ax-v.on .ax-vn,.ax-v:hover .ax-vn,.ax-v:focus-visible .ax-vn,.ax-v.tour-hi .ax-vn{background:#0f62fe;color:#fff;border-color:#fff}
+.ax-vi{display:grid;place-items:center;color:#a6c8ff;transition:color .35s}
+.ax-vi svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.ax-v.on .ax-vi,.ax-v:hover .ax-vi,.ax-v.tour-hi .ax-vi{color:#fff}
+.ax-v b{font-weight:500;font-size:.92rem;color:#fff;line-height:1.28}
+.ax-vt{font-size:.78rem;line-height:1.4;color:var(--ink-3)}
 .ax-v .i-flow{stroke-dasharray:4 3}
 .ax-v.on .i-flow,.ax-v:hover .i-flow,.ax-v.tour-hi .i-flow{animation:axDash 1s linear infinite}
 @keyframes axDash{to{stroke-dashoffset:-14}}
@@ -990,7 +992,7 @@ body.pitching .hx-layer{min-height:86px}
 .ax-v .i-needle{transform-origin:12px 18px}
 .ax-v.on .i-needle,.ax-v:hover .i-needle,.ax-v.tour-hi .i-needle{animation:axNeedle 1.5s cubic-bezier(.3,1.4,.5,1) infinite}
 @keyframes axNeedle{0%{transform:rotate(-95deg)}55%,100%{transform:rotate(0)}}
-@media (max-width:560px){.ax-v{grid-template-columns:34px minmax(0,1fr);padding:.8rem .85rem .85rem}.ax-vi{width:34px;height:34px}.ax-vt{font-size:.82rem}}
+body.pitching #st-arch .ax-vh{display:none}
 @media (prefers-reduced-motion:reduce){.ax-v *,.ax-v::before{animation:none!important;transition:none!important}}
 body.pitching #st-arch .stage-foot{display:none}
 @media (prefers-reduced-motion:reduce){.ax-say span{transition:none}}

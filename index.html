@@ -955,25 +955,27 @@ body.pitching .hx-layer{min-height:86px}
 .ax-k.ag{margin-left:.9rem}
 .ax-k.ag:hover,.ax-k.ag:focus-visible,.ax-k.ag.on,.ax-k.ag.tour-hi{border-color:#be95ff;background:rgba(190,149,255,.2)}
 @media (max-width:760px){.ax{padding:8px}.ax-gh.ibm,.ax-k.ag{margin-left:0}.ax-gh{width:100%;margin-top:.3rem}.ax-say{min-height:4.4em;font-size:1rem}}
-/* the joint value, lit as the event moves through the chart */
-.ax-vals{margin-top:1.5rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.12)}
-.ax-vh{margin-bottom:.9rem}
-.ax-vk{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#78a9ff;margin-bottom:.35rem}
-.ax-vh h3{margin:0;font-size:clamp(1.2rem,1.9vw,1.5rem);font-weight:400;color:#fff;line-height:1.25}
-.ax-vg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-@media (max-width:1000px){.ax-vg{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.ax-vg{grid-template-columns:1fr;gap:8px}}
-.ax-v{position:relative;display:grid;grid-template-columns:38px minmax(0,1fr);gap:.3rem .85rem;align-content:start;text-align:left;font:inherit;color:inherit;background:rgba(10,20,48,.62);border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:.95rem 1rem 1rem;cursor:pointer;overflow:hidden;transition:border-color .35s,background .35s}
-.ax-v::before{content:'';position:absolute;left:0;top:0;height:2px;width:0;background:#4589ff;transition:width .7s ease}
+/* the joint value: six numbered tiles, matched by markers on the chart */
+.ax-vals{margin-top:1.1rem}
+.ax-vh{margin-bottom:.75rem}
+.ax-vk{display:block;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#78a9ff;margin-bottom:.3rem}
+.ax-vh h3{margin:0;font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:400;color:#fff;line-height:1.3}
+.ax-vh h3 span{font-size:.82rem;color:var(--ink-3)}
+.ax-vg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+@media (max-width:1100px){.ax-vg{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.ax-vg{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.ax-vh h3 span{display:block}}
+.ax-v{position:relative;display:grid;gap:.35rem;align-content:start;text-align:left;font:inherit;color:inherit;background:rgba(10,20,48,.62);border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:.75rem .8rem .8rem;cursor:pointer;overflow:hidden;transition:border-color .35s,background .35s}
+.ax-v::before{content:'';position:absolute;left:0;top:0;height:2px;width:0;background:#4589ff;transition:width .6s ease}
 .ax-v.on::before,.ax-v:hover::before,.ax-v:focus-visible::before,.ax-v.tour-hi::before{width:100%}
-.ax-v.on,.ax-v:hover,.ax-v:focus-visible,.ax-v.tour-hi{border-color:#78a9ff;background:rgba(15,98,254,.16)}
-.ax-vi{grid-row:1/4;width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(166,200,255,.35);border-radius:3px;color:#a6c8ff;transition:background .35s,border-color .35s,color .35s}
-.ax-vi svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
-.ax-v b{font-weight:500;font-size:1rem;color:#fff;line-height:1.3}
-.ax-vt{font-size:.84rem;line-height:1.48;color:var(--ink-3)}
-.ax-vc{justify-self:start;margin-top:.4rem;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;color:#a6c8ff;border:1px solid rgba(166,200,255,.3);border-radius:2px;padding:.16rem .45rem;transition:color .35s,border-color .35s}
-.ax-v.on .ax-vi,.ax-v:hover .ax-vi,.ax-v:focus-visible .ax-vi,.ax-v.tour-hi .ax-vi{color:#fff;border-color:#78a9ff;background:rgba(15,98,254,.38)}
-.ax-v.on .ax-vc,.ax-v:hover .ax-vc,.ax-v.tour-hi .ax-vc{color:#fff;border-color:#78a9ff}
+.ax-v.on,.ax-v:hover,.ax-v:focus-visible,.ax-v.tour-hi{border-color:#78a9ff;background:rgba(15,98,254,.18)}
+.ax-vtop{display:flex;align-items:center;gap:.5rem;margin-bottom:.15rem}
+.ax-vn{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:#a6c8ff;border:1.2px solid rgba(166,200,255,.7);background:#0a1430;transition:background .35s,color .35s,border-color .35s}
+.ax-v.on .ax-vn,.ax-v:hover .ax-vn,.ax-v:focus-visible .ax-vn,.ax-v.tour-hi .ax-vn{background:#0f62fe;color:#fff;border-color:#fff}
+.ax-vi{display:grid;place-items:center;color:#a6c8ff;transition:color .35s}
+.ax-vi svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.ax-v.on .ax-vi,.ax-v:hover .ax-vi,.ax-v.tour-hi .ax-vi{color:#fff}
+.ax-v b{font-weight:500;font-size:.92rem;color:#fff;line-height:1.28}
+.ax-vt{font-size:.78rem;line-height:1.4;color:var(--ink-3)}
 .ax-v .i-flow{stroke-dasharray:4 3}
 .ax-v.on .i-flow,.ax-v:hover .i-flow,.ax-v.tour-hi .i-flow{animation:axDash 1s linear infinite}
 @keyframes axDash{to{stroke-dashoffset:-14}}
@@ -990,7 +992,7 @@ body.pitching .hx-layer{min-height:86px}
 .ax-v .i-needle{transform-origin:12px 18px}
 .ax-v.on .i-needle,.ax-v:hover .i-needle,.ax-v.tour-hi .i-needle{animation:axNeedle 1.5s cubic-bezier(.3,1.4,.5,1) infinite}
 @keyframes axNeedle{0%{transform:rotate(-95deg)}55%,100%{transform:rotate(0)}}
-@media (max-width:560px){.ax-v{grid-template-columns:34px minmax(0,1fr);padding:.8rem .85rem .85rem}.ax-vi{width:34px;height:34px}.ax-vt{font-size:.82rem}}
+body.pitching #st-arch .ax-vh{display:none}
 @media (prefers-reduced-motion:reduce){.ax-v *,.ax-v::before{animation:none!important;transition:none!important}}
 body.pitching #st-arch .stage-foot{display:none}
 @media (prefers-reduced-motion:reduce){.ax-say span{transition:none}}
@@ -1085,27 +1087,15 @@ body.pitching #st-live .stage-top{display:none}
           <i class="ax-a" id="arch-a-in" aria-hidden="true"></i><i class="ax-a" id="arch-a-chip" aria-hidden="true"></i><i class="ax-a" id="arch-a-out" aria-hidden="true"></i>
         </div>
         <p class="ax-say" id="arch-say"></p>
-        <div class="ax-keys" id="arch-keys">
-          <span class="ax-gh">Confluent</span>
-          <button type="button" class="ax-k" data-k="stream" data-d="Stream: Kafka topics carry every event, in order, durable and replayable.">Stream</button>
-          <button type="button" class="ax-k" data-k="connect" data-d="Connect: 120+ connectors bring orders, payments, sensors and markets in.">Connect</button>
-          <button type="button" class="ax-k" data-k="govern" data-d="Govern: Schema Registry contracts, lineage and access. Your data stays in your org.">Govern</button>
-          <button type="button" class="ax-k" data-k="process" data-d="Process: Flink calls the models on every event, with no pipeline to build.">Process</button>
-          <span class="ax-gh ibm">IBM Granite Time Series</span>
-          <button type="button" class="ax-k ibm" data-k="fd" data-d="Forecast and detect: forecasts and flags anomalies, zero-shot on any series.">Forecast · Detect</button>
-          <button type="button" class="ax-k ibm" data-k="sc" data-d="Search, classify, fill gaps: TSPulse finds the history that looks like now, labels patterns and fills missing points.">Search · Classify · Fill gaps</button>
-          <button type="button" class="ax-k ibm" data-k="opt" data-d="Optimize: picks the settings that best serve a target.">Optimize</button>
-          <button type="button" class="ax-k ag" data-k="agent" data-d="Streaming Agents act on the result, with gates for experts.">Streaming Agents</button>
-        </div>
         <div class="ax-vals" id="ax-vals">
-          <div class="ax-vh"><span class="ax-vk">Natively on Confluent, the home of real-time context</span><h3>Six reasons it is better together</h3></div>
+          <div class="ax-vh"><span class="ax-vk">Natively on Confluent, the home of real-time context</span><h3>Six reasons it is better together <span>· the numbers mark where each one happens on the chart</span></h3></div>
           <div class="ax-vg">
-            <button type="button" class="ax-v" data-v="live" data-k="process"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="i-flow" d="M2 9c2.5-2.5 5 2.5 7.5 0s5 2.5 7.5 0 3.5-1.5 5 0"/><path d="M2 15c2.5-2.5 5 2.5 7.5 0s5 2.5 7.5 0 3.5-1.5 5 0" opacity=".5"/><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/></svg></span><b>Intelligence where the data lives</b><span class="ax-vt">Optimized forecasting and anomaly detection run on the stream the moment conditions change, so your teams never copy data to a separate ML platform or warehouse.</span><span class="ax-vc">no data copies</span></button>
-            <button type="button" class="ax-v" data-v="zero" data-k="zero"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><g class="i-plug"><path d="M9 2.5v4.5M15 2.5v4.5M6.5 7h11v3.5a5.5 5.5 0 0 1-11 0z"/></g><path d="M12 16v5.5"/></svg></span><b>Zero configuration</b><span class="ax-vt">Confluent runs model serving, scaling and runtime. Your engineers call IBM Granite Time Series models from Flink SQL with no credentials or glue code to manage.</span><span class="ax-vc">no serving stack</span></button>
-            <button type="button" class="ax-v" data-v="ctx" data-k="stream"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="i-spark" d="M11 3.5l1.7 4.8 4.8 1.7-4.8 1.7L11 16.5l-1.7-4.8L4.5 10l4.8-1.7z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span><b>Fresh, AI-ready context</b><span class="ax-vt">Models read the live state of your business, from sensors and payments to app metrics, so predictions stay accurate. Results land on Kafka topics for alerts, dashboards, lakehouses and agents.</span><span class="ax-vc">fan-out to every consumer</span></button>
-            <button type="button" class="ax-v" data-v="gov" data-k="govern"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5.5" y="4.5" width="13" height="16.5" rx="1.5"/><path d="M9 3h6v3H9z"/><path class="i-check" d="M8.8 13.2l2.2 2.2 4.2-4.4"/></svg></span><b>Built-in governance and traceability</b><span class="ax-vt">Inference follows the same schemas, lineage and access controls as everything else. Your auditors can replay any topic to check, evaluate or rerun a decision on history.</span><span class="ax-vc">replay any topic</span></button>
-            <button type="button" class="ax-v" data-v="safe" data-k="cf"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path class="i-shackle" d="M8 11V8a4 4 0 0 1 8 0v3"/><path d="M12 15v2.5"/></svg></span><b>Efficient and secure</b><span class="ax-vt">No model-serving infrastructure or GPUs to provision, and no ingress or egress fees. Your data stays in Confluent Cloud under your RBAC and privacy policies.</span><span class="ax-vc">no GPUs, no egress fees</span></button>
-            <button type="button" class="ax-v" data-v="fast" data-k="out"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 18a8.5 8.5 0 1 1 17 0"/><path d="M12 5v1.5M5.7 8.2l1 1M18.3 8.2l-1 1"/><path class="i-needle" d="M12 18l4.5-5.5"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/></svg></span><b>Faster time to value</b><span class="ax-vt">Your teams go from streaming data to a working forecast and anomaly pipeline in minutes with familiar SQL, instead of building a separate ML stack or point-to-point pipelines.</span><span class="ax-vc">minutes with SQL</span></button>
+            <button type="button" class="ax-v" data-v="1"><span class="ax-vtop"><span class="ax-vn">1</span><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5.5" y="4.5" width="13" height="16.5" rx="1.5"/><path d="M9 3h6v3H9z"/><path class="i-check" d="M8.8 13.2l2.2 2.2 4.2-4.4"/></svg></span></span><b>Built-in governance</b><span class="ax-vt">Same schemas, lineage and access, replayable</span></button>
+            <button type="button" class="ax-v" data-v="2"><span class="ax-vtop"><span class="ax-vn">2</span><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="i-spark" d="M11 3.5l1.7 4.8 4.8 1.7-4.8 1.7L11 16.5l-1.7-4.8L4.5 10l4.8-1.7z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span></span><b>Fresh, AI-ready context</b><span class="ax-vt">Every prediction reads the business as it is now</span></button>
+            <button type="button" class="ax-v" data-v="3"><span class="ax-vtop"><span class="ax-vn">3</span><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="i-flow" d="M2 9c2.5-2.5 5 2.5 7.5 0s5 2.5 7.5 0 3.5-1.5 5 0"/><path d="M2 15c2.5-2.5 5 2.5 7.5 0s5 2.5 7.5 0 3.5-1.5 5 0" opacity=".5"/><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/></svg></span></span><b>Intelligence where the data lives</b><span class="ax-vt">No copies to a separate ML platform</span></button>
+            <button type="button" class="ax-v" data-v="4"><span class="ax-vtop"><span class="ax-vn">4</span><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><g class="i-plug"><path d="M9 2.5v4.5M15 2.5v4.5M6.5 7h11v3.5a5.5 5.5 0 0 1-11 0z"/></g><path d="M12 16v5.5"/></svg></span></span><b>Zero configuration</b><span class="ax-vt">Confluent runs serving, scaling and runtime</span></button>
+            <button type="button" class="ax-v" data-v="5"><span class="ax-vtop"><span class="ax-vn">5</span><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 18a8.5 8.5 0 1 1 17 0"/><path d="M12 5v1.5M5.7 8.2l1 1M18.3 8.2l-1 1"/><path class="i-needle" d="M12 18l4.5-5.5"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/></svg></span></span><b>Faster time to value</b><span class="ax-vt">Zero-shot models, working in minutes</span></button>
+            <button type="button" class="ax-v" data-v="6"><span class="ax-vtop"><span class="ax-vn">6</span><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path class="i-shackle" d="M8 11V8a4 4 0 0 1 8 0v3"/><path d="M12 15v2.5"/></svg></span></span><b>Efficient and secure</b><span class="ax-vt">No GPUs, no egress fees, data stays in</span></button>
           </div>
         </div>
       </div>
@@ -3382,32 +3372,32 @@ const CS={
 })();
 
 /* ============ 01 better together: streams in, Confluent and IBM Granite in one flow, decisions out ============ */
-/* One live system on a canvas. Six business streams come in through connectors, pass the Schema Registry gate,
-   ride their Kafka topics into Flink, where IBM Granite Time Series models read each event in its series.
-   Forecasts, flags and settings leave as decisions, the risky ones through a Streaming Agent first.
-   Every seven seconds one stream is followed end to end: its event, the chart inside the model, the decision it becomes. */
+/* One calm system on a canvas. Six streams come in, pass Schema Registry, ride their Kafka topics and funnel into Flink,
+   where IBM Granite Time Series models read each event in its series. Decisions fan out, risky ones through a Streaming Agent.
+   Every seven seconds one stream is followed end to end. Six numbered markers sit where each joint value happens,
+   and light, with a short callout, as the followed event passes them. The six tiles below carry the same numbers. */
 (function(){
   const el=$('#st-arch');if(!el)return;
-  const valEls=$$('#ax-vals [data-v]'),box=$('#arch'),cvEl=$('#arch-cv'),cv=new Cv(cvEl),sayEl=$('#arch-say'),keyEls=$$('#arch-keys [data-k]'),countEl=$('#arch-count');
+  const valEls=$$('#ax-vals [data-v]'),box=$('#arch'),cvEl=$('#arch-cv'),cv=new Cv(cvEl),sayEl=$('#arch-say'),countEl=$('#arch-count');
   const SANS='"IBM Plex Sans","Helvetica Neue",Arial,sans-serif',MF='"IBM Plex Mono",Menlo,monospace';
   const LS='letterSpacing' in CanvasRenderingContext2D.prototype;
-  const SRC=[['POS and e-commerce','orders','1.2k/s',1.3],['Card payments','payments','3.8k/s',1.8],['SCADA and historians','sensors','960/s',1.0],['Network telemetry','network','5.2k/s',2.1],['Market data','markets','8.4k/s',2.5],['Meters and IoT','meters','2.1k/s',1.2]];
-  const SNK=[['Purchase orders','dec','next truck as planned'],['Setpoint recommendations','dec','line 2 holding at 182 °C'],['Tableflow to Iceberg','fc','forecast tables, always fresh'],['Apps, BI and agents','fc','read through MCP'],['Holds and alerts','an','no holds right now'],['Tickets with a cause','an','no open tickets']];
+  const SRC=[['Store sales','orders',1.0],['Card payments','payments',1.3],['Plant sensors','sensors',0.8],['Network telemetry','network',1.5],['Market data','markets',1.8],['Smart meters','meters',0.9]];
+  const SNK=[['Purchase orders','dec'],['Setpoints','dec'],['Iceberg tables','fc'],['Apps and agents','fc'],['Holds and alerts','an'],['Tickets','an']];
   const ROUTE=[[0,2,3],[4,2,3],[1,5,2],[5,2,3],[3,2],[1,2,3]];
   const COL={dec:['#42be65','#a7f0ba'],fc:['#4589ff','#a6c8ff'],an:['#fa4d56','#ffb3b8'],ag:['#be95ff','#e8daff']};
-  const MOD=['TTM','FlowState','PatchTST-FM','TSPulse'],CAPS=[['FORECAST','#a6c8ff'],['DETECT','#ffb3b8'],['SEARCH','#e8daff'],['OPTIMIZE','#a7f0ba']];
+  const CAPC=['#a6c8ff','#ffb3b8','#e8daff','#a7f0ba'],CAPN=['FORECAST','DETECT','SEARCH','OPTIMIZE'];
   const SC=[
-    {src:0,snk:0,cap:0,mod:0,kind:'fc',series:'store 112 · bottled water sales',say:['Store sales stream in','the forecast reads the heat wave','and a purchase order goes out'],out:()=>(370+Math.round(Math.random()*30))+' more bottles, next truck'},
-    {src:1,snk:4,cap:1,mod:3,kind:'spike',series:'branch 22 · card spend per minute',say:['Card payments stream in','TSPulse flags spend at four times normal','and an agent places a hold for review'],out:()=>'hold placed, spend at 4× normal'},
-    {src:2,snk:1,cap:3,mod:0,kind:'opt',series:'tempering line 2 · temperature',say:['Line sensors stream in','the optimizer finds the setting that keeps yield on target','and a new setpoint goes to the line'],out:()=>'line 2 to 182 °C, yield on target'},
-    {src:3,snk:5,cap:2,mod:3,kind:'match',series:'cell site 4017 · traffic',say:['Network telemetry streams in','TSPulse finds the past pattern that looks like now','and a ticket opens with its cause'],out:()=>'cell 4017, event traffic, add capacity'},
-    {src:4,snk:3,cap:0,mod:2,kind:'quant',series:'index futures · price',say:['Market ticks stream in','PatchTST-FM returns the full range for the next hour','and apps and agents read it as a tool call'],out:()=>'next hour range, served as a tool call'},
-    {src:5,snk:2,cap:0,mod:1,kind:'peak',series:'building 7 · power',say:['Meter readings stream in','FlowState forecasts the afternoon peak','and the forecast lands as an Iceberg table'],out:()=>'peak 1.7 MW at 4 pm, table updated'}];
-  const KEY_TXT={};keyEls.forEach(k=>KEY_TXT[k.dataset.k]=k.dataset.d||'');
+    {src:0,snk:0,cap:0,mod:'TTM',kind:'fc',ctx:'weather',series:'store 112 · bottled water',say:['Store sales stream in','the forecast reads the heat wave','and a purchase order goes out'],out:()=>(370+Math.round(Math.random()*30))+' more bottles, next truck'},
+    {src:1,snk:4,cap:1,mod:'TSPulse',kind:'spike',ctx:'payroll calendar',series:'branch 22 · card spend',say:['Card payments stream in','TSPulse flags spend at four times normal','and an agent places a hold for review'],out:()=>'hold placed, 4× normal spend'},
+    {src:2,snk:1,cap:3,mod:'TTM + optimizer',kind:'opt',ctx:'shift schedule',series:'line 2 · temperature',say:['Plant sensors stream in','the optimizer finds the setting that keeps yield on target','and a new setpoint goes to the line'],out:()=>'line 2 to 182 °C'},
+    {src:3,snk:5,cap:2,mod:'TSPulse',kind:'match',ctx:'events calendar',series:'cell 4017 · traffic',say:['Network telemetry streams in','TSPulse finds the past pattern that looks like now','and a ticket opens with its cause'],out:()=>'cell 4017, event traffic'},
+    {src:4,snk:3,cap:0,mod:'PatchTST-FM',kind:'quant',ctx:'news',series:'index futures · price',say:['Market ticks stream in','PatchTST-FM returns the full range for the next hour','and apps and agents read it as a tool call'],out:()=>'next hour range, via MCP'},
+    {src:5,snk:2,cap:0,mod:'FlowState',kind:'peak',ctx:'weather',series:'building 7 · power',say:['Meter readings stream in','FlowState forecasts the afternoon peak','and the forecast lands as an Iceberg table'],out:()=>'peak 1.7 MW at 4 pm'}];
+  const VTXT=['governed by Schema Registry','','runs in the stream, no copies','zero configuration','zero-shot, no training','data stays in Confluent Cloud'];
   const CYCLE=7200,SPS=4,NH=44,NF=20;
   const st={slow:1,tChip:0,pitch:false,hover:-1,sc:0,ts:performance.now(),pin:-1e9,hi:null,hiT:-1e9,hold:false,parts:[],fp:null,acc:SRC.map(()=>Math.random()),
-    sinkV:SNK.map(s=>s[2]),sinkT:SNK.map(()=>-1e9),sinkF:SNK.map(()=>-1e9),gateF:SRC.map(()=>-1e9),gateX:SRC.map(()=>-1e9),srcF:SRC.map(()=>-1e9),
-    ser:null,phase:-1,key:null,inflight:0,lo:0,hi2:1};
+    sinkV:SNK.map(()=>''),sinkT:SNK.map(()=>-1e9),sinkF:SNK.map(()=>-1e9),gateF:-1e9,gateX:SRC.map(()=>-1e9),srcF:SRC.map(()=>-1e9),
+    ser:null,phase:-1,vk:0,inflight:0,lo:0,hi2:1,qInit:false};
   let L=null;
 
   /* ---------- helpers ---------- */
@@ -3420,13 +3410,11 @@ const CS={
   function sq(ctx,x,y,s,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x-s/2),Math.round(y-s/2),s,s);}
   function fz(ctx,s,w,a,b,wt){for(let z=a;z>=b;z-=0.5){ctx.font=wt+' '+z+'px '+SANS;if(ctx.measureText(s).width<=w)return;}}
   function fit(ctx,s,w){if(ctx.measureText(s).width<=w)return s;while(s.length>1&&ctx.measureText(s+'…').width>w)s=s.slice(0,-1);return s.trim()+'…';}
-  function lines(ctx,s,w,n){const out=[];let ws=s.split(' ');while(ws.length&&out.length<n-1){let a='',i=0;for(;i<ws.length;i++){const t=a?a+' '+ws[i]:ws[i];if(a&&ctx.measureText(t).width>w)break;a=t;}out.push(fit(ctx,a,w));ws=ws.slice(i);}if(ws.length)out.push(fit(ctx,ws.join(' '),w));return out;}
   function label(ctx,s,x,y,col,z,ls,align,wt){ctx.font=(wt||'500')+' '+(z||10.5)+'px '+MF;ctx.fillStyle=col;ctx.textAlign=align||'left';if(LS)ctx.letterSpacing=(ls||0)+'px';ctx.fillText(s,x,y);if(LS)ctx.letterSpacing='0px';}
   function rect(ctx,x,y,w,h,fill,line){if(fill){ctx.fillStyle=fill;ctx.fillRect(x,y,w,h);}if(line){ctx.strokeStyle=line;ctx.lineWidth=1;ctx.strokeRect(Math.round(x)+0.5,Math.round(y)+0.5,Math.round(w)-1,Math.round(h)-1);}}
   const em=k=>st.hi===k&&(st.hold||performance.now()-st.hiT<2600)?1:0;
-  function wave(i,u){switch(i){case 0:return 0.5*Math.sin(u*0.9)+0.25*Math.sin(u*2.3);case 1:return (Math.sin(u*7.1)>0.93?0.9:0)+0.15*Math.sin(u*3)-0.2;case 2:return 0.55*Math.sin(u*0.6);
-    case 3:return 0.35*Math.sin(u*1.7)+0.3*Math.sin(u*4.3+1);case 4:{let v=0;for(let k=1;k<5;k++)v+=Math.sin(u*k*1.37+k)/k;return v*0.4;}default:return 0.45*Math.sin(u*0.45)+0.1*Math.sin(u*3.1);}}
-
+  const PART={v1:'govern',v2:'ctx',v3:'process',v4:'zero',v5:'chip',v6:'cf'};
+  const part=k=>em(k)||(st.hi&&PART[st.hi]===k&&em(st.hi))?1:0;
   /* ---------- the series inside the model ---------- */
   function makeSeries(s){const R=rng(9001+s*131+Math.floor(Math.random()*997)),k=SC[s].kind,n=()=>(R()+R()+R()-1.5)*1.15,A=new Array(181),O=100;
     const bump=x=>x>=0&&x<=7?46*Math.sin(Math.PI*x/7):0,heat=i=>1+0.55*clamp((i-10)/6,0,1);
@@ -3445,144 +3433,117 @@ const CS={
   function rowsY(top,h){return [0,1,2,3,4,5].map(i=>top+h*(i+0.5));}
   function layout(){const W=cv.W,H=cv.H,wide=W>=820;const G={wide,W,H};
     if(wide){
-      const sw=Math.round(clamp(W*0.155,158,200)),kw=Math.round(clamp(W*0.19,180,250)),gA=Math.round(clamp(W*0.045,40,64)),gD=Math.round(clamp(W*0.055,52,78));
-      const cx0=sw+gA,cx1=W-kw-gD,y0=26,yb=H-4,rowH=(H-70)/6,ry=rowsY(44,rowH);
-      const fx0=Math.round(cx0+(cx1-cx0)*0.4),fx1=cx1-12,fy0=y0+14,fy1=yb-12;
-      const ch={x0:fx0+34,x1:fx1-12,y0:fy0+26,y1:fy1-58},ag={x0:fx0+34,x1:fx1-12,y0:fy1-48,y1:fy1-12};
-      const gx=cx0+38,tx0=gx+12,tx1=fx0-10;
-      const chart={x0:ch.x0+14,x1:ch.x1-14,y0:ch.y0+104,y1:ch.y1-14};
-      const py=ry.map((_,i)=>chart.y0+12+(chart.y1-chart.y0-24)*(i+0.5)/6);
-      Object.assign(G,{sw,kw,cx0,cx1,y0,yb,ry,rowH,fx0,fx1,fy0,fy1,ch,ag,gx,tx0,tx1,chart,kx0:W-kw,
-        src:ry.map(y=>({x:0,y:y-Math.min(24,rowH/2-5),w:sw,h:Math.min(48,rowH-10)})),
-        snk:ry.map(y=>({x:W-kw,y:y-Math.min(26,rowH/2-4),w:kw,h:Math.min(52,rowH-8)})),
-        pin:ry.map(y=>mk([[sw,y],[cx0,y],[gx,y]])),ptape:ry.map(y=>mk([[tx0,y],[tx1,y]])),
-        pfl:ry.map((y,i)=>{const ex=fx0+6+(5-i)*4;return mk([[tx1,y],[ex,y],[ex,py[i]],[ch.x0,py[i]]]);}),
+      const sw=Math.round(clamp(W*0.135,140,180)),kw=Math.round(clamp(W*0.15,160,210)),cx0=sw+36,cx1=W-kw-46,y0=30,yb=H-4;
+      const top=y0+34,rowH=(yb-16-top)/6,ry=rowsY(top,rowH);
+      const fx0=Math.round(cx0+(cx1-cx0)*0.36),fx1=cx1-12,fy0=y0+20,fy1=yb-12;
+      const ch={x0:fx0+24,x1:fx1-12,y0:fy0+30,y1:fy1-50},ag={x0:fx0+24,x1:fx1-12,y0:fy1-40,y1:fy1-10};
+      const gx=cx0+28,bx=fx0-16,ctxX=Math.round(gx+(bx-gx)*0.55),ent=Math.round((ch.y0+ch.y1)/2),ox=cx1+20,agM=(ag.y0+ag.y1)/2;
+      const chart={x0:ch.x0+14,x1:ch.x1-14,y0:ch.y0+52,y1:ch.y1-12};
+      Object.assign(G,{sw,kw,cx0,cx1,y0,yb,ry,rowH,fx0,fx1,fy0,fy1,ch,ag,gx,bx,ctxX,ent,ox,chart,kx0:W-kw,
+        src:ry.map(y=>({x:0,y:y-17,w:sw,h:34})),snk:ry.map(y=>({x:W-kw,y:y-Math.min(21,rowH/2-4),w:kw,h:Math.min(42,rowH-8)})),
+        pin:ry.map(y=>mk([[sw,y],[gx,y]])),plane:ry.map(y=>mk([[gx,y],[bx,y]])),pfl:ry.map(y=>mk([[bx,y],[bx,ent],[ch.x0,ent]])),
         pag:mk([[(ch.x0+ch.x1)/2,ch.y1],[(ch.x0+ch.x1)/2,ag.y0]]),
-        pout:ry.map((y,k)=>{if(k<4){const oy=ch.y0+118+k*Math.min(40,(ch.y1-ch.y0-140)/3),ex=cx1+10+k*6;return mk([[ch.x1,oy],[ex,oy],[ex,y],[W-kw,y]]);}
-          const oy=(ag.y0+ag.y1)/2+(k===4?-6:6),ex=cx1+12+(k-4)*7;return mk([[ag.x1,oy],[ex,oy],[ex,y],[W-kw,y]]);}),
-        heads:[['01','STREAMS IN',0],['02','CONFLUENT CLOUD',cx0],['03','IBM GRANITE IN FLINK',fx0],['04','DECISIONS OUT',W-kw]]});
+        pout:ry.map((y,k)=>k<4?mk([[ch.x1,ent],[ox,ent],[ox,y],[W-kw,y]]):mk([[ag.x1,agM],[ox,agM],[ox,y],[W-kw,y]])),
+        heads:[['01','STREAMS IN',0],['02','CONFLUENT CLOUD',cx0],['03','DECISIONS OUT',W-kw]],
+        mk:[[gx,y0+14,1],[ctxX,y0+14,1],[fx0,ent,-1],[fx0+10,fy0+14,1],[ch.x1-12,ch.y0+16,-1],[cx1,y0,-1]]});
     }else{
-      const z=W>=600?1.12:1,lw=Math.round(clamp(W*0.3,100,170)),rowH=Math.round(36*z),top=34,ry=rowsY(top,rowH),px0=lw+10,gx=px0+22,tx0=gx+10,tx1=W-34,bxIn=W-20,bxA=W-5,bxB=5;
-      const fy0=top+6*rowH+14,ch={x0:22,x1:W-34,y0:fy0+26,y1:fy0+26+Math.round(230*z)},ag={x0:22,x1:W-34,y0:0,y1:0};ag.y0=ch.y1+10;ag.y1=ag.y0+36;
-      const fy1=ag.y1+12,pb=fy1+24,sy0=pb+30,sh=Math.round(42*z),sg=6,chart={x0:ch.x0+10,x1:ch.x1-10,y0:ch.y0+100,y1:ch.y1-10};
-      const sky=[0,1,2,3,4,5].map(k=>sy0+k*(sh+sg)+sh/2),inY=ch.y0+30,outY=ch.y1-22,agM=(ag.y0+ag.y1)/2;
-      Object.assign(G,{z,lw,rowH,ry,px0,gx,tx0,tx1,fx0:10,fx1:W-10,fy0,fy1,pb,ch,ag,chart,cx0:px0,cx1:W,y0:22,yb:pb,
-        src:ry.map(y=>({x:0,y:y-rowH/2+4,w:lw,h:rowH-8})),snk:sky.map(y=>({x:24,y:y-sh/2,w:W-48,h:sh})),
-        pin:ry.map(y=>mk([[lw,y],[px0,y],[gx,y]])),ptape:ry.map(y=>mk([[tx0,y],[tx1,y]])),
-        pfl:ry.map(y=>mk([[tx1,y],[bxIn,y],[bxIn,inY],[ch.x1,inY]])),pag:mk([[(ch.x0+ch.x1)/2,ch.y1],[(ch.x0+ch.x1)/2,ag.y0]]),
-        pout:sky.map((y,k)=>k<4?mk([[ch.x1,outY],[bxA,outY],[bxA,y],[W-24,y]]):mk([[ag.x0,agM],[bxB,agM],[bxB,y],[24,y]])),
-        heads:[['01','STREAMS IN',0],['02','CONFLUENT CLOUD',px0]],outHead:pb+16});
+      const z=W>=600?1.1:1,lw=Math.round(clamp(W*0.33,104,160)),rowH=Math.round(32*z),top=40,ry=rowsY(top,rowH),cx0=lw+12,gx=cx0+18,bx=W-14,ctxX=Math.round(gx+(bx-gx)*0.55);
+      const fy0=top+6*rowH+16,ch={x0:20,x1:W-30,y0:fy0+30,y1:fy0+30+Math.round(220*z)},ag={x0:20,x1:W-30,y0:0,y1:0};ag.y0=ch.y1+10;ag.y1=ag.y0+32;
+      const fy1=ag.y1+12,pb=fy1+12,sy0=pb+30,sh=Math.round(36*z),sg=6,ent=ch.y0+30,ext=ch.y1-24,agM=(ag.y0+ag.y1)/2;
+      const chart={x0:ch.x0+10,x1:ch.x1-10,y0:ch.y0+52,y1:ch.y1-10},sky=[0,1,2,3,4,5].map(k=>sy0+k*(sh+sg)+sh/2);
+      Object.assign(G,{z,lw,rowH,ry,cx0,gx,bx,ctxX,fx0:10,fx1:W-10,fy0,fy1,pb,ch,ag,chart,cx1:W,y0:24,yb:pb,ent,
+        src:ry.map(y=>({x:0,y:y-rowH/2+4,w:lw,h:rowH-8})),snk:sky.map(y=>({x:22,y:y-sh/2,w:W-44,h:sh})),
+        pin:ry.map(y=>mk([[lw,y],[gx,y]])),plane:ry.map(y=>mk([[gx,y],[bx,y]])),pfl:ry.map(y=>mk([[bx,y],[bx,ent],[ch.x1,ent]])),
+        pag:mk([[(ch.x0+ch.x1)/2,ch.y1],[(ch.x0+ch.x1)/2,ag.y0]]),
+        pout:sky.map((y,k)=>k<4?mk([[ch.x1,ext],[W-4,ext],[W-4,y],[W-22,y]]):mk([[ag.x0,agM],[4,agM],[4,y],[22,y]])),
+        heads:[['01','STREAMS IN',0],['02','CONFLUENT CLOUD',cx0]],outHead:pb+16,
+        mk:[[gx,24,1],[ctxX,24,1],[bx,fy0,-1],[10+10,fy0+14,1],[ch.x1-12,ch.y0+16,-1,22],[W-12,24,-1]]});
       G.H=sy0+6*sh+5*sg+6;
     }
     return G;}
-  function tallH(W){const z=W>=600?1.12:1,rowH=Math.round(36*z),fy0=34+6*rowH+14,chY1=fy0+26+Math.round(230*z),pb=chY1+10+36+12+24;return Math.round(pb+30+6*Math.round(42*z)+30+6);}
-  function resize(){const W=cvEl.clientWidth||box.clientWidth;if(!W)return;const H=W>=820?(st.pitch?430:Math.round(clamp(W*0.4,470,540))):tallH(W);if(Math.abs(cvEl.offsetHeight-H)>1)cvEl.style.height=H+'px';
+  function tallH(W){const z=W>=600?1.1:1,rowH=Math.round(32*z),fy0=40+6*rowH+16,chY1=fy0+30+Math.round(220*z),pb=chY1+10+32+12+12;return Math.round(pb+30+6*Math.round(36*z)+30+6);}
+  function resize(){const W=cvEl.clientWidth||box.clientWidth;if(!W)return;const H=W>=820?(st.pitch?380:Math.round(clamp(W*0.36,430,480))):tallH(W);if(Math.abs(cvEl.offsetHeight-H)>1)cvEl.style.height=H+'px';
     if(!cv.fit())return;L=layout();anchors();}
   function anchors(){if(!L)return;const set=(id,y,h)=>{const a=$('#'+id);if(a){a.style.top=Math.round(y)+'px';a.style.height=Math.round(h)+'px';}};
     set('arch-a-in',0,L.wide?L.H:L.fy0);set('arch-a-chip',L.wide?0:L.fy0-10,L.wide?L.H:L.fy1-L.fy0+20);set('arch-a-out',L.wide?0:L.pb,L.wide?L.H:L.H-L.pb);}
 
-  /* ---------- the scenario loop ---------- */
-  function caption(){const S=SC[st.sc];if(!sayEl||st.hold)return;sayEl.innerHTML='<span class="s0">'+S.say[0]+',</span> <span class="s1">'+S.say[1]+',</span> <span class="s2">'+S.say[2]+'.</span>';st.phase=-1;}
-  function start(i,now,slow){st.sc=i;st.ts=now;st.slow=slow||1;st.tChip=0;st.qInit=false;st.ser=makeSeries(i);st.fp={stage:'wait',d:0};st.lo=st.ser.lo;st.hi2=st.ser.hi;caption();
+  /* ---------- the followed event ---------- */
+  function caption(){const S=SC[st.sc];if(!sayEl)return;sayEl.innerHTML='<span class="s0">'+S.say[0]+',</span> <span class="s1">'+S.say[1]+',</span> <span class="s2">'+S.say[2]+'.</span>';st.phase=-1;}
+  function start(i,now,slow){st.sc=i;st.ts=now;st.slow=slow||1;st.tChip=0;st.qInit=false;st.ser=makeSeries(i);st.fp={stage:'wait'};st.lo=st.ser.lo;st.hi2=st.ser.hi;caption();
     if(reduced){st.sinkV[SC[i].snk]=SC[i].out();st.sinkT[SC[i].snk]=now;}}
-  const DUR={in:600,tape:1000,fl:500,chip:1000,out:900,ag1:400,agw:600,ag2:800};
+  const DUR={in:600,lane:1000,fl:600,chip:1100,out:900,ag1:400,agw:600,ag2:800};
   function stepFocus(now){const S=SC[st.sc],f=st.fp,e=now-st.ts;if(!f||reduced)return;
-    const nxt={wait:'in',in:'tape',tape:'fl',fl:'chip',chip:S.snk>=4?'ag1':'out',ag1:'agw',agw:'ag2',out:'end',ag2:'end'};
+    const nxt={wait:'in',in:'lane',lane:'fl',fl:'chip',chip:S.snk>=4?'ag1':'out',ag1:'agw',agw:'ag2',out:'end',ag2:'end'};
     if(f.stage==='wait'){if(e>300*st.slow){f.stage='in';f.t0=now;st.srcF[S.src]=now;}return;}
     if(f.stage==='end')return;
-    const d=DUR[f.stage]*st.slow,u=(now-f.t0)/d;
-    if(u>=1){if(f.stage==='in')st.gateF[S.src]=now;if(f.stage==='out'||f.stage==='ag2'){st.sinkV[S.snk]=S.out();st.sinkT[S.snk]=now;st.sinkF[S.snk]=now;}
+    if((now-f.t0)/(DUR[f.stage]*st.slow)>=1){if(f.stage==='in')st.gateF=now;if(f.stage==='out'||f.stage==='ag2'){st.sinkV[S.snk]=S.out();st.sinkT[S.snk]=now;st.sinkF[S.snk]=now;}
       f.stage=nxt[f.stage];f.t0=now;if(f.stage==='chip')st.tChip=now;}}
-  function focusPath(){const S=SC[st.sc],f=st.fp;if(!f||!L)return null;const i=S.src,k=S.snk;
-    return {in:L.pin[i],tape:L.ptape[i],fl:L.pfl[i],out:L.pout[k],ag1:L.pag,ag2:L.pout[k]}[f.stage]||null;}
-  function stageOf(){const f=st.fp;return f?f.stage:'wait';}
-  function phaseOf(){if(reduced)return 2;const s=stageOf();return s==='wait'||s==='in'||s==='tape'||s==='fl'?0:s==='chip'||s==='ag1'||s==='agw'?1:2;}
-  function keyFor(){const s=stageOf(),S=SC[st.sc];if(reduced)return null;if(s==='in')return (performance.now()-st.fp.t0)/(DUR.in*st.slow)<0.55?'connect':'govern';return s==='in'?'connect':s==='tape'?'stream':s==='fl'?'process':s==='chip'?(S.cap===3?'opt':S.cap===2?'sc':'fd'):s==='ag1'||s==='agw'||s==='ag2'?'agent':null;}
+  const stageOf=()=>st.fp?st.fp.stage:'wait';
+  const prog=()=>{const f=st.fp;return f&&f.t0&&DUR[f.stage]?clamp((performance.now()-f.t0)/(DUR[f.stage]*st.slow),0,1):0;};
+  function focusPath(){const S=SC[st.sc],f=st.fp;if(!f||!L)return null;return {in:L.pin[S.src],lane:L.plane[S.src],fl:L.pfl[S.src],out:L.pout[S.snk],ag1:L.pag,ag2:L.pout[S.snk]}[f.stage]||null;}
+  function phaseOf(){if(reduced)return 2;const s=stageOf();return s==='wait'||s==='in'||s==='lane'||s==='fl'?0:s==='chip'||s==='ag1'||s==='agw'?1:2;}
+  /* which joint value the followed event is showing right now, 1 to 6 */
+  function valFor(){if(reduced)return 0;const s=stageOf(),u=prog();return s==='in'?(u>0.7?1:0):s==='lane'?(u<0.25?1:2):s==='fl'?3:s==='chip'?(u<0.45?4:5):s==='ag1'||s==='agw'||s==='ag2'||s==='out'||s==='end'?6:0;}
 
-  /* each joint value lights at the moment the followed event shows it */
-  function valFor(){if(reduced)return null;const s=stageOf();return s==='in'?'gov':s==='tape'?'ctx':s==='fl'?'live':s==='chip'?'zero':s==='end'?'safe':s==='wait'?null:'fast';}
-
-  /* ---------- background traffic ---------- */
-  function spawn(i){st.parts.push({ph:'in',i,d:0,v:150+Math.random()*60,bad:Math.random()<0.035});}
+  /* ---------- quiet background traffic ---------- */
   function update(dt){if(!L)resize();if(!L)return;const now=performance.now();
     const pit=document.body.classList.contains('pitching');if(pit!==st.pitch){st.pitch=pit;resize();}
-    if(now-st.ts>CYCLE*st.slow&&now>st.pin){start((st.sc+1)%SC.length,now);}
+    if(now-st.ts>CYCLE*st.slow&&now>st.pin)start((st.sc+1)%SC.length,now);
     stepFocus(now);
-    if(!reduced){const mob=L.wide?1:0.6;for(let i=0;i<6;i++){st.acc[i]+=dt/1000*SRC[i][3]*mob;while(st.acc[i]>1){st.acc[i]-=1;if(st.parts.length<150)spawn(i);}}
-      const vt=L.wide?62:48;
+    if(!reduced){const mob=L.wide?0.55:0.35;for(let i=0;i<6;i++){st.acc[i]+=dt/1000*SRC[i][2]*mob;while(st.acc[i]>1){st.acc[i]-=1;if(st.parts.length<70)st.parts.push({ph:'in',i,d:0,v:120+Math.random()*40,bad:Math.random()<0.02});}}
+      const vt=L.wide?56:44;
       for(let k=st.parts.length-1;k>=0;k--){const p=st.parts[k];
         if(p.ph==='rej'){p.t-=dt;if(p.t<=0)st.parts.splice(k,1);continue;}
-        const P=p.ph==='in'?L.pin[p.i]:p.ph==='tape'?L.ptape[p.i]:p.ph==='fl'?L.pfl[p.i]:p.ph==='ag1'?L.pag:L.pout[p.k];
-        p.d+=(p.ph==='tape'?vt:p.v)*dt/1000;
+        const P=p.ph==='in'?L.pin[p.i]:p.ph==='lane'?L.plane[p.i]:p.ph==='fl'?L.pfl[p.i]:p.ph==='ag1'?L.pag:L.pout[p.k];
+        p.d+=(p.ph==='lane'?vt:p.v)*dt/1000;
         if(p.d>=P.L){p.d=0;
-          if(p.ph==='in'){if(p.bad){p.ph='rej';p.t=700;st.gateX[p.i]=now;}else{p.ph='tape';st.gateF[p.i]=Math.max(st.gateF[p.i],now-260);}}
-          else if(p.ph==='tape')p.ph='fl';
-          else if(p.ph==='fl'){if(Math.random()<0.5){const r=ROUTE[p.i];p.k=r[Math.floor(Math.random()*r.length)];p.ph=p.k>=4?'ag1':'out';p.v=170+Math.random()*50;}else st.parts.splice(k,1);}
+          if(p.ph==='in'){if(p.bad){p.ph='rej';p.t=700;st.gateX[p.i]=now;}else p.ph='lane';}
+          else if(p.ph==='lane')p.ph='fl';
+          else if(p.ph==='fl'){if(Math.random()<0.3){const r=ROUTE[p.i];p.k=r[Math.floor(Math.random()*r.length)];p.ph=p.k>=4?'ag1':'out';p.v=150+Math.random()*40;}else st.parts.splice(k,1);}
           else if(p.ph==='ag1')p.ph='out';
-          else{st.sinkF[p.k]=Math.max(st.sinkF[p.k],now-300);st.parts.splice(k,1);}}}}
+          else{st.sinkF[p.k]=Math.max(st.sinkF[p.k],now-500);st.parts.splice(k,1);}}}}
     const fly=st.parts.filter(p=>p.ph==='out'||p.ph==='ag1').length+(st.fp&&/out|ag/.test(st.fp.stage)?1:0);
     if(countEl&&fly!==st.inflight){st.inflight=fly;countEl.textContent=fly;}
-    const ph=phaseOf();if(sayEl&&ph!==st.phase&&!st.hold){st.phase=ph;$$('span',sayEl).forEach((s,i)=>s.classList.toggle('on',i<=ph));}
-    const key=keyFor();if(key!==st.key){st.key=key;keyEls.forEach(k=>k.classList.toggle('on',k.dataset.k===key));}
-    const vk=valFor();if(vk!==st.vk){st.vk=vk;valEls.forEach(v=>v.classList.toggle('on',v.dataset.v===vk));}}
+    const ph=phaseOf();if(sayEl&&ph!==st.phase){st.phase=ph;$$('span',sayEl).forEach((s,i)=>s.classList.toggle('on',i<=ph));}
+    const vk=valFor();if(vk!==st.vk){st.vk=vk;valEls.forEach(v=>v.classList.toggle('on',+v.dataset.v===vk));}}
 
   /* ---------- drawing ---------- */
   function heads(ctx){const z=L.wide?10.5:9.5,ls=L.wide?1.2:0.6,o=L.wide?24:19;L.heads.forEach(([n,t,x])=>{label(ctx,n,x,10,'#78a9ff',z,ls);label(ctx,t,x+o,10,'rgba(255,255,255,.62)',z,ls);});
     if(!L.wide){label(ctx,'03',0,L.outHead,'#78a9ff',z,ls);label(ctx,'DECISIONS OUT',o,L.outHead,'rgba(255,255,255,.62)',z,ls);}}
-  function panel(ctx){const c=em('cf')||em('zero')?1:0,col=c?'rgba(166,200,255,.75)':'rgba(255,255,255,.2)';ctx.strokeStyle=col;ctx.lineWidth=1;ctx.fillStyle='rgba(255,255,255,.025)';
-    ctx.beginPath();
-    if(L.wide){ctx.rect(L.cx0+0.5,L.y0+0.5,L.cx1-L.cx0-1,L.yb-L.y0-1);}
-    else{const x0=L.px0+0.5,y0=L.y0+0.5,W=L.W-0.5,j=L.fy0-8.5,b=L.pb-0.5;ctx.moveTo(x0,y0);ctx.lineTo(W,y0);ctx.lineTo(W,b);ctx.lineTo(0.5,b);ctx.lineTo(0.5,j);ctx.lineTo(x0,j);ctx.closePath();}
-    ctx.fill();ctx.stroke();
-    /* connect, govern, stream labels */
-    const lc=k=>em(k)?'#fff':'rgba(255,255,255,.5)';
-    if(L.wide){label(ctx,'CONNECT',L.cx0+8,L.y0+12,lc('connect'),9.5,1);ctx.font='500 9.5px '+MF;const cw2=ctx.measureText('CONNECT').width+7*1+L.cx0+18,lt=cw2+ctx.measureText('STREAM · KAFKA TOPICS').width+21<L.tx1?'STREAM · KAFKA TOPICS':'KAFKA TOPICS';label(ctx,lt,L.tx1,L.y0+12,lc('stream'),9.5,1,'right');
-      label(ctx,'GOVERN · SCHEMA REGISTRY',L.cx0+8,L.yb-12,lc('govern'),9.5,1);}
-    else{label(ctx,L.W<440?'GOVERN · SCHEMA':'GOVERN · SCHEMA REGISTRY',L.px0+8,L.fy0-18,lc('govern'),9,0.6);
-      label(ctx,'zero configuration · built-in governance',L.W/2,L.pb-12,em('zero')?'#fff':'rgba(255,255,255,.5)',9.5,0.4,'center','400');}}
-  function sources(ctx,now){const S=SC[st.sc],t=reduced?0:now/1000;
-    L.src.forEach((r,i)=>{const on=i===S.src,fl=ease(1-(now-st.srcF[i])/700),hov=st.hover===i;
-      rect(ctx,r.x,r.y,r.w,r.h,on?'rgba(255,255,255,.1)':'rgba(10,20,48,.7)',on?'rgba(255,255,255,.85)':hov?'rgba(255,255,255,.45)':'rgba(255,255,255,.18)');
-      if(on)sq(ctx,r.x+r.w,r.y+r.h/2,4+3*fl,'#fff');
-      ctx.textBaseline='middle';
-      if(L.wide){fz(ctx,SRC[i][0],r.w-20,12.5,11,'500');ctx.textAlign='left';ctx.fillStyle=on?'#fff':'rgba(255,255,255,.72)';ctx.fillText(fit(ctx,SRC[i][0],r.w-20),r.x+10,r.y+15);
-        const y=r.y+r.h-13,x0=r.x+10,x1=r.x+r.w-10;ctx.beginPath();for(let x=x0;x<=x1;x+=2){const yy=y-6*wave(i,(x-x0)/10-t*1.4);x===x0?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.strokeStyle=on?'#fff':'rgba(255,255,255,.35)';ctx.lineWidth=on?1.4:1;ctx.stroke();}
-      else{ctx.font='500 '+(L.z>1?11.5:10.5)+'px '+SANS;ctx.textAlign='left';ctx.fillStyle=on?'#fff':'rgba(255,255,255,.72)';const ls=lines(ctx,SRC[i][0],r.w-14,2),lh=L.z>1?13:12;ls.forEach((s,k)=>ctx.fillText(s,r.x+7,r.y+r.h/2+(k-(ls.length-1)/2)*lh));}});}
-  const BASE=[1240,3810,960,5200,8400,2100],RT=BASE.slice();let rtT=0;
-  function rate(i,now){if(now-rtT>900){rtT=now;for(let k=0;k<6;k++)RT[k]=BASE[k]*(0.9+Math.random()*0.2);}const v=RT[i];return (v>=1000?(v/1000).toFixed(1)+'k':Math.round(v))+'/s';}
-  function lanes(ctx,now){const S=SC[st.sc],t=reduced?0:now/1000,vt=L.wide?62:48,cE=em('connect'),gE=em('govern'),sE=em('stream'),pE=em('process');
+  function panel(ctx){const c=part('cf'),col=c?'rgba(166,200,255,.85)':'rgba(255,255,255,.2)';ctx.strokeStyle=col;ctx.lineWidth=c?1.5:1;ctx.fillStyle='rgba(255,255,255,.025)';ctx.beginPath();
+    if(L.wide)ctx.rect(L.cx0+0.5,L.y0+0.5,L.cx1-L.cx0-1,L.yb-L.y0-1);
+    else{const x0=L.cx0+0.5,y0=L.y0+0.5,W=L.W-0.5,j=L.fy0-8.5,b=L.pb-0.5;ctx.moveTo(x0,y0);ctx.lineTo(W,y0);ctx.lineTo(W,b);ctx.lineTo(0.5,b);ctx.lineTo(0.5,j);ctx.lineTo(x0,j);ctx.closePath();}
+    ctx.fill();ctx.stroke();}
+  function sources(ctx,now){const S=SC[st.sc];
+    L.src.forEach((r,i)=>{const on=i===S.src,hov=st.hover===i,fl=ease(1-(now-st.srcF[i])/700);
+      rect(ctx,r.x,r.y,r.w,r.h,on?'rgba(255,255,255,.1)':'rgba(10,20,48,.7)',on?'rgba(255,255,255,.85)':hov?'rgba(255,255,255,.45)':'rgba(255,255,255,.16)');
+      if(on&&fl>0)sq(ctx,r.x+r.w,r.y+r.h/2,4+4*fl,'#fff');
+      ctx.textBaseline='middle';ctx.textAlign='left';fz(ctx,SRC[i][0],r.w-16,L.wide?12.5:11.5,10,'500');ctx.fillStyle=on?'#fff':'rgba(255,255,255,.66)';ctx.fillText(fit(ctx,SRC[i][0],r.w-16),r.x+8,r.y+r.h/2+0.5);});}
+  function lanes(ctx,now){const S=SC[st.sc],gE=part('govern'),sE=part('stream')||part('ctx'),pE=part('process'),t=reduced?0:now/1000;
+    /* schema gate */
+    ctx.strokeStyle=gE?'#fff':'rgba(255,255,255,.3)';ctx.setLineDash([2,3]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(L.gx+0.5,L.ry[0]-14);ctx.lineTo(L.gx+0.5,L.ry[5]+14);ctx.stroke();ctx.setLineDash([]);
     for(let i=0;i<6;i++){const y=Math.round(L.ry[i])+0.5,on=i===S.src;
-      path(ctx,L.pin[i],on?'rgba(255,255,255,.7)':'rgba(255,255,255,.16)',on?1.4:1);
-      /* connector port */
-      rect(ctx,L.cx0-5,y-7,10,14,cE?'#fff':'#0a1430',cE||on?'#fff':'rgba(255,255,255,.5)');ctx.fillStyle=cE?'#0a1430':on?'#fff':'rgba(255,255,255,.5)';ctx.fillRect(L.cx0-2,y-3,1,6);ctx.fillRect(L.cx0+1,y-3,1,6);
-      /* schema gate */
-      const g=ease(1-(now-st.gateF[i])/500),x=ease(1-(now-st.gateX[i])/700);
-      rect(ctx,L.gx-5,y-5,10,10,x>0?'rgba(250,77,86,'+(0.5*x+0.2)+')':g>0?'rgba(255,255,255,'+(0.15+0.6*g)+')':'#0a1430',x>0?'#fa4d56':gE?'#fff':'rgba(255,255,255,.55)');
-      if(x>0){ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(L.gx-2.5,y-2.5);ctx.lineTo(L.gx+2.5,y+2.5);ctx.moveTo(L.gx+2.5,y-2.5);ctx.lineTo(L.gx-2.5,y+2.5);ctx.stroke();}
-      /* topic tape */
-      const th=L.wide?12:9,tl=L.tx1-L.tx0;rect(ctx,L.tx0,y-th/2,tl,th,on?'rgba(255,255,255,.07)':'rgba(255,255,255,.035)',on||sE?'rgba(255,255,255,.55)':'rgba(255,255,255,.16)');
-      ctx.fillStyle='rgba(255,255,255,.07)';const off=(t*vt)%8;for(let xx=L.tx0+off;xx<L.tx1;xx+=8)ctx.fillRect(Math.round(xx),y-th/2+1,1,th-2);
-      label(ctx,SRC[i][1],L.tx0,y-th/2-7,on||sE?'#fff':'rgba(255,255,255,.55)',L.wide?10:9);label(ctx,rate(i,now),L.tx1,y-th/2-7,'rgba(255,255,255,.38)',L.wide?10:9,0,'right','400');
-      path(ctx,L.pfl[i],on?'rgba(255,255,255,.7)':pE?'rgba(166,200,255,.6)':'rgba(255,255,255,.16)',on?1.4:1);}
-    if(L.wide){ctx.strokeStyle=gE?'rgba(255,255,255,.8)':'rgba(255,255,255,.28)';ctx.setLineDash([2,3]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(L.gx+0.5,L.ry[0]-22);ctx.lineTo(L.gx+0.5,L.ry[5]+18);ctx.stroke();ctx.setLineDash([]);}}
-  function flink(ctx){const pE=em('process');rect(ctx,L.fx0,L.fy0,L.fx1-L.fx0,L.fy1-L.fy0,'rgba(0,0,0,.12)',pE?'#a6c8ff':'rgba(166,200,255,.3)');
-    label(ctx,'PROCESS · APACHE FLINK',L.fx0+10,L.fy0+13,pE?'#fff':'rgba(166,200,255,.85)',9.5,1);
-    if(L.wide){ctx.font='500 9.5px '+MF;const a=ctx.measureText('PROCESS · APACHE FLINK').width+22,b=ctx.measureText('zero configuration').width;if(a+b+30<L.fx1-L.fx0)label(ctx,'zero configuration',L.fx1-10,L.fy0+13,em('zero')?'#fff':'rgba(255,255,255,.5)',9.5,0.4,'right',em('zero')?'600':'400');}}
-  function chip(ctx,now){const R=L.ch,S=SC[st.sc],e=reduced?3000:st.tChip?(now-st.tChip)/st.slow:-1,arr=e>=0,w=R.x1-R.x0,cx=(R.x0+R.x1)/2,ibm=em('fd')||em('sc')||em('opt')||em('ibm');
-    rect(ctx,R.x0,R.y0,w,R.y1-R.y0,'#0d1c44',ibm?'#a6c8ff':'#4589ff');ctx.fillStyle='#0f62fe';ctx.fillRect(R.x0,R.y0,w,3);
-    label(ctx,'IBM GRANITE TIME SERIES',R.x0+12,R.y0+17,'#a6c8ff',10.5,1.2);
-    ctx.font='500 10.5px '+MF;const hw=ctx.measureText('IBM GRANITE TIME SERIES').width+1.2*23;ctx.font='400 9.5px '+MF;if(hw+ctx.measureText('zero-shot · no training').width+40<w)label(ctx,'zero-shot · no training',R.x1-12,R.y0+17,'rgba(255,255,255,.45)',9.5,0,'right','400');
-    /* model cells */
-    let cz=11,cp=14;for(const [z,p] of [[11,14],[10,10],[9,7]]){ctx.font=z+'px '+MF;if(MOD.reduce((a,c)=>a+ctx.measureText(c).width+p,0)+6*3<=w-24){cz=z;cp=p;break;}cz=z;cp=p;}
-    ctx.font=cz+'px '+MF;let x=R.x0+12;const cy=R.y0+40;ctx.textAlign='center';
-    MOD.forEach((m,k)=>{const cw=ctx.measureText(m).width+cp,on=arr&&k===S.mod,pulse=on&&!reduced&&e<1000&&Math.floor(e/160)%2===0;
-      rect(ctx,x,cy-9,cw,18,on?(pulse?'#0f62fe':'#0043ce'):'rgba(255,255,255,.04)',on?'#78a9ff':'rgba(166,200,255,.3)');ctx.fillStyle=on?'#fff':'#a6c8ff';ctx.fillText(m,x+cw/2,cy+0.5);x+=cw+6;});
-    /* capabilities */
-    ctx.font='600 '+(w>300?10.5:9.5)+'px '+MF;let cx2=R.x0+12;const capY=R.y0+66;ctx.textAlign='left';
-    CAPS.forEach(([c,col],k)=>{const on=arr&&k===S.cap||(k===0&&em('fd'))||(k===1&&em('fd'))||(k===2&&em('sc'))||(k===3&&em('opt')),wd=ctx.measureText(c).width;
-      if(LS)ctx.letterSpacing='1px';ctx.fillStyle=on?col:'rgba(255,255,255,.3)';ctx.fillText(c,cx2,capY);if(LS)ctx.letterSpacing='0px';
-      if(on){ctx.fillStyle=col;ctx.fillRect(cx2,capY+8,wd+4,2);}cx2+=wd+(w>300?22:12)+4;});
-    label(ctx,S.series,R.x0+12,R.y0+(L.wide?90:84),'rgba(255,255,255,.6)',L.wide?10.5:9.5,0,'left','400');
+      path(ctx,L.pin[i],on?'rgba(255,255,255,.65)':'rgba(255,255,255,.12)',on?1.4:1);
+      path(ctx,L.plane[i],on?'rgba(255,255,255,.7)':sE?'rgba(255,255,255,.35)':'rgba(255,255,255,.14)',on?1.6:1);
+      path(ctx,L.pfl[i],on?'rgba(255,255,255,.7)':pE?'rgba(166,200,255,.6)':'rgba(255,255,255,.12)',on?1.4:1);
+      const x=ease(1-(now-st.gateX[i])/700);if(x>0){sq(ctx,L.gx,y,9,'rgba(250,77,86,'+(0.3+0.6*x)+')');ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(L.gx-2.5,y-2.5);ctx.lineTo(L.gx+2.5,y+2.5);ctx.moveTo(L.gx+2.5,y-2.5);ctx.lineTo(L.gx-2.5,y+2.5);ctx.stroke();}
+      if(on){const g=ease(1-(now-st.gateF)/700);rect(ctx,L.gx-5,y-5,10,10,g>0?'rgba(66,190,101,'+(0.25+0.6*g)+')':'#0a1430',g>0?'#42be65':'rgba(255,255,255,.7)');
+        if(g>0){ctx.strokeStyle='#fff';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(L.gx-2.5,y);ctx.lineTo(L.gx-0.5,y+2);ctx.lineTo(L.gx+2.8,y-2.2);ctx.stroke();}
+        label(ctx,SRC[i][1]+' topic',L.gx+12,y-10,'rgba(255,255,255,.75)',L.wide?10:9);}}
+    /* the context topic joins the followed stream */
+    const s=stageOf(),fresh=s!=='wait'&&s!=='in',y=L.ry[S.src],cx=L.ctxX;
+    ctx.strokeStyle=fresh?'rgba(61,219,217,.85)':'rgba(61,219,217,.3)';ctx.setLineDash([2,3]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx+0.5,L.y0+24);ctx.lineTo(cx+0.5,y-5);ctx.stroke();ctx.setLineDash([]);
+    if(s==='lane'&&!reduced){const u=prog();if(u<0.6){const yy=lerp(L.y0+24,y,ease(u/0.6));sq(ctx,cx,yy,5,'#3ddbd9');}}
+    ctx.save();ctx.translate(cx,y);ctx.rotate(Math.PI/4);ctx.fillStyle=fresh?'#3ddbd9':'#0a1430';ctx.strokeStyle='#3ddbd9';ctx.fillRect(-4,-4,8,8);ctx.strokeRect(-4,-4,8,8);ctx.restore();}
+  function flink(ctx){const pE=part('process'),zE=part('zero');rect(ctx,L.fx0,L.fy0,L.fx1-L.fx0,L.fy1-L.fy0,'rgba(0,0,0,.12)',pE||zE?'#a6c8ff':'rgba(166,200,255,.3)');
+    label(ctx,'APACHE FLINK',L.fx0+(L.wide?28:30),L.fy0+14,pE?'#fff':'rgba(166,200,255,.85)',9.5,1);}
+  function chip(ctx,now){const R=L.ch,S=SC[st.sc],e=reduced?3000:st.tChip?(now-st.tChip)/st.slow:-1,arr=e>=0,w=R.x1-R.x0,cE=part('chip');
+    rect(ctx,R.x0,R.y0,w,R.y1-R.y0,'#0d1c44',cE?'#a6c8ff':'#4589ff');ctx.fillStyle='#0f62fe';ctx.fillRect(R.x0,R.y0,w,3);
+    label(ctx,'IBM GRANITE TIME SERIES',R.x0+12,R.y0+16,'#a6c8ff',L.wide?10.5:9.5,1.2);
+    const cy=R.y0+36,col=CAPC[S.cap];ctx.font='600 '+(L.wide?11:10)+'px '+MF;const cw=ctx.measureText(CAPN[S.cap]).width+CAPN[S.cap].length+14;
+    rect(ctx,R.x0+12,cy-9,cw,18,arr?'rgba(15,98,254,.35)':'rgba(255,255,255,.04)',arr?col:'rgba(255,255,255,.2)');label(ctx,CAPN[S.cap],R.x0+19,cy+0.5,arr?col:'rgba(255,255,255,.4)',L.wide?11:10,1,'left','600');
+    label(ctx,S.mod,R.x0+12+cw+10,cy+0.5,arr?'#fff':'rgba(255,255,255,.45)',L.wide?10.5:9.5,0,'left','500');
+    if(L.wide){ctx.font='500 10.5px '+MF;const mEnd=R.x0+12+cw+10+ctx.measureText(S.mod).width;ctx.font='400 10px '+MF;if(mEnd+ctx.measureText(S.series).width+30<R.x1)label(ctx,S.series,R.x1-12,cy+0.5,'rgba(255,255,255,.5)',10,0,'right','400');}
     drawChart(ctx,now,e);}
   function drawChart(ctx,now,e){const C2=L.chart,S=SC[st.sc],D=st.ser;if(!D)return;const w=C2.x1-C2.x0,h=C2.y1-C2.y0,nowX=C2.x0+w*0.66,step=(nowX-C2.x0)/NH;
     const nI=reduced?24:Math.min((now-st.ts)/st.slow,CYCLE)/1000*SPS,X=i=>nowX-(nI-i)*step,rev=e<0?0:ease(e/700),late=e<0?0:ease((e-200)/500);
@@ -3604,14 +3565,13 @@ const CS={
     if(rev>0&&D.k!=='spike'){
       if(D.k==='quant'){const m=val(D,nI),q=(hh,k)=>0.9*Math.sqrt(Math.max(0,hh))*k;[[1.9,'rgba(69,137,255,.16)'],[0.8,'rgba(69,137,255,.28)']].forEach(([k,c])=>{ctx.fillStyle=c;ctx.beginPath();for(let i=nI;i<=iF;i+=0.5)ctx.lineTo(X(i),Y(m+0.03*(i-nI)+q(i-nI,k)));for(let i=iF;i>=nI;i-=0.5)ctx.lineTo(X(i),Y(m+0.03*(i-nI)-q(i-nI,k)));ctx.closePath();ctx.fill();});
         ctx.strokeStyle='#78a9ff';ctx.setLineDash([4,3]);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(X(nI),Y(m));ctx.lineTo(X(iF),Y(m+0.03*(iF-nI)));ctx.stroke();ctx.setLineDash([]);
-        if(rev>0.9)label(ctx,'q10 to q90',X(nI+NF)-2,Y(m+q(NF,1.9))-8,'#a6c8ff',9.5,0,'right','400');}
+        if(rev>0.9)label(ctx,'range',X(nI+NF)-2,Y(m+q(NF,1.9))-8,'#a6c8ff',9.5,0,'right','400');}
       else{const F=D.k==='opt'?D.E:D.E,bw=D.k==='peak'?0.05:D.k==='opt'?0.35:4;ctx.fillStyle='rgba(69,137,255,.2)';ctx.beginPath();for(let i=nI;i<=iF;i+=0.5)ctx.lineTo(X(i),Y(F(i)+bw*(0.6+Math.sqrt(i-nI)*0.5)));for(let i=iF;i>=nI;i-=0.5)ctx.lineTo(X(i),Y(F(i)-bw*(0.6+Math.sqrt(i-nI)*0.5)));ctx.closePath();ctx.fill();
         ctx.strokeStyle=D.k==='opt'?'rgba(255,255,255,.45)':'#78a9ff';ctx.setLineDash([4,3]);ctx.lineWidth=1.5;ctx.beginPath();for(let i=nI;i<=iF;i+=0.5)i===nI?ctx.moveTo(X(i),Y(F(i))):ctx.lineTo(X(i),Y(F(i)));ctx.stroke();ctx.setLineDash([]);
         if(D.k==='opt'&&e>=600){const r2=ease((e-600)/700),iE=nI+NF*r2,b=val(D,nI);ctx.strokeStyle='#42be65';ctx.lineWidth=2;ctx.beginPath();for(let i=nI;i<=iE;i+=0.5){const v=lerp(b,D.fix(i),ease((i-nI)/8));i===nI?ctx.moveTo(X(i),Y(v)):ctx.lineTo(X(i),Y(v));}ctx.stroke();
           if(r2>0.8)label(ctx,'new setpoint',X(nI+NF)-2,Y(182)-9,'#a7f0ba',9.5,0,'right','600');}
-        if(D.k==='fc'&&rev>0.6)label(ctx,'+ weather topic: heat wave',C2.x1-4,C2.y0+9,'#3ddbd9',9.5,0,'right','600');
         if(D.k==='peak'&&rev>0.8){let bi=nI,bv=-1;for(let i=Math.ceil(nI);i<=nI+NF;i++){if(F(i)>bv){bv=F(i);bi=i;}}sq(ctx,X(bi),Y(bv),6,'#a6c8ff');label(ctx,'peak 1.7 MW',X(bi),Y(bv)-11,'#a6c8ff',9.5,0,'center','600');}
-        if(D.k==='match'&&rev>0.6)label(ctx,'forecast follows the match',C2.x1-4,C2.y0+9,'#a6c8ff',9.5,0,'right','400');}}
+}}
     if(D.k==='spike'){ctx.strokeStyle='rgba(120,169,255,.7)';ctx.setLineDash([4,3]);ctx.lineWidth=1.2;ctx.beginPath();for(let i=nI;i<=nI+NF;i+=0.5)i===nI?ctx.moveTo(X(i),Y(D.E(i))):ctx.lineTo(X(i),Y(D.E(i)));ctx.stroke();ctx.setLineDash([]);}
     /* history */
     ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.lineJoin='round';ctx.beginPath();let first=true;for(let i=i0;i<=Math.floor(nI);i++){const x=X(i),y=Y(D.A[i+D.O]);first?ctx.moveTo(x,y):ctx.lineTo(x,y);first=false;}ctx.lineTo(nowX,Y(val(D,nI)));ctx.stroke();
@@ -3623,35 +3583,41 @@ const CS={
     label(ctx,'now',nowX+4,C2.y1-8,'rgba(255,255,255,.6)',9.5,0,'left','400');
     const pa=reduced||e<0?0:1-e/600;if(pa>0&&pa<1){ctx.strokeStyle='rgba(255,255,255,'+pa+')';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(nowX,Y(val(D,nI)),4+10*(1-pa),0,Math.PI*2);ctx.stroke();}
     ctx.restore();}
-  function agent(ctx,now){const R=L.ag,S=SC[st.sc],s=stageOf(),on=s==='ag1'||s==='agw'||s==='ag2'||em('agent'),chk=s==='agw';
-    path(ctx,L.pag,on?'#be95ff':'rgba(190,149,255,.35)',on?1.4:1);
-    rect(ctx,R.x0,R.y0,R.x1-R.x0,R.y1-R.y0,on?'rgba(190,149,255,.18)':'rgba(190,149,255,.07)',on?'#be95ff':'rgba(190,149,255,.45)');
-    const my=(R.y0+R.y1)/2;label(ctx,'STREAMING AGENTS',R.x0+12,my,on?'#e8daff':'rgba(232,218,255,.75)',L.wide?10.5:9.5,1.1,'left','600');
-    const txt=chk?'checks before it acts':L.wide&&R.x1-R.x0>420?'act on the result, with gates for experts':'act, with gates for experts';ctx.font='400 '+(L.wide?11.5:10)+'px '+SANS;const x0=R.x0+12+(L.wide?150:122),ww=R.x1-12-x0;
-    if(ww>60){ctx.textAlign='left';ctx.fillStyle=chk?'#fff':'rgba(255,255,255,.55)';ctx.fillText(fit(ctx,txt,ww),x0,my+0.5);}
-    if(chk&&!reduced){const u=(now-st.fp.t0)/(DUR.agw*st.slow);ctx.fillStyle='#be95ff';ctx.fillRect(R.x0,R.y1-2,(R.x1-R.x0)*clamp(u,0,1),2);}}
+  function agent(ctx,now){const R=L.ag,s=stageOf(),on=s==='ag1'||s==='agw'||s==='ag2'||em('agent'),chk=s==='agw';
+    path(ctx,L.pag,on?'#be95ff':'rgba(190,149,255,.3)',on?1.4:1);
+    rect(ctx,R.x0,R.y0,R.x1-R.x0,R.y1-R.y0,on?'rgba(190,149,255,.18)':'rgba(190,149,255,.06)',on?'#be95ff':'rgba(190,149,255,.4)');
+    const my=(R.y0+R.y1)/2;label(ctx,'STREAMING AGENT',R.x0+12,my,on?'#e8daff':'rgba(232,218,255,.7)',L.wide?10.5:9.5,1.1,'left','600');
+    if(chk){ctx.font='400 '+(L.wide?11.5:10)+'px '+SANS;ctx.textAlign='right';ctx.fillStyle='#fff';ctx.fillText('checks before it acts',R.x1-12,my+0.5);
+      if(!reduced){ctx.fillStyle='#be95ff';ctx.fillRect(R.x0,R.y1-2,(R.x1-R.x0)*prog(),2);}}}
   function outs(ctx,now){const S=SC[st.sc],s=stageOf(),oE=em('out');
-    L.snk.forEach((r,k)=>{const kind=SNK[k][1],[c1,c2]=COL[kind],on=k===S.snk&&(s==='out'||s==='ag2'||s==='end'),fl=ease(1-(now-st.sinkF[k])/900),bg=ease(1-(now-st.sinkF[k])/400)*0.4;
-      path(ctx,L.pout[k],on?c1:k>=4?'rgba(190,149,255,.3)':'rgba(255,255,255,.16)',on?1.5:1);
-      const hit=k===S.snk&&s==='end'&&now-st.sinkT[k]<2600;
-      rect(ctx,r.x,r.y,r.w,r.h,hit?'rgba('+(kind==='dec'?'66,190,101':kind==='fc'?'69,137,255':'250,77,86')+',.16)':'rgba(10,20,48,'+(0.7-bg)+')',hit||oE?c1:fl>0?'rgba(255,255,255,'+(0.18+0.4*fl)+')':'rgba(255,255,255,.18)');
-      ctx.fillStyle=c1;ctx.fillRect(r.x,r.y,3,r.h);
-      const fresh=now-st.sinkT[k]<4000;ctx.textAlign='left';ctx.textBaseline='middle';
-      if(L.wide){fz(ctx,SNK[k][0],r.w-22,12.5,11,'500');ctx.fillStyle=hit?'#fff':'rgba(255,255,255,.8)';ctx.fillText(fit(ctx,SNK[k][0],r.w-22),r.x+12,r.y+r.h*0.33);
-        fz(ctx,st.sinkV[k],r.w-22,11,10,'400');ctx.fillStyle=fresh?c2:'rgba(255,255,255,.5)';ctx.fillText(fit(ctx,st.sinkV[k],r.w-22),r.x+12,r.y+r.h*0.7);}
-      else{ctx.font='500 '+(L.z>1?12:11)+'px '+SANS;ctx.fillStyle=hit?'#fff':'rgba(255,255,255,.8)';ctx.fillText(SNK[k][0],r.x+10,r.y+r.h*0.33);
-        ctx.font='400 '+(L.z>1?11:10)+'px '+SANS;ctx.fillStyle=fresh?c2:'rgba(255,255,255,.5)';ctx.fillText(fit(ctx,st.sinkV[k],r.w-20),r.x+10,r.y+r.h*0.7);}});
-    if(L.wide){const r=L.snk[5],y=r.y+r.h+12;if(y<L.H-6)label(ctx,'results go back on Kafka topics',r.x,y,em('stream')||em('out')?'#fff':'rgba(255,255,255,.45)',9.5,0.3,'left','400');}}
-  function packets(ctx,now){if(reduced)return;const vt=L.wide?62:48,cs=L.wide?[4,8]:[3,6];
+    L.snk.forEach((r,k)=>{const kind=SNK[k][1],[c1,c2]=COL[kind],act=k===S.snk&&(s==='out'||s==='ag2'||s==='end'),fl=ease(1-(now-st.sinkF[k])/900);
+      path(ctx,L.pout[k],act?c1:k>=4?'rgba(190,149,255,.22)':'rgba(255,255,255,.12)',act?1.5:1);
+      const hit=k===S.snk&&s==='end',fresh=now-st.sinkT[k]<6000&&st.sinkV[k];
+      rect(ctx,r.x,r.y,r.w,r.h,hit?'rgba('+(kind==='dec'?'66,190,101':kind==='fc'?'69,137,255':'250,77,86')+',.16)':'rgba(10,20,48,.7)',hit||oE?c1:fl>0?'rgba(255,255,255,'+(0.16+0.35*fl)+')':'rgba(255,255,255,.16)');
+      ctx.fillStyle=c1;ctx.fillRect(r.x,r.y,3,r.h);ctx.textAlign='left';ctx.textBaseline='middle';
+      const tz=L.wide?12.5:11.5;fz(ctx,SNK[k][0],r.w-22,tz,10,'500');ctx.fillStyle=hit?'#fff':'rgba(255,255,255,.78)';
+      if(fresh){ctx.fillText(SNK[k][0],r.x+11,r.y+r.h*0.32);fz(ctx,st.sinkV[k],r.w-20,L.wide?11:10,9.5,'400');ctx.fillStyle=c2;ctx.fillText(fit(ctx,st.sinkV[k],r.w-20),r.x+11,r.y+r.h*0.7);}
+      else ctx.fillText(SNK[k][0],r.x+11,r.y+r.h/2+0.5);});}
+  /* six numbered markers where the joint values happen, with a short callout when lit */
+  function markers(ctx,now){const S=SC[st.sc],hv=st.hi&&/^v\d$/.test(st.hi)&&(st.hold||now-st.hiT<2600)?+st.hi.slice(1):0;
+    for(const pass of [0,1])L.mk.forEach(([x,y,dir,dy],k)=>{const n0=k+1,lit0=n0===st.vk||n0===hv;if(pass===1&&!lit0)return;const n=k+1,lit=n===st.vk||n===hv,r=L.wide?8:7;
+      ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=lit?'#0f62fe':'#0a1430';ctx.fill();ctx.strokeStyle=lit?'#fff':'rgba(166,200,255,.7)';ctx.lineWidth=1.2;ctx.stroke();
+      label(ctx,String(n),x,y+0.5,lit?'#fff':'#a6c8ff',L.wide?10:9,0,'center','600');
+      if(lit&&!reduced){const p=(now%1400)/1400;ctx.beginPath();ctx.arc(x,y,r+3+7*p,0,Math.PI*2);ctx.strokeStyle='rgba(120,169,255,'+(0.6*(1-p))+')';ctx.lineWidth=1;ctx.stroke();}
+      if(!lit||pass===0)return;const txt=n===2?'+ '+S.ctx+' topic, fresh context':VTXT[k];ctx.font='500 '+(L.wide?11:10)+'px '+SANS;const tw=ctx.measureText(txt).width,ph=L.wide?22:20;
+      let x0=n===4?L.fx0+(L.wide?28:30)+(()=>{ctx.font='500 9.5px '+MF;const v=ctx.measureText('APACHE FLINK').width+13;ctx.font='500 '+(L.wide?11:10)+'px '+SANS;return v+10;})():dir>0?x+r+6:x-r-6-tw-16;
+      x0=clamp(x0,2,L.W-tw-18);const py=y+(dy||0);rect(ctx,x0,py-ph/2,tw+16,ph,'#0f62fe','#a6c8ff');ctx.fillStyle='#fff';ctx.textAlign='left';ctx.fillText(txt,x0+8,py+0.5);});}
+  function packets(ctx,now){if(reduced)return;const cs=L.wide?[3,7]:[3,6];
     for(const p of st.parts){if(p.ph==='rej'){const q=ptAt(L.pin[p.i],L.pin[p.i].L-6);sq(ctx,q[0],q[1],4,'rgba(250,77,86,'+(p.t/700)+')');continue;}
-      if(p.ph==='tape'){const q=ptAt(L.ptape[p.i],p.d);ctx.fillStyle='rgba(255,255,255,.7)';ctx.fillRect(Math.round(q[0]-cs[0]/2),Math.round(q[1]-cs[1]/2),cs[0],cs[1]);continue;}
+      if(p.ph==='lane'){const q=ptAt(L.plane[p.i],p.d);ctx.fillStyle='rgba(255,255,255,.55)';ctx.fillRect(Math.round(q[0]-cs[0]/2),Math.round(q[1]-cs[1]/2),cs[0],cs[1]);continue;}
       const P=p.ph==='in'?L.pin[p.i]:p.ph==='fl'?L.pfl[p.i]:p.ph==='ag1'?L.pag:L.pout[p.k],q=ptAt(P,p.d);
-      const col=p.ph==='in'?(p.bad?'rgba(255,131,137,.9)':'rgba(255,255,255,.65)'):p.ph==='fl'?'rgba(166,200,255,.8)':p.ph==='ag1'?COL.an[1]:p.k>=4?COL.ag[1]:COL[SNK[p.k][1]][1];sq(ctx,q[0],q[1],3,col);}
-    const f=st.fp;if(f&&f.stage==='agw'){const q=L.pag.P[1];sq(ctx,q[0],q[1]+4,7,COL.ag[1]);}const P=focusPath();if(!f||!P)return;const S=SC[st.sc],u=clamp((now-f.t0)/(DUR[f.stage]*st.slow),0,1),d=P.L*(f.stage==='tape'?u:ease(u)),q=ptAt(P,d);
-    const col=f.stage==='in'||f.stage==='tape'?'#fff':f.stage==='fl'?'#a6c8ff':f.stage==='ag1'?COL.an[1]:f.stage==='ag2'?COL.ag[1]:COL[SNK[S.snk][1]][1];
+      const col=p.ph==='in'?(p.bad?'rgba(255,131,137,.85)':'rgba(255,255,255,.5)'):p.ph==='fl'?'rgba(166,200,255,.6)':p.ph==='ag1'?'rgba(255,179,184,.7)':p.k>=4?'rgba(232,218,255,.7)':COL[SNK[p.k][1]][1];sq(ctx,q[0],q[1],3,col);}
+    const f=st.fp;if(f&&f.stage==='agw'){const q=L.pag.P[1];sq(ctx,q[0],q[1]+4,7,COL.ag[1]);}
+    const P=focusPath();if(!f||!P)return;const S=SC[st.sc],u=prog(),d=P.L*(f.stage==='lane'?u:ease(u)),q=ptAt(P,d);
+    const col=f.stage==='in'||f.stage==='lane'?'#fff':f.stage==='fl'?'#a6c8ff':f.stage==='ag1'?COL.an[1]:f.stage==='ag2'?COL.ag[1]:COL[SNK[S.snk][1]][1];
     sub(ctx,P,Math.max(0,d-46),d,col,2);sq(ctx,q[0],q[1],7,col);ctx.strokeStyle='rgba(255,255,255,.5)';ctx.lineWidth=1;ctx.strokeRect(Math.round(q[0]-5)+0.5,Math.round(q[1]-5)+0.5,10,10);}
   function draw(){if(!L||!cv.W)return;const ctx=cv.ctx,now=performance.now();ctx.clearRect(0,0,cv.W,cv.H);ctx.textBaseline='middle';
-    heads(ctx);panel(ctx);sources(ctx,now);lanes(ctx,now);flink(ctx);chip(ctx,now);agent(ctx,now);outs(ctx,now);packets(ctx,now);}
+    heads(ctx);panel(ctx);sources(ctx,now);lanes(ctx,now);flink(ctx);chip(ctx,now);agent(ctx,now);outs(ctx,now);packets(ctx,now);markers(ctx,now);}
 
   /* ---------- interaction ---------- */
   const hitSrc=(x,y)=>L?L.src.findIndex(r=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h):-1;
@@ -3659,10 +3625,7 @@ const CS={
   cvEl.addEventListener('pointerleave',()=>{st.hover=-1;cvEl.style.cursor='';});
   cvEl.addEventListener('click',e=>{const r=cvEl.getBoundingClientRect(),i=hitSrc(e.clientX-r.left,e.clientY-r.top);if(i<0)return;const s=SC.findIndex(c=>c.src===i);if(s>=0){st.pin=performance.now()+20000;start(s,performance.now());}});
   function setHi(k,hold){st.hi=k;st.hiT=performance.now();st.hold=!!hold;}
-  keyEls.forEach(k=>{const on=()=>{setHi(k.dataset.k,true);if(sayEl){sayEl.classList.add('desc');sayEl.textContent=KEY_TXT[k.dataset.k];}},off=()=>{st.hold=false;st.hi=null;if(sayEl)sayEl.classList.remove('desc');caption();};
-    k.addEventListener('mouseenter',on);k.addEventListener('focus',on);k.addEventListener('mouseleave',off);k.addEventListener('blur',off);k.addEventListener('click',on);});
-
-  valEls.forEach(v=>{const on=()=>setHi(v.dataset.k,true),off=()=>{st.hold=false;st.hi=null;};v.addEventListener('mouseenter',on);v.addEventListener('focus',on);v.addEventListener('mouseleave',off);v.addEventListener('blur',off);v.addEventListener('click',on);});
+  valEls.forEach(v=>{const on=()=>setHi('v'+v.dataset.v,true),off=()=>{st.hold=false;st.hi=null;};v.addEventListener('mouseenter',on);v.addEventListener('focus',on);v.addEventListener('mouseleave',off);v.addEventListener('blur',off);v.addEventListener('click',on);});
   reg({el,resize,update,draw});
   start(0,performance.now());resize();
   App.arch={focus(i,pin,slow){const now=performance.now();st.pin=pin?now+CYCLE*(slow||1)+800:-1e9;start(i,now,slow);},hi(k){setHi(k,false);}};
@@ -3710,11 +3673,11 @@ const CS={
     {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:9930,hold:1800,
       say:'Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration.',
       subs:['<em>Better together</em>:','Confluent <em>streams, connects and governs</em> the data,','and Granite turns each event <em>into a decision</em>,','with <em>zero configuration</em>.'],
-      run:async(w,at)=>{const A=App.arch;if(!A)return;const phone=window.innerWidth<=760,k=x=>{A.hi(x);hi('#arch-keys [data-k="'+x+'"]');};A.focus(0,true,1.5);
-        await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('streams,');k('stream');await at('connects');k('connect');await at('governs');k('govern');
-        await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);k('process');await w(450);k('fd');
-        await at('into a decision');if(phone)scrollTo('#arch-a-out',true);A.hi('out');await at('zero configuration');A.hi('zero');scrollTo('#ax-vals',true);
-        for(const v of ['zero','live','ctx','gov','safe','fast']){await w(170);hi('#ax-vals [data-v="'+v+'"]');}}},
+      run:async(w,at)=>{const A=App.arch;if(!A)return;const phone=window.innerWidth<=760,v=n=>{A.hi('v'+n);hi('#ax-vals [data-v="'+n+'"]');};A.focus(0,true,1.5);
+        await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('governs');v(1);
+        await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);v(3);await w(700);v(5);
+        await at('into a decision');if(phone)scrollTo('#arch-a-out',true);A.hi('out');await at('zero configuration');v(4);if(phone)scrollTo('#ax-vals',true);
+        for(const n of [1,2,3,5,6]){await w(170);hi('#ax-vals [data-v="'+n+'"]');}}},
     {n:5,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:8280,
       say:'For your teams: ten times faster time to value, five to ten percent more accuracy, and decisions in seconds.',
       subs:['For your teams: <em>ten times faster</em> time to value,','<em>five to ten percent</em> more accuracy,','and decisions <em>in seconds</em>.'],
