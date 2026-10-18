@@ -350,45 +350,10 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 .qbox.has .ghost{display:none}
 
 /* start */
-.start-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-@media (max-width:900px){.start-tiles{grid-template-columns:1fr}}
-.stile{background:rgba(255,255,255,.045);border:1px solid var(--line);padding:1.2rem 1.1rem 1.1rem;display:grid;gap:.8rem;align-content:start;min-height:220px;position:relative}
-.stile .sn{font-family:var(--font-mono);font-size:.78rem;color:var(--blue-3)}
-.stile h3{font-size:1.4rem;font-weight:300}
-.stile p{color:var(--ink-2);font-size:.9rem}
-.stile .btn{margin-top:auto;justify-self:start}
-.stile pre{margin:0;background:rgba(0,0,0,.3);border:1px solid var(--line);padding:.7rem .8rem;font-size:.74rem;line-height:1.5;overflow:auto;color:var(--ink-2)}
-.stile pre .k{color:var(--blue-3)}.stile pre .f{color:var(--purple)}.stile pre .s{color:var(--green-2)}.stile pre .n{color:var(--orange)}
-.form{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-@media (max-width:600px){.form{grid-template-columns:1fr}}
-.form label{display:grid;gap:.3rem;font-size:.78rem;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase}
-.form input,.form select,.form textarea{font:inherit;font-size:.95rem;color:var(--ink);background:rgba(0,0,0,.28);border:0;border-bottom:1px solid var(--line-2);padding:.6rem .7rem;min-height:44px}
-.form textarea{min-height:88px;resize:vertical;grid-column:1/-1}
-.form label.full{grid-column:1/-1}
-.form input:focus,.form select:focus,.form textarea:focus{outline:2px solid var(--blue-2);outline-offset:-2px}
-.note{margin-top:1rem;background:rgba(0,0,0,.3);border:1px solid var(--line);padding:.9rem 1rem;font-family:var(--font-mono);font-size:.8rem;white-space:pre-wrap;color:var(--ink-2)}
-details.ref{border:1px solid var(--line);background:var(--panel);margin-top:12px}
-details.ref summary{cursor:pointer;padding:.9rem 1.1rem;font-size:.95rem;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center}
-details.ref summary::-webkit-details-marker{display:none}
-details.ref summary::after{content:"+";font-family:var(--font-mono);color:var(--blue-3);font-size:1.2rem}
-details.ref[open] summary::after{content:"\2212"}
-details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
-.tabs{display:flex;flex-wrap:wrap;gap:.3rem}
-.tabs button{background:transparent;border:1px solid var(--line-2);color:var(--ink-2);padding:.4rem .8rem;cursor:pointer;font-size:.82rem}
-.tabs button[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
 .codebox{position:relative;background:rgba(0,0,0,.3);border:1px solid var(--line)}
 .codebox pre{margin:0;padding:.9rem 1rem;font-size:.78rem;line-height:1.5;overflow:auto;color:var(--ink-2)}
 .codebox pre .k{color:var(--blue-3)}.codebox pre .f{color:var(--purple)}.codebox pre .s{color:var(--green-2)}.codebox pre .n{color:var(--orange)}
 .codebox .copy{position:absolute;top:.5rem;right:.5rem}
-.tbl{width:100%;border-collapse:collapse;font-size:.82rem}
-.tbl th,.tbl td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
-.tbl th{font-weight:500;color:var(--ink-3);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
-.tbl td code{color:var(--blue-3);font-size:.78rem}
-.tbl-wrap{overflow:auto}
-.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.4rem .9rem;font-size:.86rem}
-.links a{display:flex;align-items:center;gap:.4rem;padding:.3rem 0;color:var(--ink-2)}
-.links a:hover{color:var(--ink)}
-.links a::before{content:"\2192";color:var(--blue-3);font-family:var(--font-mono)}
 
 /* topbar + nav stat */
 .topbar{background:linear-gradient(90deg,rgba(15,98,254,.35),rgba(105,41,196,.3));border-bottom:1px solid var(--line);font-size:.8rem;color:var(--ink-2)}
@@ -535,10 +500,11 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .nav-pitch svg{width:10px;height:10px;color:var(--blue-3)}
 .nav-pitch:hover{background:rgba(15,98,254,.18)}
 @media (max-width:900px){.nav-pitch{display:inline-flex;padding:.3rem .5rem}.nav-pitch svg{display:none}}
-body.pitching .stage:not(.pitch-focus),body.pitching .chapter-head,body.pitching .inds,body.pitching .ucgrid,body.pitching .trust,body.pitching .start-tiles,body.pitching .ways,body.pitching .cta,body.pitching .marquee,body.pitching .hero-head{opacity:.22;filter:saturate(.3);transition:opacity .6s,filter .6s}
+body.pitching .stage:not(.pitch-focus),body.pitching .chapter-head,body.pitching .inds,body.pitching .ucgrid,body.pitching .trust,body.pitching .cform,body.pitching .ways,body.pitching .cta,body.pitching .marquee,body.pitching .hero-head{opacity:.22;filter:saturate(.3);transition:opacity .6s,filter .6s}
 body.pitching .stage,body.pitching .chapter-head,body.pitching .hero-head{transition:opacity .6s,filter .6s}
 body.pitching .stage.pitch-focus{box-shadow:0 0 0 1px var(--blue-2),0 0 0 6px rgba(69,137,255,.18),0 30px 90px rgba(0,0,0,.28);z-index:5}
 body.pitching .pitch-focus{opacity:1!important;filter:none!important}
+body.pitching .pitch-focus .chapter-head,body.pitching .pitch-focus .cform{opacity:1!important;filter:none!important}
 body.pitching .topbar{display:none}
 .pitch{position:fixed;left:0;right:0;bottom:0;z-index:60;background:linear-gradient(180deg,rgba(0,7,20,0),rgba(0,7,20,.92) 28%,rgba(0,7,20,.98));padding:34px max(16px,env(safe-area-inset-left,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px));display:grid;gap:.6rem;pointer-events:none}
 .pitch>*{pointer-events:auto;max-width:1320px;width:100%;margin:0 auto}
@@ -593,6 +559,30 @@ body.pitching .topbar{display:none}
 .walk-steps code{font-size:.8rem;color:var(--blue-3)}
 .walk-side .btn-row{margin-top:.3rem}
 body.walking{overflow:hidden}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,80px);align-items:start}
+@media (max-width:900px){.contact{grid-template-columns:1fr}}
+.contact .chapter-head{margin-bottom:0}
+.cform{display:grid;grid-template-columns:1fr 1fr;gap:16px 16px;background:#f8f7f3;border:1px solid rgba(22,22,22,.18);padding:clamp(18px,2.6vw,30px);position:relative}
+@media (max-width:600px){.cform{grid-template-columns:1fr}}
+.cform .full{grid-column:1/-1}
+.cform label{display:grid;gap:6px;font-size:.86rem;color:var(--ink-2);min-width:0}
+.cform label em{font-style:normal;color:var(--ink-3);margin-left:.4rem;font-size:.78rem}
+.cform input,.cform textarea{font:inherit;font-size:1rem;color:var(--ink);background:#fff;border:1px solid rgba(22,22,22,.28);border-radius:0;padding:.7rem .8rem;width:100%;min-width:0;min-height:46px}
+.cform textarea{resize:vertical;min-height:7.5rem;line-height:1.45}
+.cform input:focus,.cform textarea:focus{outline:2px solid #0f62fe;outline-offset:-1px;border-color:#0f62fe}
+.cform [aria-invalid="true"]{border-color:#da1e28;box-shadow:inset 0 0 0 1px #da1e28}
+.cform .hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.cform-foot{display:flex;align-items:center;gap:.6rem 1rem;flex-wrap:wrap;margin-top:2px}
+.cform-foot .btn:disabled{opacity:.55;cursor:wait}
+.cform-msg{font-size:.88rem;color:var(--ink-2)}
+.cform-msg[data-kind="err"]{color:#da1e28}
+.cform-note{margin:0;font-size:.78rem;color:var(--ink-3)}
+.cform-done{grid-template-columns:1fr;align-content:start;gap:.5rem;outline:none}
+.cform-done b{font-size:clamp(1.3rem,2.2vw,1.7rem);font-weight:300;color:var(--ink)}
+.cform-done p{margin:0;color:var(--ink-2)}
+.cform-done .btn{justify-self:start;margin-top:.6rem}
 
 /* plant twin */
 .plant-wrap{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
@@ -693,11 +683,6 @@ body::before{background:var(--paper)}
 .h-display .caret{background:#0f62fe}
 .h-display .caret.c2{background:#198038}
 .chapter-head .n{color:var(--ink-3)}
-.stile{background:transparent;border-color:var(--line-2)}
-.stile .sn{color:var(--ink-3)}
-.stile pre{background:#1d2235;border-color:transparent;color:#d2d8e2}
-.stile pre .k{color:#78a9ff}.stile pre .f{color:#be95ff}.stile pre .s{color:#6fdc8c}.stile pre .n{color:#ff832b}
-.ref{border-color:var(--line-2)}
 .foot{border-top:1px solid var(--line-2)}
 /* the dark bands: tokens flip back so every chart keeps its light ink */
 .stage,.uc,.ind,.pitch,.walk,.tip,.dcard,.pg-card,.pg-how>div{
@@ -818,11 +803,10 @@ body.pitching .csgrid{opacity:.22;filter:saturate(.3);transition:opacity .6s,fil
       <a href="#innovation" data-ch="innovation"><b>01</b>Innovation</a>
       <a href="#value" data-ch="value"><b>02</b>Value</a>
       <a href="#usecases" data-ch="usecases"><b>03</b>Enterprise use cases</a>
-      <a href="#start" data-ch="start"><b>04</b>Start</a>
-      <a href="/playground" data-ch="playground"><b>05</b>Playground</a>
+      <a href="/playground" data-ch="playground"><b>04</b>Playground</a>
     </div>
     <button class="nav-stat nav-pitch" id="nav-pitch" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg> Demo</button>
-    <a class="btn sm" href="#briefing">Book a session <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    <a class="btn sm" href="#contact">Contact us <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </div>
 </nav>
 
@@ -1429,130 +1413,30 @@ FROM pos_sales;</code></pre></div>
   </div>
 </section>
 
-<!-- ============ 04 START ============ -->
-<section class="chapter" id="start">
+<!-- ============ CONTACT ============ -->
+<section class="chapter" id="contact">
   <div class="wrap">
-    <div class="chapter-head">
-      <span class="n">04 / START</span>
-      <h2>Run it on your stream.</h2>
-      <p>Three moves. The first takes a minute.</p>
-    </div>
-
-    <div class="start-tiles">
-      <div class="stile"><span class="sn">01</span><h3>Paste one statement</h3><p>Any topic with a value and a timestamp.</p>
-        <pre><code class="sql" id="start-sql">SELECT event_time, value,
-  AI_FORECAST(value, event_time,
-    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 12))
-  OVER (PARTITION BY series_id ORDER BY event_time
-        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f
-FROM your_topic;</code></pre>
-        <button class="btn sm ghost" id="start-copy">Copy SQL</button></div>
-      <div class="stile"><span class="sn">02</span><h3>Call it from Flink SQL</h3><p>Models hosted by Confluent. AI_FORECAST and AI_DETECT_ANOMALIES today, TS_EMBED, TS_SEARCH and TS_OPTIMIZE next.</p><a class="btn sm walk-link" href="#">Watch the walkthrough <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg></a></div>
-      <div class="stile"><span class="sn">03</span><h3>Book a working session</h3><p>Bring a topic and a decision. One afternoon, your data.</p><a class="btn sm ghost" href="#briefing">Build the note <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v10M4 8l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
-    </div>
-
-    <div class="stage" id="briefing" style="margin-top:12px">
-      <div class="stage-top"><div class="stage-title"><h3>Briefing note</h3><p>Four lines. Copy it into an email to your IBM or Confluent contact.</p></div></div>
-      <div class="stage-body">
-        <form class="form" id="brief-form">
-          <label>Name<input id="f-name" autocomplete="name" placeholder="Your name"></label>
-          <label>Company<input id="f-company" autocomplete="organization" placeholder="Company"></label>
-          <label>Use case<select id="f-use"><option>Demand and replenishment</option><option>Anomaly detection</option><option>Production optimization</option><option>Semantic search and tagging</option><option>Fraud and payments</option><option>Network operations</option></select></label>
-          <label>Streaming today<select id="f-env"><option>Confluent Cloud</option><option>Confluent Platform</option><option>Open source Kafka</option><option>Not yet</option></select></label>
-          <label class="full">The stream and the decision<textarea id="f-stream" placeholder="Example: POS sales per store and SKU, hourly. Decide when to raise a purchase order."></textarea></label>
-          <div class="btn-row" style="grid-column:1/-1"><button class="btn" type="submit">Build the note</button><button class="btn ghost" type="button" id="copy-note" hidden>Copy note</button><span class="toast" id="note-toast"></span></div>
-        </form>
-        <div class="note" id="note-out" hidden></div>
+    <div class="contact">
+      <div class="chapter-head">
+        <span class="n">CONTACT</span>
+        <h2>Contact us for opportunities.</h2>
+        <p>Tell us where you want to start, and we will get back to you.</p>
+      </div>
+      <form class="cform" id="contact-form" novalidate>
+        <label><span>Name</span><input name="name" autocomplete="name" required maxlength="120"></label>
+        <label><span>Email</span><input name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200"></label>
+        <label class="full"><span>Company</span><input name="company" autocomplete="organization" required maxlength="160"></label>
+        <label class="full"><span>Notes <em>optional</em></span><textarea name="notes" rows="4" maxlength="4000"></textarea></label>
+        <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+        <div class="cform-foot full"><button class="btn" type="submit" id="contact-send">Send <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><span class="cform-msg" id="contact-msg" role="status" aria-live="polite"></span></div>
+        <p class="cform-note full">We use these details only to reply to you.</p>
+      </form>
+      <div class="cform cform-done" id="contact-done" hidden tabindex="-1">
+        <b id="contact-thanks">Thanks. We have your note.</b>
+        <p>We will be in touch soon.</p>
+        <button class="btn ghost sm" type="button" id="contact-again">Send another</button>
       </div>
     </div>
-
-    <details class="ref" id="reference">
-      <summary>Technical reference: functions, parameters, limits</summary>
-      <div class="rb">
-        <div class="tabs" role="tablist">
-          <button role="tab" aria-selected="true" aria-controls="r1">Forecast</button>
-          <button role="tab" aria-selected="false" aria-controls="r2">Detect</button>
-          <button role="tab" aria-selected="false" aria-controls="r3">Alerts table</button>
-          <button role="tab" aria-selected="false" aria-controls="r4">Quantiles</button>
-          <button role="tab" aria-selected="false" aria-controls="r5">Asymmetric band</button>
-        </div>
-        <div class="codebox" id="r1" role="tabpanel"><button class="btn sm ghost copy">Copy SQL</button><pre><code class="sql">SELECT event_time, load_kw,
-  AI_FORECAST(load_kw, event_time,
-    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 12))
-  OVER (PARTITION BY meter_id ORDER BY event_time
-        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS forecast
-FROM meter_readings;</code></pre></div>
-        <div class="codebox" id="r2" role="tabpanel" hidden><button class="btn sm ghost copy">Copy SQL</button><pre><code class="sql">SELECT event_time, response_ms,
-  AI_DETECT_ANOMALIES(response_ms, event_time,
-    JSON_OBJECT('model' VALUE 'flowstate',
-                'minContextSize' VALUE 20, 'maxContextSize' VALUE 512,
-                'confidencePercentage' VALUE 99.0))
-  OVER (PARTITION BY host_id ORDER BY event_time
-        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS anomaly
-FROM server_metrics;</code></pre></div>
-        <div class="codebox" id="r3" role="tabpanel" hidden><button class="btn sm ghost copy">Copy SQL</button><pre><code class="sql">CREATE TABLE card_alerts AS
-SELECT card_id, event_time, amount,
-       anomaly.forecast_value AS expected, anomaly.lower_bound, anomaly.upper_bound, anomaly.rmse
-FROM (
-  SELECT card_id, event_time, amount,
-    AI_DETECT_ANOMALIES(amount, event_time,
-      JSON_OBJECT('model' VALUE 'ttm', 'confidencePercentage' VALUE 99.5))
-    OVER (PARTITION BY card_id ORDER BY event_time
-          RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS anomaly
-  FROM card_payments)
-WHERE anomaly.is_anomaly = TRUE;</code></pre></div>
-        <div class="codebox" id="r4" role="tabpanel" hidden><button class="btn sm ghost copy">Copy SQL</button><pre><code class="sql">SELECT s.sku, s.event_time AS as_of,
-       step.`timestamp` AS forecast_day, step.q10 AS floor, step.q50 AS expected, step.q90 AS reorder_point
-FROM (
-  SELECT sku, event_time,
-    AI_FORECAST(units_sold, event_time,
-      JSON_OBJECT('model' VALUE 'patchtstfm', 'horizon' VALUE 7, 'maxContextSize' VALUE 730))
-    OVER (PARTITION BY sku ORDER BY event_time
-          RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f
-  FROM daily_sales) AS s
-CROSS JOIN UNNEST(s.f.forecast) AS step (`timestamp`, mean, q10, q50, q90);</code></pre></div>
-        <div class="codebox" id="r5" role="tabpanel" hidden><button class="btn sm ghost copy">Copy SQL</button><pre><code class="sql">SELECT event_time, vibration_mm_s,
-  AI_DETECT_ANOMALIES(vibration_mm_s, event_time,
-    JSON_OBJECT('model' VALUE 'patchtstfm', 'maxContextSize' VALUE 2048,
-                'upperBoundConfidencePercentage' VALUE 90.0,
-                'lowerBoundConfidencePercentage' VALUE 99.9))
-  OVER (PARTITION BY asset_id ORDER BY event_time
-        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS anomaly
-FROM motor_telemetry;</code></pre></div>
-        <div class="tbl-wrap"><table class="tbl">
-          <thead><tr><th>Parameter</th><th>Default</th><th>Meaning</th></tr></thead>
-          <tbody>
-            <tr><td><code>model</code></td><td><code>ttm</code></td><td><code>ttm</code>, <code>flowstate</code>, <code>patchtstfm</code> or <code>timesfm-2.5</code>. Hosted by Confluent. Both functions.</td></tr>
-            <tr><td><code>horizon</code></td><td>5</td><td>Future steps to forecast. AI_FORECAST only.</td></tr>
-            <tr><td><code>minContextSize</code></td><td>20</td><td>Points required before output starts. Fields are null until then.</td></tr>
-            <tr><td><code>maxContextSize</code></td><td>512</td><td>Most recent points used. Older points are truncated.</td></tr>
-            <tr><td><code>confidencePercentage</code></td><td>99.0</td><td>Symmetric prediction interval. AI_DETECT_ANOMALIES only.</td></tr>
-            <tr><td><code>upperBoundConfidencePercentage</code> / <code>lowerBound…</code></td><td>null</td><td>Asymmetric overrides for one side of the interval.</td></tr>
-            <tr><td><code>rmseWindowSize</code></td><td>5</td><td>Rolling window for the RMSE of predictions.</td></tr>
-          </tbody></table></div>
-        <div class="tbl-wrap"><table class="tbl">
-          <thead><tr><th>Model</th><th>Horizon</th><th>Context</th><th>Notes</th></tr></thead>
-          <tbody>
-            <tr><td><code>ttm</code></td><td>up to 96</td><td>52 to 512</td><td>Picks the TTM variant that matches horizon and context. Fast default.</td></tr>
-            <tr><td><code>flowstate</code></td><td>over 6</td><td>up to 4,096</td><td>Context plus horizon under 4,102. Seconds-level and hourly data alike.</td></tr>
-            <tr><td><code>patchtstfm</code></td><td>up to 8,176</td><td>16 to 8,064</td><td>Context plus horizon up to 8,192. Long horizons, full distributions.</td></tr>
-            <tr><td><code>timesfm-2.5</code></td><td>model limit</td><td>multiple of 32</td><td>Google Research model, also available in both functions.</td></tr>
-          </tbody></table></div>
-        <p class="tiny">Output of AI_FORECAST: <code>forecast ARRAY&lt;ROW&lt;timestamp, mean, q10, q50, q90&gt;&gt;</code> and <code>metadata</code>. Output of AI_DETECT_ANOMALIES: <code>is_anomaly, forecast_value, lower_bound, upper_bound, actual_value, timestamp, rmse</code>. Inputs: value DOUBLE, timestamp TIMESTAMP(3), evenly spaced for best results. Billed as Flink compute.</p>
-        <div class="links">
-          <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">AI_FORECAST reference</a>
-          <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/detect-anomalies.html" target="_blank" rel="noopener">AI_DETECT_ANOMALIES reference</a>
-          <a href="https://github.com/confluentinc/quickstart-ai-ml-functions" target="_blank" rel="noopener">Confluent quickstart repo</a>
-          <a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Granite models on Hugging Face</a>
-          <a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">granite-tsfm on GitHub</a>
-          <a href="https://huggingface.co/spaces/Salesforce/GIFT-Eval" target="_blank" rel="noopener">GIFT-Eval leaderboard</a>
-          <a href="https://research.ibm.com/blog/tspulse-time-series-ai-model" target="_blank" rel="noopener">TSPulse, IBM Research</a>
-          <a href="https://huggingface.co/blog/ibm-research/real-time-intelligence" target="_blank" rel="noopener">Real-time intelligence, IBM on Hugging Face</a>
-          <a href="https://www.ibm.com/new/announcements/ibm-granite-time-series-models-bring-real-time-forecasting-and-anomaly-detection-to-confluent-cloud" target="_blank" rel="noopener">IBM announcement</a>
-          <a href="https://www.confluent.io/blog/2026-q3-confluent-intelligence-ai-update/" target="_blank" rel="noopener">Confluent Intelligence update</a>
-        </div>
-      </div>
-    </details>
   </div>
 </section>
 
@@ -1588,14 +1472,14 @@ FROM motor_telemetry;</code></pre></div>
   </div>
   <div class="pitch-end" id="pitch-end" hidden>
     <div class="pitch-end-h">One statement of Flink SQL. Your stream already knows what happens next.</div>
-    <div class="btn-row"><a class="btn" href="#briefing" id="pitch-brief">Book a working session</a><a class="btn ghost" href="/playground">Open the playground</a><button class="btn ghost" id="pitch-replay" type="button">Replay</button></div>
+    <div class="btn-row"><a class="btn" href="#contact" id="pitch-brief">Contact us</a><a class="btn ghost" href="/playground">Open the playground</a><button class="btn ghost" id="pitch-replay" type="button">Replay</button></div>
   </div>
 </div>
 <footer class="foot">
   <div class="wrap">
     <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. October 2026.</span></div>
     <details class="row" id="credits"><summary>Photo credits</summary><div><a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div></details>
-    <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="#reference">Technical reference</a></div>
+    <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="https://www.ibm.com/new/announcements/ibm-granite-time-series-models-bring-real-time-forecasting-and-anomaly-detection-to-confluent-cloud" target="_blank" rel="noopener">IBM announcement</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
   </div>
 </footer>
@@ -3197,14 +3081,34 @@ const CS={
   $$('#fs-sig .chip').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.v;st.sig[k]=!st.sig[k];b.setAttribute('aria-pressed',st.sig[k]?'true':'false');st.imp=target();}));
 })();
 
-/* ============ 04 start ============ */
+/* ============ contact ============ */
 (function(){
-  const sc=$('#start-copy');if(sc)sc.addEventListener('click',()=>copyText($('#start-sql').textContent,sc,ok=>{if(!ok)selectEl($('#start-sql'));}));
-  const form=$('#brief-form');
-  if(form){form.addEventListener('submit',e=>{e.preventDefault();const g=id=>($('#'+id).value||'').trim();const name=g('f-name')||'[your name]',company=g('f-company')||'[company]',use=g('f-use'),env=g('f-env'),stream=g('f-stream')||'[the stream and the decision]';
-    const txt='Subject: Working session request, IBM Granite Time Series models on Confluent\n\nHello,\n\nWe would like to evaluate IBM Granite Time Series models on Confluent for '+use.toLowerCase()+'.\n\nName: '+name+'\nCompany: '+company+'\nStreaming today: '+env+'\n\nThe stream and the decision:\n'+stream+'\n\nCould we set up a working session with the IBM and Confluent teams and get the time series functions enabled for our Confluent Cloud organization? We can share a topic and a sample statement to start.\n\nThanks,\n'+name;
-    $('#note-out').textContent=txt;$('#note-out').hidden=false;$('#copy-note').hidden=false;$('#note-toast').textContent='';$('#note-out').scrollIntoView({behavior:'smooth',block:'nearest'});});
-    $('#copy-note').addEventListener('click',()=>{const pre=$('#note-out');copyText(pre.textContent,$('#copy-note'),ok=>{$('#note-toast').textContent=ok?'Copied. Paste it into an email to your IBM or Confluent contact.':'Copy is blocked here. The text is selected, use your keyboard shortcut.';if(!ok)selectEl(pre);});});}
+  const form=$('#contact-form'),done=$('#contact-done');if(!form||!done)return;
+  const msg=$('#contact-msg'),send=$('#contact-send'),t0=performance.now();
+  const onSite=/(^|\.)realtimeintelligence\.io$|\.vercel\.app$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+  const API=(onSite?'':'https://realtimeintelligence.io')+'/api/contact';
+  const EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const field=n=>form.querySelector('[name="'+n+'"]');
+  const say=(t,kind)=>{msg.textContent=t;msg.dataset.kind=kind||'';};
+  ['name','email','company'].forEach(n=>field(n).addEventListener('input',()=>field(n).removeAttribute('aria-invalid')));
+  form.addEventListener('submit',async e=>{e.preventDefault();
+    const v=n=>field(n).value.trim();
+    const bad=['name','email','company'].filter(n=>n==='email'?!EMAIL.test(v(n)):!v(n));
+    ['name','email','company'].forEach(n=>bad.includes(n)?field(n).setAttribute('aria-invalid','true'):field(n).removeAttribute('aria-invalid'));
+    if(bad.length){say(bad.length===1&&bad[0]==='email'&&v('email')?'Check the email address.':'Add your '+bad.map(n=>n==='name'?'name':n==='email'?'email':'company').join(', ').replace(/, ([^,]*)$/,' and $1')+'.','err');field(bad[0]).focus();return;}
+    send.disabled=true;say('Sending…');
+    const body={name:v('name'),email:v('email'),company:v('company'),notes:v('notes'),website:field('website').value,t:Math.round(performance.now()-t0),page:location.pathname};
+    try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      if(!r.ok)throw new Error(String(r.status));
+      const first=body.name.split(/\s+/)[0];$('#contact-thanks').textContent='Thanks, '+first+'. We have your note.';
+      done.style.minHeight=form.offsetHeight+'px';form.hidden=true;done.hidden=false;say('');done.focus({preventScroll:true});
+    }catch(err){say(onSite?'That did not go through. Please try again in a minute.':'This preview cannot send. Use the form on realtimeintelligence.io.','err');}
+    finally{send.disabled=false;}});
+  $('#contact-again').addEventListener('click',()=>{form.reset();done.hidden=true;form.hidden=false;field('name').focus();});
+})();
+
+/* ============ share ============ */
+(function(){
   const share=$('#share-link');if(share)share.addEventListener('click',()=>{if(navigator.share){navigator.share({title:document.title,url:location.href}).catch(()=>{});return;}copyText(location.href,null,ok=>{$('#share-toast').textContent=ok?'Link copied.':'Copy the address from your browser bar.';});});
 })();
 
@@ -3281,7 +3185,7 @@ const CS={
       run:async w=>{await w(1500);click('#fr-inject .chip[data-v="stolen"]');}},
     {n:5,focus:'#cs-cement',scroll:'#cs-cement',pre:()=>{tab('cs-cement');if(App.cement)App.cement.set(false);},dur:7000,cap:'30 models <em>&#8594; 2</em>. 6 months <em>&#8594; 8 weeks</em>. 93 <em>&#8594; 99%</em>.',say:'Thirty bespoke models become two. Six months become eight weeks. Accuracy from ninety-three to ninety-nine percent.',
       run:async w=>{await w(1300);if(App.cement)App.cement.set(true);}},
-    {n:8,focus:'.start-tiles',scroll:'#start',dur:4500,cap:'One statement of Flink SQL. <em>Run it on your stream.</em>',say:'One statement of Flink SQL. Run it on your stream.',
+    {n:8,focus:'.contact',scroll:'#contact',dur:4500,cap:'One statement of Flink SQL. <em>Run it on your stream.</em>',say:'One statement of Flink SQL. Run it on your stream.',
       run:async w=>{}}
   ];
   const st={on:false,i:-1,paused:false,voice:true,token:0,utter:null,t0:0,elapsed:0,audio:null,blocked:false};
@@ -3319,7 +3223,7 @@ const CS={
     seg.classList.add('done');seg.classList.remove('on');}
   async function play(from){st.on=true;st.token++;const token=st.token;document.body.classList.add('pitching');ui.hidden=false;endEl.hidden=true;cap.hidden=false;prog.hidden=false;$('.pitch-ctl',ui).hidden=false;st.paused=false;pauseBtn.textContent='';pauseBtn.innerHTML='Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed','false');
     try{for(let i=from;i<SCRIPT.length;i++){await runStep(i,token);}finish();}catch(e){if(e.message!=='cancel')console.error(e);}}
-  function finish(){cap.innerHTML='';endEl.hidden=false;$('.pitch-ctl',ui).hidden=true;segs.forEach(g=>{g.classList.add('done');g.classList.remove('on');});stepEl.textContent=SCRIPT.length+' / '+SCRIPT.length;focus('.start-tiles');requestAnimationFrame(()=>scrollTo('.start-tiles'));}
+  function finish(){cap.innerHTML='';endEl.hidden=false;$('.pitch-ctl',ui).hidden=true;segs.forEach(g=>{g.classList.add('done');g.classList.remove('on');});stepEl.textContent=SCRIPT.length+' / '+SCRIPT.length;focus('.contact');requestAnimationFrame(()=>scrollTo('#contact'));}
   function exit(){st.token++;st.on=false;st.paused=false;document.body.classList.remove('pitching');$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));ui.hidden=true;stopAudio();}
   function togglePause(){if(!st.on||!endEl.hidden)return;st.paused=!st.paused;pauseBtn.innerHTML=st.paused?'Resume <kbd>space</kbd>':'Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed',st.paused);const seg=segs[st.i];if(seg){if(st.paused){const w=Math.min(100,100*(performance.now()-st.t0)/SCRIPT[st.i].dur);seg.style.setProperty('--w',w+'%');seg.classList.add('paused');}else{seg.classList.remove('paused');}}if(st.audio){try{if(st.paused)st.audio.pause();else st.audio.play();}catch(e){}}if(window.speechSynthesis){if(st.paused)speechSynthesis.pause();else speechSynthesis.resume();}}
   function next(){if(!st.on)return;const i=st.i+1;st.token++;stopAudio();if(i>=SCRIPT.length){finish();return;}play(i);}
@@ -3358,7 +3262,7 @@ const CS={
 
 /* ============ nav scroll spy ============ */
 (function(){
-  const links=$$('#navlinks a');const map={'innovation':'innovation','innovation-2':'innovation','value':'value','usecases':'usecases','start':'start'};
+  const links=$$('#navlinks a');const map={'innovation':'innovation','innovation-2':'innovation','value':'value','usecases':'usecases','contact':'contact'};
   const secs=Object.keys(map).map(id=>document.getElementById(id)).filter(Boolean);
   function upd(){const y=window.scrollY+window.innerHeight*0.35;let cur='innovation';secs.forEach(s=>{if(s.offsetTop<=y)cur=map[s.id];});links.forEach(a=>a.classList.toggle('on',a.dataset.ch===cur));}
   window.addEventListener('scroll',upd,{passive:true});upd();

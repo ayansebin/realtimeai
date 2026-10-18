@@ -1,0 +1,8 @@
+{
+  "name": "realtimeai",
+  "private": true,
+  "description": "realtimeintelligence.io: static site plus the contact form endpoint",
+  "dependencies": {
+    "@vercel/blob": "2.8.2"
+  }
+}
