@@ -1244,6 +1244,46 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
 .tw-nav .btn.ghost{color:#fff;border-color:rgba(255,255,255,.45);background:transparent}
 .pg-tryline a{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f62fe;border:1px solid #0f62fe;padding:.3rem .6rem;border-radius:2px;text-decoration:none}
 .pg-tryline a:hover{background:#0043ce}
+
+/* design fixes */
+.chapter.hero.pg-hero{padding-top:clamp(72px,7vw,96px)}
+.pg-tryline{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.4rem;margin:1.1rem 0 0}
+.pg-tryline ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem 1.2rem}
+.pg-tryline li{display:flex;align-items:center;gap:.5rem;font-size:.95rem;color:#3e3e3e}
+.pg-tryline li b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#0f62fe;color:#fff;font-family:var(--font-mono);font-size:.72rem;font-weight:600}
+.pg-tryline .btn{min-height:36px}
+.pg-tryline .btn svg{width:14px;height:14px}
+.pg-tryline span,.pg-tryline span+span::before{content:none}
+#st-pg .chip[aria-pressed="true"]{background:#0f62fe;border-color:#0f62fe;color:#fff}
+#st-pg .chip.race[aria-pressed="true"]{background:#8a3ffc;border-color:#8a3ffc;color:#fff}
+#st-pg .chip:not([aria-pressed="true"]):not([disabled]):hover{border-color:rgba(255,255,255,.5);color:#fff}
+#st-pg .chip[aria-pressed="true"] .mdot{box-shadow:0 0 0 1.5px #fff}
+.pg-scrub .pg-oh{position:absolute;left:8px;top:-1px;transform:translateY(-100%);padding:0 0 3px;font-size:.68rem;pointer-events:none}
+.pg-scrub{margin-top:26px}
+.pg-orow{justify-content:flex-end;margin-top:6px}
+.pg-rail-g{margin-top:.2rem}
+.pg-rail-g~.pg-rail-g{margin-top:.9rem}
+@media (max-width:900px){.pg-rail .pg-rail-g{display:block;margin:.3rem 2px .3rem;color:#6a6a66}.pg-rail-g~.pg-rail-g{margin-top:.5rem}.pg-hint{margin-bottom:.2rem}}
+.pg-howw{padding:0 clamp(16px,2.4vw,28px) 16px}
+.pg-howw .pg-src{margin:0;border-top:1px solid var(--line);padding-top:.8rem}
+.pg-howw .pg-src summary{color:var(--ink-2)}
+.pg-howw .pg-howl{color:var(--ink-2)}.pg-howw .pg-howl b{color:#fff}
+.pg-howw .pg-sources,.pg-howw .pg-built{color:var(--ink-3)}.pg-howw .pg-sources a{color:#a6c8ff}
+.pg-try{padding-top:clamp(40px,5vw,72px)}
+.tw{align-items:stretch}
+.tw-panel{min-height:0;align-content:start}
+.tw-acts .btn{background:#fff;color:#161616}
+.tw-acts .btn:hover{background:#e0e0e0}
+.tw-nav{margin-top:auto;padding-top:.6rem}
+.tw-panel{display:flex;flex-direction:column;gap:.8rem}
+.tw-nav .btn:not(.ghost){background:#0f62fe;color:#fff}
+.tw-nav .btn:not(.ghost):hover{background:#0043ce}
+.tw-nav .btn.ghost[disabled]{opacity:.3}
+.pg-tryline .btn{font-family:var(--font-sans);text-transform:none;letter-spacing:0;font-size:.9rem;gap:.6rem;padding:.3rem .9rem}
+.tw-steps button{padding:.36rem .5rem}
+.tw-side{padding:12px 12px 10px}
+.tw-panel{min-height:320px}
+.tw-nav .btn.ghost[disabled]{visibility:hidden}
 </style>
 </head>
 <body class="pg">
@@ -1267,7 +1307,7 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
     <div class="hero-head">
       <div class="pills"><span class="pill live">Playground · real data, real models</span></div>
       <h1 class="h-display">Try the models on real streams.</h1>
-      <p class="pg-tryline"><span>Pick a stream</span><span>Drag the timeline</span><span>Race the models</span><a href="#try">Then run it on Confluent &#8595;</a></p>
+      <div class="pg-tryline"><ol><li><b>1</b>Pick a stream</li><li><b>2</b>Drag the timeline</li><li><b>3</b>Race the models</li></ol><a class="btn sm" href="#try">Run it on Confluent <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v11M3 9l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a></div>
     </div>
   </div>
 </header>
@@ -1276,7 +1316,6 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
   <div class="wrap">
     <div class="pg-shell">
       <aside class="pg-rail" aria-label="Streams">
-        <div class="pg-rail-h">Streams</div>
         <div class="pg-hint" aria-hidden="true"><span>11 streams</span><span>Swipe &#8594;</span></div>
         <div class="pg-rail-g">Real data</div>
         <div class="dslist" id="ds-public"><div class="pg-empty">Loading…</div></div>
@@ -1296,21 +1335,23 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
         <div class="stage-body">
           <div class="pg-status" id="pg-status"><span class="dot"></span><span id="pg-status-t">Loading…</span></div>
           <div class="pg-chart"><canvas class="stage-canvas" id="pg-cv" aria-label="Chart of the selected stream with the model output"></canvas><div class="tip" id="pg-tip"></div></div>
-          <div class="pg-scrub"><canvas id="pg-scrub" aria-label="Timeline of the whole stream. Drag to move the forecast start, or to zoom in anomaly mode."></canvas></div>
-          <div class="pg-orow"><span class="pg-oh" id="pg-oh">drag the timeline</span><span class="pg-onav" id="g-origin"><button class="chip sm" id="pg-prev" aria-label="Earlier start">&#8249;</button><output id="pg-origin-out"></output><button class="chip sm" id="pg-next" aria-label="Later start">&#8250;</button><input type="range" id="pg-origin" min="0" max="9" value="9" aria-label="Forecast start" hidden></span></div>
+          <div class="pg-scrub"><span class="pg-oh" id="pg-oh">drag the timeline</span><canvas id="pg-scrub" aria-label="Timeline of the whole stream. Drag to move the forecast start, or to zoom in anomaly mode."></canvas></div>
+          <div class="pg-orow"><span class="pg-onav" id="g-origin"><button class="chip sm" id="pg-prev" aria-label="Earlier start">&#8249;</button><output id="pg-origin-out"></output><button class="chip sm" id="pg-next" aria-label="Later start">&#8250;</button><input type="range" id="pg-origin" min="0" max="9" value="9" aria-label="Forecast start" hidden></span></div>
           <div class="pg-legend" id="pg-legend"></div>
         </div>
         <div class="pg-result">
           <p class="pg-say" id="pg-say"></p>
           <div class="pg-tiles" id="pg-readouts"></div>
         </div>
+        <div class="pg-howw">
+          <details class="pg-src" id="how"><summary>How it works, sources and licenses</summary>
+      <ul class="pg-howl"><li><b>Zero-shot.</b> TTM r3, FlowState r1.1, PatchTST-FM r2 and TSPulse r1, open weights, no training.</li><li><b>Honest test.</b> The model sees only the past. What happened next was held back.</li><li><b>Open data.</b> Real streams are open licensed. Synthetic ones carry known events.</li></ul>
+      <div class="pg-built" id="pg-built"></div><div class="pg-sources" id="pg-sources"></div>
+          </details>
+        </div>
         <div hidden><div id="pg-table-k"></div><table id="pg-table"></table><p id="pg-table-note"></p></div>
       </div>
     </div>
-    <details class="pg-src" id="how"><summary>How it works, sources and licenses</summary>
-      <ul class="pg-howl"><li><b>Zero-shot.</b> TTM r3, FlowState r1.1, PatchTST-FM r2 and TSPulse r1, open weights, no training.</li><li><b>Honest test.</b> The model sees only the past. What happened next was held back.</li><li><b>Open data.</b> Real streams are open licensed. Synthetic ones carry known events.</li></ul>
-      <div class="pg-built" id="pg-built"></div><div class="pg-sources" id="pg-sources"></div>
-    </details>
   </div>
 </section>
 
@@ -1408,7 +1449,7 @@ function renderControls(){const ds=st.ds;
   if(st.task==='fc'){FCK.forEach(k=>{const m=ds.fc.models[k];const b=document.createElement('button');b.className='chip';b.dataset.v=k;b.innerHTML='<i class="mdot" style="background:'+MC[k]+'"></i>'+esc((m&&m.label)||MODEL_NAMES[k]);const ok=m&&m.status==='ok';b.disabled=!ok;if(!ok)b.title='Not available for this frequency';b.setAttribute('aria-pressed',!st.cmp&&st.model===k?'true':'false');b.addEventListener('click',()=>{st.model=k;st.cmp=false;st.ran=false;renderControls();renderTable();renderReadouts();renderLegend();run(true);});mm.appendChild(b);});
     const nOk=FCK.filter(k=>ds.fc.models[k]&&ds.fc.models[k].status==='ok').length;const a=document.createElement('button');a.className='chip race';a.dataset.v='all';a.textContent='Race all three';a.disabled=nOk<2;a.setAttribute('aria-pressed',st.cmp?'true':'false');a.addEventListener('click',()=>{st.cmp=true;st.ran=false;renderControls();renderReadouts();renderLegend();run(true);});mm.appendChild(a);}
   else{const b=document.createElement('button');b.className='chip';b.dataset.v='tspulse';b.textContent='TSPulse r1';b.setAttribute('aria-pressed','true');mm.appendChild(b);}
-  $('#g-h').hidden=st.task!=='fc';$('#g-origin').hidden=st.task!=='fc';$('#g-thr').hidden=st.task!=='ad';$('#pg-oh').textContent=st.task==='fc'?'drag the timeline to forecast from another point':'drag across the timeline to zoom, double-click for the full view';
+  $('#g-h').hidden=st.task!=='fc';$('#g-origin').hidden=st.task!=='fc';$('#g-thr').hidden=st.task!=='ad';$('#pg-oh').textContent=st.task==='fc'?'drag to forecast from another point':'drag across to zoom · double-click to reset';
   const hh=$('#pg-h');hh.innerHTML='';hOptions(ds).forEach(h=>{const b=document.createElement('button');b.className='chip sm';b.textContent=h+' '+stepWord(ds,h).replace('× ','× ');b.setAttribute('aria-pressed',st.h===h?'true':'false');b.addEventListener('click',()=>{st.h=h;st.ran=false;renderControls();renderTable();renderReadouts();run(true);});hh.appendChild(b);});
   const o=$('#pg-origin');o.max=ds.fc.origins.length-1;o.value=st.oi;$('#pg-origin-out').textContent=fmtDate(ds,ds.fc.origins[st.oi]);
   $('#pg-thr').value=Math.round(st.thr*100);$('#pg-thr-out').textContent=st.thr.toFixed(2);
@@ -1482,7 +1523,7 @@ function drawFc(ds){const o=ds.fc.origins[st.oi],h=st.h,m=ds.fc.models[st.model]
   if(!isFinite(lo)){lo=0;hi=1;}const padY=(hi-lo)*0.1||1;const nonneg=lo>=0;lo-=padY;hi+=padY;if(nonneg&&lo<0)lo=0;
   const X=i=>PAD.l+(W-PAD.l-PAD.r)*(i-x0)/(x1-x0),Y=v=>PAD.t+(H-PAD.t-PAD.b)*(1-(v-lo)/(hi-lo));
   grid(lo,hi,Y,ds.unit);xticks(ds,x0,x1,X);
-  /* origin line */const ox=X(o);ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ox,PAD.t);ctx.lineTo(ox,H-PAD.b);ctx.stroke();ctx.setLineDash([]);font(10,true);ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText('forecast starts · '+fmtDate(ds,o),ox+6,PAD.t+10);
+  /* origin line */const ox=X(o);ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ox,PAD.t);ctx.lineTo(ox,H-PAD.b);ctx.stroke();ctx.setLineDash([]);font(10,true);ctx.fillStyle=C.ink3;ctx.textAlign='left';{let lab='forecast starts · '+fmtDate(ds,o),lw=ctx.measureText(lab).width;if(ox+6+lw>W-PAD.r&&ox-6-lw<PAD.l){lab=fmtDate(ds,o,true);lw=ctx.measureText(lab).width;}if(ox+6+lw>W-PAD.r){ctx.textAlign='right';ctx.fillText(lab,ox-6,PAD.t+10);ctx.textAlign='left';}else ctx.fillText(lab,ox+6,PAD.t+10);}
   /* context */line(vals,x0,o+1,X,Y,C.ink,1.4);
   /* held-out actuals, revealed with the forecast */if(reveal>0)line(vals,o-1,o+Math.max(1,Math.ceil(h*reveal)),X,Y,C.ink3,1.2,[4,3]);
   /* naive */if(nv&&nv.status==='ok'&&reveal>0&&!st.cmp){const pts=[vals[o-1]].concat(nv.point[st.oi].slice(0,Math.ceil(h*reveal)));series(pts,o-1,X,Y,C.ink4,1,[2,3]);}
@@ -1532,7 +1573,7 @@ function drawScrub(){if(!sc||!st.ds||(!SW&&!sfit()))return;const ds=st.ds,v=ds.v
   const step=Math.max(1,Math.floor(ds.n/SW));sx.strokeStyle='rgba(255,255,255,.42)';sx.lineWidth=1;sx.beginPath();let on=false;for(let i=0;i<ds.n;i+=step){const y=v[i];if(y==null){on=false;continue;}on?sx.lineTo(SX(i),Y(y)):sx.moveTo(SX(i),Y(y));on=true;}sx.stroke();
   if(st.task==='fc'){const o=ds.fc.origins[st.oi],pre=preOf(ds,st.h);sx.fillStyle='rgba(69,137,255,.2)';sx.fillRect(SX(o-pre),1,SX(o+st.h)-SX(o-pre),SH-2);sx.strokeStyle='#78a9ff';sx.strokeRect(Math.round(SX(o-pre))+0.5,1.5,Math.round(SX(o+st.h)-SX(o-pre)),SH-3);
     ds.fc.origins.forEach((oo,k)=>{const x=Math.round(SX(oo))+0.5;sx.strokeStyle=k===st.oi?'#fff':'rgba(166,200,255,.7)';sx.lineWidth=k===st.oi?2:1;sx.beginPath();sx.moveTo(x,SH-8);sx.lineTo(x,SH-1);sx.stroke();});
-    const xo=Math.round(SX(o))+0.5;sx.strokeStyle='#fff';sx.lineWidth=2;sx.beginPath();sx.moveTo(xo,1);sx.lineTo(xo,SH-1);sx.stroke();sx.fillStyle='#0f62fe';sx.beginPath();sx.arc(xo,SH/2,7,0,Math.PI*2);sx.fill();sx.strokeStyle='#fff';sx.lineWidth=1.5;sx.stroke();
+    const xl=Math.round(SX(o))+0.5,xo=clamp(xl,10,SW-10);sx.strokeStyle='#fff';sx.lineWidth=2;sx.beginPath();sx.moveTo(xl,1);sx.lineTo(xl,SH-1);sx.stroke();sx.fillStyle='#0f62fe';sx.beginPath();sx.arc(xo,SH/2,7,0,Math.PI*2);sx.fill();sx.strokeStyle='#fff';sx.lineWidth=1.5;sx.stroke();
     sx.fillStyle='#fff';sx.beginPath();sx.moveTo(xo-3,SH/2-3);sx.lineTo(xo-3,SH/2+3);sx.lineTo(xo-5.5,SH/2);sx.closePath();sx.fill();sx.beginPath();sx.moveTo(xo+3,SH/2-3);sx.lineTo(xo+3,SH/2+3);sx.lineTo(xo+5.5,SH/2);sx.closePath();sx.fill();}
   else{const lab=ds.labels||[];lab.forEach(l=>{sx.fillStyle='rgba(66,190,101,.35)';sx.fillRect(SX(l[0]),1,Math.max(2,SX(l[1])-SX(l[0])),SH-2);});if(st.ran)flagged(ds,st.thr).forEach(w=>{sx.fillStyle='rgba(250,77,86,.55)';sx.fillRect(SX(w.a),SH-7,Math.max(2,SX(w.b)-SX(w.a)),6);});
     const vw=st.brush||st.view;if(vw){const a=Math.min(vw[0],vw[1]),b=Math.max(vw[0],vw[1]);sx.fillStyle='rgba(69,137,255,.22)';sx.fillRect(SX(a),1,SX(b)-SX(a),SH-2);sx.strokeStyle='#78a9ff';sx.lineWidth=1;sx.strokeRect(Math.round(SX(a))+0.5,1.5,Math.round(SX(b)-SX(a)),SH-3);}}}
