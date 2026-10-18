@@ -1,12 +1,13 @@
 [
- {"id": "01", "text": "What is new: I B M Granite Time Series models now run inside Confluent. Every event in your stream is scored in flight, with no training."},
- {"id": "02", "text": "One line of Flink S Q L forecasts the next thirty-two steps, with the band."},
- {"id": "03", "text": "Forecast it, then optimize it. The optimizer picks the setting that earns the most and still meets spec."},
- {"id": "04", "text": "Then an agent acts. Forecast, flag, reasoning, purchase order, in under a second."},
- {"id": "05", "text": "The value: ten times faster to value, five to ten percent more accurate, and decisions in seconds, not days."},
- {"id": "06", "text": "The use cases: mission-critical decisions. Production, anomalies, supply chain, fraud, search and trading."},
- {"id": "07", "text": "Take fraud. Every card has its own normal, so the odd swipe is held before authorization."},
- {"id": "08", "text": "In the field, I B M Network Intelligence opens a ticket only when the cause is confirmed."},
- {"id": "09", "text": "In cement, thirty models become two, and accuracy rises from ninety-three to ninety-nine percent."},
- {"id": "10", "text": "Bring us a stream and a decision. Contact us for opportunities."}
+ {"id": "01", "text": "Your business runs on streams, but most decisions still wait for a batch job."},
+ {"id": "02", "text": "Now I B M Granite Time Series models run inside Confluent. Every event is scored the moment it arrives, with no training."},
+ {"id": "03", "text": "The same line of Flink S Q L looks ahead, and forecasts the next thirty-two steps with a band."},
+ {"id": "04", "text": "Once you see what comes next, you can choose what to do. The optimizer finds the most profitable setting that still meets spec."},
+ {"id": "05", "text": "Then an agent closes the loop: forecast, flag, reasoning and purchase order, in under a second."},
+ {"id": "06", "text": "For your teams, that means going live in days instead of months, five to ten percent more accuracy, and decisions in seconds."},
+ {"id": "07", "text": "And it works wherever a decision rides on a stream: production, anomalies, supply chain, fraud, search and trading."},
+ {"id": "08", "text": "Take card payments. Every card gets its own normal, so the odd swipe is held before it is approved."},
+ {"id": "09", "text": "It is already proven in the field. I B M Network Intelligence opens a ticket only when the cause is confirmed."},
+ {"id": "10", "text": "At a cement producer, thirty models became two, and accuracy rose from ninety-three to ninety-nine percent."},
+ {"id": "11", "text": "So bring us one stream and one decision. Contact us, and we will show you what it can do."}
 ]
