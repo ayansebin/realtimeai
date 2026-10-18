@@ -170,11 +170,6 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 .hero .stage{box-shadow:0 30px 80px rgba(0,0,0,.3)}
 .hero .canvas-wrap{height:clamp(300px,46vh,520px)}
 
-/* draw stage */
-.draw-wrap{height:clamp(280px,42vh,460px);cursor:crosshair}
-.draw-wrap .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;color:var(--ink-3);font-size:1.05rem;text-align:center;padding:1rem;transition:opacity .25s}
-.draw-wrap .ghost kbd{font:inherit;color:var(--ink)}
-.draw-wrap.has .ghost{opacity:0}
 
 /* agent pipeline */
 .pipe{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:stretch}
@@ -744,6 +739,15 @@ body::before{background:var(--paper)}
 .uc[aria-selected="true"],body .dcard[aria-pressed="true"]{box-shadow:0 0 0 2px #0f62fe}
 .ind[aria-selected="true"]{box-shadow:0 0 0 2px #0f62fe}
 .stage::before{opacity:.18}
+
+/* ---------- chart readability: a calm solid well behind every plot ---------- */
+.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox{background:#1b2746;border:1px solid rgba(255,255,255,.08)}
+.stage .canvas-wrap{border-radius:2px}
+.plant-inner{background:#18233f}
+.three-row{background:rgba(10,18,40,.35)}
+.uc .uc-cv{background:rgba(10,18,40,.45);padding:2px}
+.tip{background:#0f1830;border-color:rgba(255,255,255,.28);font-size:12.5px;line-height:1.45}
+.stage .readout span,.stage .eyebrow{color:#c3cbd8}
 /* ---- playground ---- */
 .pg-hero .hero-head{margin-bottom:0}
 .pg-built{font-family:var(--font-mono);font-size:.78rem;color:var(--ink-3);margin-top:.4rem}
