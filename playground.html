@@ -1208,6 +1208,42 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
 .pg-status.ok{opacity:0;transition:opacity .6s .9s}
 .pg-onav output{white-space:nowrap}
 @media (max-width:600px){.pg-oh{font-size:.68rem}.pg-orow{align-items:flex-start}}
+/* try it on Confluent: a walkthrough you tick off */
+.pg-try{padding-top:clamp(48px,6vw,88px)}
+.tw{display:grid;grid-template-columns:300px minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:900px){.tw{grid-template-columns:minmax(0,1fr)}}
+.tw-side{background:#f8f7f3;border:1px solid rgba(22,22,22,.16);padding:12px;color:#161616}
+.tw-prog{display:grid;gap:.4rem;margin:0 0 .7rem}
+.tw-prog b{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:#6a6a66;font-weight:500}
+.tw-prog i{display:block;height:4px;background:rgba(22,22,22,.1);border-radius:2px;overflow:hidden}
+.tw-prog i span{display:block;height:100%;width:0;background:#42be65;transition:width .4s ease}
+.tw-steps{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.tw-steps button{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;font:inherit;font-size:.9rem;color:#161616;background:transparent;border:1px solid transparent;border-radius:3px;padding:.45rem .5rem;cursor:pointer;transition:background .15s,border-color .15s}
+.tw-steps button:hover{background:rgba(15,98,254,.06);border-color:rgba(15,98,254,.25)}
+.tw-steps button i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(22,22,22,.35);font-style:normal;font-family:var(--font-mono);font-size:.72rem;font-weight:600;flex:none;color:#3e3e3e}
+.tw-steps button.ok i{background:#42be65;border-color:#42be65;color:#fff}
+.tw-steps button.on{background:#1b2746;border-color:#0f62fe;color:#fff}
+.tw-steps button.on i{border-color:#fff;color:#fff}
+.tw-steps button.on.ok i{background:#42be65;border-color:#42be65}
+@media (max-width:900px){.tw-steps{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}.tw-steps::-webkit-scrollbar{display:none}.tw-steps button{width:auto;padding:.3rem}.tw-steps button span{display:none}.tw-steps button.on span{display:inline;white-space:nowrap}}
+.tw-panel{background:linear-gradient(150deg,#2c5066 0%,#26375f 70%);border:1px solid #0f62fe;color:#f6f7fb;padding:clamp(18px,2.4vw,28px);min-height:300px;display:grid;gap:.8rem;align-content:start}
+.tw-k{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#a6c8ff}
+.tw-panel h3{margin:0;font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:300;color:#fff}
+.tw-panel p{margin:0;font-size:1rem;line-height:1.5;color:#d6dbe5;max-width:62ch}
+.tw-acts{display:flex;flex-wrap:wrap;gap:8px}
+.tw-acts .btn svg{width:14px;height:14px}
+.tw-code{position:relative;background:#0a1430;border:1px solid rgba(255,255,255,.14);border-radius:4px}
+.tw-code pre{margin:0;padding:14px 16px;overflow-x:auto;font-family:var(--font-mono);font-size:.82rem;line-height:1.55;color:#e0e0e0}
+.tw-code .k{color:#78a9ff}.tw-code .f{color:#be95ff;font-weight:600}.tw-code .s{color:#a7f0ba}.tw-code .n{color:#ffb784}.tw-code .c{color:#8d8d8d}
+.tw-copy{position:absolute;top:8px;right:8px;font:inherit;font-size:.76rem;color:#fff;background:rgba(15,98,254,.35);border:1px solid #78a9ff;border-radius:3px;padding:.2rem .6rem;cursor:pointer}
+.tw-copy:hover{background:rgba(15,98,254,.6)}
+.tw-nav{display:flex;justify-content:space-between;gap:8px;margin-top:.3rem}
+.tw-nav .btn[disabled]{opacity:.4;cursor:default}
+.tw-note{margin:.9rem 0 0;font-size:.82rem;color:#6a6a66;max-width:80ch}
+.tw-note a{color:#0043ce}
+.tw-nav .btn.ghost{color:#fff;border-color:rgba(255,255,255,.45);background:transparent}
+.pg-tryline a{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#0f62fe;border:1px solid #0f62fe;padding:.3rem .6rem;border-radius:2px;text-decoration:none}
+.pg-tryline a:hover{background:#0043ce}
 </style>
 </head>
 <body class="pg">
@@ -1231,7 +1267,7 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
     <div class="hero-head">
       <div class="pills"><span class="pill live">Playground · real data, real models</span></div>
       <h1 class="h-display">Try the models on real streams.</h1>
-      <p class="pg-tryline"><span>Pick a stream</span><span>Drag the timeline</span><span>Race the models</span></p>
+      <p class="pg-tryline"><span>Pick a stream</span><span>Drag the timeline</span><span>Race the models</span><a href="#try">Then run it on Confluent &#8595;</a></p>
     </div>
   </div>
 </header>
@@ -1275,6 +1311,24 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
       <ul class="pg-howl"><li><b>Zero-shot.</b> TTM r3, FlowState r1.1, PatchTST-FM r2 and TSPulse r1, open weights, no training.</li><li><b>Honest test.</b> The model sees only the past. What happened next was held back.</li><li><b>Open data.</b> Real streams are open licensed. Synthetic ones carry known events.</li></ul>
       <div class="pg-built" id="pg-built"></div><div class="pg-sources" id="pg-sources"></div>
     </details>
+  </div>
+</section>
+
+<section class="chapter pg-try" id="try">
+  <div class="wrap">
+    <div class="chapter-head">
+      <span class="n">TRY IT ON CONFLUENT</span>
+      <h2>From sign-up to your first forecast.</h2>
+      <p>Eight steps on Confluent Cloud. Tick them off as you go.</p>
+    </div>
+    <div class="tw" id="tw">
+      <div class="tw-side">
+        <div class="tw-prog"><b id="tw-count">0 of 8 done</b><i><span id="tw-bar"></span></i></div>
+        <ol class="tw-steps" id="tw-steps"></ol>
+      </div>
+      <div class="tw-panel" id="tw-panel" aria-live="polite"></div>
+    </div>
+    <p class="tw-note">The models are in Early Access on Confluent Cloud on AWS, for evaluation in development and test environments. Syntax can change, so check <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">the forecast docs</a> and <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/detect-anomalies.html" target="_blank" rel="noopener">the anomaly docs</a>.</p>
   </div>
 </section>
 
@@ -1495,6 +1549,40 @@ cv.addEventListener('touchstart',e=>{const r=cv.getBoundingClientRect();st.hover
 cv.addEventListener('touchmove',e=>{const r=cv.getBoundingClientRect();st.hover=e.touches[0].clientX-r.left;draw();},{passive:true});
 cv.addEventListener('touchend',()=>{setTimeout(()=>{st.hover=null;draw();},1500);},{passive:true});
 window.addEventListener('keydown',e=>{if(!st.ds||e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowLeft')$('#pg-prev').click();else if(e.key==='ArrowRight')$('#pg-next').click();else if(e.key==='Enter'&&e.target.tagName!=='BUTTON')run();});
+
+/* ---------- try it on Confluent: an eight step walkthrough you can tick off ---------- */
+(function(){
+  const list=$('#tw-steps'),panel=$('#tw-panel');if(!list||!panel)return;
+  const SUB="  SELECT window_time, CAST(SUM(price) AS DOUBLE) AS revenue\n  FROM TABLE(TUMBLE(TABLE orders, DESCRIPTOR($rowtime), INTERVAL '10' SECOND))\n  GROUP BY window_start, window_end, window_time";
+  const OVER="  OVER (ORDER BY window_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)";
+  const S=[
+    {t:'Create your free account',d:'Sign up for Confluent Cloud. New accounts get free credits for their first 30 days.',a:[['Sign up','https://www.confluent.io/get-started/']]},
+    {t:'Join the Early Access',d:'Request the IBM Granite Time Series models. They open on Confluent Cloud on AWS, at no charge during Early Access.',a:[['Request access','https://events.confluent.io/early-access-flink-features']]},
+    {t:'Open a SQL workspace',d:'In the Cloud Console go to SQL workspaces, create one, and pick AWS and your enabled region. A compute pool is set up for you.',a:[['Open Confluent Cloud','https://confluent.cloud/']]},
+    {t:'Watch a live stream',d:'Set the catalog to examples and the database to marketplace, then run this. Sample orders stream in.',q:'SELECT * FROM orders;'},
+    {t:'Forecast it',d:'Revenue every 10 seconds, the next 10 windows forecast by TTM. Forecasts start once about 50 windows have arrived.',q:"SELECT window_time, revenue,\n  AI_FORECAST(revenue, window_time,\n    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 10))\n"+OVER+" AS forecast\nFROM (\n"+SUB+"\n);"},
+    {t:'Flag anomalies',d:'Same stream. Every window outside the 95% range comes back flagged.',q:"SELECT window_time, revenue,\n  AI_DETECT_ANOMALIES(revenue, window_time,\n    JSON_OBJECT('model' VALUE 'ttm', 'confidencePercentage' VALUE 95.0))\n"+OVER+" AS anomaly\nFROM (\n"+SUB+"\n);"},
+    {t:'Race the models',d:'Change one word and run the forecast again. Nothing else in the pipeline changes.',q:"JSON_OBJECT('model' VALUE 'flowstate', 'horizon' VALUE 10)\nJSON_OBJECT('model' VALUE 'patchtstfm', 'horizon' VALUE 10)"},
+    {t:'Use your own topics',d:'Pick your environment and cluster as catalog and database, swap in your topic and column, and write the result to a topic for alerts, dashboards and agents.',q:"CREATE TABLE my_forecast AS\nSELECT $rowtime AS ts, my_value,\n  AI_FORECAST(CAST(my_value AS DOUBLE), $rowtime,\n    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 12))\n  OVER (ORDER BY $rowtime\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS forecast\nFROM my_topic;",a:[['Read the docs','https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html']]}];
+  const KEY='pg-try-done';let done=[];try{done=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){}
+  let cur=Math.min(S.length-1,(()=>{for(let i=0;i<S.length;i++)if(done.indexOf(i)<0)return i;return S.length-1;})());
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}};
+  const hl=q=>highlight(q).replace(/\b(GROUP|CAST|SUM|TABLE|TUMBLE|DESCRIPTOR|INTERVAL|SECOND|CREATE|DOUBLE)\b/g,'<span class="k">$1</span>');
+  const arrow='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+  function render(){
+    list.innerHTML=S.map((s,i)=>'<li><button type="button" data-i="'+i+'" class="'+(i===cur?'on ':'')+(done.indexOf(i)>=0?'ok':'')+'" aria-current="'+(i===cur?'step':'false')+'"><i>'+(done.indexOf(i)>=0?'✓':i+1)+'</i><span>'+esc(s.t)+'</span></button></li>').join('');
+    $$('button',list).forEach(b=>b.addEventListener('click',()=>{cur=+b.dataset.i;render();}));
+    const s=S[cur],isDone=done.indexOf(cur)>=0;
+    panel.innerHTML='<div class="tw-k">Step '+(cur+1)+' of '+S.length+'</div><h3>'+esc(s.t)+'</h3><p>'+esc(s.d)+'</p>'+
+      (s.a?'<div class="tw-acts">'+s.a.map(([l,u])=>'<a class="btn" href="'+u+'" target="_blank" rel="noopener">'+esc(l)+' '+arrow+'</a>').join('')+'</div>':'')+
+      (s.q?'<div class="tw-code"><button type="button" class="tw-copy">Copy</button><pre><code>'+hl(s.q)+'</code></pre></div>':'')+
+      '<div class="tw-nav"><button type="button" class="btn sm ghost" data-go="-1"'+(cur===0?' disabled':'')+'>Back</button><button type="button" class="btn sm" data-go="1">'+(cur===S.length-1?(isDone?'All done':'Mark done'):(isDone?'Next step':'Done, next step'))+'</button></div>';
+    const cp=$('.tw-copy',panel);if(cp)cp.addEventListener('click',()=>{const t=s.q;const ok=()=>{cp.textContent='Copied';setTimeout(()=>cp.textContent='Copy',1500);};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,()=>{});});
+    $$('[data-go]',panel).forEach(b=>b.addEventListener('click',()=>{const g=+b.dataset.go;if(g>0&&done.indexOf(cur)<0){done.push(cur);save();}cur=Math.max(0,Math.min(S.length-1,cur+g));render();}));
+    const n=done.length;$('#tw-count').textContent=n+' of '+S.length+' done';$('#tw-bar').style.width=(n/S.length*100)+'%';}
+  render();
+})();
+
 fit();draw();loadIndex();
 })();
 
