@@ -9,14 +9,14 @@
 <link rel="canonical" href="https://realtimeintelligence.io/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Real-Time Intelligence on Confluent">
-<meta property="og:description" content="Predict the next stockout. Optimize for service level. Granite Time Series models and Streaming Agents on Confluent, live simulations you can touch.">
+<meta property="og:description" content="Time series intelligence meets real-time context. IBM Granite Time Series models on Confluent optimize mission-critical decisions while they still matter.">
 <meta property="og:url" content="https://realtimeintelligence.io/">
 <meta property="og:image" content="https://realtimeintelligence.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Real-Time Intelligence on Confluent">
-<meta name="twitter:description" content="Predict the next stockout. Optimize for service level. Granite Time Series models and Streaming Agents on Confluent, live simulations you can touch.">
+<meta name="twitter:description" content="Time series intelligence meets real-time context. IBM Granite Time Series models on Confluent optimize mission-critical decisions while they still matter.">
 <meta name="twitter:image" content="https://realtimeintelligence.io/og-image.png">
 <meta name="theme-color" content="#ecebe6">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -818,7 +818,6 @@ body::before{background:var(--paper)}
 #cstabs .cs[aria-selected="true"] code{color:#be95ff}
 #cstabs .cs[aria-selected="true"] .cs-m{color:#6fdc8c}
 .cspanel .cs-wrap{height:clamp(340px,46vh,430px)}
-.tl-wrap{height:clamp(320px,44vh,410px)}
 .cspanel .plant-wrap{border:1px solid rgba(255,255,255,.08);background:#1b2746}
 .cs-inner{position:relative;height:420px}
 .cs-inner canvas{position:absolute;inset:0;width:100%;height:100%}
@@ -843,6 +842,26 @@ body.pitching .csgrid{opacity:.22;filter:saturate(.3);transition:opacity .6s,fil
   .csgrid::-webkit-scrollbar{display:none}
   .csgrid .cs{flex:0 0 74%;scroll-snap-align:start}
 }
+/* ---------- hero: real-time context, time series intelligence, optimized decision ---------- */
+.hero .canvas-wrap.hx-wrap{height:clamp(340px,50vh,540px)}
+#st-live .stage-title{max-width:none}
+.hflow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.hf{display:grid;gap:.35rem;align-content:start;padding:14px clamp(16px,2.4vw,28px) clamp(16px,2.2vw,22px);transition:background .4s,box-shadow .4s;min-width:0}
+.hf+.hf{border-left:1px solid var(--line)}
+.hf-k{display:flex;align-items:baseline;gap:.55rem;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#c3cbd8;font-weight:500}
+.hf-k i{font-style:normal;font-family:var(--font-mono);color:var(--blue-3);letter-spacing:0}
+.hf-k em{font-style:normal;margin-left:auto;font-family:var(--font-mono);font-size:.68rem;letter-spacing:0;text-transform:none;color:var(--ink-3)}
+.hf b{font-weight:300;font-size:clamp(1.05rem,1.55vw,1.3rem);line-height:1.25;color:var(--ink);transition:color .3s}
+.hf b.warn{color:#ff8389}.hf b.ok{color:#6fdc8c}
+.hf .hf-s{font-size:.8rem;line-height:1.4;color:var(--ink-3)}
+.hf.on{background:rgba(15,98,254,.14);box-shadow:inset 0 2px 0 #4589ff}
+#hf-ctx.on{box-shadow:inset 0 2px 0 #3ddbd9;background:rgba(8,189,186,.1)}
+#hf-dec.on{box-shadow:inset 0 2px 0 #42be65;background:rgba(66,190,101,.1)}
+@media (min-width:761px) and (max-width:1100px){.hf-k em{display:none}}
+@media (max-width:760px){.hflow{grid-template-columns:1fr}.hf+.hf{border-left:0;border-top:1px solid var(--line)}.hf{padding:11px 16px 12px;gap:.2rem}.hf b{font-size:1.05rem}}
+/* during the demo the line and its three cards fit on one screen */
+body.pitching #st-live .stage-top{display:none}
+@media (max-width:760px){body.pitching .hero .canvas-wrap.hx-wrap{height:38vh}}
 </style>
 </head>
 <body>
@@ -866,52 +885,30 @@ body.pitching .csgrid{opacity:.22;filter:saturate(.3);transition:opacity .6s,fil
   <div class="wrap" id="top">
     <div class="hero-head">
       <div class="pills"><span class="pill live">Now on Confluent Cloud</span></div>
-      <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
-      <p class="lede">Streaming data is where the mission-critical decisions live. One statement of Flink SQL forecasts, flags and finds the setpoint, inside the stream, with no training.</p>
+      <h1 class="h-display">Time series intelligence<br>meets <em>real-time context</em>.</h1>
+      <p class="lede">IBM Granite Time Series models now run inside Confluent. They read every live signal in its context and optimize mission-critical decisions while they still matter.</p>
       <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>1 min, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
     </div>
 
     <div class="stage" id="st-live">
       <div class="stage-top">
-        <div class="stage-title"><h3>Live stream</h3><p>Every event scored in flight. Poke it.</p></div>
+        <div class="stage-title"><h3>One tempering line, live on Confluent</h3><p>Its temperature streams in with real-time context: the room, the line speed and the cocoa batch.</p></div>
         <div class="ctl">
-          <div class="ctl-group"><span class="eyebrow">Stream</span>
-            <div class="chips" id="live-sc">
-              <button class="chip" data-v="temp" aria-pressed="true">Factory line °C</button>
-              <button class="chip" data-v="latency" aria-pressed="false">API latency</button>
-              <button class="chip" data-v="payments" aria-pressed="false">Card payments</button>
-              <button class="chip" data-v="load" aria-pressed="false">Grid load</button>
+          <div class="ctl-group"><span class="eyebrow">Change the context</span>
+            <div class="chips" id="hx-ctx">
+              <button class="chip" data-v="room" aria-pressed="false">Warmer room</button>
+              <button class="chip" data-v="speed" aria-pressed="false">Faster line</button>
+              <button class="chip" data-v="batch" aria-pressed="false">New cocoa batch</button>
             </div></div>
-          <div class="ctl-group"><span class="eyebrow">Function</span>
-            <div class="chips" id="live-mode">
-              <button class="chip" data-v="ad" aria-pressed="true">Detect anomalies</button>
-              <button class="chip" data-v="fc" aria-pressed="false">Forecast</button>
-              <button class="chip" data-v="opt" aria-pressed="false">Optimize</button>
-              <button class="chip" data-v="search" aria-pressed="false">Search</button>
-            </div></div>
-          <div class="ctl-group" id="live-ctl-h" hidden><span class="eyebrow" id="live-h-label">Horizon</span>
-            <label class="range"><input type="range" id="live-h" min="4" max="48" value="16" aria-label="Horizon"><output id="live-hv">16</output></label></div>
-          <div class="ctl-group" id="live-ctl-c"><span class="eyebrow">Confidence</span>
-            <div class="chips" id="live-conf">
-              <button class="chip sm" data-v="95" aria-pressed="false">95%</button>
-              <button class="chip sm" data-v="99" aria-pressed="true">99%</button>
-              <button class="chip sm" data-v="99.9" aria-pressed="false">99.9%</button>
-            </div></div>
-          <div class="ctl-group"><span class="eyebrow">&nbsp;</span>
-            <div class="btn-row"><button class="btn sm" id="live-poke">Poke it <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4 7l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button class="btn sm ghost" id="live-pause" aria-pressed="false">Pause</button></div></div>
         </div>
       </div>
       <div class="stage-body">
-        <div class="canvas-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="Live stream with anomaly flags, the forecast band, the optimized path inside its window, and similar windows found in the history"></canvas><div class="tip" id="live-tip"></div></div>
+        <div class="canvas-wrap hx-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="A tempering line streaming its temperature inside a spec window, with the room, line speed and cocoa batch streaming in as context. The forecast that reads the context sees the drift coming, the forecast without it does not, and the optimizer moves the heater in time."></canvas><div class="tip" id="live-tip"></div></div>
       </div>
-      <div class="stage-foot">
-        <div class="readouts">
-          <div class="readout"><b id="ro-events">0</b><span>events scored</span></div>
-          <div class="readout"><b id="ro-flags" class="red">0</b><span id="ro-flags-l">flags</span></div>
-          <div class="readout"><b id="ro-model" class="blue">TTM</b><span>model</span></div>
-          <div class="readout"><b id="ro-lat">~3 ms</b><span>per call, CPU</span></div>
-        </div>
-        <div class="sqlline"><code id="live-sql"></code><button class="btn sm ghost" id="live-copy">Copy SQL</button></div>
+      <div class="hflow" id="hflow">
+        <div class="hf" id="hf-ctx"><span class="hf-k"><i>01</i>Real-time context<em>Confluent</em></span><b id="hf-ctx-b">Room 22 °C · line 100 % · batch 4471</b><span class="hf-s" id="hf-ctx-s">three context topics, joined to the stream as it flows</span></div>
+        <div class="hf" id="hf-ts"><span class="hf-k"><i>02</i>Time series intelligence<em>IBM Granite</em></span><b id="hf-ts-b">Inside spec for the next 6 min</b><span class="hf-s" id="hf-ts-s">IBM Granite TTM, ~3 ms per reading</span></div>
+        <div class="hf" id="hf-dec"><span class="hf-k"><i>03</i>Optimized decision<em>TS_OPTIMIZE</em></span><b id="hf-dec-b">Hold the setpoint</b><span class="hf-s" id="hf-dec-s">inside the window, at the least energy</span></div>
       </div>
     </div>
   </div>
@@ -1127,34 +1124,6 @@ FROM pos_sales;</code></pre></div>
         </div>
       </div>
       <div class="stage-foot"><div class="hint">Illustrative. Impact figures from design partner engagements.</div></div>
-    </div>
-
-    <div class="chapter-head sub" id="h-tail">
-      <h2>Every series, not just the top few hundred.</h2>
-      <p>Bespoke models only pay off where the money is, so the rest of the business runs on safety margins. One foundation model on the stream covers the whole tail.</p>
-    </div>
-
-    <div class="stage" id="st-tail">
-      <div class="stage-top">
-        <div class="stage-title"><h3>Where the margin goes</h3><p>A business with 100,000 series. Illustrative.</p></div>
-        <div class="ctl"><div class="ctl-group"><span class="eyebrow">Approach</span><div class="chips" id="tl-mode"><button class="chip sm" data-v="today" aria-pressed="true">A bespoke model per series</button><button class="chip sm" data-v="tsfm" aria-pressed="false">IBM Granite on Confluent</button></div></div></div>
-      </div>
-      <div class="stage-body">
-        <div class="side">
-          <div class="canvas-wrap tl-wrap"><canvas class="stage-canvas" id="tl-cv" aria-label="100,000 series as squares: today only the top few hundred have a model and the rest carry a safety margin, with a foundation model on the stream every series gets a forecast and the margin thins"></canvas></div>
-          <div class="panel cs-panel">
-            <div class="ph">Per business</div>
-            <table class="op-table cm-table" id="tl-table">
-              <tr><th></th><th class="c-ml">Bespoke</th><th class="c-fm">Foundation model</th></tr>
-              <tr><td>Series forecast</td><td class="c-ml">top few hundred</td><td class="c-fm">every one</td></tr>
-              <tr><td>Each new series</td><td class="c-ml">months of expert work</td><td class="c-fm">one SQL statement</td></tr>
-              <tr><td>The long tail</td><td class="c-ml">safety margins</td><td class="c-fm">a forecast every cycle</td></tr>
-            </table>
-            <div class="cs-big"><b class="green" id="tl-big">300</b><span id="tl-bigl">series with a forecast</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="stage-foot"><div class="hint">The margin is the cost of a decision nobody could forecast, paid every cycle.</div></div>
     </div>
   </div>
 </section>
@@ -1704,76 +1673,188 @@ function drawStream(cv,sim,o){
 }
 function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundingClientRect();const px=(ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left;let best=-1,bd=1e9;layout.vis.forEach((r,k)=>{const d=Math.abs(layout.X(k)-px);if(d<bd){bd=d;best=k;}});return bd>24?-1:best;}
 
-/* ============ 01 hero live ============ */
+/* ============ 01 hero: time series intelligence meets real-time context ============ */
+/* One tempering line. Its temperature streams in on Confluent, and so does its context: the room, the line speed and
+   the cocoa batch. A change in context reaches the line minutes later, so a forecast that reads the context sees the
+   drift coming while a forecast of the series alone sees nothing. The optimizer then plans the heater, timed to when
+   the change arrives, so the line never leaves its window. */
 (function(){
   const el=$('#st-live');if(!el)return;
-  const SC={
-    temp:{table:'tempering_line',col:'temp_c',key:'line_id',unit:'°C',base:31.5,amp:0.8,amp2:0.25,period:48,noise:0.11,stepSec:5,spike:2.6,dec:2},
-    latency:{table:'server_metrics',col:'response_ms',key:'host_id',unit:'ms',base:122,amp:16,amp2:6,period:60,noise:3.5,stepSec:1,spike:150,dec:0},
-    payments:{table:'card_payments',col:'amount',key:'card_id',unit:'$',base:46,amp:15,amp2:5,period:72,noise:3,stepSec:60,spike:240,dec:0},
-    load:{table:'meter_readings',col:'load_kw',key:'meter_id',unit:'kW',base:860,amp:150,amp2:40,period:96,noise:11,stepSec:900,spike:-330,dec:0}
+  const cv=new Cv($('#live-cv')),tip=$('#live-tip');
+  const LO=31.0,HI=32.2,BASE=31.6,TAU=6,ZB=2.5758,NOISE=0.045,HN=24,SEC=15;
+  const T0=Date.UTC(2026,9,16,8,20,0);
+  /* each context topic: what it reports, how long it takes to reach the line, and what it does there */
+  const CTX={
+    room:{lag:8,k:0.3,ref:22,on:26,rate:0.5,topic:'weather topic',up:'Room up 4 °C',down:'Room back to 22 °C',tagUp:'room +4 °C',tagDown:'room −4 °C'},
+    speed:{lag:4,k:-0.06,ref:100,on:115,topic:'MES topic',up:'Line speed up 15 %',down:'Line speed back to 100 %',tagUp:'speed +15 %',tagDown:'speed −15 %'},
+    batch:{lag:7,k:0.7,ref:0,on:1,topic:'ERP topic',up:'New batch, more cocoa butter',down:'New batch, standard recipe',tagUp:'new batch',tagDown:'new batch'}
   };
-  Object.values(SC).forEach(c=>c.warm=420);
-  /* what TS_OPTIMIZE keeps inside the window on each stream, and the lever it moves */
-  const OPT={
-    temp:{lo:31.0,hi:32.2,keep:'keep 31.0 to 32.2 °C',lever:'heater setpoint',obj:'min energy',move:d=>(d>0?'heater −':'heater +')+Math.abs(d*1.1).toFixed(1)+' °C'},
-    latency:{hi:140,keep:'keep ≤ 140 ms',lever:'replicas',obj:'min cost',move:d=>'scale out +'+Math.max(1,Math.ceil(d/12))+' replicas'},
-    payments:{thr:true,keep:'hold threshold from the band',lever:'hold threshold',obj:'false declines ≤ 1 %',move:d=>'hold above $'+Math.round(d)},
-    load:{hi:1000,keep:'keep ≤ 1,000 kW',lever:'demand response',obj:'min peak charge',move:d=>'shed '+Math.round(d/10)*10+' kW'}
-  };
-  const st={sc:'temp',mode:'ad',conf:99,h:16,paused:false,events:0,acc:0,hover:-1,moves:0,matches:0,best:0};
-  let sim=new Sim(SC.temp);st.events=sim.rows.length;
-  const cv=new Cv($('#live-cv'));const tip=$('#live-tip');let layout=null;
-  const BASE=Date.UTC(2026,9,16,9,0,0);
-  const label=i=>{const d=new Date(BASE+i*sim.stepSec*1000);const p=n=>String(n).padStart(2,'0');return p(d.getUTCHours())+':'+p(d.getUTCMinutes())+(sim.stepSec<60?':'+p(d.getUTCSeconds()):'');};
-  function sql(){const s=sim;const over=" OVER (PARTITION BY "+s.key+" ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)";let q;
-    if(st.mode==='ad')q="SELECT event_time, "+s.col+", AI_DETECT_ANOMALIES("+s.col+", event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+Number(st.conf).toFixed(1)+"))"+over+" AS anomaly FROM "+s.table+";";
-    else if(st.mode==='fc')q="SELECT event_time, "+s.col+", AI_FORECAST("+s.col+", event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE "+st.h+"))"+over+" AS forecast FROM "+s.table+";";
-    else if(st.mode==='opt'){const o=OPT[st.sc];q="SELECT event_time, "+s.col+", TS_OPTIMIZE(AI_FORECAST("+s.col+", event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE "+st.h+")), JSON_OBJECT('keep' VALUE '"+(o.thr?'band_p99':(o.lo!=null?o.lo+'..':'..')+(o.hi!=null?o.hi:''))+"', 'lever' VALUE '"+o.lever.replace(/ /g,'_')+"', 'objective' VALUE '"+o.obj.replace(/ /g,'_').replace('≤','le')+"'))"+over+" AS setpoint FROM "+s.table+";";}
-    else q="SELECT event_time, TS_SEARCH(TS_EMBED("+s.col+", event_time, JSON_OBJECT('model' VALUE 'tspulse', 'window' VALUE "+st.h+")), JSON_OBJECT('k' VALUE 3, 'index' VALUE '"+s.table+"_windows'))"+over+" AS matches FROM "+s.table+";";
-    $('#live-sql').innerHTML=highlight(q);$('#live-sql').dataset.sql=q;}
-  function readouts(){$('#ro-events').textContent=fmtInt(st.events);const m=MODELS[App.model];$('#ro-model').textContent=m.name;$('#ro-lat').textContent='~'+m.ms+' ms';}
-  st.dirty=true;
-  const znorm=a=>{const m=mean(a),s=std(a)||1;return a.map(v=>(v-m)/s);};
-  const dist=(a,b)=>{let d=0;for(let i=0;i<a.length;i++)d+=(a[i]-b[i])*(a[i]-b[i]);return d;};
-  function optAfter(L){const o=OPT[st.sc],f=L.f;if(!f||!f.length)return;const ctx=cv.ctx;const k0=L.vis.length-1;const FX=j=>L.X(k0+j);const x1=FX(1),x2=FX(f.length);ctx.font=MONO;ctx.textBaseline='middle';
-    if(o.thr){const thr=Math.max.apply(null,f.map(p=>p.mean+2.81*p.sig))*1.05;const y=Math.round(L.Y(Math.min(thr,L.hi)))+0.5;ctx.setLineDash([5,4]);ctx.strokeStyle=C.red2;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x1,y);ctx.lineTo(x2,y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=C.red2;ctx.textAlign='left';ctx.fillText(o.move(thr)+' · '+o.obj,x1+6,y-10);st.moves=1;st.moveText='TS_OPTIMIZE · '+o.move(thr);return;}
-    const lo=o.lo!=null?o.lo:L.lo,hi=o.hi!=null?o.hi:L.hi;const yh=L.Y(Math.min(hi,L.hi)),yl=L.Y(Math.max(lo,L.lo));
-    ctx.fillStyle='rgba(66,190,101,.09)';ctx.fillRect(x1,yh,x2-x1,yl-yh);ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(111,220,140,.8)';ctx.lineWidth=1;ctx.beginPath();if(o.hi!=null){ctx.moveTo(x1,Math.round(yh)+0.5);ctx.lineTo(x2,Math.round(yh)+0.5);}if(o.lo!=null){ctx.moveTo(x1,Math.round(yl)+0.5);ctx.lineTo(x2,Math.round(yl)+0.5);}ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle=C.green2;ctx.textAlign='right';ctx.fillText(o.keep,x2-2,(o.hi!=null?yh:yl)+(o.hi!=null?10:-10));
-    const m=(o.hi!=null&&o.lo!=null)?(o.hi-o.lo)*0.08:(L.hi-L.lo)*0.04;let excess=0;f.forEach(p=>{if(o.hi!=null&&p.mean>o.hi-m)excess=Math.max(excess,p.mean-(o.hi-m));if(o.lo!=null&&p.mean<o.lo+m)excess=Math.min(excess,p.mean-(o.lo+m));});
-    if(excess!==0){ctx.save();ctx.shadowColor=C.green;ctx.shadowBlur=8;ctx.setLineDash([6,4]);ctx.strokeStyle=C.green2;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(L.X(k0),L.Y(L.vis[k0].v));f.forEach((p,j)=>{const u=Math.min(1,(j+1)/4);const t=clamp(p.mean,o.lo!=null?o.lo+m:-1e9,o.hi!=null?o.hi-m:1e9);ctx.lineTo(FX(j+1),L.Y(lerp(p.mean,t,u)));});ctx.stroke();ctx.restore();ctx.setLineDash([]);
-      st.moves=1;st.moveText='TS_OPTIMIZE · '+o.move(excess)+' · '+o.obj;ctx.fillStyle=C.green2;ctx.textAlign='left';ctx.fillText(st.moveText,x1+6,L.padT+22);}
-    else{st.moves=0;st.moveText='inside the window · no move';ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText(st.moveText,x1+6,L.padT+22);}}
-  function searchAfter(L){const vis=L.vis,n=vis.length,W=st.h;const ctx=cv.ctx;ctx.font=MONO;ctx.textBaseline='middle';if(n<3*W){st.matches=0;return;}
-    const zq=znorm(vis.slice(n-W).map(r=>r.v));const cands=[];for(let s0=0;s0<=n-2*W;s0+=2){const d=dist(znorm(vis.slice(s0,s0+W).map(r=>r.v)),zq);cands.push({s:s0,d});}
-    cands.sort((a,b)=>a.d-b.d);const picks=[];for(const c of cands){if(picks.every(p=>Math.abs(p.s-c.s)>=W)){picks.push(c);if(picks.length===3)break;}}
-    picks.forEach(p=>{p.score=Math.max(0,1-p.d/(2*W));});
-    const top=L.padT,h=L.ph;
-    picks.forEach((p,i)=>{const xa=L.X(p.s),xb=L.X(p.s+W-1);const a=0.35+0.65*p.score;ctx.fillStyle='rgba(69,137,255,'+(0.08+0.14*p.score).toFixed(2)+')';ctx.fillRect(xa,top,xb-xa,h);ctx.strokeStyle='rgba(120,169,255,'+a.toFixed(2)+')';ctx.lineWidth=1;ctx.strokeRect(Math.round(xa)+0.5,top+0.5,xb-xa,h-1);ctx.fillStyle=i===0?C.blue4:C.blue3;ctx.textAlign='left';ctx.fillText(p.score.toFixed(2)+' · '+label(vis[p.s].i),xa+4,top+10);});
-    const qa=L.X(n-W),qb=L.X(n-1);ctx.setLineDash([4,3]);ctx.strokeStyle='rgba(244,244,244,.8)';ctx.strokeRect(Math.round(qa)+0.5,top+0.5,qb-qa,h-1);ctx.setLineDash([]);ctx.fillStyle=C.ink;ctx.textAlign='right';ctx.fillText('query · last '+W,qb-4,top+10);
-    st.matches=picks.length;st.best=picks.length?picks[0].score:0;}
-  function draw(){if(!st.dirty)return;st.dirty=false;
-    if(st.mode==='opt'){const o=OPT[st.sc];let xr=[o.lo!=null?o.lo:1e9,o.hi!=null?o.hi:-1e9];if(o.thr){const f0=sim.fc(st.h);if(f0)xr=[1e9,Math.max.apply(null,f0.map(p=>p.mean+2.81*p.sig))*1.05*1.04];}layout=drawStream(cv,sim,{mode:'fc',z:Z[st.conf]||2.5758,h:st.h,hover:st.hover,label,nVis:Math.min(Math.max(30,Math.floor((cv.W-66)/7)),Math.max(60,st.h*3)),extraRange:xr,after:optAfter});}
-    else if(st.mode==='search'){layout=drawStream(cv,sim,{mode:'raw',z:0,h:0,hover:st.hover,label,nVis:Math.min(240,Math.max(90,Math.floor((cv.W-66)/5))),glow:false,after:searchAfter});}
-    else layout=drawStream(cv,sim,{mode:st.mode,z:Z[st.conf]||2.5758,h:st.h,hover:st.hover,label,nVis:st.mode==='fc'?Math.min(Math.max(30,Math.floor((cv.W-66)/7)),Math.max(60,st.h*3)):undefined});
-    if(!layout)return;const rf=$('#ro-flags'),rl=$('#ro-flags-l');
-    if(st.mode==='ad'){rf.textContent=layout.flags;rf.className='red';rl.textContent='flags';}
-    else if(st.mode==='fc'){rf.textContent='+'+st.h;rf.className='blue';rl.textContent='steps ahead, with band';}
-    else if(st.mode==='opt'){rf.textContent=st.moves;rf.className=st.moves?'green':'';rl.textContent=st.moves?'setpoint move proposed':'inside the window';}
-    else{rf.textContent=st.matches;rf.className='blue';rl.textContent='similar windows · best '+st.best.toFixed(2);}}
-  const stage=reg({el,resize(){cv.fit();st.dirty=true;draw();},update(dt){if(st.paused)return;st.acc+=dt;const rate=reduced?1400:650;let n=0;while(st.acc>rate){st.acc-=rate;sim.step();st.events++;n++;}if(n){st.dirty=true;readouts();}},draw});
-  chipGroup('live-sc',v=>{st.sc=v;sim=new Sim(SC[v]);st.events+=sim.rows.length;st.hover=-1;st.dirty=true;sql();readouts();});
-  chipGroup('live-mode',v=>{st.mode=v;$('#live-ctl-h').hidden=!(v==='fc'||v==='opt'||v==='search');$('#live-h-label').textContent=v==='search'?'Window':'Horizon';$('#live-ctl-c').hidden=v!=='ad';st.dirty=true;sql();});
-  chipGroup('live-conf',v=>{st.conf=Number(v);st.dirty=true;sql();});
-  $('#live-h').addEventListener('input',e=>{st.h=Number(e.target.value);$('#live-hv').textContent=st.h;st.dirty=true;sql();});
-  $('#live-poke').addEventListener('click',()=>{sim.q=[sim.spike,sim.spike*.45,sim.spike*.15];if(st.paused){sim.step();st.events++;st.dirty=true;readouts();}});
-  $('#live-pause').addEventListener('click',e=>{st.paused=!st.paused;e.currentTarget.textContent=st.paused?'Resume':'Pause';e.currentTarget.setAttribute('aria-pressed',st.paused);});
-  $('#live-copy').addEventListener('click',()=>copyText($('#live-sql').dataset.sql||'',$('#live-copy'),ok=>{if(!ok)selectEl($('#live-sql'));}));
-  function onMove(ev){const k=hoverIndex(layout,cv,ev);if(k!==st.hover)st.dirty=true;st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];const z=Z[st.conf]||2.5758;let html='<b>'+label(r.i)+'</b><br>actual '+r.v.toFixed(sim.dec)+' '+sim.unit;if(r.pred!=null){html+='<br>expected '+r.pred.toFixed(sim.dec)+'<br>band '+(r.pred-z*r.sig).toFixed(sim.dec)+' to '+(r.pred+z*r.sig).toFixed(sim.dec);if(st.mode==='ad')html+='<br>is_anomaly '+(layout.isAnom(r)?'<b>TRUE</b>':'FALSE');}tip.innerHTML=html;tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.7?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
-  cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});cv.c.addEventListener('mouseleave',()=>{st.hover=-1;st.dirty=true;tip.style.display='none';});
-  App.listeners.push(()=>{sql();readouts();st.dirty=true;});
-  sql();readouts();
+  const KEYS=['room','speed','batch'];
+  const AUTO=[['room',true],['batch',true],['speed',true],['room',false],['batch',false],['speed',false]];
+  const st={};
+  const seas=n=>0.16*Math.sin(2*Math.PI*n/40)+0.06*Math.sin(2*Math.PI*n/13+1.3);
+  const rowAt=m=>{const r=st.rows,i=r.length?m-r[0].i:-1;return i>=0&&i<r.length?r[i]:null;};
+  const hhmm=i=>{const d=new Date(T0+i*SEC*1000);const p=x=>String(x).padStart(2,'0');return p(d.getUTCHours())+':'+p(d.getUTCMinutes());};
+  const mins=steps=>Math.max(1,Math.round(steps*SEC/60));
+  function init(){Object.assign(st,{n:0,rows:[],tgt:{room:22,speed:100,batch:0},cur:{room:22,speed:100,batch:0},hand:{room:22,speed:100,batch:0},
+      follow:{room:true,speed:true,batch:true},batchId:4471,z:0,eff:0,ctl:0,ev:[],dec:[],alert:0,pendN:0,hold:false,holdUntil:0,
+      acc:0,events:1260,hover:-1,fc:null,ghost:null,evT:-1e9,decT:-1e9,dirty:true});
+    for(let i=0;i<170;i++)step(true);st.fc=forecast(HN);}
+  if(!st.autoAt)st.autoAt=0;st.autoI=0;
+  /* context reported at a future step jj, as far as the stream already knows it */
+  function futureCtx(k,jj){if(k==='room'){const c=st.cur.room,d=st.tgt.room-c;return c+Math.sign(d)*Math.min(Math.abs(d),CTX.room.rate*jj);}return st.tgt[k];}
+  function forecast(h,noContext){const out=[],n0=st.n-1;let eff=st.eff,ctl=st.ctl;
+    for(let j=1;j<=h;j++){const m=n0+j,zz=st.z*Math.pow(0.5,j),sig=0.075*Math.sqrt(1+0.12*j);
+      if(noContext){out.push({mean:BASE+seas(m)+st.eff+st.ctl+zz,sig});continue;}
+      let E=0,U=0;
+      KEYS.forEach(k=>{const C_=CTX[k],src=m-C_.lag;let cc,hh;
+        if(src<=n0){const r=rowAt(src);cc=r?r.c[k]:C_.ref;hh=r?r.h[k]:C_.ref;}
+        else{cc=futureCtx(k,src-n0);hh=st.follow[k]?cc:st.hand[k];}
+        E+=C_.k*(cc-C_.ref);U-=C_.k*(hh-C_.ref);});
+      eff+=(E-eff)/TAU;ctl+=(U-ctl)/TAU;out.push({mean:BASE+seas(m)+eff+ctl+zz,sig});}
+    return out;}
+  function step(warm){const n=st.n;
+    const c={room:st.cur.room,speed:st.tgt.speed,batch:st.tgt.batch};const d=st.tgt.room-c.room;c.room+=Math.sign(d)*Math.min(Math.abs(d),CTX.room.rate);st.cur=c;
+    KEYS.forEach(k=>{if(st.follow[k])st.hand[k]=c[k];});
+    let E=0,U=0;KEYS.forEach(k=>{const C_=CTX[k],r=rowAt(n-C_.lag);E+=C_.k*((r?r.c[k]:C_.ref)-C_.ref);U-=C_.k*((r?r.h[k]:C_.ref)-C_.ref);});
+    const f1=st.rows.length>2?forecast(1)[0]:null;
+    st.eff+=(E-st.eff)/TAU;st.ctl+=(U-st.ctl)/TAU;st.z=0.5*st.z+NOISE*gauss();
+    const v=BASE+seas(n)+st.eff+st.ctl+st.z;
+    st.rows.push({i:n,v,pred:f1?f1.mean:null,sig:f1?f1.sig:null,c,h:{room:st.hand.room,speed:st.hand.speed,batch:st.hand.batch}});
+    if(st.rows.length>320)st.rows.shift();st.n++;st.events++;
+    if(warm)return;
+    st.fc=forecast(HN);
+    /* the first step at which the forecast leaves the window */
+    let a=0;for(let j=0;j<st.fc.length;j++){const m=st.fc[j].mean;if(m>HI-0.03||m<LO+0.03){a=j+1;break;}}st.alert=a;
+    const open=KEYS.some(k=>!st.follow[k]);
+    if(st.hold&&performance.now()>st.holdUntil)st.hold=false;
+    if(a&&open){if(!st.pendN)st.pendN=st.n+4;if(!st.hold&&st.n>=st.pendN)decide();}
+    else if(open&&!st.hold){const le=st.ev[st.ev.length-1];if(!le||st.n-le.n>6)adopt();}
+    else st.pendN=0;
+    st.ghost=(st.alert&&open)?forecast(HN,true):null;}
+  /* the controller takes the new context on board: from the change onward the heater mirrors what reaches the line */
+  function adopt(){KEYS.forEach(k=>{if(st.follow[k])return;st.follow[k]=true;const e=[...st.ev].reverse().find(x=>x.key===k);const from=e?e.n:st.n;st.rows.forEach(r=>{if(r.i>=from)r.h[k]=r.c[k];});st.hand[k]=st.cur[k];});st.pendN=0;}
+  const steadyU=()=>-KEYS.reduce((s,k)=>s+CTX[k].k*((st.follow[k]?st.tgt[k]:st.hand[k])-CTX[k].ref),0);
+  function decide(){if(!KEYS.some(k=>!st.follow[k]))return;const before=steadyU();const le=st.ev[st.ev.length-1];adopt();const delta=steadyU()-before;
+    if(Math.abs(delta)>=0.05){const at=le?Math.max(st.n,le.n+CTX[le.key].lag):st.n;st.dec.push({n:st.n-1,delta,at});st.decT=performance.now();}
+    st.fc=forecast(HN);st.alert=0;st.ghost=null;st.dirty=true;}
+  function setCtx(k,on){const C_=CTX[k],v=on?C_.on:C_.ref;chipPress(k,on);if(st.tgt[k]===v)return;
+    st.tgt[k]=v;if(k==='batch')st.batchId++;
+    if(st.follow[k]){st.follow[k]=false;st.hand[k]=st.cur[k];}
+    st.ev.push({n:st.n,key:k,on,text:on?C_.up:C_.down,tag:on?C_.tagUp:C_.tagDown});st.evT=performance.now();st.pendN=0;
+    st.fc=forecast(HN);st.ghost=forecast(HN,true);st.dirty=true;}
+  const chips=$$('#hx-ctx .chip');
+  function chipPress(k,on){chips.forEach(b=>{if(b.dataset.v===k)b.setAttribute('aria-pressed',on?'true':'false');});}
+  chips.forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.v,on=st.tgt[k]===CTX[k].ref;st.autoAt=performance.now()+40000;setCtx(k,on);}));
+
+  /* the three cards under the chart say what the chart shows, in words */
+  const fx={ctx:$('#hf-ctx'),ts:$('#hf-ts'),dec:$('#hf-dec')};const txt={};
+  function put(id,v,cls){const e=$('#'+id);if(!e)return;if(txt[id]!==v){txt[id]=v;e.textContent=v;}if(cls!==undefined&&e.className!==cls)e.className=cls;}
+  function cards(){const now=performance.now(),le=st.ev[st.ev.length-1],ld=st.dec[st.dec.length-1],open=KEYS.some(k=>!st.follow[k]);
+    const fresh=le&&(now-st.evT<9000||open),m=MODELS[App.model]||MODELS.ttm;
+    if(fresh){put('hf-ctx-b',le.text,'');put('hf-ctx-s','from the '+CTX[le.key].topic+', it reaches the line in '+mins(CTX[le.key].lag)+' min');}
+    else{put('hf-ctx-b','Room '+Math.round(st.cur.room)+' °C · line '+Math.round(st.cur.speed)+' % · batch '+st.batchId,'');put('hf-ctx-s','three context topics, joined to the stream as it flows');}
+    const recentDec=ld&&now-st.decT<7000;
+    if(st.alert&&open){put('hf-ts-b','Leaves spec in about '+mins(st.alert)+' min','warn');put('hf-ts-s','Seen in the context. Without it, the forecast looks fine.');}
+    else if(recentDec){put('hf-ts-b','Back inside spec','ok');put('hf-ts-s','the forecast with the new setpoint');}
+    else{put('hf-ts-b','Inside spec for the next '+mins(HN)+' min','');put('hf-ts-s','IBM Granite '+m.name+', ~'+m.ms+' ms per reading');}
+    if(st.alert&&open){put('hf-dec-b','Planning the setpoint','');put('hf-dec-s','TS_OPTIMIZE searches inside the window');}
+    else if(recentDec){const up=ld.delta>0,pct=Math.max(1,Math.round(Math.abs(ld.delta)*4.2));put('hf-dec-b','Heater '+(up?'+':'−')+Math.abs(ld.delta).toFixed(1)+' °C','ok');
+      put('hf-dec-s',(ld.at>ld.n+1?'timed for '+hhmm(ld.at)+', as the change arrives':'applied now')+' · '+pct+' % '+(up?'more heat':'less energy'));}
+    else{put('hf-dec-b','Hold the setpoint','');put('hf-dec-s','inside the window, at the least energy');}
+    fx.ctx.classList.toggle('on',!!le&&now-st.evT<2600);fx.ts.classList.toggle('on',!!(st.alert&&open));fx.dec.classList.toggle('on',!!recentDec&&now-st.decT<4000);}
+
+  let layout=null;
+  function plate(ctx,text,x,y,align,color,bold){ctx.font=(bold?'600 ':'')+MONO;const w=ctx.measureText(text).width,x0=align==='right'?x-w:x;ctx.fillStyle='rgba(27,39,70,.9)';ctx.fillRect(x0-4,y-8,w+8,16);ctx.fillStyle=color;ctx.textAlign='left';ctx.fillText(text,x0,y);ctx.font=MONO;}
+  function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W||!H)return;const narrow=W<560;
+    const padL=narrow?47:54,padR=narrow?10:16,top=30,laneH=narrow?15:17,laneGap=5,lanesH=3*laneH+2*laneGap,axisH=20;
+    const mainH=H-top-axisH-lanesH-14,pw=W-padL-padR;
+    const nVis=Math.max(30,Math.min(120,Math.floor(pw*(narrow?0.6:0.83)/(narrow?4.6:8.2))));
+    const vis=st.rows.slice(Math.max(0,st.rows.length-nVis)),fc=st.fc||[],gh=st.ghost,total=vis.length+fc.length;
+    const X=k=>padL+(k/Math.max(1,total-1))*pw,k0=vis.length-1,xi=i=>X(i-vis[0].i);
+    let lo=LO-0.3,hi=HI+0.3;vis.forEach(r=>{lo=Math.min(lo,r.v);hi=Math.max(hi,r.v);});fc.forEach(p=>{lo=Math.min(lo,p.mean-Z80*p.sig);hi=Math.max(hi,p.mean+Z80*p.sig);});
+    const pad=(hi-lo)*0.06;lo-=pad;hi+=pad;const Y=v=>top+(1-(v-lo)/(hi-lo))*mainH;
+    ctx.clearRect(0,0,W,H);ctx.font=MONO;ctx.textBaseline='middle';
+    /* live badge */
+    const blink=reduced||Math.floor(performance.now()/700)%2===0;ctx.fillStyle=blink?C.green2:'rgba(111,220,140,.35)';ctx.fillRect(padL,9,7,7);
+    ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText(narrow?'LIVE · '+fmtInt(st.events)+' readings':'LIVE on Confluent · tempering_line · '+fmtInt(st.events)+' readings',padL+13,13);
+    if(!narrow){ctx.textAlign='right';ctx.fillStyle=C.ink3;ctx.fillText('one reading every '+SEC+' s',padL+pw,13);}
+    /* grid */
+    ctx.strokeStyle=C.grid;ctx.lineWidth=1;ctx.fillStyle=C.ink3;ctx.textAlign='right';
+    niceTicks(lo,hi,4).forEach(v=>{const y=Math.round(Y(v))+0.5;if(y<top-1||y>top+mainH+1)return;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(padL+pw,y);ctx.stroke();ctx.fillText(v.toFixed(1),padL-7,y);});
+    /* the window the line must stay in */
+    const yH=Y(HI),yL=Y(LO);ctx.fillStyle='rgba(66,190,101,.07)';ctx.fillRect(padL,yH,pw,yL-yH);ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(111,220,140,.55)';
+    ctx.beginPath();ctx.moveTo(padL,Math.round(yH)+0.5);ctx.lineTo(padL+pw,Math.round(yH)+0.5);ctx.moveTo(padL,Math.round(yL)+0.5);ctx.lineTo(padL+pw,Math.round(yL)+0.5);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=C.green2;ctx.textAlign='left';ctx.fillText(narrow?'spec':'spec 31.0 to 32.2 °C',padL+6,yH+10);
+    /* time axis */
+    ctx.fillStyle=C.ink3;ctx.textBaseline='alphabetic';const ay=top+mainH+15;const nLab=Math.max(2,Math.floor((X(k0)-padL)/120));
+    for(let j=0;j<=nLab;j++){const k=Math.round(j*k0/nLab);const r=vis[k];if(!r)continue;ctx.textAlign=j===0?'left':'center';if(j===nLab)continue;ctx.fillText(hhmm(r.i),X(k),ay);}
+    ctx.textAlign='right';ctx.fillText('+'+mins(HN)+' min',padL+pw,ay);ctx.textBaseline='middle';
+    /* band the model expected, behind the line */
+    const pts=vis.map((r,k)=>({k,r})).filter(p=>p.r.pred!=null);
+    if(pts.length>1){ctx.beginPath();pts.forEach((p,j)=>{const y=Y(p.r.pred+ZB*p.r.sig);j?ctx.lineTo(X(p.k),y):ctx.moveTo(X(p.k),y);});for(let j=pts.length-1;j>=0;j--){const p=pts[j];ctx.lineTo(X(p.k),Y(p.r.pred-ZB*p.r.sig));}ctx.closePath();ctx.fillStyle=C.band;ctx.fill();}
+    /* context and decision markers */
+    const ly0=top+mainH+axisH+8;
+    st.ev.forEach(e=>{if(e.n<vis[0].i)return;const x=Math.round(xi(e.n))+0.5;ctx.strokeStyle='rgba(61,219,217,.55)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,ly0+lanesH);ctx.stroke();ctx.setLineDash([]);});
+    st.dec.forEach(d=>{if(d.n<vis[0].i)return;const x=Math.round(xi(d.n))+0.5;ctx.strokeStyle='rgba(111,220,140,.6)';ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,top+mainH);ctx.stroke();
+      ctx.fillStyle=C.green2;ctx.beginPath();ctx.moveTo(x,top+mainH-9);ctx.lineTo(x+5,top+mainH-4);ctx.lineTo(x,top+mainH+1);ctx.lineTo(x-5,top+mainH-4);ctx.closePath();ctx.fill();
+      if(d.at>d.n+1&&d.at<vis[0].i+total){const xa=Math.round(xi(d.at))+0.5,yb=top+mainH-4;ctx.strokeStyle='rgba(111,220,140,.5)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(x+6,yb);ctx.lineTo(xa-5,yb);ctx.stroke();ctx.setLineDash([]);ctx.strokeStyle=C.green2;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(xa,yb-5);ctx.lineTo(xa+5,yb);ctx.lineTo(xa,yb+5);ctx.lineTo(xa-5,yb);ctx.closePath();ctx.stroke();ctx.lineWidth=1;}});
+    /* the actual line */
+    ctx.save();ctx.shadowColor='rgba(166,200,255,.9)';ctx.shadowBlur=reduced?0:10;ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.lineJoin='round';ctx.lineCap='round';
+    ctx.beginPath();vis.forEach((r,k)=>{k?ctx.lineTo(X(k),Y(r.v)):ctx.moveTo(X(k),Y(r.v));});ctx.stroke();ctx.restore();
+    /* now */
+    const r0=vis[k0],xn=Math.round(X(k0))+0.5;ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(xn,top);ctx.lineTo(xn,top+mainH);ctx.stroke();
+    ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText('now',xn+5,top+8);
+    /* the forecast without context: it only knows the series, so it sees nothing coming */
+    if(gh){ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(185,195,211,.7)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(X(k0),Y(r0.v));gh.forEach((p,j)=>ctx.lineTo(X(k0+1+j),Y(p.mean)));ctx.stroke();ctx.setLineDash([]);
+      const pe=gh[gh.length-1];plate(ctx,narrow?'no context':'without context',X(k0+gh.length)-2,Y(pe.mean)+(pe.mean<(fc[fc.length-1]||pe).mean?14:-14),'right',C.ink2);}
+    /* the forecast with real-time context */
+    if(fc.length){const ok=performance.now()-st.decT<7000&&!st.alert,col=ok?C.green2:C.blue3;
+      ctx.beginPath();ctx.moveTo(X(k0),Y(r0.v));fc.forEach((p,j)=>ctx.lineTo(X(k0+1+j),Y(p.mean+Z80*p.sig)));for(let j=fc.length-1;j>=0;j--)ctx.lineTo(X(k0+1+j),Y(fc[j].mean-Z80*fc[j].sig));ctx.closePath();
+      ctx.fillStyle=ok?'rgba(111,220,140,.14)':C.band;ctx.fill();
+      ctx.save();ctx.shadowColor=ok?'rgba(66,190,101,.9)':'rgba(69,137,255,.9)';ctx.shadowBlur=reduced?0:8;ctx.lineWidth=2.2;ctx.setLineDash([6,4]);
+      let px=X(k0),py=Y(r0.v);fc.forEach((p,j)=>{const x=X(k0+1+j),y=Y(p.mean),out=p.mean>HI||p.mean<LO;ctx.strokeStyle=out?C.red2:col;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(x,y);ctx.stroke();px=x;py=y;});ctx.setLineDash([]);ctx.restore();
+      const pe=fc[fc.length-1];ctx.beginPath();ctx.arc(X(k0+fc.length),Y(pe.mean),4.5,0,Math.PI*2);ctx.fillStyle=(pe.mean>HI||pe.mean<LO)?C.red2:col;ctx.fill();ctx.strokeStyle=C.bg;ctx.lineWidth=2;ctx.stroke();
+      if(st.alert){const p=fc[st.alert-1],x=X(k0+st.alert),y=Y(p.mean);ctx.save();ctx.shadowColor=C.red;ctx.shadowBlur=reduced?0:12;ctx.beginPath();ctx.arc(x,y,5.5,0,Math.PI*2);ctx.fillStyle=C.red2;ctx.fill();ctx.restore();
+        const lab=(narrow?'out in ':'leaves spec in ')+mins(st.alert)+' min',up=p.mean>BASE;ctx.font=MONO;const lw=ctx.measureText(lab).width;let lx=x-10-lw;if(lx<xn+8)lx=Math.min(x+10,padL+pw-lw-4);plate(ctx,lab,lx,y+(up?-14:14),'left',C.red2);}
+      else plate(ctx,pe.mean.toFixed(1)+' °C',X(k0+fc.length)-10,Y(pe.mean)+(pe.mean>BASE?-14:14),'right',col);}
+    /* context lanes: what the other topics say, on the same clock */
+    const lanes=[{k:'room',lab:'room',lo:21,hi:27,fmt:v=>Math.round(v)+' °C'},{k:'speed',lab:'speed',lo:94,hi:121,fmt:v=>Math.round(v)+' %'},{k:'batch',lab:'batch'}];
+    lanes.forEach((L,li)=>{const y0=ly0+li*(laneH+laneGap),y1=y0+laneH;ctx.fillStyle='rgba(255,255,255,.04)';ctx.fillRect(padL,y0,pw,laneH);
+      ctx.fillStyle=C.ink3;ctx.textAlign='right';ctx.fillText(L.lab,padL-7,y0+laneH/2);
+      const xf=X(k0),xe=padL+pw;
+      if(L.k==='batch'){let s=0;const ids=[];let id=st.batchId-st.ev.filter(e=>e.key==='batch'&&e.n>vis[0].i).length;
+        for(let k=1;k<=vis.length;k++){if(k===vis.length||vis[k].c.batch!==vis[k-1].c.batch){const on=vis[s].c.batch>0;ctx.fillStyle=on?'rgba(61,219,217,.45)':'rgba(61,219,217,.16)';ctx.fillRect(X(s),y0+2,X(k-1)-X(s)+1,laneH-4);ids.push({x0:X(s),x1:X(k-1),id});s=k;id++;}}
+        ids.forEach(b=>{if(b.x1-b.x0>40){ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText(String(b.id),b.x0+5,y0+laneH/2);}});
+        ctx.strokeStyle='rgba(61,219,217,.4)';ctx.setLineDash([3,3]);ctx.strokeRect(xf+0.5,y0+2.5,xe-xf-1,laneH-5);ctx.setLineDash([]);
+        plate(ctx,String(st.batchId)+(st.tgt.batch?(narrow?' +butter':' · more cocoa butter'):''),xf+6,y0+laneH/2,'left',C.teal2);return;}
+      const yv=v=>y1-2-(clamp(v,L.lo,L.hi)-L.lo)/(L.hi-L.lo)*(laneH-4);
+      ctx.beginPath();vis.forEach((r,k)=>{k?ctx.lineTo(X(k),yv(r.c[L.k])):ctx.moveTo(X(k),yv(r.c[L.k]));});ctx.lineTo(xf,y1);ctx.lineTo(X(0),y1);ctx.closePath();ctx.fillStyle='rgba(61,219,217,.16)';ctx.fill();
+      ctx.strokeStyle=C.teal2;ctx.lineWidth=1.5;ctx.beginPath();vis.forEach((r,k)=>{k?ctx.lineTo(X(k),yv(r.c[L.k])):ctx.moveTo(X(k),yv(r.c[L.k]));});ctx.stroke();
+      ctx.setLineDash([3,3]);ctx.strokeStyle='rgba(61,219,217,.5)';ctx.beginPath();ctx.moveTo(xf,yv(st.cur[L.k]));for(let j=1;j<=fc.length;j++)ctx.lineTo(X(k0+j),yv(futureCtx(L.k,j)));ctx.stroke();ctx.setLineDash([]);
+      plate(ctx,L.fmt(futureCtx(L.k,fc.length)),xf+6,y0+laneH/2,'left',C.teal2);});
+    /* the latest context change and decision, named on the chart */
+    const le=st.ev[st.ev.length-1];if(le&&le.n>=vis[0].i){const x=xi(le.n),r=x>padL+90;plate(ctx,le.tag,x+(r?-7:7),top+8,r?'right':'left',C.teal2,true);}
+    const ld=st.dec[st.dec.length-1];if(ld&&ld.n>=vis[0].i){const x=xi(ld.n),r=x>padL+120;plate(ctx,'heater '+(ld.delta>0?'+':'−')+Math.abs(ld.delta).toFixed(1)+' °C',x+(r?-8:8),top+mainH-18,r?'right':'left',C.green2);}
+    /* hover */
+    if(st.hover>=0&&st.hover<vis.length){const r=vis[st.hover],x=Math.round(X(st.hover))+0.5;ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,ly0+lanesH);ctx.stroke();ctx.beginPath();ctx.arc(X(st.hover),Y(r.v),5,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle=C.bg;ctx.lineWidth=2;ctx.stroke();}
+    layout={X,Y,vis};}
+  function onMove(ev){if(!layout)return;const k=hoverIndex(layout,cv,ev);st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];
+    tip.innerHTML='<b>'+hhmm(r.i)+'</b><br>line '+r.v.toFixed(2)+' °C'+(r.pred!=null?'<br>expected '+(r.pred-ZB*r.sig).toFixed(2)+' to '+(r.pred+ZB*r.sig).toFixed(2):'')+'<br>room '+r.c.room.toFixed(1)+' °C · speed '+Math.round(r.c.speed)+' %';
+    tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.6?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
+  cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});
+  cv.c.addEventListener('mouseleave',()=>{st.hover=-1;tip.style.display='none';});
+  init();
+  reg({el,resize(){cv.fit();draw();},update(dt){const now=performance.now();st.acc+=dt;const rate=reduced?1400:650;let n=0;while(st.acc>rate){st.acc-=rate;step();n++;}
+      /* the line changes context by itself every so often, until the visitor takes over */
+      if(!st.autoAt)st.autoAt=now+3500;if(now>st.autoAt&&!st.hold&&!KEYS.some(k=>!st.follow[k])){const [k,on]=AUTO[st.autoI%AUTO.length];st.autoI++;setCtx(k,on);st.autoAt=now+19000;}
+      cards();},draw});
+  App.listeners.push(()=>cards());
+  /* the demo drives the same line */
+  App.hero={reset(){init();chips.forEach(b=>b.setAttribute('aria-pressed','false'));st.autoAt=performance.now()+60000;st.autoI=0;st.dirty=true;},
+    ctx(k,on){st.autoAt=performance.now()+60000;setCtx(k,on!==false);},
+    hold(on){st.hold=!!on;st.holdUntil=performance.now()+16000;},
+    decide(){st.hold=false;decide();st.autoAt=performance.now()+30000;}};
 })();
 
 /* ============ 01 agent loop ============ */
@@ -2977,41 +3058,6 @@ const CS={
   seed(n){let s=n>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
 };
 
-/* ============ 02 the long tail: every series, not just the top few hundred ============ */
-(function(){
-  const el=$('#st-tail');if(!el)return;
-  const cv=new Cv($('#tl-cv'));const st={u:0,target:0,auto:false,autoT:0};
-  function set(on){st.target=on?1:0;chipSet('tl-mode',on?'tsfm':'today');const t=$('#tl-table');if(t)t.classList.toggle('fm',on);}
-  function update(dt){if(!st.auto){st.autoT+=dt;if(st.autoT>1800){st.auto=true;if(!st.target)set(true);}}
-    const sp=reduced?1:dt/1500;st.u=st.target>st.u?Math.min(st.target,st.u+sp):Math.max(st.target,st.u-sp);
-    const k=ease(clamp(st.u,0,1)),n=Math.round(300+(100000-300)*k);$('#tl-big').textContent=n.toLocaleString('en-US');$('#tl-bigl').textContent=k>0.98?'series forecast, every cycle':'series with a forecast';}
-  function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);const u=clamp(st.u,0,1),k=ease(u);
-    const narrow=W<560,pad=16,cols=narrow?20:50,rows=20,per=100000/(cols*rows),N=cols*rows,head=Math.max(1,Math.round(300/per));
-    const top=58,legH=26,barH=46,gw=W-2*pad,gh=H-top-legH-barH-18;const cell=Math.min(gw/cols,gh/rows),gap=Math.max(1,cell*0.2),sz=cell-gap;
-    const ox=pad+(gw-cell*cols)/2,oy=top;
-    CS.txt(ctx,narrow?'100,000 series · a square is '+per:'100,000 series · each square is '+per.toLocaleString('en-US')+' series',pad,14,{c:C.ink2,max:W-2*pad});
-    /* the sweep: once a foundation model is on the stream, every square gets a forecast */
-    for(let i=0;i<N;i++){const x=ox+(i%cols)*cell,y=oy+Math.floor(i/cols)*cell;
-      if(i<head){ctx.fillStyle=C.blue3;ctx.fillRect(x,y,sz,sz);continue;}
-      const on=clamp((u*1.18-i/N)/0.18,0,1);
-      if(on<1){ctx.globalAlpha=1-on;ctx.strokeStyle='rgba(255,170,90,.8)';ctx.lineWidth=1;ctx.strokeRect(x+.5,y+.5,sz-1,sz-1);ctx.globalAlpha=1;}
-      if(on>0){ctx.globalAlpha=on;ctx.fillStyle=C.blue2;ctx.fillRect(x,y,sz,sz);ctx.globalAlpha=1;}}
-    /* call-out on the head while it is the only part with a model */
-    if(k<0.5){ctx.globalAlpha=1-k*2;const hx=ox+head*cell;ctx.strokeStyle=C.blue4;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ox,oy-6);ctx.lineTo(ox,oy-10);ctx.lineTo(hx-gap,oy-10);ctx.lineTo(hx-gap,oy-6);ctx.stroke();
-      CS.txt(ctx,narrow?'top 300: a model each':'the top 300: a bespoke model each, months of expert work',ox,oy-20,{c:C.blue4,max:W-ox-pad});ctx.globalAlpha=1;}
-    else{ctx.globalAlpha=(k-0.5)*2;CS.txt(ctx,narrow?'every series, every cycle':'every series, every cycle, one statement',ox,oy-20,{c:C.green2,max:W-ox-pad});ctx.globalAlpha=1;}
-    /* legend */
-    const ly=oy+rows*cell+12;ctx.fillStyle=C.blue2;ctx.fillRect(ox,ly-5,10,10);CS.txt(ctx,'forecast',ox+16,ly,{c:C.ink2});
-    const lx2=ox+(narrow?92:110);ctx.strokeStyle='rgba(255,170,90,.8)';ctx.strokeRect(lx2+.5,ly-4.5,9,9);CS.txt(ctx,narrow?'safety margin':'covered by a safety margin',lx2+16,ly,{c:C.ink2,max:W-lx2-pad-16});
-    /* the margin carried, every cycle */
-    const by=H-barH+6,bw=gw,wm=lerp(1,0.32,k);CS.txt(ctx,narrow?'Margin carried':'Safety margin carried, every cycle',pad,by,{c:C.ink2});
-    ctx.fillStyle='rgba(255,255,255,.07)';ctx.fillRect(pad,by+12,bw,10);ctx.fillStyle=k>0.5?'rgba(255,170,90,.55)':'rgba(255,170,90,.85)';ctx.fillRect(pad,by+12,bw*wm,10);
-    CS.txt(ctx,k>0.5?(narrow?'where the band is wide':'only where the forecast band is wide'):(narrow?'extra stock, headroom':'extra inventory, headroom, tolerance'),W-pad,by,{c:k>0.5?C.green2:'#ffaa5a',a:'right',max:Math.max(80,W-2*pad-(narrow?118:290))});}
-  reg({el,resize(){cv.fit();},update,draw});
-  chipGroup('tl-mode',v=>{st.auto=true;set(v==='tsfm');});
-  App.tail={set(on){st.auto=true;set(on);},reset(){st.auto=true;st.u=0;set(false);}};
-})();
-
 /* ============ 03 case study: IBM Network Intelligence ============ */
 (function(){
   const el=$('#cs-telco');if(!el)return;
@@ -3237,21 +3283,6 @@ const CS={
   const share=$('#share-link');if(share)share.addEventListener('click',()=>{if(navigator.share){navigator.share({title:document.title,url:location.href}).catch(()=>{});return;}copyText(location.href,null,ok=>{$('#share-toast').textContent=ok?'Link copied.':'Copy the address from your browser bar.';});});
 })();
 
-/* ============ hero: rotating word + marquee ============ */
-(function(){
-  const el=$('#rot'),el2=$('#rot2');if(!el)return;
-  /* what we predict, and what the optimizer is pointed at */
-  const pairs=[['stockout','service level'],['fraud','risk'],['outage','uptime'],['kiln drift','energy'],['grid peak','cost'],['price swing','margin'],['quality slip','yield'],['anomaly','security']];
-  if(reduced){el.textContent='stockout';if(el2)el2.textContent='service level';return;}
-  let i=0;
-  function type(node,word,done){let k=0;const tick=()=>{node.textContent=word.slice(0,++k);if(k<word.length)setTimeout(tick,55);else done();};tick();}
-  function erase(node,done){const tick=()=>{node.textContent=node.textContent.slice(0,-1);if(node.textContent.length)setTimeout(tick,28);else done();};tick();}
-  function cycle(){setTimeout(()=>erase(el,()=>{i=(i+1)%pairs.length;type(el,pairs[i][0],()=>{if(!el2){cycle();return;}erase(el2,()=>type(el2,pairs[i][1],cycle));});}),2600);}
-  if(el2&&!el2.textContent)el2.textContent=pairs[0][1];
-  cycle();
-  const mq=$('#mq');if(mq){const items=['Confluent Cloud','Apache Flink','Apache Kafka','Schema Registry','Tableflow','Apache Iceberg','Hugging Face','granite-tsfm','Streaming Agents','Confluent MCP','pgvector','Claude Code','IBM Bob','Codex','AWS · Azure · GCP'];const html=items.map(t=>'<span>'+t+'</span>').join('');mq.innerHTML=html+html;}
-})();
-
 /* ============ architecture particles ============ */
 (function(){
   const el=$('#st-arch');if(!el)return;
@@ -3308,28 +3339,27 @@ const CS={
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>{const f=App.tabSel&&App.tabSel[id];if(f){f();return true;}return click('[role=tab][aria-controls="'+id+'"]');};
-  /* one pitch, about a minute: the prize, what is new, what it tells you, Confluent and Granite better together,
-     the economics, then the proof of breadth: six decisions, four industries, three case studies, and the ask.
+  /* one pitch, about a minute: time series intelligence meets real-time context, the forecast that sees it coming,
+     the decision in time, Confluent and Granite better together, the value, then the proof of breadth: six decisions, four industries, three case studies, and the ask.
      subs are the subtitles, timed to the voice by their length. at('phrase') waits for that phrase in the line.
      hold keeps a step on screen a moment after the voice ends */
   const ACTS=['01 Innovation','02 Value','03 Use cases','Contact'];
-  const mode=v=>click('#live-mode .chip[data-v="'+v+'"]');
   const hi=sel=>$$(sel).forEach(x=>x.classList.add('tour-hi'));
   const show=(strip,id)=>{tab(id);$$('#'+strip+' [role=tab]').forEach(x=>x.classList.toggle('tour-hi',x.getAttribute('aria-controls')===id));};
   const montage=async(at,strip,list)=>{for(const [p,id] of list){await at(p);show(strip,id);}};
   const SCRIPT=[
-    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:8730,
-      say:'Foundation models unlocked unstructured data. The bigger prize is streaming data, where the mission-critical decisions live.',
-      subs:['Foundation models unlocked <em>unstructured data</em>.','The bigger prize is <em>streaming data</em>,','where the <em>mission-critical decisions</em> live.'],
-      run:async w=>{chipSet('live-mode','ad');mode('ad');click('#live-sc .chip[data-v="temp"]');}},
-    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:7960,
-      say:'Now IBM Granite Time Series models run inside Confluent, and work on series they have never seen.',
-      subs:['Now IBM Granite Time Series models run <em>inside Confluent</em>,','and work on series <em>they have never seen</em>.'],
-      run:async(w,at)=>{await at('and work on');click('#live-sc .chip[data-v="load"]');await at('never seen');click('#live-poke');}},
-    {n:3,act:0,focus:'.hero-head,#st-live',dur:7530,
-      say:'They tell you what comes next, how far it sits from normal, which history matches, and which settings hit the target.',
-      subs:['They tell you <em>what comes next</em>,','<em>how far it sits from normal</em>,','<em>which history matches</em>,','and <em>which settings hit the target</em>.'],
-      run:async(w,at)=>{await at('what comes next');mode('fc');await w(500);setRange('#live-h',32);await at('how far it sits');mode('ad');await w(400);click('#live-poke');await at('which history');mode('search');await at('which settings');mode('opt');}},
+    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:9070,
+      say:'Time series intelligence meets real-time context. IBM Granite Time Series models now run live inside Confluent.',
+      subs:['<em>Time series intelligence</em>','meets <em>real-time context</em>.','IBM Granite Time Series models now run','<em>live inside Confluent</em>.'],
+      run:async w=>{if(App.hero)App.hero.reset();}},
+    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:8060,
+      say:'When the context changes, say a warmer room, the forecast sees it coming, minutes before the line drifts out of spec.',
+      subs:['When <em>the context changes</em>,','say a warmer room,','the forecast <em>sees it coming</em>,','minutes before the line drifts out of spec.'],
+      run:async(w,at)=>{await at('say a warmer room');if(App.hero){App.hero.hold(true);App.hero.ctx('room',true);}}},
+    {n:3,act:0,focus:'.hero-head,#st-live',dur:7700,
+      say:'Then it optimizes the setpoint to keep the line in spec, so mission-critical decisions land while they still matter.',
+      subs:['Then it <em>optimizes the setpoint</em>','to keep the line in spec,','so mission-critical decisions land','<em>while they still matter</em>.'],
+      run:async(w,at)=>{await at('optimizes the setpoint');if(App.hero)App.hero.decide();}},
     {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#arch-mid',dur:9930,
       say:'Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration.',
       subs:['<em>Better together</em>:','Confluent <em>streams, connects and governs</em> the data,','and Granite turns each event <em>into a decision</em>,','with <em>zero configuration</em>.'],
@@ -3337,10 +3367,10 @@ const CS={
         await at('Confluent streams');hi('#arch-mid .arch-brand:not(.ibm)');await at('streams,');row('stream');await at('connects');row('connect');await at('governs');row('govern');
         await at('and Granite');scrollTo(window.innerWidth<=760?'#arch-mid .arch-brand.ibm':'#arch-mid .arch-row[data-k="process"]',true);row('process');hi('#arch-mid .arch-brand.ibm');await w(260);row('fd');await w(260);row('sc');await w(260);row('opt');
         await at('into a decision');row('agent');await at('zero configuration');hi('#arch-mid .arch-f');}},
-    {n:5,act:1,focus:'#h-tail,#st-tail',scroll:'#st-tail',pre:()=>{if(App.tail)App.tail.reset();},dur:8710,
-      say:'That changes the economics: not a few hundred modeled series and safety margins on the rest, but every series, every cycle.',
-      subs:['That changes <em>the economics</em>:','not a few hundred modeled series','and <em>safety margins</em> on the rest,','but <em>every series, every cycle</em>.'],
-      run:async(w,at)=>{await at('but every series');if(App.tail)App.tail.set(true);}},
+    {n:5,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:8280,
+      say:'For your teams: ten times faster time to value, five to ten percent more accuracy, and decisions in seconds.',
+      subs:['For your teams: <em>ten times faster</em> time to value,','<em>five to ten percent</em> more accuracy,','and decisions <em>in seconds</em>.'],
+      run:async w=>{}},
     {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#usecases > .wrap > .chapter-head:first-child',top:true,scrollM:'#uctabs',dur:9040,
       say:'Six mission-critical decisions, no data science team required: production, anomalies, supply chain, fraud, search and trading.',
       subs:['<em>Six mission-critical decisions</em>,','no data science team required:','production, anomalies, supply chain,','fraud, search and trading.'],
@@ -3376,7 +3406,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-10-18f';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='2026-10-18g';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}
