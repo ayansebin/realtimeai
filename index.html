@@ -748,6 +748,45 @@ body::before{background:var(--paper)}
 .uc .uc-cv{background:rgba(10,18,40,.45);padding:2px}
 .tip{background:#0f1830;border-color:rgba(255,255,255,.28);font-size:12.5px;line-height:1.45}
 .stage .readout span,.stage .eyebrow{color:#c3cbd8}
+
+/* ---------- tabs read as a picker: light cards above, the dark live demo below ---------- */
+#uctabs .uc{--ink:#161616;--ink-2:#3e3e3e;--ink-3:#6a6a66;--line:rgba(22,22,22,.14);--line-2:rgba(22,22,22,.32);
+  background:#f8f7f3;border:1px solid rgba(22,22,22,.18);color:var(--ink);box-shadow:0 1px 0 rgba(22,22,22,.04);filter:none;transition:border-color .15s,box-shadow .15s,transform .15s}
+#uctabs .uc:hover{border-color:rgba(22,22,22,.45);box-shadow:0 6px 18px rgba(22,22,22,.08);transform:translateY(-1px)}
+#uctabs .uc code{color:#6929c4}
+#uctabs .uc .uc-cv{background:#1b2746;padding:2px;border-radius:2px}
+#uctabs .uc[aria-selected="true"]{--ink:#f6f7fb;--ink-2:#d6dbe5;--ink-3:#adb7c8;
+  background:linear-gradient(150deg,#2c5066 0%,#26375f 70%);border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe;transform:none}
+#uctabs .uc[aria-selected="true"] code{color:#be95ff}
+.tabcaret{display:none}
+[aria-selected="true"]>.tabcaret{display:block;position:absolute;left:50%;bottom:-10px;width:0;height:0;transform:translateX(-50%);border-left:9px solid transparent;border-right:9px solid transparent;border-top:9px solid #0f62fe;pointer-events:none;z-index:2}
+.ind{overflow:visible}
+.ind::before,.ind::after{border-radius:inherit}
+.ind:hover::before{transform:none}
+#indtabs .ind:not([aria-selected="true"]){filter:saturate(.75) brightness(.92)}
+#indtabs .ind:not([aria-selected="true"]):hover{filter:none}
+/* prev and next inside every live demo */
+.pnav{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.55rem clamp(12px,2vw,20px);border-bottom:1px solid var(--line);background:rgba(10,18,40,.28);font-size:.84rem}
+.pnav-b{display:inline-flex;align-items:center;gap:.45rem;background:transparent;border:1px solid var(--line-2);color:var(--ink);padding:.3rem .7rem;cursor:pointer;font:inherit;min-height:34px;max-width:42%;transition:background .15s,border-color .15s}
+.pnav-b:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+.pnav-b .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pnav-b .sh{display:none}
+.pnav-b svg{width:14px;height:14px;flex:none}
+.pnav-c{font-family:var(--font-mono);font-size:.78rem;color:var(--ink-3);white-space:nowrap;display:flex;gap:.5rem;align-items:center}
+.pnav-c b{color:var(--ink);font-weight:500}
+.pnav-dots{display:inline-flex;gap:4px}
+.pnav-dots i{width:6px;height:6px;background:rgba(255,255,255,.28)}
+.pnav-dots i.on{background:#fff}
+.strip-hint{display:none}
+@media (max-width:600px){
+  .ucgrid,.inds{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:8px;margin-inline:-16px;padding:2px 16px 14px;margin-bottom:0}
+  .ucgrid::-webkit-scrollbar,.inds::-webkit-scrollbar{display:none}
+  .ucgrid .uc{flex:0 0 44%;scroll-snap-align:start}
+  .inds .ind{flex:0 0 82%;scroll-snap-align:start;min-height:190px}
+  .strip-hint{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-3);margin:0 0 .5rem}
+  .pnav-b .nm{display:none}.pnav-b .sh{display:inline}
+  .pnav-b{max-width:none}
+}
 </style>
 </head>
 <body>
@@ -2489,12 +2528,33 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
     ]}
   }};})());
 
-/* ============ 03 use cases and industries: cards as tabs ============ */
+/* ============ 03 use cases and industries: cards as tabs, with prev and next ============ */
 (function(){
   const scrollTo=el=>el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
-  ['uctabs','indtabs'].forEach(id=>{const tabs=document.getElementById(id);if(!tabs)return;const btns=$$('[role=tab]',tabs);
-    function select(b){btns.forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on?'true':'false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p){p.hidden=!on;if(on){const s=p.__stage;if(s&&s.resize)requestAnimationFrame(()=>s.resize());}}});}
-    btns.forEach(b=>b.addEventListener('click',()=>{select(b);if(window.innerWidth<=760){const p=document.getElementById(b.getAttribute('aria-controls'));if(p)scrollTo(p);}}));});
+  const arrowL='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+  const arrowR='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+  [['uctabs','decision'],['indtabs','industry']].forEach(([id,noun])=>{const tabs=document.getElementById(id);if(!tabs)return;const btns=$$('[role=tab]',tabs);const n=btns.length;
+    const name=b=>{const x=b.querySelector('b');if(b.classList.contains('ind')){const il=b.querySelector('.il');return il?il.childNodes[0].textContent.trim():'';}return x?x.textContent.trim():'';};
+    const names=btns.map(name);
+    /* swipe hint above the strip on phones */
+    const hint=document.createElement('div');hint.className='strip-hint';hint.setAttribute('aria-hidden','true');hint.innerHTML='<span>'+n+' to choose from</span><span>Swipe for more &#8594;</span>';tabs.parentNode.insertBefore(hint,tabs);
+    function strip(b){if(tabs.scrollWidth>tabs.clientWidth+4){const left=clamp(b.offsetLeft-16,0,tabs.scrollWidth-tabs.clientWidth);try{tabs.scrollTo({left,behavior:reduced?'auto':'smooth'});}catch(e){tabs.scrollLeft=left;}}}
+    function select(b){btns.forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;const p=document.getElementById(x.getAttribute('aria-controls'));if(p){p.hidden=!on;if(on){const s=p.__stage;if(s&&s.resize)requestAnimationFrame(()=>s.resize());}}});strip(b);}
+    btns.forEach((b,i)=>{
+      const c=document.createElement('span');c.className='tabcaret';c.setAttribute('aria-hidden','true');b.appendChild(c);
+      b.addEventListener('click',()=>{select(b);if(window.innerWidth<=760)scrollTo(tabs.previousElementSibling&&tabs.previousElementSibling.classList.contains('strip-hint')?tabs.previousElementSibling:tabs);});
+      b.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;e.preventDefault();const j=(i+(e.key==='ArrowRight'?1:-1)+n)%n;select(btns[j]);btns[j].focus();});
+      const p=document.getElementById(b.getAttribute('aria-controls'));if(!p)return;
+      const prev=(i-1+n)%n,next=(i+1)%n;
+      const nav=document.createElement('div');nav.className='pnav';
+      nav.innerHTML='<button type="button" class="pnav-b" data-j="'+prev+'" aria-label="Previous '+noun+': '+names[prev]+'">'+arrowL+'<span class="nm">'+names[prev]+'</span><span class="sh">Previous</span></button>'+
+        '<span class="pnav-c"><b>'+String(i+1).padStart(2,'0')+'</b> / '+String(n).padStart(2,'0')+'<span class="pnav-dots">'+btns.map((_,k)=>'<i'+(k===i?' class="on"':'')+'></i>').join('')+'</span></span>'+
+        '<button type="button" class="pnav-b" data-j="'+next+'" aria-label="Next '+noun+': '+names[next]+'"><span class="nm">'+names[next]+'</span><span class="sh">Next</span>'+arrowR+'</button>';
+      p.insertBefore(nav,p.firstChild);
+      $$('.pnav-b',nav).forEach(x=>x.addEventListener('click',()=>{const t=btns[Number(x.dataset.j)];const y=p.getBoundingClientRect().top;select(t);const np=document.getElementById(t.getAttribute('aria-controls'));if(np){const dy=np.getBoundingClientRect().top-y;if(Math.abs(dy)>2)window.scrollBy(0,dy);}}));
+    });
+    btns.forEach(x=>{x.tabIndex=x.getAttribute('aria-selected')==='true'?0:-1;});
+  });
 })();
 
 /* ============ 03 use case minis: a live miniature of each demo on its card ============ */
