@@ -1175,6 +1175,39 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
 .btn.play small{font-size:.7rem;color:var(--blue-5);opacity:.85;font-weight:400;margin-left:.4rem;letter-spacing:.04em}
 .readout b.blue{color:var(--blue-3)}
 .readout b.dim{color:var(--ink-4)}
+/* less text, more to touch */
+.pg-tryline{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0 0}
+.pg-tryline span{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:#0043ce;border:1px solid rgba(15,98,254,.35);background:rgba(15,98,254,.06);padding:.3rem .6rem;border-radius:2px}
+.pg-tryline span+span::before{content:'→';margin-right:.45rem;color:#78a9ff}
+.pg-rail-h{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#6a6a66;font-weight:500}
+.pg-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem 1rem}
+.pg-top h3{margin:0}
+.pg-meta{font-family:var(--font-mono);font-size:.74rem;color:var(--ink-3)}
+.pg-ctl{align-items:center;gap:10px 16px}
+.pg-ctl .pg-c{display:flex;align-items:center;gap:.5rem}
+.chip .mdot,.pg-tile .mdot,.pg-legend .mdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.4rem;vertical-align:middle}
+.chip.race{border-style:dashed}
+.chip.race[aria-pressed="true"]{border-style:solid;background:rgba(190,149,255,.18);border-color:#be95ff;color:#fff}
+.pg-replay{margin-left:auto;display:inline-flex;align-items:center;gap:.4rem}
+.pg-replay svg{width:12px;height:12px}
+@media (max-width:600px){.pg-replay{margin-left:0}}
+.pg-scrub{position:relative;height:46px;margin-top:8px;background:#0a1430;border:1px solid rgba(255,255,255,.12);border-radius:3px}
+.pg-scrub canvas{display:block;width:100%;height:100%;cursor:ew-resize;touch-action:none}
+.pg-orow{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:6px;font-size:.8rem;color:var(--ink-3)}
+.pg-oh{font-family:var(--font-mono);font-size:.72rem;color:#a6c8ff}
+.pg-onav{display:inline-flex;align-items:center;gap:.4rem}
+.pg-onav[hidden]{display:none}
+.pg-onav output{font-family:var(--font-mono);color:var(--ink);font-size:.78rem}
+.pg-say{font-size:clamp(1.05rem,1.6vw,1.3rem);margin:.4rem 0 .7rem}
+.pg-tile[data-win]{border-color:#42be65;box-shadow:inset 0 2px 0 #42be65}
+.pg-tile span{display:flex;align-items:center;flex-wrap:wrap}
+.pg-src{margin-top:1.4rem}
+.pg-howl{list-style:none;margin:.9rem 0 0;padding:0;display:grid;gap:.4rem;font-size:.88rem;color:#3e3e3e}
+.pg-howl b{color:#161616;font-weight:500}
+#st-pg .pg-chart{height:clamp(260px,30vw,400px)}
+.pg-status.ok{opacity:0;transition:opacity .6s .9s}
+.pg-onav output{white-space:nowrap}
+@media (max-width:600px){.pg-oh{font-size:.68rem}.pg-orow{align-items:flex-start}}
 </style>
 </head>
 <body class="pg">
@@ -1198,8 +1231,7 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
     <div class="hero-head">
       <div class="pills"><span class="pill live">Playground · real data, real models</span></div>
       <h1 class="h-display">Try the models on real streams.</h1>
-      <p class="lede">Pick a stream and press Run. The model only sees the past, and you see how close it came to what really happened.</p>
-      <ol class="pg-steps"><li><b>1</b>Pick a stream</li><li><b>2</b>Choose a job and a model</li><li><b>3</b>Run and compare</li></ol>
+      <p class="pg-tryline"><span>Pick a stream</span><span>Drag the timeline</span><span>Race the models</span></p>
     </div>
   </div>
 </header>
@@ -1208,58 +1240,41 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
   <div class="wrap">
     <div class="pg-shell">
       <aside class="pg-rail" aria-label="Streams">
-        <div class="pg-rail-h"><b>1</b>Pick a stream</div>
-        <div class="pg-hint" aria-hidden="true"><span>11 streams</span><span>Swipe for more &#8594;</span></div>
+        <div class="pg-rail-h">Streams</div>
+        <div class="pg-hint" aria-hidden="true"><span>11 streams</span><span>Swipe &#8594;</span></div>
         <div class="pg-rail-g">Real data</div>
-        <div class="dslist" id="ds-public"><div class="pg-empty">Loading streams…</div></div>
-        <div class="pg-rail-g">Synthetic, with known events</div>
+        <div class="dslist" id="ds-public"><div class="pg-empty">Loading…</div></div>
+        <div class="pg-rail-g">Synthetic, known events</div>
         <div class="dslist" id="ds-synth"></div>
       </aside>
 
       <div class="stage" id="st-pg">
-        <div class="pg-top"><div class="stage-title"><h3 id="pg-name">Loading a stream</h3><p id="pg-blurb">The chart fills in as soon as a stream is picked.</p></div></div>
+        <div class="pg-top"><h3 id="pg-name">Loading</h3><span class="pg-meta" id="pg-meta"></span><p id="pg-blurb" hidden></p></div>
         <div class="pg-ctl">
-          <div class="pg-c"><span class="pg-ck"><b>2</b>Job</span><div class="chips seg" id="pg-task"><button class="chip" data-v="fc" aria-pressed="true">Forecast</button><button class="chip" data-v="ad" aria-pressed="false">Find anomalies</button></div></div>
-          <div class="pg-c"><span class="pg-ck">Model</span><div class="chips" id="pg-model"></div></div>
-          <div class="pg-c" id="g-thr" hidden><span class="pg-ck">Alert threshold</span><div class="range"><input type="range" id="pg-thr" min="10" max="98" value="50" aria-label="Alert threshold"><output id="pg-thr-out">0.50</output></div></div>
-          <div class="pg-c pg-go"><span class="pg-ck"><b>3</b>Run</span><button class="btn play" id="pg-run" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Run<small id="pg-run-sub">real output</small></button></div>
+          <div class="chips seg" id="pg-task" role="group" aria-label="Job"><button class="chip" data-v="fc" aria-pressed="true">Forecast</button><button class="chip" data-v="ad" aria-pressed="false">Find anomalies</button></div>
+          <div class="chips" id="pg-model" role="group" aria-label="Model"></div>
+          <div class="pg-c" id="g-h"><span class="pg-ck">Ahead</span><div class="chips" id="pg-h"></div></div>
+          <div class="pg-c" id="g-thr" hidden><span class="pg-ck">Threshold</span><div class="range"><input type="range" id="pg-thr" min="10" max="98" value="50" aria-label="Alert threshold"><output id="pg-thr-out">0.50</output></div></div>
+          <button class="btn sm ghost pg-replay" id="pg-run" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg><span>Replay</span><small id="pg-run-sub" hidden></small></button>
         </div>
-        <details class="pg-more" id="pg-more"><summary>More options</summary>
-          <div class="pg-more-in">
-            <div class="ctl-group" id="g-h"><span class="eyebrow">How far ahead</span><div class="chips" id="pg-h"></div></div>
-            <div class="ctl-group" id="g-origin"><span class="eyebrow">Forecast from</span><div class="range"><button class="chip sm" id="pg-prev" aria-label="Earlier start">&#8249;</button><input type="range" id="pg-origin" min="0" max="9" value="9" aria-label="Forecast start"><button class="chip sm" id="pg-next" aria-label="Later start">&#8250;</button><output id="pg-origin-out"></output></div></div>
-          </div>
-        </details>
         <div class="stage-body">
           <div class="pg-status" id="pg-status"><span class="dot"></span><span id="pg-status-t">Loading…</span></div>
           <div class="pg-chart"><canvas class="stage-canvas" id="pg-cv" aria-label="Chart of the selected stream with the model output"></canvas><div class="tip" id="pg-tip"></div></div>
+          <div class="pg-scrub"><canvas id="pg-scrub" aria-label="Timeline of the whole stream. Drag to move the forecast start, or to zoom in anomaly mode."></canvas></div>
+          <div class="pg-orow"><span class="pg-oh" id="pg-oh">drag the timeline</span><span class="pg-onav" id="g-origin"><button class="chip sm" id="pg-prev" aria-label="Earlier start">&#8249;</button><output id="pg-origin-out"></output><button class="chip sm" id="pg-next" aria-label="Later start">&#8250;</button><input type="range" id="pg-origin" min="0" max="9" value="9" aria-label="Forecast start" hidden></span></div>
           <div class="pg-legend" id="pg-legend"></div>
         </div>
         <div class="pg-result">
-          <p class="pg-say" id="pg-say">Press Run to see the model against what really happened.</p>
+          <p class="pg-say" id="pg-say"></p>
           <div class="pg-tiles" id="pg-readouts"></div>
         </div>
-        <details class="pg-cmp" id="pg-cmp"><summary>Compare all models on this stream</summary>
-          <div class="pg-cmp-in"><div class="eyebrow" id="pg-table-k"></div><table class="pg-table" id="pg-table"></table><p class="pg-note" id="pg-table-note"></p></div>
-        </details>
-        <div class="stage-foot"><div class="hint">Real model outputs, precomputed on a CPU runner. Nothing leaves your browser. On Confluent the same models run on every event of your Kafka topics.</div></div>
+        <div hidden><div id="pg-table-k"></div><table id="pg-table"></table><p id="pg-table-note"></p></div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="chapter" id="how">
-  <div class="wrap">
-    <div class="chapter-head">
-      <span class="n">HOW IT WORKS</span>
-      <h2>What you are looking at.</h2>
-    </div>
-    <div class="pg-how">
-      <div><b>Real models, zero-shot</b><p>TTM r3, FlowState r1.1, PatchTST-FM r2 and TSPulse r1, the open weights on Hugging Face, run with no training and no tuning on these streams.</p></div>
-      <div><b>An honest test</b><p>The model only sees the past. What really happened next was held back, so the scores show how it would have done live.</p></div>
-      <div><b>Open data</b><p>Real streams are open licensed. Synthetic ones come with known events, so you can check what detection caught and what it missed.</p></div>
-    </div>
-    <details class="pg-src"><summary>Sources, licenses and build details</summary><div class="pg-built" id="pg-built"></div><div class="pg-sources" id="pg-sources"></div></details>
+    <details class="pg-src" id="how"><summary>How it works, sources and licenses</summary>
+      <ul class="pg-howl"><li><b>Zero-shot.</b> TTM r3, FlowState r1.1, PatchTST-FM r2 and TSPulse r1, open weights, no training.</li><li><b>Honest test.</b> The model sees only the past. What happened next was held back.</li><li><b>Open data.</b> Real streams are open licensed. Synthetic ones carry known events.</li></ul>
+      <div class="pg-built" id="pg-built"></div><div class="pg-sources" id="pg-sources"></div>
+    </details>
   </div>
 </section>
 
@@ -1296,7 +1311,8 @@ const freqLabel={min:'1 min','5min':'5 min','15min':'15 min','30min':'30 min',h:
 const topicOf=id=>({steel:'plant.energy',traffic:'road.i94.volume',bikes:'bikes.rentals',grid:'grid.nsw.demand',retail:'retail.sales',wti:'markets.wti',subway:'mta.subway.riders','syn-kiln':'kiln.telemetry','syn-sku':'store.sku.sales','syn-cards':'cards.authorizations','syn-api':'api.latency'})[id]||id.replace(/-/g,'.');
 
 /* ---------- state ---------- */
-const st={index:null,ds:null,cache:{},task:'fc',model:'ttm',h:96,oi:0,thr:0.5,ran:false,once:false,anim:null,view:null,hover:null};
+const st={index:null,ds:null,cache:{},task:'fc',model:'ttm',cmp:false,h:96,oi:0,thr:0.5,ran:false,once:false,anim:null,view:null,hover:null,brush:null,geo:null};
+const MC={ttm:'#78a9ff',flowstate:'#3ddbd9',patchtstfm:'#be95ff'},FCK=['ttm','flowstate','patchtstfm'];
 const cv=$('#pg-cv'),ctx=cv.getContext('2d'),tip=$('#pg-tip');
 let W=0,H=0;
 function fit(){const r=cv.getBoundingClientRect();if(r.width<2)return false;const dpr=Math.min(2,window.devicePixelRatio||1);W=r.width;H=r.height;const w=Math.round(W*dpr),h=Math.round(H*dpr);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}ctx.setTransform(dpr,0,0,dpr,0,0);return true;}
@@ -1308,7 +1324,7 @@ async function loadIndex(){try{const r=await fetch('/data/pg/index.json',{cache:
   renderCards();renderSources();
   const q=new URLSearchParams(location.search);const id=q.get('ds');const first=st.index.datasets.find(d=>d.id===id)||st.index.datasets[0];if(q.get('task')==='ad')st.task='ad';
   if(first)selectDataset(first.id,false);}
-function renderCards(){const pub=$('#ds-public'),syn=$('#ds-synth');pub.innerHTML='';syn.innerHTML='';st.index.datasets.forEach(d=>{const b=document.createElement('button');b.className='dcard';b.type='button';b.dataset.id=d.id;b.setAttribute('aria-pressed','false');
+function renderCards(){const pub=$('#ds-public'),syn=$('#ds-synth');pub.innerHTML='';syn.innerHTML='';st.index.datasets.forEach(d=>{const b=document.createElement('button');b.className='dcard';b.type='button';b.dataset.id=d.id;b.title=d.blurb;b.setAttribute('aria-pressed','false');
     b.innerHTML='<canvas aria-hidden="true"></canvas><span class="dn"><b>'+esc(d.name)+'</b><small>'+esc(d.domain)+' · '+esc(freqLabel[d.freq]||d.freq)+'</small></span>';
     (d.kind==='synthetic'?syn:pub).appendChild(b);b.addEventListener('click',()=>selectDataset(d.id,true));requestAnimationFrame(()=>spark($('canvas',b),d.spark));});}
 function spark(c,data){const r=c.getBoundingClientRect();const dpr=Math.min(2,window.devicePixelRatio||1);c.width=Math.round(r.width*dpr);c.height=Math.round(r.height*dpr);const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);const w=r.width,h=r.height;const v=data.filter(y=>y!=null);if(v.length<2)return;const lo=Math.min(...v),hi=Math.max(...v);const Y=y=>h-3-(h-6)*((y-lo)/((hi-lo)||1));x.beginPath();v.forEach((y,i)=>{const px=w*i/(v.length-1);i?x.lineTo(px,Y(y)):x.moveTo(px,Y(y));});x.strokeStyle=C.blue3;x.lineWidth=1.2;x.stroke();x.lineTo(w,h);x.lineTo(0,h);x.closePath();x.fillStyle='rgba(120,169,255,.10)';x.fill();}
@@ -1321,7 +1337,7 @@ async function selectDataset(id,scroll){$$('.dcard').forEach(b=>b.setAttribute('
   if(st.task==='fc'&&okModels.indexOf(st.model)<0)st.model=okModels[0]||'snaive';
   const hs=hOptions(ds);if(hs.indexOf(st.h)<0)st.h=hs[hs.length-1];
   st.oi=ds.fc.origins.length-1;st.thr=defaultThr(ds);
-  $('#pg-name').textContent=ds.name;$('#pg-blurb').textContent=ds.blurb;
+  $('#pg-name').textContent=ds.name;$('#pg-blurb').textContent=ds.blurb;$('#pg-meta').textContent=(freqLabel[ds.freq]||ds.freq)+' · '+ds.n.toLocaleString('en-US')+' points · '+ds.unit;
   const q=new URLSearchParams(location.search);q.set('ds',id);if(st.task==='ad')q.set('task','ad');else q.delete('task');history.replaceState(null,'',location.pathname+'?'+q.toString());
   renderControls();renderTable();renderSQL();renderReadouts();renderLegend();
   fit();draw();
@@ -1335,16 +1351,17 @@ function setStatus(cls,text){const el=$('#pg-status');el.className='pg-status'+(
 function renderControls(){const ds=st.ds;
   $$('#pg-task .chip').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.v===st.task?'true':'false');if(b.dataset.v==='ad'){const ok=ds.ad.tspulse&&ds.ad.tspulse.status==='ok';b.disabled=!ok;b.title=ok?'':'Anomaly scoring needs at least 1,536 points';}});
   const mm=$('#pg-model');mm.innerHTML='';
-  if(st.task==='fc'){['ttm','flowstate','patchtstfm'].forEach(k=>{const m=ds.fc.models[k];const b=document.createElement('button');b.className='chip';b.dataset.v=k;b.textContent=(m&&m.label)||MODEL_NAMES[k];const ok=m&&m.status==='ok';b.disabled=!ok;if(!ok)b.title='Not available for this frequency';b.setAttribute('aria-pressed',st.model===k?'true':'false');b.addEventListener('click',()=>{st.model=k;st.ran=false;renderControls();renderTable();renderSQL();renderReadouts();renderLegend();if(st.once)run(true);else{setStatus('',(m.label)+' selected · press Run');draw();}});mm.appendChild(b);});}
+  if(st.task==='fc'){FCK.forEach(k=>{const m=ds.fc.models[k];const b=document.createElement('button');b.className='chip';b.dataset.v=k;b.innerHTML='<i class="mdot" style="background:'+MC[k]+'"></i>'+esc((m&&m.label)||MODEL_NAMES[k]);const ok=m&&m.status==='ok';b.disabled=!ok;if(!ok)b.title='Not available for this frequency';b.setAttribute('aria-pressed',!st.cmp&&st.model===k?'true':'false');b.addEventListener('click',()=>{st.model=k;st.cmp=false;st.ran=false;renderControls();renderTable();renderReadouts();renderLegend();run(true);});mm.appendChild(b);});
+    const nOk=FCK.filter(k=>ds.fc.models[k]&&ds.fc.models[k].status==='ok').length;const a=document.createElement('button');a.className='chip race';a.dataset.v='all';a.textContent='Race all three';a.disabled=nOk<2;a.setAttribute('aria-pressed',st.cmp?'true':'false');a.addEventListener('click',()=>{st.cmp=true;st.ran=false;renderControls();renderReadouts();renderLegend();run(true);});mm.appendChild(a);}
   else{const b=document.createElement('button');b.className='chip';b.dataset.v='tspulse';b.textContent='TSPulse r1';b.setAttribute('aria-pressed','true');mm.appendChild(b);}
-  $('#g-h').hidden=st.task!=='fc';$('#g-origin').hidden=st.task!=='fc';$('#g-thr').hidden=st.task!=='ad';
-  const hh=$('#pg-h');hh.innerHTML='';hOptions(ds).forEach(h=>{const b=document.createElement('button');b.className='chip sm';b.textContent=h+' '+stepWord(ds,h);b.setAttribute('aria-pressed',st.h===h?'true':'false');b.addEventListener('click',()=>{st.h=h;st.ran=false;renderControls();renderTable();renderSQL();renderReadouts();if(st.once)run(true);else draw();});hh.appendChild(b);});
+  $('#g-h').hidden=st.task!=='fc';$('#g-origin').hidden=st.task!=='fc';$('#g-thr').hidden=st.task!=='ad';$('#pg-oh').textContent=st.task==='fc'?'drag the timeline to forecast from another point':'drag across the timeline to zoom, double-click for the full view';
+  const hh=$('#pg-h');hh.innerHTML='';hOptions(ds).forEach(h=>{const b=document.createElement('button');b.className='chip sm';b.textContent=h+' '+stepWord(ds,h).replace('× ','× ');b.setAttribute('aria-pressed',st.h===h?'true':'false');b.addEventListener('click',()=>{st.h=h;st.ran=false;renderControls();renderTable();renderReadouts();run(true);});hh.appendChild(b);});
   const o=$('#pg-origin');o.max=ds.fc.origins.length-1;o.value=st.oi;$('#pg-origin-out').textContent=fmtDate(ds,ds.fc.origins[st.oi]);
   $('#pg-thr').value=Math.round(st.thr*100);$('#pg-thr-out').textContent=st.thr.toFixed(2);
   $('#pg-run-sub').textContent='again';const cmp=$('#pg-cmp');if(cmp)cmp.hidden=st.task!=='fc';}
 function stepWord(ds,h){return ({min:'min','5min':'× 5 min','15min':'× 15 min','30min':'× 30 min',h:'h',D:'days',B:'days',MS:'months'})[ds.freq]||'steps';}
 $$('#pg-task .chip').forEach(b=>b.addEventListener('click',()=>{if(b.disabled)return;st.task=b.dataset.v;st.ran=false;st.once=false;st.anim=null;st.view=null;if(st.task==='fc'){const ok=Object.keys(st.ds.fc.models).filter(k=>k!=='snaive'&&st.ds.fc.models[k].status==='ok');if(ok.indexOf(st.model)<0)st.model=ok[0];}renderControls();renderTable();renderSQL();renderReadouts();renderLegend();const q=new URLSearchParams(location.search);if(st.task==='ad')q.set('task','ad');else q.delete('task');history.replaceState(null,'',location.pathname+'?'+q.toString());run(false);}));
-$('#pg-origin').addEventListener('input',e=>{st.oi=+e.target.value;st.ran=false;st.anim=null;$('#pg-origin-out').textContent=fmtDate(st.ds,st.ds.fc.origins[st.oi]);renderReadouts();if(st.once)run(true);else{setStatus('','origin moved · press Run');draw();}});
+$('#pg-origin').addEventListener('input',e=>{const k=+e.target.value;st.oi=-1;setOrigin(k);});
 $('#pg-prev').addEventListener('click',()=>{if(st.oi>0){st.oi--;$('#pg-origin').value=st.oi;$('#pg-origin').dispatchEvent(new Event('input'));}});
 $('#pg-next').addEventListener('click',()=>{if(st.oi<st.ds.fc.origins.length-1){st.oi++;$('#pg-origin').value=st.oi;$('#pg-origin').dispatchEvent(new Event('input'));}});
 $('#pg-thr').addEventListener('input',e=>{st.thr=(+e.target.value)/100;$('#pg-thr-out').textContent=st.thr.toFixed(2);renderReadouts();renderLegend();draw();});
@@ -1360,19 +1377,18 @@ function adScore(ds,thr){const wins=flagged(ds,thr);const labels=ds.labels||[];c
 
 /* ---------- panels ---------- */
 function renderReadouts(){const ds=st.ds,el=$('#pg-readouts'),say=$('#pg-say');if(!ds){el.innerHTML='';return;}
-  const dim=!st.ran;const tile=(v,k,cls)=>'<div class="pg-tile"><b class="'+(dim?'dim':cls||'')+'">'+(dim?'–':v)+'</b><span>'+k+'</span></div>';
-  if(st.task==='fc'){const m=metrics(ds,st.model,st.oi,st.h);const mm=ds.fc.models[st.model];const nv=metrics(ds,'snaive',st.oi,st.h);const nm=(mm&&mm.label)||MODEL_NAMES[st.model];
-    const gain=m&&nv&&nv.mase?(1-m.mase/nv.mase):NaN,ahead=st.h+' '+stepWord(ds,st.h);
-    el.innerHTML=tile(m&&!isNaN(m.wape)?(m.wape*100).toFixed(1)+'%':'–','average error against what really happened')+
-      tile(isNaN(gain)?'–':(gain>=0?Math.round(gain*100)+'% better':Math.round(-gain*100)+'% worse'),'than simply repeating the last cycle',gain>=0?'green':'')+
-      tile(m&&!isNaN(m.cov)?Math.round(m.cov*100)+'%':'n/a','of real values inside the likely range',m&&m.cov>=.7?'green':'')+
-      tile(mm&&mm.ms!=null?(mm.ms<10?mm.ms.toFixed(1):Math.round(mm.ms))+' ms':'–','per forecast on a CPU','blue');
-    say.innerHTML=dim?'Running '+esc(nm)+' on '+esc(ahead)+' ahead…':
-      '<b>'+esc(nm)+'</b> forecast '+esc(ahead)+' ahead with <b>'+(m?(m.wape*100).toFixed(1)+'%':'–')+'</b> average error'+(isNaN(gain)?'':', <b class="'+(gain>=0?'g':'r')+'">'+(gain>=0?Math.round(gain*100)+'% better':Math.round(-gain*100)+'% worse')+'</b> than repeating the last cycle')+(m&&!isNaN(m.cov)?'. '+Math.round(m.cov*100)+'% of what really happened fell inside its likely range.':'.');}
+  const dim=!st.ran;const tile=(v,k,cls,sty)=>'<div class="pg-tile"'+(sty||'')+'><b class="'+(dim?'dim':cls||'')+'">'+(dim?'–':v)+'</b><span>'+k+'</span></div>';
+  const better=g=>isNaN(g)?'–':(g>=0?Math.round(g*100)+'% better':Math.round(-g*100)+'% worse');
+  if(st.task==='fc'){const nv=metrics(ds,'snaive',st.oi,st.h);
+    if(st.cmp){const rows=FCK.map(k=>{const m=metrics(ds,k,st.oi,st.h);return {k,m,g:m&&nv&&nv.mase?1-m.mase/nv.mase:NaN};}).filter(r=>r.m);const best=rows.slice().sort((x,y)=>y.g-x.g)[0];
+      el.innerHTML=rows.map(r=>tile(better(r.g),'<i class="mdot" style="background:'+MC[r.k]+'"></i>'+esc(MODEL_NAMES[r.k])+' · '+(r.m.wape*100).toFixed(1)+'% error',r===best?'green':'',r===best&&!dim?' data-win="1"':'')).join('')+tile(nv?(nv.wape*100).toFixed(1)+'%':'–','simple guess error','');
+      say.innerHTML=dim?'Racing three models…':'<b style="color:'+MC[best.k]+'">'+esc(MODEL_NAMES[best.k])+'</b> wins here, <b class="g">'+better(best.g)+'</b> than the simple guess.';return;}
+    const m=metrics(ds,st.model,st.oi,st.h);const mm=ds.fc.models[st.model];const gain=m&&nv&&nv.mase?(1-m.mase/nv.mase):NaN;
+    el.innerHTML=tile(m&&!isNaN(m.wape)?(m.wape*100).toFixed(1)+'%':'–','average error')+tile(better(gain),'vs simple guess',gain>=0?'green':'')+tile(m&&!isNaN(m.cov)?Math.round(m.cov*100)+'%':'n/a','inside the range',m&&m.cov>=.7?'green':'')+tile(mm&&mm.ms!=null?(mm.ms<10?mm.ms.toFixed(1):Math.round(mm.ms))+' ms':'–','per forecast, CPU','blue');
+    say.innerHTML=dim?'Forecasting…':'<b class="'+(gain>=0?'g':'r')+'">'+better(gain)+'</b> than simply repeating the last cycle.';}
   else{const s=adScore(ds,st.thr),ms=ds.ad.tspulse&&ds.ad.tspulse.ms!=null?(ds.ad.tspulse.ms/1000).toFixed(1)+' s':'–';
-    el.innerHTML=tile(s.wins.length,'windows above the alert threshold')+(s.total?tile(s.caught+' of '+s.total,'known events caught',s.caught===s.total?'green':'')+tile(s.falseAlarms,'false alarms',s.falseAlarms===0?'green':''):tile('n/a','no known events on real data'))+tile(ms,'to score '+ds.n.toLocaleString('en-US')+' points on a CPU','blue');
-    say.innerHTML=dim?'TSPulse is scoring every point of this stream…':
-      '<b>TSPulse</b> scored all '+ds.n.toLocaleString('en-US')+' points and flagged <b>'+s.wins.length+'</b> window'+(s.wins.length===1?'':'s')+(s.total?', catching <b class="'+(s.caught===s.total?'g':'r')+'">'+s.caught+' of '+s.total+'</b> known events with '+s.falseAlarms+' false alarm'+(s.falseAlarms===1?'':'s')+'.':'.')+' Move the threshold or pick a window below to zoom in.';}}
+    el.innerHTML=tile(s.wins.length,'flagged windows')+(s.total?tile(s.caught+' of '+s.total,'known events caught',s.caught===s.total?'green':'')+tile(s.falseAlarms,'false alarms',s.falseAlarms===0?'green':''):tile('n/a','no known events'))+tile(ms,ds.n.toLocaleString('en-US')+' points, CPU','blue');
+    say.innerHTML=dim?'Scoring every point…':(s.total?'Caught <b class="'+(s.caught===s.total?'g':'r')+'">'+s.caught+' of '+s.total+'</b> known events. Drag the red line to change the threshold.':'Flagged <b>'+s.wins.length+'</b> window'+(s.wins.length===1?'':'s')+'. Drag the red line to change the threshold.');}}
 function renderTable(){const ds=st.ds,t=$('#pg-table');if(!ds)return;const h=st.h;$('#pg-table-k').textContent=h+' '+stepWord(ds,h)+' ahead · averaged over '+ds.fc.origins.length+' start points';
   const keys=['ttm','flowstate','patchtstfm','snaive'];const rows=keys.map(k=>({k,m:ds.fc.models[k],a:avgMetrics(ds,k,h)}));const best=rows.filter(r=>r.a).sort((x,y)=>x.a.mase-y.a.mase)[0];
   t.innerHTML='<tr><th>Model</th><th class="r">vs simple guess</th><th class="r">avg error</th><th class="r">in range</th><th class="r">ms</th></tr>'+rows.map(r=>{const na=!r.a;return '<tr class="'+(best&&r===best?'best ':'')+(r.k===st.model?'cur ':'')+(na?'na':'')+'"><td>'+esc((r.m&&r.m.label)||MODEL_NAMES[r.k])+(na?' <span style="font-family:var(--font-mono);font-size:.7rem;color:var(--ink-4)">not for this frequency</span>':'')+'</td><td class="r">'+(na?'–':r.a.mase.toFixed(2))+'</td><td class="r">'+(na||isNaN(r.a.wape)?'–':(r.a.wape*100).toFixed(1)+'%')+'</td><td class="r">'+(na||isNaN(r.a.cov)?'–':Math.round(r.a.cov*100)+'%')+'</td><td class="r">'+(r.m&&r.m.ms!=null&&r.k!=='snaive'?(r.m.ms<10?r.m.ms.toFixed(1):Math.round(r.m.ms)):'–')+'</td></tr>';}).join('');
@@ -1381,7 +1397,8 @@ function renderSQL(){const ds=st.ds;if(!ds)return;const topic=topicOf(ds.id);let
   else{sql="SELECT event_time, value,\n  AI_DETECT_ANOMALIES(value, event_time,\n    JSON_OBJECT('model' VALUE 'tspulse', 'threshold' VALUE "+st.thr.toFixed(2)+"))\n  OVER (PARTITION BY series_id ORDER BY event_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS flag\nFROM `"+topic+"`;";}
   const q=$('#pg-sql');if(q)q.innerHTML=highlight(sql);}
 function renderLegend(){const ds=st.ds,el=$('#pg-legend');if(!ds){el.innerHTML='';return;}
-  if(st.task==='fc'){el.innerHTML='<span><i style="background:'+C.ink+'"></i>history the model saw</span><span><i style="background:'+C.ink3+'"></i>what really happened</span><span><i style="background:'+C.blue3+'"></i>'+esc(MODEL_NAMES[st.model])+' forecast</span><span><i class="band"></i>likely range</span><span><i style="background:'+C.ink4+';height:1px"></i>simple guess</span>';}
+  if(st.task==='fc'&&st.cmp){el.innerHTML='<span><i style="background:'+C.ink+'"></i>history</span><span><i style="background:'+C.ink3+'"></i>what really happened</span>'+FCK.filter(k=>ds.fc.models[k]&&ds.fc.models[k].status==='ok').map(k=>'<span><i style="background:'+MC[k]+'"></i>'+esc(MODEL_NAMES[k])+'</span>').join('');}
+  else if(st.task==='fc'){el.innerHTML='<span><i style="background:'+C.ink+'"></i>history the model saw</span><span><i style="background:'+C.ink3+'"></i>what really happened</span><span><i style="background:'+C.blue3+'"></i>'+esc(MODEL_NAMES[st.model])+' forecast</span><span><i class="band"></i>likely range</span><span><i style="background:'+C.ink4+';height:1px"></i>simple guess</span>';}
   else{const s=adScore(ds,st.thr);el.innerHTML='<span><i style="background:'+C.ink+'"></i>stream</span><span><i style="background:'+C.orange+'"></i>anomaly score</span><span><i class="ev"></i>flagged</span>'+(ds.labels&&ds.labels.length?'<span><i class="gt"></i>known event</span>':'')+'<button class="evb" data-v="all" type="button">Full view</button>'+s.wins.slice(0,8).map((w,i)=>'<button class="evb" data-v="'+i+'" type="button">#'+(i+1)+' '+esc(fmtDate(ds,w.a,true))+' · peak '+w.peak.toFixed(2)+'</button>').join('');
     $$('.evb',el).forEach(b=>b.addEventListener('click',()=>{if(b.dataset.v==='all'){st.view=null;}else{const w=s.wins[+b.dataset.v];const span=Math.max(240,(w.b-w.a)*6);st.view=[clamp(Math.round((w.a+w.b)/2-span/2),0,ds.n-1),clamp(Math.round((w.a+w.b)/2+span/2),1,ds.n)];}draw();}));}}
 
@@ -1389,33 +1406,36 @@ function renderLegend(){const ds=st.ds,el=$('#pg-legend');if(!ds){el.innerHTML='
 function run(fast){const ds=st.ds;if(!ds)return;if(st.task==='fc'&&!(ds.fc.models[st.model]&&ds.fc.models[st.model].status==='ok'))return;
   const sc=fast?0.35:1;const t0=performance.now();st.anim={t0,p:0};st.ran=false;st.once=true;renderReadouts();
   const topic=topicOf(ds.id);const m=st.task==='fc'?ds.fc.models[st.model]:ds.ad.tspulse;
-  void topic;const steps=st.task==='fc'?[[0,'reading '+(m.ctx||ds.fc.ctx).toLocaleString('en-US')+' points of history'],[520,'forecasting with '+(MODEL_NAMES[st.model]||'TTM')],[1000,'checking against what really happened']]
-    :[[0,'reading '+ds.n.toLocaleString('en-US')+' points'],[520,'scoring every point with TSPulse'],[1000,'marking what is off']];
+  void topic;const steps=st.task==='fc'?[[0,'reading history'],[520,st.cmp?'racing three models':'forecasting with '+(MODEL_NAMES[st.model]||'TTM')],[1000,'checking against what really happened']]
+    :[[0,'reading '+ds.n.toLocaleString('en-US')+' points'],[520,'scoring with TSPulse'],[1000,'marking what is off']];
   let si=-1;
   function frame(){if(!st.anim||st.anim.t0!==t0)return;const t=(performance.now()-t0)/sc;while(si+1<steps.length&&t>=steps[si+1][0]){si++;setStatus(si<2?'busy':'ok',steps[si][1]);}
     st.anim.p=clamp((t-1000)/(st.task==='fc'?900:1500),0,1);st.anim.scan=clamp(t/520,0,1);draw();
-    if(t<2600){requestAnimationFrame(frame);}else{st.anim=null;st.ran=true;renderReadouts();renderTable();draw();setStatus('ok',st.task==='fc'?'done · try another model, or a different start under More options':'done · try a different threshold');}}
+    if(t<2600){requestAnimationFrame(frame);}else{st.anim=null;st.ran=true;renderReadouts();renderTable();draw();setStatus('ok','done');}}
   requestAnimationFrame(frame);}
 
 /* ---------- drawing ---------- */
 function font(px,mono,w){ctx.font=(w||400)+' '+px+'px '+(mono?MONO:SANS);}
 function draw(){if(!W&&!fit())return;const ds=st.ds;ctx.clearRect(0,0,W,H);if(!ds){font(13);ctx.fillStyle=C.ink3;ctx.textAlign='center';ctx.fillText('Pick a dataset above',W/2,H/2);return;}
-  if(st.task==='fc')drawFc(ds);else drawAd(ds);}
+  if(st.task==='fc')drawFc(ds);else drawAd(ds);drawScrub();}
 const PAD={l:56,r:16,t:18,b:28};
-function drawFc(ds){const o=ds.fc.origins[st.oi],h=st.h,m=ds.fc.models[st.model],nv=ds.fc.models.snaive;const pre=Math.min(ds.fc.ctx,W<600?Math.max(Math.round(1.5*h),h>=96?120:h>=30?45:18):Math.max(3*h,h>=96?240:h>=30?90:36));const x0=o-pre,x1=o+h;
+function preOf(ds,h){return Math.min(ds.fc.ctx,W<600?Math.max(Math.round(1.5*h),h>=96?120:h>=30?45:18):Math.max(3*h,h>=96?240:h>=30?90:36));}
+function drawFc(ds){const o=ds.fc.origins[st.oi],h=st.h,m=ds.fc.models[st.model],nv=ds.fc.models.snaive;const pre=preOf(ds,h);const x0=o-pre,x1=o+h;const race=st.cmp?FCK.filter(k=>ds.fc.models[k]&&ds.fc.models[k].status==='ok'):[];
   const vals=ds.values;let lo=Infinity,hi=-Infinity;for(let i=x0;i<x1;i++){const v=vals[i];if(v==null)continue;lo=Math.min(lo,v);hi=Math.max(hi,v);}
   const reveal=st.ran?1:(st.anim?ease(st.anim.p):0);
-  if(m&&m.status==='ok'&&reveal>0){for(let j=0;j<h;j++){const p=m.point[st.oi][j];if(p!=null){lo=Math.min(lo,p);hi=Math.max(hi,p);}if(m.lo&&m.lo.length){lo=Math.min(lo,m.lo[st.oi][j]);hi=Math.max(hi,m.hi[st.oi][j]);}}}
+  if(m&&m.status==='ok'&&reveal>0&&!st.cmp){for(let j=0;j<h;j++){const p=m.point[st.oi][j];if(p!=null){lo=Math.min(lo,p);hi=Math.max(hi,p);}if(m.lo&&m.lo.length){lo=Math.min(lo,m.lo[st.oi][j]);hi=Math.max(hi,m.hi[st.oi][j]);}}}
+  if(reveal>0)race.forEach(k=>{const mk=ds.fc.models[k];for(let j=0;j<h;j++){const p=mk.point[st.oi][j];if(p!=null){lo=Math.min(lo,p);hi=Math.max(hi,p);}}});
   if(!isFinite(lo)){lo=0;hi=1;}const padY=(hi-lo)*0.1||1;const nonneg=lo>=0;lo-=padY;hi+=padY;if(nonneg&&lo<0)lo=0;
   const X=i=>PAD.l+(W-PAD.l-PAD.r)*(i-x0)/(x1-x0),Y=v=>PAD.t+(H-PAD.t-PAD.b)*(1-(v-lo)/(hi-lo));
   grid(lo,hi,Y,ds.unit);xticks(ds,x0,x1,X);
   /* origin line */const ox=X(o);ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ox,PAD.t);ctx.lineTo(ox,H-PAD.b);ctx.stroke();ctx.setLineDash([]);font(10,true);ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText('forecast starts · '+fmtDate(ds,o),ox+6,PAD.t+10);
   /* context */line(vals,x0,o+1,X,Y,C.ink,1.4);
   /* held-out actuals, revealed with the forecast */if(reveal>0)line(vals,o-1,o+Math.max(1,Math.ceil(h*reveal)),X,Y,C.ink3,1.2,[4,3]);
-  /* naive */if(nv&&nv.status==='ok'&&reveal>0){const pts=[vals[o-1]].concat(nv.point[st.oi].slice(0,Math.ceil(h*reveal)));series(pts,o-1,X,Y,C.ink4,1,[2,3]);}
-  /* forecast + band */if(m&&m.status==='ok'&&reveal>0){const k=Math.max(1,Math.ceil(h*reveal));if(m.lo&&m.lo.length){ctx.beginPath();for(let j=0;j<k;j++){const x=X(o+j),y=Y(m.hi[st.oi][j]);j?ctx.lineTo(x,y):ctx.moveTo(x,y);}for(let j=k-1;j>=0;j--){ctx.lineTo(X(o+j),Y(m.lo[st.oi][j]));}ctx.closePath();ctx.fillStyle=C.band;ctx.fill();}
-    const pts=[vals[o-1]].concat(m.point[st.oi].slice(0,k));ctx.save();ctx.shadowColor=C.blue3;ctx.shadowBlur=8;series(pts,o-1,X,Y,C.blue3,2);ctx.restore();
-    if(reveal>=1&&st.ran){const j=k-1;ctx.fillStyle=C.blue3;ctx.beginPath();ctx.arc(X(o+j),Y(m.point[st.oi][j]),3,0,Math.PI*2);ctx.fill();}}
+  /* naive */if(nv&&nv.status==='ok'&&reveal>0&&!st.cmp){const pts=[vals[o-1]].concat(nv.point[st.oi].slice(0,Math.ceil(h*reveal)));series(pts,o-1,X,Y,C.ink4,1,[2,3]);}
+  /* the race: three forecasts at once */if(st.cmp&&reveal>0){const k=Math.max(1,Math.ceil(h*reveal));race.forEach(mk=>{const M=ds.fc.models[mk];series([vals[o-1]].concat(M.point[st.oi].slice(0,k)),o-1,X,Y,MC[mk],2);if(reveal>=1&&st.ran){ctx.fillStyle=MC[mk];ctx.beginPath();ctx.arc(X(o+k-1),Y(M.point[st.oi][k-1]),3,0,Math.PI*2);ctx.fill();}});}
+  /* forecast + band */if(m&&m.status==='ok'&&reveal>0&&!st.cmp){const k=Math.max(1,Math.ceil(h*reveal));if(m.lo&&m.lo.length){ctx.beginPath();for(let j=0;j<k;j++){const x=X(o+j),y=Y(m.hi[st.oi][j]);j?ctx.lineTo(x,y):ctx.moveTo(x,y);}for(let j=k-1;j>=0;j--){ctx.lineTo(X(o+j),Y(m.lo[st.oi][j]));}ctx.closePath();ctx.fillStyle=C.band;ctx.fill();}
+    const pts=[vals[o-1]].concat(m.point[st.oi].slice(0,k));series(pts,o-1,X,Y,MC[st.model]||C.blue3,2);
+    if(reveal>=1&&st.ran){const j=k-1;ctx.fillStyle=MC[st.model]||C.blue3;ctx.beginPath();ctx.arc(X(o+j),Y(m.point[st.oi][j]),3,0,Math.PI*2);ctx.fill();}}
   /* scan cursor during the read phase */if(st.anim&&st.anim.scan<1){const sx=X(x0+(o-x0)*st.anim.scan);ctx.strokeStyle='rgba(241,194,27,.8)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(sx,PAD.t);ctx.lineTo(sx,H-PAD.b);ctx.stroke();}
   hoverFc(ds,x0,x1,X,Y,o);}
 function drawAd(ds){const s=ds.ad.tspulse.score;const v=[st.view?st.view[0]:0,st.view?st.view[1]:ds.n];const x0=v[0],x1=v[1];const vals=ds.values;let lo=Infinity,hi=-Infinity;for(let i=x0;i<x1;i++){const y=vals[i];if(y==null)continue;lo=Math.min(lo,y);hi=Math.max(hi,y);}if(!isFinite(lo)){lo=0;hi=1;}const padY=(hi-lo)*0.08||1;const nonneg=lo>=0;lo-=padY;hi+=padY;if(nonneg&&lo<0)lo=0;
@@ -1427,7 +1447,8 @@ function drawAd(ds){const s=ds.ad.tspulse.score;const v=[st.view?st.view[0]:0,st
   /* flagged windows */if(reveal>0){flagged(ds,st.thr).forEach(w=>{if(w.b<x0||w.a>upto)return;const a=Math.max(w.a,x0),b=Math.min(w.b,upto,x1);ctx.fillStyle='rgba(250,77,86,.16)';ctx.fillRect(X(a),PAD.t,Math.max(2,X(b)-X(a)),H-PAD.t-PAD.b);});}
   /* stream */line(vals,x0,x1,X,Y,C.ink,x1-x0>1500?0.9:1.3);
   /* score strip */ctx.strokeStyle='rgba(255,255,255,.12)';ctx.beginPath();ctx.moveTo(PAD.l,split+.5);ctx.lineTo(W-PAD.r,split+.5);ctx.stroke();font(9.5,true);ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText('anomaly score',PAD.l+4,split+12);
-  const ty=YS(st.thr);ctx.setLineDash([3,3]);ctx.strokeStyle='rgba(255,131,137,.6)';ctx.beginPath();ctx.moveTo(PAD.l,ty);ctx.lineTo(W-PAD.r,ty);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=C.red2;ctx.textAlign='right';ctx.fillText('threshold '+st.thr.toFixed(2),W-PAD.r-4,ty-4);
+  st.geo={split,YS};const ty=YS(st.thr);ctx.setLineDash([3,3]);ctx.strokeStyle=st.thrDrag?'#ff8389':'rgba(255,131,137,.75)';ctx.lineWidth=st.thrDrag?2:1.2;ctx.beginPath();ctx.moveTo(PAD.l,ty);ctx.lineTo(W-PAD.r,ty);ctx.stroke();ctx.setLineDash([]);ctx.lineWidth=1;
+  font(10,true,600);const lab='threshold '+st.thr.toFixed(2)+' · drag',lw=ctx.measureText(lab).width+14;ctx.fillStyle='#fa4d56';ctx.fillRect(W-PAD.r-lw,ty-9,lw,18);ctx.fillStyle='#fff';ctx.textAlign='left';ctx.fillText(lab,W-PAD.r-lw+7,ty+3.5);
   if(reveal>0){ctx.beginPath();ctx.moveTo(X(x0),YS(0));for(let i=x0;i<Math.min(upto,x1);i++){ctx.lineTo(X(i),YS(clamp(s[i]||0,0,1)));}ctx.lineTo(X(Math.min(upto,x1)-1),YS(0));ctx.closePath();ctx.fillStyle='rgba(255,131,43,.22)';ctx.fill();ctx.beginPath();for(let i=x0;i<Math.min(upto,x1);i++){const x=X(i),y=YS(clamp(s[i]||0,0,1));i===x0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.strokeStyle=C.orange;ctx.lineWidth=1.1;ctx.stroke();}
   if(st.anim&&st.anim.scan<1){const sx=X(x0+(x1-x0)*st.anim.scan);ctx.strokeStyle='rgba(241,194,27,.8)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(sx,PAD.t);ctx.lineTo(sx,H-PAD.b);ctx.stroke();}
   hoverAd(ds,x0,x1,X,Y,YS,s);}
@@ -1436,12 +1457,39 @@ function grid(lo,hi,Y,unit,bottom){const b=bottom||(H-PAD.b);ctx.strokeStyle=C.g
 function xticks(ds,x0,x1,X){font(10,true);ctx.fillStyle=C.ink3;ctx.textAlign='center';const n=Math.max(3,Math.min(7,Math.floor(W/170)));for(let i=0;i<=n;i++){const idx=Math.round(x0+(x1-x0)*i/n);if(idx>=ds.n)continue;ctx.fillText(fmtDate(ds,idx,true),X(idx),H-PAD.b+16);}}
 function line(vals,a,b,X,Y,c,lw,dash){ctx.beginPath();let started=false;for(let i=a;i<b;i++){const v=vals[i];if(v==null){started=false;continue;}const x=X(i),y=Y(v);started?ctx.lineTo(x,y):ctx.moveTo(x,y);started=true;}ctx.strokeStyle=c;ctx.lineWidth=lw;if(dash)ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([]);}
 function series(pts,start,X,Y,c,lw,dash){ctx.beginPath();let started=false;pts.forEach((v,j)=>{if(v==null){started=false;return;}const x=X(start+j),y=Y(v);started?ctx.lineTo(x,y):ctx.moveTo(x,y);started=true;});ctx.strokeStyle=c;ctx.lineWidth=lw;if(dash)ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([]);}
-function hoverFc(ds,x0,x1,X,Y,o){if(st.hover==null){tip.style.display='none';return;}const i=clamp(Math.round(x0+(x1-x0)*(st.hover-PAD.l)/(W-PAD.l-PAD.r)),x0,x1-1);const v=ds.values[i];const m=ds.fc.models[st.model];const j=i-o;let html='<b>'+fmtDate(ds,i)+'</b><br>'+(j<0?'context ':'actual ')+fmtNum(v)+' '+esc(ds.unit);if(st.ran&&m&&m.status==='ok'&&j>=0&&j<st.h){html+='<br>forecast '+fmtNum(m.point[st.oi][j]);if(m.lo&&m.lo.length)html+=' · band '+fmtNum(m.lo[st.oi][j])+' to '+fmtNum(m.hi[st.oi][j]);}
+function hoverFc(ds,x0,x1,X,Y,o){if(st.hover==null){tip.style.display='none';return;}const i=clamp(Math.round(x0+(x1-x0)*(st.hover-PAD.l)/(W-PAD.l-PAD.r)),x0,x1-1);const v=ds.values[i];const m=ds.fc.models[st.model];const j=i-o;let html='<b>'+fmtDate(ds,i)+'</b><br>'+(j<0?'context ':'actual ')+fmtNum(v)+' '+esc(ds.unit);if(st.ran&&st.cmp&&j>=0&&j<st.h){FCK.forEach(k=>{const M=ds.fc.models[k];if(M&&M.status==='ok')html+='<br><span style="color:'+MC[k]+'">'+esc(MODEL_NAMES[k])+'</span> '+fmtNum(M.point[st.oi][j]);});}
+  else if(st.ran&&m&&m.status==='ok'&&j>=0&&j<st.h){html+='<br>forecast '+fmtNum(m.point[st.oi][j]);if(m.lo&&m.lo.length)html+=' · range '+fmtNum(m.lo[st.oi][j])+' to '+fmtNum(m.hi[st.oi][j]);}
   tip.innerHTML=html;tip.style.display='block';const x=X(i);ctx.strokeStyle='rgba(255,255,255,.25)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,PAD.t);ctx.lineTo(x,H-PAD.b);ctx.stroke();if(v!=null){ctx.fillStyle=C.ink;ctx.beginPath();ctx.arc(x,Y(v),3,0,Math.PI*2);ctx.fill();}placeTip(x);}
 function hoverAd(ds,x0,x1,X,Y,YS,s){if(st.hover==null){tip.style.display='none';return;}const i=clamp(Math.round(x0+(x1-x0)*(st.hover-PAD.l)/(W-PAD.l-PAD.r)),x0,x1-1);const v=ds.values[i];let html='<b>'+fmtDate(ds,i)+'</b><br>value '+fmtNum(v)+' '+esc(ds.unit);if(st.ran)html+='<br>score '+(s[i]||0).toFixed(2)+(s[i]>=st.thr?' · <span style="color:var(--red-2)">flagged</span>':'');const l=(ds.labels||[]).find(l=>i>=l[0]&&i<l[1]);if(l)html+='<br><span style="color:var(--green-2)">labeled: '+esc(l[2])+'</span>';
   tip.innerHTML=html;tip.style.display='block';const x=X(i);ctx.strokeStyle='rgba(255,255,255,.25)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,PAD.t);ctx.lineTo(x,H-PAD.b);ctx.stroke();placeTip(x);}
 function placeTip(x){const w=tip.offsetWidth;tip.style.left=(x>W*0.65?x-12-w:x+12)+'px';tip.style.top='14px';}
-cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect();st.hover=e.clientX-r.left;if(st.hover<PAD.l||st.hover>W-PAD.r)st.hover=null;draw();});
+function thrFromY(y){const g=st.geo;if(!g)return st.thr;const sc=(H-PAD.b-y)/(H-PAD.b-g.split-8);return clamp(Math.round(sc*100)/100,0.1,0.98);}
+function inStrip(y){return st.task==='ad'&&st.geo&&y>st.geo.split-6;}
+cv.addEventListener('pointerdown',e=>{const r=cv.getBoundingClientRect(),y=e.clientY-r.top;if(!inStrip(y))return;st.thrDrag=true;cv.setPointerCapture(e.pointerId);setThr(thrFromY(y));e.preventDefault();});
+cv.addEventListener('pointerup',()=>{if(st.thrDrag){st.thrDrag=false;draw();}});
+function setThr(v){st.thr=v;$('#pg-thr').value=Math.round(v*100);$('#pg-thr-out').textContent=v.toFixed(2);renderReadouts();renderLegend();draw();}
+cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect(),y=e.clientY-r.top;if(st.thrDrag){setThr(thrFromY(y));return;}cv.style.cursor=inStrip(y)?'ns-resize':'';st.hover=e.clientX-r.left;if(st.hover<PAD.l||st.hover>W-PAD.r)st.hover=null;draw();});
+cv.addEventListener('pointermove',e=>{if(st.thrDrag&&e.pointerType!=='mouse'){const r=cv.getBoundingClientRect();setThr(thrFromY(e.clientY-r.top));}});
+/* the timeline under the chart: the whole stream, drag to move the forecast start, or drag across to zoom anomalies */
+const sc=$('#pg-scrub'),sx=sc?sc.getContext('2d'):null;let SW=0,SH=0;
+function sfit(){if(!sc)return false;const r=sc.getBoundingClientRect();if(r.width<2)return false;const dpr=Math.min(2,window.devicePixelRatio||1);SW=r.width;SH=r.height;const w=Math.round(SW*dpr),h=Math.round(SH*dpr);if(sc.width!==w||sc.height!==h){sc.width=w;sc.height=h;}sx.setTransform(dpr,0,0,dpr,0,0);return true;}
+const SX=i=>4+(SW-8)*i/Math.max(1,st.ds.n-1),SI=x=>clamp(Math.round((x-4)/(SW-8)*(st.ds.n-1)),0,st.ds.n-1);
+function drawScrub(){if(!sc||!st.ds||(!SW&&!sfit()))return;const ds=st.ds,v=ds.values;sx.clearRect(0,0,SW,SH);let lo=Infinity,hi=-Infinity;v.forEach(y=>{if(y!=null){lo=Math.min(lo,y);hi=Math.max(hi,y);}});const Y=y=>SH-5-(SH-10)*(y-lo)/((hi-lo)||1);
+  const step=Math.max(1,Math.floor(ds.n/SW));sx.strokeStyle='rgba(255,255,255,.42)';sx.lineWidth=1;sx.beginPath();let on=false;for(let i=0;i<ds.n;i+=step){const y=v[i];if(y==null){on=false;continue;}on?sx.lineTo(SX(i),Y(y)):sx.moveTo(SX(i),Y(y));on=true;}sx.stroke();
+  if(st.task==='fc'){const o=ds.fc.origins[st.oi],pre=preOf(ds,st.h);sx.fillStyle='rgba(69,137,255,.2)';sx.fillRect(SX(o-pre),1,SX(o+st.h)-SX(o-pre),SH-2);sx.strokeStyle='#78a9ff';sx.strokeRect(Math.round(SX(o-pre))+0.5,1.5,Math.round(SX(o+st.h)-SX(o-pre)),SH-3);
+    ds.fc.origins.forEach((oo,k)=>{const x=Math.round(SX(oo))+0.5;sx.strokeStyle=k===st.oi?'#fff':'rgba(166,200,255,.7)';sx.lineWidth=k===st.oi?2:1;sx.beginPath();sx.moveTo(x,SH-8);sx.lineTo(x,SH-1);sx.stroke();});
+    const xo=Math.round(SX(o))+0.5;sx.strokeStyle='#fff';sx.lineWidth=2;sx.beginPath();sx.moveTo(xo,1);sx.lineTo(xo,SH-1);sx.stroke();sx.fillStyle='#0f62fe';sx.beginPath();sx.arc(xo,SH/2,7,0,Math.PI*2);sx.fill();sx.strokeStyle='#fff';sx.lineWidth=1.5;sx.stroke();
+    sx.fillStyle='#fff';sx.beginPath();sx.moveTo(xo-3,SH/2-3);sx.lineTo(xo-3,SH/2+3);sx.lineTo(xo-5.5,SH/2);sx.closePath();sx.fill();sx.beginPath();sx.moveTo(xo+3,SH/2-3);sx.lineTo(xo+3,SH/2+3);sx.lineTo(xo+5.5,SH/2);sx.closePath();sx.fill();}
+  else{const lab=ds.labels||[];lab.forEach(l=>{sx.fillStyle='rgba(66,190,101,.35)';sx.fillRect(SX(l[0]),1,Math.max(2,SX(l[1])-SX(l[0])),SH-2);});if(st.ran)flagged(ds,st.thr).forEach(w=>{sx.fillStyle='rgba(250,77,86,.55)';sx.fillRect(SX(w.a),SH-7,Math.max(2,SX(w.b)-SX(w.a)),6);});
+    const vw=st.brush||st.view;if(vw){const a=Math.min(vw[0],vw[1]),b=Math.max(vw[0],vw[1]);sx.fillStyle='rgba(69,137,255,.22)';sx.fillRect(SX(a),1,SX(b)-SX(a),SH-2);sx.strokeStyle='#78a9ff';sx.lineWidth=1;sx.strokeRect(Math.round(SX(a))+0.5,1.5,Math.round(SX(b)-SX(a)),SH-3);}}}
+function nearestOrigin(i){const os=st.ds.fc.origins;let k=0,d=1e9;os.forEach((o,j)=>{const dd=Math.abs(o-i);if(dd<d){d=dd;k=j;}});return k;}
+function setOrigin(k){if(k===st.oi)return;st.oi=k;$('#pg-origin').value=k;$('#pg-origin-out').textContent=fmtDate(st.ds,st.ds.fc.origins[k]);st.anim=null;st.ran=true;st.once=true;renderReadouts();renderLegend();draw();}
+if(sc){let drag=null;sc.addEventListener('pointerdown',e=>{if(!st.ds)return;sc.setPointerCapture(e.pointerId);const r=sc.getBoundingClientRect(),i=SI(e.clientX-r.left);if(st.task==='fc'){drag='o';setOrigin(nearestOrigin(i));}else{drag='b';st.brush=[i,i];draw();}e.preventDefault();});
+  sc.addEventListener('pointermove',e=>{if(!drag)return;const r=sc.getBoundingClientRect(),i=SI(e.clientX-r.left);if(drag==='o')setOrigin(nearestOrigin(i));else{st.brush[1]=i;draw();}});
+  const end=()=>{if(drag==='b'&&st.brush){const a=Math.min(st.brush[0],st.brush[1]),b=Math.max(st.brush[0],st.brush[1]);if(b-a>12)st.view=[a,b];else{const span=Math.max(240,Math.round(st.ds.n/8));st.view=[clamp(a-span/2,0,st.ds.n-span),clamp(a+span/2,span,st.ds.n)];}st.brush=null;draw();}drag=null;};
+  sc.addEventListener('pointerup',end);sc.addEventListener('pointercancel',end);sc.addEventListener('dblclick',()=>{st.view=null;draw();});
+  if(window.ResizeObserver)new ResizeObserver(()=>{sfit();drawScrub();}).observe(sc.parentElement);}
+cv.addEventListener('dblclick',()=>{if(st.task==='ad'){st.view=null;draw();}});
 cv.addEventListener('mouseleave',()=>{st.hover=null;draw();});
 cv.addEventListener('touchstart',e=>{const r=cv.getBoundingClientRect();st.hover=e.touches[0].clientX-r.left;draw();},{passive:true});
 cv.addEventListener('touchmove',e=>{const r=cv.getBoundingClientRect();st.hover=e.touches[0].clientX-r.left;draw();},{passive:true});
