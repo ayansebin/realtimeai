@@ -519,12 +519,15 @@ body.pitching .topbar{display:none}
 .pitch-prog i{display:block;background:rgba(255,255,255,.14);position:relative;overflow:hidden}
 .pitch-prog i.act{margin-left:10px}
 .pitch-act{color:var(--ink);letter-spacing:.08em}
+.pitch-cap.in{animation:capin .32s ease-out}
+@keyframes capin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.pitch-cap.in{animation:none}}
 #uctabs .uc.tour-hi{border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe,0 10px 24px rgba(15,98,254,.18);transform:translateY(-2px)}
 .pitch-prog i::after{content:"";position:absolute;inset:0;width:0;background:var(--blue-2);box-shadow:0 0 10px var(--blue-2)}
 .pitch-prog i.done::after{width:100%}
 .pitch-prog i.on::after{width:100%;transition:width var(--d,6s) linear}
 .pitch-prog i.on.paused::after{transition:none;width:var(--w,0%)}
-.pitch-cap{font-size:clamp(1.3rem,2.6vw,2.1rem);font-weight:300;line-height:1.25;letter-spacing:-.01em;color:var(--ink);min-height:2.5em;text-wrap:balance;max-width:34ch}
+.pitch-cap{font-size:clamp(1.3rem,2.6vw,2.1rem);font-weight:300;line-height:1.25;letter-spacing:-.01em;color:var(--ink);min-height:2.5em;text-wrap:balance;max-width:40ch}
 .pitch-cap em{font-style:normal;color:var(--blue-3)}
 .pitch-ctl{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center}
 .pitch-ctl .btn kbd{margin-left:.2rem}
