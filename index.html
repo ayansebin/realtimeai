@@ -955,6 +955,43 @@ body.pitching .hx-layer{min-height:86px}
 .ax-k.ag{margin-left:.9rem}
 .ax-k.ag:hover,.ax-k.ag:focus-visible,.ax-k.ag.on,.ax-k.ag.tour-hi{border-color:#be95ff;background:rgba(190,149,255,.2)}
 @media (max-width:760px){.ax{padding:8px}.ax-gh.ibm,.ax-k.ag{margin-left:0}.ax-gh{width:100%;margin-top:.3rem}.ax-say{min-height:4.4em;font-size:1rem}}
+/* the joint value, lit as the event moves through the chart */
+.ax-vals{margin-top:1.5rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.12)}
+.ax-vh{margin-bottom:.9rem}
+.ax-vk{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#78a9ff;margin-bottom:.35rem}
+.ax-vh h3{margin:0;font-size:clamp(1.2rem,1.9vw,1.5rem);font-weight:400;color:#fff;line-height:1.25}
+.ax-vg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:1000px){.ax-vg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ax-vg{grid-template-columns:1fr;gap:8px}}
+.ax-v{position:relative;display:grid;grid-template-columns:38px minmax(0,1fr);gap:.3rem .85rem;align-content:start;text-align:left;font:inherit;color:inherit;background:rgba(10,20,48,.62);border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:.95rem 1rem 1rem;cursor:pointer;overflow:hidden;transition:border-color .35s,background .35s}
+.ax-v::before{content:'';position:absolute;left:0;top:0;height:2px;width:0;background:#4589ff;transition:width .7s ease}
+.ax-v.on::before,.ax-v:hover::before,.ax-v:focus-visible::before,.ax-v.tour-hi::before{width:100%}
+.ax-v.on,.ax-v:hover,.ax-v:focus-visible,.ax-v.tour-hi{border-color:#78a9ff;background:rgba(15,98,254,.16)}
+.ax-vi{grid-row:1/4;width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(166,200,255,.35);border-radius:3px;color:#a6c8ff;transition:background .35s,border-color .35s,color .35s}
+.ax-vi svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.ax-v b{font-weight:500;font-size:1rem;color:#fff;line-height:1.3}
+.ax-vt{font-size:.84rem;line-height:1.48;color:var(--ink-3)}
+.ax-vc{justify-self:start;margin-top:.4rem;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;color:#a6c8ff;border:1px solid rgba(166,200,255,.3);border-radius:2px;padding:.16rem .45rem;transition:color .35s,border-color .35s}
+.ax-v.on .ax-vi,.ax-v:hover .ax-vi,.ax-v:focus-visible .ax-vi,.ax-v.tour-hi .ax-vi{color:#fff;border-color:#78a9ff;background:rgba(15,98,254,.38)}
+.ax-v.on .ax-vc,.ax-v:hover .ax-vc,.ax-v.tour-hi .ax-vc{color:#fff;border-color:#78a9ff}
+.ax-v .i-flow{stroke-dasharray:4 3}
+.ax-v.on .i-flow,.ax-v:hover .i-flow,.ax-v.tour-hi .i-flow{animation:axDash 1s linear infinite}
+@keyframes axDash{to{stroke-dashoffset:-14}}
+.ax-v.on .i-plug,.ax-v:hover .i-plug,.ax-v.tour-hi .i-plug{animation:axPlug 1.2s ease-in-out infinite}
+@keyframes axPlug{0%,100%{transform:translateY(-2.5px)}50%{transform:translateY(.5px)}}
+.ax-v .i-spark{transform-origin:11px 10px}
+.ax-v.on .i-spark,.ax-v:hover .i-spark,.ax-v.tour-hi .i-spark{animation:axTwinkle 1.4s ease-in-out infinite}
+@keyframes axTwinkle{0%,100%{transform:scale(.82) rotate(0)}50%{transform:scale(1.12) rotate(18deg)}}
+.ax-v .i-check{stroke-dasharray:12}
+.ax-v.on .i-check,.ax-v:hover .i-check,.ax-v.tour-hi .i-check{animation:axCheck 1.6s ease-out infinite}
+@keyframes axCheck{0%{stroke-dashoffset:12}45%,100%{stroke-dashoffset:0}}
+.ax-v.on .i-shackle,.ax-v:hover .i-shackle,.ax-v.tour-hi .i-shackle{animation:axLock 1.5s ease-in-out infinite}
+@keyframes axLock{0%,100%{transform:translateY(-3px)}50%{transform:translateY(0)}}
+.ax-v .i-needle{transform-origin:12px 18px}
+.ax-v.on .i-needle,.ax-v:hover .i-needle,.ax-v.tour-hi .i-needle{animation:axNeedle 1.5s cubic-bezier(.3,1.4,.5,1) infinite}
+@keyframes axNeedle{0%{transform:rotate(-95deg)}55%,100%{transform:rotate(0)}}
+@media (max-width:560px){.ax-v{grid-template-columns:34px minmax(0,1fr);padding:.8rem .85rem .85rem}.ax-vi{width:34px;height:34px}.ax-vt{font-size:.82rem}}
+@media (prefers-reduced-motion:reduce){.ax-v *,.ax-v::before{animation:none!important;transition:none!important}}
 body.pitching #st-arch .stage-foot{display:none}
 @media (prefers-reduced-motion:reduce){.ax-say span{transition:none}}
 /* the layer as a system diagram: flat, gridded, crisp */
@@ -1059,6 +1096,17 @@ body.pitching #st-live .stage-top{display:none}
           <button type="button" class="ax-k ibm" data-k="sc" data-d="Search, classify, fill gaps: TSPulse finds the history that looks like now, labels patterns and fills missing points.">Search · Classify · Fill gaps</button>
           <button type="button" class="ax-k ibm" data-k="opt" data-d="Optimize: picks the settings that best serve a target.">Optimize</button>
           <button type="button" class="ax-k ag" data-k="agent" data-d="Streaming Agents act on the result, with gates for experts.">Streaming Agents</button>
+        </div>
+        <div class="ax-vals" id="ax-vals">
+          <div class="ax-vh"><span class="ax-vk">Natively on Confluent, the home of real-time context</span><h3>Six reasons it is better together</h3></div>
+          <div class="ax-vg">
+            <button type="button" class="ax-v" data-v="live" data-k="process"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="i-flow" d="M2 9c2.5-2.5 5 2.5 7.5 0s5 2.5 7.5 0 3.5-1.5 5 0"/><path d="M2 15c2.5-2.5 5 2.5 7.5 0s5 2.5 7.5 0 3.5-1.5 5 0" opacity=".5"/><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/></svg></span><b>Intelligence where the data lives</b><span class="ax-vt">Optimized forecasting and anomaly detection run on the stream the moment conditions change, so your teams never copy data to a separate ML platform or warehouse.</span><span class="ax-vc">no data copies</span></button>
+            <button type="button" class="ax-v" data-v="zero" data-k="zero"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><g class="i-plug"><path d="M9 2.5v4.5M15 2.5v4.5M6.5 7h11v3.5a5.5 5.5 0 0 1-11 0z"/></g><path d="M12 16v5.5"/></svg></span><b>Zero configuration</b><span class="ax-vt">Confluent runs model serving, scaling and runtime. Your engineers call IBM Granite Time Series models from Flink SQL with no credentials or glue code to manage.</span><span class="ax-vc">no serving stack</span></button>
+            <button type="button" class="ax-v" data-v="ctx" data-k="stream"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="i-spark" d="M11 3.5l1.7 4.8 4.8 1.7-4.8 1.7L11 16.5l-1.7-4.8L4.5 10l4.8-1.7z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span><b>Fresh, AI-ready context</b><span class="ax-vt">Models read the live state of your business, from sensors and payments to app metrics, so predictions stay accurate. Results land on Kafka topics for alerts, dashboards, lakehouses and agents.</span><span class="ax-vc">fan-out to every consumer</span></button>
+            <button type="button" class="ax-v" data-v="gov" data-k="govern"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5.5" y="4.5" width="13" height="16.5" rx="1.5"/><path d="M9 3h6v3H9z"/><path class="i-check" d="M8.8 13.2l2.2 2.2 4.2-4.4"/></svg></span><b>Built-in governance and traceability</b><span class="ax-vt">Inference follows the same schemas, lineage and access controls as everything else. Your auditors can replay any topic to check, evaluate or rerun a decision on history.</span><span class="ax-vc">replay any topic</span></button>
+            <button type="button" class="ax-v" data-v="safe" data-k="cf"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path class="i-shackle" d="M8 11V8a4 4 0 0 1 8 0v3"/><path d="M12 15v2.5"/></svg></span><b>Efficient and secure</b><span class="ax-vt">No model-serving infrastructure or GPUs to provision, and no ingress or egress fees. Your data stays in Confluent Cloud under your RBAC and privacy policies.</span><span class="ax-vc">no GPUs, no egress fees</span></button>
+            <button type="button" class="ax-v" data-v="fast" data-k="out"><span class="ax-vi" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 18a8.5 8.5 0 1 1 17 0"/><path d="M12 5v1.5M5.7 8.2l1 1M18.3 8.2l-1 1"/><path class="i-needle" d="M12 18l4.5-5.5"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/></svg></span><b>Faster time to value</b><span class="ax-vt">Your teams go from streaming data to a working forecast and anomaly pipeline in minutes with familiar SQL, instead of building a separate ML stack or point-to-point pipelines.</span><span class="ax-vc">minutes with SQL</span></button>
+          </div>
         </div>
       </div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b>1</b><span>layer</span></div><div class="readout"><b id="arch-count">0</b><span>decisions in flight</span></div><div class="readout"><b class="purple">0</b><span>models to train</span></div></div><div class="hint">Pick a stream to follow it. Nothing leaves Confluent Cloud.</div></div>
@@ -3340,7 +3388,7 @@ const CS={
    Every seven seconds one stream is followed end to end: its event, the chart inside the model, the decision it becomes. */
 (function(){
   const el=$('#st-arch');if(!el)return;
-  const box=$('#arch'),cvEl=$('#arch-cv'),cv=new Cv(cvEl),sayEl=$('#arch-say'),keyEls=$$('#arch-keys [data-k]'),countEl=$('#arch-count');
+  const valEls=$$('#ax-vals [data-v]'),box=$('#arch'),cvEl=$('#arch-cv'),cv=new Cv(cvEl),sayEl=$('#arch-say'),keyEls=$$('#arch-keys [data-k]'),countEl=$('#arch-count');
   const SANS='"IBM Plex Sans","Helvetica Neue",Arial,sans-serif',MF='"IBM Plex Mono",Menlo,monospace';
   const LS='letterSpacing' in CanvasRenderingContext2D.prototype;
   const SRC=[['POS and e-commerce','orders','1.2k/s',1.3],['Card payments','payments','3.8k/s',1.8],['SCADA and historians','sensors','960/s',1.0],['Network telemetry','network','5.2k/s',2.1],['Market data','markets','8.4k/s',2.5],['Meters and IoT','meters','2.1k/s',1.2]];
@@ -3451,6 +3499,9 @@ const CS={
   function phaseOf(){if(reduced)return 2;const s=stageOf();return s==='wait'||s==='in'||s==='tape'||s==='fl'?0:s==='chip'||s==='ag1'||s==='agw'?1:2;}
   function keyFor(){const s=stageOf(),S=SC[st.sc];if(reduced)return null;if(s==='in')return (performance.now()-st.fp.t0)/(DUR.in*st.slow)<0.55?'connect':'govern';return s==='in'?'connect':s==='tape'?'stream':s==='fl'?'process':s==='chip'?(S.cap===3?'opt':S.cap===2?'sc':'fd'):s==='ag1'||s==='agw'||s==='ag2'?'agent':null;}
 
+  /* each joint value lights at the moment the followed event shows it */
+  function valFor(){if(reduced)return null;const s=stageOf();return s==='in'?'gov':s==='tape'?'ctx':s==='fl'?'live':s==='chip'?'zero':s==='end'?'safe':s==='wait'?null:'fast';}
+
   /* ---------- background traffic ---------- */
   function spawn(i){st.parts.push({ph:'in',i,d:0,v:150+Math.random()*60,bad:Math.random()<0.035});}
   function update(dt){if(!L)resize();if(!L)return;const now=performance.now();
@@ -3472,7 +3523,8 @@ const CS={
     const fly=st.parts.filter(p=>p.ph==='out'||p.ph==='ag1').length+(st.fp&&/out|ag/.test(st.fp.stage)?1:0);
     if(countEl&&fly!==st.inflight){st.inflight=fly;countEl.textContent=fly;}
     const ph=phaseOf();if(sayEl&&ph!==st.phase&&!st.hold){st.phase=ph;$$('span',sayEl).forEach((s,i)=>s.classList.toggle('on',i<=ph));}
-    const key=keyFor();if(key!==st.key){st.key=key;keyEls.forEach(k=>k.classList.toggle('on',k.dataset.k===key));}}
+    const key=keyFor();if(key!==st.key){st.key=key;keyEls.forEach(k=>k.classList.toggle('on',k.dataset.k===key));}
+    const vk=valFor();if(vk!==st.vk){st.vk=vk;valEls.forEach(v=>v.classList.toggle('on',v.dataset.v===vk));}}
 
   /* ---------- drawing ---------- */
   function heads(ctx){const z=L.wide?10.5:9.5,ls=L.wide?1.2:0.6,o=L.wide?24:19;L.heads.forEach(([n,t,x])=>{label(ctx,n,x,10,'#78a9ff',z,ls);label(ctx,t,x+o,10,'rgba(255,255,255,.62)',z,ls);});
@@ -3588,7 +3640,8 @@ const CS={
       if(L.wide){fz(ctx,SNK[k][0],r.w-22,12.5,11,'500');ctx.fillStyle=hit?'#fff':'rgba(255,255,255,.8)';ctx.fillText(fit(ctx,SNK[k][0],r.w-22),r.x+12,r.y+r.h*0.33);
         fz(ctx,st.sinkV[k],r.w-22,11,10,'400');ctx.fillStyle=fresh?c2:'rgba(255,255,255,.5)';ctx.fillText(fit(ctx,st.sinkV[k],r.w-22),r.x+12,r.y+r.h*0.7);}
       else{ctx.font='500 '+(L.z>1?12:11)+'px '+SANS;ctx.fillStyle=hit?'#fff':'rgba(255,255,255,.8)';ctx.fillText(SNK[k][0],r.x+10,r.y+r.h*0.33);
-        ctx.font='400 '+(L.z>1?11:10)+'px '+SANS;ctx.fillStyle=fresh?c2:'rgba(255,255,255,.5)';ctx.fillText(fit(ctx,st.sinkV[k],r.w-20),r.x+10,r.y+r.h*0.7);}});}
+        ctx.font='400 '+(L.z>1?11:10)+'px '+SANS;ctx.fillStyle=fresh?c2:'rgba(255,255,255,.5)';ctx.fillText(fit(ctx,st.sinkV[k],r.w-20),r.x+10,r.y+r.h*0.7);}});
+    if(L.wide){const r=L.snk[5],y=r.y+r.h+12;if(y<L.H-6)label(ctx,'results go back on Kafka topics',r.x,y,em('stream')||em('out')?'#fff':'rgba(255,255,255,.45)',9.5,0.3,'left','400');}}
   function packets(ctx,now){if(reduced)return;const vt=L.wide?62:48,cs=L.wide?[4,8]:[3,6];
     for(const p of st.parts){if(p.ph==='rej'){const q=ptAt(L.pin[p.i],L.pin[p.i].L-6);sq(ctx,q[0],q[1],4,'rgba(250,77,86,'+(p.t/700)+')');continue;}
       if(p.ph==='tape'){const q=ptAt(L.ptape[p.i],p.d);ctx.fillStyle='rgba(255,255,255,.7)';ctx.fillRect(Math.round(q[0]-cs[0]/2),Math.round(q[1]-cs[1]/2),cs[0],cs[1]);continue;}
@@ -3609,6 +3662,7 @@ const CS={
   keyEls.forEach(k=>{const on=()=>{setHi(k.dataset.k,true);if(sayEl){sayEl.classList.add('desc');sayEl.textContent=KEY_TXT[k.dataset.k];}},off=()=>{st.hold=false;st.hi=null;if(sayEl)sayEl.classList.remove('desc');caption();};
     k.addEventListener('mouseenter',on);k.addEventListener('focus',on);k.addEventListener('mouseleave',off);k.addEventListener('blur',off);k.addEventListener('click',on);});
 
+  valEls.forEach(v=>{const on=()=>setHi(v.dataset.k,true),off=()=>{st.hold=false;st.hi=null;};v.addEventListener('mouseenter',on);v.addEventListener('focus',on);v.addEventListener('mouseleave',off);v.addEventListener('blur',off);v.addEventListener('click',on);});
   reg({el,resize,update,draw});
   start(0,performance.now());resize();
   App.arch={focus(i,pin,slow){const now=performance.now();st.pin=pin?now+CYCLE*(slow||1)+800:-1e9;start(i,now,slow);},hi(k){setHi(k,false);}};
@@ -3653,13 +3707,14 @@ const CS={
       say:'Then it optimizes the next order to keep the shelf full, so mission-critical decisions land while they still matter.',
       subs:['Then it <em>optimizes the next order</em>','to keep the shelf full,','so mission-critical decisions land','<em>while they still matter</em>.'],
       run:async(w,at)=>{await at('optimizes the next order');if(App.hero)App.hero.optimize();}},
-    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:9930,
+    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:9930,hold:1800,
       say:'Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration.',
       subs:['<em>Better together</em>:','Confluent <em>streams, connects and governs</em> the data,','and Granite turns each event <em>into a decision</em>,','with <em>zero configuration</em>.'],
       run:async(w,at)=>{const A=App.arch;if(!A)return;const phone=window.innerWidth<=760,k=x=>{A.hi(x);hi('#arch-keys [data-k="'+x+'"]');};A.focus(0,true,1.5);
         await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('streams,');k('stream');await at('connects');k('connect');await at('governs');k('govern');
         await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);k('process');await w(450);k('fd');
-        await at('into a decision');if(phone)scrollTo('#arch-a-out',true);A.hi('out');await at('zero configuration');A.hi('zero');}},
+        await at('into a decision');if(phone)scrollTo('#arch-a-out',true);A.hi('out');await at('zero configuration');A.hi('zero');scrollTo('#ax-vals',true);
+        for(const v of ['zero','live','ctx','gov','safe','fast']){await w(170);hi('#ax-vals [data-v="'+v+'"]');}}},
     {n:5,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:8280,
       say:'For your teams: ten times faster time to value, five to ten percent more accuracy, and decisions in seconds.',
       subs:['For your teams: <em>ten times faster</em> time to value,','<em>five to ten percent</em> more accuracy,','and decisions <em>in seconds</em>.'],
