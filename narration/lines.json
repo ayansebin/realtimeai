@@ -1,10 +1,10 @@
 [
- {"id": "01", "text": "Foundation models unlocked unstructured data. The bigger prize is streaming data: how much to order, which payment to stop, when the pump will fail."},
- {"id": "02", "text": "Now I B M Granite Time Series models are live on Confluent. Trained once, they work on series they have never seen."},
- {"id": "03", "text": "They tell you what comes next, how far it sits from normal, which history looks like this one, and which settings hit the target."},
- {"id": "04", "text": "Confluent streams and governs the data with zero configuration, so every model sees live business signals."},
- {"id": "05", "text": "That changes the economics. No bespoke model per series, no months of expert work, no safety margins paid every cycle."},
- {"id": "06", "text": "No army of data scientists: a demand planner, a fraud analyst or a process engineer puts them to work on their own streams."},
- {"id": "07", "text": "On a factory line, it forecasts the shift, flags a slow drift and finds the last run like this one."},
- {"id": "08", "text": "Forecasting, anomaly detection, optimization and search on every stream. Contact us to start with yours."}
+ {"id": "01", "text": "Foundation models unlocked unstructured data. The bigger prize is streaming data: which payment to stop, when the pump will fail."},
+ {"id": "02", "text": "Now I B M Granite Time Series models are live on Confluent, and work on series they have never seen."},
+ {"id": "03", "text": "They tell you what comes next, how far it sits from normal, which history matches, and which settings hit the target."},
+ {"id": "04", "text": "Confluent streams and governs the data with zero configuration, so models see live signals."},
+ {"id": "05", "text": "That changes the economics: no bespoke model per series, no months of expert work, no safety margins."},
+ {"id": "06", "text": "No data science army: a demand planner, a fraud analyst or a process engineer runs them on their own streams."},
+ {"id": "07", "text": "On a factory line, it forecasts the shift, flags a slow drift, and finds the last run like this."},
+ {"id": "08", "text": "Forecasting, anomaly detection, optimization and search, on every stream. Contact us to start with yours."}
 ]
