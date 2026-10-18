@@ -866,7 +866,6 @@ button.hf:focus-visible{outline:2px solid #4589ff;outline-offset:-2px}
 .hero-kicker{font-size:clamp(1.2rem,2.1vw,1.75rem);font-weight:400;line-height:1.25;letter-spacing:-.012em;color:var(--ink);max-width:36ch;margin-bottom:-.25rem;text-wrap:balance}
 .hero-kicker .k-ts{color:#0f62fe}
 .hero-kicker .k-ctx{color:#007d79}
-#hf-fc .hf-k i{color:#78a9ff}#hf-ad .hf-k i{color:#ff8389}#hf-op .hf-k i{color:#6fdc8c}
 /* the hero follows one logic: industries, one universal layer, three outcomes */
 .hx-top{display:grid;gap:12px;padding:clamp(16px,2.2vw,24px) clamp(16px,2.4vw,28px) 0}
 .hx-inds{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
@@ -910,6 +909,34 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(300px,42vh,460px)}
 body.pitching #st-live .hx-bens{display:none}
 body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(280px,36vh,420px)}
 body.pitching .hx-layer{min-height:86px}
+/* the three steps of the loop, said loud: a badge, a moving icon, and a sweep of light while the step runs */
+#hf-fc{--hl:#a6c8ff;--hg:rgba(69,137,255,.55)}#hf-ad{--hl:#ffb3b8;--hg:rgba(250,77,86,.55)}#hf-op{--hl:#a7f0ba;--hg:rgba(66,190,101,.55)}
+.hf .hf-k{display:flex;align-items:center;gap:.6rem;font-size:clamp(.98rem,1.45vw,1.22rem);font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);margin-bottom:.15rem}
+.hf .hf-k .hf-n{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--hc);color:var(--hl);font:600 .72rem/1 var(--font-mono);letter-spacing:0;transition:background .3s,color .3s}
+.hf-ic{flex:none;width:24px;height:24px;fill:none;stroke:var(--hl);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.55;transition:opacity .3s}
+.hf-ic .hf-f{stroke-dasharray:2.4 2.6}
+.hf-ic .hf-pk,.hf-ic .hf-dot{fill:var(--hl);stroke:none}
+.hf-t{transition:color .3s,transform .35s;transform-origin:left center;display:inline-block}
+.hf.on .hf-k .hf-n{background:var(--hc);color:#fff;animation:hfPulse 1.6s ease-out infinite}
+.hf.on .hf-ic{opacity:1}
+.hf.on .hf-ic .hf-f{animation:hfDash 1.1s linear infinite}
+.hf.on .hf-ic .hf-pk{transform-box:fill-box;transform-origin:center;animation:hfPeak 1s ease-in-out infinite}
+.hf.on .hf-ic .hf-dot{animation:hfSeek 2.4s ease-in-out infinite}
+.hf.on .hf-t{transform:scale(1.06);color:transparent;background:linear-gradient(90deg,#fff 0%,#fff 35%,var(--hl) 50%,#fff 65%,#fff 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;animation:hfSweep 2.4s linear infinite}
+.hf.done .hf-k .hf-n{background:rgba(255,255,255,.08);color:var(--hl)}
+.hf.done .hf-t{color:#fff}
+.hf.done .hf-ic{opacity:.85}
+@keyframes hfPulse{0%{box-shadow:0 0 0 0 var(--hg)}70%{box-shadow:0 0 0 10px rgba(0,0,0,0)}100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}}
+@keyframes hfDash{to{stroke-dashoffset:-10}}
+@keyframes hfPeak{0%,100%{transform:scale(1)}50%{transform:scale(1.7)}}
+@keyframes hfSeek{0%{transform:translate(7px,-6px)}45%,70%{transform:translate(0,0)}100%{transform:translate(-6px,6px)}}
+@keyframes hfSweep{from{background-position:100% 0}to{background-position:-150% 0}}
+/* the loop runs left to right, then starts again */
+.hflow{position:relative}
+.hf:not(:last-child)::after{content:"";position:absolute;right:-8px;top:27px;width:12px;height:12px;border-top:1.6px solid rgba(255,255,255,.35);border-right:1.6px solid rgba(255,255,255,.35);transform:rotate(45deg);z-index:2;transition:border-color .3s}
+.hf.done:not(:last-child)::after{border-color:var(--hl)}
+@media (max-width:760px){.hf:not(:last-child)::after{right:auto;left:30px;top:auto;bottom:-8px;transform:rotate(135deg)}.hf .hf-k{font-size:1rem}.hf .hf-k .hf-n{width:26px;height:26px}}
+@media (prefers-reduced-motion:reduce){.hf.on .hf-k .hf-n,.hf.on .hf-ic *,.hf.on .hf-t{animation:none}.hf.on .hf-t{color:#fff;background:none}}
 /* during the demo the line and its three cards fit on one screen */
 body.pitching #st-live .stage-top{display:none}
 @media (max-width:760px){body.pitching .hero .canvas-wrap.hx-wrap{height:38vh}}
