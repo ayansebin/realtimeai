@@ -12,6 +12,7 @@ OUT = os.path.join(ROOT, 'narration')
 LINES = json.load(open(os.path.join(OUT, 'lines.json')))
 ENGINE = sys.argv[1] if len(sys.argv) > 1 else 'kokoro'
 VOICE = sys.argv[2] if len(sys.argv) > 2 else 'am_michael'
+SPEED = float(os.environ.get('NARRATION_SPEED', '1.1'))  # a touch brisker reads as a pitch, not a lecture
 
 
 def kokoro():
@@ -19,9 +20,9 @@ def kokoro():
     from kokoro import KPipeline
     pipe = KPipeline(lang_code='a', repo_id='hexgrad/Kokoro-82M')
     for l in LINES:
-        chunks = [audio for _, _, audio in pipe(l['text'], voice=VOICE, speed=1.0)]
+        chunks = [audio for _, _, audio in pipe(l['text'], voice=VOICE, speed=SPEED)]
         audio = np.concatenate([np.asarray(c) for c in chunks])
-        pad = np.zeros(int(24000 * 0.25), dtype=audio.dtype)
+        pad = np.zeros(int(24000 * 0.12), dtype=audio.dtype)
         sf.write(os.path.join(OUT, l['id'] + '.wav'), np.concatenate([pad, audio, pad]), 24000)
         print('kokoro', l['id'], round(len(audio) / 24000, 2), 's', flush=True)
     for f in os.listdir(OUT):
