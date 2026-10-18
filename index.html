@@ -519,6 +519,8 @@ body.pitching .topbar{display:none}
 .pitch-prog i{display:block;background:rgba(255,255,255,.14);position:relative;overflow:hidden}
 .pitch-prog i.act{margin-left:10px}
 .pitch-act{color:var(--ink);letter-spacing:.08em}
+.pitch{transition:opacity .6s ease}
+.pitch.closing{opacity:0;pointer-events:none}
 .pitch-cap.in{animation:capin .32s ease-out}
 @keyframes capin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.pitch-cap.in{animation:none}}
@@ -532,8 +534,6 @@ body.pitching .topbar{display:none}
 .pitch-ctl{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center}
 .pitch-ctl .btn kbd{margin-left:.2rem}
 .pitch-hint{font-size:.78rem;color:var(--ink-3)}
-.pitch-end{display:grid;gap:.8rem;padding-top:.4rem}
-.pitch-end-h{font-size:clamp(1.2rem,2.2vw,1.7rem);font-weight:300;max-width:34ch}
 @media (max-width:760px){.pitch{padding-top:22px;gap:.45rem}.pitch-cap{font-size:1.15rem;min-height:2.6em}.pitch-ctl .btn kbd,.pitch-x kbd{display:none}.pitch-top{font-size:.66rem}body.pitching .stage.pitch-focus .stage-top{display:none}body.pitching .nav-links{display:none}body.pitching .nav .wrap{min-height:48px}.nav-pitch{display:none}}
 @media (prefers-reduced-motion:reduce){.pitch-live i{animation:none}}
 
@@ -1475,10 +1475,6 @@ FROM pos_sales;</code></pre></div>
     <button class="btn sm ghost" id="pitch-next" type="button">Next <kbd>&#8594;</kbd></button>
     <button class="switch" id="pitch-voice" type="button" aria-pressed="true"><i></i>Narration</button><button class="btn sm" id="pitch-sound" type="button" hidden>Enable sound</button>
     <span class="pitch-hint" id="pitch-hint"></span>
-  </div>
-  <div class="pitch-end" id="pitch-end" hidden>
-    <div class="pitch-end-h">One statement of Flink SQL. Your stream already knows what happens next.</div>
-    <div class="btn-row"><a class="btn" href="#contact" id="pitch-brief">Contact us</a><a class="btn ghost" href="/playground">Open the playground</a><button class="btn ghost" id="pitch-replay" type="button">Replay</button></div>
   </div>
 </div>
 <footer class="foot">
@@ -3174,7 +3170,7 @@ const CS={
 /* ============ live demo (scripted tour) ============ */
 (function(){
   const ui=$('#pitch');if(!ui)return;
-  const cap=$('#pitch-cap'),prog=$('#pitch-prog'),stepEl=$('#pitch-step'),endEl=$('#pitch-end'),pauseBtn=$('#pitch-pause'),voiceBtn=$('#pitch-voice'),hint=$('#pitch-hint');
+  const cap=$('#pitch-cap'),prog=$('#pitch-prog'),stepEl=$('#pitch-step'),pauseBtn=$('#pitch-pause'),voiceBtn=$('#pitch-voice'),hint=$('#pitch-hint');
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>click('[role=tab][aria-controls="'+id+'"]');
@@ -3266,23 +3262,23 @@ const CS={
     await Promise.race([say,waitFor(st.voice?6000:300,token)]);
     if(st.token!==token)throw new Error('cancel');
     seg.classList.add('done');seg.classList.remove('on');}
-  async function play(from){st.on=true;st.token++;const token=st.token;document.body.classList.add('pitching');ui.hidden=false;endEl.hidden=true;cap.hidden=false;prog.hidden=false;$('.pitch-ctl',ui).hidden=false;st.paused=false;pauseBtn.textContent='';pauseBtn.innerHTML='Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed','false');
+  async function play(from){st.on=true;st.token++;const token=st.token;document.body.classList.add('pitching');ui.classList.remove('closing');ui.hidden=false;cap.hidden=false;prog.hidden=false;$('.pitch-ctl',ui).hidden=false;st.paused=false;pauseBtn.textContent='';pauseBtn.innerHTML='Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed','false');
     try{for(let i=from;i<SCRIPT.length;i++){await runStep(i,token);}finish();}catch(e){if(e.message!=='cancel')console.error(e);}}
-  function finish(){cap.innerHTML='';endEl.hidden=false;$('.pitch-ctl',ui).hidden=true;segs.forEach(g=>{g.classList.add('done');g.classList.remove('on');});stepEl.textContent=SCRIPT.length+' / '+SCRIPT.length;focus('.contact');requestAnimationFrame(()=>scrollTo('#contact'));}
+  /* when the pitch ends the panel fades out and closes, leaving the visitor on the contact form */
+  function finish(){segs.forEach(g=>{g.classList.add('done');g.classList.remove('on');});stepEl.textContent=SCRIPT.length+' / '+SCRIPT.length;const token=st.token;
+    setTimeout(()=>{if(st.token!==token||!st.on)return;ui.classList.add('closing');setTimeout(()=>{if(st.token===token&&st.on)exit();ui.classList.remove('closing');},650);},500);}
   function exit(){st.token++;st.on=false;st.paused=false;document.body.classList.remove('pitching');$$('.tour-hi').forEach(e=>e.classList.remove('tour-hi'));$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));ui.hidden=true;stopAudio();}
-  function togglePause(){if(!st.on||!endEl.hidden)return;st.paused=!st.paused;if(st.paused)st.pauseAt=performance.now();else st.pausedMs+=performance.now()-(st.pauseAt||performance.now());pauseBtn.innerHTML=st.paused?'Resume <kbd>space</kbd>':'Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed',st.paused);const seg=segs[st.i];if(seg){if(st.paused){const w=Math.min(100,100*(performance.now()-st.t0)/SCRIPT[st.i].dur);seg.style.setProperty('--w',w+'%');seg.classList.add('paused');}else{seg.classList.remove('paused');}}if(st.audio){try{if(st.paused)st.audio.pause();else st.audio.play();}catch(e){}}if(window.speechSynthesis){if(st.paused)speechSynthesis.pause();else speechSynthesis.resume();}}
+  function togglePause(){if(!st.on)return;st.paused=!st.paused;if(st.paused)st.pauseAt=performance.now();else st.pausedMs+=performance.now()-(st.pauseAt||performance.now());pauseBtn.innerHTML=st.paused?'Resume <kbd>space</kbd>':'Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed',st.paused);const seg=segs[st.i];if(seg){if(st.paused){const w=Math.min(100,100*(performance.now()-st.t0)/SCRIPT[st.i].dur);seg.style.setProperty('--w',w+'%');seg.classList.add('paused');}else{seg.classList.remove('paused');}}if(st.audio){try{if(st.paused)st.audio.pause();else st.audio.play();}catch(e){}}if(window.speechSynthesis){if(st.paused)speechSynthesis.pause();else speechSynthesis.resume();}}
   function next(){if(!st.on)return;const i=st.i+1;st.token++;stopAudio();if(i>=SCRIPT.length){finish();return;}play(i);}
   function unlock(){preload();$('#pitch-sound').hidden=true;st.blocked=false;if(!st.voice)return;try{const a=clip(0);const pr=a.play();if(pr&&pr.then)pr.then(()=>{a.pause();a.currentTime=0;}).catch(()=>{});}catch(e){}if(window.speechSynthesis){try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){}}}
-  $('#pitch-sound').addEventListener('click',()=>{st.voice=true;voiceBtn.setAttribute('aria-pressed','true');st.blocked=false;$('#pitch-sound').hidden=true;hint.textContent='';if(st.on&&endEl.hidden&&st.i>=0){speak(st.i,st.token);}});
+  $('#pitch-sound').addEventListener('click',()=>{st.voice=true;voiceBtn.setAttribute('aria-pressed','true');st.blocked=false;$('#pitch-sound').hidden=true;hint.textContent='';if(st.on&&st.i>=0){speak(st.i,st.token);}});
   const start=()=>{st.auto=false;unlock();play(0);};
   $('#pitch-play').addEventListener('click',start);
   $('#nav-pitch').addEventListener('click',start);
   $('#pitch-exit').addEventListener('click',exit);
-  $('#pitch-replay').addEventListener('click',start);
-  $('#pitch-brief').addEventListener('click',()=>setTimeout(exit,50));
   pauseBtn.addEventListener('click',togglePause);
   $('#pitch-next').addEventListener('click',next);
-  voiceBtn.addEventListener('click',()=>{st.voice=!st.voice;voiceBtn.setAttribute('aria-pressed',st.voice);$('#pitch-sound').hidden=true;if(!st.voice){stopAudio();hint.textContent='Captions only';}else{hint.textContent='';if(st.on&&endEl.hidden&&st.i>=0)speak(st.i,st.token);}});
+  voiceBtn.addEventListener('click',()=>{st.voice=!st.voice;voiceBtn.setAttribute('aria-pressed',st.voice);$('#pitch-sound').hidden=true;if(!st.voice){stopAudio();hint.textContent='Captions only';}else{hint.textContent='';if(st.on&&st.i>=0)speak(st.i,st.token);}});
   document.addEventListener('keydown',e=>{if(!st.on)return;if(e.key==='Escape'){exit();}else if(e.key===' '){e.preventDefault();togglePause();}else if(e.key==='ArrowRight'){next();}});
   window.addEventListener('pagehide',()=>{if(window.speechSynthesis)speechSynthesis.cancel();});
   /* the demo opens on landing. Not on a deep link, a back or forward visit, or a hop from another page of the site */

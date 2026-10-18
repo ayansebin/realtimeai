@@ -519,6 +519,8 @@ body.pitching .topbar{display:none}
 .pitch-prog i{display:block;background:rgba(255,255,255,.14);position:relative;overflow:hidden}
 .pitch-prog i.act{margin-left:10px}
 .pitch-act{color:var(--ink);letter-spacing:.08em}
+.pitch{transition:opacity .6s ease}
+.pitch.closing{opacity:0;pointer-events:none}
 .pitch-cap.in{animation:capin .32s ease-out}
 @keyframes capin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.pitch-cap.in{animation:none}}
@@ -532,8 +534,6 @@ body.pitching .topbar{display:none}
 .pitch-ctl{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center}
 .pitch-ctl .btn kbd{margin-left:.2rem}
 .pitch-hint{font-size:.78rem;color:var(--ink-3)}
-.pitch-end{display:grid;gap:.8rem;padding-top:.4rem}
-.pitch-end-h{font-size:clamp(1.2rem,2.2vw,1.7rem);font-weight:300;max-width:34ch}
 @media (max-width:760px){.pitch{padding-top:22px;gap:.45rem}.pitch-cap{font-size:1.15rem;min-height:2.6em}.pitch-ctl .btn kbd,.pitch-x kbd{display:none}.pitch-top{font-size:.66rem}body.pitching .stage.pitch-focus .stage-top{display:none}body.pitching .nav-links{display:none}body.pitching .nav .wrap{min-height:48px}.nav-pitch{display:none}}
 @media (prefers-reduced-motion:reduce){.pitch-live i{animation:none}}
 
