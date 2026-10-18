@@ -389,7 +389,7 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 @media (prefers-reduced-motion:reduce){.mq-inner{animation:none}.h-display .caret{animation:none}}
 
 /* architecture */
-.arch{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) minmax(0,1fr);gap:clamp(18px,4vw,64px);align-items:start}
+.arch{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) minmax(0,1fr);gap:clamp(18px,4vw,64px);align-items:center}
 @media (max-width:900px){.arch{grid-template-columns:1fr;gap:18px}}
 .arch-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
 .arch-col{position:relative;z-index:2;display:grid;gap:8px;align-content:start}
@@ -405,6 +405,21 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 .arch-row.purple i{background:var(--purple);box-shadow:0 0 10px var(--purple)}
 .arch-row.purple{border-color:rgba(190,149,255,.4)}
 .arch-col.mid .arch-f{text-align:center}
+.arch-brand{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap;padding:.15rem .1rem .25rem}
+.arch-brand b{font-size:1rem;font-weight:500;color:#fff}
+.arch-brand span{font-size:.74rem;color:var(--ink-3)}
+.arch-brand.ibm{padding-top:.1rem}
+.arch-join{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem;margin:.15rem 0}
+.arch-join i{height:1px;background:linear-gradient(90deg,rgba(120,169,255,0),rgba(120,169,255,.6),rgba(120,169,255,0))}
+.arch-join span{font-family:var(--font-mono);font-size:1.1rem;color:var(--blue-3);line-height:1}
+.arch-row.ibm i{background:var(--blue-3)}
+.arch-row.ibm{border-color:rgba(120,169,255,.42)}
+.arch-row{transition:background .35s,border-color .35s}
+.arch-row.lit,.arch-row.tour-hi{background:rgba(15,98,254,.26);border-color:var(--blue-2)}
+.arch-row.purple.lit,.arch-row.purple.tour-hi{background:rgba(190,149,255,.2);border-color:var(--purple)}
+/* the demo walks the stack: Confluent, the join, Granite, the agent */
+.arch-join span{display:inline-block;transition:transform .4s,color .4s}.arch-join.tour-hi span{color:#fff;transform:scale(1.6)}
+.arch-brand b,.arch-col.mid .arch-f{transition:color .4s}.arch-brand.tour-hi b{color:var(--blue-4)}.arch-col.mid .arch-f.tour-hi{color:var(--blue-4)}
 
 /* proof labels + trust */
 .pcard .pk em{font-style:normal;margin-left:.4rem;border:1px solid var(--line-2);padding:.05rem .4rem;font-size:.62rem;color:var(--ink-2);letter-spacing:.06em}
@@ -525,6 +540,7 @@ body.pitching .topbar{display:none}
 @keyframes capin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.pitch-cap.in{animation:none}}
 #uctabs .uc.tour-hi{border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe,0 10px 24px rgba(15,98,254,.18);transform:translateY(-2px)}
+#indtabs .ind.tour-hi,#cstabs .cs.tour-hi{border-color:#0f62fe;box-shadow:0 0 0 2px #0f62fe}
 .pitch-prog i::after{content:"";position:absolute;inset:0;width:0;background:var(--blue-2);box-shadow:0 0 10px var(--blue-2)}
 .pitch-prog i.done::after{width:100%}
 .pitch-prog i.on::after{width:100%;transition:width var(--d,6s) linear}
@@ -802,6 +818,7 @@ body::before{background:var(--paper)}
 #cstabs .cs[aria-selected="true"] code{color:#be95ff}
 #cstabs .cs[aria-selected="true"] .cs-m{color:#6fdc8c}
 .cspanel .cs-wrap{height:clamp(340px,46vh,430px)}
+.tl-wrap{height:clamp(320px,44vh,410px)}
 .cspanel .plant-wrap{border:1px solid rgba(255,255,255,.08);background:#1b2746}
 .cs-inner{position:relative;height:420px}
 .cs-inner canvas{position:absolute;inset:0;width:100%;height:100%}

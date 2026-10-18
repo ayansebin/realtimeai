@@ -389,7 +389,7 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 @media (prefers-reduced-motion:reduce){.mq-inner{animation:none}.h-display .caret{animation:none}}
 
 /* architecture */
-.arch{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) minmax(0,1fr);gap:clamp(18px,4vw,64px);align-items:start}
+.arch{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) minmax(0,1fr);gap:clamp(18px,4vw,64px);align-items:center}
 @media (max-width:900px){.arch{grid-template-columns:1fr;gap:18px}}
 .arch-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
 .arch-col{position:relative;z-index:2;display:grid;gap:8px;align-content:start}
@@ -405,6 +405,21 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 .arch-row.purple i{background:var(--purple);box-shadow:0 0 10px var(--purple)}
 .arch-row.purple{border-color:rgba(190,149,255,.4)}
 .arch-col.mid .arch-f{text-align:center}
+.arch-brand{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap;padding:.15rem .1rem .25rem}
+.arch-brand b{font-size:1rem;font-weight:500;color:#fff}
+.arch-brand span{font-size:.74rem;color:var(--ink-3)}
+.arch-brand.ibm{padding-top:.1rem}
+.arch-join{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem;margin:.15rem 0}
+.arch-join i{height:1px;background:linear-gradient(90deg,rgba(120,169,255,0),rgba(120,169,255,.6),rgba(120,169,255,0))}
+.arch-join span{font-family:var(--font-mono);font-size:1.1rem;color:var(--blue-3);line-height:1}
+.arch-row.ibm i{background:var(--blue-3)}
+.arch-row.ibm{border-color:rgba(120,169,255,.42)}
+.arch-row{transition:background .35s,border-color .35s}
+.arch-row.lit,.arch-row.tour-hi{background:rgba(15,98,254,.26);border-color:var(--blue-2)}
+.arch-row.purple.lit,.arch-row.purple.tour-hi{background:rgba(190,149,255,.2);border-color:var(--purple)}
+/* the demo walks the stack: Confluent, the join, Granite, the agent */
+.arch-join span{display:inline-block;transition:transform .4s,color .4s}.arch-join.tour-hi span{color:#fff;transform:scale(1.6)}
+.arch-brand b,.arch-col.mid .arch-f{transition:color .4s}.arch-brand.tour-hi b{color:var(--blue-4)}.arch-col.mid .arch-f.tour-hi{color:var(--blue-4)}
 
 /* proof labels + trust */
 .pcard .pk em{font-style:normal;margin-left:.4rem;border:1px solid var(--line-2);padding:.05rem .4rem;font-size:.62rem;color:var(--ink-2);letter-spacing:.06em}
@@ -525,6 +540,7 @@ body.pitching .topbar{display:none}
 @keyframes capin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.pitch-cap.in{animation:none}}
 #uctabs .uc.tour-hi{border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe,0 10px 24px rgba(15,98,254,.18);transform:translateY(-2px)}
+#indtabs .ind.tour-hi,#cstabs .cs.tour-hi{border-color:#0f62fe;box-shadow:0 0 0 2px #0f62fe}
 .pitch-prog i::after{content:"";position:absolute;inset:0;width:0;background:var(--blue-2);box-shadow:0 0 10px var(--blue-2)}
 .pitch-prog i.done::after{width:100%}
 .pitch-prog i.on::after{width:100%;transition:width var(--d,6s) linear}
@@ -802,6 +818,7 @@ body::before{background:var(--paper)}
 #cstabs .cs[aria-selected="true"] code{color:#be95ff}
 #cstabs .cs[aria-selected="true"] .cs-m{color:#6fdc8c}
 .cspanel .cs-wrap{height:clamp(340px,46vh,430px)}
+.tl-wrap{height:clamp(320px,44vh,410px)}
 .cspanel .plant-wrap{border:1px solid rgba(255,255,255,.08);background:#1b2746}
 .cs-inner{position:relative;height:420px}
 .cs-inner canvas{position:absolute;inset:0;width:100%;height:100%}
@@ -1007,8 +1024,9 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <div class="chapter-head sub" id="h-arch">
-      <h2>One stream. Every decision.</h2>
-      <p>Flink runs the models on every event. Decisions land as topics, tables, alerts and agent calls.</p>
+      <span class="n">BETTER TOGETHER</span>
+      <h2>Confluent and IBM Granite. One stream, every decision.</h2>
+      <p>Confluent streams, connects and governs business data in motion. IBM Granite Time Series models turn each event into a forecast, a flag or a setting. Zero configuration.</p>
     </div>
 
     <div class="stage" id="st-arch">
@@ -1026,14 +1044,21 @@ FROM pos_sales;</code></pre></div>
             <div class="arch-f">120+ connectors, Schema Registry contracts</div>
           </div>
           <div class="arch-col mid" id="arch-mid">
-            <div class="arch-h"><span>02</span>Confluent Cloud</div>
+            <div class="arch-h"><span>02</span>Confluent Cloud with IBM Granite</div>
             <div class="arch-engine">
-              <div class="arch-row"><i></i><b>Kafka topics</b><span>every series, every event, in order. Durable and replayable for audit and re-runs</span></div>
-              <div class="arch-row"><i></i><b>Flink SQL</b><span>AI_FORECAST · AI_DETECT_ANOMALIES · TS_EMBED · TS_SEARCH · TS_OPTIMIZE</span></div>
-              <div class="arch-row"><i></i><b>Granite Time Series models</b><span>hosted by Confluent, zero-shot, no credentials or serving to manage, your data stays in your org</span></div>
-              <div class="arch-row purple"><i></i><b>Streaming Agents</b><span>CREATE TOOL · CREATE AGENT · AI_RUN_AGENT, gates for experts</span></div>
+              <div class="arch-brand"><b>Confluent</b><span>data streaming platform</span></div>
+              <div class="arch-row" data-k="stream"><i></i><b>Stream</b><span>Kafka topics carry every event, in order, durable and replayable</span></div>
+              <div class="arch-row" data-k="connect"><i></i><b>Connect</b><span>120+ connectors bring orders, payments, sensors and markets in</span></div>
+              <div class="arch-row" data-k="govern"><i></i><b>Govern</b><span>Schema Registry contracts, lineage and access, your data stays in your org</span></div>
+              <div class="arch-row" data-k="process"><i></i><b>Process</b><span>Flink SQL calls the models, one statement per decision</span></div>
+              <div class="arch-join" aria-hidden="true"><i></i><span>+</span><i></i></div>
+              <div class="arch-brand ibm"><b>IBM Granite Time Series</b><span>foundation models, hosted on Confluent</span></div>
+              <div class="arch-row ibm" data-k="fd"><i></i><b>Forecast · Detect</b><span>AI_FORECAST and AI_DETECT_ANOMALIES, zero-shot on any series</span></div>
+              <div class="arch-row ibm" data-k="sc"><i></i><b>Search · Classify · Fill gaps</b><span>TSPulse finds the history that looks like now, labels patterns, fills missing points</span></div>
+              <div class="arch-row ibm" data-k="opt"><i></i><b>Optimize</b><span>TS_OPTIMIZE picks the settings that best serve a target</span></div>
+              <div class="arch-row purple" data-k="agent"><i></i><b>Streaming Agents</b><span>act on the result, with gates for experts</span></div>
             </div>
-            <div class="arch-f">one statement per decision, billed as Flink compute</div>
+            <div class="arch-f">zero configuration · built-in governance · billed as Flink compute</div>
           </div>
           <div class="arch-col" id="arch-out">
             <div class="arch-h"><span>03</span>Decisions out</div>
@@ -1102,6 +1127,34 @@ FROM pos_sales;</code></pre></div>
         </div>
       </div>
       <div class="stage-foot"><div class="hint">Illustrative. Impact figures from design partner engagements.</div></div>
+    </div>
+
+    <div class="chapter-head sub" id="h-tail">
+      <h2>Every series, not just the top few hundred.</h2>
+      <p>Bespoke models only pay off where the money is, so the rest of the business runs on safety margins. One foundation model on the stream covers the whole tail.</p>
+    </div>
+
+    <div class="stage" id="st-tail">
+      <div class="stage-top">
+        <div class="stage-title"><h3>Where the margin goes</h3><p>A business with 100,000 series. Illustrative.</p></div>
+        <div class="ctl"><div class="ctl-group"><span class="eyebrow">Approach</span><div class="chips" id="tl-mode"><button class="chip sm" data-v="today" aria-pressed="true">A bespoke model per series</button><button class="chip sm" data-v="tsfm" aria-pressed="false">IBM Granite on Confluent</button></div></div></div>
+      </div>
+      <div class="stage-body">
+        <div class="side">
+          <div class="canvas-wrap tl-wrap"><canvas class="stage-canvas" id="tl-cv" aria-label="100,000 series as squares: today only the top few hundred have a model and the rest carry a safety margin, with a foundation model on the stream every series gets a forecast and the margin thins"></canvas></div>
+          <div class="panel cs-panel">
+            <div class="ph">Per business</div>
+            <table class="op-table cm-table" id="tl-table">
+              <tr><th></th><th class="c-ml">Bespoke</th><th class="c-fm">Foundation model</th></tr>
+              <tr><td>Series forecast</td><td class="c-ml">top few hundred</td><td class="c-fm">every one</td></tr>
+              <tr><td>Each new series</td><td class="c-ml">months of expert work</td><td class="c-fm">one SQL statement</td></tr>
+              <tr><td>The long tail</td><td class="c-ml">safety margins</td><td class="c-fm">a forecast every cycle</td></tr>
+            </table>
+            <div class="cs-big"><b class="green" id="tl-big">300</b><span id="tl-bigl">series with a forecast</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot"><div class="hint">The margin is the cost of a decision nobody could forecast, paid every cycle.</div></div>
     </div>
   </div>
 </section>
@@ -1261,7 +1314,7 @@ FROM pos_sales;</code></pre></div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">every symbol</b><span>one statement</span></div><div class="readout"><b>&lt;10 ms</b><span>per bar</span></div><div class="readout"><b>P10 to P90</b><span>a band, not a point</span></div></div><div class="sqlline"><code id="tr-sql"></code></div></div>
     </div>
 
-    <div class="chapter-head sub">
+    <div class="chapter-head sub" id="h-ind">
       <span class="n">INDUSTRIES</span>
       <h2>Where it lands first.</h2>
       <p>Pick an industry. Each one is a live twin, sensor to decision and back.</p>
@@ -1495,7 +1548,7 @@ FROM pos_sales;</code></pre></div>
   </div>
 </div>
 <div class="pitch" id="pitch" hidden role="region" aria-label="Live demo">
-  <div class="pitch-top"><span class="pitch-live"><i></i><span class="tx">Live demo</span></span><span class="pitch-act" id="pitch-act">01 Innovation</span><span class="pitch-step" id="pitch-step">1 / 8</span>
+  <div class="pitch-top"><span class="pitch-live"><i></i><span class="tx">Live demo</span></span><span class="pitch-act" id="pitch-act">01 Innovation</span><span class="pitch-step" id="pitch-step">1 / 9</span>
     <span class="pitch-tr"><button class="pitch-x" id="pitch-min" type="button" aria-label="Minimize the demo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 12h10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="tx">Minimize</span></button><button class="pitch-x" id="pitch-exit" type="button" aria-label="Close the demo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="tx">Close</span><kbd>Esc</kbd></button></span></div>
   <div class="pitch-prog" id="pitch-prog" role="group" aria-label="Jump to a step"></div>
   <div class="pitch-cap" id="pitch-cap" aria-live="polite"></div>
@@ -2475,6 +2528,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
       $$('.pnav-b',nav).forEach(x=>x.addEventListener('click',()=>{const t=btns[Number(x.dataset.j)];const y=p.getBoundingClientRect().top;select(t);const np=document.getElementById(t.getAttribute('aria-controls'));if(np){const dy=np.getBoundingClientRect().top-y;if(Math.abs(dy)>2)window.scrollBy(0,dy);}}));
     });
     btns.forEach(x=>{x.tabIndex=x.getAttribute('aria-selected')==='true'?0:-1;});
+    App.tabSel=App.tabSel||{};btns.forEach(b=>{App.tabSel[b.getAttribute('aria-controls')]=()=>select(b);});
   });
 })();
 
@@ -2923,6 +2977,41 @@ const CS={
   seed(n){let s=n>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
 };
 
+/* ============ 02 the long tail: every series, not just the top few hundred ============ */
+(function(){
+  const el=$('#st-tail');if(!el)return;
+  const cv=new Cv($('#tl-cv'));const st={u:0,target:0,auto:false,autoT:0};
+  function set(on){st.target=on?1:0;chipSet('tl-mode',on?'tsfm':'today');const t=$('#tl-table');if(t)t.classList.toggle('fm',on);}
+  function update(dt){if(!st.auto){st.autoT+=dt;if(st.autoT>1800){st.auto=true;if(!st.target)set(true);}}
+    const sp=reduced?1:dt/1500;st.u=st.target>st.u?Math.min(st.target,st.u+sp):Math.max(st.target,st.u-sp);
+    const k=ease(clamp(st.u,0,1)),n=Math.round(300+(100000-300)*k);$('#tl-big').textContent=n.toLocaleString('en-US');$('#tl-bigl').textContent=k>0.98?'series forecast, every cycle':'series with a forecast';}
+  function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);const u=clamp(st.u,0,1),k=ease(u);
+    const narrow=W<560,pad=16,cols=narrow?20:50,rows=20,per=100000/(cols*rows),N=cols*rows,head=Math.max(1,Math.round(300/per));
+    const top=58,legH=26,barH=46,gw=W-2*pad,gh=H-top-legH-barH-18;const cell=Math.min(gw/cols,gh/rows),gap=Math.max(1,cell*0.2),sz=cell-gap;
+    const ox=pad+(gw-cell*cols)/2,oy=top;
+    CS.txt(ctx,narrow?'100,000 series · a square is '+per:'100,000 series · each square is '+per.toLocaleString('en-US')+' series',pad,14,{c:C.ink2,max:W-2*pad});
+    /* the sweep: once a foundation model is on the stream, every square gets a forecast */
+    for(let i=0;i<N;i++){const x=ox+(i%cols)*cell,y=oy+Math.floor(i/cols)*cell;
+      if(i<head){ctx.fillStyle=C.blue3;ctx.fillRect(x,y,sz,sz);continue;}
+      const on=clamp((u*1.18-i/N)/0.18,0,1);
+      if(on<1){ctx.globalAlpha=1-on;ctx.strokeStyle='rgba(255,170,90,.8)';ctx.lineWidth=1;ctx.strokeRect(x+.5,y+.5,sz-1,sz-1);ctx.globalAlpha=1;}
+      if(on>0){ctx.globalAlpha=on;ctx.fillStyle=C.blue2;ctx.fillRect(x,y,sz,sz);ctx.globalAlpha=1;}}
+    /* call-out on the head while it is the only part with a model */
+    if(k<0.5){ctx.globalAlpha=1-k*2;const hx=ox+head*cell;ctx.strokeStyle=C.blue4;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ox,oy-6);ctx.lineTo(ox,oy-10);ctx.lineTo(hx-gap,oy-10);ctx.lineTo(hx-gap,oy-6);ctx.stroke();
+      CS.txt(ctx,narrow?'top 300: a model each':'the top 300: a bespoke model each, months of expert work',ox,oy-20,{c:C.blue4,max:W-ox-pad});ctx.globalAlpha=1;}
+    else{ctx.globalAlpha=(k-0.5)*2;CS.txt(ctx,narrow?'every series, every cycle':'every series, every cycle, one statement',ox,oy-20,{c:C.green2,max:W-ox-pad});ctx.globalAlpha=1;}
+    /* legend */
+    const ly=oy+rows*cell+12;ctx.fillStyle=C.blue2;ctx.fillRect(ox,ly-5,10,10);CS.txt(ctx,'forecast',ox+16,ly,{c:C.ink2});
+    const lx2=ox+(narrow?92:110);ctx.strokeStyle='rgba(255,170,90,.8)';ctx.strokeRect(lx2+.5,ly-4.5,9,9);CS.txt(ctx,narrow?'safety margin':'covered by a safety margin',lx2+16,ly,{c:C.ink2,max:W-lx2-pad-16});
+    /* the margin carried, every cycle */
+    const by=H-barH+6,bw=gw,wm=lerp(1,0.32,k);CS.txt(ctx,narrow?'Margin carried':'Safety margin carried, every cycle',pad,by,{c:C.ink2});
+    ctx.fillStyle='rgba(255,255,255,.07)';ctx.fillRect(pad,by+12,bw,10);ctx.fillStyle=k>0.5?'rgba(255,170,90,.55)':'rgba(255,170,90,.85)';ctx.fillRect(pad,by+12,bw*wm,10);
+    CS.txt(ctx,k>0.5?(narrow?'where the band is wide':'only where the forecast band is wide'):(narrow?'extra stock, headroom':'extra inventory, headroom, tolerance'),W-pad,by,{c:k>0.5?C.green2:'#ffaa5a',a:'right',max:Math.max(80,W-2*pad-(narrow?118:290))});}
+  reg({el,resize(){cv.fit();},update,draw});
+  chipGroup('tl-mode',v=>{st.auto=true;set(v==='tsfm');});
+  App.tail={set(on){st.auto=true;set(on);},reset(){st.auto=true;st.u=0;set(false);}};
+})();
+
 /* ============ 03 case study: IBM Network Intelligence ============ */
 (function(){
   const el=$('#cs-telco');if(!el)return;
@@ -3167,7 +3256,7 @@ const CS={
 (function(){
   const el=$('#st-arch');if(!el)return;
   const arch=$('#arch'),cv=new Cv($('#arch-cv'));
-  const ins=$$('#arch-in .arch-node'),outs=$$('#arch-out .arch-node'),rows=$$('#arch-mid .arch-row');
+  const ins=$$('#arch-in .arch-node'),outs=$$('#arch-out .arch-node'),rows=$$('#arch-mid .arch-row');const KIND=rows.map(r=>r.classList.contains('purple')?'agent':r.classList.contains('ibm')?'ibm':'cf');
   let A=null;const parts=[];let count=0;
   function anchors(){const ar=arch.getBoundingClientRect();const rel=r=>({l:r.left-ar.left,r:r.right-ar.left,t:r.top-ar.top,b:r.bottom-ar.top,cx:r.left-ar.left+r.width/2,cy:r.top-ar.top+r.height/2});const stacked=window.innerWidth<=900;
     A={stacked,ins:ins.map(n=>rel(n.getBoundingClientRect())),outs:outs.map(n=>rel(n.getBoundingClientRect())),rows:rows.map(n=>rel(n.getBoundingClientRect())),eng:rel($('#arch-mid .arch-engine').getBoundingClientRect())};}
@@ -3195,8 +3284,8 @@ const CS={
       ctx.strokeStyle='rgba(120,169,255,.10)';ctx.lineWidth=1;
       const e=A.eng;A.ins.forEach(s=>{ctx.beginPath();if(!A.stacked){ctx.moveTo(s.r,s.cy);ctx.bezierCurveTo(s.r+(e.l-s.r)*0.5,s.cy,e.l-(e.l-s.r)*0.4,e.cy,e.l,e.cy);}else{ctx.moveTo(s.cx,s.b);ctx.bezierCurveTo(s.cx,s.b+(e.t-s.b)*0.5,e.cx,e.t-(e.t-s.b)*0.4,e.cx,e.t);}ctx.stroke();});
       A.outs.forEach(d=>{ctx.beginPath();if(!A.stacked){ctx.moveTo(e.r,e.cy);ctx.bezierCurveTo(e.r+(d.l-e.r)*0.4,e.cy,d.l-(d.l-e.r)*0.5,d.cy,d.l,d.cy);}else{ctx.moveTo(e.cx,e.b);ctx.bezierCurveTo(e.cx,e.b+(d.t-e.b)*0.5,d.cx,d.t-(d.t-e.b)*0.4,d.cx,d.t);}ctx.stroke();});
-      parts.forEach(p=>{const q=pos(p);const c=q.phase===0?C.blue3:q.phase===1?(q.row>=3?C.purple:'#fff'):C.green2;ctx.save();ctx.shadowColor=q.phase===1&&q.row<3?C.blue2:c;ctx.shadowBlur=14;ctx.fillStyle=c;ctx.beginPath();ctx.arc(q.pt.x,q.pt.y,q.phase===1?4.5:3.2,0,Math.PI*2);ctx.fill();ctx.restore();});
-      rows.forEach((r,i)=>{const lit=parts.some(p=>{const q=pos(p);return q.phase===1&&q.row===i;});r.style.borderColor=lit?(i===3?'rgba(190,149,255,.8)':'rgba(69,137,255,.8)'):'';});
+      parts.forEach(p=>{const q=pos(p);const kind=q.phase===1?KIND[q.row]:'';const c=q.phase===0?C.blue3:q.phase===1?(kind==='agent'?C.purple:kind==='ibm'?C.blue3:'#fff'):C.green2;ctx.save();ctx.shadowColor=q.phase===1&&kind!=='agent'?C.blue2:c;ctx.shadowBlur=14;ctx.fillStyle=c;ctx.beginPath();ctx.arc(q.pt.x,q.pt.y,q.phase===1?4.5:3.2,0,Math.PI*2);ctx.fill();ctx.restore();});
+      rows.forEach((r,i)=>{const lit=parts.some(p=>{const q=pos(p);return q.phase===1&&q.row===i;});r.style.borderColor=lit?(KIND[i]==='agent'?'rgba(190,149,255,.8)':'rgba(69,137,255,.8)'):'';});
     }});
   anchors();
 })();
@@ -3218,45 +3307,56 @@ const CS={
   const cap=$('#pitch-cap'),prog=$('#pitch-prog'),stepEl=$('#pitch-step'),actEl=$('#pitch-act'),pauseBtn=$('#pitch-pause'),soundBtn=$('#pitch-sound'),hint=$('#pitch-hint'),miniStep=$('#pitch-mini-step');
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
-  const tab=id=>click('[role=tab][aria-controls="'+id+'"]');
-  /* one pitch, about a minute: the prize, what is new, what it tells you, the platform, the economics, who uses it,
-     a line on the floor, where the value lands. subs are the subtitles, timed to the voice by their length.
-     at('phrase') waits for that phrase in the line */
+  const tab=id=>{const f=App.tabSel&&App.tabSel[id];if(f){f();return true;}return click('[role=tab][aria-controls="'+id+'"]');};
+  /* one pitch, about a minute: the prize, what is new, what it tells you, Confluent and Granite better together,
+     the economics, then the proof of breadth: six decisions, four industries, three case studies, and the ask.
+     subs are the subtitles, timed to the voice by their length. at('phrase') waits for that phrase in the line.
+     hold keeps a step on screen a moment after the voice ends */
   const ACTS=['01 Innovation','02 Value','03 Use cases','Contact'];
   const mode=v=>click('#live-mode .chip[data-v="'+v+'"]');
-  const lightCard=id=>{$$('#uctabs [role=tab]').forEach(x=>x.classList.toggle('tour-hi',x.getAttribute('aria-controls')===id));const c=$('#uctabs [aria-controls="'+id+'"]'),strip=$('#uctabs');if(c&&strip.scrollWidth>strip.clientWidth+4){try{strip.scrollTo({left:Math.max(0,c.offsetLeft-16),behavior:reduced?'auto':'smooth'});}catch(e){}}};
+  const hi=sel=>$$(sel).forEach(x=>x.classList.add('tour-hi'));
+  const show=(strip,id)=>{tab(id);$$('#'+strip+' [role=tab]').forEach(x=>x.classList.toggle('tour-hi',x.getAttribute('aria-controls')===id));};
+  const montage=async(at,strip,list)=>{for(const [p,id] of list){await at(p);show(strip,id);}};
   const SCRIPT=[
-    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:9000,
-      say:'Foundation models unlocked unstructured data. The bigger prize is streaming data: which payment to stop, when the pump will fail.',
-      subs:['Foundation models unlocked <em>unstructured data</em>.','The bigger prize is <em>streaming data</em>:','which payment to stop, when the pump will fail.'],
+    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:8730,
+      say:'Foundation models unlocked unstructured data. The bigger prize is streaming data, where the mission-critical decisions live.',
+      subs:['Foundation models unlocked <em>unstructured data</em>.','The bigger prize is <em>streaming data</em>,','where the <em>mission-critical decisions</em> live.'],
       run:async w=>{chipSet('live-mode','ad');mode('ad');click('#live-sc .chip[data-v="temp"]');}},
-    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:7800,
-      say:'Now IBM Granite Time Series models are live on Confluent, and work on series they have never seen.',
-      subs:['Now IBM Granite Time Series models are <em>live on Confluent</em>,','and work on series <em>they have never seen</em>.'],
-      run:async(w,at)=>{await at('and work on');click('#live-poke');}},
-    {n:3,act:0,focus:'.hero-head,#st-live',dur:7500,
+    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:7960,
+      say:'Now IBM Granite Time Series models run inside Confluent, and work on series they have never seen.',
+      subs:['Now IBM Granite Time Series models run <em>inside Confluent</em>,','and work on series <em>they have never seen</em>.'],
+      run:async(w,at)=>{await at('and work on');click('#live-sc .chip[data-v="load"]');await at('never seen');click('#live-poke');}},
+    {n:3,act:0,focus:'.hero-head,#st-live',dur:7530,
       say:'They tell you what comes next, how far it sits from normal, which history matches, and which settings hit the target.',
       subs:['They tell you <em>what comes next</em>,','<em>how far it sits from normal</em>,','<em>which history matches</em>,','and <em>which settings hit the target</em>.'],
       run:async(w,at)=>{await at('what comes next');mode('fc');await w(500);setRange('#live-h',32);await at('how far it sits');mode('ad');await w(400);click('#live-poke');await at('which history');mode('search');await at('which settings');mode('opt');}},
-    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#st-arch',dur:7000,
-      say:'Confluent streams and governs the data with zero configuration, so models see live signals.',
-      subs:['Confluent streams and governs the data','<em>with zero configuration</em>, so models see <em>live signals</em>.'],
-      run:async w=>{}},
-    {n:5,act:1,focus:'#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:7900,
-      say:'That changes the economics: no bespoke model per series, no months of expert work, no safety margins.',
-      subs:['That changes <em>the economics</em>:','no bespoke model per series, no months of expert work,','<em>no safety margins</em>.'],
-      run:async w=>{}},
-    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs',scroll:'#uctabs',dur:8200,
-      say:'No data science army: a demand planner, a fraud analyst or a process engineer runs them on their own streams.',
-      subs:['No data science army:','a <em>demand planner</em>, a <em>fraud analyst</em> or a <em>process engineer</em>','runs them <em>on their own streams</em>.'],
-      run:async(w,at)=>{await at('a demand planner');lightCard('uc-demand');await at('a fraud analyst');lightCard('uc-fraud');await at('a process engineer');lightCard('uc-prod');await at('runs them');$$('#uctabs [role=tab]').forEach(x=>x.classList.add('tour-hi'));}},
-    {n:7,act:2,focus:'#st-plant',scroll:'#st-plant',pre:()=>{tab('st-plant');click('#pl-sc .chip[data-v="opt"]');},dur:7000,
-      say:'On a factory line, it forecasts the shift, flags a slow drift, and finds the last run like this.',
-      subs:['On a factory line, it <em>forecasts the shift</em>,','<em>flags a slow drift</em>,','and <em>finds the last run like this</em>.'],
-      run:async(w,at)=>{await at('flags a slow drift');click('#pl-sc .chip[data-v="anom"]');}},
-    {n:8,act:3,focus:'.contact',scroll:'#contact',dur:7900,
-      say:'Forecasting, anomaly detection, optimization and search, on every stream. Contact us to start with yours.',
-      subs:['Forecasting, anomaly detection, optimization and search, <em>on every stream</em>.','<em>Contact us</em> to start with yours.'],
+    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#arch-mid',dur:9930,
+      say:'Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration.',
+      subs:['<em>Better together</em>:','Confluent <em>streams, connects and governs</em> the data,','and Granite turns each event <em>into a decision</em>,','with <em>zero configuration</em>.'],
+      run:async(w,at)=>{const row=k=>hi('#arch-mid .arch-row[data-k="'+k+'"]');hi('#arch-mid .arch-join');
+        await at('Confluent streams');hi('#arch-mid .arch-brand:not(.ibm)');await at('streams,');row('stream');await at('connects');row('connect');await at('governs');row('govern');
+        await at('and Granite');scrollTo(window.innerWidth<=760?'#arch-mid .arch-brand.ibm':'#arch-mid .arch-row[data-k="process"]',true);row('process');hi('#arch-mid .arch-brand.ibm');await w(260);row('fd');await w(260);row('sc');await w(260);row('opt');
+        await at('into a decision');row('agent');await at('zero configuration');hi('#arch-mid .arch-f');}},
+    {n:5,act:1,focus:'#h-tail,#st-tail',scroll:'#st-tail',pre:()=>{if(App.tail)App.tail.reset();},dur:8710,
+      say:'That changes the economics: not a few hundred modeled series and safety margins on the rest, but every series, every cycle.',
+      subs:['That changes <em>the economics</em>:','not a few hundred modeled series','and <em>safety margins</em> on the rest,','but <em>every series, every cycle</em>.'],
+      run:async(w,at)=>{await at('but every series');if(App.tail)App.tail.set(true);}},
+    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#usecases > .wrap > .chapter-head:first-child',top:true,scrollM:'#uctabs',dur:9040,
+      say:'Six mission-critical decisions, no data science team required: production, anomalies, supply chain, fraud, search and trading.',
+      subs:['<em>Six mission-critical decisions</em>,','no data science team required:','production, anomalies, supply chain,','fraud, search and trading.'],
+      run:async(w,at)=>{hi('#uctabs [role=tab]');await montage(at,'uctabs',[['production','uc-prod'],['anomalies','uc-anom'],['supply chain','uc-demand'],['fraud','uc-fraud'],['search','uc-search'],['trading','uc-trade']]);}},
+    {n:7,act:2,focus:'#h-ind,#indtabs,#st-plant,#st-retail,#st-bank,#st-air',scroll:'#h-ind',top:true,scrollM:'#indtabs',dur:5130,hold:1300,
+      say:'Live twins for industrial plants, retail, banking and airlines.',
+      subs:['<em>Live twins</em> for industrial plants,','retail, banking and airlines.'],
+      run:async(w,at)=>{hi('#indtabs [role=tab]');await montage(at,'indtabs',[['industrial plants','st-plant'],['retail','st-retail'],['banking','st-bank'],['airlines','st-air']]);}},
+    {n:8,act:2,focus:'#cases,#cstabs,#usecases .cspanel',scroll:'#cstabs',topM:true,pre:()=>{if(App.cement)App.cement.set(false);},dur:9860,
+      say:'Proven in the field: tickets only on confirmed causes in telco, thirty models to two in cement, ten percent lower error in finance.',
+      subs:['<em>Proven in the field</em>:','tickets only on <em>confirmed causes</em> in telco,','<em>thirty models to two</em> in cement,','<em>ten percent lower error</em> in finance.'],
+      run:async(w,at)=>{hi('#cstabs [role=tab]');await at('tickets only');show('cstabs','cs-telco');click('#ni-mode .chip[data-v="assist"]');await w(200);click('#ni-inject .chip[data-v="fiber"]');
+        await at('thirty models');show('cstabs','cs-cement');await w(500);if(App.cement)App.cement.set(true);await at('ten percent');show('cstabs','cs-fin');}},
+    {n:9,act:3,focus:'.contact',scroll:'#contact',dur:4290,hold:500,
+      say:'Bring us a stream and a decision. Contact us to start.',
+      subs:['Bring us <em>a stream and a decision</em>.','<em>Contact us</em> to start.'],
       run:async w=>{}}
   ];
   const store={get(k){try{return localStorage.getItem(k);}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
@@ -3264,6 +3364,7 @@ const CS={
   const st={on:false,mini:false,i:0,paused:false,autoPaused:false,token:0,t0:0,pausedMs:0,pauseAt:0,auto:false,speaking:false,
     voice:store.get(SOUND)!=='off',unlocked:false};
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const len=s=>s.dur+(s.hold||0);
   async function waitFor(ms,token){const end=performance.now()+ms;while(performance.now()<end){if(st.token!==token)throw new Error('cancel');if(st.paused){const p0=performance.now();while(st.paused&&st.token===token)await sleep(80);if(st.token!==token)throw new Error('cancel');return waitFor(end-p0,token);}await sleep(50);}}
   const elapsed=()=>performance.now()-st.t0-st.pausedMs-(st.paused?performance.now()-st.pauseAt:0);
   const inField=t=>!!(t&&t.closest&&t.closest('input,textarea,select,[contenteditable],[contenteditable=""]'));
@@ -3275,7 +3376,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-10-18e';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='2026-10-18f';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}
@@ -3304,7 +3405,7 @@ const CS={
   function toggleSound(){if(st.voice&&!st.unlocked){enableSound();return;}st.voice=!st.voice;store.set(SOUND,st.voice?'on':'off');if(st.voice)enableSound();else stopAudio();soundUI();}
 
   function focus(sel){$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));$$(sel).forEach(el=>el.classList.add('pitch-focus'));}
-  function scrollTo(sel){if(sel==='top'){window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});return;}const el=$(sel);if(!el)return;const nav=document.querySelector('.nav');const navH=nav?nav.offsetHeight:56;const panelH=ui.hidden?0:(ui.offsetHeight||230);const avail=window.innerHeight-navH-panelH;const r=el.getBoundingClientRect();let top=r.top+window.scrollY-navH-12;if(r.height<avail-24)top-=(avail-24-r.height)/2;window.scrollTo({top:Math.max(0,top),behavior:reduced?'auto':'smooth'});}
+  function scrollTo(sel,alignTop){if(sel==='top'){window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});return;}const el=$(sel);if(!el)return;const nav=document.querySelector('.nav');const navH=nav?nav.offsetHeight:56;const panelH=ui.hidden?0:(ui.offsetHeight||230);const avail=window.innerHeight-navH-panelH;const r=el.getBoundingClientRect();let top=r.top+window.scrollY-navH-12;if(!alignTop&&r.height<avail-24)top-=(avail-24-r.height)/2;window.scrollTo({top:Math.max(0,top),behavior:reduced?'auto':'smooth'});}
   function showCap(html){cap.innerHTML=html;cap.classList.remove('in');void cap.offsetWidth;cap.classList.add('in');}
   async function runSubs(s,token){const parts=s.subs||[s.cap];if(parts.length<2)return;const len=parts.map(p=>p.replace(/<[^>]+>/g,'').length);const tot=len.reduce((x,y)=>x+y,0);let acc=len[0];
     try{for(let k=1;k<parts.length;k++){const t=(acc/tot)*s.dur-120-elapsed();if(t>0)await waitFor(t,token);if(st.token!==token)return;showCap(parts[k]);acc+=len[k];}}catch(e){}}
@@ -3312,20 +3413,21 @@ const CS={
     segs.forEach((g,j)=>{g.classList.toggle('done',j<i);g.classList.remove('on','paused');g.style.removeProperty('--d');});segBtns.forEach((b,j)=>b.setAttribute('aria-current',j===i?'step':'false'));
     $$('.tour-hi').forEach(e=>e.classList.remove('tour-hi'));
     if(s.pre)s.pre();focus(s.focus);
-    await waitFor(60,token);const target=(window.innerWidth<=760&&s.scrollM)?s.scrollM:s.scroll;if(target)scrollTo(target);
+    await waitFor(60,token);const phone=window.innerWidth<=760,target=(phone&&s.scrollM)?s.scrollM:s.scroll;if(target)scrollTo(target,s.top||(phone&&s.topM));
     await waitFor(reduced?60:220,token);
-    const seg=segs[i];seg.style.setProperty('--d',s.dur+'ms');void seg.offsetWidth;seg.classList.add('on');st.t0=performance.now();st.pausedMs=0;
+    const seg=segs[i];seg.style.setProperty('--d',len(s)+'ms');void seg.offsetWidth;seg.classList.add('on');st.t0=performance.now();st.pausedMs=0;
     const w=ms=>waitFor(ms,token);
     const at=async p=>{const k=s.say.indexOf(p);if(k<0)return;const t=(k/s.say.length)*s.dur-elapsed();if(t>0)await w(t);};
     const said=speak(i,token);runSubs(s,token);
     try{await s.run(w,at);}catch(e){if(e.message==='cancel')throw e;}
     await waitFor(Math.max(0,s.dur-elapsed()),token);
     await Promise.race([said,waitFor(st.voice&&st.unlocked?6000:200,token)]);
+    if(s.hold)await waitFor(Math.max(0,len(s)-elapsed()),token);
     if(st.token!==token)throw new Error('cancel');
     seg.classList.add('done');seg.classList.remove('on');}
   function setPaused(p){if(!st.on||st.paused===p)return;st.paused=p;const now=performance.now();if(p)st.pauseAt=now;else st.pausedMs+=now-st.pauseAt;
     pauseBtn.innerHTML=p?'Resume <kbd>space</kbd>':'Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed',p?'true':'false');ui.classList.toggle('is-paused',p);
-    const seg=segs[st.i],s=SCRIPT[st.i];if(seg){if(p){seg.style.setProperty('--w',Math.min(100,100*elapsed()/s.dur)+'%');seg.classList.add('paused');}else{seg.style.setProperty('--d',Math.max(0,s.dur-elapsed())+'ms');seg.classList.remove('paused');}}
+    const seg=segs[st.i],s=SCRIPT[st.i];if(seg){if(p){seg.style.setProperty('--w',Math.min(100,100*elapsed()/len(s))+'%');seg.classList.add('paused');}else{seg.style.setProperty('--d',Math.max(0,len(s)-elapsed())+'ms');seg.classList.remove('paused');}}
     if(p){try{player.pause();}catch(e){}if(window.speechSynthesis)speechSynthesis.pause();}
     else{if(st.voice&&st.unlocked&&st.speaking){const pr=player.play();if(pr&&pr.catch)pr.catch(()=>{});}if(window.speechSynthesis)speechSynthesis.resume();}}
   const togglePause=()=>{st.autoPaused=false;setPaused(!st.paused);};
