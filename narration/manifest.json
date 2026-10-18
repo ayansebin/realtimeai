@@ -5,20 +5,20 @@
   {
    "id": "01",
    "file": "01.mp3",
-   "dur": 8.83,
-   "text": "Foundation models unlocked unstructured data. The bigger prize is streaming data, where the mission-critical decisions live."
+   "dur": 10.32,
+   "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run inside Confluent, on every live stream."
   },
   {
    "id": "02",
    "file": "02.mp3",
-   "dur": 8.06,
-   "text": "Now I B M Granite Time Series models run inside Confluent, and work on series they have never seen."
+   "dur": 9.36,
+   "text": "When the context changes, a warmer room or a faster line, the forecast sees it coming, minutes before the line drifts out of spec."
   },
   {
    "id": "03",
    "file": "03.mp3",
-   "dur": 7.63,
-   "text": "They tell you what comes next, how far it sits from normal, which history matches, and which settings hit the target."
+   "dur": 7.8,
+   "text": "Then it optimizes the setpoint to keep the line in spec, so mission-critical decisions land while they still matter."
   },
   {
    "id": "04",
@@ -29,8 +29,8 @@
   {
    "id": "05",
    "file": "05.mp3",
-   "dur": 8.81,
-   "text": "That changes the economics: not a few hundred modeled series and safety margins on the rest, but every series, every cycle."
+   "dur": 9.53,
+   "text": "For your teams, that means ten times faster time to value, five to ten percent more accuracy, and decisions in seconds, not days."
   },
   {
    "id": "06",
