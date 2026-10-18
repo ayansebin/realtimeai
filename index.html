@@ -517,6 +517,9 @@ body.pitching .topbar{display:none}
 .pitch kbd{font-family:var(--font-mono);font-size:.68rem;border:1px solid var(--line-2);padding:.05rem .3rem;color:var(--ink-3);text-transform:none;letter-spacing:0}
 .pitch-prog{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;height:4px}
 .pitch-prog i{display:block;background:rgba(255,255,255,.14);position:relative;overflow:hidden}
+.pitch-prog i.act{margin-left:10px}
+.pitch-act{color:var(--ink);letter-spacing:.08em}
+#uctabs .uc.tour-hi{border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe,0 10px 24px rgba(15,98,254,.18);transform:translateY(-2px)}
 .pitch-prog i::after{content:"";position:absolute;inset:0;width:0;background:var(--blue-2);box-shadow:0 0 10px var(--blue-2)}
 .pitch-prog i.done::after{width:100%}
 .pitch-prog i.on::after{width:100%;transition:width var(--d,6s) linear}
@@ -1461,7 +1464,7 @@ FROM pos_sales;</code></pre></div>
   </div>
 </div>
 <div class="pitch" id="pitch" hidden role="dialog" aria-label="Live demo" aria-modal="false">
-  <div class="pitch-top"><span class="pitch-live"><i></i>Live demo</span><span class="pitch-step" id="pitch-step">1 / 9</span><button class="pitch-x" id="pitch-exit" type="button" aria-label="Exit the demo">Exit <kbd>Esc</kbd></button></div>
+  <div class="pitch-top"><span class="pitch-live"><i></i>Live demo</span><span class="pitch-act" id="pitch-act">01 Innovation</span><span class="pitch-step" id="pitch-step">1 / 10</span><button class="pitch-x" id="pitch-exit" type="button" aria-label="Exit the demo">Exit <kbd>Esc</kbd></button></div>
   <div class="pitch-prog" id="pitch-prog" aria-hidden="true"></div>
   <div class="pitch-cap" id="pitch-cap" aria-live="polite"></div>
   <div class="pitch-ctl">
@@ -3172,35 +3175,39 @@ const CS={
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>click('[role=tab][aria-controls="'+id+'"]');
+  /* three acts and a close: what is new, the value, the use cases, then contact */
+  const ACTS=['01 Innovation','02 Value','03 Use cases','Contact'];
   const SCRIPT=[
-    {n:1,focus:'.hero-head,#st-live',scroll:'top',dur:9900,cap:'Every event is a decision. <em>Scored in flight.</em>',say:'Every event in your stream is a decision. IBM Granite Time Series models score each one in flight, on Confluent. Poke it.',
-      run:async w=>{chipSet('live-mode','ad');click('#live-mode .chip[data-v="ad"]');click('#live-sc .chip[data-v="temp"]');await w(2800);scrollTo('#st-live');await w(4400);click('#live-poke');}},
-    {n:2,focus:'.hero-head,#st-live',dur:5100,cap:'Forecast the next <em>32 steps</em>, with the band.',say:'Switch to forecast: the next thirty-two steps, with the band.',
+    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:11400,cap:'IBM Granite Time Series models, <em>inside Confluent</em>.',say:'What is new: IBM Granite Time Series models now run inside Confluent. Every event in your stream is scored in flight, with no training.',
+      run:async w=>{chipSet('live-mode','ad');click('#live-mode .chip[data-v="ad"]');click('#live-sc .chip[data-v="temp"]');await w(2800);scrollTo('#st-live');await w(3600);click('#live-poke');}},
+    {n:2,act:0,focus:'.hero-head,#st-live',dur:6400,cap:'One line of Flink SQL. <em>The next 32 steps</em>, with the band.',say:'One line of Flink SQL forecasts the next thirty-two steps, with the band.',
       run:async w=>{click('#live-mode .chip[data-v="fc"]');await w(900);setRange('#live-h',32);}},
-    {n:3,focus:'#uc-opt',scroll:'#uc-opt',pre:()=>click('#op-reset'),dur:9000,cap:'Then optimize it. <em>The best setting, inside spec.</em>',say:'Then optimize it. The optimizer finds the setting that earns the most and still meets spec. The operator approves.',
+    {n:3,act:0,focus:'#uc-opt',scroll:'#uc-opt',pre:()=>click('#op-reset'),dur:8100,cap:'Forecast it, then <em>optimize it</em>.',say:'Forecast it, then optimize it. The optimizer picks the setting that earns the most and still meets spec.',
       run:async w=>{await w(1200);click('#op-go');}},
-    {n:4,focus:'#st-agent',scroll:'#st-agent',scrollM:'#n2',dur:8300,cap:'Then an agent acts. <em>Under a second</em>, inside Confluent.',say:'Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent.',
+    {n:4,act:0,focus:'#st-agent',scroll:'#st-agent',scrollM:'#n2',dur:6900,cap:'Then an agent acts. <em>Under a second</em>.',say:'Then an agent acts. Forecast, flag, reasoning, purchase order, in under a second.',
       run:async w=>{click('#ag-sc .chip[data-v="retail"]');await w(300);click('#ag-run');}},
-    {n:5,focus:'#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:9600,cap:'<em>10&#215;</em> faster to value. <em>5 to 10%</em> more accurate. Seconds, <em>not days</em>.',say:'Three things change. Ten times faster to value, five to ten percent more accurate, and decisions in seconds, not days.',
+    {n:5,act:1,focus:'#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:9000,cap:'<em>10&#215;</em> faster to value. <em>5 to 10%</em> more accurate. Seconds, <em>not days</em>.',say:'The value: ten times faster to value, five to ten percent more accurate, and decisions in seconds, not days.',
       run:async w=>{}},
-    {n:6,focus:'#uc-fraud',scroll:'#uc-fraud',pre:()=>tab('uc-fraud'),dur:6500,cap:'Every card has <em>its own normal</em>.',say:'Every card has its own normal. The odd swipe is held before authorization.',
+    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs',scroll:'#uctabs',dur:8200,cap:'Mission-critical <em>enterprise decisions</em>.',say:'The use cases: mission-critical decisions. Production, anomalies, supply chain, fraud, search and trading.',
+      run:async w=>{const cards=$$('#uctabs [role=tab]'),strip=$('#uctabs');await w(2400);for(const c of cards){cards.forEach(x=>x.classList.toggle('tour-hi',x===c));if(strip.scrollWidth>strip.clientWidth+4){try{strip.scrollTo({left:Math.max(0,c.offsetLeft-16),behavior:reduced?'auto':'smooth'});}catch(e){}}await w(850);}cards.forEach(x=>x.classList.remove('tour-hi'));}},
+    {n:7,act:2,focus:'#uc-fraud',scroll:'#uc-fraud',pre:()=>tab('uc-fraud'),dur:7700,cap:'Every card has <em>its own normal</em>.',say:'Take fraud. Every card has its own normal, so the odd swipe is held before authorization.',
       run:async w=>{await w(1500);click('#fr-inject .chip[data-v="stolen"]');}},
-    {n:7,focus:'#cs-telco',scroll:'#cs-telco',pre:()=>{tab('cs-telco');click('#ni-mode .chip[data-v="assist"]');},dur:10800,cap:'A ticket opens <em>only when the cause is real</em>.',say:'IBM Network Intelligence. TSPulse flags the anomaly, agents confirm the cause, and a ticket opens only when it is real.',
-      run:async w=>{await w(700);click('#ni-inject .chip[data-v="fiber"]');}},
-    {n:8,focus:'#cs-cement',scroll:'#cs-cement',pre:()=>{tab('cs-cement');if(App.cement)App.cement.set(false);},dur:9000,cap:'30 models <em>&#8594; 2</em>. 6 months <em>&#8594; 8 to 10 weeks</em>. 93 <em>&#8594; 99%</em>.',say:'Thirty models become two. Six months become eight to ten weeks. Accuracy from ninety-three to ninety-nine percent.',
+    {n:8,act:2,focus:'#cs-telco',scroll:'#cs-telco',pre:()=>{tab('cs-telco');click('#ni-mode .chip[data-v="assist"]');},dur:7600,cap:'A ticket opens <em>only when the cause is confirmed</em>.',say:'In the field, IBM Network Intelligence opens a ticket only when the cause is confirmed.',
+      run:async w=>{await w(300);click('#ni-inject .chip[data-v="fiber"]');}},
+    {n:9,act:2,focus:'#cs-cement',scroll:'#cs-cement',pre:()=>{tab('cs-cement');if(App.cement)App.cement.set(false);},dur:7900,cap:'30 models <em>&#8594; 2</em>. 6 months <em>&#8594; 8 to 10 weeks</em>. 93 <em>&#8594; 99%</em>.',say:'In cement, thirty models become two, and accuracy rises from ninety-three to ninety-nine percent.',
       run:async w=>{await w(1300);if(App.cement)App.cement.set(true);}},
-    {n:9,focus:'.contact',scroll:'#contact',dur:5400,cap:'Bring a stream and a decision. <em>Contact us.</em>',say:'Bring us a stream and a decision. Contact us for opportunities.',
+    {n:10,act:3,focus:'.contact',scroll:'#contact',dur:5400,cap:'Bring a stream and a decision. <em>Contact us.</em>',say:'Bring us a stream and a decision. Contact us for opportunities.',
       run:async w=>{}}
   ];
   const st={on:false,i:-1,paused:false,voice:true,token:0,utter:null,t0:0,elapsed:0,audio:null,blocked:false,auto:false};
   let voices=[];const pickVoice=()=>{voices=window.speechSynthesis?speechSynthesis.getVoices():[];const pref=['Google US English','Samantha','Microsoft Aria','Microsoft Jenny','Daniel','Karen','Moira','Alex'];for(const n of pref){const v=voices.find(x=>x.name.indexOf(n)>=0);if(v)return v;}return voices.find(v=>/^en[-_]US/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;};
   if(window.speechSynthesis){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener('voiceschanged',pickVoice);}else{voiceBtn.hidden=true;st.voice=false;}
-  prog.innerHTML=SCRIPT.map(()=>'<i></i>').join('');
+  prog.innerHTML=SCRIPT.map((s,i)=>'<i'+(i&&s.act!==SCRIPT[i-1].act?' class="act"':'')+'></i>').join('');const actEl=$('#pitch-act');
   const segs=$$('i',prog);
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   async function waitFor(ms,token){const end=performance.now()+ms;while(performance.now()<end){if(st.token!==token)throw new Error('cancel');if(st.paused){const p0=performance.now();while(st.paused&&st.token===token)await sleep(80);if(st.token!==token)throw new Error('cancel');return waitFor(end-p0,token);}await sleep(60);}}
   /* narration: MP3 files rendered offline (narration/NN.mp3), browser speech as the fallback */
-  const NARR='narration/',NARR_V='2026-10-18';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */const clips={};let narrOK=true;
+  const NARR='narration/',NARR_V='2026-10-18b';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */const clips={};let narrOK=true;
   function clip(i){if(!clips[i]){const a=new Audio(NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V);a.preload='auto';a.addEventListener('error',()=>{narrOK=false;});clips[i]=a;}return clips[i];}
   function preload(){for(let i=0;i<SCRIPT.length;i++)clip(i).load();}
   function stopAudio(){if(st.audio){try{st.audio.pause();st.audio.currentTime=0;}catch(e){}st.audio=null;}if(window.speechSynthesis)speechSynthesis.cancel();}
@@ -3212,7 +3219,7 @@ const CS={
     setTimeout(fin,20000);});}
   function focus(sel){$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));$$(sel).forEach(el=>el.classList.add('pitch-focus'));}
   function scrollTo(sel){if(sel==='top'){window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});return;}const el=$(sel);if(!el)return;const nav=document.querySelector('.nav');const navH=nav?nav.offsetHeight:56;const panelH=ui.hidden?0:(ui.offsetHeight||230);const avail=window.innerHeight-navH-panelH;const r=el.getBoundingClientRect();let top=r.top+window.scrollY-navH-12;if(r.height<avail-24)top-=(avail-24-r.height)/2;window.scrollTo({top:Math.max(0,top),behavior:reduced?'auto':'smooth'});}
-  async function runStep(i,token){const s=SCRIPT[i];st.i=i;stepEl.textContent=(i+1)+' / '+SCRIPT.length;cap.innerHTML=s.cap;
+  async function runStep(i,token){const s=SCRIPT[i];st.i=i;stepEl.textContent=(i+1)+' / '+SCRIPT.length;cap.innerHTML=s.cap;if(actEl)actEl.textContent=ACTS[s.act]||'';
     segs.forEach((g,j)=>{g.classList.toggle('done',j<i);g.classList.remove('on','paused');g.style.removeProperty('--d');});
     if(s.pre)s.pre();focus(s.focus);
     await waitFor(60,token);const target=(window.innerWidth<=760&&s.scrollM)?s.scrollM:s.scroll;if(target)scrollTo(target);
@@ -3228,7 +3235,7 @@ const CS={
   async function play(from){st.on=true;st.token++;const token=st.token;document.body.classList.add('pitching');ui.hidden=false;endEl.hidden=true;cap.hidden=false;prog.hidden=false;$('.pitch-ctl',ui).hidden=false;st.paused=false;pauseBtn.textContent='';pauseBtn.innerHTML='Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed','false');
     try{for(let i=from;i<SCRIPT.length;i++){await runStep(i,token);}finish();}catch(e){if(e.message!=='cancel')console.error(e);}}
   function finish(){cap.innerHTML='';endEl.hidden=false;$('.pitch-ctl',ui).hidden=true;segs.forEach(g=>{g.classList.add('done');g.classList.remove('on');});stepEl.textContent=SCRIPT.length+' / '+SCRIPT.length;focus('.contact');requestAnimationFrame(()=>scrollTo('#contact'));}
-  function exit(){st.token++;st.on=false;st.paused=false;document.body.classList.remove('pitching');$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));ui.hidden=true;stopAudio();}
+  function exit(){st.token++;st.on=false;st.paused=false;document.body.classList.remove('pitching');$$('.tour-hi').forEach(e=>e.classList.remove('tour-hi'));$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));ui.hidden=true;stopAudio();}
   function togglePause(){if(!st.on||!endEl.hidden)return;st.paused=!st.paused;pauseBtn.innerHTML=st.paused?'Resume <kbd>space</kbd>':'Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed',st.paused);const seg=segs[st.i];if(seg){if(st.paused){const w=Math.min(100,100*(performance.now()-st.t0)/SCRIPT[st.i].dur);seg.style.setProperty('--w',w+'%');seg.classList.add('paused');}else{seg.classList.remove('paused');}}if(st.audio){try{if(st.paused)st.audio.pause();else st.audio.play();}catch(e){}}if(window.speechSynthesis){if(st.paused)speechSynthesis.pause();else speechSynthesis.resume();}}
   function next(){if(!st.on)return;const i=st.i+1;st.token++;stopAudio();if(i>=SCRIPT.length){finish();return;}play(i);}
   function unlock(){preload();$('#pitch-sound').hidden=true;st.blocked=false;if(!st.voice)return;try{const a=clip(0);const pr=a.play();if(pr&&pr.then)pr.then(()=>{a.pause();a.currentTime=0;}).catch(()=>{});}catch(e){}if(window.speechSynthesis){try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){}}}
