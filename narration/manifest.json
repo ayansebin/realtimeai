@@ -5,68 +5,50 @@
   {
    "id": "01",
    "file": "01.mp3",
-   "dur": 5.69,
-   "text": "Your business runs on streams, but most decisions still wait for a batch job."
+   "dur": 10.34,
+   "text": "Foundation models unlocked unstructured data. The bigger prize is streaming data: how much to order, which payment to stop, when the pump will fail."
   },
   {
    "id": "02",
    "file": "02.mp3",
-   "dur": 9.46,
-   "text": "Now I B M Granite Time Series models run inside Confluent. Every event is scored the moment it arrives, with no training."
+   "dur": 8.93,
+   "text": "Now I B M Granite Time Series models are live on Confluent. Trained once, they work on series they have never seen."
   },
   {
    "id": "03",
    "file": "03.mp3",
-   "dur": 6.84,
-   "text": "The same line of Flink S Q L looks ahead, and forecasts the next thirty-two steps with a band."
+   "dur": 8.35,
+   "text": "They tell you what comes next, how far it sits from normal, which history looks like this one, and which settings hit the target."
   },
   {
    "id": "04",
    "file": "04.mp3",
-   "dur": 8.52,
-   "text": "Once you see what comes next, you can choose what to do. The optimizer finds the most profitable setting that still meets spec."
+   "dur": 8.16,
+   "text": "Confluent streams and governs the data with zero configuration, so every model sees live business signals."
   },
   {
    "id": "05",
    "file": "05.mp3",
-   "dur": 7.01,
-   "text": "Then an agent closes the loop: forecast, flag, reasoning and purchase order, in under a second."
+   "dur": 9.36,
+   "text": "That changes the economics. No bespoke model per series, no months of expert work, no safety margins paid every cycle."
   },
   {
    "id": "06",
    "file": "06.mp3",
-   "dur": 8.95,
-   "text": "For your teams, that means going live in days instead of months, five to ten percent more accuracy, and decisions in seconds."
+   "dur": 9.05,
+   "text": "No army of data scientists: a demand planner, a fraud analyst or a process engineer puts them to work on their own streams."
   },
   {
    "id": "07",
    "file": "07.mp3",
-   "dur": 8.09,
-   "text": "And it works wherever a decision rides on a stream: production, anomalies, supply chain, fraud, search and trading."
+   "dur": 7.46,
+   "text": "On a factory line, it forecasts the shift, flags a slow drift and finds the last run like this one."
   },
   {
    "id": "08",
    "file": "08.mp3",
-   "dur": 7.3,
-   "text": "Take card payments. Every card gets its own normal, so the odd swipe is held before it is approved."
-  },
-  {
-   "id": "09",
-   "file": "09.mp3",
-   "dur": 8.26,
-   "text": "It is already proven in the field. I B M Network Intelligence opens a ticket only when the cause is confirmed."
-  },
-  {
-   "id": "10",
-   "file": "10.mp3",
-   "dur": 7.78,
-   "text": "At a cement producer, thirty models became two, and accuracy rose from ninety-three to ninety-nine percent."
-  },
-  {
-   "id": "11",
-   "file": "11.mp3",
-   "dur": 6.62,
-   "text": "So bring us one stream and one decision. Contact us, and we will show you what it can do."
+   "dur": 7.92,
+   "text": "Forecasting, anomaly detection, optimization and search on every stream. Contact us to start with yours."
   }
  ]
 }
