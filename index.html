@@ -948,50 +948,8 @@ body.pitching #st-live .stage-top{display:none}
 
 <section class="chapter" id="innovation-2" style="padding-top:0">
   <div class="wrap">
-    <div class="chapter-head">
-      <span class="n">01 / INNOVATION</span>
-      <h2>An agent acts on it.</h2>
-      <p>An agent reads the forecast and the flag, reasons, and writes the decision to a topic. Experts set the gates.</p>
-    </div>
-
-    <div class="stage" id="st-agent">
-      <div class="stage-top">
-        <div class="stage-title"><h3>Stream to decision</h3><p>One event, five hops, under a second.</p></div>
-        <div class="ctl">
-          <div class="ctl-group"><span class="eyebrow">Scenario</span>
-            <div class="chips" id="ag-sc">
-              <button class="chip" data-v="retail" aria-pressed="true">Retail reorder</button>
-              <button class="chip" data-v="fraud" aria-pressed="false">Card fraud</button>
-              <button class="chip" data-v="network" aria-pressed="false">Network ops</button>
-              <button class="chip" data-v="kiln" aria-pressed="false">Cement kiln</button>
-            </div></div>
-          <div class="ctl-group"><span class="eyebrow">&nbsp;</span>
-            <div class="btn-row"><button class="btn sm" id="ag-run">Run one event <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3l9 5-9 5z" fill="currentColor"/></svg></button><button class="switch" id="ag-auto" aria-pressed="false"><i></i>Autopilot</button></div></div>
-        </div>
-      </div>
-      <div class="stage-body">
-        <div class="pipe" id="pipe">
-          <svg class="pipe-svg" id="pipe-svg" aria-hidden="true"></svg>
-          <div class="particle" id="pt"></div>
-          <div class="node" id="n0"><div class="nl"><i></i>Kafka topic</div><div class="nimg" id="n0img" style="--img:url(photos/retail-shelves-s.jpg)"></div><div class="nt" id="n0t">POS sales</div><div class="nb" id="n0b">waiting for an event</div></div>
-          <div class="node" id="n1"><div class="nl"><i></i>Forecast</div><div class="nt">Granite TTM</div><div class="nb" id="n1b"></div></div>
-          <div class="node" id="n2"><div class="nl"><i></i>Detect anomalies</div><div class="nt">99% band</div><div class="nb" id="n2b"></div></div>
-          <div class="node agent" id="n3"><div class="nl"><i></i>Streaming Agent</div><div class="nt">reasons, then acts</div><div class="nb" id="n3b"></div></div>
-          <div class="node" id="n4"><div class="nl"><i></i>Action topic</div><div class="nt" id="n4t">Purchase orders</div><div class="nb" id="n4b"></div></div>
-        </div>
-        <div class="log" id="ag-log" aria-live="polite"><div class="t">Agent log. Press Run one event.</div></div>
-      </div>
-      <div class="stage-foot">
-        <div class="readouts">
-          <div class="readout"><b id="ag-count">0</b><span>decisions</span></div>
-          <div class="readout"><b id="ag-ms" class="blue">–</b><span>stream to action</span></div>
-          <div class="readout"><b id="ag-gate" class="purple">5</b><span>expert gates</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="chapter-head sub" id="h-arch">
-      <span class="n">BETTER TOGETHER</span>
+    <div class="chapter-head" id="h-arch">
+      <span class="n">01 / BETTER TOGETHER</span>
       <h2>Confluent and IBM Granite. One stream, every decision.</h2>
       <p>Confluent streams, connects and governs business data in motion. IBM Granite Time Series models turn each event into a forecast, a flag or a setting. Zero configuration.</p>
     </div>
