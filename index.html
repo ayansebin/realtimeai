@@ -1461,7 +1461,7 @@ FROM pos_sales;</code></pre></div>
   </div>
 </div>
 <div class="pitch" id="pitch" hidden role="dialog" aria-label="Live demo" aria-modal="false">
-  <div class="pitch-top"><span class="pitch-live"><i></i>Live demo</span><span class="pitch-step" id="pitch-step">1 / 8</span><button class="pitch-x" id="pitch-exit" type="button" aria-label="Exit the demo">Exit <kbd>Esc</kbd></button></div>
+  <div class="pitch-top"><span class="pitch-live"><i></i>Live demo</span><span class="pitch-step" id="pitch-step">1 / 9</span><button class="pitch-x" id="pitch-exit" type="button" aria-label="Exit the demo">Exit <kbd>Esc</kbd></button></div>
   <div class="pitch-prog" id="pitch-prog" aria-hidden="true"></div>
   <div class="pitch-cap" id="pitch-cap" aria-live="polite"></div>
   <div class="pitch-ctl">
@@ -3173,22 +3173,26 @@ const CS={
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>click('[role=tab][aria-controls="'+id+'"]');
   const SCRIPT=[
-    {n:1,focus:'#st-live',scroll:'#st-live',dur:7500,cap:'Every event is a decision. <em>Scored in flight.</em>',say:'Every event in your stream is a decision. Granite Time Series models score each one in flight, on Confluent. Poke it.',
-      run:async w=>{chipSet('live-mode','ad');click('#live-mode .chip[data-v="ad"]');click('#live-sc .chip[data-v="temp"]');await w(2600);click('#live-poke');}},
-    {n:2,focus:'#st-live',dur:5000,cap:'Forecast the next <em>32 steps</em>, with the band.',say:'Switch to forecast: the next thirty-two steps, with the band.',
+    {n:1,focus:'.hero-head,#st-live',scroll:'top',dur:9900,cap:'Every event is a decision. <em>Scored in flight.</em>',say:'Every event in your stream is a decision. IBM Granite Time Series models score each one in flight, on Confluent. Poke it.',
+      run:async w=>{chipSet('live-mode','ad');click('#live-mode .chip[data-v="ad"]');click('#live-sc .chip[data-v="temp"]');await w(2800);scrollTo('#st-live');await w(4400);click('#live-poke');}},
+    {n:2,focus:'.hero-head,#st-live',dur:5100,cap:'Forecast the next <em>32 steps</em>, with the band.',say:'Switch to forecast: the next thirty-two steps, with the band.',
       run:async w=>{click('#live-mode .chip[data-v="fc"]');await w(900);setRange('#live-h',32);}},
-    {n:7,focus:'#uc-opt',scroll:'#uc-opt',pre:()=>{tab('uc-opt');click('#op-reset');},dur:6000,cap:'The kiln finds <em>its own setpoint</em>.',say:'The kiln finds its own setpoint inside the guardrails. The operator approves.',
+    {n:3,focus:'#uc-opt',scroll:'#uc-opt',pre:()=>click('#op-reset'),dur:9000,cap:'Then optimize it. <em>The best setting, inside spec.</em>',say:'Then optimize it. The optimizer finds the setting that earns the most and still meets spec. The operator approves.',
       run:async w=>{await w(1200);click('#op-go');}},
-    {n:4,focus:'#st-agent',scroll:'#st-agent',scrollM:'#n2',dur:8000,cap:'Then an agent acts. <em>Under a second</em>, inside Confluent.',say:'Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent.',
+    {n:4,focus:'#st-agent',scroll:'#st-agent',scrollM:'#n2',dur:8300,cap:'Then an agent acts. <em>Under a second</em>, inside Confluent.',say:'Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent.',
       run:async w=>{click('#ag-sc .chip[data-v="retail"]');await w(300);click('#ag-run');}},
-    {n:6,focus:'#uc-fraud',scroll:'#uc-fraud',pre:()=>tab('uc-fraud'),dur:6000,cap:'Every card has <em>its own normal</em>.',say:'Every card has its own normal. The odd swipe is held before authorization.',
+    {n:5,focus:'#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:9600,cap:'<em>10&#215;</em> faster to value. <em>5 to 10%</em> more accurate. Seconds, <em>not days</em>.',say:'Three things change. Ten times faster to value, five to ten percent more accurate, and decisions in seconds, not days.',
+      run:async w=>{}},
+    {n:6,focus:'#uc-fraud',scroll:'#uc-fraud',pre:()=>tab('uc-fraud'),dur:6500,cap:'Every card has <em>its own normal</em>.',say:'Every card has its own normal. The odd swipe is held before authorization.',
       run:async w=>{await w(1500);click('#fr-inject .chip[data-v="stolen"]');}},
-    {n:5,focus:'#cs-cement',scroll:'#cs-cement',pre:()=>{tab('cs-cement');if(App.cement)App.cement.set(false);},dur:7000,cap:'30 models <em>&#8594; 2</em>. 6 months <em>&#8594; 8 weeks</em>. 93 <em>&#8594; 99%</em>.',say:'Thirty bespoke models become two. Six months become eight weeks. Accuracy from ninety-three to ninety-nine percent.',
+    {n:7,focus:'#cs-telco',scroll:'#cs-telco',pre:()=>{tab('cs-telco');click('#ni-mode .chip[data-v="assist"]');},dur:10800,cap:'A ticket opens <em>only when the cause is real</em>.',say:'IBM Network Intelligence. TSPulse flags the anomaly, agents confirm the cause, and a ticket opens only when it is real.',
+      run:async w=>{await w(700);click('#ni-inject .chip[data-v="fiber"]');}},
+    {n:8,focus:'#cs-cement',scroll:'#cs-cement',pre:()=>{tab('cs-cement');if(App.cement)App.cement.set(false);},dur:9000,cap:'30 models <em>&#8594; 2</em>. 6 months <em>&#8594; 8 to 10 weeks</em>. 93 <em>&#8594; 99%</em>.',say:'Thirty models become two. Six months become eight to ten weeks. Accuracy from ninety-three to ninety-nine percent.',
       run:async w=>{await w(1300);if(App.cement)App.cement.set(true);}},
-    {n:8,focus:'.contact',scroll:'#contact',dur:4500,cap:'One statement of Flink SQL. <em>Run it on your stream.</em>',say:'One statement of Flink SQL. Run it on your stream.',
+    {n:9,focus:'.contact',scroll:'#contact',dur:5400,cap:'Bring a stream and a decision. <em>Contact us.</em>',say:'Bring us a stream and a decision. Contact us for opportunities.',
       run:async w=>{}}
   ];
-  const st={on:false,i:-1,paused:false,voice:true,token:0,utter:null,t0:0,elapsed:0,audio:null,blocked:false};
+  const st={on:false,i:-1,paused:false,voice:true,token:0,utter:null,t0:0,elapsed:0,audio:null,blocked:false,auto:false};
   let voices=[];const pickVoice=()=>{voices=window.speechSynthesis?speechSynthesis.getVoices():[];const pref=['Google US English','Samantha','Microsoft Aria','Microsoft Jenny','Daniel','Karen','Moira','Alex'];for(const n of pref){const v=voices.find(x=>x.name.indexOf(n)>=0);if(v)return v;}return voices.find(v=>/^en[-_]US/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;};
   if(window.speechSynthesis){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener('voiceschanged',pickVoice);}else{voiceBtn.hidden=true;st.voice=false;}
   prog.innerHTML=SCRIPT.map(()=>'<i></i>').join('');
@@ -3204,10 +3208,10 @@ const CS={
   function speak(i,token){return new Promise(res=>{if(!st.voice){res();return;}if(!narrOK){speechFallback(SCRIPT[i].say,token).then(res);return;}
     const a=clip(i);let done=false;const fin=()=>{if(!done){done=true;a.removeEventListener('ended',fin);res();}};stopAudio();st.audio=a;a.currentTime=0;a.addEventListener('ended',fin);
     a.addEventListener('error',()=>{narrOK=false;speechFallback(SCRIPT[i].say,token).then(fin);},{once:true});
-    const pr=a.play();if(pr&&pr.catch)pr.catch(err=>{if(err&&(err.name==='NotAllowedError'||err.name==='AbortError')){if(err.name==='NotAllowedError'){st.blocked=true;$('#pitch-sound').hidden=false;hint.textContent='The browser muted the demo. Press Enable sound.';}fin();}else{narrOK=false;speechFallback(SCRIPT[i].say,token).then(fin);}});
+    const pr=a.play();if(pr&&pr.catch)pr.catch(err=>{if(err&&(err.name==='NotAllowedError'||err.name==='AbortError')){if(err.name==='NotAllowedError'){st.blocked=true;$('#pitch-sound').hidden=false;hint.textContent='Sound is off. Press Enable sound to hear it.';}fin();}else{narrOK=false;speechFallback(SCRIPT[i].say,token).then(fin);}});
     setTimeout(fin,20000);});}
-  function focus(sel){$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));const el=$(sel);if(el)el.classList.add('pitch-focus');}
-  function scrollTo(sel){const el=$(sel);if(!el)return;const nav=document.querySelector('.nav');const navH=nav?nav.offsetHeight:56;const panelH=ui.hidden?0:(ui.offsetHeight||230);const avail=window.innerHeight-navH-panelH;const r=el.getBoundingClientRect();let top=r.top+window.scrollY-navH-12;if(r.height<avail-24)top-=(avail-24-r.height)/2;window.scrollTo({top:Math.max(0,top),behavior:reduced?'auto':'smooth'});}
+  function focus(sel){$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));$$(sel).forEach(el=>el.classList.add('pitch-focus'));}
+  function scrollTo(sel){if(sel==='top'){window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});return;}const el=$(sel);if(!el)return;const nav=document.querySelector('.nav');const navH=nav?nav.offsetHeight:56;const panelH=ui.hidden?0:(ui.offsetHeight||230);const avail=window.innerHeight-navH-panelH;const r=el.getBoundingClientRect();let top=r.top+window.scrollY-navH-12;if(r.height<avail-24)top-=(avail-24-r.height)/2;window.scrollTo({top:Math.max(0,top),behavior:reduced?'auto':'smooth'});}
   async function runStep(i,token){const s=SCRIPT[i];st.i=i;stepEl.textContent=(i+1)+' / '+SCRIPT.length;cap.innerHTML=s.cap;
     segs.forEach((g,j)=>{g.classList.toggle('done',j<i);g.classList.remove('on','paused');g.style.removeProperty('--d');});
     if(s.pre)s.pre();focus(s.focus);
@@ -3229,17 +3233,30 @@ const CS={
   function next(){if(!st.on)return;const i=st.i+1;st.token++;stopAudio();if(i>=SCRIPT.length){finish();return;}play(i);}
   function unlock(){preload();$('#pitch-sound').hidden=true;st.blocked=false;if(!st.voice)return;try{const a=clip(0);const pr=a.play();if(pr&&pr.then)pr.then(()=>{a.pause();a.currentTime=0;}).catch(()=>{});}catch(e){}if(window.speechSynthesis){try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){}}}
   $('#pitch-sound').addEventListener('click',()=>{st.voice=true;voiceBtn.setAttribute('aria-pressed','true');st.blocked=false;$('#pitch-sound').hidden=true;hint.textContent='';if(st.on&&endEl.hidden&&st.i>=0){speak(st.i,st.token);}});
-  $('#pitch-play').addEventListener('click',()=>{unlock();play(0);});
-  $('#nav-pitch').addEventListener('click',()=>{unlock();play(0);});
+  const start=()=>{st.auto=false;unlock();play(0);};
+  $('#pitch-play').addEventListener('click',start);
+  $('#nav-pitch').addEventListener('click',start);
   $('#pitch-exit').addEventListener('click',exit);
-  $('#pitch-replay').addEventListener('click',()=>{unlock();play(0);});
+  $('#pitch-replay').addEventListener('click',start);
   $('#pitch-brief').addEventListener('click',()=>setTimeout(exit,50));
   pauseBtn.addEventListener('click',togglePause);
   $('#pitch-next').addEventListener('click',next);
   voiceBtn.addEventListener('click',()=>{st.voice=!st.voice;voiceBtn.setAttribute('aria-pressed',st.voice);$('#pitch-sound').hidden=true;if(!st.voice){stopAudio();hint.textContent='Captions only';}else{hint.textContent='';if(st.on&&endEl.hidden&&st.i>=0)speak(st.i,st.token);}});
   document.addEventListener('keydown',e=>{if(!st.on)return;if(e.key==='Escape'){exit();}else if(e.key===' '){e.preventDefault();togglePause();}else if(e.key==='ArrowRight'){next();}});
   window.addEventListener('pagehide',()=>{if(window.speechSynthesis)speechSynthesis.cancel();});
-  if(/[?&](demo|pitch)=1/.test(location.search)){st.voice=false;voiceBtn.setAttribute('aria-pressed','false');hint.textContent='Captions only. Turn on Narration to hear it.';setTimeout(()=>play(0),900);}
+  /* the demo opens on landing. Not on a deep link, a back or forward visit, or a hop from another page of the site */
+  const navEntry=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};
+  let fromSite=false;try{fromSite=!!document.referrer&&new URL(document.referrer).origin===location.origin;}catch(e){}
+  const forced=/[?&](demo|pitch)=1/.test(location.search),off=/[?&](demo|pitch)=0/.test(location.search);
+  const landing=!off&&(forced||(!location.hash&&navEntry.type!=='back_forward'&&(navEntry.type==='reload'||!fromSite)));
+  function autostart(){if(st.on)return;st.auto=true;preload();play(0);}
+  if(landing){const go=()=>setTimeout(autostart,900);if(document.visibilityState!=='hidden')go();else document.addEventListener('visibilitychange',function v(){if(document.visibilityState!=='hidden'){document.removeEventListener('visibilitychange',v);go();}});}
+  /* a visitor who scrolls, taps or clicks the page takes over, and the demo that opened by itself steps aside */
+  function takeover(e){if(!st.on||!st.auto)return;if(e&&e.target&&e.target.closest&&e.target.closest('#pitch'))return;exit();}
+  window.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)+Math.abs(e.deltaX)>2)takeover(e);},{passive:true});
+  window.addEventListener('touchmove',takeover,{passive:true});
+  window.addEventListener('pointerdown',takeover,true);
+  document.addEventListener('keydown',e=>{if(['PageDown','PageUp','Home','End','ArrowDown','ArrowUp'].includes(e.key))takeover(e);});
 })();
 
 /* ============ walkthrough: the official Confluent demo video ============ */
