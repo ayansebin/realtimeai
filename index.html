@@ -40,7 +40,8 @@
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 8px)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-off,var(--nav-h)) + 8px)}
+@media (max-width:960px){:root{--nav-off:96px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:1.0625rem;line-height:1.5;overflow-x:hidden;
   background-image:
@@ -81,8 +82,10 @@ button{font:inherit;color:inherit}
 .nav-links a:hover{color:var(--ink);text-decoration:none}
 .nav-links a.on{color:var(--ink);border-bottom-color:var(--blue-2)}
 .nav-links a b{font-weight:500;color:var(--ink-4);margin-right:.35rem;font-size:.75rem}
+@media (min-width:961px) and (max-width:1400px){.brand .co{display:none}}
+@media (min-width:961px) and (max-width:1100px){.nav-links a b{display:none}.nav-links a{padding:.4rem .55rem}}
 .nav .btn{min-height:38px;padding-block:0;font-size:.85rem;flex:none}
-@media (max-width:760px){.nav .wrap{flex-wrap:wrap;row-gap:0;padding-block:.35rem;gap:.75rem}.brand{min-width:0;overflow:hidden;text-overflow:ellipsis}.brand .co{display:none}.nav-links{order:3;width:100%;margin-left:0;padding-bottom:.15rem}.nav-links a{padding:.35rem .55rem}.nav-links a b{display:none}.nav .btn{margin-left:auto}}
+@media (max-width:960px){.nav .wrap{flex-wrap:wrap;row-gap:0;padding-block:.35rem;gap:.75rem}.brand{min-width:0;overflow:hidden;text-overflow:ellipsis}.brand .co{display:none}.nav-links{order:3;width:100%;margin-left:0;padding-bottom:.15rem}.nav-links a{padding:.35rem .55rem}.nav-links a b{display:none}.nav .btn{margin-left:auto}}
 
 /* buttons, chips, sliders */
 .btn{display:inline-flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:46px;padding:.5rem 1rem;background:var(--blue);color:#fff;border:1px solid transparent;cursor:pointer;text-decoration:none;font-size:.95rem;line-height:1.2;transition:background .12s,transform .12s}
@@ -234,24 +237,6 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 .in .bar i::after{width:var(--w)}
 .bar em{font-style:normal;font-family:var(--font-mono);text-align:right;color:var(--ink)}
 .bcard .bf{font-size:.72rem;color:var(--ink-3)}
-
-/* value: decay */
-.decay{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);align-items:center}
-@media (max-width:900px){.decay{grid-template-columns:1fr}}
-.decay svg{width:100%;height:auto;display:block}
-.lanes{display:grid;gap:.9rem}
-.lane{display:grid;grid-template-columns:13.5rem 1fr;gap:.9rem;align-items:center}
-@media (max-width:520px){.lane{grid-template-columns:1fr}}
-.lane .ln{font-size:.9rem;color:var(--ink)}
-.lane .ln small{display:block;font-size:.72rem;color:var(--ink-3)}
-.lane .lb{position:relative;height:34px;background:rgba(0,0,0,.25);border:1px solid var(--line);overflow:hidden}
-.lane .lb i{position:absolute;inset:0;width:100%;background:linear-gradient(90deg,var(--blue),var(--teal));transition:width .5s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 18px rgba(8,189,186,.35)}
-.lane .lb span{position:absolute;inset:0;display:flex;align-items:center;padding:0 .7rem;font-size:.8rem;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.28);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lane .lb em{position:absolute;right:.6rem;top:0;bottom:0;display:flex;align-items:center;font-style:normal;font-family:var(--font-mono);font-size:.8rem;color:var(--ink)}
-.tslider{display:grid;gap:.4rem;margin-top:1.2rem}
-.tslider input[type=range]{width:100%}
-.tslider .marks{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-3)}
-.tslider .marks b{color:var(--ink);font-weight:500}
 
 /* dials */
 .dials{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
@@ -527,15 +512,12 @@ details.ref .rb{padding:0 1.1rem 1.1rem;display:grid;gap:1rem}
 .uc b{font-weight:400;font-size:1rem;line-height:1.25}
 .uc code{font-family:var(--font-mono);font-size:.64rem;color:var(--purple);letter-spacing:.02em;overflow-wrap:anywhere}
 @media (max-width:600px){.uc{padding:.65rem .7rem .6rem}.uc .uc-cv{height:60px}.uc b{font-size:.92rem}}
-.ucpanel[role=tabpanel]{scroll-margin-top:calc(var(--nav-h) + 8px)}
+.ucpanel[role=tabpanel]{scroll-margin-top:calc(var(--nav-off,var(--nav-h)) + 8px)}
 .ucpanel.has-cover .stage-top{position:relative;isolation:isolate;min-height:150px;padding-bottom:16px}
 .ucpanel.has-cover .stage-top::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--img);background-size:cover;background-position:center var(--pos,40%);filter:saturate(.8)}
 .ucpanel.has-cover .stage-top::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(0,7,20,.94) 0,rgba(0,7,20,.82) 40%,rgba(255,255,255,.05) 100%),linear-gradient(180deg,rgba(0,7,20,0) 60%,rgba(0,7,20,.95) 100%)}
 .nimg{height:64px;background-image:var(--img);background-size:cover;background-position:center;border:1px solid var(--line);margin:.1rem 0 .2rem;position:relative}
 .nimg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,7,20,.1),rgba(255,255,255,.045))}
-.lane .ln{display:block}
-.lane .ln span{min-width:0}
-.lane .lt{display:block;width:64px;height:44px;background-image:var(--img);background-size:cover;background-position:center;border:1px solid var(--line);filter:saturate(.85)}
 .pimg{position:relative;aspect-ratio:16/8;background-image:var(--img);background-size:cover;background-position:center;border:1px solid var(--line);overflow:hidden;filter:saturate(.85)}
 .pimg.top{background-position:center 25%}
 .pimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,7,20,.05) 0,rgba(0,7,20,.2) 50%,rgba(0,7,20,.85) 100%)}
@@ -655,7 +637,7 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
 .node.agent.lit{box-shadow:0 0 0 1px var(--purple)}
 .way.on{box-shadow:0 0 0 1px rgba(69,137,255,.35)}
 .tile.hit{box-shadow:0 0 0 1px var(--teal)}
-.lane .lb i,.bar.hi i::after,.boxes.now i.keep,.trust-i i{box-shadow:none}
+.bar.hi i::after,.boxes.now i.keep,.trust-i i{box-shadow:none}
 .arch-engine{box-shadow:none}
 .particle{box-shadow:0 0 8px rgba(69,137,255,.6)}
 .particle.purple{box-shadow:0 0 8px rgba(190,149,255,.6)}
@@ -678,7 +660,6 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
 @media (max-width:900px){.three-k{flex-direction:row;align-items:baseline;gap:.6rem}}
 .tn-toggle button.on{background:rgba(255,255,255,.1);color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.55) inset}
 #th-play[aria-pressed],#live-pause[aria-pressed="true"]{background:transparent;border-color:var(--line-2);color:var(--ink)}
-.lane .lb i{background:linear-gradient(90deg,rgba(69,137,255,.8),rgba(61,219,217,.7))}
 .ind::before{filter:saturate(.55) contrast(1.02) brightness(.85)}
 .ind::after{background:linear-gradient(180deg,rgba(10,20,50,.25) 0,rgba(10,20,50,.7) 42%,rgba(10,20,50,.96) 100%)}
 .pcard .pimg{filter:saturate(.7)}
@@ -836,10 +817,9 @@ body.pitching .csgrid{opacity:.22;filter:saturate(.3);transition:opacity .6s,fil
     <div class="nav-links" id="navlinks">
       <a href="#innovation" data-ch="innovation"><b>01</b>Innovation</a>
       <a href="#value" data-ch="value"><b>02</b>Value</a>
-      <a href="#usecases" data-ch="usecases"><b>03</b>Use cases</a>
-      <a href="#cases" data-ch="cases"><b>04</b>Case studies</a>
-      <a href="#start" data-ch="start"><b>05</b>Start</a>
-      <a href="/playground" data-ch="playground"><b>06</b>Playground</a>
+      <a href="#usecases" data-ch="usecases"><b>03</b>Enterprise use cases</a>
+      <a href="#start" data-ch="start"><b>04</b>Start</a>
+      <a href="/playground" data-ch="playground"><b>05</b>Playground</a>
     </div>
     <button class="nav-stat nav-pitch" id="nav-pitch" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg> Demo</button>
     <a class="btn sm" href="#briefing">Book a session <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
@@ -1105,52 +1085,14 @@ FROM pos_sales;</code></pre></div>
       </div>
       <div class="stage-foot"><div class="hint">Illustrative. Impact figures from design partner engagements.</div></div>
     </div>
-
-    <div class="chapter-head sub">
-      <h2>Value decays by the minute.</h2>
-      <p>Slide the moment you act. Watch what is left of the decision.</p>
-    </div>
-
-    <div class="stage" id="st-decay">
-      <div class="stage-body">
-        <div class="decay">
-          <div>
-            <svg viewBox="0 0 420 260" id="decay-svg" aria-label="Value of a decision over time">
-              <defs><linearGradient id="dg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4589ff" stop-opacity=".45"/><stop offset="1" stop-color="#4589ff" stop-opacity="0"/></linearGradient></defs>
-              <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#8d99a8">
-                <text x="30" y="24">value captured</text>
-                <text x="392" y="248" text-anchor="end">time to act</text>
-              </g>
-              <path id="decay-fill" fill="url(#dg)" d=""/>
-              <path id="decay-line" fill="none" stroke="#78a9ff" stroke-width="2.5" d=""/>
-              <line id="decay-vl" x1="40" y1="40" x2="40" y2="230" stroke="#f4f4f4" stroke-opacity=".5" stroke-dasharray="3 4"/>
-              <circle id="decay-dot" cx="40" cy="40" r="7" fill="#78a9ff" stroke="#122148" stroke-width="2"/>
-              <text id="decay-pct" x="52" y="44" font-family="IBM Plex Sans, sans-serif" font-size="26" font-weight="300" fill="#f4f4f4">100%</text>
-            </svg>
-            <div class="tslider">
-              <input type="range" id="decay-t" min="0" max="100" value="0" aria-label="Time to act">
-              <div class="marks"><b>second</b><span>minute</span><span>hour</span><span>day</span><span>week</span></div>
-            </div>
-          </div>
-          <div class="lanes" id="lanes">
-            <div class="lane"><div class="ln"><span>Card fraud<small>a stolen card, first swipe</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
-            <div class="lane"><div class="ln"><span>Stockout<small>a store, a hot SKU, a weekend</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
-            <div class="lane"><div class="ln"><span>Network fault<small>a cell site, drop rate rising</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
-            <div class="lane"><div class="ln"><span>Kiln drift<small>quality sliding, energy climbing</small></span></div><div class="lb"><i></i><span></span><em></em></div></div>
-          </div>
-        </div>
-      </div>
-      <div class="stage-foot"><div class="hint">Illustrative curves</div><div class="readouts"><div class="readout"><b id="decay-when">1 s</b><span>you act after</span></div></div></div>
-    </div>
-
   </div>
 </section>
 
-<!-- ============ 03 USE CASES ============ -->
+<!-- ============ 03 ENTERPRISE USE CASES ============ -->
 <section class="chapter" id="usecases">
   <div class="wrap">
     <div class="chapter-head">
-      <span class="n">03 / USE CASES</span>
+      <span class="n">03 / ENTERPRISE USE CASES</span>
       <h2>Mission-critical enterprise decisions.</h2>
       <p>Pick one. Every demo is live.</p>
     </div>
@@ -1302,6 +1244,7 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <div class="chapter-head sub">
+      <span class="n">INDUSTRIES</span>
       <h2>Where it lands first.</h2>
       <p>Pick an industry. Each one is a live twin, sensor to decision and back.</p>
     </div>
@@ -1393,14 +1336,10 @@ FROM pos_sales;</code></pre></div>
       </div>
       <div class="stage-foot"><div class="readouts"><div class="readout"><b id="al-r0">–</b><span>on-time departures · target 85%</span></div><div class="readout"><b id="al-r1">–</b><span>load factor · target 86%</span></div><div class="readout"><b id="al-r2">–</b><span>unplanned AOG per month · target 1</span></div><div class="readout"><b id="al-r3">–</b><span>turnaround, min · target 45</span></div></div><div class="hint">Simulated airline. The topics, the statements and the gates are the real ones.</div></div>
     </div>
-  </div>
-</section>
 
-<!-- ============ 04 CASE STUDIES ============ -->
-<section class="chapter" id="cases">
-  <div class="wrap">
-    <div class="chapter-head">
-      <span class="n">04 / CASE STUDIES</span>
+    <!-- case studies -->
+    <div class="chapter-head sub" id="cases">
+      <span class="n">CASE STUDIES</span>
       <h2>Time series models at work.</h2>
       <p>Three engagements on live operational data. Client identities withheld.</p>
     </div>
@@ -1490,11 +1429,11 @@ FROM pos_sales;</code></pre></div>
   </div>
 </section>
 
-<!-- ============ 05 START ============ -->
+<!-- ============ 04 START ============ -->
 <section class="chapter" id="start">
   <div class="wrap">
     <div class="chapter-head">
-      <span class="n">05 / START</span>
+      <span class="n">04 / START</span>
       <h2>Run it on your stream.</h2>
       <p>Three moves. The first takes a minute.</p>
     </div>
@@ -1996,29 +1935,6 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   reg({el,resize(){Object.values(cvs).forEach(c=>c.fit());},update,draw});
   const btn=$('#th-play');if(btn)btn.addEventListener('click',()=>{st.playing=!st.playing;btn.textContent=st.playing?'Pause':'Play';btn.setAttribute('aria-pressed',st.playing);});
   const rp=$('#th-replay');if(rp)rp.addEventListener('click',()=>{st.t=0;st.decisions=0;st.events=[];st.playing=true;if(btn){btn.textContent='Pause';btn.setAttribute('aria-pressed','true');}});
-})();
-
-/* ============ 02 decay ============ */
-(function(){
-  const el=$('#st-decay');if(!el)return;
-  const sig=(x,c,k)=>1/(1+Math.exp((x-c)*k));
-  const LANES=[
-    {f:x=>0.04+0.96*sig(x,0.2,22),txt:x=>x<0.2?'declined before authorization':x<0.5?'flagged after settlement, chargeback filed':'loss written off'},
-    {f:x=>0.08+0.92*sig(x,0.55,12),txt:x=>x<0.35?'PO raised, shelf never empties':x<0.65?'expedited at a premium':'lost sales, waste on the rebound'},
-    {f:x=>0.05+0.95*sig(x,0.35,16),txt:x=>x<0.25?'rerouted, nobody notices':x<0.6?'ticket after the complaints':'outage report'},
-    {f:x=>0.1+0.9*sig(x,0.5,10),txt:x=>x<0.4?'setpoint corrected in cycle':x<0.7?'off-spec batch reblended':'scrap, energy wasted'}
-  ];
-  const lanes=$$('.lane',el);
-  const line=$('#decay-line'),fill=$('#decay-fill'),dot=$('#decay-dot'),vl=$('#decay-vl'),pct=$('#decay-pct');
-  const x0=40,x1=400,y0=40,y1=230;
-  const avg=x=>mean(LANES.map(l=>l.f(x)));
-  let d='';for(let i=0;i<=80;i++){const x=i/80;const px=lerp(x0,x1,x),py=lerp(y1,y0,avg(x));d+=(i?' L':'M')+px.toFixed(1)+' '+py.toFixed(1);}
-  line.setAttribute('d',d);fill.setAttribute('d',d+' L'+x1+' '+y1+' L'+x0+' '+y1+' Z');
-  const when=x=>{const seg=x*4,i=Math.floor(seg),t=seg-i;if(i>=4)return '1 week';const units=[['s',1,59],['min',1,59],['h',1,23],['d',1,6]];const u=units[i];const v=Math.round(lerp(u[1],u[2],t));return v+' '+u[0];};
-  function set(v){const x=v/100;const px=lerp(x0,x1,x),py=lerp(y1,y0,avg(x));dot.setAttribute('cx',px);dot.setAttribute('cy',py);vl.setAttribute('x1',px);vl.setAttribute('x2',px);pct.setAttribute('x',px>330?px-14:px+12);pct.setAttribute('text-anchor',px>330?'end':'start');pct.setAttribute('y',Math.max(52,py+6));pct.textContent=Math.round(avg(x)*100)+'%';
-    lanes.forEach((l,i)=>{const r=LANES[i].f(x);$('.lb i',l).style.width=(r*100)+'%';$('.lb span',l).textContent=LANES[i].txt(x);$('.lb em',l).textContent=Math.round(r*100)+'%';});$('#decay-when').textContent=when(x);}
-  const sl=$('#decay-t');sl.addEventListener('input',e=>set(Number(e.target.value)));set(0);
-  once(el,()=>{if(reduced)return;let v=0;const t0=performance.now();function f(t){v=Math.min(38,(t-t0)/60);sl.value=v;set(v);if(v<38)requestAnimationFrame(f);}setTimeout(()=>requestAnimationFrame(f),500);});
 })();
 
 /* ============ 02 dials, proof count-ups ============ */
@@ -3077,7 +2993,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   once(el,()=>{setTimeout(()=>{if(!query){const b=$('#se-q .chip');if(b)b.click();}},600);});
 })();
 
-/* ============ 04 case studies: shared drawing helpers ============ */
+/* ============ 03 case studies: shared drawing helpers ============ */
 const CS={
   mono:(ctx,px,w)=>{ctx.font=(w||400)+' '+px+'px "IBM Plex Mono", Menlo, monospace';},
   sans:(ctx,px,w)=>{ctx.font=(w||400)+' '+px+'px "IBM Plex Sans", Arial, sans-serif';},
@@ -3087,7 +3003,7 @@ const CS={
   seed(n){let s=n>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
 };
 
-/* ============ 04 case study: IBM Network Intelligence ============ */
+/* ============ 03 case study: IBM Network Intelligence ============ */
 (function(){
   const el=$('#cs-telco');if(!el)return;
   const cv=new Cv($('#ni-cv'));const rnd=CS.seed(17);
@@ -3190,7 +3106,7 @@ const CS={
   chipGroup('ni-inject',(v,b)=>{const j=INJ[v];if(j)spawn(j[0],LIB[j[0]][j[1]]);setTimeout(()=>b.setAttribute('aria-pressed','false'),500);});
 })();
 
-/* ============ 04 case study: cement plant ============ */
+/* ============ 03 case study: cement plant ============ */
 (function(){
   const el=$('#cs-cement');if(!el)return;
   const cv=new Cv($('#cm-cv'));const rnd=CS.seed(5);
@@ -3228,7 +3144,7 @@ const CS={
   App.cement={set};
 })();
 
-/* ============ 04 case study: financial services ============ */
+/* ============ 03 case study: financial services ============ */
 (function(){
   const el=$('#cs-fin');if(!el)return;
   const cv=new Cv($('#fs-cv'));
@@ -3437,9 +3353,12 @@ const CS={
   if(/[?&]walkthrough=1/.test(location.search))setTimeout(open,500);
 })();
 
+/* ============ anchors clear the sticky nav at any height ============ */
+(function(){const nav=document.querySelector('.nav');if(!nav)return;const set=()=>document.documentElement.style.setProperty('--nav-off',nav.offsetHeight+'px');set();window.addEventListener('resize',set,{passive:true});if(window.ResizeObserver)new ResizeObserver(set).observe(nav);})();
+
 /* ============ nav scroll spy ============ */
 (function(){
-  const links=$$('#navlinks a');const map={'innovation':'innovation','innovation-2':'innovation','value':'value','usecases':'usecases','cases':'cases','start':'start'};
+  const links=$$('#navlinks a');const map={'innovation':'innovation','innovation-2':'innovation','value':'value','usecases':'usecases','start':'start'};
   const secs=Object.keys(map).map(id=>document.getElementById(id)).filter(Boolean);
   function upd(){const y=window.scrollY+window.innerHeight*0.35;let cur='innovation';secs.forEach(s=>{if(s.offsetTop<=y)cur=map[s.id];});links.forEach(a=>a.classList.toggle('on',a.dataset.ch===cur));}
   window.addEventListener('scroll',upd,{passive:true});upd();
