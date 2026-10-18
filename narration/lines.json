@@ -1,9 +1,9 @@
 [
- {"id": "01", "text": "Foundation models unlocked unstructured data. The bigger prize is streaming data, where the mission-critical decisions live."},
- {"id": "02", "text": "Now I B M Granite Time Series models run inside Confluent, and work on series they have never seen."},
- {"id": "03", "text": "They tell you what comes next, how far it sits from normal, which history matches, and which settings hit the target."},
+ {"id": "01", "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run inside Confluent, on every live stream."},
+ {"id": "02", "text": "When the context changes, a warmer room or a faster line, the forecast sees it coming, minutes before the line drifts out of spec."},
+ {"id": "03", "text": "Then it optimizes the setpoint to keep the line in spec, so mission-critical decisions land while they still matter."},
  {"id": "04", "text": "Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration."},
- {"id": "05", "text": "That changes the economics: not a few hundred modeled series and safety margins on the rest, but every series, every cycle."},
+ {"id": "05", "text": "For your teams, that means ten times faster time to value, five to ten percent more accuracy, and decisions in seconds, not days."},
  {"id": "06", "text": "Six mission-critical decisions, no data science team required: production, anomalies, supply chain, fraud, search and trading."},
  {"id": "07", "text": "Live twins for industrial plants, retail, banking and airlines."},
  {"id": "08", "text": "Proven in the field: tickets only on confirmed causes in telco, thirty models to two in cement, ten percent lower error in finance."},
