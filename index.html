@@ -534,6 +534,34 @@ body.pitching .topbar{display:none}
 .pitch-ctl{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center}
 .pitch-ctl .btn kbd{margin-left:.2rem}
 .pitch-hint{font-size:.78rem;color:var(--ink-3)}
+/* demo controls: back, next, sound, minimize, and the resume pill */
+.pitch-tr{margin-left:auto;display:inline-flex;gap:.5rem}
+.pitch-tr .pitch-x{margin-left:0}
+.pitch-prog{height:auto}
+.pitch-prog button{display:block;padding:8px 0;margin:-8px 0;background:none;border:0;cursor:pointer;min-width:0}
+.pitch-prog button i{height:4px}
+.pitch-prog button:hover i{background:rgba(255,255,255,.32)}
+.pitch-prog button:focus-visible{outline:2px solid var(--blue-3);outline-offset:3px}
+.pitch-prog button.act{margin-left:10px}
+.pitch-ctl .btn svg{width:14px;height:14px;flex:none}
+.pitch-ctl #pitch-back,.pitch-ctl #pitch-next{gap:.45rem}
+.pitch-sound{gap:.5rem}
+.pitch-sound svg{width:16px;height:16px}
+.pitch-sound.ask{border-color:var(--blue-2);background:rgba(15,98,254,.28);color:#fff;animation:askpulse 1.6s ease-in-out infinite}
+@keyframes askpulse{0%,100%{box-shadow:0 0 0 0 rgba(69,137,255,.5)}50%{box-shadow:0 0 0 7px rgba(69,137,255,0)}}
+.pitch.is-paused .pitch-live i{animation:none;opacity:.5}
+.pitch-mini{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;align-items:stretch;background:#0d1733;color:#f6f7fb;border:1px solid rgba(255,255,255,.18);box-shadow:0 14px 36px rgba(10,16,40,.32)}
+.pitch-mini-go{display:inline-flex;align-items:center;gap:.6rem;background:none;border:0;color:inherit;padding:.65rem .95rem;font:inherit;font-size:.9rem;cursor:pointer;min-height:44px}
+.pitch-mini-go svg{width:11px;height:11px;color:#78a9ff}
+.pitch-mini-go span{font-family:var(--font-mono);font-size:.76rem;color:#adb7c8}
+.pitch-mini-x{display:grid;place-items:center;background:none;border:0;border-left:1px solid rgba(255,255,255,.18);color:#adb7c8;cursor:pointer;min-width:44px}
+.pitch-mini-x svg{width:14px;height:14px}
+.pitch-mini-go:hover,.pitch-mini-x:hover{background:rgba(255,255,255,.08);color:#fff}
+.pitch-mini-go:focus-visible,.pitch-mini-x:focus-visible{outline:2px solid #78a9ff;outline-offset:-2px}
+@media (pointer:coarse){.pitch-ctl .btn,.pitch-x{min-height:44px}}
+.pitch-x svg{width:12px;height:12px;flex:none}
+@media (max-width:760px){.pitch-ctl{gap:.45rem .5rem;flex-wrap:nowrap}.pitch-ctl .btn{padding:.3rem .65rem;gap:.4rem}.pitch-sound kbd,.pitch-hint,.pitch .tx{display:none}.pitch-tr .pitch-x{padding:.3rem .55rem;min-width:40px;justify-content:center}.pitch-top{gap:.7rem}}
+@media (prefers-reduced-motion:reduce){.pitch-sound.ask{animation:none}}
 @media (max-width:760px){.pitch{padding-top:22px;gap:.45rem}.pitch-cap{font-size:1.15rem;min-height:2.6em}.pitch-ctl .btn kbd,.pitch-x kbd{display:none}.pitch-top{font-size:.66rem}body.pitching .stage.pitch-focus .stage-top{display:none}body.pitching .nav-links{display:none}body.pitching .nav .wrap{min-height:48px}.nav-pitch{display:none}}
 @media (prefers-reduced-motion:reduce){.pitch-live i{animation:none}}
 
@@ -1466,16 +1494,22 @@ FROM pos_sales;</code></pre></div>
     </div>
   </div>
 </div>
-<div class="pitch" id="pitch" hidden role="dialog" aria-label="Live demo" aria-modal="false">
-  <div class="pitch-top"><span class="pitch-live"><i></i>Live demo</span><span class="pitch-act" id="pitch-act">01 Innovation</span><span class="pitch-step" id="pitch-step">1 / 11</span><button class="pitch-x" id="pitch-exit" type="button" aria-label="Exit the demo">Exit <kbd>Esc</kbd></button></div>
-  <div class="pitch-prog" id="pitch-prog" aria-hidden="true"></div>
+<div class="pitch" id="pitch" hidden role="region" aria-label="Live demo">
+  <div class="pitch-top"><span class="pitch-live"><i></i><span class="tx">Live demo</span></span><span class="pitch-act" id="pitch-act">01 Innovation</span><span class="pitch-step" id="pitch-step">1 / 11</span>
+    <span class="pitch-tr"><button class="pitch-x" id="pitch-min" type="button" aria-label="Minimize the demo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 12h10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="tx">Minimize</span></button><button class="pitch-x" id="pitch-exit" type="button" aria-label="Close the demo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="tx">Close</span><kbd>Esc</kbd></button></span></div>
+  <div class="pitch-prog" id="pitch-prog" role="group" aria-label="Jump to a step"></div>
   <div class="pitch-cap" id="pitch-cap" aria-live="polite"></div>
   <div class="pitch-ctl">
+    <button class="btn sm ghost" id="pitch-back" type="button" aria-label="Previous step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8H3M7 3L2 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="tx">Back</span></button>
     <button class="btn sm" id="pitch-pause" type="button" aria-pressed="false">Pause <kbd>space</kbd></button>
-    <button class="btn sm ghost" id="pitch-next" type="button">Next <kbd>&#8594;</kbd></button>
-    <button class="switch" id="pitch-voice" type="button" aria-pressed="true"><i></i>Narration</button><button class="btn sm" id="pitch-sound" type="button" hidden>Enable sound</button>
+    <button class="btn sm ghost" id="pitch-next" type="button" aria-label="Next step"><span class="tx">Next</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    <button class="btn sm ghost pitch-sound" id="pitch-sound" type="button" aria-pressed="false"><svg class="ic-on" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10L5 10H2z" fill="currentColor"/><path d="M11 5.5a3.5 3.5 0 010 5M12.6 3.5a6 6 0 010 9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><svg class="ic-off" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10L5 10H2z" fill="currentColor"/><path d="M11 6l4 4M15 6l-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span class="lbl">Sound on</span><kbd>M</kbd></button>
     <span class="pitch-hint" id="pitch-hint"></span>
   </div>
+</div>
+<div class="pitch-mini" id="pitch-mini" hidden role="region" aria-label="Demo paused">
+  <button class="pitch-mini-go" id="pitch-resume" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Resume the demo <span id="pitch-mini-step">1 / 11</span></button>
+  <button class="pitch-mini-x" id="pitch-mini-x" type="button" aria-label="Close the demo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
 </div>
 <footer class="foot">
   <div class="wrap">
@@ -3168,9 +3202,20 @@ const CS={
 })();
 
 /* ============ live demo (scripted tour) ============ */
+/* How it behaves, by design:
+   opens   on a first visit to the home page, once the page is visible, unless the visitor arrived on a deep link,
+           came back or forward, came from another page of this site, prefers reduced motion, or already saw it this week.
+           A visitor who scrolls, taps or types before it opens is exploring, so it stays closed. ?demo=1 forces it, ?demo=0 blocks it.
+   sound   tries to speak at once. When the browser holds sound back until a first interaction, captions run, the sound
+           button asks for a tap, and the first tap anywhere on the page brings the voice in mid-line, in sync.
+   control pause and resume, back and next, jump on the progress bar, mute, minimize, close. Space, arrows, M and Esc
+           do the same, and never fire while the visitor is typing.
+   yields  when the visitor scrolls or clicks into the page it pauses and shrinks to a small Resume pill.
+           A hidden tab pauses it, a visible one resumes it.
+   ends    by fading out on the contact form. Closing or finishing it means it will not open by itself again this week. */
 (function(){
-  const ui=$('#pitch');if(!ui)return;
-  const cap=$('#pitch-cap'),prog=$('#pitch-prog'),stepEl=$('#pitch-step'),pauseBtn=$('#pitch-pause'),voiceBtn=$('#pitch-voice'),hint=$('#pitch-hint');
+  const ui=$('#pitch'),mini=$('#pitch-mini');if(!ui||!mini)return;
+  const cap=$('#pitch-cap'),prog=$('#pitch-prog'),stepEl=$('#pitch-step'),actEl=$('#pitch-act'),pauseBtn=$('#pitch-pause'),soundBtn=$('#pitch-sound'),hint=$('#pitch-hint'),miniStep=$('#pitch-mini-step');
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>click('[role=tab][aria-controls="'+id+'"]');
@@ -3224,76 +3269,130 @@ const CS={
       subs:['So bring us <em>one stream and one decision</em>.','<em>Contact us</em>, and we will show you what it can do.'],
       run:async w=>{}}
   ];
-  const st={on:false,i:-1,paused:false,voice:true,token:0,utter:null,t0:0,elapsed:0,audio:null,blocked:false,auto:false,pausedMs:0,pauseAt:0};
-  let voices=[];const pickVoice=()=>{voices=window.speechSynthesis?speechSynthesis.getVoices():[];const pref=['Google US English','Samantha','Microsoft Aria','Microsoft Jenny','Daniel','Karen','Moira','Alex'];for(const n of pref){const v=voices.find(x=>x.name.indexOf(n)>=0);if(v)return v;}return voices.find(v=>/^en[-_]US/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||voices[0]||null;};
-  if(window.speechSynthesis){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener('voiceschanged',pickVoice);}else{voiceBtn.hidden=true;st.voice=false;}
-  prog.innerHTML=SCRIPT.map((s,i)=>'<i'+(i&&s.act!==SCRIPT[i-1].act?' class="act"':'')+'></i>').join('');const actEl=$('#pitch-act');
-  const segs=$$('i',prog);
+  const store={get(k){try{return localStorage.getItem(k);}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
+  const SEEN='rti-demo-seen',SOUND='rti-demo-sound',WEEK=7*864e5;
+  const st={on:false,mini:false,i:0,paused:false,autoPaused:false,token:0,t0:0,pausedMs:0,pauseAt:0,auto:false,speaking:false,
+    voice:store.get(SOUND)!=='off',unlocked:false};
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-  async function waitFor(ms,token){const end=performance.now()+ms;while(performance.now()<end){if(st.token!==token)throw new Error('cancel');if(st.paused){const p0=performance.now();while(st.paused&&st.token===token)await sleep(80);if(st.token!==token)throw new Error('cancel');return waitFor(end-p0,token);}await sleep(60);}}
-  /* narration: MP3 files rendered offline (narration/NN.mp3), browser speech as the fallback */
-  const NARR='narration/',NARR_V='2026-10-18c';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */const clips={};let narrOK=true;
-  function clip(i){if(!clips[i]){const a=new Audio(NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V);a.preload='auto';a.addEventListener('error',()=>{narrOK=false;});clips[i]=a;}return clips[i];}
-  function preload(){for(let i=0;i<SCRIPT.length;i++)clip(i).load();}
-  function stopAudio(){if(st.audio){try{st.audio.pause();st.audio.currentTime=0;}catch(e){}st.audio=null;}if(window.speechSynthesis)speechSynthesis.cancel();}
-  function speechFallback(text,token){return new Promise(res=>{if(!st.voice||!window.speechSynthesis){res();return;}try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);const v=pickVoice();if(v)u.voice=v;u.rate=1.02;u.pitch=1;u.lang=(v&&v.lang)||'en-US';let done=false;const fin=()=>{if(!done){done=true;res();}};u.onend=fin;u.onerror=fin;st.utter=u;setTimeout(()=>{if(st.token===token)speechSynthesis.speak(u);else fin();},80);setTimeout(fin,Math.min(14000,900+text.length*75));}catch(e){res();}});}
-  function speak(i,token){return new Promise(res=>{if(!st.voice){res();return;}if(!narrOK){speechFallback(SCRIPT[i].say,token).then(res);return;}
-    const a=clip(i);let done=false;const tu=()=>{if(a.duration&&a.currentTime>=a.duration-0.1)fin();};const fin=()=>{if(!done){done=true;a.removeEventListener('ended',fin);a.removeEventListener('timeupdate',tu);res();}};stopAudio();st.audio=a;a.currentTime=0;a.addEventListener('ended',fin);a.addEventListener('timeupdate',tu);
-    a.addEventListener('error',()=>{narrOK=false;speechFallback(SCRIPT[i].say,token).then(fin);},{once:true});
-    const pr=a.play();if(pr&&pr.catch)pr.catch(err=>{if(err&&(err.name==='NotAllowedError'||err.name==='AbortError')){if(err.name==='NotAllowedError'){st.blocked=true;$('#pitch-sound').hidden=false;hint.textContent='Sound is off. Press Enable sound to hear it.';}fin();}else{narrOK=false;speechFallback(SCRIPT[i].say,token).then(fin);}});
+  async function waitFor(ms,token){const end=performance.now()+ms;while(performance.now()<end){if(st.token!==token)throw new Error('cancel');if(st.paused){const p0=performance.now();while(st.paused&&st.token===token)await sleep(80);if(st.token!==token)throw new Error('cancel');return waitFor(end-p0,token);}await sleep(50);}}
+  const elapsed=()=>performance.now()-st.t0-st.pausedMs-(st.paused?performance.now()-st.pauseAt:0);
+  const inField=t=>!!(t&&t.closest&&t.closest('input,textarea,select,[contenteditable],[contenteditable=""]'));
+  const inDemo=t=>!!(t&&t.closest&&(t.closest('#pitch')||t.closest('#pitch-mini')));
+  const isInteractive=t=>!!(t&&t.closest&&t.closest('a,button,input,select,textarea,label,summary,canvas,[role=tab],[role=button],.chip,[contenteditable]'));
+
+  /* progress: one button per step, grouped by act */
+  prog.innerHTML=SCRIPT.map((s,i)=>'<button type="button"'+(i&&s.act!==SCRIPT[i-1].act?' class="act"':'')+' aria-label="Step '+(i+1)+' of '+SCRIPT.length+', '+ACTS[s.act]+'"><i></i></button>').join('');
+  const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
+
+  /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
+  const NARR='narration/',NARR_V='2026-10-18c';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
+  const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
+  function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}
+  function setSrc(i){const u=urlFor(i);if(player.dataset.src!==u){player.src=u;player.dataset.src=u;}}
+  function stopAudio(){st.speaking=false;gen++;try{player.pause();}catch(e){}if(window.speechSynthesis)speechSynthesis.cancel();}
+  function speechFallback(text,token){return new Promise(res=>{if(!window.speechSynthesis){res();return;}try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=1.04;u.lang='en-US';let done=false;const fin=()=>{if(!done){done=true;res();}};u.onend=fin;u.onerror=fin;setTimeout(()=>{if(st.token===token)speechSynthesis.speak(u);else fin();},60);setTimeout(fin,Math.min(14000,900+text.length*70));}catch(e){res();}});}
+  function speak(i,token,from){return new Promise(res=>{if(!st.voice){res();return;}
+    if(!narrOK){speechFallback(SCRIPT[i].say,token).then(res);return;}
+    const g=++gen;let done=false;
+    const fin=()=>{if(done)return;done=true;if(g===gen)st.speaking=false;player.removeEventListener('ended',fin);player.removeEventListener('timeupdate',tu);res();};
+    const tu=()=>{if(g!==gen){fin();return;}if(player.duration&&player.currentTime>=player.duration-0.1)fin();};
+    setSrc(i);player.muted=false;
+    const seek=()=>{try{player.currentTime=from||0;}catch(e){}};if(player.readyState>=1)seek();else player.addEventListener('loadedmetadata',seek,{once:true});
+    player.addEventListener('ended',fin);player.addEventListener('timeupdate',tu);
+    player.addEventListener('error',()=>{if(g!==gen)return;narrOK=false;speechFallback(SCRIPT[i].say,token).then(fin);},{once:true});
+    st.speaking=true;const pr=player.play();
+    if(pr&&pr.then)pr.then(()=>{if(g===gen){st.unlocked=true;soundUI();}}).catch(err=>{if(g!==gen){fin();return;}if(err&&err.name==='NotAllowedError'){st.unlocked=false;soundUI();}fin();});
     setTimeout(fin,20000);});}
+  /* a silent play inside a tap, so the voice is allowed later even if this tap did something else */
+  function unlock(){if(st.unlocked)return;const g=++gen;try{setSrc(st.i||0);player.muted=true;const pr=player.play();if(pr&&pr.then)pr.then(()=>{st.unlocked=true;if(g===gen){player.pause();try{player.currentTime=0;}catch(e){}}player.muted=false;soundUI();}).catch(()=>{player.muted=false;});}catch(e){player.muted=false;}}
+  function soundUI(){const ask=st.voice&&!st.unlocked,on=st.voice&&st.unlocked;soundBtn.classList.toggle('ask',ask);soundBtn.setAttribute('aria-pressed',on?'true':'false');
+    $('.lbl',soundBtn).textContent=!st.voice?'Sound off':ask?'Tap for sound':'Sound on';$('.ic-on',soundBtn).style.display=on?'':'none';$('.ic-off',soundBtn).style.display=on?'none':'';
+    hint.textContent=ask&&st.on?'or tap anywhere on the page':'';}
+  /* bring the voice in where the subtitles are, mid-line */
+  function enableSound(){st.voice=true;store.set(SOUND,'on');if(st.on&&!st.mini&&!st.paused){const s=SCRIPT[st.i],off=Math.max(0,elapsed()/1000),d=(s.dur+100)/1000;if(off<d-0.8){speak(st.i,st.token,off);}else unlock();}else unlock();soundUI();}
+  function toggleSound(){if(st.voice&&!st.unlocked){enableSound();return;}st.voice=!st.voice;store.set(SOUND,st.voice?'on':'off');if(st.voice)enableSound();else stopAudio();soundUI();}
+
   function focus(sel){$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));$$(sel).forEach(el=>el.classList.add('pitch-focus'));}
   function scrollTo(sel){if(sel==='top'){window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});return;}const el=$(sel);if(!el)return;const nav=document.querySelector('.nav');const navH=nav?nav.offsetHeight:56;const panelH=ui.hidden?0:(ui.offsetHeight||230);const avail=window.innerHeight-navH-panelH;const r=el.getBoundingClientRect();let top=r.top+window.scrollY-navH-12;if(r.height<avail-24)top-=(avail-24-r.height)/2;window.scrollTo({top:Math.max(0,top),behavior:reduced?'auto':'smooth'});}
   function showCap(html){cap.innerHTML=html;cap.classList.remove('in');void cap.offsetWidth;cap.classList.add('in');}
-  const elapsed=()=>performance.now()-st.t0-st.pausedMs-(st.paused?performance.now()-st.pauseAt:0);
   async function runSubs(s,token){const parts=s.subs||[s.cap];if(parts.length<2)return;const len=parts.map(p=>p.replace(/<[^>]+>/g,'').length);const tot=len.reduce((x,y)=>x+y,0);let acc=len[0];
     try{for(let k=1;k<parts.length;k++){const t=(acc/tot)*s.dur-120-elapsed();if(t>0)await waitFor(t,token);if(st.token!==token)return;showCap(parts[k]);acc+=len[k];}}catch(e){}}
-  async function runStep(i,token){const s=SCRIPT[i];st.i=i;stepEl.textContent=(i+1)+' / '+SCRIPT.length;showCap(s.subs?s.subs[0]:s.cap);if(actEl)actEl.textContent=ACTS[s.act]||'';
-    segs.forEach((g,j)=>{g.classList.toggle('done',j<i);g.classList.remove('on','paused');g.style.removeProperty('--d');});
+  async function runStep(i,token){const s=SCRIPT[i];st.i=i;stepEl.textContent=(i+1)+' / '+SCRIPT.length;actEl.textContent=ACTS[s.act]||'';showCap(s.subs?s.subs[0]:s.cap);
+    segs.forEach((g,j)=>{g.classList.toggle('done',j<i);g.classList.remove('on','paused');g.style.removeProperty('--d');});segBtns.forEach((b,j)=>b.setAttribute('aria-current',j===i?'step':'false'));
+    $$('.tour-hi').forEach(e=>e.classList.remove('tour-hi'));
     if(s.pre)s.pre();focus(s.focus);
     await waitFor(60,token);const target=(window.innerWidth<=760&&s.scrollM)?s.scrollM:s.scroll;if(target)scrollTo(target);
     await waitFor(reduced?60:220,token);
     const seg=segs[i];seg.style.setProperty('--d',s.dur+'ms');void seg.offsetWidth;seg.classList.add('on');st.t0=performance.now();st.pausedMs=0;
     const w=ms=>waitFor(ms,token);
     const at=async p=>{const k=s.say.indexOf(p);if(k<0)return;const t=(k/s.say.length)*s.dur-elapsed();if(t>0)await w(t);};
-    const say=speak(i,token);runSubs(s,token);
+    const said=speak(i,token);runSubs(s,token);
     try{await s.run(w,at);}catch(e){if(e.message==='cancel')throw e;}
-    const t=Math.max(0,s.dur-(performance.now()-st.t0));await waitFor(t,token);
-    await Promise.race([say,waitFor(st.voice?6000:300,token)]);
+    await waitFor(Math.max(0,s.dur-elapsed()),token);
+    await Promise.race([said,waitFor(st.voice&&st.unlocked?6000:200,token)]);
     if(st.token!==token)throw new Error('cancel');
     seg.classList.add('done');seg.classList.remove('on');}
-  async function play(from){st.on=true;st.token++;const token=st.token;document.body.classList.add('pitching');ui.classList.remove('closing');ui.hidden=false;cap.hidden=false;prog.hidden=false;$('.pitch-ctl',ui).hidden=false;st.paused=false;pauseBtn.textContent='';pauseBtn.innerHTML='Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed','false');
-    try{for(let i=from;i<SCRIPT.length;i++){await runStep(i,token);}finish();}catch(e){if(e.message!=='cancel')console.error(e);}}
-  /* when the pitch ends the panel fades out and closes, leaving the visitor on the contact form */
-  function finish(){segs.forEach(g=>{g.classList.add('done');g.classList.remove('on');});stepEl.textContent=SCRIPT.length+' / '+SCRIPT.length;const token=st.token;
-    setTimeout(()=>{if(st.token!==token||!st.on)return;ui.classList.add('closing');setTimeout(()=>{if(st.token===token&&st.on)exit();ui.classList.remove('closing');},650);},500);}
-  function exit(){st.token++;st.on=false;st.paused=false;document.body.classList.remove('pitching');$$('.tour-hi').forEach(e=>e.classList.remove('tour-hi'));$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));ui.hidden=true;stopAudio();}
-  function togglePause(){if(!st.on)return;st.paused=!st.paused;if(st.paused)st.pauseAt=performance.now();else st.pausedMs+=performance.now()-(st.pauseAt||performance.now());pauseBtn.innerHTML=st.paused?'Resume <kbd>space</kbd>':'Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed',st.paused);const seg=segs[st.i];if(seg){if(st.paused){const w=Math.min(100,100*(performance.now()-st.t0)/SCRIPT[st.i].dur);seg.style.setProperty('--w',w+'%');seg.classList.add('paused');}else{seg.classList.remove('paused');}}if(st.audio){try{if(st.paused)st.audio.pause();else st.audio.play();}catch(e){}}if(window.speechSynthesis){if(st.paused)speechSynthesis.pause();else speechSynthesis.resume();}}
-  function next(){if(!st.on)return;const i=st.i+1;st.token++;stopAudio();if(i>=SCRIPT.length){finish();return;}play(i);}
-  function unlock(){preload();$('#pitch-sound').hidden=true;st.blocked=false;if(!st.voice)return;try{const a=clip(0);const pr=a.play();if(pr&&pr.then)pr.then(()=>{a.pause();a.currentTime=0;}).catch(()=>{});}catch(e){}if(window.speechSynthesis){try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){}}}
-  $('#pitch-sound').addEventListener('click',()=>{st.voice=true;voiceBtn.setAttribute('aria-pressed','true');st.blocked=false;$('#pitch-sound').hidden=true;hint.textContent='';if(st.on&&st.i>=0){speak(st.i,st.token);}});
-  const start=()=>{st.auto=false;unlock();play(0);};
+  function setPaused(p){if(!st.on||st.paused===p)return;st.paused=p;const now=performance.now();if(p)st.pauseAt=now;else st.pausedMs+=now-st.pauseAt;
+    pauseBtn.innerHTML=p?'Resume <kbd>space</kbd>':'Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed',p?'true':'false');ui.classList.toggle('is-paused',p);
+    const seg=segs[st.i],s=SCRIPT[st.i];if(seg){if(p){seg.style.setProperty('--w',Math.min(100,100*elapsed()/s.dur)+'%');seg.classList.add('paused');}else{seg.style.setProperty('--d',Math.max(0,s.dur-elapsed())+'ms');seg.classList.remove('paused');}}
+    if(p){try{player.pause();}catch(e){}if(window.speechSynthesis)speechSynthesis.pause();}
+    else{if(st.voice&&st.unlocked&&st.speaking){const pr=player.play();if(pr&&pr.catch)pr.catch(()=>{});}if(window.speechSynthesis)speechSynthesis.resume();}}
+  const togglePause=()=>{st.autoPaused=false;setPaused(!st.paused);};
+  async function play(from){st.on=true;st.mini=false;st.token++;const token=st.token;st.paused=false;st.pausedMs=0;st.autoPaused=false;
+    document.body.classList.add('pitching');ui.classList.remove('closing','is-paused');ui.hidden=false;mini.hidden=true;pauseBtn.innerHTML='Pause <kbd>space</kbd>';pauseBtn.setAttribute('aria-pressed','false');soundUI();
+    try{for(let i=from;i<SCRIPT.length;i++){await runStep(i,token);}finish(token);}catch(e){if(e.message!=='cancel')console.error(e);}}
+  function goTo(k){if(!st.on)return;if(k>=SCRIPT.length){st.token++;stopAudio();finish(st.token);return;}stopAudio();play(Math.max(0,k));}
+  function finish(token){segs.forEach(g=>{g.classList.add('done');g.classList.remove('on');});store.set(SEEN,String(Date.now()));
+    setTimeout(()=>{if(st.token!==token||!st.on)return;ui.classList.add('closing');setTimeout(()=>{if(st.token===token&&st.on)close();ui.classList.remove('closing');},650);},500);}
+  function close(){st.token++;st.on=false;st.mini=false;st.paused=false;store.set(SEEN,String(Date.now()));document.body.classList.remove('pitching');$$('.pitch-focus').forEach(e=>e.classList.remove('pitch-focus'));$$('.tour-hi').forEach(e=>e.classList.remove('tour-hi'));ui.hidden=true;mini.hidden=true;stopAudio();}
+  /* the visitor takes the wheel: pause and shrink to a pill they can resume from */
+  function minimize(){if(!st.on||st.mini)return;st.autoPaused=false;setPaused(true);st.mini=true;document.body.classList.remove('pitching');$$('.tour-hi').forEach(e=>e.classList.remove('tour-hi'));ui.hidden=true;mini.hidden=false;miniStep.textContent=(st.i+1)+' / '+SCRIPT.length;}
+  function restore(){if(!st.on||!st.mini)return;play(st.i);}
+  function start(){st.auto=false;cancelPending();if(st.voice)unlock();preload();play(0);}
+
+  /* controls */
   $('#pitch-play').addEventListener('click',start);
   $('#nav-pitch').addEventListener('click',start);
-  $('#pitch-exit').addEventListener('click',exit);
-  pauseBtn.addEventListener('click',togglePause);
-  $('#pitch-next').addEventListener('click',next);
-  voiceBtn.addEventListener('click',()=>{st.voice=!st.voice;voiceBtn.setAttribute('aria-pressed',st.voice);$('#pitch-sound').hidden=true;if(!st.voice){stopAudio();hint.textContent='Captions only';}else{hint.textContent='';if(st.on&&st.i>=0)speak(st.i,st.token);}});
-  document.addEventListener('keydown',e=>{if(!st.on)return;if(e.key==='Escape'){exit();}else if(e.key===' '){e.preventDefault();togglePause();}else if(e.key==='ArrowRight'){next();}});
-  window.addEventListener('pagehide',()=>{if(window.speechSynthesis)speechSynthesis.cancel();});
-  /* the demo opens on landing. Not on a deep link, a back or forward visit, or a hop from another page of the site */
+  $('#pitch-exit').addEventListener('click',close);
+  $('#pitch-min').addEventListener('click',minimize);
+  $('#pitch-resume').addEventListener('click',()=>{unlock();restore();});
+  $('#pitch-mini-x').addEventListener('click',close);
+  pauseBtn.addEventListener('click',()=>{unlock();togglePause();});
+  $('#pitch-next').addEventListener('click',()=>{unlock();goTo(st.i+1);});
+  $('#pitch-back').addEventListener('click',()=>{unlock();goTo(st.i-1);});
+  segBtns.forEach((b,k)=>b.addEventListener('click',()=>{unlock();goTo(k);}));
+  soundBtn.addEventListener('click',toggleSound);
+  document.addEventListener('keydown',e=>{if(!st.on||e.metaKey||e.ctrlKey||e.altKey||inField(e.target))return;
+    if(st.mini){if(e.key==='Escape')close();return;}
+    const onBtn=e.target&&e.target.closest&&e.target.closest('button,a');
+    if(e.key==='Escape'){e.preventDefault();close();}
+    else if(e.key===' '&&!onBtn){e.preventDefault();unlock();togglePause();}
+    else if(e.key==='ArrowRight'){e.preventDefault();unlock();goTo(st.i+1);}
+    else if(e.key==='ArrowLeft'){e.preventDefault();unlock();goTo(st.i-1);}
+    else if(e.key==='m'||e.key==='M'){toggleSound();}
+    else if(['PageDown','PageUp','Home','End','ArrowDown','ArrowUp'].includes(e.key))minimize();});
+  /* scrolling the page, or clicking into it, hands control back. A tap on plain page area just brings the voice in */
+  window.addEventListener('wheel',e=>{if(st.on&&!st.mini&&!inDemo(e.target)&&Math.abs(e.deltaY)+Math.abs(e.deltaX)>2)minimize();},{passive:true});
+  window.addEventListener('touchmove',e=>{if(st.on&&!st.mini&&!inDemo(e.target))minimize();},{passive:true});
+  window.addEventListener('pointerdown',e=>{if(!st.on||inDemo(e.target))return;if(isInteractive(e.target)){unlock();minimize();}else if(!st.mini&&st.voice&&!st.unlocked)enableSound();else unlock();},true);
+  document.addEventListener('visibilitychange',()=>{if(!st.on||st.mini)return;if(document.hidden){if(!st.paused){st.autoPaused=true;setPaused(true);}}else if(st.autoPaused){st.autoPaused=false;setPaused(false);}});
+  window.addEventListener('pagehide',()=>{stopAudio();});
+
+  /* when it opens by itself */
   const navEntry=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};
   let fromSite=false;try{fromSite=!!document.referrer&&new URL(document.referrer).origin===location.origin;}catch(e){}
-  const forced=/[?&](demo|pitch)=1/.test(location.search),off=/[?&](demo|pitch)=0/.test(location.search);
-  const landing=!off&&(forced||(!location.hash&&navEntry.type!=='back_forward'&&(navEntry.type==='reload'||!fromSite)));
-  function autostart(){if(st.on)return;st.auto=true;preload();play(0);}
-  if(landing){const go=()=>setTimeout(autostart,900);if(document.visibilityState!=='hidden')go();else document.addEventListener('visibilitychange',function v(){if(document.visibilityState!=='hidden'){document.removeEventListener('visibilitychange',v);go();}});}
-  /* a visitor who scrolls, taps or clicks the page takes over, and the demo that opened by itself steps aside */
-  function takeover(e){if(!st.on||!st.auto)return;if(e&&e.target&&e.target.closest&&e.target.closest('#pitch'))return;exit();}
-  window.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)+Math.abs(e.deltaX)>2)takeover(e);},{passive:true});
-  window.addEventListener('touchmove',takeover,{passive:true});
-  window.addEventListener('pointerdown',takeover,true);
-  document.addEventListener('keydown',e=>{if(['PageDown','PageUp','Home','End','ArrowDown','ArrowUp'].includes(e.key))takeover(e);});
+  const forced=/[?&](demo|pitch)=1/.test(location.search),blocked=/[?&](demo|pitch)=0/.test(location.search);
+  const seenRecently=Date.now()-Number(store.get(SEEN)||0)<WEEK;
+  const landing=!blocked&&(forced||(!location.hash&&navEntry.type!=='back_forward'&&!fromSite&&!seenRecently&&!reduced));
+  let pending=null;
+  function cancelPending(){if(pending){clearTimeout(pending);pending=null;}}
+  function autostart(){pending=null;if(st.on)return;st.auto=true;store.set(SEEN,String(Date.now()));preload();play(0);}
+  if(landing){const go=()=>{pending=setTimeout(autostart,1200);};
+    if(document.visibilityState!=='hidden')go();else document.addEventListener('visibilitychange',function v(){if(document.visibilityState!=='hidden'){document.removeEventListener('visibilitychange',v);go();}});
+    if(!forced){const early=e=>{if(!pending)return;if(e.type==='wheel'&&Math.abs(e.deltaY)<3)return;cancelPending();};['wheel','touchmove','pointerdown','keydown'].forEach(t=>window.addEventListener(t,early,{passive:true,capture:true}));}}
+  soundUI();
+  window.__rtiDemo={state:()=>({on:st.on,mini:st.mini,i:st.i,paused:st.paused,voice:st.voice,unlocked:st.unlocked,playing:!player.paused,src:(player.dataset.src||'').replace(/^.*\//,''),t:+(player.currentTime||0).toFixed(2)})};
 })();
 
 /* ============ walkthrough: the official Confluent demo video ============ */

@@ -534,6 +534,34 @@ body.pitching .topbar{display:none}
 .pitch-ctl{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center}
 .pitch-ctl .btn kbd{margin-left:.2rem}
 .pitch-hint{font-size:.78rem;color:var(--ink-3)}
+/* demo controls: back, next, sound, minimize, and the resume pill */
+.pitch-tr{margin-left:auto;display:inline-flex;gap:.5rem}
+.pitch-tr .pitch-x{margin-left:0}
+.pitch-prog{height:auto}
+.pitch-prog button{display:block;padding:8px 0;margin:-8px 0;background:none;border:0;cursor:pointer;min-width:0}
+.pitch-prog button i{height:4px}
+.pitch-prog button:hover i{background:rgba(255,255,255,.32)}
+.pitch-prog button:focus-visible{outline:2px solid var(--blue-3);outline-offset:3px}
+.pitch-prog button.act{margin-left:10px}
+.pitch-ctl .btn svg{width:14px;height:14px;flex:none}
+.pitch-ctl #pitch-back,.pitch-ctl #pitch-next{gap:.45rem}
+.pitch-sound{gap:.5rem}
+.pitch-sound svg{width:16px;height:16px}
+.pitch-sound.ask{border-color:var(--blue-2);background:rgba(15,98,254,.28);color:#fff;animation:askpulse 1.6s ease-in-out infinite}
+@keyframes askpulse{0%,100%{box-shadow:0 0 0 0 rgba(69,137,255,.5)}50%{box-shadow:0 0 0 7px rgba(69,137,255,0)}}
+.pitch.is-paused .pitch-live i{animation:none;opacity:.5}
+.pitch-mini{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;align-items:stretch;background:#0d1733;color:#f6f7fb;border:1px solid rgba(255,255,255,.18);box-shadow:0 14px 36px rgba(10,16,40,.32)}
+.pitch-mini-go{display:inline-flex;align-items:center;gap:.6rem;background:none;border:0;color:inherit;padding:.65rem .95rem;font:inherit;font-size:.9rem;cursor:pointer;min-height:44px}
+.pitch-mini-go svg{width:11px;height:11px;color:#78a9ff}
+.pitch-mini-go span{font-family:var(--font-mono);font-size:.76rem;color:#adb7c8}
+.pitch-mini-x{display:grid;place-items:center;background:none;border:0;border-left:1px solid rgba(255,255,255,.18);color:#adb7c8;cursor:pointer;min-width:44px}
+.pitch-mini-x svg{width:14px;height:14px}
+.pitch-mini-go:hover,.pitch-mini-x:hover{background:rgba(255,255,255,.08);color:#fff}
+.pitch-mini-go:focus-visible,.pitch-mini-x:focus-visible{outline:2px solid #78a9ff;outline-offset:-2px}
+@media (pointer:coarse){.pitch-ctl .btn,.pitch-x{min-height:44px}}
+.pitch-x svg{width:12px;height:12px;flex:none}
+@media (max-width:760px){.pitch-ctl{gap:.45rem .5rem;flex-wrap:nowrap}.pitch-ctl .btn{padding:.3rem .65rem;gap:.4rem}.pitch-sound kbd,.pitch-hint,.pitch .tx{display:none}.pitch-tr .pitch-x{padding:.3rem .55rem;min-width:40px;justify-content:center}.pitch-top{gap:.7rem}}
+@media (prefers-reduced-motion:reduce){.pitch-sound.ask{animation:none}}
 @media (max-width:760px){.pitch{padding-top:22px;gap:.45rem}.pitch-cap{font-size:1.15rem;min-height:2.6em}.pitch-ctl .btn kbd,.pitch-x kbd{display:none}.pitch-top{font-size:.66rem}body.pitching .stage.pitch-focus .stage-top{display:none}body.pitching .nav-links{display:none}body.pitching .nav .wrap{min-height:48px}.nav-pitch{display:none}}
 @media (prefers-reduced-motion:reduce){.pitch-live i{animation:none}}
 
