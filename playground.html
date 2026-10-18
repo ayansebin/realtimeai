@@ -4,23 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Playground · Real-Time Intelligence on Confluent</title>
-<meta name="description" content="Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts for Flink SQL.">
+<meta name="description" content="Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://realtimeintelligence.io/playground">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Playground · Real-Time Intelligence on Confluent">
-<meta property="og:description" content="Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts for Flink SQL.">
+<meta property="og:description" content="Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts.">
 <meta property="og:url" content="https://realtimeintelligence.io/playground">
 <meta property="og:image" content="https://realtimeintelligence.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Playground · Real-Time Intelligence on Confluent">
-<meta name="twitter:description" content="Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts for Flink SQL.">
+<meta name="twitter:description" content="Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts.">
 <meta name="twitter:image" content="https://realtimeintelligence.io/og-image.png">
 <meta name="theme-color" content="#ecebe6">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Playground · Real-Time Intelligence on Confluent","url":"https://realtimeintelligence.io/playground","description":"Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts for Flink SQL."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Playground · Real-Time Intelligence on Confluent","url":"https://realtimeintelligence.io/playground","description":"Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts."}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
@@ -1021,7 +1021,7 @@ body.pitching #st-live .stage-top{display:none}
 
     <div class="pg-grid2">
       <div class="pg-card"><div class="eyebrow" id="pg-table-k">All models on this stream</div><table class="pg-table" id="pg-table"></table><p class="pg-note" id="pg-table-note">MASE is scaled by the seasonal naive error over the same context: 1.00 means as good as repeating last cycle, lower is better. Coverage is the share of actuals inside the 10 to 90 band.</p></div>
-      <div class="pg-card"><div class="eyebrow">The same call on Confluent</div><div class="codebox"><pre><code class="sql" id="pg-sql"></code></pre><button class="btn sm ghost copy" id="pg-copy" type="button">Copy SQL</button></div><p class="pg-note">The models you just ran are the ones Confluent hosts. One statement of Flink SQL, per event, no training loop.</p></div>
+      <div class="pg-card"><div class="eyebrow">On Confluent</div><p class="pg-note">The models you just ran are the ones Confluent hosts, scored on every event of your Kafka topics, with no training loop.</p></div>
     </div>
   </div>
 </section>
@@ -1128,7 +1128,7 @@ $('#pg-prev').addEventListener('click',()=>{if(st.oi>0){st.oi--;$('#pg-origin').
 $('#pg-next').addEventListener('click',()=>{if(st.oi<st.ds.fc.origins.length-1){st.oi++;$('#pg-origin').value=st.oi;$('#pg-origin').dispatchEvent(new Event('input'));}});
 $('#pg-thr').addEventListener('input',e=>{st.thr=(+e.target.value)/100;$('#pg-thr-out').textContent=st.thr.toFixed(2);renderReadouts();renderLegend();draw();});
 $('#pg-run').addEventListener('click',run);
-$('#pg-copy').addEventListener('click',()=>{const t=$('#pg-sql').textContent;const b=$('#pg-copy');if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy SQL',1600);},()=>{});});
+($('#pg-copy')||{addEventListener(){}}).addEventListener('click',()=>{const t=$('#pg-sql').textContent;const b=$('#pg-copy');if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy SQL',1600);},()=>{});});
 
 /* ---------- metrics ---------- */
 function metrics(ds,mk,oi,h){const m=ds.fc.models[mk];if(!m||m.status!=='ok')return null;const o=ds.fc.origins[oi];const y=ds.values.slice(o,o+h),p=m.point[oi].slice(0,h);const hasB=m.lo&&m.lo.length;let ae=0,sy=0,cov=0,n=0;for(let j=0;j<h;j++){if(y[j]==null||p[j]==null)continue;n++;ae+=Math.abs(y[j]-p[j]);sy+=Math.abs(y[j]);if(hasB&&y[j]>=m.lo[oi][j]&&y[j]<=m.hi[oi][j])cov++;}if(!n)return null;const mae=ae/n;return {mase:mae/(ds.fc.scale[oi]||1),wape:sy?ae/sy:NaN,cov:hasB?cov/n:NaN,mae};}
@@ -1149,7 +1149,7 @@ function renderTable(){const ds=st.ds,t=$('#pg-table');if(!ds)return;const h=st.
   $('#pg-table-note').textContent=st.task==='fc'?'MASE is scaled by the seasonal naive error over the same context: 1.00 means as good as repeating the last cycle, lower is better. Coverage is the share of held-out actuals inside the 10 to 90 band. Latency is per forecast on a shared CPU runner.':'Forecast metrics for this stream. Switch the task to compare detection at your threshold.';}
 function renderSQL(){const ds=st.ds;if(!ds)return;const topic=topicOf(ds.id);let sql;if(st.task==='fc'){sql="SELECT event_time, value,\n  AI_FORECAST(value, event_time,\n    JSON_OBJECT('model' VALUE '"+(MODEL_SQL[st.model]||'ttm')+"', 'horizon' VALUE "+st.h+",\n                'quantiles' VALUE '0.1,0.5,0.9'))\n  OVER (PARTITION BY series_id ORDER BY event_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS forecast\nFROM `"+topic+"`;";}
   else{sql="SELECT event_time, value,\n  AI_DETECT_ANOMALIES(value, event_time,\n    JSON_OBJECT('model' VALUE 'tspulse', 'threshold' VALUE "+st.thr.toFixed(2)+"))\n  OVER (PARTITION BY series_id ORDER BY event_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS flag\nFROM `"+topic+"`;";}
-  $('#pg-sql').innerHTML=highlight(sql);}
+  const q=$('#pg-sql');if(q)q.innerHTML=highlight(sql);}
 function renderLegend(){const ds=st.ds,el=$('#pg-legend');if(!ds){el.innerHTML='';return;}
   if(st.task==='fc'){el.innerHTML='<span><i style="background:'+C.ink+'"></i>context the model saw</span><span><i style="background:'+C.ink3+'"></i>actual, held out</span><span><i style="background:'+C.blue3+'"></i>'+esc(MODEL_NAMES[st.model])+' forecast</span><span><i class="band"></i>10 to 90 band</span><span><i style="background:'+C.ink4+';height:1px"></i>seasonal naive</span>';}
   else{const s=adScore(ds,st.thr);el.innerHTML='<span><i style="background:'+C.ink+'"></i>stream</span><span><i style="background:'+C.orange+'"></i>TSPulse score</span><span><i class="ev"></i>above threshold</span>'+(ds.labels&&ds.labels.length?'<span><i class="gt"></i>labeled event</span>':'')+'<button class="evb" data-v="all" type="button">Full view</button>'+s.wins.slice(0,8).map((w,i)=>'<button class="evb" data-v="'+i+'" type="button">#'+(i+1)+' '+esc(fmtDate(ds,w.a,true))+' · peak '+w.peak.toFixed(2)+'</button>').join('');
@@ -1159,8 +1159,8 @@ function renderLegend(){const ds=st.ds,el=$('#pg-legend');if(!ds){el.innerHTML='
 function run(fast){const ds=st.ds;if(!ds)return;if(st.task==='fc'&&!(ds.fc.models[st.model]&&ds.fc.models[st.model].status==='ok'))return;
   const sc=fast?0.35:1;const t0=performance.now();st.anim={t0,p:0};st.ran=false;st.once=true;renderReadouts();
   const topic=topicOf(ds.id);const m=st.task==='fc'?ds.fc.models[st.model]:ds.ad.tspulse;
-  const steps=st.task==='fc'?[[0,'reading <b>'+topic+'</b> · '+(m.ctx||ds.fc.ctx).toLocaleString('en-US')+' events of context'],[520,'AI_FORECAST(value, event_time, \''+(MODEL_SQL[st.model])+'\') · horizon '+st.h],[1000,'forecast ready · '+(m.ms<10?m.ms.toFixed(1):Math.round(m.ms))+' ms on CPU · scoring the holdout']]
-    :[[0,'reading <b>'+topic+'</b> · '+ds.n.toLocaleString('en-US')+' events'],[520,'AI_DETECT_ANOMALIES(value, event_time, \'tspulse\') · time and frequency reconstruction'],[1000,'scored '+ds.n.toLocaleString('en-US')+' points · '+(ds.ad.tspulse.ms/1000).toFixed(1)+' s on CPU']];
+  const steps=st.task==='fc'?[[0,'reading <b>'+topic+'</b> · '+(m.ctx||ds.fc.ctx).toLocaleString('en-US')+' events of context'],[520,'forecasting with '+(MODEL_NAMES[st.model]||'TTM')+' · horizon '+st.h],[1000,'forecast ready · '+(m.ms<10?m.ms.toFixed(1):Math.round(m.ms))+' ms on CPU · scoring the holdout']]
+    :[[0,'reading <b>'+topic+'</b> · '+ds.n.toLocaleString('en-US')+' events'],[520,'scoring with TSPulse · time and frequency reconstruction'],[1000,'scored '+ds.n.toLocaleString('en-US')+' points · '+(ds.ad.tspulse.ms/1000).toFixed(1)+' s on CPU']];
   let si=-1;
   function frame(){if(!st.anim||st.anim.t0!==t0)return;const t=(performance.now()-t0)/sc;while(si+1<steps.length&&t>=steps[si+1][0]){si++;setStatus(si<2?'busy':'ok',steps[si][1]);}
     st.anim.p=clamp((t-1000)/(st.task==='fc'?900:1500),0,1);st.anim.scan=clamp(t/520,0,1);draw();

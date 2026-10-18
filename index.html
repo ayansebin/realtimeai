@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Real-Time Intelligence on Confluent</title>
-<meta name="description" content="See, touch and try real-time intelligence: IBM Granite Time Series foundation models and Streaming Agents on Confluent Cloud for Apache Flink. Forecast, detect and act inside the stream with one line of Flink SQL, no training.">
+<meta name="description" content="See, touch and try real-time intelligence: IBM Granite Time Series foundation models and Streaming Agents on Confluent Cloud for Apache Flink. Forecast, detect anomalies and optimize decisions inside the stream, with no training.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://realtimeintelligence.io/">
 <meta property="og:type" content="website">
@@ -20,7 +20,7 @@
 <meta name="twitter:image" content="https://realtimeintelligence.io/og-image.png">
 <meta name="theme-color" content="#ecebe6">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Real-Time Intelligence on Confluent","url":"https://realtimeintelligence.io/","description":"IBM Granite Time Series foundation models and Streaming Agents run natively on Confluent Cloud for Apache Flink. Interactive simulations of forecasting, anomaly detection, optimization and semantic search in the stream.","about":[{"@type":"Thing","name":"Time series foundation models"},{"@type":"Thing","name":"Apache Flink SQL"},{"@type":"Thing","name":"Streaming Agents"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Real-Time Intelligence on Confluent","url":"https://realtimeintelligence.io/","description":"IBM Granite Time Series foundation models and Streaming Agents run natively on Confluent Cloud for Apache Flink. Interactive simulations of forecasting, anomaly detection, optimization and semantic search in the stream.","about":[{"@type":"Thing","name":"Time series foundation models"},{"@type":"Thing","name":"Apache Flink"},{"@type":"Thing","name":"Streaming Agents"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
@@ -938,9 +938,9 @@ body.pitching #st-live .stage-top{display:none}
         <div class="canvas-wrap hx-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="One live stream for the chosen industry. The forecast that reads its real-time context sees the change coming, an anomaly is flagged as it happens, and the decision is optimized before the plan fails."></canvas><div class="tip" id="live-tip"></div></div>
       </div>
       <div class="hflow" id="hflow">
-        <button type="button" class="hf" id="hf-fc"><span class="hf-k"><i>01</i>Forecasting<em>AI_FORECAST</em></span><b id="hf-fc-b">Next 4 h: about 290 bottles</b><span class="hf-s" id="hf-fc-s">read with its context topics, ~3 ms per event</span></button>
-        <button type="button" class="hf" id="hf-ad"><span class="hf-k"><i>02</i>Anomaly detection<em>AI_DETECT_ANOMALIES</em></span><b id="hf-ad-b">Every event inside the expected range</b><span class="hf-s" id="hf-ad-s">each one scored the moment it arrives</span></button>
-        <button type="button" class="hf" id="hf-op"><span class="hf-k"><i>03</i>Optimization<em>TS_OPTIMIZE</em></span><b id="hf-op-b">Next truck as planned: 180</b><span class="hf-s" id="hf-op-s">covers the forecast at 98 % service level</span></button>
+        <button type="button" class="hf" id="hf-fc"><span class="hf-k"><i>01</i>Forecasting</span><b id="hf-fc-b">Next 4 h: about 290 bottles</b><span class="hf-s" id="hf-fc-s">read with its context topics, ~3 ms per event</span></button>
+        <button type="button" class="hf" id="hf-ad"><span class="hf-k"><i>02</i>Anomaly detection</span><b id="hf-ad-b">Every event inside the expected range</b><span class="hf-s" id="hf-ad-s">each one scored the moment it arrives</span></button>
+        <button type="button" class="hf" id="hf-op"><span class="hf-k"><i>03</i>Optimization</span><b id="hf-op-b">Next truck as planned: 180</b><span class="hf-s" id="hf-op-s">covers the forecast at 98 % service level</span></button>
       </div>
     </div>
   </div>
@@ -973,13 +973,13 @@ body.pitching #st-live .stage-top{display:none}
         <div class="pipe" id="pipe">
           <svg class="pipe-svg" id="pipe-svg" aria-hidden="true"></svg>
           <div class="particle" id="pt"></div>
-          <div class="node" id="n0"><div class="nl"><i></i>Kafka topic</div><div class="nimg" id="n0img" style="--img:url(photos/retail-shelves-s.jpg)"></div><div class="nt" id="n0t">pos_sales</div><div class="nb" id="n0b">waiting for an event</div></div>
-          <div class="node" id="n1"><div class="nl"><i></i>AI_FORECAST</div><div class="nt">Granite TTM</div><div class="nb" id="n1b"></div></div>
-          <div class="node" id="n2"><div class="nl"><i></i>AI_DETECT_ANOMALIES</div><div class="nt">99% band</div><div class="nb" id="n2b"></div></div>
-          <div class="node agent" id="n3"><div class="nl"><i></i>Streaming Agent</div><div class="nt">AI_RUN_AGENT</div><div class="nb" id="n3b"></div></div>
-          <div class="node" id="n4"><div class="nl"><i></i>Action topic</div><div class="nt" id="n4t">purchase_orders</div><div class="nb" id="n4b"></div></div>
+          <div class="node" id="n0"><div class="nl"><i></i>Kafka topic</div><div class="nimg" id="n0img" style="--img:url(photos/retail-shelves-s.jpg)"></div><div class="nt" id="n0t">POS sales</div><div class="nb" id="n0b">waiting for an event</div></div>
+          <div class="node" id="n1"><div class="nl"><i></i>Forecast</div><div class="nt">Granite TTM</div><div class="nb" id="n1b"></div></div>
+          <div class="node" id="n2"><div class="nl"><i></i>Detect anomalies</div><div class="nt">99% band</div><div class="nb" id="n2b"></div></div>
+          <div class="node agent" id="n3"><div class="nl"><i></i>Streaming Agent</div><div class="nt">reasons, then acts</div><div class="nb" id="n3b"></div></div>
+          <div class="node" id="n4"><div class="nl"><i></i>Action topic</div><div class="nt" id="n4t">Purchase orders</div><div class="nb" id="n4b"></div></div>
         </div>
-        <div class="log" id="ag-log" aria-live="polite"><div class="t">// agent log. press Run one event.</div></div>
+        <div class="log" id="ag-log" aria-live="polite"><div class="t">Agent log. Press Run one event.</div></div>
       </div>
       <div class="stage-foot">
         <div class="readouts">
@@ -987,28 +987,6 @@ body.pitching #st-live .stage-top{display:none}
           <div class="readout"><b id="ag-ms" class="blue">–</b><span>stream to action</span></div>
           <div class="readout"><b id="ag-gate" class="purple">5</b><span>expert gates</span></div>
         </div>
-        <details class="ref" style="margin:0;flex:1 1 100%">
-          <summary>The three statements behind it</summary>
-          <div class="rb">
-            <div class="codebox"><button class="btn sm ghost copy">Copy SQL</button><pre><code class="sql">-- 1. wrap the model as a tool
-CREATE TOOL forecast_sku AS
-  AI_FORECAST(units_sold, event_time,
-    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 7));
-
--- 2. bind a model, a prompt and tools
-CREATE AGENT replenisher WITH (
-  model  = 'granite-llm',
-  prompt = 'Keep service level at P90. Raise a PO when projected stock falls under lead time demand. Explain in one line.',
-  tools  = ['forecast_sku', 'stock_lookup', 'raise_po']
-);
-
--- 3. run it per event, write decisions back
-INSERT INTO purchase_orders
-SELECT store_id, sku, AI_RUN_AGENT('replenisher', ROW(store_id, sku, units_sold, event_time))
-FROM pos_sales;</code></pre></div>
-            <p class="tiny">Streaming Agents syntax as previewed by Confluent. Names and clauses can change before GA.</p>
-          </div>
-        </details>
       </div>
     </div>
 
@@ -1039,12 +1017,12 @@ FROM pos_sales;</code></pre></div>
               <div class="arch-row" data-k="stream"><i></i><b>Stream</b><span>Kafka topics carry every event, in order, durable and replayable</span></div>
               <div class="arch-row" data-k="connect"><i></i><b>Connect</b><span>120+ connectors bring orders, payments, sensors and markets in</span></div>
               <div class="arch-row" data-k="govern"><i></i><b>Govern</b><span>Schema Registry contracts, lineage and access, your data stays in your org</span></div>
-              <div class="arch-row" data-k="process"><i></i><b>Process</b><span>Flink SQL calls the models, one statement per decision</span></div>
+              <div class="arch-row" data-k="process"><i></i><b>Process</b><span>Flink calls the models on every event, no pipeline to build</span></div>
               <div class="arch-join" aria-hidden="true"><i></i><span>+</span><i></i></div>
               <div class="arch-brand ibm"><b>IBM Granite Time Series</b><span>foundation models, hosted on Confluent</span></div>
-              <div class="arch-row ibm" data-k="fd"><i></i><b>Forecast · Detect</b><span>AI_FORECAST and AI_DETECT_ANOMALIES, zero-shot on any series</span></div>
+              <div class="arch-row ibm" data-k="fd"><i></i><b>Forecast · Detect</b><span>Forecasts and flags anomalies, zero-shot on any series</span></div>
               <div class="arch-row ibm" data-k="sc"><i></i><b>Search · Classify · Fill gaps</b><span>TSPulse finds the history that looks like now, labels patterns, fills missing points</span></div>
-              <div class="arch-row ibm" data-k="opt"><i></i><b>Optimize</b><span>TS_OPTIMIZE picks the settings that best serve a target</span></div>
+              <div class="arch-row ibm" data-k="opt"><i></i><b>Optimize</b><span>Picks the settings that best serve a target</span></div>
               <div class="arch-row purple" data-k="agent"><i></i><b>Streaming Agents</b><span>act on the result, with gates for experts</span></div>
             </div>
             <div class="arch-f">zero configuration · built-in governance · billed as Flink compute</div>
@@ -1061,7 +1039,7 @@ FROM pos_sales;</code></pre></div>
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b>1</b><span>statement</span></div><div class="readout"><b id="arch-count">0</b><span>decisions in flight</span></div><div class="readout"><b class="purple">0</b><span>models to train</span></div></div><div class="hint">Nothing leaves Confluent Cloud. Models run next to the topic.</div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b>1</b><span>layer</span></div><div class="readout"><b id="arch-count">0</b><span>decisions in flight</span></div><div class="readout"><b class="purple">0</b><span>models to train</span></div></div><div class="hint">Nothing leaves Confluent Cloud. Models run next to the topic.</div></div>
     </div>
 
     <div class="chapter-head sub">
@@ -1072,10 +1050,10 @@ FROM pos_sales;</code></pre></div>
     <div class="stage" id="st-models">
       <div class="stage-body">
         <div class="models" id="models">
-          <button class="mcard on" data-m="ttm"><span class="use">in use</span><span class="mk">Mixer · default</span><h4>TTM</h4><span class="mp">'model' VALUE 'ttm'</span><canvas data-glyph="point"></canvas><span class="ml">Tiny mixing networks, CPU-friendly. About 100,000 series a night on CPU.</span><span class="mb"><span>NeurIPS 2024</span><span>10 to 60× throughput</span><span>horizon ≤ 96</span></span></button>
-          <button class="mcard" data-m="flowstate"><span class="use">in use</span><span class="mk">State space</span><h4>FlowState</h4><span class="mp">'model' VALUE 'flowstate'</span><canvas data-glyph="smooth"></canvas><span class="ml">A running summary updated with every point. Sub-second and hourly data alike.</span><span class="mb"><span>ICML 2026</span><span>sampling-rate equivariant</span><span>context ≤ 4,096</span></span></button>
-          <button class="mcard" data-m="patchtstfm"><span class="use">in use</span><span class="mk">Transformer</span><h4>PatchTST-FM</h4><span class="mp">'model' VALUE 'patchtstfm'</span><canvas data-glyph="quant"></canvas><span class="ml">Reads the series patch by patch and returns the full distribution, q10 to q90.</span><span class="mb"><span class="gold">#1 GIFT-Eval</span><span>context ≤ 8,064</span><span>2026</span></span></button>
-          <button class="mcard" data-m="tspulse"><span class="use">in use</span><span class="mk">Dual space · next</span><h4>TSPulse</h4><span class="mp">TS_EMBED · TS_SEARCH</span><canvas data-glyph="embed"></canvas><span class="ml">One small model for anomaly detection, classification, gap-filling and similarity search. GPU-free.</span><span class="mb"><span class="gold">#1 TSB-AD</span><span>ICLR 2026</span><span>next</span></span></button>
+          <button class="mcard on" data-m="ttm"><span class="use">in use</span><span class="mk">Mixer · default</span><h4>TTM</h4><canvas data-glyph="point"></canvas><span class="ml">Tiny mixing networks, CPU-friendly. About 100,000 series a night on CPU.</span><span class="mb"><span>NeurIPS 2024</span><span>10 to 60× throughput</span><span>horizon ≤ 96</span></span></button>
+          <button class="mcard" data-m="flowstate"><span class="use">in use</span><span class="mk">State space</span><h4>FlowState</h4><canvas data-glyph="smooth"></canvas><span class="ml">A running summary updated with every point. Sub-second and hourly data alike.</span><span class="mb"><span>ICML 2026</span><span>sampling-rate equivariant</span><span>context ≤ 4,096</span></span></button>
+          <button class="mcard" data-m="patchtstfm"><span class="use">in use</span><span class="mk">Transformer</span><h4>PatchTST-FM</h4><canvas data-glyph="quant"></canvas><span class="ml">Reads the series patch by patch and returns the full distribution, q10 to q90.</span><span class="mb"><span class="gold">#1 GIFT-Eval</span><span>context ≤ 8,064</span><span>2026</span></span></button>
+          <button class="mcard" data-m="tspulse"><span class="use">in use</span><span class="mk">Dual space · next</span><h4>TSPulse</h4><canvas data-glyph="embed"></canvas><span class="ml">One small model for anomaly detection, classification, gap-filling and similarity search. GPU-free.</span><span class="mb"><span class="gold">#1 TSB-AD</span><span>ICLR 2026</span><span>next</span></span></button>
         </div>
       </div>
     </div>
@@ -1130,12 +1108,12 @@ FROM pos_sales;</code></pre></div>
     </div>
 
     <div class="ucgrid" role="tablist" id="uctabs" aria-label="Use cases">
-      <button class="uc" role="tab" aria-selected="true" aria-controls="uc-prod" type="button"><i>01</i><canvas class="uc-cv" data-mini="prod" aria-hidden="true"></canvas><b>Production optimization</b><code>AI_FORECAST · TS_OPTIMIZE</code></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-anom" type="button"><i>02</i><canvas class="uc-cv" data-mini="anom" aria-hidden="true"></canvas><b>Anomaly detection</b><code>AI_DETECT_ANOMALIES</code></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-demand" type="button"><i>03</i><canvas class="uc-cv" data-mini="fc" aria-hidden="true"></canvas><b>Supply chain planning</b><code>AI_FORECAST</code></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-fraud" type="button"><i>04</i><canvas class="uc-cv" data-mini="fraud" aria-hidden="true"></canvas><b>Fraud and security</b><code>AI_DETECT_ANOMALIES</code></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-search" type="button"><i>05</i><canvas class="uc-cv" data-mini="search" aria-hidden="true"></canvas><b>Semantic search</b><code>TS_EMBED · TS_SEARCH</code></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-trade" type="button"><i>06</i><canvas class="uc-cv" data-mini="trade" aria-hidden="true"></canvas><b>Trading</b><code>AI_FORECAST</code></button>
+      <button class="uc" role="tab" aria-selected="true" aria-controls="uc-prod" type="button"><i>01</i><canvas class="uc-cv" data-mini="prod" aria-hidden="true"></canvas><b>Production optimization</b></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-anom" type="button"><i>02</i><canvas class="uc-cv" data-mini="anom" aria-hidden="true"></canvas><b>Anomaly detection</b></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-demand" type="button"><i>03</i><canvas class="uc-cv" data-mini="fc" aria-hidden="true"></canvas><b>Supply chain planning</b></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-fraud" type="button"><i>04</i><canvas class="uc-cv" data-mini="fraud" aria-hidden="true"></canvas><b>Fraud and security</b></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-search" type="button"><i>05</i><canvas class="uc-cv" data-mini="search" aria-hidden="true"></canvas><b>Semantic search</b></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-trade" type="button"><i>06</i><canvas class="uc-cv" data-mini="trade" aria-hidden="true"></canvas><b>Trading</b></button>
     </div>
 
     <!-- production optimization -->
@@ -1159,7 +1137,6 @@ FROM pos_sales;</code></pre></div>
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="sqlline"><code id="pr-sql"></code></div></div>
     </div>
 
     <!-- anomaly -->
@@ -1181,7 +1158,7 @@ FROM pos_sales;</code></pre></div>
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="an-scored">0</b><span>days scored</span></div><div class="readout"><b id="an-flagged" class="red">0</b><span>flagged</span></div><div class="readout"><b>same day</b><span>time to action</span></div></div><div class="sqlline"><code id="an-sql"></code></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="an-scored">0</b><span>days scored</span></div><div class="readout"><b id="an-flagged" class="red">0</b><span>flagged</span></div><div class="readout"><b>same day</b><span>time to action</span></div></div></div>
     </div>
 
     <!-- demand -->
@@ -1204,7 +1181,7 @@ FROM pos_sales;</code></pre></div>
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">+5 to 10</b><span>accuracy points</span></div><div class="readout"><b>100k</b><span>SKUs, thousands of stores</span></div><div class="readout"><b>hourly</b><span>not weekly</span></div></div><div class="sqlline"><code id="dm-sql"></code></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">+5 to 10</b><span>accuracy points</span></div><div class="readout"><b>100k</b><span>SKUs, thousands of stores</span></div><div class="readout"><b>hourly</b><span>not weekly</span></div></div></div>
     </div>
 
     <!-- fraud -->
@@ -1226,7 +1203,7 @@ FROM pos_sales;</code></pre></div>
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="fr-scored">0</b><span>authorizations scored</span></div><div class="readout"><b id="fr-flagged" class="red">0</b><span>held</span></div><div class="readout"><b>&lt;50 ms</b><span>inside the auth window</span></div></div><div class="sqlline"><code id="fr-sql"></code></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="fr-scored">0</b><span>authorizations scored</span></div><div class="readout"><b id="fr-flagged" class="red">0</b><span>held</span></div><div class="readout"><b>&lt;50 ms</b><span>inside the auth window</span></div></div></div>
     </div>
 
     <!-- search -->
@@ -1249,7 +1226,7 @@ FROM pos_sales;</code></pre></div>
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b>1.1M</b><span>parameters</span></div><div class="readout"><b>GPU-free</b><span>embedding</span></div></div><div class="sqlline"><code id="se-sql"></code></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b>1.1M</b><span>parameters</span></div><div class="readout"><b>GPU-free</b><span>embedding</span></div></div></div>
     </div>
 
     <!-- trading -->
@@ -1272,7 +1249,7 @@ FROM pos_sales;</code></pre></div>
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">every symbol</b><span>one statement</span></div><div class="readout"><b>&lt;10 ms</b><span>per bar</span></div><div class="readout"><b>P10 to P90</b><span>a band, not a point</span></div></div><div class="sqlline"><code id="tr-sql"></code></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">every symbol</b><span>one model</span></div><div class="readout"><b>&lt;10 ms</b><span>per bar</span></div><div class="readout"><b>P10 to P90</b><span>a band, not a point</span></div></div></div>
     </div>
 
     <div class="chapter-head sub" id="h-ind">
@@ -1324,7 +1301,7 @@ FROM pos_sales;</code></pre></div>
           <div class="readout"><b id="pl-m" class="green">$0.00</b><span>margin vs baseline, per ton</span></div>
           <div class="readout"><b id="pl-d" class="blue">0 h</b><span>downtime avoided</span></div>
         </div>
-        <div class="hint">Simulated line. The topics, the statements and the gates are the real ones.</div>
+        <div class="hint">Simulated line. The topics and the gates are the real ones.</div>
       </div>
     </div>
     <div class="stage" id="st-retail" role="tabpanel" hidden>
@@ -1338,7 +1315,7 @@ FROM pos_sales;</code></pre></div>
         <div class="plant-wrap" id="rt-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="rt-cv" aria-label="Animated store 112 and its supply chain: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="rt-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="rt-cap-k"></span><span class="plant-steps" id="rt-steps" aria-hidden="true"></span><button class="switch" id="rt-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="rt-cap-t"></p></div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="rt-r0">–</b><span>on-shelf availability · target 98%</span></div><div class="readout"><b id="rt-r1">–</b><span>waste · target 2%</span></div><div class="readout"><b id="rt-r2">–</b><span>inventory days · target 12</span></div><div class="readout"><b id="rt-r3">–</b><span>fraud loss, bps · target 5</span></div></div><div class="hint">Simulated store. The topics, the statements and the gates are the real ones.</div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="rt-r0">–</b><span>on-shelf availability · target 98%</span></div><div class="readout"><b id="rt-r1">–</b><span>waste · target 2%</span></div><div class="readout"><b id="rt-r2">–</b><span>inventory days · target 12</span></div><div class="readout"><b id="rt-r3">–</b><span>fraud loss, bps · target 5</span></div></div><div class="hint">Simulated store. The topics and the gates are the real ones.</div></div>
     </div>
 
     <div class="stage" id="st-bank" role="tabpanel" hidden>
@@ -1352,7 +1329,7 @@ FROM pos_sales;</code></pre></div>
         <div class="plant-wrap" id="bk-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="bk-cv" aria-label="Animated payments and the trading desk: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="bk-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="bk-cap-k"></span><span class="plant-steps" id="bk-steps" aria-hidden="true"></span><button class="switch" id="bk-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="bk-cap-t"></p></div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="bk-r0">–</b><span>fraud loss, bps · target 3</span></div><div class="readout"><b id="bk-r1">–</b><span>false declines · target 1%</span></div><div class="readout"><b id="bk-r2">–</b><span>slippage, bps · target 2</span></div><div class="readout"><b id="bk-r3">–</b><span>settlement on time · target 99.5%</span></div></div><div class="hint">Simulated bank. The topics, the statements and the gates are the real ones.</div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="bk-r0">–</b><span>fraud loss, bps · target 3</span></div><div class="readout"><b id="bk-r1">–</b><span>false declines · target 1%</span></div><div class="readout"><b id="bk-r2">–</b><span>slippage, bps · target 2</span></div><div class="readout"><b id="bk-r3">–</b><span>settlement on time · target 99.5%</span></div></div><div class="hint">Simulated bank. The topics and the gates are the real ones.</div></div>
     </div>
 
     <div class="stage" id="st-air" role="tabpanel" hidden>
@@ -1366,7 +1343,7 @@ FROM pos_sales;</code></pre></div>
         <div class="plant-wrap" id="al-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="al-cv" aria-label="Animated hub operations, fleet and network: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="al-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="al-cap-k"></span><span class="plant-steps" id="al-steps" aria-hidden="true"></span><button class="switch" id="al-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="al-cap-t"></p></div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="al-r0">–</b><span>on-time departures · target 85%</span></div><div class="readout"><b id="al-r1">–</b><span>load factor · target 86%</span></div><div class="readout"><b id="al-r2">–</b><span>unplanned AOG per month · target 1</span></div><div class="readout"><b id="al-r3">–</b><span>turnaround, min · target 45</span></div></div><div class="hint">Simulated airline. The topics, the statements and the gates are the real ones.</div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="al-r0">–</b><span>on-time departures · target 85%</span></div><div class="readout"><b id="al-r1">–</b><span>load factor · target 86%</span></div><div class="readout"><b id="al-r2">–</b><span>unplanned AOG per month · target 1</span></div><div class="readout"><b id="al-r3">–</b><span>turnaround, min · target 45</span></div></div><div class="hint">Simulated airline. The topics and the gates are the real ones.</div></div>
     </div>
 
     <!-- case studies -->
@@ -1495,13 +1472,13 @@ FROM pos_sales;</code></pre></div>
       <div class="walk-video" id="walk-video"></div>
       <div class="walk-side">
         <h3>Real-time forecasting on Confluent Cloud, in the console</h3>
-        <p>The official demo: IBM Granite Time Series models called from the Flink SQL workspace on live Kafka data.</p>
+        <p>The official demo: IBM Granite Time Series models running in the Confluent Cloud console on live Kafka data.</p>
         <ol class="walk-steps">
           <li><b>A topic of live readings</b><span>Energy load data flowing through Kafka, with a Flink table on top.</span></li>
-          <li><b>One statement in the Flink SQL workspace</b><span>AI_FORECAST on the stream. No model to deploy, no pipeline, zero config.</span></li>
-          <li><b>Run, streaming mode</b><span>The statement goes Running, thousands of rows come back with the forecast fields alongside the actuals.</span></li>
+          <li><b>One step in the Flink workspace</b><span>The forecast runs on the stream. No model to deploy, no pipeline, zero config.</span></li>
+          <li><b>Run, streaming mode</b><span>Thousands of rows come back with the forecast alongside the actuals.</span></li>
           <li><b>The results chart</b><span>Actual against the AI forecast, drawn inside the workspace, and the baseline it beats.</span></li>
-          <li><b>Switch models with one word</b><span>TTM, FlowState or PatchTST-FM in the <code>'model'</code> option. Same statement, three models, lower cost on fully managed Confluent Cloud.</span></li>
+          <li><b>Switch models with one word</b><span>TTM, FlowState or PatchTST-FM. Same step, three models, lower cost on fully managed Confluent Cloud.</span></li>
         </ol>
         <div class="btn-row"><a class="btn sm ghost" href="https://www.youtube.com/watch?v=knU4XB-90Nw" target="_blank" rel="noopener">Open on YouTube</a><button class="btn sm ghost" id="walk-to-demo" type="button">Play the live demo</button></div>
       </div>
@@ -1679,43 +1656,43 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   const k$=v=>'$'+Math.round(v)+'k';
   /* each stream: its shape, its context topic, the anomaly it can show, and the decision it needs */
   const IND={
-    retail:{pair:['stockout','service level'],topic:'pos_sales · store 112 · bottled water',unit:'bottles per hour',kind:'stock',base:60,cv:0.12,amp:0.16,
+    retail:{pair:['stockout','service level'],topic:'store 112 · bottled water sales',unit:'bottles per hour',kind:'stock',base:60,cv:0.12,amp:0.16,
       ctx:{mul:0.8,delay:6,len:48,tag:'heat wave · 34 °C',title:'Heat wave: demand up 80 %',src:'weather topic'},
       an:{type:'drop',f:1,len:4,tag:'no sales',title:s=>'No sales for 20 min, '+s.anStock+' in stock',act:'Shelf empty? The store gets an alert now.',after:'Shelf refilled, sales back'},
       stock:{s0:190,plan:180,first:21,every:48,lot:24,fmt:v=>String(Math.round(v))},
       fc:s=>'Next 4 h: about '+Math.round(s.sum/10)*10+' bottles',
-      op:{steady:s=>'Next truck as planned: '+s.plan,steadyS:'covers the forecast at 98 % service level',risk:t=>'Shelf runs out in '+t,riskS:'at today\'s order. TS_OPTIMIZE plans the next truck.',
+      op:{steady:s=>'Next truck as planned: '+s.plan,steadyS:'covers the forecast at 98 % service level',risk:t=>'Shelf runs out in '+t,riskS:'at today\'s order. The optimizer plans the next truck.',
         riskTag:t=>'shelf empty in '+t,planTag:q=>'next truck · '+q,done:d=>'Order '+d.q+' on the next truck',doneS:d=>'+'+d.add+' bottles · no stockout · 98 % service level',doneTag:d=>'truck · '+d.q+' (+'+d.add+')'}},
-    banking:{pair:['fraud','risk'],topic:'atm_withdrawals · branch 22',unit:'$k per hour',kind:'stock',base:18,cv:0.18,amp:0.14,
+    banking:{pair:['fraud','risk'],topic:'branch 22 · ATM withdrawals',unit:'$k per hour',kind:'stock',base:18,cv:0.18,amp:0.14,
       ctx:{mul:0.7,delay:4,len:48,tag:'payroll landed',title:'Payroll landed: withdrawals up 70 %',src:'payments topic'},
       an:{type:'spike',add:54,len:2,tag:'4× at ATM 3',title:()=>'ATM 3 at 4× normal in 10 min',act:'Skimming? ATM 3 is paused and the cards blocked.',after:'ATM 3 back in service, cash safe'},
       stock:{s0:58,plan:54,first:21,every:48,lot:6,fmt:k$},
       fc:s=>'Next 4 h: about '+k$(s.sum)+' withdrawn',
-      op:{steady:s=>'Next cash run as planned: '+k$(s.plan),steadyS:'covers the forecast with little idle cash',risk:t=>'ATMs run dry in '+t,riskS:'at the planned cash run. TS_OPTIMIZE plans the load.',
+      op:{steady:s=>'Next cash run as planned: '+k$(s.plan),steadyS:'covers the forecast with little idle cash',risk:t=>'ATMs run dry in '+t,riskS:'at the planned cash run. The optimizer plans the load.',
         riskTag:t=>'ATMs dry in '+t,planTag:q=>'next cash run · '+k$(q),done:d=>'Load '+k$(d.q)+' on the next cash run',doneS:d=>'+'+k$(d.add)+' · no ATM runs dry · less idle cash at risk',doneTag:d=>'cash run · '+k$(d.q)+' (+'+k$(d.add)+')'}},
-    manufacturing:{pair:['quality slip','yield'],topic:'line_temp · tempering line 2',unit:'°C',kind:'spec',base:31.6,sd:0.045,lo:31.0,hi:32.2,
+    manufacturing:{pair:['quality slip','yield'],topic:'tempering line 2 · temperature',unit:'°C',kind:'spec',base:31.6,sd:0.045,lo:31.0,hi:32.2,
       ctx:{add:1.2,delay:12,len:48,tag:'room +4 °C',title:'Room up 4 °C: the line will run hot',src:'building topic'},
       an:{type:'spike',add:1.0,len:2,tag:'+1 °C spike',title:()=>'Zone 3 spiked by 1 °C in 10 min',act:'A sticking relay? Maintenance gets a work order.',after:'Zone 3 back to normal'},
       fc:()=> 'Inside spec for the next 4 h',
-      op:{steady:()=>'Hold the setpoint',steadyS:'inside the window, at the least energy',risk:t=>'Leaves spec in '+t,riskS:'TS_OPTIMIZE plans the heater.',
+      op:{steady:()=>'Hold the setpoint',steadyS:'inside the window, at the least energy',risk:t=>'Leaves spec in '+t,riskS:'The optimizer plans the heater.',
         riskTag:t=>'out of spec in '+t,done:()=>'Heater −1.2 °C, timed to the room heat',doneS:()=>'stays in spec · 5 % less energy',doneTag:()=>'heater −1.2 °C'}},
-    telecom:{pair:['outage','uptime'],topic:'cell_traffic · site 4017',unit:'Gbps',kind:'cap',act:'raise',base:6.2,cv:0.06,amp:0.17,dec:1,limit:10,limitTag:'capacity 10 Gbps',raise:5,
+    telecom:{pair:['outage','uptime'],topic:'cell site 4017 · traffic',unit:'Gbps',kind:'cap',act:'raise',base:6.2,cv:0.06,amp:0.17,dec:1,limit:10,limitTag:'capacity 10 Gbps',raise:5,
       ctx:{mul:0.75,delay:5,len:40,tag:'stadium event',title:'Stadium event: traffic up 75 %',src:'events topic'},
       an:{type:'drop',f:0.6,len:4,tag:'−60 %',title:()=>'Sector 2 traffic down 60 %',act:'Fiber degradation? A ticket opens with the cause.',after:'Sector 2 restored'},
       fc:s=>'Peak in the next 4 h: '+s.peak.toFixed(1)+' Gbps',
       op:{steady:()=>'One carrier is enough',steadyS:'traffic stays under 10 Gbps',risk:t=>'Over capacity in '+t,riskS:'The crowd needs more than one carrier.',
         riskTag:t=>'congestion in '+t,done:d=>'Extra carrier on '+(d.left>0?'in '+rel(d.left):'now'),doneS:()=>'no congestion · 0 dropped sessions',doneTag:()=>'+1 carrier'}},
-    healthcare:{pair:['surge','wait times'],topic:'ed_arrivals · one hospital',unit:'patients per hour',kind:'cap',act:'raise',base:10,cv:0.12,amp:0.18,dec:0,limit:15,limitTag:'safe capacity 15 per hour',raise:6,
+    healthcare:{pair:['surge','wait times'],topic:'one hospital · emergency arrivals',unit:'patients per hour',kind:'cap',act:'raise',base:10,cv:0.12,amp:0.18,dec:0,limit:15,limitTag:'safe capacity 15 per hour',raise:6,
       ctx:{mul:0.55,delay:6,len:44,tag:'flu alert',title:'Flu alert: arrivals up 55 %',src:'public health topic'},
       an:{type:'drop',f:1,len:4,tag:'feed silent',title:()=>'No triage events for 20 min',act:'Kiosk offline? IT is paged before patients wait.',after:'Triage feed back'},
       fc:s=>'Next 4 h: about '+Math.round(s.sum)+' arrivals',
-      op:{steady:()=>'Staffing as planned',steadyS:'arrivals stay under safe capacity',risk:t=>'Over safe capacity in '+t,riskS:'TS_OPTIMIZE plans the staffing.',
+      op:{steady:()=>'Staffing as planned',steadyS:'arrivals stay under safe capacity',risk:t=>'Over safe capacity in '+t,riskS:'The optimizer plans the staffing.',
         riskTag:t=>'over capacity in '+t,done:d=>d.left>0?'Call in 2 nurses, starting in '+rel(d.left):'Call in 2 nurses now',doneS:()=>'waits stay under 30 min',doneTag:()=>'+2 nurses'}},
-    energy:{pair:['grid peak','cost'],topic:'meter_readings · building 7',unit:'kW',kind:'cap',act:'lower',base:720,cv:0.035,amp:0.14,dec:0,limit:1000,limitTag:'peak limit 1,000 kW',
+    energy:{pair:['grid peak','cost'],topic:'building 7 · power meter',unit:'kW',kind:'cap',act:'lower',base:720,cv:0.035,amp:0.14,dec:0,limit:1000,limitTag:'peak limit 1,000 kW',
       ctx:{mul:0.38,delay:6,len:40,tag:'cold snap · −8 °C',title:'Cold snap: load up 38 %',src:'weather topic'},
       an:{type:'spike',add:180,len:3,tag:'+180 kW',title:()=>'Heat pump 4 stuck at full power',act:'+180 kW out of nowhere. Maintenance is paged.',after:'Heat pump 4 fixed'},
       fc:s=>'Peak in the next 4 h: '+fmtInt(s.peak)+' kW',
-      op:{steady:()=>'No load shift needed',steadyS:'the peak stays under 1,000 kW',risk:t=>'Over the 1,000 kW limit in '+t,riskS:'A demand charge ahead. TS_OPTIMIZE plans the load.',
+      op:{steady:()=>'No load shift needed',steadyS:'the peak stays under 1,000 kW',risk:t=>'Over the 1,000 kW limit in '+t,riskS:'A demand charge ahead. The optimizer plans the load.',
         riskTag:t=>'over the limit in '+t,done:()=>'Pre-heat now, EV charging after the peak',doneS:()=>'peak under 1,000 kW · saves $4,800 this month',doneTag:()=>'pre-heat · EV later'}}
   };
   const st={};let cfg=IND.retail,key='retail';
@@ -1897,10 +1874,10 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   const el=$('#st-agent');if(!el)return;
   const pipe=$('#pipe'),svg=$('#pipe-svg'),pt=$('#pt');const nodes=[0,1,2,3,4].map(i=>$('#n'+i));
   const SC={
-    retail:{topic:'pos_sales',out:'purchase_orders',n0:'store 112 · oat milk 1L\nsold 41 · stock 52',n1:'q50 38 /day · q90 52 /day\nhorizon 7 days',n2:'FALSE · inside the band',flag:false,n3:'cover 52 ÷ 52 = 1.0 d\nlead time 2 d at P90\n→ raise PO 240 (pack 60)',n4:'PO-88213 · 240 units\narrives Tue 06:00',log:[['f','AI_FORECAST ttm h=7 → q50 38, q90 52'],['f','AI_DETECT_ANOMALIES → is_anomaly FALSE'],['a','agent: cover 1.0 d < lead 2 d at P90. tool raise_po(240)'],['g','INSERT INTO purchase_orders → PO-88213'],['y','gate: planner reviews by exception']],ms:[12,3,310,8]},
-    fraud:{topic:'card_payments',out:'card_holds',n0:'card ••4417 · $1,240\nelectronics · new city',n1:'expected $46\nupper $210 at 99.5%',n2:'TRUE · 5.9× the upper bound',flag:true,n3:'velocity 3 tx / 4 min\nnew merchant, new geo\n→ hold + step-up auth',n4:'hold placed\npush sent to cardholder',log:[['f','AI_FORECAST ttm → expected $46'],['r','AI_DETECT_ANOMALIES → is_anomaly TRUE, 5.9× upper'],['a','agent: velocity 3/4 min, new MCC and geo. tool place_hold()'],['g','INSERT INTO card_holds → hold 7f3a, step-up auth'],['y','gate: risk team tunes the band, not the rule']],ms:[9,3,220,6]},
-    network:{topic:'cell_kpis',out:'tickets',n0:'cell NYC-0412\ndrop rate 3.8%',n1:'expected 0.6%\nupper 1.4%',n2:'TRUE · 6 min above the band',flag:true,n3:'neighbors normal\nconfig change 09:12 found\ncause confirmed',n4:'INC-20931 opened\nwith cause and rollback plan',log:[['f','AI_FORECAST tspulse → expected 0.6%'],['r','AI_DETECT_ANOMALIES → TRUE, 6 min above band'],['a','agent: neighbors normal. tool config_diff() → change 09:12. cause confirmed'],['g','INSERT INTO tickets → INC-20931 with rollback plan'],['y','gate: tickets only when a cause is confirmed']],ms:[7,3,480,9]},
-    kiln:{topic:'kiln_telemetry',out:'setpoints',n0:'mill M2 · feed 196 t/h\ntemp 1,418 °C',n1:'quality 97.1% in 40 min\ntarget 98.0%',n2:'FALSE · drifting −0.4 pt/h',flag:false,n3:'TS_OPTIMIZE → feed 178, temp 1,462\ninside guardrails\n+$2 /t margin',n4:'recommendation sent\noperator approves',log:[['f','AI_FORECAST patchtstfm → quality 97.1% in 40 min'],['f','AI_DETECT_ANOMALIES → FALSE, drift −0.4 pt/h'],['a','agent: below target in 40 min. tool ts_optimize() → feed 178, temp 1,462'],['g','INSERT INTO setpoints → recommendation M2-5521'],['y','gate: operator approves the setpoint']],ms:[41,4,520,7]}
+    retail:{topic:'POS sales',out:'Purchase orders',n0:'store 112 · oat milk 1L\nsold 41 · stock 52',n1:'q50 38 /day · q90 52 /day\nhorizon 7 days',n2:'normal · inside the band',flag:false,n3:'cover 52 ÷ 52 = 1.0 d\nlead time 2 d at P90\n→ raise an order of 240',n4:'PO-88213 · 240 units\narrives Tue 06:00',log:[['f','forecast, TTM, 7 days → q50 38, q90 52'],['f','anomaly check → inside the band'],['a','agent: 1 day of cover, 2 days of lead time at P90. Raises an order for 240'],['g','order PO-88213 written to the purchase orders topic'],['y','gate: the planner reviews by exception']],ms:[12,3,310,8]},
+    fraud:{topic:'Card payments',out:'Card holds',n0:'card ••4417 · $1,240\nelectronics · new city',n1:'expected $46\nupper $210 at 99.5%',n2:'anomaly · 5.9× the upper bound',flag:true,n3:'3 payments in 4 min\nnew merchant, new city\n→ hold and verify',n4:'hold placed\npush sent to cardholder',log:[['f','forecast, TTM → expected $46'],['r','anomaly check → 5.9× the upper bound'],['a','agent: 3 payments in 4 min, new merchant and new city. Places a hold'],['g','hold written to the card holds topic, verification sent'],['y','gate: the risk team tunes the band, not the rule']],ms:[9,3,220,6]},
+    network:{topic:'Cell KPIs',out:'Tickets',n0:'cell NYC-0412\ndrop rate 3.8%',n1:'expected 0.6%\nupper 1.4%',n2:'anomaly · 6 min above the band',flag:true,n3:'neighbors normal\nconfig change 09:12 found\ncause confirmed',n4:'INC-20931 opened\nwith cause and rollback plan',log:[['f','forecast, TSPulse → expected 0.6%'],['r','anomaly check → 6 min above the band'],['a','agent: neighbors normal. Finds the config change at 09:12. Cause confirmed'],['g','ticket INC-20931 opened with the rollback plan'],['y','gate: tickets only when a cause is confirmed']],ms:[7,3,480,9]},
+    kiln:{topic:'Kiln telemetry',out:'Setpoints',n0:'mill M2 · feed 196 t/h\ntemp 1,418 °C',n1:'quality 97.1% in 40 min\ntarget 98.0%',n2:'normal · drifting −0.4 pt/h',flag:false,n3:'optimizer → feed 178, temp 1,462\ninside guardrails\n+$2 /t margin',n4:'recommendation sent\noperator approves',log:[['f','forecast, PatchTST-FM → quality 97.1% in 40 min'],['f','anomaly check → normal, drift −0.4 pt/h'],['a','agent: below target in 40 min. The optimizer finds feed 178, temp 1,462'],['g','recommendation M2-5521 written to the setpoints topic'],['y','gate: the operator approves the setpoint']],ms:[41,4,520,7]}
   };
   const st={sc:'retail',running:false,auto:false,count:0,timer:null};
   function centers(){const pr=pipe.getBoundingClientRect();return nodes.map(n=>{const r=n.getBoundingClientRect();return {l:r.left-pr.left,r:r.right-pr.left,t:r.top-pr.top,b:r.bottom-pr.top,cx:r.left-pr.left+r.width/2,cy:r.top-pr.top+r.height/2};});}
@@ -1981,7 +1958,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     {const r=R,top=r.y+24,bot=r.y+r.h-16;monthAxis(ctx,r,top-2,bot);const n=12,lh=(bot-14-top)/n;let liveR=0;
       for(let u=0;u<n;u++){const y=top+u*lh+lh/2;const s0=u,go=u+0.25;if(m<=s0)continue;const x1=r.x+s0/12*r.w,x2=r.x+Math.min(m,go)/12*r.w;ctx.fillStyle='rgba(120,169,255,.5)';ctx.fillRect(x1,y-2,Math.max(1,x2-x1),4);if(m>=go){liveR++;const xg=r.x+go/12*r.w,xe=r.x+cur/12*r.w;ctx.fillStyle='rgba(111,220,140,.75)';ctx.fillRect(xg,y-2,Math.max(2,xe-xg),4);}}
       if(liveR&&m<12){const xc=r.x+cur/12*r.w;ctx.save();ctx.shadowColor=C.green2;ctx.shadowBlur=8;ctx.fillStyle=C.green2;ctx.beginPath();ctx.arc(xc,top+(liveR-1)*lh+lh/2,3,0,Math.PI*2);ctx.fill();ctx.restore();}
-      people(ctx,r.x+6,bot-4,1,C.blue3);txt(ctx,'1 analyst, SQL',r.x+18,bot-4,{px:8.5,c:C.blue3});
+      people(ctx,r.x+6,bot-4,1,C.blue3);txt(ctx,'1 analyst',r.x+18,bot-4,{px:8.5,c:C.blue3});
       header(ctx,r,'IN THE STREAM · GRANITE, ONE STATEMENT','live '+liveR+' · first value in 6 d',C.blue3);
       const x=r.x+cur/12*r.w;ctx.strokeStyle='rgba(244,244,244,.5)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(x)+0.5,top-2);ctx.lineTo(Math.round(x)+0.5,bot);ctx.stroke();}}
 
@@ -2103,7 +2080,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const CC={x:40,y:415,w:1230,h:200};
   const KAFKA={x:60,y:440,w:305,h:160};
   const FLINK={x:395,y:440,w:380,h:160};
-  const FN=[{k:'AI_FORECAST',y:478},{k:'AI_DETECT_ANOMALIES',y:514},{k:'TS_OPTIMIZE',y:550}];
+  const FN=[{k:'Forecast',y:478},{k:'Detect anomalies',y:514},{k:'Optimize',y:550}];
   const AG={x:800,y:440,w:195,h:160};
   const DEC={x:1020,y:440,w:240,h:160};
   const DROWS=[{k:'Setpoint → kiln',y:482,c:P.green},{k:'Work order → CMMS',y:518,c:P.orange},{k:'Alert → operator',y:554,c:P.red}];
@@ -2135,21 +2112,21 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const SC={
     opt:{name:'Production optimization',eq:'kiln',phases:[
       {d:2600,cap:'Free lime is trending up. The quality forecast says 97.1% in 40 minutes, below the 98.5% target.',on:()=>{st.highlight='kiln';st.callouts=[{x:660,y:118,c:P.yellow,to:{x:860,y:208},l:['AT-501 free lime 1.2 → 1.6 %','quality forecast 97.1 % in 40 min','target 98.5 %']}];kpiTo({q:97.1});flow(['kiln','cooler'],0,0,P.yellow);}},
-      {d:2600,cap:'AI_FORECAST reads the kiln and lab topics. TS_OPTIMIZE searches feed and temperature inside the guardrails.',on:()=>{st.fn=[1,0,1];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['search feed 150–205 t/h, temp 1400–1485 °C','quality ≥ 98.5 · energy ↓ · emissions cap']}];flow(['kiln','cooler'],0,2,P.blue3,true);}},
+      {d:2600,cap:'The forecast reads the kiln and lab topics. The optimizer searches feed and temperature inside the guardrails.',on:()=>{st.fn=[1,0,1];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['search feed 150–205 t/h, temp 1400–1485 °C','quality ≥ 98.5 · energy ↓ · emissions cap']}];flow(['kiln','cooler'],0,2,P.blue3,true);}},
       {d:2600,cap:'The agent proposes feed 178 t/h and kiln 1,462 °C, worth about $2 per ton. The operator approves at the gate.',on:()=>{st.agent=1;st.dec=[1,0,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: feed 178 t/h · temp 1,462 °C','+$2.0 /t · inside guardrails','→ operator gate']}];spawn(agentToDec(0),{color:P.green,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(0),{color:P.green,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
       {d:3200,cap:'Approved. The setpoints land on the kiln. Quality back to 99.0%, 3 kWh per ton less, margin up.',on:()=>{st.gate=2;spawn(ctrlToKiln(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.kiln.feed=178;st.kiln.temp=1462;kpiTo({q:99.0,e:91,t:178,m:2.0});st.callouts=[{x:660,y:118,c:P.green,to:{x:640,y:222},l:['setpoint applied: feed 178 t/h · 1,462 °C','quality 99.0 % · 91 kWh/t · +$2.0 /t']}];}});}},
       {d:1800,cap:'Every cycle. 2 to 5× faster than tuning by hand, and the same models score every mill.',on:()=>{}}
     ]},
     pdm:{name:'Predictive maintenance',eq:'cmill',phases:[
       {d:2600,cap:'The cement mill bearing vibration is creeping up. VT-205 streams to the historian and to Kafka.',on:()=>{st.highlight='cmill';st.vibRise=1;st.callouts=[{x:600,y:112,c:P.yellow,to:{x:898,y:224},l:['VT-205 bearing vibration 4.1 → 5.3 mm/s','alarm limit 7.1 mm/s']}];flow('cmill',1,0,P.yellow);}},
-      {d:2600,cap:'AI_FORECAST projects the crossing: 9 days to the alarm limit, 6 days at P90.',on:()=>{st.fn=[1,0,0];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['forecast crosses 7.1 mm/s in 9 d','P90: 6 d · next planned stop: 6 d']}];flow('cmill',1,0,P.blue3,true);}},
-      {d:2600,cap:'The agent reserves the bearing and schedules the swap in the planned stop. A work order lands in the CMMS.',on:()=>{st.agent=1;st.dec=[0,1,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: RUL 9 d < P90 6 d → act','tool create_work_order(VT-205)']}];spawn(agentToDec(1),{color:P.orange,speed:240,size:3.5,onEnd:()=>{spawn(decToCmms(),{color:P.orange,speed:320,size:3.5,onEnd:()=>{st.wo=true;}});}});}},
+      {d:2600,cap:'The forecast projects the crossing: 9 days to the alarm limit, 6 days at P90.',on:()=>{st.fn=[1,0,0];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['forecast crosses 7.1 mm/s in 9 d','P90: 6 d · next planned stop: 6 d']}];flow('cmill',1,0,P.blue3,true);}},
+      {d:2600,cap:'The agent reserves the bearing and schedules the swap in the planned stop. A work order lands in the CMMS.',on:()=>{st.agent=1;st.dec=[0,1,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: RUL 9 d < P90 6 d → act','work order VT-205 raised']}];spawn(agentToDec(1),{color:P.orange,speed:240,size:3.5,onEnd:()=>{spawn(decToCmms(),{color:P.orange,speed:320,size:3.5,onEnd:()=>{st.wo=true;}});}});}},
       {d:3200,cap:'WO-4471 scheduled, parts reserved, maintenance confirms at the gate. 18 hours of unplanned downtime avoided.',on:()=>{st.gate=2;spawn(cmmsToMill(),{color:P.orange,speed:300,size:3.5,onEnd:()=>{kpiTo({d:18});st.callouts=[{x:600,y:112,c:P.green,to:{x:898,y:224},l:['WO-4471 · bearing swap in planned stop','parts reserved · 18 h downtime avoided']}];}});}},
       {d:1800,cap:'Thousands of bearings, one statement each. No labeled failures needed.',on:()=>{}}
     ]},
     anom:{name:'Anomaly detection',eq:'preheater',phases:[
       {d:2400,cap:'Cyclone 4 draft pressure jumps. PT-302 is scored against its own band on every reading.',on:()=>{st.highlight='preheater';st.spike=1;st.callouts=[{x:470,y:40,c:P.red,to:{x:417,y:118},l:['PT-302 cyclone 4 ΔP 6.2 → 9.8 mbar','4.2 σ outside the 99.9 % band']}];flow('preheater',2,1,P.red);}},
-      {d:2600,cap:'AI_DETECT_ANOMALIES flags it. The agent checks the neighbors: gas temperature and ID fan amps are normal.',on:()=>{st.fn=[0,1,0];st.flag=true;st.callouts=[{x:400,y:622,c:P.red,to:{x:495,y:600},l:['is_anomaly TRUE · upper_bound 8.1','TE-305 normal · ID fan amps normal']}];flow('preheater',2,1,P.red,true);}},
+      {d:2600,cap:'Anomaly detection flags it. The agent checks the neighbors: gas temperature and ID fan amps are normal.',on:()=>{st.fn=[0,1,0];st.flag=true;st.callouts=[{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound 8.1','TE-305 normal · ID fan amps normal']}];flow('preheater',2,1,P.red,true);}},
       {d:2600,cap:'Likely cause: partial blockage in cyclone 4. Alert to the operator with the evidence, not a trip.',on:()=>{st.agent=1;st.dec=[0,0,1];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: pattern = cyclone blockage','alert operator · suggest air blaster C4']}];spawn(agentToDec(2),{color:P.red,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(2),{color:P.red,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
       {d:3200,cap:'The operator fires the air blaster. Pressure comes back inside the band in a minute, kiln never stopped.',on:()=>{st.gate=2;spawn(ctrlToPre(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.blast=1;st.spike=0;st.flag=false;st.callouts=[{x:470,y:40,c:P.green,to:{x:422,y:221},l:['air blaster C4 fired','ΔP back to 6.4 mbar · no trip']}];kpiTo({d:st.kpiT.d+4});}});}},
       {d:1800,cap:'Weekend cycles and start-ups are inside the band, so they are not alarms. False alarms down, trips avoided.',on:()=>{}}
@@ -2258,11 +2235,11 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     line(decToCtrl(0),'rgba(111,220,140,.14)',1);line(decToCmms(),'rgba(255,131,43,.14)',1);line(ctrlToKiln(),'rgba(111,220,140,.12)',1,[2,5]);line(cmmsToMill(),'rgba(255,131,43,.12)',1,[2,5]);line(ctrlToPre(),'rgba(255,131,137,.12)',1,[2,5]);
     rr(KAFKA.x,KAFKA.y,KAFKA.w,KAFKA.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('KAFKA TOPICS',KAFKA.x+10,KAFKA.y+14);
     TOPICS.forEach((t,i)=>{const y=topicY(i);text(t,KAFKA.x+14,y,{px:10,mono:true,c:P.blue4});const ph2=(st.t/30+i*7)%16;ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1*S;ctx.setLineDash([3*S,13*S]);ctx.lineDashOffset=-ph2*S;ctx.beginPath();ctx.moveTo(X(KAFKA.x+150),Y(y));ctx.lineTo(X(KAFKA.x+KAFKA.w-10),Y(y));ctx.stroke();ctx.setLineDash([]);});
-    rr(FLINK.x,FLINK.y,FLINK.w,FLINK.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('FLINK SQL · ONE STATEMENT PER DECISION',FLINK.x+10,FLINK.y+14);
+    rr(FLINK.x,FLINK.y,FLINK.w,FLINK.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('CONFLUENT CLOUD FOR APACHE FLINK',FLINK.x+10,FLINK.y+14);
     FN.forEach((f,i)=>{const lit=st.fn[i];ctx.save();if(lit)glow(P.blue,14);rr(FLINK.x+14,f.y-11,170,22,2,lit?'rgba(15,98,254,.9)':'rgba(255,255,255,.05)',lit?P.blue3:P.line,1);noglow();ctx.restore();text(f.k,FLINK.x+24,f.y,{px:10,mono:true,c:lit?'#fff':P.ink2,w:lit?500:400});});
     text('Granite Time Series models',FLINK.x+196,FN[0].y,{px:10,c:P.ink2,w:500});text('TTM · FlowState · PatchTST-FM · TSPulse',FLINK.x+196,FN[0].y+16,{px:8.5,c:P.ink3});text('zero-shot · hosted by Confluent',FLINK.x+196,FN[1].y+8,{px:9,c:P.ink3});text('backtest MASE · WAPE · CRPS',FLINK.x+196,FN[2].y,{px:9,c:P.ink3});
     ctx.save();if(st.agent)glow(P.purple,14);rr(AG.x,AG.y,AG.w,AG.h,2,st.agent?'rgba(49,19,94,.55)':'rgba(0,7,20,.6)',st.agent?P.purple:P.line,1);noglow();ctx.restore();eyebrow('STREAMING AGENTS',AG.x+10,AG.y+14,{c:st.agent?P.purple:P.ink3});
-    ['CREATE TOOL → function','CREATE AGENT → prompt + tools','AI_RUN_AGENT per event','reflection before release'].forEach((t,i)=>text(t,AG.x+12,AG.y+40+i*20,{px:9.5,mono:true,c:st.agent?P.ink:P.ink2}));
+    ['tools from your systems','a goal and a prompt','runs on every event','checks before it acts'].forEach((t,i)=>text(t,AG.x+12,AG.y+40+i*20,{px:9.5,mono:false,c:st.agent?P.ink:P.ink2}));
     text('5 expert gates',AG.x+AG.w-10,AG.y+AG.h-14,{px:9,mono:true,a:'right',c:P.purple});
     rr(DEC.x,DEC.y,DEC.w,DEC.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('DECISIONS · BACK TO THE FLOOR',DEC.x+10,DEC.y+14);
     DROWS.forEach((d,i)=>{const lit=st.dec[i];ctx.save();if(lit)glow(d.c,12);rr(DEC.x+12,d.y-11,DEC.w-24,22,2,lit?'rgba(0,7,20,.9)':'rgba(255,255,255,.04)',lit?d.c:P.line,1);noglow();ctx.restore();text(d.k,DEC.x+22,d.y,{px:10,mono:true,c:lit?d.c:P.ink2});});
@@ -2280,7 +2257,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
      {x:cx(EQ.cmill),y:cy(EQ.cmill),r:50,eq:'cmill',html:'<b>Cement mill</b><br>click: predictive maintenance'},
      {x:cx(EQ.preheater),y:cy(EQ.preheater),r:60,eq:'preheater',html:'<b>Preheater tower</b><br>click: anomaly detection'}],
     Object.keys(SRC).map(k=>({x:cx(SRC[k]),y:cy(SRC[k]),r:40,html:'<b>'+SRC[k].label+'</b><br>'+SRC[k].sub+' → Kafka via connector'})),
-    [{x:cx(KAFKA),y:cy(KAFKA),r:70,html:'<b>Kafka topics</b><br>one topic per source, Schema Registry contracts'},{x:cx(FLINK),y:cy(FLINK),r:70,html:'<b>Flink SQL</b><br>AI_FORECAST · AI_DETECT_ANOMALIES · TS_OPTIMIZE'},{x:cx(AG),y:cy(AG),r:60,html:'<b>Streaming Agents</b><br>reason on the forecast and the flag, call tools, write decisions'},{x:cx(DEC),y:cy(DEC),r:60,html:'<b>Decisions</b><br>topics the floor consumes: setpoints, work orders, alerts'},{x:cx(EQ.ctrl),y:cy(EQ.ctrl),r:70,html:'<b>Control room</b><br>objectives, targets and the operator gate'}]);
+    [{x:cx(KAFKA),y:cy(KAFKA),r:70,html:'<b>Kafka topics</b><br>one topic per source, Schema Registry contracts'},{x:cx(FLINK),y:cy(FLINK),r:70,html:'<b>Flink</b><br>forecast · detect anomalies · optimize'},{x:cx(AG),y:cy(AG),r:60,html:'<b>Streaming Agents</b><br>reason on the forecast and the flag, call tools, write decisions'},{x:cx(DEC),y:cy(DEC),r:60,html:'<b>Decisions</b><br>topics the floor consumes: setpoints, work orders, alerts'},{x:cx(EQ.ctrl),y:cy(EQ.ctrl),r:70,html:'<b>Control room</b><br>objectives, targets and the operator gate'}]);
   function vpos(ev){const r=cv.c.getBoundingClientRect();const e=ev.touches?ev.touches[0]:ev;return {x:(e.clientX-r.left)/S,y:(e.clientY-r.top)/S};}
   function hit(p){let best=null,bd=1e9;HOT.forEach(h=>{const d=Math.hypot(h.x-p.x,h.y-p.y);if(d<h.r&&d<bd){bd=d;best=h;}});return best;}
   cv.c.addEventListener('mousemove',ev=>{const p=vpos(ev);const h=hit(p);st.hover=h&&h.s?h.s:null;if(!h){tip.style.display='none';cv.c.style.cursor='default';return;}tip.innerHTML=h.html;tip.style.display='block';const r=inner.getBoundingClientRect();const px=(ev.clientX-r.left),py=(ev.clientY-r.top);tip.style.left=(px>r.width*0.7?px-10-tip.offsetWidth:px+12)+'px';tip.style.top=(py+10)+'px';cv.c.style.cursor=(h.eq==='kiln'||h.eq==='cmill'||h.eq==='preheater')?'pointer':'default';});
@@ -2432,11 +2409,11 @@ function twin(spec){
     line(decToCtrl(0),'rgba(111,220,140,.14)',1);
     rr(KAFKA.x,KAFKA.y,KAFKA.w,KAFKA.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('KAFKA TOPICS',KAFKA.x+10,KAFKA.y+14);
     TOPICS.forEach((t,i)=>{const y=topicY(i);text(t,KAFKA.x+14,y,{px:10,mono:true,c:P.blue4});const ph2=(st.t/30+i*7)%16;ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1*S;ctx.setLineDash([3*S,13*S]);ctx.lineDashOffset=-ph2*S;ctx.beginPath();ctx.moveTo(X(KAFKA.x+150),Y(y));ctx.lineTo(X(KAFKA.x+KAFKA.w-10),Y(y));ctx.stroke();ctx.setLineDash([]);});
-    rr(FLINK.x,FLINK.y,FLINK.w,FLINK.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('FLINK SQL · ONE STATEMENT PER DECISION',FLINK.x+10,FLINK.y+14);
+    rr(FLINK.x,FLINK.y,FLINK.w,FLINK.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('CONFLUENT CLOUD FOR APACHE FLINK',FLINK.x+10,FLINK.y+14);
     FN.forEach((f,i)=>{const lit=st.fn[i];ctx.save();if(lit)glow(P.blue,14);rr(FLINK.x+14,f.y-11,170,22,2,lit?'rgba(15,98,254,.9)':'rgba(255,255,255,.05)',lit?P.blue3:P.line,1);noglow();ctx.restore();text(f.k,FLINK.x+24,f.y,{px:10,mono:true,c:lit?'#fff':P.ink2,w:lit?500:400});});
     text('Granite Time Series models',FLINK.x+196,FN[0].y,{px:10,c:P.ink2,w:500});text('TTM · FlowState · PatchTST-FM · TSPulse',FLINK.x+196,FN[0].y+16,{px:8.5,c:P.ink3});text('zero-shot · hosted by Confluent',FLINK.x+196,FN[1].y+8,{px:9,c:P.ink3});text('backtest MASE · WAPE · CRPS',FLINK.x+196,FN[2].y,{px:9,c:P.ink3});
     ctx.save();if(st.agent)glow(P.purple,14);rr(AG.x,AG.y,AG.w,AG.h,2,st.agent?'rgba(49,19,94,.55)':'rgba(0,7,20,.6)',st.agent?P.purple:P.line,1);noglow();ctx.restore();eyebrow('STREAMING AGENTS',AG.x+10,AG.y+14,{c:st.agent?P.purple:P.ink3});
-    ['CREATE TOOL → function','CREATE AGENT → prompt + tools','AI_RUN_AGENT per event','reflection before release'].forEach((t,i)=>text(t,AG.x+12,AG.y+40+i*20,{px:9.5,mono:true,c:st.agent?P.ink:P.ink2}));
+    ['tools from your systems','a goal and a prompt','runs on every event','checks before it acts'].forEach((t,i)=>text(t,AG.x+12,AG.y+40+i*20,{px:9.5,mono:false,c:st.agent?P.ink:P.ink2}));
     text('5 expert gates',AG.x+AG.w-10,AG.y+AG.h-14,{px:9,mono:true,a:'right',c:P.purple});
     rr(DEC.x,DEC.y,DEC.w,DEC.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow(spec.decLabel||'DECISIONS · BACK TO THE FLOOR',DEC.x+10,DEC.y+14);
     DROWS.forEach((d,i)=>{const lit=st.dec[i];ctx.save();if(lit)glow(d.c,12);rr(DEC.x+12,d.y-11,DEC.w-24,22,2,lit?'rgba(0,7,20,.9)':'rgba(255,255,255,.04)',lit?d.c:P.line,1);noglow();ctx.restore();text(d.k,DEC.x+22,d.y,{px:10,mono:true,c:lit?d.c:P.ink2});});
@@ -2448,7 +2425,7 @@ function twin(spec){
   const HOT=[].concat(SIG.map(s=>({x:s.x,y:s.y,r:12,html:'<b>'+s.id+'</b> '+s.name+'<br>unit '+s.unit+' · source '+SRC[s.src].label+'<br>topic '+TOPICS[s.topic],s})),
     Object.keys(N).map(k=>({x:cx(N[k]),y:cy(N[k]),r:Math.max(N[k].w,N[k].h)/2+6,node:k,html:'<b>'+(N[k].label||k)+'</b>'+(N[k].sc?'<br>click: '+spec.scenarios[N[k].sc].name:'')})),
     Object.keys(SRC).map(k=>({x:cx(SRC[k]),y:cy(SRC[k]),r:40,html:'<b>'+SRC[k].label+'</b><br>'+SRC[k].sub+' → Kafka via connector'})),
-    [{x:cx(KAFKA),y:cy(KAFKA),r:70,html:'<b>Kafka topics</b><br>one topic per source, Schema Registry contracts'},{x:cx(FLINK),y:cy(FLINK),r:70,html:'<b>Flink SQL</b><br>'+FNK.join(' · ')},{x:cx(AG),y:cy(AG),r:60,html:'<b>Streaming Agents</b><br>reason on the forecast and the flag, call tools, write decisions'},{x:cx(DEC),y:cy(DEC),r:60,html:'<b>Decisions</b><br>'+DROWS.map(d=>d.k).join(' · ')},{x:cx(CTRL),y:cy(CTRL),r:70,html:'<b>'+spec.ctrlName+'</b><br>objectives, targets and the gate'}]);
+    [{x:cx(KAFKA),y:cy(KAFKA),r:70,html:'<b>Kafka topics</b><br>one topic per source, Schema Registry contracts'},{x:cx(FLINK),y:cy(FLINK),r:70,html:'<b>Flink</b><br>'+FNK.join(' · ').toLowerCase()},{x:cx(AG),y:cy(AG),r:60,html:'<b>Streaming Agents</b><br>reason on the forecast and the flag, call tools, write decisions'},{x:cx(DEC),y:cy(DEC),r:60,html:'<b>Decisions</b><br>'+DROWS.map(d=>d.k).join(' · ')},{x:cx(CTRL),y:cy(CTRL),r:70,html:'<b>'+spec.ctrlName+'</b><br>objectives, targets and the gate'}]);
   function vpos(ev){const r=cv.c.getBoundingClientRect();const e=ev.touches?ev.touches[0]:ev;return {x:(e.clientX-r.left)/S,y:(e.clientY-r.top)/S};}
   function hit(o){let best=null,bd=1e9;HOT.forEach(h=>{const d=Math.hypot(h.x-o.x,h.y-o.y);if(d<h.r&&d<bd){bd=d;best=h;}});return best;}
   cv.c.addEventListener('mousemove',ev=>{const o=vpos(ev);const h=hit(o);st.hover=h&&h.s?h.s:null;if(!h){tip.style.display='none';cv.c.style.cursor='default';return;}tip.innerHTML=h.html;tip.style.display='block';const r=inner.getBoundingClientRect();const px=(ev.clientX-r.left),py=(ev.clientY-r.top);tip.style.left=(px>r.width*0.7?px-10-tip.offsetWidth:px+12)+'px';tip.style.top=(py+10)+'px';cv.c.style.cursor=(h.node&&N[h.node].sc)?'pointer':'default';});
@@ -2485,7 +2462,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   ],
   sources:{pos:{x:80,y:325,w:150,h:50,label:'POS · checkout',sub:'scans, real time'},wms:{x:255,y:325,w:150,h:50,label:'Inventory · WMS',sub:'on hand, hourly'},ecom:{x:430,y:325,w:150,h:50,label:'E-commerce',sub:'orders, clicks'},erp:{x:605,y:325,w:150,h:50,label:'ERP · pricing',sub:'promos, costs'},pay:{x:780,y:325,w:150,h:50,label:'Payments',sub:'card auths, 50 ms'},tms:{x:955,y:325,w:150,h:50,label:'Logistics · TMS',sub:'trucks, ETAs'}},
   topics:['pos.transactions','store.inventory','ecom.orders','erp.prices','payments.auth','logistics.eta'],
-  fn:['AI_FORECAST','AI_DETECT_ANOMALIES','TS_OPTIMIZE'],
+  fn:['Forecast','Detect anomalies','Optimize'],
   decisions:[{k:'Purchase order → DC',c:P.green},{k:'Task → store team',c:P.orange},{k:'Hold card → checkout',c:P.red}],
   kpis:[{k:'On-shelf availability',key:'osa',v0:96.2,u:'%',dec:1,lo:90,hi:100,tg:98,up:true},{k:'Waste',key:'waste',v0:2.6,u:' %',dec:1,lo:0,hi:5,tg:2,up:false},{k:'Inventory days',key:'days',v0:14,u:' d',dec:0,lo:5,hi:25,tg:12,up:false},{k:'Fraud loss',key:'fraud',v0:9,u:' bps',dec:0,lo:0,hi:20,tg:5,up:false}],
   legend:[['telemetry',P.blue3],['purchase order',P.green],['task',P.orange],['hold',P.red],['agent',P.purple]],
@@ -2493,22 +2470,22 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
     /* shoppers */for(let i=0;i<3;i++){const sx=480+((t/(50+i*13)+i*70)%230);D.dot(sx,208,2.5,'rgba(166,200,255,.6)');}},
   scenarios:{
     plan:{name:'Supply chain planning',phases:[
-      {d:2600,cap:'Oat milk sells 40 a day in store 112. A promo starts next week. The forecast at P90 says 68 a day, lead time 2 days.',on:a=>{a.hl('shelf');a.co([{x:560,y:232,c:P.yellow,to:{x:540,y:108},l:['SKU 44102 oat milk 1L · 40/day','promo next week · AI_FORECAST P90: 68/day','lead time 2 d · on hand 140']}]);a.kpi({osa:96.2});a.flow(['shelf','pos','store'],0,0,P.yellow);}},
-      {d:2600,cap:'AI_FORECAST runs on the sales topic with the promo as a driver. The band sets the reorder point: 136 units before the promo day.',on:a=>{a.fn([1,0,0]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 28 d · quantiles P50 P90','reorder point 136 · order up to 376']}]);a.flow(['shelf','store'],1,0,P.blue3,true);}},
+      {d:2600,cap:'Oat milk sells 40 a day in store 112. A promo starts next week. The forecast at P90 says 68 a day, lead time 2 days.',on:a=>{a.hl('shelf');a.co([{x:560,y:232,c:P.yellow,to:{x:540,y:108},l:['SKU 44102 oat milk 1L · 40/day','promo next week · forecast P90: 68/day','lead time 2 d · on hand 140']}]);a.kpi({osa:96.2});a.flow(['shelf','pos','store'],0,0,P.yellow);}},
+      {d:2600,cap:'The forecast runs on the sales topic with the promo as a driver. The band sets the reorder point: 136 units before the promo day.',on:a=>{a.fn([1,0,0]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 28 d · quantiles P50 P90','reorder point 136 · order up to 376']}]);a.flow(['shelf','store'],1,0,P.blue3,true);}},
       {d:2600,cap:'The agent raises PO-8821 for 240 units to the distribution center, inside the planner budget. The planner approves.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: PO-8821 · 240 units · DC → store 112','ships day 5 · arrives day 7 · budget ok','→ planner gate']}]);a.toGate(0,P.green);}},
       {d:3400,cap:'Approved. The order lands in the WMS, the truck rolls, the shelf is full on promo day. Availability 99%, waste flat.',on:a=>{a.fromGate('dc',P.green,()=>{a.flag('src','wms');a.flag('srcNote',{src:'wms',t:'PO-8821 · 240 units · picked'});a.flag('truck',true);a.flag('shelf',0.95);a.kpi({osa:99.1,days:11});a.co([{x:560,y:232,c:P.green,to:{x:540,y:108},l:['shelf full on promo day · 99.1 % availability','inventory days 14 → 11 · waste flat']}]);});}},
       {d:1800,cap:'Every SKU, every store, every hour. 100,000 SKUs on one statement.',on:a=>{}}
     ]},
     anom:{name:'Anomaly detection',phases:[
       {d:2600,cap:'Oat milk sales drop to 6 on a Tuesday. The shelf camera shows a gap, the back room still has 140 units.',on:a=>{a.hl('shelf');a.flag('shelf',0.15);a.spark('SHELF-A4',{from:38,to:6,lo:0,hi:60,limit:18,label:'POS-112 units/h',unit:'',dec:0,color:P.red,dx:-180,dy:-60});a.co([{x:600,y:232,c:P.red,to:{x:540,y:108},l:['POS-112 sales 38 → 6 /h · shelf gap','BACK-112 back room on hand 140']}]);a.flow(['shelf','store'],0,1,P.red);}},
-      {d:2600,cap:'AI_DETECT_ANOMALIES flags the dip against the band. No labels, no rules per SKU.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['is_anomaly TRUE · lower_bound 22','weekend peaks inside the band: not flagged']}]);a.flow(['shelf'],0,1,P.red,true);}},
+      {d:2600,cap:'Anomaly detection flags the dip against the band. No labels, no rules per SKU.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · lower bound 22','weekend peaks inside the band: not flagged']}]);a.flow(['shelf'],0,1,P.red,true);}},
       {d:2600,cap:'The agent diagnoses: stock in the back room, not on the shelf. A task goes to the store team, not a purchase order.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: gap with stock on hand = replenish shelf','task store team · no PO · no markdown']}]);a.toGate(1,P.orange);}},
       {d:3200,cap:'Shelf refilled in 20 minutes. 1,100 units of lost sales avoided this week across the category.',on:a=>{a.fromGate('shelf',P.orange,()=>{a.flag('shelf',0.9);a.spark('SHELF-A4',null);a.kpi({osa:98.6});a.co([{x:600,y:232,c:P.green,to:{x:540,y:108},l:['shelf refilled in 20 min','1,100 units of lost sales avoided']}]);});}},
       {d:1800,cap:'Same statement on 100,000 SKUs. A flag becomes the right action, the same day.',on:a=>{}}
     ]},
     fraud:{name:'Fraud and security',phases:[
       {d:2600,cap:'At checkout, card ••4417 tries 14 small authorizations in two minutes.',on:a=>{a.hl('pos');a.spark('AUTH-112',{from:1,to:14,lo:0,hi:16,limit:6,label:'AUTH ••4417 /min',unit:'',dec:0,color:P.red,dx:70,dy:70});a.co([{x:890,y:200,c:P.red,to:{x:690,y:150},l:['card ••4417 · 14 auths in 2 min · $1 to $4','normal for this card: 2 a week']}]);a.flow(['pos'],4,1,P.red);}},
-      {d:2600,cap:'AI_DETECT_ANOMALIES scores every card against its own normal: 4.8σ outside the band. Card testing pattern.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['is_anomaly TRUE · 4.8 σ · per card_id','pattern: card testing']}]);a.flow(['pos'],4,1,P.red,true);}},
+      {d:2600,cap:'Anomaly detection scores every card against its own normal: 4.8σ outside the band. Card testing pattern.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · 4.8 σ · per card','pattern: card testing']}]);a.flow(['pos'],4,1,P.red,true);}},
       {d:2600,cap:'The agent holds the card, alerts the issuer and keeps the lane open for everyone else.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: hold ••4417 · alert issuer','lane stays open · no rule rewrite']}]);a.toGate(2,P.red);}},
       {d:3200,cap:'Held before the authorization window closes, under 50 ms. $2,400 of loss avoided on one card.',on:a=>{a.fromGate('pos',P.red,()=>{a.flag('held','pos');a.spark('AUTH-112',null);a.kpi({fraud:4});a.co([{x:890,y:200,c:P.green,to:{x:690,y:150},l:['held in 41 ms · issuer notified','$2,400 loss avoided · false declines flat']}]);});}},
       {d:1800,cap:'Every card has its own normal. Rules are not rewritten for each new attack.',on:a=>{}}
@@ -2538,7 +2515,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   ],
   sources:{switch:{x:80,y:325,w:150,h:50,label:'Card switch',sub:'auths, 20k per second'},digital:{x:255,y:325,w:150,h:50,label:'Digital banking',sub:'logins, sessions'},core:{x:430,y:325,w:150,h:50,label:'Core banking',sub:'ledger, settlement'},mkt:{x:605,y:325,w:150,h:50,label:'Market data',sub:'bars, ticks'},oms:{x:780,y:325,w:150,h:50,label:'OMS · EMS',sub:'orders, fills'},crm:{x:955,y:325,w:150,h:50,label:'CRM · KYC',sub:'profiles, limits'}},
   topics:['payments.auth','digital.events','core.settlement','market.bars','oms.orders','crm.profiles'],
-  fn:['AI_FORECAST','AI_DETECT_ANOMALIES','TS_OPTIMIZE'],
+  fn:['Forecast','Detect anomalies','Optimize'],
   decisions:[{k:'Slices → OMS',c:P.green},{k:'Reroute → settlement',c:P.orange},{k:'Hold → authorization',c:P.red}],
   kpis:[{k:'Fraud loss',key:'fraud',v0:6,u:' bps',dec:1,lo:0,hi:12,tg:3,up:false},{k:'False declines',key:'fd',v0:1.4,u:' %',dec:1,lo:0,hi:3,tg:1,up:false},{k:'Slippage',key:'slip',v0:3.1,u:' bps',dec:1,lo:0,hi:6,tg:2,up:false},{k:'Settlement on time',key:'sot',v0:99.1,u:' %',dec:1,lo:95,hi:100,tg:99.5,up:true}],
   legend:[['telemetry',P.blue3],['order slice',P.green],['reroute',P.orange],['hold',P.red],['agent',P.purple]],
@@ -2546,21 +2523,21 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   scenarios:{
     fraud:{name:'Fraud and security',phases:[
       {d:2600,cap:'Card ••4417: three authorizations in 90 seconds, two countries, amounts far above its normal.',on:a=>{a.hl('switch');a.spark('AUTH-RT',{from:40,to:1194,lo:0,hi:1400,limit:420,label:'••4417 amount',unit:'$',dec:0,color:P.red,dx:-205,dy:105});a.co([{x:600,y:232,c:P.red,to:{x:505,y:80},l:['••4417 · $1,194 · $334 · $174 in 90 s','two countries · normal for this card: $46']}]);a.flow(['switch','merchants'],0,1,P.red);}},
-      {d:2600,cap:'AI_DETECT_ANOMALIES scores the amount against the card’s own band inside the authorization window.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['is_anomaly TRUE · upper_bound $420','scored in 38 ms · per card_id']}]);a.flow(['switch'],0,1,P.red,true);}},
+      {d:2600,cap:'Anomaly detection scores the amount against the card’s own band inside the authorization window.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound $420','scored in 38 ms · per card']}]);a.flow(['switch'],0,1,P.red,true);}},
       {d:2600,cap:'The agent holds the authorization, pushes a step-up to the cardholder and keeps the card alive for the real owner.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: hold · step-up to cardholder','merchant notified · no blanket block']}]);a.toGate(2,P.red);}},
       {d:3200,cap:'Cardholder confirms fraud in the app. $1,700 held, card reissued, no false decline for the next trip abroad.',on:a=>{a.fromGate('switch',P.red,()=>{a.flag('held','switch');a.spark('AUTH-RT',null);a.kpi({fraud:2.8,fd:1.1});a.co([{x:600,y:232,c:P.green,to:{x:505,y:80},l:['$1,702 held · card reissued','trip abroad next week: band learns the new normal']}]);});}},
       {d:1800,cap:'Every card has its own normal. 20,000 authorizations a second on one statement.',on:a=>{}}
     ]},
     trade:{name:'Trading',phases:[
       {d:2600,cap:'The desk has 100,000 shares to work by the close. Volume per minute comes off the exchange feed as bars.',on:a=>{a.hl('desk');a.co([{x:540,y:232,c:P.yellow,to:{x:870,y:200},l:['order 100,000 shares · participation cap 10 %','tape: 42k shares/min and falling']}]);a.flow(['markets','desk'],3,0,P.yellow);}},
-      {d:2600,cap:'AI_FORECAST projects the next 30 minutes of volume with a band. The slices are sized from the band, not from yesterday.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 30 bars · P10 to P90','1.2M shares forecast · 30 slices · done 14:11']}]);a.flow(['markets'],3,0,P.blue3,true);}},
+      {d:2600,cap:'The forecast projects the next 30 minutes of volume with a band. The slices are sized from the band, not from yesterday.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 30 bars · P10 to P90','1.2M shares forecast · 30 slices · done 14:11']}]);a.flow(['markets'],3,0,P.blue3,true);}},
       {d:2600,cap:'The agent writes the slice schedule to the OMS and watches the band for a burst.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: 30 slices · largest 5,700 now','pause rule: burst above the band']}]);a.toSrc(0,'oms',P.green,()=>{a.flag('src','oms');a.flag('srcNote',{src:'oms',t:'30 slices scheduled'});a.srcToNode('oms','desk',P.green,()=>{a.kpi({slip:1.6});});});}},
       {d:3200,cap:'A news burst hits at 13:52. The slices pause, the forecast refreshes on the next bar, the order completes at 14:13 inside the cap.',on:a=>{a.co([{x:540,y:232,c:P.green,to:{x:870,y:200},l:['burst 125k/min · slices paused 2 min','filled 14:13 · slippage 3.1 → 1.6 bps']}]);a.kpi({slip:1.6});}},
       {d:1800,cap:'Every symbol, every minute. The risk desk scores volatility with the same statement.',on:a=>{}}
     ]},
     anom:{name:'Anomaly detection',phases:[
       {d:2600,cap:'Settlement latency on the primary rail jumps from 120 to 480 ms at 14:02. Nothing has failed yet.',on:a=>{a.hl('core');a.flag('lat',480);a.spark('SETTLE',{from:120,to:480,lo:0,hi:600,limit:300,label:'SETTLE latency',unit:'ms',dec:0,color:P.red,dx:-75,dy:78});a.co([{x:620,y:232,c:P.red,to:{x:715,y:75},l:['SETTLE p95 120 → 480 ms · 14:02','rail A · queue growing']}]);a.flow(['core'],2,1,P.red);}},
-      {d:2600,cap:'AI_DETECT_ANOMALIES flags the latency against its own band, before the SLA breach.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['is_anomaly TRUE · upper_bound 300 ms','forecast: SLA breach in 11 min']}]);a.flow(['core'],2,1,P.red,true);}},
+      {d:2600,cap:'Anomaly detection flags the latency against its own band, before the SLA breach.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound 300 ms','forecast: SLA breach in 11 min']}]);a.flow(['core'],2,1,P.red,true);}},
       {d:2600,cap:'The agent checks the secondary rail and the queue depth, then proposes rerouting the batch. Operations approves.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: rail B healthy · 40 ms','reroute batch 7 · notify treasury']}]);a.toGate(1,P.orange);}},
       {d:3200,cap:'Rerouted. Settlement on time at 99.6%, the SLA never tripped, the incident ticket was opened with the evidence attached.',on:a=>{a.fromGate('core',P.orange,()=>{a.flag('lat',60);a.spark('SETTLE',null);a.kpi({sot:99.6});a.co([{x:620,y:232,c:P.green,to:{x:715,y:75},l:['batch 7 on rail B · 60 ms','on time 99.6 % · SLA kept']}]);});}},
       {d:1800,cap:'Payments operations, scored per rail and per batch, not per rulebook.',on:a=>{}}
@@ -2589,7 +2566,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   ],
   sources:{acars:{x:80,y:325,w:150,h:50,label:'ACARS · QAR',sub:'engine data, per flight'},aodb:{x:255,y:325,w:150,h:50,label:'AODB · gates',sub:'turnarounds, stands'},bhs:{x:430,y:325,w:150,h:50,label:'Baggage · ramp',sub:'scans, loaders'},pss:{x:605,y:325,w:150,h:50,label:'PSS · bookings',sub:'reservations, fares'},wx:{x:780,y:325,w:150,h:50,label:'Weather · ATC',sub:'METAR, slots'},crew:{x:955,y:325,w:150,h:50,label:'Crew · MRO',sub:'rosters, work orders'}},
   topics:['engine.telemetry','ops.turnaround','ramp.events','bookings.daily','weather.hub','crew.roster'],
-  fn:['AI_FORECAST','AI_DETECT_ANOMALIES','TS_OPTIMIZE'],
+  fn:['Forecast','Detect anomalies','Optimize'],
   decisions:[{k:'Plan → gate · network',c:P.green},{k:'Work order → hangar',c:P.orange},{k:'Alert → ops control',c:P.red}],
   kpis:[{k:'On-time departures',key:'otp',v0:82,u:' %',dec:0,lo:60,hi:100,tg:85,up:true},{k:'Load factor',key:'lf',v0:84,u:' %',dec:0,lo:60,hi:100,tg:86,up:true},{k:'Unplanned AOG',key:'aog',v0:3,u:' /mo',dec:0,lo:0,hi:6,tg:1,up:false},{k:'Turnaround',key:'turn',v0:52,u:' min',dec:0,lo:30,hi:70,tg:45,up:false}],
   legend:[['telemetry',P.blue3],['plan',P.green],['work order',P.orange],['alert',P.red],['agent',P.purple]],
@@ -2597,21 +2574,21 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   scenarios:{
     anom:{name:'Anomaly detection',phases:[
       {d:2600,cap:'Flight 214 on climb. Engine 1 exhaust gas temperature runs 12 °C above its own band, vibration is normal.',on:a=>{a.hl('aircraft');a.flag('engine',true);a.spark('EGT-1',{from:612,to:638,lo:560,hi:680,limit:640,label:'EGT-1',unit:'°C',dec:0,color:P.yellow,dx:-150,dy:-120});a.co([{x:430,y:232,c:P.yellow,to:{x:566,y:168},l:['EGT-1 626 → 638 °C on climb · band to 628','VIB-1 normal · N1 normal']}]);a.flow(['aircraft'],0,1,P.yellow);}},
-      {d:2600,cap:'AI_DETECT_ANOMALIES scores every parameter per engine, per flight. No failure labels needed.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.yellow,to:{x:495,y:600},l:['is_anomaly TRUE · 3.6 σ · engine 1','trend: margin to redline gone in 9 flights']}]);a.flow(['aircraft'],0,1,P.yellow,true);}},
+      {d:2600,cap:'Anomaly detection scores every parameter per engine, per flight. No failure labels needed.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.yellow,to:{x:495,y:600},l:['anomaly · 3.6 σ · engine 1','trend: margin to redline gone in 9 flights']}]);a.flow(['aircraft'],0,1,P.yellow,true);}},
       {d:2600,cap:'The agent matches the pattern to a borescope finding, reserves the slot in tonight’s overnight check and books the part.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: pattern = HPT blade erosion','WO tonight · part reserved · crew swap not needed']}]);a.toSrc(1,'crew',P.orange,()=>{a.flag('src','crew');a.flag('srcNote',{src:'crew',t:'WO-7731 · overnight · hangar 2'});a.srcToNode('crew','hangar',P.orange,()=>{a.flag('wo',true);});});}},
       {d:3200,cap:'Aircraft flies its day, swaps the part overnight. An AOG with 6 cancelled flights avoided.',on:a=>{a.flag('engine',false);a.spark('EGT-1',null);a.kpi({aog:2});a.co([{x:430,y:232,c:P.green,to:{x:566,y:168},l:['overnight fix · 0 cancellations','AOG avoided · 6 flights protected']}]);}},
-      {d:1800,cap:'Every engine, every flight, one statement. The fleet learns from itself.',on:a=>{}}
+      {d:1800,cap:'Every engine, every flight, one model. The fleet learns from itself.',on:a=>{}}
     ]},
     opt:{name:'Production optimization',phases:[
       {d:2600,cap:'The inbound aircraft for gate B12 is 14 minutes late. The turnaround clock says 52 minutes against a 45 minute plan.',on:a=>{a.hl('gate');a.flag('turn',52);a.co([{x:240,y:40,c:P.yellow,to:{x:140,y:90},l:['inbound +14 min · plan 45 · forecast 52 min','crew duty remaining 190 min · bags 40 %']}]);a.kpi({turn:52});a.flow(['gate','ramp'],1,0,P.yellow);}},
-      {d:2600,cap:'AI_FORECAST projects bag loading, fueling and boarding. TS_OPTIMIZE re-sequences the ramp inside the safety rules.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['bags done 11:42 · fuel 11:38 · boarding 11:47','search: parallel fueling · second loader · 2 gates']}]);a.flow(['ramp'],2,2,P.blue3,true);}},
+      {d:2600,cap:'The forecast projects bag loading, fueling and boarding. The optimizer re-sequences the ramp inside the safety rules.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['bags done 11:42 · fuel 11:38 · boarding 11:47','search: parallel fueling · second loader · 2 gates']}]);a.flow(['ramp'],2,2,P.blue3,true);}},
       {d:2600,cap:'The agent proposes a second loader and fueling during boarding. Operations control approves at the gate.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: second loader · fuel during boarding','turnaround 52 → 41 min · crew within duty','→ ops gate']}]);a.toGate(0,P.green);}},
       {d:3400,cap:'Approved. The plan reaches the ramp, the aircraft leaves 3 minutes late instead of 14. The connection bank holds.',on:a=>{a.fromGate('gate',P.green,()=>{a.flag('turn',41);a.kpi({turn:41,otp:88});a.co([{x:240,y:40,c:P.green,to:{x:140,y:90},l:['departed +3 min · 212 connections held','turnaround 41 min · on-time 88 %']}]);});}},
       {d:1800,cap:'Every turnaround, every gate, every day. The same models run the ramp and the kiln.',on:a=>{}}
     ]},
     plan:{name:'Supply chain planning',phases:[
       {d:2600,cap:'Hub to Lisbon, Friday. Bookings come in daily per route. The forecast says the flight fills to 96% with 11 days to go.',on:a=>{a.hl('network');a.flag('route',3);a.spark('BOOK-LIS',{from:120,to:168,lo:60,hi:190,limit:174,label:'BOOK-LIS seats',unit:'',dec:0,color:P.blue3,dx:100,dy:130});a.co([{x:960,y:232,c:P.yellow,to:{x:845,y:45},l:['HUB–LIS Fri · 168 of 174 seats forecast','P90: full 3 days early · fare class Y open']}]);a.kpi({lf:84});a.flow(['network'],3,0,P.yellow);}},
-      {d:2600,cap:'AI_FORECAST runs per route and per fare class, with the weather topic as a driver for the hub.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['180 routes · 6 fare classes · horizon 21 d','demand P50 P90 · catering and fuel from the same band']}]);a.flow(['network'],3,0,P.blue3,true);}},
+      {d:2600,cap:'The forecast runs per route and per fare class, with the weather topic as a driver for the hub.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['180 routes · 6 fare classes · horizon 21 d','demand P50 P90 · catering and fuel from the same band']}]);a.flow(['network'],3,0,P.blue3,true);}},
       {d:2600,cap:'The agent closes the lowest fare class, releases 8 seats on the evening flight and sizes catering and fuel for the load.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: close class Q · +8 seats evening','catering 168 meals · fuel for 86 % load']}]);a.toSrc(0,'pss',P.green,()=>{a.flag('src','pss');a.flag('srcNote',{src:'pss',t:'class Q closed · +8 seats'});a.srcToNode('pss','network',P.green,()=>{a.kpi({lf:88});});});}},
       {d:3200,cap:'Load factor 88% across the bank, no spoiled seats, no missed meals.',on:a=>{a.co([{x:960,y:232,c:P.green,to:{x:845,y:45},l:['Friday bank 88 % load · +$41k revenue','0 spoiled seats · catering exact']}]);}},
       {d:1800,cap:'Bookings, parts, meals and fuel from one forecast. Every route, every day.',on:a=>{}}
@@ -2771,7 +2748,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
     else if(!st.prop&&fq<st.spec-0.05&&st.since>=3)propose('exc');
     if(st.prop&&st.auto){st.pend++;if(st.pend>=2)approve();}
     st.dirty=true;}
-  function sql(){$('#pr-sql').innerHTML=highlight("SELECT kiln_id, event_time, AI_FORECAST(free_lime, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 24)) OVER (PARTITION BY kiln_id ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f, TS_OPTIMIZE(f, JSON_OBJECT('objective' VALUE 'margin', 'spec' VALUE "+st.spec+", 'every' VALUE '"+st.cycle+"h')) AS setpoint FROM kiln_telemetry;");}
+  function sql(){($('#pr-sql')||{}).innerHTML=highlight("SELECT kiln_id, event_time, AI_FORECAST(free_lime, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 24)) OVER (PARTITION BY kiln_id ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f, TS_OPTIMIZE(f, JSON_OBJECT('objective' VALUE 'margin', 'spec' VALUE "+st.spec+", 'every' VALUE '"+st.cycle+"h')) AS setpoint FROM kiln_telemetry;");}
   function panel(){const row=st.rows[st.rows.length-1];if(!row)return;const fq=quality(st.tf,st.tt,st.fs,st.ts);
     $('#pr-q').textContent=row.q.toFixed(1)+'%';$('#pr-q').className=row.q<st.spec?'red':'';
     $('#pr-fq').textContent=fq.toFixed(1)+'%';$('#pr-fq').className=fq<st.spec?'red':'blue';
@@ -2838,7 +2815,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   function panel(r){if(!r)return;$('#dm-lead').textContent=Math.round(r.week)+' units';$('#dm-rop').textContent=Math.round(r.rop)+' units';$('#dm-out').textContent=r.out<0?'not in 28 d':'day '+r.out;$('#dm-out').className=r.out<0?'green':'red';const a=$('#dm-action');a.classList.remove('red','green');
     if(r.po<0){a.classList.add('green');$('#dm-actiont').textContent='No order this cycle. Stock covers the horizon at P'+st.sl+'.';}else{const dry=r.out>0&&r.out<=r.arrive;a.classList.add(dry?'red':'green');$('#dm-actiont').textContent='Order '+r.qty+' units '+(r.po===0?'now':'on day '+r.po)+', arrives day '+r.arrive+'.'+(dry?' Shelf runs dry on day '+r.out+' first: expedite.':' Service level held at P'+st.sl+'.')+(r.pos.length>1?' '+(r.pos.length-1)+' more PO'+(r.pos.length>2?'s':'')+' in the window.':'');}
     {const e=$('#dm-model');if(e)e.textContent=sqlModel();}}
-  function sql(){$('#dm-sql').innerHTML=highlight("SELECT sku, event_time, AI_FORECAST(units_sold, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 28, 'maxContextSize' VALUE 730)) OVER (PARTITION BY sku ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f FROM daily_sales;");}
+  function sql(){($('#dm-sql')||{}).innerHTML=highlight("SELECT sku, event_time, AI_FORECAST(units_sold, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 28, 'maxContextSize' VALUE 730)) OVER (PARTITION BY sku ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f FROM daily_sales;");}
   function draw(){if(!st.dirty)return;st.dirty=false;const r=compute();st.res=r;const z=Z[st.sl]||0;
     drawStream(cv,sim,{mode:'fc',z,h:H,nVis:84,label,stepName:' days',floorZero:true,fcOpts:{mult:k=>k<=7?1+st.promo:1},padR:58,
       after(L){if(!r)return;const ctx=cv.ctx;const k0=L.vis.length-1;const FX=j=>L.X(k0+j);const xr=L.padL+L.pw;
@@ -2872,7 +2849,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const dateOf=i=>{const d=new Date(Date.UTC(2026,2,1)+i*86400000);return DAYS[(d.getUTCDay()+6)%7]+' '+d.getUTCDate()+' '+MON[d.getUTCMonth()];};
   function classify(r,z){if(r.v<=0.5)return ['feed gap','route to data operations, no stock decision'];if(r.v<r.pred-z*r.sig)return ['stockout','replenish or expedite the store today'];return ['unplanned spike','check the price file and the promo before tomorrow'];}
-  function sql(){$('#an-sql').innerHTML=highlight("SELECT store_id, sku, sale_date, AI_DETECT_ANOMALIES(units, sale_date, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+st.conf+", 'maxContextSize' VALUE 512)) OVER (PARTITION BY store_id, sku ORDER BY sale_date RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS a FROM daily_sales;");}
+  function sql(){($('#an-sql')||{}).innerHTML=highlight("SELECT store_id, sku, sale_date, AI_DETECT_ANOMALIES(units, sale_date, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+st.conf+", 'maxContextSize' VALUE 512)) OVER (PARTITION BY store_id, sku ORDER BY sale_date RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS a FROM daily_sales;");}
   function panel(){const z=Z[st.conf]||3.29;const flagged=sim.rows.filter(r=>r.pred!=null&&(r.v>r.pred+z*r.sig||r.v<r.pred-z*r.sig));$('#an-flagged').textContent=flagged.length;$('#an-scored').textContent=fmtInt(st.scored);{const e=$('#an-confv');if(e)e.textContent=st.conf;}const a=$('#an-action');a.classList.remove('red','green');
     if(!flagged.length){$('#an-day').textContent='–';$('#an-act').textContent='–';$('#an-band').textContent='–';$('#an-cause').textContent='none';$('#an-actiont').textContent='No flags. Weekend peaks are expected, not flagged.';a.classList.add('green');return;}
     const r=flagged[flagged.length-1];const c=classify(r,z);$('#an-day').textContent=dateOf(r.i);$('#an-act').textContent=Math.round(r.v)+' units';$('#an-band').textContent=Math.round(r.pred-z*r.sig)+' to '+Math.round(r.pred+z*r.sig);$('#an-cause').textContent=c[0];$('#an-actiont').textContent=c[1];a.classList.add('red');}
@@ -2880,7 +2857,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   reg({el,resize(){cv.fit();st.dirty=true;draw();},update(dt){st.acc+=dt;if(st.acc>(reduced?3000:1300)){st.acc=0;sim.step();st.scored++;st.dirty=true;panel();}},draw});
   chipGroup('an-inject',(v,b)=>{if(v==='stockout')sim.mq=[0.25,0.2];else if(v==='spike')sim.mq=[2.4];else sim.mq=[0,0];st.acc=1e9;setTimeout(()=>b.setAttribute('aria-pressed','false'),600);});
   chipGroup('an-conf',v=>{st.conf=Number(v);st.dirty=true;sql();panel();});
-  function onMove(ev){const k=hoverIndex(layout,cv,ev);if(k!==st.hover)st.dirty=true;st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];const z=Z[st.conf]||3.29;let html='<b>'+dateOf(r.i)+'</b><br>units '+Math.round(r.v);if(r.pred!=null)html+='<br>band '+Math.round(r.pred-z*r.sig)+' to '+Math.round(r.pred+z*r.sig)+'<br>is_anomaly '+(layout.isAnom(r)?'<b>TRUE</b>':'FALSE');tip.innerHTML=html;tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.7?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
+  function onMove(ev){const k=hoverIndex(layout,cv,ev);if(k!==st.hover)st.dirty=true;st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];const z=Z[st.conf]||3.29;let html='<b>'+dateOf(r.i)+'</b><br>units '+Math.round(r.v);if(r.pred!=null)html+='<br>band '+Math.round(r.pred-z*r.sig)+' to '+Math.round(r.pred+z*r.sig)+'<br>'+(layout.isAnom(r)?'<b>anomaly</b>':'normal');tip.innerHTML=html;tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.7?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
   cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});cv.c.addEventListener('mouseleave',()=>{st.hover=-1;st.dirty=true;tip.style.display='none';});
   App.listeners.push(()=>{sql();st.dirty=true;});sql();panel();
 })();
@@ -2896,7 +2873,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   const label=i=>{const d=new Date(BASE+i*60000);const p=n=>String(n).padStart(2,'0');return p(d.getUTCHours())+':'+p(d.getUTCMinutes());};
   const money=v=>'$'+Math.round(v).toLocaleString('en-US');
   function classify(r,z){const up=r.pred+z*r.sig,lo=r.pred-z*r.sig;if(r.v>up&&r.v>3*r.pred)return ['stolen card pattern','hold the authorization, step-up auth, push to the cardholder','red'];if(r.v>up)return ['unusual spend for this card','step-up auth, allow on confirmation, learn the new normal','red'];if(r.v<lo&&r.v<3)return ['card testing','decline, block the merchant, alert the issuer','red'];return ['below normal','allow','green'];}
-  function sql(){$('#fr-sql').innerHTML=highlight("SELECT card_id, event_time, amount, AI_DETECT_ANOMALIES(amount, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+st.conf+")) OVER (PARTITION BY card_id ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS a FROM card_payments;");}
+  function sql(){($('#fr-sql')||{}).innerHTML=highlight("SELECT card_id, event_time, amount, AI_DETECT_ANOMALIES(amount, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'confidencePercentage' VALUE "+st.conf+")) OVER (PARTITION BY card_id ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS a FROM card_payments;");}
   function panel(){const z=Z[st.conf]||2.81;const flagged=sim.rows.filter(r=>r.pred!=null&&(r.v>r.pred+z*r.sig||r.v<r.pred-z*r.sig));$('#fr-flagged').textContent=flagged.length;$('#fr-scored').textContent=fmtInt(st.scored);{const e=$('#fr-confv');if(e)e.textContent=st.conf;}const a=$('#fr-action');a.classList.remove('red','green');
     /* report the biggest flag of the last few, not the tail of a spike */
     const recent=flagged.slice(-4);const top=recent.length?recent.reduce((m,r)=>Math.abs(r.v-r.pred)/r.sig>Math.abs(m.v-m.pred)/m.sig?r:m):null;
@@ -2906,7 +2883,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   reg({el,resize(){cv.fit();st.dirty=true;draw();},update(dt){st.acc+=dt;if(st.acc>(reduced?2400:1000)){st.acc=0;sim.step();st.scored+=1+Math.floor(Math.random()*3);st.dirty=true;panel();}},draw});
   chipGroup('fr-inject',(v,b)=>{if(v==='stolen')sim.q=[1194,334,174];else if(v==='testing')sim.mq=[0.02,0.02,0.02,0.02,0.02,0.02];else sim.mq=[2.2,1.8,2.6,2.0,1.9];st.acc=1e9;setTimeout(()=>b.setAttribute('aria-pressed','false'),600);});
   chipGroup('fr-conf',v=>{st.conf=Number(v);st.dirty=true;sql();panel();});
-  function onMove(ev){const k=hoverIndex(layout,cv,ev);if(k!==st.hover)st.dirty=true;st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];const z=Z[st.conf]||2.81;let html='<b>'+label(r.i)+'</b><br>amount '+money(r.v);if(r.pred!=null)html+='<br>band '+money(Math.max(0,r.pred-z*r.sig))+' to '+money(r.pred+z*r.sig)+'<br>is_anomaly '+(layout.isAnom(r)?'<b>TRUE</b>':'FALSE');tip.innerHTML=html;tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.7?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
+  function onMove(ev){const k=hoverIndex(layout,cv,ev);if(k!==st.hover)st.dirty=true;st.hover=k;if(k<0){tip.style.display='none';return;}const r=layout.vis[k];const z=Z[st.conf]||2.81;let html='<b>'+label(r.i)+'</b><br>amount '+money(r.v);if(r.pred!=null)html+='<br>band '+money(Math.max(0,r.pred-z*r.sig))+' to '+money(r.pred+z*r.sig)+'<br>'+(layout.isAnom(r)?'<b>anomaly</b>':'normal');tip.innerHTML=html;tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.7?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
   cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});cv.c.addEventListener('mouseleave',()=>{st.hover=-1;st.dirty=true;tip.style.display='none';});
   App.listeners.push(()=>{sql();st.dirty=true;});sql();panel();
 })();
@@ -2933,7 +2910,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
     if(r.mode==='burst'){a.classList.add('red');$('#tr-actiont').textContent='Volume burst, '+k1(r.last.v)+' this minute against a band to '+k1(r.last.pred+2.6*r.last.sig)+'. Pause the slices, re-forecast on the next bar, let the risk desk see it.';}
     else if(r.done>0){a.classList.add('green');$('#tr-actiont').textContent='Work '+sh(st.size)+' shares at '+Math.round(st.cap*100)+'% of forecast volume: '+sh(r.first)+' this minute, done by '+label(sim.rows[n].i+r.done)+'.'+(r.mode==='quiet'?' Tape is quiet, slices shrink with it.':'');}
     else{a.classList.add('red');$('#tr-actiont').textContent='At '+Math.round(st.cap*100)+'% participation only '+sh(st.size-r.rem)+' of '+sh(st.size)+' shares fill in 30 minutes. Raise the cap or extend the window.';}}
-  function sql(){$('#tr-sql').innerHTML=highlight("SELECT symbol, bar_time, AI_FORECAST(volume, bar_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 30, 'maxContextSize' VALUE 512)) OVER (PARTITION BY symbol ORDER BY bar_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f FROM minute_bars;");}
+  function sql(){($('#tr-sql')||{}).innerHTML=highlight("SELECT symbol, bar_time, AI_FORECAST(volume, bar_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 30, 'maxContextSize' VALUE 512)) OVER (PARTITION BY symbol ORDER BY bar_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f FROM minute_bars;");}
   function draw(){if(!st.dirty)return;st.dirty=false;const r=compute();st.res=r;
     drawStream(cv,sim,{mode:'fc',z:0,h:H,nVis:95,label,stepName:' min',floorZero:true,fmtY:k1,padR:20,
       after(L){if(!r)return;const ctx=cv.ctx;const k0=L.vis.length-1;const FX=j=>L.X(k0+j);const base=L.padT+L.ph;const smax=Math.max.apply(null,r.slices.concat([1]));const sh_=Math.min(L.ph*0.28,70);
@@ -2974,13 +2951,13 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   function sim(q,s){const qs=std(q),ss=std(s);if(qs<0.03){return clamp(1-ss/0.25,0,1);}const a=znorm(q),b=znorm(s);let best=-1;for(let sh=-5;sh<=5;sh++){let c=0,n=0;for(let i=0;i<M;i++){const j=i+sh;if(j<0||j>=M)continue;c+=a[i]*b[j];n++;}c/=n;best=Math.max(best,c);}return clamp(best,-1,1);}
   const qcv=new Cv($('#se-cv')),qbox=$('#qbox');let query=null,qname='';
   function drawQuery(pts){if(!qcv.fit())return;const ctx=qcv.ctx,W=qcv.W,H=qcv.H;ctx.clearRect(0,0,W,H);if(!query)return;ctx.save();ctx.shadowColor=C.teal2;ctx.shadowBlur=8;ctx.strokeStyle=C.teal2;ctx.lineWidth=2;ctx.beginPath();if(pts){pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));}else{query.forEach((v,i)=>{const x=6+(W-12)*i/(M-1),y=H-6-(H-12)*v;i?ctx.lineTo(x,y):ctx.moveTo(x,y);});}ctx.stroke();ctx.restore();}
-  function search(){if(!query){tiles.classList.remove('searching');data.forEach(d=>{d.el.classList.remove('hit');$('.sc',d.el).textContent='';});all();$('#se-n').textContent='–';$('#se-best').textContent='–';$('#se-actiont').textContent='–';$('#se-sql').innerHTML='';return;}
+  function search(){if(!query){tiles.classList.remove('searching');data.forEach(d=>{d.el.classList.remove('hit');$('.sc',d.el).textContent='';});all();$('#se-n').textContent='–';$('#se-best').textContent='–';$('#se-actiont').textContent='–';($('#se-sql')||{}).innerHTML='';return;}
     const scored=data.map(d=>({d,sc:sim(query,d.s)})).sort((a,b)=>b.sc-a.sc);const hits=scored.filter(x=>x.sc>0.62).slice(0,6);tiles.classList.add('searching');
     data.forEach(d=>{d.el.classList.remove('hit');$('.sc',d.el).textContent='';});hits.forEach(h=>{h.d.el.classList.add('hit');$('.sc',h.d.el).textContent=h.sc.toFixed(2);});all();
     $('#se-n').textContent=hits.length+' of 24';$('#se-best').textContent=scored[0].sc.toFixed(2);
     if(!qname){let bk='',bs=-2;Object.keys(SHAPES).forEach(k=>{const q=[];for(let i=0;i<M;i++)q.push(SHAPES[k](i));const s=sim(query,q);if(s>bs){bs=s;bk=k;}});qname=bs>0.6?NAMES[bk]:'custom shape';}
     $('#se-actiont').textContent=hits.length?'tag '+hits.length+' windows as "'+qname+'", notify the owners of '+hits.map(h=>$('.id',h.d.el).textContent).slice(0,3).join(', ')+(hits.length>3?'…':''):'no window close to this shape in the last hour';
-    $('#se-sql').innerHTML=highlight("SELECT asset_id, score FROM TS_SEARCH(TS_EMBED(window), '"+qname+"', 6) WHERE score > 0.62;");}
+    ($('#se-sql')||{}).innerHTML=highlight("SELECT asset_id, score FROM TS_SEARCH(TS_EMBED(window), '"+qname+"', 6) WHERE score > 0.62;");}
   chipGroup('se-q',v=>{query=[];for(let i=0;i<M;i++)query.push(SHAPES[v](i));qname=NAMES[v];qbox.classList.add('has');drawQuery();search();});
   let pts=[],drawing=false;const pos=ev=>{const r=qcv.c.getBoundingClientRect();return {x:ev.clientX-r.left,y:ev.clientY-r.top};};
   qcv.c.addEventListener('pointerdown',ev=>{ev.preventDefault();qcv.c.setPointerCapture(ev.pointerId);pts=[pos(ev)];drawing=true;query=pts.map(()=>0.5);qbox.classList.add('has');$$('#se-q .chip').forEach(c=>c.setAttribute('aria-pressed','false'));});
