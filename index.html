@@ -3200,8 +3200,8 @@ const CS={
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   async function waitFor(ms,token){const end=performance.now()+ms;while(performance.now()<end){if(st.token!==token)throw new Error('cancel');if(st.paused){const p0=performance.now();while(st.paused&&st.token===token)await sleep(80);if(st.token!==token)throw new Error('cancel');return waitFor(end-p0,token);}await sleep(60);}}
   /* narration: MP3 files rendered offline (narration/NN.mp3), browser speech as the fallback */
-  const NARR='narration/';const clips={};let narrOK=true;
-  function clip(i){if(!clips[i]){const a=new Audio(NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3');a.preload='auto';a.addEventListener('error',()=>{narrOK=false;});clips[i]=a;}return clips[i];}
+  const NARR='narration/',NARR_V='2026-10-18';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */const clips={};let narrOK=true;
+  function clip(i){if(!clips[i]){const a=new Audio(NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V);a.preload='auto';a.addEventListener('error',()=>{narrOK=false;});clips[i]=a;}return clips[i];}
   function preload(){for(let i=0;i<SCRIPT.length;i++)clip(i).load();}
   function stopAudio(){if(st.audio){try{st.audio.pause();st.audio.currentTime=0;}catch(e){}st.audio=null;}if(window.speechSynthesis)speechSynthesis.cancel();}
   function speechFallback(text,token){return new Promise(res=>{if(!st.voice||!window.speechSynthesis){res();return;}try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);const v=pickVoice();if(v)u.voice=v;u.rate=1.02;u.pitch=1;u.lang=(v&&v.lang)||'en-US';let done=false;const fin=()=>{if(!done){done=true;res();}};u.onend=fin;u.onerror=fin;st.utter=u;setTimeout(()=>{if(st.token===token)speechSynthesis.speak(u);else fin();},80);setTimeout(fin,Math.min(14000,900+text.length*75));}catch(e){res();}});}
