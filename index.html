@@ -787,6 +787,45 @@ body::before{background:var(--paper)}
   .pnav-b .nm{display:none}.pnav-b .sh{display:inline}
   .pnav-b{max-width:none}
 }
+
+/* ---------- case studies ---------- */
+.csgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+#cstabs .cs{position:relative;display:grid;gap:.45rem;align-content:start;text-align:left;font:inherit;cursor:pointer;padding:1rem 1.05rem .95rem;
+  --ink:#161616;--ink-2:#3e3e3e;--ink-3:#6a6a66;background:#f8f7f3;border:1px solid rgba(22,22,22,.18);color:var(--ink);transition:border-color .15s,box-shadow .15s,transform .15s}
+#cstabs .cs:hover{border-color:rgba(22,22,22,.45);box-shadow:0 6px 18px rgba(22,22,22,.08);transform:translateY(-1px)}
+#cstabs .cs .cs-k{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+#cstabs .cs b{font-weight:400;font-size:1.08rem;line-height:1.25}
+#cstabs .cs .cs-m{font-weight:300;font-size:clamp(1.7rem,2.6vw,2.3rem);line-height:1.05;letter-spacing:-.01em;display:grid;gap:.15rem;margin-top:.35rem}
+#cstabs .cs .cs-m small{font-size:.78rem;font-weight:400;letter-spacing:0;color:var(--ink-3)}
+#cstabs .cs code{font-family:var(--font-mono);font-size:.68rem;color:#6929c4;margin-top:.2rem}
+#cstabs .cs[aria-selected="true"]{--ink:#f6f7fb;--ink-2:#d6dbe5;--ink-3:#adb7c8;background:linear-gradient(150deg,#2c5066 0%,#26375f 70%);border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe;transform:none}
+#cstabs .cs[aria-selected="true"] code{color:#be95ff}
+#cstabs .cs[aria-selected="true"] .cs-m{color:#6fdc8c}
+.cspanel .cs-wrap{height:clamp(340px,46vh,430px)}
+.cspanel .plant-wrap{border:1px solid rgba(255,255,255,.08);background:#1b2746}
+.cs-inner{position:relative;height:420px}
+.cs-inner canvas{position:absolute;inset:0;width:100%;height:100%}
+.cs-panel{align-content:start;gap:.9rem}
+.cs-big{display:grid;gap:.15rem}
+.cs-big b{font-weight:300;font-size:1.9rem;line-height:1.05;color:var(--ink);font-variant-numeric:tabular-nums}
+.cs-big b.green{color:var(--green-2)}
+.cs-big span{font-size:.78rem;color:var(--ink-3);line-height:1.35}
+.cs-list{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.cs-list li{display:grid;gap:.1rem;font-size:.78rem;color:var(--ink-3);line-height:1.35;border-top:1px solid var(--line);padding-top:.55rem}
+.cs-list li b{font-weight:500;color:var(--ink);font-size:.86rem}
+.cs-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.cs-tags span{font-size:.72rem;border:1px solid var(--line-2);padding:.15rem .5rem;color:var(--ink-2)}
+.cm-table td,.cm-table th{transition:color .3s,opacity .3s}
+.cm-table .c-fm{opacity:.45}
+.cm-table.fm .c-fm{opacity:1;color:var(--green-2)}
+.cm-table.fm .c-ml{opacity:.45}
+body.pitching .csgrid{opacity:.22;filter:saturate(.3);transition:opacity .6s,filter .6s}
+@media (max-width:900px){.csgrid{grid-template-columns:1fr}}
+@media (max-width:600px){
+  .csgrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:8px;margin-inline:-16px;padding:2px 16px 14px;margin-bottom:0}
+  .csgrid::-webkit-scrollbar{display:none}
+  .csgrid .cs{flex:0 0 74%;scroll-snap-align:start}
+}
 </style>
 </head>
 <body>
@@ -798,8 +837,9 @@ body::before{background:var(--paper)}
       <a href="#innovation" data-ch="innovation"><b>01</b>Innovation</a>
       <a href="#value" data-ch="value"><b>02</b>Value</a>
       <a href="#usecases" data-ch="usecases"><b>03</b>Use cases</a>
-      <a href="#start" data-ch="start"><b>04</b>Start</a>
-      <a href="/playground" data-ch="playground"><b>05</b>Playground</a>
+      <a href="#cases" data-ch="cases"><b>04</b>Case studies</a>
+      <a href="#start" data-ch="start"><b>05</b>Start</a>
+      <a href="/playground" data-ch="playground"><b>06</b>Playground</a>
     </div>
     <button class="nav-stat nav-pitch" id="nav-pitch" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg> Demo</button>
     <a class="btn sm" href="#briefing">Book a session <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
@@ -1103,55 +1143,6 @@ FROM pos_sales;</code></pre></div>
       <div class="stage-foot"><div class="hint">Illustrative curves</div><div class="readouts"><div class="readout"><b id="decay-when">1 s</b><span>you act after</span></div></div></div>
     </div>
 
-    <div class="chapter-head sub">
-      <h2>From 30 models to 2.</h2>
-      <p>A cement producer, one mill. Flip it.</p>
-    </div>
-    <div class="stage" id="st-thennow">
-      <div class="stage-body">
-        <div class="thennow">
-          <div>
-            <div class="tn-toggle" role="group" aria-label="Then or now"><button class="on" id="tn-then">Bespoke and batch</button><button id="tn-now">Foundation models, streaming</button></div>
-            <div class="boxes" id="boxes" aria-label="Models per mill"></div>
-            <div class="tn-stats">
-              <div class="tn-stat"><b id="tn-models">30</b><span>models per mill</span></div>
-              <div class="tn-stat"><b id="tn-weeks">26</b><span>weeks to deliver</span></div>
-              <div class="tn-stat" id="tn-acc-card"><b id="tn-acc">93%</b><span>accuracy</span></div>
-            </div>
-            <p class="tiny" style="margin-top:.8rem" id="tn-note">8 to 10 regression models per cement grade, 3 grades, retrained in batch. 6 months for one mill.</p>
-          </div>
-          <div>
-            <div class="quad" id="quad">
-              <svg class="trail" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M 25 75 L 75 75 L 75 25"/></svg>
-              <div class="q tl"><b>Real time, bespoke</b>custom models on streams, rebuilt per use case</div>
-              <div class="q tr"><b>Autonomous enterprise</b>foundation models and governed agents on Confluent</div>
-              <div class="q bl on"><b>Bespoke and batch</b>where most teams are today</div>
-              <div class="q br"><b>Zero-shot, batch</b>foundation models, agents as nightly jobs</div>
-              <div class="dotp" id="qdot" style="left:25%;top:75%"></div>
-              <div class="axis x">bespoke &#8594; foundation models and agents</div>
-              <div class="axis y">batch &#8594; real time</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">$2</b><span>EBITDA per ton</span></div><div class="readout"><b>$10s to 100s M</b><span>financial benefit</span></div></div><div class="hint">Client identities withheld</div></div>
-    </div>
-
-    <div class="chapter-head sub">
-      <h2>Real outcomes on real streams.</h2>
-      <p>In production with design partners. Client identities withheld.</p>
-    </div>
-    <div class="stage" id="st-proof">
-      <div class="stage-body">
-        <div class="proof" id="proof">
-          <div class="pcard"><span class="pk">Telco · network operations <em>production</em></span><b>0<small> tickets without a cause</small></b><div class="pimg" style="--img:url(photos/telecom-s.jpg)"><canvas data-spark="telco"></canvas></div><div class="pt">IBM Network Intelligence, Granite TSPulse</div><div class="pd">Telemetry in, anomalies out, agentic root cause, remediation human-in-the-loop or autonomous.</div><div class="tags"><span>TSPulse</span><span>agentic RCA</span><span>MCP tools</span></div></div>
-          <div class="pcard"><span class="pk">Financial services · markets <em>production</em></span><b>~10%<small> lower RMSE</small></b><div class="pimg" style="--img:url(photos/banking-charts-s.jpg)"><canvas data-spark="fin"></canvas></div><div class="pt">Multivariate asset forecasts, Granite TTM</div><div class="pd">Per asset class, against the incumbent model. Zero-shot first, tuned where the backtest paid.</div><div class="tags"><span>TTM</span><span>multivariate</span><span>backtested</span></div></div>
-          <div class="pcard"><span class="pk">Grocery · planning <em>reference design</em></span><b>+5 to 10<small> accuracy points</small></b><div class="pimg" style="--img:url(photos/retail-shelves-s.jpg)"><canvas data-spark="grocery"></canvas></div><div class="pt">Every SKU in every store, hourly</div><div class="pd">Around 100,000 SKUs across thousands of stores. Reorder point and purchase order raised in the stream from the P10 to P90 band.</div><div class="tags"><span>AI_FORECAST</span><span>P10 to P90</span><span>Tableflow</span></div></div>
-        </div>
-      </div>
-    </div>
-
-    </div>
   </div>
 </section>
 
@@ -1405,11 +1396,105 @@ FROM pos_sales;</code></pre></div>
   </div>
 </section>
 
-<!-- ============ 04 START ============ -->
+<!-- ============ 04 CASE STUDIES ============ -->
+<section class="chapter" id="cases">
+  <div class="wrap">
+    <div class="chapter-head">
+      <span class="n">04 / CASE STUDIES</span>
+      <h2>Time series models at work.</h2>
+      <p>Three engagements on live operational data. Client identities withheld.</p>
+    </div>
+
+    <div class="csgrid" role="tablist" id="cstabs" aria-label="Case studies">
+      <button class="cs" role="tab" aria-selected="true" aria-controls="cs-telco" type="button"><span class="cs-k">Telco · network operations</span><b>IBM Network Intelligence</b><span class="cs-m">0<small>tickets without a confirmed cause</small></span><code>Granite TSPulse</code></button>
+      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-cement" type="button"><span class="cs-k">Manufacturing · cement</span><b>Cement plant production</b><span class="cs-m">93% &#8594; 99%<small>process and quality accuracy</small></span><code>Granite Time Series models</code></button>
+      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-fin" type="button"><span class="cs-k">Financial services · investments</span><b>Multivariate asset forecasting</b><span class="cs-m">~10%<small>lower RMSE than the current approach</small></span><code>Granite TTM</code></button>
+    </div>
+
+    <!-- telco -->
+    <div class="stage cspanel" id="cs-telco" role="tabpanel">
+      <div class="stage-top">
+        <div class="stage-title"><h3>IBM Network Intelligence, powered by Granite TSPulse</h3><p>Telemetry in, anomalies out. Agents investigate, and a ticket opens only when a cause is confirmed.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Mode</span><div class="chips" id="ni-mode"><button class="chip sm" data-v="assist" aria-pressed="true">Assist</button><button class="chip sm" data-v="agentic" aria-pressed="false">Agentic</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="ni-inject"><button class="chip sm" data-v="fiber">Fiber degradation</button><button class="chip sm" data-v="config">Config drift</button><button class="chip sm" data-v="peak">Expected peak</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="side">
+          <div class="plant-wrap"><div class="cs-inner"><canvas class="stage-canvas" id="ni-cv" aria-label="Telemetry flowing through four stages: ingest, detect with TSPulse, investigate with agents, remediate, with the funnel from datapoints to confirmed issues"></canvas></div></div>
+          <div class="panel cs-panel">
+            <div class="ph">Outcome</div>
+            <div class="cs-big"><b>0</b><span>tickets opened without a confirmed cause</span></div>
+            <div class="cs-big"><b id="ni-ratio">1 in 52</b><span>observations ends in a ticket, in this run</span></div>
+            <div class="action" id="ni-action"><small>latest</small><span id="ni-actiont">Watching the network.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot"><div class="cs-tags"><span>Granite TSPulse</span><span>agentic RCA</span><span>MCP and API tools</span><span>SaaS</span></div><div class="hint">Simulated telemetry. The four stages are the ones it runs today.</div></div>
+    </div>
+
+    <!-- cement -->
+    <div class="stage cspanel" id="cs-cement" role="tabpanel" hidden>
+      <div class="stage-top">
+        <div class="stage-title"><h3>Cement plant production optimization</h3><p>One mill, three cement grades. Flip the approach.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Approach</span><div class="chips" id="cm-mode"><button class="chip sm" data-v="ml" aria-pressed="true">Traditional ML</button><button class="chip sm" data-v="fm" aria-pressed="false">Time series foundation models</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="side">
+          <div class="canvas-wrap cs-wrap"><canvas class="stage-canvas" id="cm-cv" aria-label="Regression models per cement grade collapsing into two foundation models, the delivery time and the quality prediction accuracy"></canvas></div>
+          <div class="panel cs-panel">
+            <div class="ph">Per mill</div>
+            <table class="op-table cm-table" id="cm-table">
+              <tr><th></th><th class="c-ml">Traditional ML</th><th class="c-fm">Foundation models</th></tr>
+              <tr><td>Models</td><td class="c-ml">24 to 30</td><td class="c-fm">2</td></tr>
+              <tr><td>Time to deliver</td><td class="c-ml">6 months</td><td class="c-fm">8 to 10 weeks</td></tr>
+              <tr><td>Accuracy</td><td class="c-ml">93%</td><td class="c-fm">99%</td></tr>
+            </table>
+            <div class="cs-big"><b class="green">$2 / ton</b><span>EBITDA improvement per ton of cement</span></div>
+            <div class="cs-big"><b>$10s to $100s M</b><span>financial benefit, savings and added production</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot"><div class="cs-tags"><span>process parameters model</span><span>qualities model</span><span>fine-tuned per mill</span></div><div class="hint">Client identity withheld.</div></div>
+    </div>
+
+    <!-- financial services -->
+    <div class="stage cspanel" id="cs-fin" role="tabpanel" hidden>
+      <div class="stage-top">
+        <div class="stage-title"><h3>Multivariate forecasting for financial services</h3><p>AI-driven investment strategies and portfolios. Fuse the signals, fine-tune once per asset class, forecast on CPU.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Asset class</span><div class="chips" id="fs-asset"><button class="chip sm" data-v="eq" aria-pressed="true">Equities</button><button class="chip sm" data-v="fi" aria-pressed="false">Fixed income</button><button class="chip sm" data-v="co" aria-pressed="false">Commodities</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Signals fused</span><div class="chips" id="fs-sig"><button class="chip sm" data-v="esg" aria-pressed="true">ESG</button><button class="chip sm" data-v="news" aria-pressed="true">News sentiment</button><button class="chip sm" data-v="exo" aria-pressed="true">Exogenous and control</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Horizon</span><div class="chips" id="fs-h"><button class="chip sm" data-v="5" aria-pressed="false">1 week</button><button class="chip sm" data-v="20" aria-pressed="true">1 month</button><button class="chip sm" data-v="60" aria-pressed="false">1 quarter</button></div></div>
+        </div>
+      </div>
+      <div class="stage-body">
+        <div class="side">
+          <div class="canvas-wrap cs-wrap"><canvas class="stage-canvas" id="fs-cv" aria-label="Market, ESG, news and control signals feeding a fine-tuned Granite TTM, jointly forecasting two variables with uncertainty, against the current approach"></canvas></div>
+          <div class="panel cs-panel">
+            <div class="ph">Granite TTM vs the current approach</div>
+            <div class="cs-big"><b class="green" id="fs-imp">10.0%</b><span id="fs-impl">lower RMSE, all signals fused</span></div>
+            <ul class="cs-list">
+              <li><b>One model per asset group</b>less data science and model management effort</li>
+              <li><b>Fast fine-tuning</b>rapid adaptation to new assets and markets</li>
+              <li><b>CPU inference</b>cost-effective, scalable deployment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="stage-foot"><div class="cs-tags"><span>Granite TTM</span><span>multivariate</span><span>multi-horizon</span><span>uncertainty bands</span></div><div class="hint">Simulated series. The engagement measured about 10% lower RMSE with the signals fused.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 START ============ -->
 <section class="chapter" id="start">
   <div class="wrap">
     <div class="chapter-head">
-      <span class="n">04 / START</span>
+      <span class="n">05 / START</span>
       <h2>Run it on your stream.</h2>
       <p>Three moves. The first takes a minute.</p>
     </div>
@@ -1570,7 +1655,7 @@ FROM motor_telemetry;</code></pre></div>
 <footer class="foot">
   <div class="wrap">
     <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. October 2026.</span></div>
-    <details class="row" id="credits"><summary>Photo credits</summary><div><a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://stocksnap.io/photo/stockmarket-charts-G3YOGRBLF3" target="_blank" rel="noopener">Stockmarket Charts</a> by Negative Space (CC0) · <a href="https://commons.wikimedia.org/wiki/File:Telecommunications_mast_at_sunset.jpg" target="_blank" rel="noopener">Telecommunications mast at sunset</a> by W.carter (CC BY-SA 4.0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div></details>
+    <details class="row" id="credits"><summary>Photo credits</summary><div><a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div></details>
     <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="#reference">Technical reference</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
   </div>
@@ -2533,7 +2618,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   const scrollTo=el=>el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
   const arrowL='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
   const arrowR='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
-  [['uctabs','decision'],['indtabs','industry']].forEach(([id,noun])=>{const tabs=document.getElementById(id);if(!tabs)return;const btns=$$('[role=tab]',tabs);const n=btns.length;
+  [['uctabs','decision'],['indtabs','industry'],['cstabs','case study']].forEach(([id,noun])=>{const tabs=document.getElementById(id);if(!tabs)return;const btns=$$('[role=tab]',tabs);const n=btns.length;
     const name=b=>{const x=b.querySelector('b');if(b.classList.contains('ind')){const il=b.querySelector('.il');return il?il.childNodes[0].textContent.trim():'';}return x?x.textContent.trim():'';};
     const names=btns.map(name);
     /* swipe hint above the strip on phones */
@@ -2992,6 +3077,210 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   once(el,()=>{setTimeout(()=>{if(!query){const b=$('#se-q .chip');if(b)b.click();}},600);});
 })();
 
+/* ============ 04 case studies: shared drawing helpers ============ */
+const CS={
+  mono:(ctx,px,w)=>{ctx.font=(w||400)+' '+px+'px "IBM Plex Mono", Menlo, monospace';},
+  sans:(ctx,px,w)=>{ctx.font=(w||400)+' '+px+'px "IBM Plex Sans", Arial, sans-serif';},
+  txt(ctx,s,x,y,o){o=o||{};(o.sans?CS.sans:CS.mono)(ctx,o.px||10.5,o.w);ctx.fillStyle=o.c||C.ink3;ctx.textAlign=o.a||'left';ctx.textBaseline=o.b||'middle';if(o.max){s=CS.fit(ctx,s,o.max);}ctx.fillText(s,x,y);},
+  fit(ctx,s,max){if(ctx.measureText(s).width<=max)return s;let t=s;while(t.length>1&&ctx.measureText(t+'…').width>max)t=t.slice(0,-1);return t+'…';},
+  rr(ctx,x,y,w,h,r){r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();},
+  seed(n){let s=n>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+};
+
+/* ============ 04 case study: IBM Network Intelligence ============ */
+(function(){
+  const el=$('#cs-telco');if(!el)return;
+  const cv=new Cv($('#ni-cv'));const rnd=CS.seed(17);
+  const DOM=[{k:'IP networks',s:'IP networks',c:C.blue3},{k:'Radio access',s:'Radio access',c:C.teal2},{k:'Broadband access',s:'Broadband',c:C.purple}];
+  const LIB={
+    dismiss:[{what:'throughput dip · cell 214',d:1,why:'planned maintenance'},{what:'latency spike · core R3',d:0,why:'expected peak, match day'},{what:'packet loss · OLT 9',d:2,why:'self-cleared in 40 s'},{what:'CPU surge · BNG 2',d:2,why:'nightly backup job'}],
+    watch:[{what:'jitter rise · link B-4',d:0,why:'no cause confirmed'},{what:'retries up · cell 118',d:1,why:'weather, no fault found'}],
+    confirm:[{what:'optical power drop · A-17',d:0,cause:'fiber degradation, A-17',plan:['reroute to link B-2','dispatch field team']},{what:'config drift · PE-12',d:0,cause:'change CHG-4471 at 02:10',plan:['roll back CHG-4471','verify routes']},{what:'drop rate up · cells 300+',d:1,cause:'faulty radio unit RU-88',plan:['reset RU-88','monitor 30 min']}]
+  };
+  const INJ={fiber:['confirm',0],config:['confirm',1],peak:['dismiss',1]};
+  const st={mode:'assist',acc:0,next:900,dp:1284310,obs:312,inv:37,conf:6,items:[],seq:1040,tk:55030,spark:DOM.map(()=>[]),marks:[],dots:[],dotAcc:0,sparkAcc:0,slots:3};
+  for(let d=0;d<3;d++)for(let i=0;i<70;i++)st.spark[d].push(0.5+0.16*Math.sin(i/5+d*2)+0.1*(rnd()-0.5));
+  function latest(s){$('#ni-actiont').textContent=s;}
+  function spawn(kind,spec){const o=Object.assign({id:'OBS-'+(++st.seq),kind,t:0},spec);st.obs++;st.items.push(o);st.marks.push({d:o.d,i:69,c:kind==='confirm'?C.red2:C.yellow});st.spark[o.d][69]=kind==='confirm'?0.12:0.92;latest(o.id+' · '+o.what+' flagged by TSPulse');return o;}
+  function auto(){const r=rnd();const kind=r<0.78?'dismiss':r<0.9?'watch':'confirm';const L=LIB[kind];spawn(kind,L[Math.floor(rnd()*L.length)]);}
+  const T={detect:0.8,flag:1.4,move:1.9,inv:3.6,out:5.2,col4:4.3,conf:4.8,gate:6.3,done:7.0,end:9.0};
+  const gateT=()=>st.mode==='assist'?T.gate:T.conf+0.5;
+  function update(dt){const s=dt/1000;
+    st.dp+=Math.round(s*(2200+800*rnd()));
+    st.sparkAcc+=dt;while(st.sparkAcc>140){st.sparkAcc-=140;for(let d=0;d<3;d++){const a=st.spark[d];a.shift();const i=st.dp/40+d*13;a.push(0.5+0.16*Math.sin(i/5+d*2)+0.1*(rnd()-0.5));}st.marks.forEach(m=>m.i--);st.marks=st.marks.filter(m=>m.i>=0);}
+    st.dotAcc+=dt;while(st.dotAcc>70){st.dotAcc-=70;if(st.dots.length<70)st.dots.push({d:Math.floor(rnd()*3),u:0,v:0.6+0.8*rnd(),y:rnd(),z:rnd()});}
+    st.dots.forEach(p=>{p.u+=s*p.v;});st.dots=st.dots.filter(p=>p.u<1);
+    st.acc+=dt;if(st.acc>st.next&&st.items.filter(o=>o.t<T.out).length<st.slots){st.acc=0;st.next=1500+rnd()*1500;auto();}
+    st.items.forEach(o=>{const t0=o.t;o.t+=s;const cross=k=>t0<k&&o.t>=k;
+      if(cross(T.inv)){if(o.kind==='dismiss')latest(o.id+' dismissed · '+o.why+' · no ticket');else{st.inv++;if(o.kind==='watch')latest(o.id+' valid, '+o.why+' · no ticket');else latest(o.id+' cause confirmed · '+o.cause);}}
+      if(o.kind==='confirm'){if(cross(T.conf)){st.conf++;latest(st.mode==='assist'?'Remediation plan sent to the engineer: '+o.plan.join(', '):'Executing autonomously: '+o.plan.join(', '));}
+        if(cross(gateT())){o.tk='TCK-'+(++st.tk);latest(o.tk+' opened with the cause attached · '+o.cause);}}});
+    st.items=st.items.filter(o=>o.t<(o.kind==='confirm'?T.end:T.out+0.4));
+    $('#ni-ratio').textContent='1 in '+Math.max(1,Math.round(st.obs/Math.max(1,st.conf)));}
+  /* four stages: columns when there is room, stacked on a phone */
+  const WIDE=800,tallFor=W=>W>=WIDE?420:W>=568?614:660;
+  function layout(W,H){const pad=14;
+    if(W>=WIDE){const gap=14,top=46,bot=58,wt=[0.9,0.7,1.2,1.2],tot=W-2*pad-3*gap;const R=[];let x=pad;
+      wt.forEach(f=>{const w=tot*f/4;R.push({x,y:top,w,h:H-top-bot});x+=w+gap;});
+      const r0=R[0],rowH=(r0.h-16)/3,r1=R[1];const cardH=Math.min(72,(R[2].h-24)/3),mw=Math.min(...R.map(r=>r.w));
+      const sp=DOM.map((d,k)=>{const sy=r0.y+10+k*rowH;return{lab:d.k,lx:r0.x+10,ly:sy+6,x:r0.x+10,y:sy+18,w:r0.w-20,h:rowH-26,ax:r0.x+r0.w-6,ay:sy+rowH*0.55};});
+      return{wide:true,R,sp,core:{x:r1.x+r1.w/2,y:r1.y+r1.h/2,r:Math.min(r1.w,r1.h)*0.24},slots:3,cardH,remSlots:2,remH:cardH*1.45,
+        fun:R.map((r,i)=>({x:r.x,y:H-bot+12,w:r.w,bw:mw*(1-i*0.2),stack:false}))};}
+    const w=W-2*pad,cardH=72,remH=100,hs=[70,76,2*cardH+6+16,remH+16];const R=[];let y=8;
+    hs.forEach(h=>{R.push({x:pad,y:y+18,w,h});y+=18+h+16;});
+    const r0=R[0],cw=(r0.w-36)/3,r1=R[1],half=(w-12)/2,fy=y-8;
+    const sp=DOM.map((d,k)=>{const x=r0.x+10+k*(cw+8);return{lab:d.s,lx:x,ly:r0.y+12,x,y:r0.y+24,w:cw,h:r0.h-32,ax:x+cw/2,ay:r1.y+2};});
+    return{wide:false,R,sp,core:{x:r1.x+44,y:r1.y+r1.h/2,r:24},slots:2,cardH,remSlots:1,remH,
+      fun:[0,1,2,3].map(i=>w>=540?{x:pad+i*((w-36)/4+12),y:fy,w:(w-36)/4,bw:(w-36)/4*(1-i*0.2),stack:true}:{x:pad+(i%2)*(half+12),y:fy+Math.floor(i/2)*46,w:half,bw:half*(1-i*0.2),stack:true})};}
+  function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);
+    const L=layout(W,H),R=L.R,wide=L.wide,c=L.core;st.slots=L.slots;
+    const NM=['INGEST','DETECT','INVESTIGATE','REMEDIATE'],SUB=['unified ingestion','Granite TSPulse','agentic root cause',st.mode==='assist'?'human in the loop':'autonomous'],SUBC=[C.ink3,C.blue3,C.ink3,st.mode==='assist'?C.yellow:C.green2];
+    R.forEach((r,i)=>{
+      if(wide){CS.txt(ctx,'0'+(i+1),r.x,14,{c:C.ink3});CS.txt(ctx,NM[i],r.x+24,14,{c:C.ink,w:500});CS.txt(ctx,SUB[i],r.x,31,{c:SUBC[i],max:r.w});}
+      else{const hy=r.y-10;CS.txt(ctx,'0'+(i+1),r.x,hy,{c:C.ink3});CS.txt(ctx,NM[i],r.x+24,hy,{c:C.ink,w:500});const nw=ctx.measureText(NM[i]).width;CS.txt(ctx,SUB[i],r.x+24+nw+12,hy,{c:SUBC[i],max:r.w-36-nw});}
+      ctx.fillStyle='rgba(255,255,255,.035)';ctx.fillRect(r.x,r.y,r.w,r.h);ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;ctx.strokeRect(r.x+.5,r.y+.5,r.w-1,r.h-1);
+      if(i<3){ctx.strokeStyle='rgba(255,255,255,.28)';ctx.beginPath();if(wide){const ax=r.x+r.w+7,ay=r.y+r.h/2;ctx.moveTo(ax-3,ay-5);ctx.lineTo(ax+2,ay);ctx.lineTo(ax-3,ay+5);}else{const ax=r.x+r.w/2,ay=r.y+r.h+8;ctx.moveTo(ax-5,ay-2);ctx.lineTo(ax,ay+3);ctx.lineTo(ax+5,ay-2);}ctx.stroke();}});
+    /* 01 telemetry domains */
+    DOM.forEach((d,k)=>{const s=L.sp[k],a=st.spark[k],n=a.length;CS.txt(ctx,s.lab,s.lx,s.ly,{c:C.ink2,max:s.w});ctx.strokeStyle=d.c;ctx.lineWidth=1.3;ctx.beginPath();a.forEach((v,i)=>{const px=s.x+i/(n-1)*s.w,py=s.y+(1-v)*s.h;i?ctx.lineTo(px,py):ctx.moveTo(px,py);});ctx.stroke();
+      st.marks.filter(m=>m.d===k).forEach(m=>{const ii=clamp(m.i,0,n-1);ctx.fillStyle=m.c;ctx.beginPath();ctx.arc(s.x+ii/(n-1)*s.w,s.y+(1-a[ii])*s.h,3.2,0,Math.PI*2);ctx.fill();});});
+    /* normal datapoints, scored and passed */
+    st.dots.forEach(p=>{const s=L.sp[p.d];const ex=c.x+(p.z-0.5)*c.r*1.4,ey=c.y+(p.y-0.5)*c.r*1.4,u=p.u;ctx.fillStyle='rgba(166,200,255,'+(0.65*(1-u)).toFixed(2)+')';ctx.fillRect(lerp(s.ax,ex,u)-1,lerp(s.ay,ey,u)-1,2,2);});
+    /* 02 TSPulse */
+    const pulsing=st.items.some(o=>o.t>=T.detect&&o.t<T.flag);
+    ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.arc(c.x,c.y,c.r,0,Math.PI*2);ctx.stroke();
+    if(wide){CS.txt(ctx,'TSPulse',c.x,c.y-c.r-14,{px:12,c:C.blue4,a:'center',w:500});CS.txt(ctx,'scores every point',c.x,c.y+c.r+14,{c:C.ink3,a:'center',max:R[1].w-20});CS.txt(ctx,'normal points pass',R[1].x+10,R[1].y+R[1].h-14,{c:C.ink3,max:R[1].w-20});}
+    else{const tx=c.x+c.r+16;CS.txt(ctx,'TSPulse',tx,c.y-16,{px:12,c:C.blue4,w:500});CS.txt(ctx,'scores every point',tx,c.y+2,{c:C.ink3,max:W-tx-20});CS.txt(ctx,pulsing?'observation flagged':'normal points pass',tx,c.y+18,{c:pulsing?C.yellow:C.ink3,max:W-tx-20});}
+    st.items.forEach(o=>{const s=L.sp[o.d];
+      if(o.t<T.detect){const u=o.t/T.detect;ctx.fillStyle=C.yellow;ctx.beginPath();ctx.arc(lerp(s.ax,c.x,u),lerp(s.ay,c.y,u),4,0,Math.PI*2);ctx.fill();}
+      else if(o.t<T.flag){const pu=(o.t-T.detect)/(T.flag-T.detect);ctx.strokeStyle='rgba(241,194,27,'+(1-pu).toFixed(2)+')';ctx.lineWidth=2;ctx.beginPath();ctx.arc(c.x,c.y,6+pu*22,0,Math.PI*2);ctx.stroke();ctx.fillStyle=C.yellow;ctx.beginPath();ctx.arc(c.x,c.y,4.5,0,Math.PI*2);ctx.fill();if(wide)CS.txt(ctx,'observation',c.x,c.y+c.r+30,{c:C.yellow,a:'center'});}});
+    /* 03 investigations */
+    const r2=R[2],cardH=L.cardH;
+    const inv=st.items.filter(o=>o.t>=T.flag&&o.t<(o.kind==='confirm'?T.col4:T.out+0.4)).slice(-L.slots);
+    inv.forEach((o,k)=>{const x=r2.x+8,y=r2.y+8+k*(cardH+6),w=r2.w-16;
+      if(o.t<T.move){const u=ease((o.t-T.flag)/(T.move-T.flag));ctx.fillStyle=C.yellow;ctx.beginPath();ctx.arc(lerp(c.x,x,u),lerp(c.y,y+cardH/2,u),3.5,0,Math.PI*2);ctx.fill();}
+      let al=o.t<T.move?(o.t-T.flag)/(T.move-T.flag):1;if(o.kind!=='confirm'&&o.t>T.out-0.6)al=Math.min(al,T.out+0.4-o.t);ctx.globalAlpha=clamp(al,0,1);
+      const sk=o.t<T.inv?'run':o.kind==='dismiss'?'dis':o.kind==='watch'?'watch':'conf';
+      const S={run:[C.yellow,'investigating','rgba(241,194,27,.7)'],dis:[C.ink3,'dismissed','rgba(255,255,255,.2)'],watch:[C.blue3,'valid','rgba(120,169,255,.6)'],conf:[C.red2,'confirmed',C.red2]}[sk];
+      CS.rr(ctx,x,y,w,cardH,3);ctx.fillStyle='rgba(10,18,40,.92)';ctx.fill();ctx.strokeStyle=S[2];ctx.lineWidth=1;ctx.stroke();
+      CS.txt(ctx,o.id,x+8,y+13,{c:C.ink3});CS.txt(ctx,S[1],x+w-8,y+13,{c:S[0],a:'right'});
+      CS.txt(ctx,o.what,x+8,y+29,{c:C.ink,max:w-16});
+      if(sk==='run'){const u=clamp((o.t-T.move)/(T.inv-T.move),0,1);CS.txt(ctx,'checking alarms, changes',x+8,y+45,{c:C.ink3,max:w-16});ctx.fillStyle='rgba(255,255,255,.1)';ctx.fillRect(x+8,y+cardH-12,w-16,3);ctx.fillStyle=C.yellow;ctx.fillRect(x+8,y+cardH-12,(w-16)*u,3);}
+      else{CS.txt(ctx,sk==='conf'?o.cause:o.why,x+8,y+45,{c:sk==='dis'?C.ink2:S[0],max:w-16});CS.txt(ctx,sk==='conf'?'sent to remediation':sk==='watch'?'no ticket, watching':'no ticket',x+8,y+cardH-12,{c:C.ink3,max:w-16});}
+      ctx.globalAlpha=1;});
+    if(!inv.length)CS.txt(ctx,'no open investigation',r2.x+10,r2.y+20,{c:C.ink3,max:r2.w-20});
+    /* 04 remediation */
+    const r3=R[3],rh=L.remH;
+    const rem=st.items.filter(o=>o.kind==='confirm'&&o.t>=T.col4).slice(-L.remSlots);
+    rem.forEach((o,k)=>{const x=r3.x+8,y=r3.y+8+k*(rh+8),w=r3.w-16;
+      let al=o.t<T.conf?(o.t-T.col4)/(T.conf-T.col4):1;if(o.t>T.end-0.8)al=Math.min(al,(T.end-o.t)/0.8);ctx.globalAlpha=clamp(al,0,1);
+      const g=gateT(),done=o.t>=g;
+      CS.rr(ctx,x,y,w,rh,3);ctx.fillStyle='rgba(10,18,40,.92)';ctx.fill();ctx.strokeStyle=done||st.mode!=='assist'?C.green2:C.yellow;ctx.lineWidth=1;ctx.stroke();
+      CS.txt(ctx,'root cause',x+8,y+13,{c:C.ink3});CS.txt(ctx,o.cause,x+8,y+29,{c:C.ink,w:500,max:w-16});
+      o.plan.forEach((p,j)=>{const ok=done&&o.t>g+0.3*(j+1);CS.txt(ctx,(ok?'✓ ':'· ')+p,x+8,y+47+j*15,{c:ok?C.green2:C.ink2,max:w-16});});
+      CS.txt(ctx,done?(o.tk?o.tk+' · cause attached':'plan approved'):(st.mode==='assist'?'awaiting approval':'executing'),x+8,y+rh-12,{c:done?C.green2:C.yellow,max:w-16});ctx.globalAlpha=1;});
+    if(!rem.length)CS.txt(ctx,'no confirmed issue',r3.x+10,r3.y+20,{c:C.ink3,max:r3.w-20});
+    /* funnel */
+    const F=[[st.dp,'datapoints'],[st.obs,'observations'],[st.inv,wide?'valid investigations':'investigations'],[st.conf,'confirmed issues']];
+    F.forEach((f,i)=>{const p=L.fun[i],num=f[0].toLocaleString('en-US');ctx.fillStyle=i===3?'rgba(111,220,140,.28)':'rgba(120,169,255,'+(0.26-i*0.05).toFixed(2)+')';ctx.fillRect(p.x,p.y,p.bw,6);
+      if(p.stack){CS.txt(ctx,num,p.x,p.y+19,{px:13,c:i===3?C.green2:C.ink,w:500});CS.txt(ctx,f[1],p.x,p.y+34,{c:C.ink3,max:p.w});}
+      else{CS.txt(ctx,num,p.x,p.y+24,{px:13,c:i===3?C.green2:C.ink,w:500});const nw=ctx.measureText(num).width;CS.txt(ctx,f[1],p.x+nw+10,p.y+24,{c:C.ink3,max:p.w-nw-10});}});}
+  const inner=$('#ni-cv').parentElement;
+  reg({el,resize(){const w=inner.clientWidth;if(w){const h=tallFor(w)+'px';if(inner.style.height!==h)inner.style.height=h;}cv.fit();},update,draw});
+  chipGroup('ni-mode',v=>{st.mode=v;latest(v==='assist'?'Assist mode: remediation plans wait for an engineer.':'Agentic mode: confirmed plans run autonomously through MCP and API tools.');});
+  chipGroup('ni-inject',(v,b)=>{const j=INJ[v];if(j)spawn(j[0],LIB[j[0]][j[1]]);setTimeout(()=>b.setAttribute('aria-pressed','false'),500);});
+})();
+
+/* ============ 04 case study: cement plant ============ */
+(function(){
+  const el=$('#cs-cement');if(!el)return;
+  const cv=new Cv($('#cm-cv'));const rnd=CS.seed(5);
+  const st={fm:false,u:0,target:0,auto:false};
+  /* lab quality and the two predictions */
+  const N=48,act=[],eMl=[],eFm=[];let a=0.5,b=0;for(let i=0;i<N;i++){a=clamp(a+0.07*(rnd()-0.5)+0.04*Math.sin(i/4),0.15,0.85);act.push(a);b=0.75*b+0.5*(rnd()-0.5);eMl.push(b);}
+  let c=0;for(let i=0;i<N;i++){c=0.6*c+0.5*(rnd()-0.5);eFm.push(c);}
+  function set(fm){st.fm=fm;st.target=fm?1:0;chipSet('cm-mode',fm?'fm':'ml');const t=$('#cm-table');if(t){t.classList.toggle('fm',fm);}}
+  function update(dt){if(!st.auto){st.autoT=(st.autoT||0)+dt;if(st.autoT>1600){st.auto=true;if(!st.fm)set(true);}}const k=1-Math.pow(0.004,dt/1000);st.u=lerp(st.u,st.target,k);if(Math.abs(st.u-st.target)<0.002)st.u=st.target;}
+  function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);const u=ease(clamp(st.u,0,1));
+    const nw=W<560,pad=16,gx=pad+(nw?34:64),topH=H*0.46,rowH=(topH-40)/3;
+    const head=u<0.5?(nw?'24 to 30 regression models':'24 to 30 regression models · 8 to 10 per grade · retrained in batch'):(nw?'2 foundation models, every grade':'2 foundation models · fine-tuned per mill · one model covers every grade');
+    CS.txt(ctx,head,pad,14,{c:u<0.5?C.ink2:C.green2,max:W-2*pad});
+    const fmw=nw?132:176,fmx=W-pad-fmw,fmh=(topH-44)/2-6,cols=nw?5:10,rws=nw?2:1,gp=nw?4:6;
+    const tw=Math.max(4,Math.min(30,(fmx-12-gx)/cols-gp,(rowH-8)/rws-gp)),ta=1-u;
+    for(let g=0;g<3;g++){const y=34+g*rowH;CS.txt(ctx,(nw?'G':'Grade ')+(g+1),pad,y+rowH/2-4,{c:C.ink2});
+      if(ta>0.01)for(let i=0;i<10;i++){const x0=gx+(i%cols)*(tw+gp),y0=y+4+Math.floor(i/cols)*(tw+gp);const tgt=(g*10+i)%2,tx=fmx+fmw/2-tw/2,ty=34+tgt*(fmh+12)+fmh/2-tw/2;ctx.globalAlpha=ta;ctx.fillStyle='rgba(159,179,200,.55)';ctx.fillRect(lerp(x0,tx,u),lerp(y0,ty,u),tw,tw);ctx.globalAlpha=1;}}
+    /* foundation models */
+    const NMS=nw?[['process','parameters'],['qualities']]:[['process parameters'],['qualities']];
+    NMS.forEach((nm,k)=>{const y=34+k*(fmh+12),ix=fmx+(nw?8:10),mx=fmw-(nw?16:20);ctx.globalAlpha=u;CS.rr(ctx,fmx,y,fmw,fmh,4);ctx.fillStyle='rgba(15,98,254,.35)';ctx.fill();ctx.strokeStyle=C.blue3;ctx.lineWidth=1.2;ctx.stroke();
+      CS.txt(ctx,'Foundation model',ix,y+(nw?13:16),{c:C.ink3,max:mx});nm.forEach((ln,j)=>CS.txt(ctx,ln,ix,y+(nw?29:33)+j*14,{px:12,c:C.ink,w:500,max:mx}));
+      for(let g=0;g<3;g++){const gy=34+g*rowH+rowH/2-4;ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad+(nw?24:56),gy);ctx.lineTo(fmx,y+fmh/2);ctx.stroke();}ctx.globalAlpha=1;});
+    /* delivery timeline, with room for its label */
+    const ty=topH+18;CS.txt(ctx,'Time to deliver one mill',pad,ty,{c:C.ink2});CS.mono(ctx,11.5,500);const lw=ctx.measureText('8 to 10 weeks').width+14;
+    const bx=pad,bw=W-2*pad-lw,weeks=lerp(26,9,u);ctx.fillStyle='rgba(255,255,255,.08)';ctx.fillRect(bx,ty+12,bw,10);ctx.fillStyle=u>0.5?C.green2:'rgba(159,179,200,.8)';ctx.fillRect(bx,ty+12,bw*weeks/26,10);
+    CS.txt(ctx,u>0.5?'8 to 10 weeks':'6 months',bx+bw*weeks/26+8,ty+17,{px:11.5,c:u>0.5?C.green2:C.ink,w:500});
+    /* quality prediction against the lab */
+    const cy=ty+44,ch=H-cy-26,cx=pad+30,cwid=W-pad-cx;CS.txt(ctx,nw?'Prediction vs lab':'Quality prediction vs lab result',pad,cy,{c:C.ink2});const acc=lerp(93,99,u);CS.txt(ctx,'accuracy '+acc.toFixed(0)+'%',W-pad,cy,{px:12,c:u>0.5?C.green2:C.ink,a:'right',w:500});
+    const X=i=>cx+i/(N-1)*cwid,Y=v=>cy+14+(1-v)*(ch-14);ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;for(let k=0;k<=2;k++){const yy=Math.round(cy+14+k*(ch-14)/2)+.5;ctx.beginPath();ctx.moveTo(cx,yy);ctx.lineTo(cx+cwid,yy);ctx.stroke();}
+    const amp=lerp(0.16,0.025,u);ctx.strokeStyle=u>0.5?C.green2:'rgba(255,170,90,.9)';ctx.lineWidth=1.6;ctx.beginPath();for(let i=0;i<N;i++){const e=lerp(eMl[i],eFm[i],u);const v=clamp(act[i]+e*amp*2.2,0.02,0.98);i?ctx.lineTo(X(i),Y(v)):ctx.moveTo(X(i),Y(v));}ctx.stroke();
+    for(let i=0;i<N;i++){ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(i),Y(act[i]),2,0,Math.PI*2);ctx.fill();}
+    CS.txt(ctx,'● lab',cx,H-10,{c:C.ink2});const pc=u>0.5?C.green2:'#ffaa5a';ctx.strokeStyle=pc;ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(cx+60,H-10);ctx.lineTo(cx+74,H-10);ctx.stroke();CS.txt(ctx,'prediction',cx+80,H-10,{c:pc});}
+  reg({el,resize(){cv.fit();},update,draw});
+  chipGroup('cm-mode',v=>{st.auto=true;set(v==='fm');});
+  App.cement={set};
+})();
+
+/* ============ 04 case study: financial services ============ */
+(function(){
+  const el=$('#cs-fin');if(!el)return;
+  const cv=new Cv($('#fs-cv'));
+  const AS={eq:{v:['Price index','Volatility'],seed:3},fi:{v:['10-year yield','Credit spread'],seed:8},co:{v:['Price','Volatility'],seed:12}};
+  const st={asset:'eq',h:20,sig:{esg:true,news:true,exo:true},imp:0.10,impD:0.10,data:null,t:0,parts:[],pAcc:0};
+  const target=()=>0.04+(st.sig.esg?0.02:0)+(st.sig.news?0.02:0)+(st.sig.exo?0.02:0);
+  function smooth(r,n,phi){const out=[];let x=0;for(let i=0;i<n;i++){x=phi*x+(r()-0.5);out.push(x);}return out;}
+  function lowpass(a,k){return a.map((_,i)=>{let s=0,n=0;for(let j=-k;j<=k;j++){const t=i+j;if(t>=0&&t<a.length){s+=a[t];n++;}}return s/n;});}
+  /* scale an error path so the forecast lands exactly on a target RMSE against the actuals */
+  function fitRmse(d,e,tg){const ee=mean(e.map(v=>v*v)),de=mean(d.map((v,i)=>v*e[i])),dd=mean(d.map(v=>v*v));if(!ee)return 0;const B=2*de,disc=B*B-4*ee*(dd-tg*tg);return Math.max(0,disc<0?-B/(2*ee):(-B+Math.sqrt(disc))/(2*ee));}
+  function build(){const A=AS[st.asset];const r=CS.seed(A.seed*97+st.h);const HN=90,n=HN+st.h,h=st.h;
+    const vars=A.v.map((nm,k)=>{const w=smooth(r,n,0.97);const base=k===0?0.5:0.35;const ser=[];for(let i=0;i<n;i++)ser.push(clamp(base+0.25*w[i]/6+(k===0?0.08*Math.sin(i/9):0.05*Math.sin(i/13+1)),0.06,0.94));
+      const lp=lowpass(ser,h<12?0:Math.round(h/12)).slice(HN),fut=ser.slice(HN),d=lp.map((v,j)=>v-fut[j]);
+      const env=j=>Math.sqrt((j+1)/h),s=0.022*Math.sqrt(h/20)*(k===0?1:0.8),ke=Math.max(1,Math.round(h/10));
+      const e1=lowpass(smooth(r,h,0.9),ke).map((v,j)=>v*env(j)),e2=lowpass(smooth(r,h,0.9),ke).map((v,j)=>v*env(j));const ka=fitRmse(d,e1,s);const ec=e1.map(v=>v*ka);
+      const ext=ser.concat(lp.map((v,j)=>v+ec[j]),lp.map((v,j)=>v+1.6*s*env(j)),lp.map((v,j)=>v-1.6*s*env(j)));
+      return{nm,ser,lp,d,ec,et:e2,s,lo:Math.min(...ext)-0.03,hi:Math.max(...ext)+0.03};});
+    st.data={HN,n,vars};}
+  build();
+  const LANES=[['Asset indicators',null],['Lag features',null],['ESG signals','esg'],['News sentiment','news'],['Exogenous and control','exo']];
+  const laneSeries=LANES.map((l,k)=>{const r=CS.seed(40+k);return smooth(r,60,0.9);});
+  function update(dt){st.t+=dt;st.impD=lerp(st.impD,st.imp,1-Math.pow(0.01,dt/1000));
+    st.pAcc+=dt;if(st.pAcc>160){st.pAcc=0;const on=LANES.map((l,k)=>!l[1]||st.sig[l[1]]?k:-1).filter(k=>k>=0);st.parts.push({k:on[Math.floor(Math.random()*on.length)],u:0});}
+    st.parts.forEach(p=>{p.u+=dt/900;});st.parts=st.parts.filter(p=>p.u<1);
+    $('#fs-imp').textContent=(st.impD*100).toFixed(1)+'%';const nOn=['esg','news','exo'].filter(k=>st.sig[k]).length;$('#fs-impl').textContent='lower RMSE'+(nOn===3?', all signals fused':nOn===0?', market data only':', '+nOn+' of 3 extra signals fused');}
+  function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);const D=st.data;const narrow=W<640;const pad=14;
+    let cx0=pad;
+    if(!narrow){const lw=W*0.24,lh=(H-2*pad-10)/LANES.length;LANES.forEach((l,k)=>{const on=!l[1]||st.sig[l[1]];const y=pad+k*lh;ctx.globalAlpha=on?1:0.3;CS.txt(ctx,l[0],pad,y+8,{c:on?C.ink2:C.ink3,max:lw-10});const s=laneSeries[k];const sh=lh-26;ctx.strokeStyle=k<2?C.blue3:k===2?C.green2:k===3?C.purple:C.orange;ctx.lineWidth=1.2;ctx.beginPath();s.forEach((v,i)=>{const x=pad+i/(s.length-1)*(lw-16),yy=y+18+sh/2-v*sh/6;i?ctx.lineTo(x,yy):ctx.moveTo(x,yy);});ctx.stroke();ctx.globalAlpha=1;});
+      const mx=pad+lw+8,mw=W*0.13,my=H/2-46,mh=92;CS.rr(ctx,mx,my,mw,mh,4);ctx.fillStyle='rgba(15,98,254,.3)';ctx.fill();ctx.strokeStyle=C.blue3;ctx.lineWidth=1;ctx.stroke();CS.txt(ctx,'Granite TTM',mx+mw/2,my+20,{px:12,c:C.ink,a:'center',w:500,max:mw-10});CS.txt(ctx,'fine-tuned',mx+mw/2,my+40,{c:C.ink2,a:'center',max:mw-10});CS.txt(ctx,{eq:'equities',fi:'fixed income',co:'commodities'}[st.asset],mx+mw/2,my+56,{c:C.blue4,a:'center',max:mw-10});CS.txt(ctx,'CPU',mx+mw/2,my+74,{c:C.ink3,a:'center'});
+      st.parts.forEach(p=>{const sy=pad+p.k*lh+18+(lh-26)/2,sx=pad+lw-14;ctx.fillStyle='rgba(166,200,255,'+(0.8*(1-p.u*0.5)).toFixed(2)+')';ctx.beginPath();ctx.arc(lerp(sx,mx,p.u),lerp(sy,my+mh/2,p.u),2,0,Math.PI*2);ctx.fill();});
+      ctx.strokeStyle='rgba(255,255,255,.3)';ctx.beginPath();ctx.moveTo(mx+mw,H/2);ctx.lineTo(mx+mw+16,H/2);ctx.stroke();cx0=mx+mw+22;}
+    /* two jointly forecast variables */
+    const barH=44,cw=W-pad-cx0,chH=(H-2*pad-barH-14)/2,imp=st.impD,h=st.h;
+    D.vars.forEach((v,k)=>{const y0=pad+k*(chH+8);const X=i=>cx0+30+i/(D.n-1)*(cw-30);const Y=a=>y0+16+(1-(a-v.lo)/(v.hi-v.lo))*(chH-20);
+      CS.txt(ctx,v.nm,cx0,y0+6,{c:C.ink2});
+      if(k===1){CS.mono(ctx,10.5);const tEnd=cx0+ctx.measureText(v.nm).width+16;const items=[['Granite TTM',C.blue3],['current','#ffaa5a'],['actual','rgba(255,255,255,.75)']];const wOf=a=>a.reduce((q,[t])=>q+ctx.measureText(t).width+14,-14);while(items.length>2&&cx0+cw-wOf(items)<tEnd)items.pop();let x=cx0+cw;items.forEach(([t,cl])=>{CS.mono(ctx,10.5);x-=ctx.measureText(t).width;CS.txt(ctx,t,x,y0+6,{c:cl});x-=14;});}
+      ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let g=0;g<3;g++){const yy=Math.round(y0+16+g*(chH-20)/2)+.5;ctx.beginPath();ctx.moveTo(cx0+30,yy);ctx.lineTo(cx0+cw,yy);ctx.stroke();}
+      const xo=X(D.HN-1);ctx.strokeStyle='rgba(255,255,255,.35)';ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(Math.round(xo)+.5,y0+12);ctx.lineTo(Math.round(xo)+.5,y0+chH-2);ctx.stroke();ctx.setLineDash([]);if(k===0)CS.txt(ctx,'now',xo+5,y0+6,{c:C.ink3});
+      const kb=fitRmse(v.d,v.et,v.s*(1-imp)),tt=j=>v.lp[j]+v.et[j]*kb,sd=j=>1.5*v.s*(1-imp)*Math.sqrt((j+1)/h);
+      /* band */ctx.beginPath();for(let j=0;j<h;j++)ctx.lineTo(X(D.HN+j),Y(tt(j)+sd(j)));for(let j=h-1;j>=0;j--)ctx.lineTo(X(D.HN+j),Y(tt(j)-sd(j)));ctx.closePath();ctx.fillStyle='rgba(120,169,255,.16)';ctx.fill();
+      /* history and actuals */ctx.strokeStyle=C.ink;ctx.lineWidth=1.5;ctx.beginPath();for(let i=0;i<D.HN;i++){i?ctx.lineTo(X(i),Y(v.ser[i])):ctx.moveTo(X(i),Y(v.ser[i]));}ctx.stroke();ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1;ctx.beginPath();for(let i=D.HN-1;i<D.n;i++){i>D.HN-1?ctx.lineTo(X(i),Y(v.ser[i])):ctx.moveTo(X(i),Y(v.ser[i]));}ctx.stroke();
+      /* current approach */ctx.strokeStyle='rgba(255,170,90,.9)';ctx.setLineDash([4,3]);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(X(D.HN-1),Y(v.ser[D.HN-1]));for(let j=0;j<h;j++)ctx.lineTo(X(D.HN+j),Y(v.lp[j]+v.ec[j]));ctx.stroke();ctx.setLineDash([]);
+      /* granite */ctx.strokeStyle=C.blue3;ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(X(D.HN-1),Y(v.ser[D.HN-1]));for(let j=0;j<h;j++)ctx.lineTo(X(D.HN+j),Y(tt(j)));ctx.stroke();});
+    /* rmse bars */const by=H-pad-barH+8,bx=narrow?cx0:cx0+30,lab=narrow?86:124,rw=narrow?96:150,bw=cw-(narrow?0:30)-rw;const rows=[[narrow?'current':'current approach',1,'rgba(255,170,90,.85)'],['Granite TTM',1-imp,C.blue3]];
+    rows.forEach((r,k)=>{const y=by+k*18;CS.txt(ctx,r[0],bx,y,{c:C.ink2,max:lab-6});ctx.fillStyle='rgba(255,255,255,.08)';ctx.fillRect(bx+lab,y-4,bw-lab,8);ctx.fillStyle=r[2];ctx.fillRect(bx+lab,y-4,(bw-lab)*r[1],8);});
+    CS.txt(ctx,'RMSE −'+(imp*100).toFixed(1)+'%',bx+bw+10,by+9,{px:13,c:C.green2,w:500});}
+  reg({el,resize(){cv.fit();},update,draw});
+  chipGroup('fs-asset',v=>{st.asset=v;build();});
+  chipGroup('fs-h',v=>{st.h=Number(v);build();});
+  $$('#fs-sig .chip').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.v;st.sig[k]=!st.sig[k];b.setAttribute('aria-pressed',st.sig[k]?'true':'false');st.imp=target();}));
+})();
+
 /* ============ 04 start ============ */
 (function(){
   const sc=$('#start-copy');if(sc)sc.addEventListener('click',()=>copyText($('#start-sql').textContent,sc,ok=>{if(!ok)selectEl($('#start-sql'));}));
@@ -3062,20 +3351,20 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   const cap=$('#pitch-cap'),prog=$('#pitch-prog'),stepEl=$('#pitch-step'),endEl=$('#pitch-end'),pauseBtn=$('#pitch-pause'),voiceBtn=$('#pitch-voice'),hint=$('#pitch-hint');
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
-  const tab=id=>click('#uctabs [aria-controls="'+id+'"]');
+  const tab=id=>click('[role=tab][aria-controls="'+id+'"]');
   const SCRIPT=[
     {n:1,focus:'#st-live',scroll:'#st-live',dur:7500,cap:'Every event is a decision. <em>Scored in flight.</em>',say:'Every event in your stream is a decision. Granite Time Series models score each one in flight, on Confluent. Poke it.',
       run:async w=>{chipSet('live-mode','ad');click('#live-mode .chip[data-v="ad"]');click('#live-sc .chip[data-v="temp"]');await w(2600);click('#live-poke');}},
     {n:2,focus:'#st-live',dur:5000,cap:'Forecast the next <em>32 steps</em>, with the band.',say:'Switch to forecast: the next thirty-two steps, with the band.',
       run:async w=>{click('#live-mode .chip[data-v="fc"]');await w(900);setRange('#live-h',32);}},
-    {n:4,focus:'#st-agent',scroll:'#st-agent',scrollM:'#n2',dur:8000,cap:'Then an agent acts. <em>Under a second</em>, inside Confluent.',say:'Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent.',
-      run:async w=>{click('#ag-sc .chip[data-v="retail"]');await w(300);click('#ag-run');}},
-    {n:5,focus:'#st-thennow',scroll:'#st-thennow',dur:7000,cap:'30 models <em>&#8594; 2</em>. 6 months <em>&#8594; 8 weeks</em>. 93 <em>&#8594; 99%</em>.',say:'Thirty bespoke models become two. Six months become eight weeks. Accuracy from ninety-three to ninety-nine percent.',
-      run:async w=>{click('#tn-then');await w(1500);click('#tn-now');}},
-    {n:6,focus:'#uc-fraud',scroll:'#uc-fraud',pre:()=>tab('uc-fraud'),dur:6000,cap:'Every card has <em>its own normal</em>.',say:'Every card has its own normal. The odd swipe is held before authorization.',
-      run:async w=>{await w(1500);click('#fr-inject .chip[data-v="stolen"]');}},
     {n:7,focus:'#uc-opt',scroll:'#uc-opt',pre:()=>{tab('uc-opt');click('#op-reset');},dur:6000,cap:'The kiln finds <em>its own setpoint</em>.',say:'The kiln finds its own setpoint inside the guardrails. The operator approves.',
       run:async w=>{await w(1200);click('#op-go');}},
+    {n:4,focus:'#st-agent',scroll:'#st-agent',scrollM:'#n2',dur:8000,cap:'Then an agent acts. <em>Under a second</em>, inside Confluent.',say:'Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent.',
+      run:async w=>{click('#ag-sc .chip[data-v="retail"]');await w(300);click('#ag-run');}},
+    {n:6,focus:'#uc-fraud',scroll:'#uc-fraud',pre:()=>tab('uc-fraud'),dur:6000,cap:'Every card has <em>its own normal</em>.',say:'Every card has its own normal. The odd swipe is held before authorization.',
+      run:async w=>{await w(1500);click('#fr-inject .chip[data-v="stolen"]');}},
+    {n:5,focus:'#cs-cement',scroll:'#cs-cement',pre:()=>{tab('cs-cement');if(App.cement)App.cement.set(false);},dur:7000,cap:'30 models <em>&#8594; 2</em>. 6 months <em>&#8594; 8 weeks</em>. 93 <em>&#8594; 99%</em>.',say:'Thirty bespoke models become two. Six months become eight weeks. Accuracy from ninety-three to ninety-nine percent.',
+      run:async w=>{await w(1300);if(App.cement)App.cement.set(true);}},
     {n:8,focus:'.start-tiles',scroll:'#start',dur:4500,cap:'One statement of Flink SQL. <em>Run it on your stream.</em>',say:'One statement of Flink SQL. Run it on your stream.',
       run:async w=>{}}
   ];
@@ -3150,7 +3439,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
 
 /* ============ nav scroll spy ============ */
 (function(){
-  const links=$$('#navlinks a');const map={'innovation':'innovation','innovation-2':'innovation','value':'value','usecases':'usecases','start':'start'};
+  const links=$$('#navlinks a');const map={'innovation':'innovation','innovation-2':'innovation','value':'value','usecases':'usecases','cases':'cases','start':'start'};
   const secs=Object.keys(map).map(id=>document.getElementById(id)).filter(Boolean);
   function upd(){const y=window.scrollY+window.innerHeight*0.35;let cur='innovation';secs.forEach(s=>{if(s.offsetTop<=y)cur=map[s.id];});links.forEach(a=>a.classList.toggle('on',a.dataset.ch===cur));}
   window.addEventListener('scroll',upd,{passive:true});upd();
