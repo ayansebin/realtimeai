@@ -937,6 +937,26 @@ body.pitching .hx-layer{min-height:86px}
 .hf.done:not(:last-child)::after{border-color:var(--hl)}
 @media (max-width:760px){.hf:not(:last-child)::after{right:auto;left:30px;top:auto;bottom:-8px;transform:rotate(135deg)}.hf .hf-k{font-size:1rem}.hf .hf-k .hf-n{width:26px;height:26px}}
 @media (prefers-reduced-motion:reduce){.hf.on .hf-k .hf-n,.hf.on .hf-ic *,.hf.on .hf-t{animation:none}.hf.on .hf-t{color:#fff;background:none}}
+/* better together: one live system, streams in, decisions out */
+.ax{position:relative;background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:14px}
+.ax-cv{display:block;width:100%;height:500px;touch-action:pan-y}
+.ax-a{position:absolute;left:0;width:1px;pointer-events:none}
+.ax-say{margin:.95rem 0 .1rem;font-size:clamp(1rem,1.35vw,1.15rem);line-height:1.45;color:var(--ink);min-height:2.95em}
+.ax-say span{opacity:.36;transition:opacity .45s,color .45s}
+.ax-say span.on{opacity:1}
+.ax-say .s1.on{color:#a6c8ff}.ax-say .s2.on{color:#a7f0ba}
+.ax-say.desc{color:#fff}
+.ax-keys{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:.55rem}
+.ax-gh{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 .25rem 0 .1rem}
+.ax-gh.ibm{margin-left:.9rem;color:#a6c8ff}
+.ax-k{font:inherit;font-size:.8rem;color:var(--ink-2);background:rgba(10,20,48,.6);border:1px solid rgba(255,255,255,.18);border-radius:3px;padding:.3rem .6rem;cursor:pointer;transition:background .3s,border-color .3s,color .3s}
+.ax-k:hover,.ax-k:focus-visible,.ax-k.on,.ax-k.tour-hi{color:#fff;border-color:#fff;background:rgba(255,255,255,.1)}
+.ax-k.ibm:hover,.ax-k.ibm:focus-visible,.ax-k.ibm.on,.ax-k.ibm.tour-hi{border-color:#78a9ff;background:rgba(15,98,254,.28)}
+.ax-k.ag{margin-left:.9rem}
+.ax-k.ag:hover,.ax-k.ag:focus-visible,.ax-k.ag.on,.ax-k.ag.tour-hi{border-color:#be95ff;background:rgba(190,149,255,.2)}
+@media (max-width:760px){.ax{padding:8px}.ax-gh.ibm,.ax-k.ag{margin-left:0}.ax-gh{width:100%;margin-top:.3rem}.ax-say{min-height:4.4em;font-size:1rem}}
+body.pitching #st-arch .stage-foot{display:none}
+@media (prefers-reduced-motion:reduce){.ax-say span{transition:none}}
 /* the layer as a system diagram: flat, gridded, crisp */
 .hx-layer{min-height:156px;border-radius:4px;box-shadow:none;border:1px solid rgba(255,255,255,.14);
   background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:24px 24px}
@@ -1023,48 +1043,25 @@ body.pitching #st-live .stage-top{display:none}
 
     <div class="stage" id="st-arch">
       <div class="stage-body">
-        <div class="arch" id="arch">
-          <canvas class="arch-cv" id="arch-cv" aria-hidden="true"></canvas>
-          <div class="arch-col" id="arch-in">
-            <div class="arch-h"><span>01</span>Streams in</div>
-            <div class="arch-node">POS and e-commerce</div>
-            <div class="arch-node">Card payments</div>
-            <div class="arch-node">SCADA and historians</div>
-            <div class="arch-node">Network telemetry</div>
-            <div class="arch-node">Market data</div>
-            <div class="arch-node">Meters and IoT</div>
-            <div class="arch-f">120+ connectors, Schema Registry contracts</div>
-          </div>
-          <div class="arch-col mid" id="arch-mid">
-            <div class="arch-h"><span>02</span>Confluent Cloud with IBM Granite</div>
-            <div class="arch-engine">
-              <div class="arch-brand"><b>Confluent</b><span>data streaming platform</span></div>
-              <div class="arch-row" data-k="stream"><i></i><b>Stream</b><span>Kafka topics carry every event, in order, durable and replayable</span></div>
-              <div class="arch-row" data-k="connect"><i></i><b>Connect</b><span>120+ connectors bring orders, payments, sensors and markets in</span></div>
-              <div class="arch-row" data-k="govern"><i></i><b>Govern</b><span>Schema Registry contracts, lineage and access, your data stays in your org</span></div>
-              <div class="arch-row" data-k="process"><i></i><b>Process</b><span>Flink calls the models on every event, no pipeline to build</span></div>
-              <div class="arch-join" aria-hidden="true"><i></i><span>+</span><i></i></div>
-              <div class="arch-brand ibm"><b>IBM Granite Time Series</b><span>foundation models, hosted on Confluent</span></div>
-              <div class="arch-row ibm" data-k="fd"><i></i><b>Forecast · Detect</b><span>Forecasts and flags anomalies, zero-shot on any series</span></div>
-              <div class="arch-row ibm" data-k="sc"><i></i><b>Search · Classify · Fill gaps</b><span>TSPulse finds the history that looks like now, labels patterns, fills missing points</span></div>
-              <div class="arch-row ibm" data-k="opt"><i></i><b>Optimize</b><span>Picks the settings that best serve a target</span></div>
-              <div class="arch-row purple" data-k="agent"><i></i><b>Streaming Agents</b><span>act on the result, with gates for experts</span></div>
-            </div>
-            <div class="arch-f">zero configuration · built-in governance · billed as Flink compute</div>
-          </div>
-          <div class="arch-col" id="arch-out">
-            <div class="arch-h"><span>03</span>Decisions out</div>
-            <div class="arch-node">Purchase orders topic</div>
-            <div class="arch-node">Holds and alerts</div>
-            <div class="arch-node">Tickets with a cause</div>
-            <div class="arch-node">Setpoint recommendations</div>
-            <div class="arch-node">Tableflow to Iceberg</div>
-            <div class="arch-node">Apps, BI and agents via MCP</div>
-            <div class="arch-f">consumed as events, tables or tool calls</div>
-          </div>
+        <div class="ax" id="arch">
+          <canvas class="ax-cv" id="arch-cv" role="img" aria-label="Six business streams, from store sales and card payments to sensors, network telemetry, market data and meters, come into Confluent Cloud through connectors. Schema Registry checks each event and Kafka topics carry it to Flink, where IBM Granite Time Series models forecast, detect anomalies, search for similar patterns and optimize. Results leave as purchase orders, setpoints, Iceberg tables and tool calls, and risky ones pass a Streaming Agent before they become holds or tickets."></canvas>
+          <i class="ax-a" id="arch-a-in" aria-hidden="true"></i><i class="ax-a" id="arch-a-chip" aria-hidden="true"></i><i class="ax-a" id="arch-a-out" aria-hidden="true"></i>
+        </div>
+        <p class="ax-say" id="arch-say"></p>
+        <div class="ax-keys" id="arch-keys">
+          <span class="ax-gh">Confluent</span>
+          <button type="button" class="ax-k" data-k="stream" data-d="Stream: Kafka topics carry every event, in order, durable and replayable.">Stream</button>
+          <button type="button" class="ax-k" data-k="connect" data-d="Connect: 120+ connectors bring orders, payments, sensors and markets in.">Connect</button>
+          <button type="button" class="ax-k" data-k="govern" data-d="Govern: Schema Registry contracts, lineage and access. Your data stays in your org.">Govern</button>
+          <button type="button" class="ax-k" data-k="process" data-d="Process: Flink calls the models on every event, with no pipeline to build.">Process</button>
+          <span class="ax-gh ibm">IBM Granite Time Series</span>
+          <button type="button" class="ax-k ibm" data-k="fd" data-d="Forecast and detect: forecasts and flags anomalies, zero-shot on any series.">Forecast · Detect</button>
+          <button type="button" class="ax-k ibm" data-k="sc" data-d="Search, classify, fill gaps: TSPulse finds the history that looks like now, labels patterns and fills missing points.">Search · Classify · Fill gaps</button>
+          <button type="button" class="ax-k ibm" data-k="opt" data-d="Optimize: picks the settings that best serve a target.">Optimize</button>
+          <button type="button" class="ax-k ag" data-k="agent" data-d="Streaming Agents act on the result, with gates for experts.">Streaming Agents</button>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b>1</b><span>layer</span></div><div class="readout"><b id="arch-count">0</b><span>decisions in flight</span></div><div class="readout"><b class="purple">0</b><span>models to train</span></div></div><div class="hint">Nothing leaves Confluent Cloud. Models run next to the topic.</div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b>1</b><span>layer</span></div><div class="readout"><b id="arch-count">0</b><span>decisions in flight</span></div><div class="readout"><b class="purple">0</b><span>models to train</span></div></div><div class="hint">Pick a stream to follow it. Nothing leaves Confluent Cloud.</div></div>
     </div>
 
     <div class="chapter-head sub">
@@ -3336,42 +3333,285 @@ const CS={
     erase(el,t,()=>type(el,a,t,()=>{if(el2)erase(el2,t,()=>type(el2,b,t,()=>{}));}));};
 })();
 
-/* ============ architecture particles ============ */
+/* ============ 01 better together: streams in, Confluent and IBM Granite in one flow, decisions out ============ */
+/* One live system on a canvas. Six business streams come in through connectors, pass the Schema Registry gate,
+   ride their Kafka topics into Flink, where IBM Granite Time Series models read each event in its series.
+   Forecasts, flags and settings leave as decisions, the risky ones through a Streaming Agent first.
+   Every seven seconds one stream is followed end to end: its event, the chart inside the model, the decision it becomes. */
 (function(){
   const el=$('#st-arch');if(!el)return;
-  const arch=$('#arch'),cv=new Cv($('#arch-cv'));
-  const ins=$$('#arch-in .arch-node'),outs=$$('#arch-out .arch-node'),rows=$$('#arch-mid .arch-row');const KIND=rows.map(r=>r.classList.contains('purple')?'agent':r.classList.contains('ibm')?'ibm':'cf');
-  let A=null;const parts=[];let count=0;
-  function anchors(){const ar=arch.getBoundingClientRect();const rel=r=>({l:r.left-ar.left,r:r.right-ar.left,t:r.top-ar.top,b:r.bottom-ar.top,cx:r.left-ar.left+r.width/2,cy:r.top-ar.top+r.height/2});const stacked=window.innerWidth<=900;
-    A={stacked,ins:ins.map(n=>rel(n.getBoundingClientRect())),outs:outs.map(n=>rel(n.getBoundingClientRect())),rows:rows.map(n=>rel(n.getBoundingClientRect())),eng:rel($('#arch-mid .arch-engine').getBoundingClientRect())};}
-  function bez(p0,p1,p2,p3,t){const u=1-t;return {x:u*u*u*p0.x+3*u*u*t*p1.x+3*u*t*t*p2.x+t*t*t*p3.x,y:u*u*u*p0.y+3*u*u*t*p1.y+3*u*t*t*p2.y+t*t*t*p3.y};}
-  function spawn(){const i=Math.floor(Math.random()*A.ins.length),o=Math.floor(Math.random()*A.outs.length);parts.push({i,o,t:0,speed:0.0022+Math.random()*0.0012,row:0});}
-  function rail(pin,pout,u){const R=A.rows,x=R[0].l+16,y0=R[0].cy,y1=R[R.length-1].cy;if(u<0.15){const v=u/0.15;return {pt:{x:lerp(pin.x,x,v),y:lerp(pin.y,y0,v)},phase:1,row:0};}if(u<0.85){const v=(u-0.15)/0.7;return {pt:{x,y:lerp(y0,y1,v)},phase:1,row:Math.min(R.length-1,Math.floor(v*R.length))};}const v=(u-0.85)/0.15;return {pt:{x:lerp(x,pout.x,v),y:lerp(y1,pout.y,v)},phase:1,row:R.length-1};}
-  function pos(p){const s=A.ins[p.i],d=A.outs[p.o],e=A.eng;
-    if(!A.stacked){
-      const t=p.t;
-      if(t<0.3){const u=t/0.3;return {pt:bez({x:s.r,y:s.cy},{x:s.r+(e.l-s.r)*0.5,y:s.cy},{x:e.l-(e.l-s.r)*0.4,y:e.cy},{x:e.l,y:e.cy},u),phase:0};}
-      if(t<0.6){const u=(t-0.3)/0.3;return rail({x:e.l,y:e.cy},{x:e.r,y:e.cy},u);}
-      const u=(t-0.6)/0.4;return {pt:bez({x:e.r,y:e.cy},{x:e.r+(d.l-e.r)*0.4,y:e.cy},{x:d.l-(d.l-e.r)*0.5,y:d.cy},{x:d.l,y:d.cy},u),phase:2};
+  const box=$('#arch'),cvEl=$('#arch-cv'),cv=new Cv(cvEl),sayEl=$('#arch-say'),keyEls=$$('#arch-keys [data-k]'),countEl=$('#arch-count');
+  const SANS='"IBM Plex Sans","Helvetica Neue",Arial,sans-serif',MF='"IBM Plex Mono",Menlo,monospace';
+  const LS='letterSpacing' in CanvasRenderingContext2D.prototype;
+  const SRC=[['POS and e-commerce','orders','1.2k/s',1.3],['Card payments','payments','3.8k/s',1.8],['SCADA and historians','sensors','960/s',1.0],['Network telemetry','network','5.2k/s',2.1],['Market data','markets','8.4k/s',2.5],['Meters and IoT','meters','2.1k/s',1.2]];
+  const SNK=[['Purchase orders','dec','next truck as planned'],['Setpoint recommendations','dec','line 2 holding at 182 °C'],['Tableflow to Iceberg','fc','forecast tables, always fresh'],['Apps, BI and agents','fc','read through MCP'],['Holds and alerts','an','no holds right now'],['Tickets with a cause','an','no open tickets']];
+  const ROUTE=[[0,2,3],[4,2,3],[1,5,2],[5,2,3],[3,2],[1,2,3]];
+  const COL={dec:['#42be65','#a7f0ba'],fc:['#4589ff','#a6c8ff'],an:['#fa4d56','#ffb3b8'],ag:['#be95ff','#e8daff']};
+  const MOD=['TTM','FlowState','PatchTST-FM','TSPulse'],CAPS=[['FORECAST','#a6c8ff'],['DETECT','#ffb3b8'],['SEARCH','#e8daff'],['OPTIMIZE','#a7f0ba']];
+  const SC=[
+    {src:0,snk:0,cap:0,mod:0,kind:'fc',series:'store 112 · bottled water sales',say:['Store sales stream in','the forecast reads the heat wave','and a purchase order goes out'],out:()=>(370+Math.round(Math.random()*30))+' more bottles, next truck'},
+    {src:1,snk:4,cap:1,mod:3,kind:'spike',series:'branch 22 · card spend per minute',say:['Card payments stream in','TSPulse flags spend at four times normal','and an agent places a hold for review'],out:()=>'hold placed, spend at 4× normal'},
+    {src:2,snk:1,cap:3,mod:0,kind:'opt',series:'tempering line 2 · temperature',say:['Line sensors stream in','the optimizer finds the setting that keeps yield on target','and a new setpoint goes to the line'],out:()=>'line 2 to 182 °C, yield on target'},
+    {src:3,snk:5,cap:2,mod:3,kind:'match',series:'cell site 4017 · traffic',say:['Network telemetry streams in','TSPulse finds the past pattern that looks like now','and a ticket opens with its cause'],out:()=>'cell 4017, event traffic, add capacity'},
+    {src:4,snk:3,cap:0,mod:2,kind:'quant',series:'index futures · price',say:['Market ticks stream in','PatchTST-FM returns the full range for the next hour','and apps and agents read it as a tool call'],out:()=>'next hour range, served as a tool call'},
+    {src:5,snk:2,cap:0,mod:1,kind:'peak',series:'building 7 · power',say:['Meter readings stream in','FlowState forecasts the afternoon peak','and the forecast lands as an Iceberg table'],out:()=>'peak 1.7 MW at 4 pm, table updated'}];
+  const KEY_TXT={};keyEls.forEach(k=>KEY_TXT[k.dataset.k]=k.dataset.d||'');
+  const CYCLE=7200,SPS=4,NH=44,NF=20;
+  const st={slow:1,tChip:0,pitch:false,hover:-1,sc:0,ts:performance.now(),pin:-1e9,hi:null,hiT:-1e9,hold:false,parts:[],fp:null,acc:SRC.map(()=>Math.random()),
+    sinkV:SNK.map(s=>s[2]),sinkT:SNK.map(()=>-1e9),sinkF:SNK.map(()=>-1e9),gateF:SRC.map(()=>-1e9),gateX:SRC.map(()=>-1e9),srcF:SRC.map(()=>-1e9),
+    ser:null,phase:-1,key:null,inflight:0,lo:0,hi2:1};
+  let L=null;
+
+  /* ---------- helpers ---------- */
+  function rng(s){return ()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),ease=x=>x<0?0:x>1?1:x*x*(3-2*x);
+  function mk(P){let n=0;const s=[];for(let i=1;i<P.length;i++){const l=Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]);s.push(l);n+=l;}return {P,s,L:n};}
+  function ptAt(p,d){d=clamp(d,0,p.L);for(let i=0;i<p.s.length;i++){if(d<=p.s[i]){const f=p.s[i]?d/p.s[i]:0;return [lerp(p.P[i][0],p.P[i+1][0],f),lerp(p.P[i][1],p.P[i+1][1],f)];}d-=p.s[i];}return p.P[p.P.length-1];}
+  function path(ctx,p,col,w,dash){ctx.beginPath();p.P.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.strokeStyle=col;ctx.lineWidth=w;ctx.lineJoin='miter';if(dash)ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([]);}
+  function sub(ctx,p,d0,d1,col,w){if(d1<=d0)return;const n=8;ctx.beginPath();for(let k=0;k<=n;k++){const q=ptAt(p,lerp(d0,d1,k/n));k?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);}ctx.strokeStyle=col;ctx.lineWidth=w;ctx.stroke();}
+  function sq(ctx,x,y,s,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x-s/2),Math.round(y-s/2),s,s);}
+  function fz(ctx,s,w,a,b,wt){for(let z=a;z>=b;z-=0.5){ctx.font=wt+' '+z+'px '+SANS;if(ctx.measureText(s).width<=w)return;}}
+  function fit(ctx,s,w){if(ctx.measureText(s).width<=w)return s;while(s.length>1&&ctx.measureText(s+'…').width>w)s=s.slice(0,-1);return s.trim()+'…';}
+  function lines(ctx,s,w,n){const out=[];let ws=s.split(' ');while(ws.length&&out.length<n-1){let a='',i=0;for(;i<ws.length;i++){const t=a?a+' '+ws[i]:ws[i];if(a&&ctx.measureText(t).width>w)break;a=t;}out.push(fit(ctx,a,w));ws=ws.slice(i);}if(ws.length)out.push(fit(ctx,ws.join(' '),w));return out;}
+  function label(ctx,s,x,y,col,z,ls,align,wt){ctx.font=(wt||'500')+' '+(z||10.5)+'px '+MF;ctx.fillStyle=col;ctx.textAlign=align||'left';if(LS)ctx.letterSpacing=(ls||0)+'px';ctx.fillText(s,x,y);if(LS)ctx.letterSpacing='0px';}
+  function rect(ctx,x,y,w,h,fill,line){if(fill){ctx.fillStyle=fill;ctx.fillRect(x,y,w,h);}if(line){ctx.strokeStyle=line;ctx.lineWidth=1;ctx.strokeRect(Math.round(x)+0.5,Math.round(y)+0.5,Math.round(w)-1,Math.round(h)-1);}}
+  const em=k=>st.hi===k&&(st.hold||performance.now()-st.hiT<2600)?1:0;
+  function wave(i,u){switch(i){case 0:return 0.5*Math.sin(u*0.9)+0.25*Math.sin(u*2.3);case 1:return (Math.sin(u*7.1)>0.93?0.9:0)+0.15*Math.sin(u*3)-0.2;case 2:return 0.55*Math.sin(u*0.6);
+    case 3:return 0.35*Math.sin(u*1.7)+0.3*Math.sin(u*4.3+1);case 4:{let v=0;for(let k=1;k<5;k++)v+=Math.sin(u*k*1.37+k)/k;return v*0.4;}default:return 0.45*Math.sin(u*0.45)+0.1*Math.sin(u*3.1);}}
+
+  /* ---------- the series inside the model ---------- */
+  function makeSeries(s){const R=rng(9001+s*131+Math.floor(Math.random()*997)),k=SC[s].kind,n=()=>(R()+R()+R()-1.5)*1.15,A=new Array(181),O=100;
+    const bump=x=>x>=0&&x<=7?46*Math.sin(Math.PI*x/7):0,heat=i=>1+0.55*clamp((i-10)/6,0,1);
+    let E,lo,hi;
+    if(k==='fc'){E=i=>(52+11*Math.sin(2*Math.PI*i/16))*heat(i);lo=15;hi=115;for(let i=-100;i<=80;i++)A[i+O]=E(i)+n()*3.4;}
+    else if(k==='spike'){E=i=>30+5*Math.sin(2*Math.PI*i/12);lo=0;hi=128;for(let i=-100;i<=80;i++)A[i+O]=E(i)+n()*2.2+(i===10?90:i===11?34:0);}
+    else if(k==='opt'){const raw=i=>183+0.12*i+0.35*Math.sin(i/2.5),fix=i=>i<14?raw(i):lerp(raw(i),182+0.15*Math.sin(i/2.5),ease((i-14)/8));E=raw;lo=178.5;hi=188;for(let i=-100;i<=80;i++)A[i+O]=fix(i)+n()*0.22;
+      return {k,A,O,E,lo,hi,fix:i=>182+0.15*Math.sin(i/2.5)};}
+    else if(k==='match'){E=i=>40+8*Math.sin(2*Math.PI*i/20)+bump(i-10);lo=10;hi=112;for(let i=-100;i<=80;i++)A[i+O]=40+8*Math.sin(2*Math.PI*i/20)+bump(i+34)+bump(i-10)+n()*2.6;}
+    else if(k==='quant'){let v=100;for(let i=-100;i<=80;i++){v+=n()*0.9+0.03;A[i+O]=v;}E=null;lo=0;hi=0;}
+    else{E=i=>1.25+0.42*Math.sin(2*Math.PI*(i-4)/30)+0.06*Math.sin(i/2);lo=0.55;hi=1.95;for(let i=-100;i<=80;i++)A[i+O]=E(i)+n()*0.025;}
+    return {k,A,O,E,lo,hi};}
+  const val=(S,i)=>{const a=Math.floor(i),f=i-a;return lerp(S.A[a+S.O],S.A[a+1+S.O],f);};
+
+  /* ---------- layout ---------- */
+  function rowsY(top,h){return [0,1,2,3,4,5].map(i=>top+h*(i+0.5));}
+  function layout(){const W=cv.W,H=cv.H,wide=W>=820;const G={wide,W,H};
+    if(wide){
+      const sw=Math.round(clamp(W*0.155,158,200)),kw=Math.round(clamp(W*0.19,180,250)),gA=Math.round(clamp(W*0.045,40,64)),gD=Math.round(clamp(W*0.055,52,78));
+      const cx0=sw+gA,cx1=W-kw-gD,y0=26,yb=H-4,rowH=(H-70)/6,ry=rowsY(44,rowH);
+      const fx0=Math.round(cx0+(cx1-cx0)*0.4),fx1=cx1-12,fy0=y0+14,fy1=yb-12;
+      const ch={x0:fx0+34,x1:fx1-12,y0:fy0+26,y1:fy1-58},ag={x0:fx0+34,x1:fx1-12,y0:fy1-48,y1:fy1-12};
+      const gx=cx0+38,tx0=gx+12,tx1=fx0-10;
+      const chart={x0:ch.x0+14,x1:ch.x1-14,y0:ch.y0+104,y1:ch.y1-14};
+      const py=ry.map((_,i)=>chart.y0+12+(chart.y1-chart.y0-24)*(i+0.5)/6);
+      Object.assign(G,{sw,kw,cx0,cx1,y0,yb,ry,rowH,fx0,fx1,fy0,fy1,ch,ag,gx,tx0,tx1,chart,kx0:W-kw,
+        src:ry.map(y=>({x:0,y:y-Math.min(24,rowH/2-5),w:sw,h:Math.min(48,rowH-10)})),
+        snk:ry.map(y=>({x:W-kw,y:y-Math.min(26,rowH/2-4),w:kw,h:Math.min(52,rowH-8)})),
+        pin:ry.map(y=>mk([[sw,y],[cx0,y],[gx,y]])),ptape:ry.map(y=>mk([[tx0,y],[tx1,y]])),
+        pfl:ry.map((y,i)=>{const ex=fx0+6+(5-i)*4;return mk([[tx1,y],[ex,y],[ex,py[i]],[ch.x0,py[i]]]);}),
+        pag:mk([[(ch.x0+ch.x1)/2,ch.y1],[(ch.x0+ch.x1)/2,ag.y0]]),
+        pout:ry.map((y,k)=>{if(k<4){const oy=ch.y0+118+k*Math.min(40,(ch.y1-ch.y0-140)/3),ex=cx1+10+k*6;return mk([[ch.x1,oy],[ex,oy],[ex,y],[W-kw,y]]);}
+          const oy=(ag.y0+ag.y1)/2+(k===4?-6:6),ex=cx1+12+(k-4)*7;return mk([[ag.x1,oy],[ex,oy],[ex,y],[W-kw,y]]);}),
+        heads:[['01','STREAMS IN',0],['02','CONFLUENT CLOUD',cx0],['03','IBM GRANITE IN FLINK',fx0],['04','DECISIONS OUT',W-kw]]});
     }else{
-      const t=p.t;
-      if(t<0.3){const u=t/0.3;return {pt:bez({x:s.cx,y:s.b},{x:s.cx,y:s.b+(e.t-s.b)*0.5},{x:e.cx,y:e.t-(e.t-s.b)*0.4},{x:e.cx,y:e.t},u),phase:0};}
-      if(t<0.6){const u=(t-0.3)/0.3;return rail({x:e.cx,y:e.t},{x:e.cx,y:e.b},u);}
-      const u=(t-0.6)/0.4;return {pt:bez({x:e.cx,y:e.b},{x:e.cx,y:e.b+(d.t-e.b)*0.5},{x:d.cx,y:d.t-(d.t-e.b)*0.4},{x:d.cx,y:d.t},u),phase:2};
-    }}
-  let acc=0;
-  reg({el,resize(){cv.fit();anchors();},update(dt){if(!A)anchors();acc+=dt;const every=reduced?1400:330;while(acc>every){acc-=every;if(parts.length<26)spawn();}
-      for(let k=parts.length-1;k>=0;k--){const p=parts[k];p.t+=p.speed*dt/16;if(p.t>=1){parts.splice(k,1);count++;}}
-      $('#arch-count').textContent=parts.filter(p=>p.t>0.3).length;},
-    draw(){if(!A||!cv.W)return;const ctx=cv.ctx;ctx.clearRect(0,0,cv.W,cv.H);
-      /* faint lanes */
-      ctx.strokeStyle='rgba(120,169,255,.10)';ctx.lineWidth=1;
-      const e=A.eng;A.ins.forEach(s=>{ctx.beginPath();if(!A.stacked){ctx.moveTo(s.r,s.cy);ctx.bezierCurveTo(s.r+(e.l-s.r)*0.5,s.cy,e.l-(e.l-s.r)*0.4,e.cy,e.l,e.cy);}else{ctx.moveTo(s.cx,s.b);ctx.bezierCurveTo(s.cx,s.b+(e.t-s.b)*0.5,e.cx,e.t-(e.t-s.b)*0.4,e.cx,e.t);}ctx.stroke();});
-      A.outs.forEach(d=>{ctx.beginPath();if(!A.stacked){ctx.moveTo(e.r,e.cy);ctx.bezierCurveTo(e.r+(d.l-e.r)*0.4,e.cy,d.l-(d.l-e.r)*0.5,d.cy,d.l,d.cy);}else{ctx.moveTo(e.cx,e.b);ctx.bezierCurveTo(e.cx,e.b+(d.t-e.b)*0.5,d.cx,d.t-(d.t-e.b)*0.4,d.cx,d.t);}ctx.stroke();});
-      parts.forEach(p=>{const q=pos(p);const kind=q.phase===1?KIND[q.row]:'';const c=q.phase===0?C.blue3:q.phase===1?(kind==='agent'?C.purple:kind==='ibm'?C.blue3:'#fff'):C.green2;ctx.save();ctx.shadowColor=q.phase===1&&kind!=='agent'?C.blue2:c;ctx.shadowBlur=14;ctx.fillStyle=c;ctx.beginPath();ctx.arc(q.pt.x,q.pt.y,q.phase===1?4.5:3.2,0,Math.PI*2);ctx.fill();ctx.restore();});
-      rows.forEach((r,i)=>{const lit=parts.some(p=>{const q=pos(p);return q.phase===1&&q.row===i;});r.style.borderColor=lit?(KIND[i]==='agent'?'rgba(190,149,255,.8)':'rgba(69,137,255,.8)'):'';});
-    }});
-  anchors();
+      const z=W>=600?1.12:1,lw=Math.round(clamp(W*0.3,100,170)),rowH=Math.round(36*z),top=34,ry=rowsY(top,rowH),px0=lw+10,gx=px0+22,tx0=gx+10,tx1=W-34,bxIn=W-20,bxA=W-5,bxB=5;
+      const fy0=top+6*rowH+14,ch={x0:22,x1:W-34,y0:fy0+26,y1:fy0+26+Math.round(230*z)},ag={x0:22,x1:W-34,y0:0,y1:0};ag.y0=ch.y1+10;ag.y1=ag.y0+36;
+      const fy1=ag.y1+12,pb=fy1+24,sy0=pb+30,sh=Math.round(42*z),sg=6,chart={x0:ch.x0+10,x1:ch.x1-10,y0:ch.y0+100,y1:ch.y1-10};
+      const sky=[0,1,2,3,4,5].map(k=>sy0+k*(sh+sg)+sh/2),inY=ch.y0+30,outY=ch.y1-22,agM=(ag.y0+ag.y1)/2;
+      Object.assign(G,{z,lw,rowH,ry,px0,gx,tx0,tx1,fx0:10,fx1:W-10,fy0,fy1,pb,ch,ag,chart,cx0:px0,cx1:W,y0:22,yb:pb,
+        src:ry.map(y=>({x:0,y:y-rowH/2+4,w:lw,h:rowH-8})),snk:sky.map(y=>({x:24,y:y-sh/2,w:W-48,h:sh})),
+        pin:ry.map(y=>mk([[lw,y],[px0,y],[gx,y]])),ptape:ry.map(y=>mk([[tx0,y],[tx1,y]])),
+        pfl:ry.map(y=>mk([[tx1,y],[bxIn,y],[bxIn,inY],[ch.x1,inY]])),pag:mk([[(ch.x0+ch.x1)/2,ch.y1],[(ch.x0+ch.x1)/2,ag.y0]]),
+        pout:sky.map((y,k)=>k<4?mk([[ch.x1,outY],[bxA,outY],[bxA,y],[W-24,y]]):mk([[ag.x0,agM],[bxB,agM],[bxB,y],[24,y]])),
+        heads:[['01','STREAMS IN',0],['02','CONFLUENT CLOUD',px0]],outHead:pb+16});
+      G.H=sy0+6*sh+5*sg+6;
+    }
+    return G;}
+  function tallH(W){const z=W>=600?1.12:1,rowH=Math.round(36*z),fy0=34+6*rowH+14,chY1=fy0+26+Math.round(230*z),pb=chY1+10+36+12+24;return Math.round(pb+30+6*Math.round(42*z)+30+6);}
+  function resize(){const W=cvEl.clientWidth||box.clientWidth;if(!W)return;const H=W>=820?(st.pitch?430:Math.round(clamp(W*0.4,470,540))):tallH(W);if(Math.abs(cvEl.offsetHeight-H)>1)cvEl.style.height=H+'px';
+    if(!cv.fit())return;L=layout();anchors();}
+  function anchors(){if(!L)return;const set=(id,y,h)=>{const a=$('#'+id);if(a){a.style.top=Math.round(y)+'px';a.style.height=Math.round(h)+'px';}};
+    set('arch-a-in',0,L.wide?L.H:L.fy0);set('arch-a-chip',L.wide?0:L.fy0-10,L.wide?L.H:L.fy1-L.fy0+20);set('arch-a-out',L.wide?0:L.pb,L.wide?L.H:L.H-L.pb);}
+
+  /* ---------- the scenario loop ---------- */
+  function caption(){const S=SC[st.sc];if(!sayEl||st.hold)return;sayEl.innerHTML='<span class="s0">'+S.say[0]+',</span> <span class="s1">'+S.say[1]+',</span> <span class="s2">'+S.say[2]+'.</span>';st.phase=-1;}
+  function start(i,now,slow){st.sc=i;st.ts=now;st.slow=slow||1;st.tChip=0;st.qInit=false;st.ser=makeSeries(i);st.fp={stage:'wait',d:0};st.lo=st.ser.lo;st.hi2=st.ser.hi;caption();
+    if(reduced){st.sinkV[SC[i].snk]=SC[i].out();st.sinkT[SC[i].snk]=now;}}
+  const DUR={in:600,tape:1000,fl:500,chip:1000,out:900,ag1:400,agw:600,ag2:800};
+  function stepFocus(now){const S=SC[st.sc],f=st.fp,e=now-st.ts;if(!f||reduced)return;
+    const nxt={wait:'in',in:'tape',tape:'fl',fl:'chip',chip:S.snk>=4?'ag1':'out',ag1:'agw',agw:'ag2',out:'end',ag2:'end'};
+    if(f.stage==='wait'){if(e>300*st.slow){f.stage='in';f.t0=now;st.srcF[S.src]=now;}return;}
+    if(f.stage==='end')return;
+    const d=DUR[f.stage]*st.slow,u=(now-f.t0)/d;
+    if(u>=1){if(f.stage==='in')st.gateF[S.src]=now;if(f.stage==='out'||f.stage==='ag2'){st.sinkV[S.snk]=S.out();st.sinkT[S.snk]=now;st.sinkF[S.snk]=now;}
+      f.stage=nxt[f.stage];f.t0=now;if(f.stage==='chip')st.tChip=now;}}
+  function focusPath(){const S=SC[st.sc],f=st.fp;if(!f||!L)return null;const i=S.src,k=S.snk;
+    return {in:L.pin[i],tape:L.ptape[i],fl:L.pfl[i],out:L.pout[k],ag1:L.pag,ag2:L.pout[k]}[f.stage]||null;}
+  function stageOf(){const f=st.fp;return f?f.stage:'wait';}
+  function phaseOf(){if(reduced)return 2;const s=stageOf();return s==='wait'||s==='in'||s==='tape'||s==='fl'?0:s==='chip'||s==='ag1'||s==='agw'?1:2;}
+  function keyFor(){const s=stageOf(),S=SC[st.sc];if(reduced)return null;if(s==='in')return (performance.now()-st.fp.t0)/(DUR.in*st.slow)<0.55?'connect':'govern';return s==='in'?'connect':s==='tape'?'stream':s==='fl'?'process':s==='chip'?(S.cap===3?'opt':S.cap===2?'sc':'fd'):s==='ag1'||s==='agw'||s==='ag2'?'agent':null;}
+
+  /* ---------- background traffic ---------- */
+  function spawn(i){st.parts.push({ph:'in',i,d:0,v:150+Math.random()*60,bad:Math.random()<0.035});}
+  function update(dt){if(!L)resize();if(!L)return;const now=performance.now();
+    const pit=document.body.classList.contains('pitching');if(pit!==st.pitch){st.pitch=pit;resize();}
+    if(now-st.ts>CYCLE*st.slow&&now>st.pin){start((st.sc+1)%SC.length,now);}
+    stepFocus(now);
+    if(!reduced){const mob=L.wide?1:0.6;for(let i=0;i<6;i++){st.acc[i]+=dt/1000*SRC[i][3]*mob;while(st.acc[i]>1){st.acc[i]-=1;if(st.parts.length<150)spawn(i);}}
+      const vt=L.wide?62:48;
+      for(let k=st.parts.length-1;k>=0;k--){const p=st.parts[k];
+        if(p.ph==='rej'){p.t-=dt;if(p.t<=0)st.parts.splice(k,1);continue;}
+        const P=p.ph==='in'?L.pin[p.i]:p.ph==='tape'?L.ptape[p.i]:p.ph==='fl'?L.pfl[p.i]:p.ph==='ag1'?L.pag:L.pout[p.k];
+        p.d+=(p.ph==='tape'?vt:p.v)*dt/1000;
+        if(p.d>=P.L){p.d=0;
+          if(p.ph==='in'){if(p.bad){p.ph='rej';p.t=700;st.gateX[p.i]=now;}else{p.ph='tape';st.gateF[p.i]=Math.max(st.gateF[p.i],now-260);}}
+          else if(p.ph==='tape')p.ph='fl';
+          else if(p.ph==='fl'){if(Math.random()<0.5){const r=ROUTE[p.i];p.k=r[Math.floor(Math.random()*r.length)];p.ph=p.k>=4?'ag1':'out';p.v=170+Math.random()*50;}else st.parts.splice(k,1);}
+          else if(p.ph==='ag1')p.ph='out';
+          else{st.sinkF[p.k]=Math.max(st.sinkF[p.k],now-300);st.parts.splice(k,1);}}}}
+    const fly=st.parts.filter(p=>p.ph==='out'||p.ph==='ag1').length+(st.fp&&/out|ag/.test(st.fp.stage)?1:0);
+    if(countEl&&fly!==st.inflight){st.inflight=fly;countEl.textContent=fly;}
+    const ph=phaseOf();if(sayEl&&ph!==st.phase&&!st.hold){st.phase=ph;$$('span',sayEl).forEach((s,i)=>s.classList.toggle('on',i<=ph));}
+    const key=keyFor();if(key!==st.key){st.key=key;keyEls.forEach(k=>k.classList.toggle('on',k.dataset.k===key));}}
+
+  /* ---------- drawing ---------- */
+  function heads(ctx){const z=L.wide?10.5:9.5,ls=L.wide?1.2:0.6,o=L.wide?24:19;L.heads.forEach(([n,t,x])=>{label(ctx,n,x,10,'#78a9ff',z,ls);label(ctx,t,x+o,10,'rgba(255,255,255,.62)',z,ls);});
+    if(!L.wide){label(ctx,'03',0,L.outHead,'#78a9ff',z,ls);label(ctx,'DECISIONS OUT',o,L.outHead,'rgba(255,255,255,.62)',z,ls);}}
+  function panel(ctx){const c=em('cf')||em('zero')?1:0,col=c?'rgba(166,200,255,.75)':'rgba(255,255,255,.2)';ctx.strokeStyle=col;ctx.lineWidth=1;ctx.fillStyle='rgba(255,255,255,.025)';
+    ctx.beginPath();
+    if(L.wide){ctx.rect(L.cx0+0.5,L.y0+0.5,L.cx1-L.cx0-1,L.yb-L.y0-1);}
+    else{const x0=L.px0+0.5,y0=L.y0+0.5,W=L.W-0.5,j=L.fy0-8.5,b=L.pb-0.5;ctx.moveTo(x0,y0);ctx.lineTo(W,y0);ctx.lineTo(W,b);ctx.lineTo(0.5,b);ctx.lineTo(0.5,j);ctx.lineTo(x0,j);ctx.closePath();}
+    ctx.fill();ctx.stroke();
+    /* connect, govern, stream labels */
+    const lc=k=>em(k)?'#fff':'rgba(255,255,255,.5)';
+    if(L.wide){label(ctx,'CONNECT',L.cx0+8,L.y0+12,lc('connect'),9.5,1);ctx.font='500 9.5px '+MF;const cw2=ctx.measureText('CONNECT').width+7*1+L.cx0+18,lt=cw2+ctx.measureText('STREAM · KAFKA TOPICS').width+21<L.tx1?'STREAM · KAFKA TOPICS':'KAFKA TOPICS';label(ctx,lt,L.tx1,L.y0+12,lc('stream'),9.5,1,'right');
+      label(ctx,'GOVERN · SCHEMA REGISTRY',L.cx0+8,L.yb-12,lc('govern'),9.5,1);}
+    else{label(ctx,L.W<440?'GOVERN · SCHEMA':'GOVERN · SCHEMA REGISTRY',L.px0+8,L.fy0-18,lc('govern'),9,0.6);
+      label(ctx,'zero configuration · built-in governance',L.W/2,L.pb-12,em('zero')?'#fff':'rgba(255,255,255,.5)',9.5,0.4,'center','400');}}
+  function sources(ctx,now){const S=SC[st.sc],t=reduced?0:now/1000;
+    L.src.forEach((r,i)=>{const on=i===S.src,fl=ease(1-(now-st.srcF[i])/700),hov=st.hover===i;
+      rect(ctx,r.x,r.y,r.w,r.h,on?'rgba(255,255,255,.1)':'rgba(10,20,48,.7)',on?'rgba(255,255,255,.85)':hov?'rgba(255,255,255,.45)':'rgba(255,255,255,.18)');
+      if(on)sq(ctx,r.x+r.w,r.y+r.h/2,4+3*fl,'#fff');
+      ctx.textBaseline='middle';
+      if(L.wide){fz(ctx,SRC[i][0],r.w-20,12.5,11,'500');ctx.textAlign='left';ctx.fillStyle=on?'#fff':'rgba(255,255,255,.72)';ctx.fillText(fit(ctx,SRC[i][0],r.w-20),r.x+10,r.y+15);
+        const y=r.y+r.h-13,x0=r.x+10,x1=r.x+r.w-10;ctx.beginPath();for(let x=x0;x<=x1;x+=2){const yy=y-6*wave(i,(x-x0)/10-t*1.4);x===x0?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.strokeStyle=on?'#fff':'rgba(255,255,255,.35)';ctx.lineWidth=on?1.4:1;ctx.stroke();}
+      else{ctx.font='500 '+(L.z>1?11.5:10.5)+'px '+SANS;ctx.textAlign='left';ctx.fillStyle=on?'#fff':'rgba(255,255,255,.72)';const ls=lines(ctx,SRC[i][0],r.w-14,2),lh=L.z>1?13:12;ls.forEach((s,k)=>ctx.fillText(s,r.x+7,r.y+r.h/2+(k-(ls.length-1)/2)*lh));}});}
+  const BASE=[1240,3810,960,5200,8400,2100],RT=BASE.slice();let rtT=0;
+  function rate(i,now){if(now-rtT>900){rtT=now;for(let k=0;k<6;k++)RT[k]=BASE[k]*(0.9+Math.random()*0.2);}const v=RT[i];return (v>=1000?(v/1000).toFixed(1)+'k':Math.round(v))+'/s';}
+  function lanes(ctx,now){const S=SC[st.sc],t=reduced?0:now/1000,vt=L.wide?62:48,cE=em('connect'),gE=em('govern'),sE=em('stream'),pE=em('process');
+    for(let i=0;i<6;i++){const y=Math.round(L.ry[i])+0.5,on=i===S.src;
+      path(ctx,L.pin[i],on?'rgba(255,255,255,.7)':'rgba(255,255,255,.16)',on?1.4:1);
+      /* connector port */
+      rect(ctx,L.cx0-5,y-7,10,14,cE?'#fff':'#0a1430',cE||on?'#fff':'rgba(255,255,255,.5)');ctx.fillStyle=cE?'#0a1430':on?'#fff':'rgba(255,255,255,.5)';ctx.fillRect(L.cx0-2,y-3,1,6);ctx.fillRect(L.cx0+1,y-3,1,6);
+      /* schema gate */
+      const g=ease(1-(now-st.gateF[i])/500),x=ease(1-(now-st.gateX[i])/700);
+      rect(ctx,L.gx-5,y-5,10,10,x>0?'rgba(250,77,86,'+(0.5*x+0.2)+')':g>0?'rgba(255,255,255,'+(0.15+0.6*g)+')':'#0a1430',x>0?'#fa4d56':gE?'#fff':'rgba(255,255,255,.55)');
+      if(x>0){ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(L.gx-2.5,y-2.5);ctx.lineTo(L.gx+2.5,y+2.5);ctx.moveTo(L.gx+2.5,y-2.5);ctx.lineTo(L.gx-2.5,y+2.5);ctx.stroke();}
+      /* topic tape */
+      const th=L.wide?12:9,tl=L.tx1-L.tx0;rect(ctx,L.tx0,y-th/2,tl,th,on?'rgba(255,255,255,.07)':'rgba(255,255,255,.035)',on||sE?'rgba(255,255,255,.55)':'rgba(255,255,255,.16)');
+      ctx.fillStyle='rgba(255,255,255,.07)';const off=(t*vt)%8;for(let xx=L.tx0+off;xx<L.tx1;xx+=8)ctx.fillRect(Math.round(xx),y-th/2+1,1,th-2);
+      label(ctx,SRC[i][1],L.tx0,y-th/2-7,on||sE?'#fff':'rgba(255,255,255,.55)',L.wide?10:9);label(ctx,rate(i,now),L.tx1,y-th/2-7,'rgba(255,255,255,.38)',L.wide?10:9,0,'right','400');
+      path(ctx,L.pfl[i],on?'rgba(255,255,255,.7)':pE?'rgba(166,200,255,.6)':'rgba(255,255,255,.16)',on?1.4:1);}
+    if(L.wide){ctx.strokeStyle=gE?'rgba(255,255,255,.8)':'rgba(255,255,255,.28)';ctx.setLineDash([2,3]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(L.gx+0.5,L.ry[0]-22);ctx.lineTo(L.gx+0.5,L.ry[5]+18);ctx.stroke();ctx.setLineDash([]);}}
+  function flink(ctx){const pE=em('process');rect(ctx,L.fx0,L.fy0,L.fx1-L.fx0,L.fy1-L.fy0,'rgba(0,0,0,.12)',pE?'#a6c8ff':'rgba(166,200,255,.3)');
+    label(ctx,'PROCESS · APACHE FLINK',L.fx0+10,L.fy0+13,pE?'#fff':'rgba(166,200,255,.85)',9.5,1);
+    if(L.wide){ctx.font='500 9.5px '+MF;const a=ctx.measureText('PROCESS · APACHE FLINK').width+22,b=ctx.measureText('zero configuration').width;if(a+b+30<L.fx1-L.fx0)label(ctx,'zero configuration',L.fx1-10,L.fy0+13,em('zero')?'#fff':'rgba(255,255,255,.5)',9.5,0.4,'right',em('zero')?'600':'400');}}
+  function chip(ctx,now){const R=L.ch,S=SC[st.sc],e=reduced?3000:st.tChip?(now-st.tChip)/st.slow:-1,arr=e>=0,w=R.x1-R.x0,cx=(R.x0+R.x1)/2,ibm=em('fd')||em('sc')||em('opt')||em('ibm');
+    rect(ctx,R.x0,R.y0,w,R.y1-R.y0,'#0d1c44',ibm?'#a6c8ff':'#4589ff');ctx.fillStyle='#0f62fe';ctx.fillRect(R.x0,R.y0,w,3);
+    label(ctx,'IBM GRANITE TIME SERIES',R.x0+12,R.y0+17,'#a6c8ff',10.5,1.2);
+    ctx.font='500 10.5px '+MF;const hw=ctx.measureText('IBM GRANITE TIME SERIES').width+1.2*23;ctx.font='400 9.5px '+MF;if(hw+ctx.measureText('zero-shot · no training').width+40<w)label(ctx,'zero-shot · no training',R.x1-12,R.y0+17,'rgba(255,255,255,.45)',9.5,0,'right','400');
+    /* model cells */
+    let cz=11,cp=14;for(const [z,p] of [[11,14],[10,10],[9,7]]){ctx.font=z+'px '+MF;if(MOD.reduce((a,c)=>a+ctx.measureText(c).width+p,0)+6*3<=w-24){cz=z;cp=p;break;}cz=z;cp=p;}
+    ctx.font=cz+'px '+MF;let x=R.x0+12;const cy=R.y0+40;ctx.textAlign='center';
+    MOD.forEach((m,k)=>{const cw=ctx.measureText(m).width+cp,on=arr&&k===S.mod,pulse=on&&!reduced&&e<1000&&Math.floor(e/160)%2===0;
+      rect(ctx,x,cy-9,cw,18,on?(pulse?'#0f62fe':'#0043ce'):'rgba(255,255,255,.04)',on?'#78a9ff':'rgba(166,200,255,.3)');ctx.fillStyle=on?'#fff':'#a6c8ff';ctx.fillText(m,x+cw/2,cy+0.5);x+=cw+6;});
+    /* capabilities */
+    ctx.font='600 '+(w>300?10.5:9.5)+'px '+MF;let cx2=R.x0+12;const capY=R.y0+66;ctx.textAlign='left';
+    CAPS.forEach(([c,col],k)=>{const on=arr&&k===S.cap||(k===0&&em('fd'))||(k===1&&em('fd'))||(k===2&&em('sc'))||(k===3&&em('opt')),wd=ctx.measureText(c).width;
+      if(LS)ctx.letterSpacing='1px';ctx.fillStyle=on?col:'rgba(255,255,255,.3)';ctx.fillText(c,cx2,capY);if(LS)ctx.letterSpacing='0px';
+      if(on){ctx.fillStyle=col;ctx.fillRect(cx2,capY+8,wd+4,2);}cx2+=wd+(w>300?22:12)+4;});
+    label(ctx,S.series,R.x0+12,R.y0+(L.wide?90:84),'rgba(255,255,255,.6)',L.wide?10.5:9.5,0,'left','400');
+    drawChart(ctx,now,e);}
+  function drawChart(ctx,now,e){const C2=L.chart,S=SC[st.sc],D=st.ser;if(!D)return;const w=C2.x1-C2.x0,h=C2.y1-C2.y0,nowX=C2.x0+w*0.66,step=(nowX-C2.x0)/NH;
+    const nI=reduced?24:Math.min((now-st.ts)/st.slow,CYCLE)/1000*SPS,X=i=>nowX-(nI-i)*step,rev=e<0?0:ease(e/700),late=e<0?0:ease((e-200)/500);
+    let lo=D.lo,hi=D.hi;
+    if(D.k==='quant'){let a=1e9,b=-1e9;for(let i=Math.floor(nI-NH);i<=Math.ceil(nI);i++){const v=D.A[i+D.O];a=Math.min(a,v);b=Math.max(b,v);}const last=val(D,nI),sp=0.9*Math.sqrt(NF)*1.9;a=Math.min(a,last-sp);b=Math.max(b,last+sp);
+      if(!st.qInit){st.lo=a;st.hi2=b;st.qInit=true;}st.lo=lerp(st.lo,a-1,0.08);st.hi2=lerp(st.hi2,b+1,0.08);lo=st.lo;hi=st.hi2;}
+    const Y=v=>C2.y1-(v-lo)/(hi-lo)*h;
+    ctx.save();ctx.beginPath();ctx.rect(C2.x0,C2.y0-2,w,h+4);ctx.clip();
+    ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let k=1;k<4;k++){const y=Math.round(C2.y0+h*k/4)+0.5;ctx.beginPath();ctx.moveTo(C2.x0,y);ctx.lineTo(C2.x1,y);ctx.stroke();}
+    const i0=Math.floor(nI-NH)-1,i1=nI,iF=nI+NF*rev;
+    /* expected range for detection */
+    if(D.k==='spike'){ctx.fillStyle='rgba(69,137,255,.14)';ctx.beginPath();for(let i=i0;i<=nI+NF;i+=0.5)ctx.lineTo(X(i),Y(D.E(i)+10));for(let i=nI+NF;i>=i0;i-=0.5)ctx.lineTo(X(i),Y(D.E(i)-10));ctx.closePath();ctx.fill();}
+    if(D.k==='opt'){ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(250,77,86,.8)';ctx.beginPath();ctx.moveTo(C2.x0,Math.round(Y(186))+0.5);ctx.lineTo(C2.x1,Math.round(Y(186))+0.5);ctx.stroke();
+      ctx.strokeStyle='rgba(66,190,101,.7)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(C2.x0,Math.round(Y(182))+0.5);ctx.lineTo(C2.x1,Math.round(Y(182))+0.5);ctx.stroke();ctx.setLineDash([]);
+      label(ctx,'limit',C2.x0+4,Y(186)-8,'#ff8389',9.5,0,'left','400');label(ctx,'target',C2.x0+4,Y(182)+9,'#a7f0ba',9.5,0,'left','400');}
+    if(D.k==='match'&&late>0){const a=X(-34),b=X(-27);ctx.fillStyle='rgba(190,149,255,'+(0.18*late)+')';ctx.fillRect(a,C2.y0,b-a,h);ctx.strokeStyle='rgba(190,149,255,'+(0.7*late)+')';ctx.strokeRect(Math.round(a)+0.5,C2.y0+0.5,Math.round(b-a),h-1);
+      if(a>C2.x0-20)label(ctx,'looks like now',Math.max(C2.x0+4,a),C2.y0+9,'rgba(232,218,255,'+late+')',9.5,0,'left','400');}
+    /* forecast */
+    if(rev>0&&D.k!=='spike'){
+      if(D.k==='quant'){const m=val(D,nI),q=(hh,k)=>0.9*Math.sqrt(Math.max(0,hh))*k;[[1.9,'rgba(69,137,255,.16)'],[0.8,'rgba(69,137,255,.28)']].forEach(([k,c])=>{ctx.fillStyle=c;ctx.beginPath();for(let i=nI;i<=iF;i+=0.5)ctx.lineTo(X(i),Y(m+0.03*(i-nI)+q(i-nI,k)));for(let i=iF;i>=nI;i-=0.5)ctx.lineTo(X(i),Y(m+0.03*(i-nI)-q(i-nI,k)));ctx.closePath();ctx.fill();});
+        ctx.strokeStyle='#78a9ff';ctx.setLineDash([4,3]);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(X(nI),Y(m));ctx.lineTo(X(iF),Y(m+0.03*(iF-nI)));ctx.stroke();ctx.setLineDash([]);
+        if(rev>0.9)label(ctx,'q10 to q90',X(nI+NF)-2,Y(m+q(NF,1.9))-8,'#a6c8ff',9.5,0,'right','400');}
+      else{const F=D.k==='opt'?D.E:D.E,bw=D.k==='peak'?0.05:D.k==='opt'?0.35:4;ctx.fillStyle='rgba(69,137,255,.2)';ctx.beginPath();for(let i=nI;i<=iF;i+=0.5)ctx.lineTo(X(i),Y(F(i)+bw*(0.6+Math.sqrt(i-nI)*0.5)));for(let i=iF;i>=nI;i-=0.5)ctx.lineTo(X(i),Y(F(i)-bw*(0.6+Math.sqrt(i-nI)*0.5)));ctx.closePath();ctx.fill();
+        ctx.strokeStyle=D.k==='opt'?'rgba(255,255,255,.45)':'#78a9ff';ctx.setLineDash([4,3]);ctx.lineWidth=1.5;ctx.beginPath();for(let i=nI;i<=iF;i+=0.5)i===nI?ctx.moveTo(X(i),Y(F(i))):ctx.lineTo(X(i),Y(F(i)));ctx.stroke();ctx.setLineDash([]);
+        if(D.k==='opt'&&e>=600){const r2=ease((e-600)/700),iE=nI+NF*r2,b=val(D,nI);ctx.strokeStyle='#42be65';ctx.lineWidth=2;ctx.beginPath();for(let i=nI;i<=iE;i+=0.5){const v=lerp(b,D.fix(i),ease((i-nI)/8));i===nI?ctx.moveTo(X(i),Y(v)):ctx.lineTo(X(i),Y(v));}ctx.stroke();
+          if(r2>0.8)label(ctx,'new setpoint',X(nI+NF)-2,Y(182)-9,'#a7f0ba',9.5,0,'right','600');}
+        if(D.k==='fc'&&rev>0.6)label(ctx,'+ weather topic: heat wave',C2.x1-4,C2.y0+9,'#3ddbd9',9.5,0,'right','600');
+        if(D.k==='peak'&&rev>0.8){let bi=nI,bv=-1;for(let i=Math.ceil(nI);i<=nI+NF;i++){if(F(i)>bv){bv=F(i);bi=i;}}sq(ctx,X(bi),Y(bv),6,'#a6c8ff');label(ctx,'peak 1.7 MW',X(bi),Y(bv)-11,'#a6c8ff',9.5,0,'center','600');}
+        if(D.k==='match'&&rev>0.6)label(ctx,'forecast follows the match',C2.x1-4,C2.y0+9,'#a6c8ff',9.5,0,'right','400');}}
+    if(D.k==='spike'){ctx.strokeStyle='rgba(120,169,255,.7)';ctx.setLineDash([4,3]);ctx.lineWidth=1.2;ctx.beginPath();for(let i=nI;i<=nI+NF;i+=0.5)i===nI?ctx.moveTo(X(i),Y(D.E(i))):ctx.lineTo(X(i),Y(D.E(i)));ctx.stroke();ctx.setLineDash([]);}
+    /* history */
+    ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.lineJoin='round';ctx.beginPath();let first=true;for(let i=i0;i<=Math.floor(nI);i++){const x=X(i),y=Y(D.A[i+D.O]);first?ctx.moveTo(x,y):ctx.lineTo(x,y);first=false;}ctx.lineTo(nowX,Y(val(D,nI)));ctx.stroke();
+    if(D.k==='spike'&&nI>=10){const x=X(10),y=Y(D.A[10+D.O]),p=reduced||e<0?0:Math.max(0,Math.min(1,1-(e-100)/900));ctx.strokeStyle='#fa4d56';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,6+8*p,0,Math.PI*2);ctx.stroke();sq(ctx,x,y,5,'#ff8389');
+      label(ctx,'4× normal',x+12,y+2,'#ffb3b8',10,0,'left','600');}
+    if(D.k==='match'&&late>0){ctx.strokeStyle='rgba(190,149,255,'+(0.8*late)+')';ctx.setLineDash([2,3]);ctx.lineWidth=1;const xa=(X(-34)+X(-27))/2,im=Math.min(13,nI),xb=X(im),yy=C2.y0+20;ctx.beginPath();ctx.moveTo(xb,Y(val(D,im))-6);ctx.quadraticCurveTo((xa+xb)/2,yy-14,xa,yy);ctx.stroke();ctx.setLineDash([]);}
+    /* now */
+    ctx.strokeStyle='rgba(255,255,255,.45)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(nowX)+0.5,C2.y0);ctx.lineTo(Math.round(nowX)+0.5,C2.y1);ctx.stroke();
+    label(ctx,'now',nowX+4,C2.y1-8,'rgba(255,255,255,.6)',9.5,0,'left','400');
+    const pa=reduced||e<0?0:1-e/600;if(pa>0&&pa<1){ctx.strokeStyle='rgba(255,255,255,'+pa+')';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(nowX,Y(val(D,nI)),4+10*(1-pa),0,Math.PI*2);ctx.stroke();}
+    ctx.restore();}
+  function agent(ctx,now){const R=L.ag,S=SC[st.sc],s=stageOf(),on=s==='ag1'||s==='agw'||s==='ag2'||em('agent'),chk=s==='agw';
+    path(ctx,L.pag,on?'#be95ff':'rgba(190,149,255,.35)',on?1.4:1);
+    rect(ctx,R.x0,R.y0,R.x1-R.x0,R.y1-R.y0,on?'rgba(190,149,255,.18)':'rgba(190,149,255,.07)',on?'#be95ff':'rgba(190,149,255,.45)');
+    const my=(R.y0+R.y1)/2;label(ctx,'STREAMING AGENTS',R.x0+12,my,on?'#e8daff':'rgba(232,218,255,.75)',L.wide?10.5:9.5,1.1,'left','600');
+    const txt=chk?'checks before it acts':L.wide&&R.x1-R.x0>420?'act on the result, with gates for experts':'act, with gates for experts';ctx.font='400 '+(L.wide?11.5:10)+'px '+SANS;const x0=R.x0+12+(L.wide?150:122),ww=R.x1-12-x0;
+    if(ww>60){ctx.textAlign='left';ctx.fillStyle=chk?'#fff':'rgba(255,255,255,.55)';ctx.fillText(fit(ctx,txt,ww),x0,my+0.5);}
+    if(chk&&!reduced){const u=(now-st.fp.t0)/(DUR.agw*st.slow);ctx.fillStyle='#be95ff';ctx.fillRect(R.x0,R.y1-2,(R.x1-R.x0)*clamp(u,0,1),2);}}
+  function outs(ctx,now){const S=SC[st.sc],s=stageOf(),oE=em('out');
+    L.snk.forEach((r,k)=>{const kind=SNK[k][1],[c1,c2]=COL[kind],on=k===S.snk&&(s==='out'||s==='ag2'||s==='end'),fl=ease(1-(now-st.sinkF[k])/900),bg=ease(1-(now-st.sinkF[k])/400)*0.4;
+      path(ctx,L.pout[k],on?c1:k>=4?'rgba(190,149,255,.3)':'rgba(255,255,255,.16)',on?1.5:1);
+      const hit=k===S.snk&&s==='end'&&now-st.sinkT[k]<2600;
+      rect(ctx,r.x,r.y,r.w,r.h,hit?'rgba('+(kind==='dec'?'66,190,101':kind==='fc'?'69,137,255':'250,77,86')+',.16)':'rgba(10,20,48,'+(0.7-bg)+')',hit||oE?c1:fl>0?'rgba(255,255,255,'+(0.18+0.4*fl)+')':'rgba(255,255,255,.18)');
+      ctx.fillStyle=c1;ctx.fillRect(r.x,r.y,3,r.h);
+      const fresh=now-st.sinkT[k]<4000;ctx.textAlign='left';ctx.textBaseline='middle';
+      if(L.wide){fz(ctx,SNK[k][0],r.w-22,12.5,11,'500');ctx.fillStyle=hit?'#fff':'rgba(255,255,255,.8)';ctx.fillText(fit(ctx,SNK[k][0],r.w-22),r.x+12,r.y+r.h*0.33);
+        fz(ctx,st.sinkV[k],r.w-22,11,10,'400');ctx.fillStyle=fresh?c2:'rgba(255,255,255,.5)';ctx.fillText(fit(ctx,st.sinkV[k],r.w-22),r.x+12,r.y+r.h*0.7);}
+      else{ctx.font='500 '+(L.z>1?12:11)+'px '+SANS;ctx.fillStyle=hit?'#fff':'rgba(255,255,255,.8)';ctx.fillText(SNK[k][0],r.x+10,r.y+r.h*0.33);
+        ctx.font='400 '+(L.z>1?11:10)+'px '+SANS;ctx.fillStyle=fresh?c2:'rgba(255,255,255,.5)';ctx.fillText(fit(ctx,st.sinkV[k],r.w-20),r.x+10,r.y+r.h*0.7);}});}
+  function packets(ctx,now){if(reduced)return;const vt=L.wide?62:48,cs=L.wide?[4,8]:[3,6];
+    for(const p of st.parts){if(p.ph==='rej'){const q=ptAt(L.pin[p.i],L.pin[p.i].L-6);sq(ctx,q[0],q[1],4,'rgba(250,77,86,'+(p.t/700)+')');continue;}
+      if(p.ph==='tape'){const q=ptAt(L.ptape[p.i],p.d);ctx.fillStyle='rgba(255,255,255,.7)';ctx.fillRect(Math.round(q[0]-cs[0]/2),Math.round(q[1]-cs[1]/2),cs[0],cs[1]);continue;}
+      const P=p.ph==='in'?L.pin[p.i]:p.ph==='fl'?L.pfl[p.i]:p.ph==='ag1'?L.pag:L.pout[p.k],q=ptAt(P,p.d);
+      const col=p.ph==='in'?(p.bad?'rgba(255,131,137,.9)':'rgba(255,255,255,.65)'):p.ph==='fl'?'rgba(166,200,255,.8)':p.ph==='ag1'?COL.an[1]:p.k>=4?COL.ag[1]:COL[SNK[p.k][1]][1];sq(ctx,q[0],q[1],3,col);}
+    const f=st.fp;if(f&&f.stage==='agw'){const q=L.pag.P[1];sq(ctx,q[0],q[1]+4,7,COL.ag[1]);}const P=focusPath();if(!f||!P)return;const S=SC[st.sc],u=clamp((now-f.t0)/(DUR[f.stage]*st.slow),0,1),d=P.L*(f.stage==='tape'?u:ease(u)),q=ptAt(P,d);
+    const col=f.stage==='in'||f.stage==='tape'?'#fff':f.stage==='fl'?'#a6c8ff':f.stage==='ag1'?COL.an[1]:f.stage==='ag2'?COL.ag[1]:COL[SNK[S.snk][1]][1];
+    sub(ctx,P,Math.max(0,d-46),d,col,2);sq(ctx,q[0],q[1],7,col);ctx.strokeStyle='rgba(255,255,255,.5)';ctx.lineWidth=1;ctx.strokeRect(Math.round(q[0]-5)+0.5,Math.round(q[1]-5)+0.5,10,10);}
+  function draw(){if(!L||!cv.W)return;const ctx=cv.ctx,now=performance.now();ctx.clearRect(0,0,cv.W,cv.H);ctx.textBaseline='middle';
+    heads(ctx);panel(ctx);sources(ctx,now);lanes(ctx,now);flink(ctx);chip(ctx,now);agent(ctx,now);outs(ctx,now);packets(ctx,now);}
+
+  /* ---------- interaction ---------- */
+  const hitSrc=(x,y)=>L?L.src.findIndex(r=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h):-1;
+  cvEl.addEventListener('pointermove',e=>{const r=cvEl.getBoundingClientRect(),i=hitSrc(e.clientX-r.left,e.clientY-r.top);st.hover=i;cvEl.style.cursor=i>=0?'pointer':'';});
+  cvEl.addEventListener('pointerleave',()=>{st.hover=-1;cvEl.style.cursor='';});
+  cvEl.addEventListener('click',e=>{const r=cvEl.getBoundingClientRect(),i=hitSrc(e.clientX-r.left,e.clientY-r.top);if(i<0)return;const s=SC.findIndex(c=>c.src===i);if(s>=0){st.pin=performance.now()+20000;start(s,performance.now());}});
+  function setHi(k,hold){st.hi=k;st.hiT=performance.now();st.hold=!!hold;}
+  keyEls.forEach(k=>{const on=()=>{setHi(k.dataset.k,true);if(sayEl){sayEl.classList.add('desc');sayEl.textContent=KEY_TXT[k.dataset.k];}},off=()=>{st.hold=false;st.hi=null;if(sayEl)sayEl.classList.remove('desc');caption();};
+    k.addEventListener('mouseenter',on);k.addEventListener('focus',on);k.addEventListener('mouseleave',off);k.addEventListener('blur',off);k.addEventListener('click',on);});
+
+  reg({el,resize,update,draw});
+  start(0,performance.now());resize();
+  App.arch={focus(i,pin,slow){const now=performance.now();st.pin=pin?now+CYCLE*(slow||1)+800:-1e9;start(i,now,slow);},hi(k){setHi(k,false);}};
 })();
 
 /* ============ live demo (scripted tour) ============ */
@@ -3413,13 +3653,13 @@ const CS={
       say:'Then it optimizes the next order to keep the shelf full, so mission-critical decisions land while they still matter.',
       subs:['Then it <em>optimizes the next order</em>','to keep the shelf full,','so mission-critical decisions land','<em>while they still matter</em>.'],
       run:async(w,at)=>{await at('optimizes the next order');if(App.hero)App.hero.optimize();}},
-    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#arch-mid',dur:9930,
+    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:9930,
       say:'Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration.',
       subs:['<em>Better together</em>:','Confluent <em>streams, connects and governs</em> the data,','and Granite turns each event <em>into a decision</em>,','with <em>zero configuration</em>.'],
-      run:async(w,at)=>{const row=k=>hi('#arch-mid .arch-row[data-k="'+k+'"]');hi('#arch-mid .arch-join');
-        await at('Confluent streams');hi('#arch-mid .arch-brand:not(.ibm)');await at('streams,');row('stream');await at('connects');row('connect');await at('governs');row('govern');
-        await at('and Granite');scrollTo(window.innerWidth<=760?'#arch-mid .arch-brand.ibm':'#arch-mid .arch-row[data-k="process"]',true);row('process');hi('#arch-mid .arch-brand.ibm');await w(260);row('fd');await w(260);row('sc');await w(260);row('opt');
-        await at('into a decision');row('agent');await at('zero configuration');hi('#arch-mid .arch-f');}},
+      run:async(w,at)=>{const A=App.arch;if(!A)return;const phone=window.innerWidth<=760,k=x=>{A.hi(x);hi('#arch-keys [data-k="'+x+'"]');};A.focus(0,true,1.5);
+        await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('streams,');k('stream');await at('connects');k('connect');await at('governs');k('govern');
+        await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);k('process');await w(450);k('fd');
+        await at('into a decision');if(phone)scrollTo('#arch-a-out',true);A.hi('out');await at('zero configuration');A.hi('zero');}},
     {n:5,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:8280,
       say:'For your teams: ten times faster time to value, five to ten percent more accuracy, and decisions in seconds.',
       subs:['For your teams: <em>ten times faster</em> time to value,','<em>five to ten percent</em> more accuracy,','and decisions <em>in seconds</em>.'],

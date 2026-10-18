@@ -937,6 +937,26 @@ body.pitching .hx-layer{min-height:86px}
 .hf.done:not(:last-child)::after{border-color:var(--hl)}
 @media (max-width:760px){.hf:not(:last-child)::after{right:auto;left:30px;top:auto;bottom:-8px;transform:rotate(135deg)}.hf .hf-k{font-size:1rem}.hf .hf-k .hf-n{width:26px;height:26px}}
 @media (prefers-reduced-motion:reduce){.hf.on .hf-k .hf-n,.hf.on .hf-ic *,.hf.on .hf-t{animation:none}.hf.on .hf-t{color:#fff;background:none}}
+/* better together: one live system, streams in, decisions out */
+.ax{position:relative;background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:14px}
+.ax-cv{display:block;width:100%;height:500px;touch-action:pan-y}
+.ax-a{position:absolute;left:0;width:1px;pointer-events:none}
+.ax-say{margin:.95rem 0 .1rem;font-size:clamp(1rem,1.35vw,1.15rem);line-height:1.45;color:var(--ink);min-height:2.95em}
+.ax-say span{opacity:.36;transition:opacity .45s,color .45s}
+.ax-say span.on{opacity:1}
+.ax-say .s1.on{color:#a6c8ff}.ax-say .s2.on{color:#a7f0ba}
+.ax-say.desc{color:#fff}
+.ax-keys{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:.55rem}
+.ax-gh{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 .25rem 0 .1rem}
+.ax-gh.ibm{margin-left:.9rem;color:#a6c8ff}
+.ax-k{font:inherit;font-size:.8rem;color:var(--ink-2);background:rgba(10,20,48,.6);border:1px solid rgba(255,255,255,.18);border-radius:3px;padding:.3rem .6rem;cursor:pointer;transition:background .3s,border-color .3s,color .3s}
+.ax-k:hover,.ax-k:focus-visible,.ax-k.on,.ax-k.tour-hi{color:#fff;border-color:#fff;background:rgba(255,255,255,.1)}
+.ax-k.ibm:hover,.ax-k.ibm:focus-visible,.ax-k.ibm.on,.ax-k.ibm.tour-hi{border-color:#78a9ff;background:rgba(15,98,254,.28)}
+.ax-k.ag{margin-left:.9rem}
+.ax-k.ag:hover,.ax-k.ag:focus-visible,.ax-k.ag.on,.ax-k.ag.tour-hi{border-color:#be95ff;background:rgba(190,149,255,.2)}
+@media (max-width:760px){.ax{padding:8px}.ax-gh.ibm,.ax-k.ag{margin-left:0}.ax-gh{width:100%;margin-top:.3rem}.ax-say{min-height:4.4em;font-size:1rem}}
+body.pitching #st-arch .stage-foot{display:none}
+@media (prefers-reduced-motion:reduce){.ax-say span{transition:none}}
 /* the layer as a system diagram: flat, gridded, crisp */
 .hx-layer{min-height:156px;border-radius:4px;box-shadow:none;border:1px solid rgba(255,255,255,.14);
   background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:24px 24px}
