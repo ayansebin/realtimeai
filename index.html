@@ -937,6 +937,43 @@ body.pitching .hx-layer{min-height:86px}
 .hf.done:not(:last-child)::after{border-color:var(--hl)}
 @media (max-width:760px){.hf:not(:last-child)::after{right:auto;left:30px;top:auto;bottom:-8px;transform:rotate(135deg)}.hf .hf-k{font-size:1rem}.hf .hf-k .hf-n{width:26px;height:26px}}
 @media (prefers-reduced-motion:reduce){.hf.on .hf-k .hf-n,.hf.on .hf-ic *,.hf.on .hf-t{animation:none}.hf.on .hf-t{color:#fff;background:none}}
+/* the model family: tabs in the use case style, a live fit picture and an efficiency profile per model */
+.mdgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.ucgrid.mdgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:860px){.ucgrid.mdgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#mdtabs .uc{--ink:#161616;--ink-2:#3e3e3e;--ink-3:#6a6a66;--line:rgba(22,22,22,.14);--line-2:rgba(22,22,22,.32);background:#f8f7f3;border:1px solid rgba(22,22,22,.18);color:var(--ink);box-shadow:0 1px 0 rgba(22,22,22,.04);filter:none;transition:border-color .15s,box-shadow .15s,transform .15s}
+#mdtabs .uc:hover{border-color:rgba(22,22,22,.45);box-shadow:0 6px 18px rgba(22,22,22,.08);transform:translateY(-1px)}
+#mdtabs .uc .uc-cv{background:#1b2746;padding:2px;border-radius:2px;height:64px}
+#mdtabs .uc[aria-selected="true"]{--ink:#f6f7fb;--ink-2:#d6dbe5;--ink-3:#adb7c8;background:linear-gradient(150deg,#2c5066 0%,#26375f 70%);border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe;transform:none}
+#mdtabs .uc b{font-size:1.15rem;font-weight:500}
+#mdtabs .md-k{font-size:.8rem;color:var(--ink-3);margin-top:-.3rem}
+.mdpanel .stage-top{align-items:center}
+.mdpanel .stage-title{flex:1 1 auto;max-width:none;min-width:0}.mdpanel .stage-title h3{max-width:none}
+.md-use{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#a7f0ba}
+.md-use i{width:7px;height:7px;background:#42be65;border-radius:50%}
+.md-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:clamp(16px,2.4vw,32px)}
+@media (max-width:900px){.md-grid{grid-template-columns:1fr}}
+.md-viz{background:#0a1430;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:12px 14px;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px}
+.md-cv{display:block;width:100%;height:232px}
+@media (max-width:600px){.md-cv{height:250px}.md-viz{padding:10px}}
+.md-fit{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;margin-top:16px}
+@media (max-width:600px){.md-fit{grid-template-columns:1fr;gap:12px}}
+.md-h{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#78a9ff;margin:0 0 .55rem}
+.md-when{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.md-when li{position:relative;padding-left:1.1rem;font-size:.9rem;line-height:1.42;color:var(--ink)}
+.md-when li::before{content:'';position:absolute;left:0;top:.5em;width:7px;height:7px;border:1.5px solid #78a9ff;border-radius:50%}
+.md-ucs{display:flex;flex-wrap:wrap;gap:6px}
+.md-uc{display:inline-flex;align-items:center;gap:.45rem;font:inherit;font-size:.84rem;color:#fff;background:rgba(15,98,254,.2);border:1px solid rgba(120,169,255,.55);border-radius:3px;padding:.38rem .65rem;cursor:pointer;transition:background .2s,border-color .2s}
+.md-uc:hover,.md-uc:focus-visible{background:rgba(15,98,254,.42);border-color:#a6c8ff}
+.md-uc svg{width:13px;height:13px}
+.md-side{display:flex;flex-direction:column}
+.md-spec{margin:0 0 1.1rem;display:grid;gap:0;border-top:1px solid rgba(255,255,255,.12)}
+.md-spec>div{display:grid;grid-template-columns:84px minmax(0,1fr);gap:.8rem;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.md-spec dt{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:.12rem}
+.md-spec dd{margin:0;font-size:.9rem;line-height:1.38;color:#fff}
+.md-ladder{display:block;width:100%;height:78px;margin-bottom:.8rem}
+.md-proof{margin:auto 0 0;font-size:.84rem;color:#f1c21b;border:1px solid rgba(241,194,27,.45);border-radius:3px;padding:.5rem .65rem;line-height:1.4}
+@media (max-width:600px){#mdtabs .uc{flex:0 0 46%}}
 /* better together: one live system, streams in, decisions out */
 .ax{position:relative;background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px;border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:14px}
 .ax-cv{display:block;width:100%;height:500px;touch-action:pan-y}
@@ -1102,18 +1139,102 @@ body.pitching #st-live .stage-top{display:none}
       <div class="stage-foot"><div class="readouts"><div class="readout"><b>1</b><span>layer</span></div><div class="readout"><b id="arch-count">0</b><span>decisions in flight</span></div><div class="readout"><b class="purple">0</b><span>models to train</span></div></div><div class="hint">Pick a stream to follow it. Nothing leaves Confluent Cloud.</div></div>
     </div>
 
-    <div class="chapter-head sub">
+    <div class="chapter-head sub" id="h-models">
       <h2>Four models, one family.</h2>
-      <p>44M+ downloads on Hugging Face. Pick one and every simulation on the page follows.</p>
+      <p>44M+ downloads on Hugging Face. Each one fits a different job, data rhythm and budget. Pick one to see where it fits, and every simulation on the page follows.</p>
     </div>
 
-    <div class="stage" id="st-models">
+    <div class="ucgrid mdgrid" role="tablist" id="mdtabs" aria-label="Models">
+      <button class="uc md" role="tab" aria-selected="true" aria-controls="md-ttm" type="button" data-m="ttm"><i>01</i><canvas class="uc-cv" data-glyph="point" aria-hidden="true"></canvas><b>TTM</b><span class="md-k">Fast forecasts at scale</span></button>
+      <button class="uc md" role="tab" aria-selected="false" aria-controls="md-flowstate" type="button" data-m="flowstate"><i>02</i><canvas class="uc-cv" data-glyph="smooth" aria-hidden="true"></canvas><b>FlowState</b><span class="md-k">Any sampling rate</span></button>
+      <button class="uc md" role="tab" aria-selected="false" aria-controls="md-patchtstfm" type="button" data-m="patchtstfm"><i>03</i><canvas class="uc-cv" data-glyph="quant" aria-hidden="true"></canvas><b>PatchTST-FM</b><span class="md-k">The full range, top accuracy</span></button>
+      <button class="uc md" role="tab" aria-selected="false" aria-controls="md-tspulse" type="button" data-m="tspulse"><i>04</i><canvas class="uc-cv" data-glyph="embed" aria-hidden="true"></canvas><b>TSPulse</b><span class="md-k">Detect, search, classify, fill</span></button>
+    </div>
+
+    <div class="stage ucpanel mdpanel" id="md-ttm" role="tabpanel">
+      <div class="stage-top"><div class="stage-title"><h3>TTM forecasts millions of series, fast, on CPU</h3></div><span class="md-use"><i></i>In use in every simulation on this page</span></div>
       <div class="stage-body">
-        <div class="models" id="models">
-          <button class="mcard on" data-m="ttm"><span class="use">in use</span><span class="mk">Mixer · default</span><h4>TTM</h4><canvas data-glyph="point"></canvas><span class="ml">Tiny mixing networks, CPU-friendly. About 100,000 series a night on CPU.</span><span class="mb"><span>NeurIPS 2024</span><span>10 to 60× throughput</span><span>horizon ≤ 96</span></span></button>
-          <button class="mcard" data-m="flowstate"><span class="use">in use</span><span class="mk">State space</span><h4>FlowState</h4><canvas data-glyph="smooth"></canvas><span class="ml">A running summary updated with every point. Sub-second and hourly data alike.</span><span class="mb"><span>ICML 2026</span><span>sampling-rate equivariant</span><span>context ≤ 4,096</span></span></button>
-          <button class="mcard" data-m="patchtstfm"><span class="use">in use</span><span class="mk">Transformer</span><h4>PatchTST-FM</h4><canvas data-glyph="quant"></canvas><span class="ml">Reads the series patch by patch and returns the full distribution, q10 to q90.</span><span class="mb"><span class="gold">#1 GIFT-Eval</span><span>context ≤ 8,064</span><span>2026</span></span></button>
-          <button class="mcard" data-m="tspulse"><span class="use">in use</span><span class="mk">Dual space · next</span><h4>TSPulse</h4><canvas data-glyph="embed"></canvas><span class="ml">One small model for anomaly detection, classification, gap-filling and similarity search. GPU-free.</span><span class="mb"><span class="gold">#1 TSB-AD</span><span>ICLR 2026</span><span>next</span></span></button>
+        <div class="md-grid">
+          <div class="md-main">
+            <div class="md-viz"><canvas class="md-cv" data-viz="ttm" role="img" aria-label="Dozens of store series forecast one after another by the same model, with a running count"></canvas></div>
+            <div class="md-fit">
+              <div><div class="md-h">Choose it when</div><ul class="md-when"><li>You forecast thousands to millions of series, like every product in every store</li><li>Your latency budget is milliseconds and your fleet runs on CPU</li><li>Control variables matter, like price, promotions or setpoints</li></ul></div>
+              <div><div class="md-h">Use cases it powers</div><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-demand">Supply chain planning <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-prod">Production optimization <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div>
+            </div>
+          </div>
+          <div class="md-side">
+            <div class="md-h">Efficiency profile</div>
+            <dl class="md-spec"><div><dt>Size</dt><dd>1M to 35M parameters, a mix of tiny experts</dd></div><div><dt>Runs on</dt><dd>CPU, about 180 forecasts a second, 800 with Lite</dd></div><div><dt>Reads</dt><dd>multivariate series with control variables</dd></div><div><dt>Returns</dt><dd>point forecasts and quantiles</dd></div></dl>
+            <div class="md-h">Size across the family</div>
+            <canvas class="md-ladder" data-m="ttm" role="img" aria-label="Parameter counts on a log scale: TSPulse 1M, TTM 1M to 35M, FlowState 18.5M, PatchTST-FM 385M"></canvas>
+            <p class="md-proof">NeurIPS 2024 · 15 to 50× faster than typical models</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage ucpanel mdpanel" id="md-flowstate" role="tabpanel" hidden>
+      <div class="stage-top"><div class="stage-title"><h3>FlowState reads any rhythm, from seconds to months</h3></div><span class="md-use"><i></i>In use in every simulation on this page</span></div>
+      <div class="stage-body">
+        <div class="md-grid">
+          <div class="md-main">
+            <div class="md-viz"><canvas class="md-cv" data-viz="flowstate" role="img" aria-label="Three streams sampled every second, every 15 minutes and every day, forecast by the same model"></canvas></div>
+            <div class="md-fit">
+              <div><div class="md-h">Choose it when</div><ul class="md-when"><li>Your streams arrive at different rates, from sensors every second to daily demand</li><li>Sampling changes over time and you do not want a model per rate</li><li>You want long horizons from a compact model</li></ul></div>
+              <div><div class="md-h">Use cases it powers</div><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-prod">Production optimization <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-trade">Trading <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div>
+            </div>
+          </div>
+          <div class="md-side">
+            <div class="md-h">Efficiency profile</div>
+            <dl class="md-spec"><div><dt>Size</dt><dd>18.5M parameters, a state space model</dd></div><div><dt>Runs on</dt><dd>CPU or GPU, compact</dd></div><div><dt>Reads</dt><dd>up to 4,096 points at any sampling rate</dd></div><div><dt>Returns</dt><dd>quantile forecasts, horizon set by the data</dd></div></dl>
+            <div class="md-h">Size across the family</div>
+            <canvas class="md-ladder" data-m="flowstate" role="img" aria-label="Parameter counts on a log scale: TSPulse 1M, TTM 1M to 35M, FlowState 18.5M, PatchTST-FM 385M"></canvas>
+            <p class="md-proof">ICML 2026 · more than 10× smaller than the next best models on GIFT-Eval</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage ucpanel mdpanel" id="md-patchtstfm" role="tabpanel" hidden>
+      <div class="stage-top"><div class="stage-title"><h3>PatchTST-FM returns the whole distribution, not one number</h3></div><span class="md-use"><i></i>In use in every simulation on this page</span></div>
+      <div class="stage-body">
+        <div class="md-grid">
+          <div class="md-main">
+            <div class="md-viz"><canvas class="md-cv" data-viz="patchtstfm" role="img" aria-label="A long price history with a fan of forecast quantiles and the chance of crossing a limit"></canvas></div>
+            <div class="md-fit">
+              <div><div class="md-h">Choose it when</div><ul class="md-when"><li>A decision depends on risk, like a service level or a trading limit</li><li>Your history is long and complex, up to 8,192 points</li><li>Accuracy matters more than the cost of each call</li></ul></div>
+              <div><div class="md-h">Use cases it powers</div><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-trade">Trading <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-demand">Supply chain planning <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div>
+            </div>
+          </div>
+          <div class="md-side">
+            <div class="md-h">Efficiency profile</div>
+            <dl class="md-spec"><div><dt>Size</dt><dd>385M parameters, the largest of the four</dd></div><div><dt>Runs on</dt><dd>CPU or GPU, the heaviest per call</dd></div><div><dt>Reads</dt><dd>up to 8,192 points of history</dd></div><div><dt>Returns</dt><dd>99 quantiles, q10 to q90 shown here</dd></div></dl>
+            <div class="md-h">Size across the family</div>
+            <canvas class="md-ladder" data-m="patchtstfm" role="img" aria-label="Parameter counts on a log scale: TSPulse 1M, TTM 1M to 35M, FlowState 18.5M, PatchTST-FM 385M"></canvas>
+            <p class="md-proof">Top commercial-friendly zero-shot model on GIFT-Eval, August 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage ucpanel mdpanel" id="md-tspulse" role="tabpanel" hidden>
+      <div class="stage-top"><div class="stage-title"><h3>TSPulse finds what is unusual and what it looks like</h3></div><span class="md-use"><i></i>In use in every simulation on this page</span></div>
+      <div class="stage-body">
+        <div class="md-grid">
+          <div class="md-main">
+            <div class="md-viz"><canvas class="md-cv" data-viz="tspulse" role="img" aria-label="Four small panels: an anomaly flagged, a past match found, a pattern labeled and a gap filled"></canvas></div>
+            <div class="md-fit">
+              <div><div class="md-h">Choose it when</div><ul class="md-when"><li>You need anomaly flags on every event, without a GPU</li><li>You want to find the past moment that looks like now</li><li>Gaps in sensor data or unlabeled patterns slow your teams down</li></ul></div>
+              <div><div class="md-h">Use cases it powers</div><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-anom">Anomaly detection <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-fraud">Fraud and security <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-search">Semantic search <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div>
+            </div>
+          </div>
+          <div class="md-side">
+            <div class="md-h">Efficiency profile</div>
+            <dl class="md-spec"><div><dt>Size</dt><dd>1M parameters</dd></div><div><dt>Runs on</dt><dd>GPU-free</dd></div><div><dt>Reads</dt><dd>512 points, about 2,048 for anomaly detection</dd></div><div><dt>Returns</dt><dd>anomaly scores, labels, embeddings, filled gaps</dd></div></dl>
+            <div class="md-h">Size across the family</div>
+            <canvas class="md-ladder" data-m="tspulse" role="img" aria-label="Parameter counts on a log scale: TSPulse 1M, TTM 1M to 35M, FlowState 18.5M, PatchTST-FM 385M"></canvas>
+            <p class="md-proof">ICLR 2026 · #1 on TSB-AD, univariate and multivariate</p>
+          </div>
         </div>
       </div>
     </div>
@@ -2071,20 +2192,110 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   App.listeners.push(k=>{$('#n1 .nt').textContent='Granite '+MODELS[k].name;});
 })();
 
-/* ============ 01 models: glyphs, bubbles, bench ============ */
+/* ============ 01 models: four tabs in the use case style, each with where it fits and what it needs ============ */
 (function(){
-  const el=$('#st-models');if(!el)return;
-  function glyph(c,type){const cv=new Cv(c);if(!cv.fit())return;const ctx=cv.ctx,W=cv.W,H=cv.H;ctx.clearRect(0,0,W,H);const n=40,X=i=>4+(W-8)*i/(n-1),f=i=>0.5+0.28*Math.sin(i/4)+0.08*Math.sin(i/1.7);const Y=v=>H-6-(H-12)*v;
-    if(type==='embed'){ctx.fillStyle='rgba(61,219,217,.55)';for(let i=0;i<34;i++){const x=6+Math.random()*(W-12),y=6+Math.random()*(H-12);ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fill();}ctx.fillStyle=C.teal2;ctx.shadowColor=C.teal2;ctx.shadowBlur=10;for(let i=0;i<7;i++){const x=W*0.68+Math.random()*18-9,y=H*0.42+Math.random()*16-8;ctx.beginPath();ctx.arc(x,y,2.8,0,Math.PI*2);ctx.fill();}ctx.shadowBlur=0;ctx.strokeStyle=C.teal2;ctx.strokeRect(W*0.68-16,H*0.42-14,32,28);return;}
-    const split=Math.floor(n*0.6);
-    ctx.strokeStyle=C.ink;ctx.lineWidth=1.6;ctx.beginPath();for(let i=0;i<=split;i++){const y=Y(f(i)+0.03*gauss());i?ctx.lineTo(X(i),y):ctx.moveTo(X(i),y);}ctx.stroke();
-    if(type==='quant'){ctx.fillStyle='rgba(120,169,255,.22)';ctx.beginPath();ctx.moveTo(X(split),Y(f(split)));for(let i=split;i<n;i++)ctx.lineTo(X(i),Y(f(i)+0.1*Math.sqrt((i-split)/8)));for(let i=n-1;i>=split;i--)ctx.lineTo(X(i),Y(f(i)-0.1*Math.sqrt((i-split)/8)));ctx.closePath();ctx.fill();ctx.strokeStyle='rgba(120,169,255,.8)';ctx.lineWidth=1;[1,-1].forEach(s=>{ctx.beginPath();for(let i=split;i<n;i++){const y=Y(f(i)+s*0.1*Math.sqrt((i-split)/8));i===split?ctx.moveTo(X(i),y):ctx.lineTo(X(i),y);}ctx.stroke();});}
-    if(type==='smooth'){ctx.fillStyle='rgba(120,169,255,.18)';ctx.beginPath();ctx.moveTo(X(split),Y(f(split)));for(let i=split;i<n;i++)ctx.lineTo(X(i),Y(f(i)+0.06*Math.sqrt((i-split)/8)));for(let i=n-1;i>=split;i--)ctx.lineTo(X(i),Y(f(i)-0.06*Math.sqrt((i-split)/8)));ctx.closePath();ctx.fill();}
-    ctx.strokeStyle=C.blue3;ctx.lineWidth=1.8;ctx.setLineDash([4,3]);ctx.beginPath();for(let i=split;i<n;i++){const y=Y(f(i));i===split?ctx.moveTo(X(i),y):ctx.lineTo(X(i),y);}ctx.stroke();ctx.setLineDash([]);
-    ctx.strokeStyle=C.ink3;ctx.beginPath();ctx.moveTo(X(split)+0.5,4);ctx.lineTo(X(split)+0.5,H-4);ctx.stroke();}
-  function all(){$$('canvas[data-glyph]',el).forEach(c=>glyph(c,c.dataset.glyph));}
-  reg({el,resize:all});all();
-  ['#bubbles','#bench'].forEach(id=>{const x=$(id);if(x)once(x,()=>x.classList.add('in'));});
+  const tabs=$('#mdtabs');if(!tabs)return;
+  const MF='"IBM Plex Mono",Menlo,monospace',SANS='"IBM Plex Sans","Helvetica Neue",Arial,sans-serif';
+  const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),ease=x=>x<0?0:x>1?1:x*x*(3-2*x);
+  function txt(ctx,s,x,y,col,z,al,wt,fam){ctx.font=(wt||'400')+' '+(z||10)+'px '+(fam||MF);ctx.fillStyle=col;ctx.textAlign=al||'left';ctx.textBaseline='middle';ctx.fillText(s,x,y);}
+  function prng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+  /* the small picture on each tab card */
+  function glyph(c,type){const cv=new Cv(c);if(!cv.fit())return;const ctx=cv.ctx,W=cv.W,H=cv.H;ctx.clearRect(0,0,W,H);
+    const line=(pts,col,w)=>{ctx.strokeStyle=col;ctx.lineWidth=w;ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.stroke();};
+    if(type==='point'){/* TTM: many small series, each with its forecast */const cols=6,rows=2,g=4,cw=(W-8-g*(cols-1))/cols,ch=(H-8-g)/rows;
+      for(let i=0;i<cols*rows;i++){const x=4+(i%cols)*(cw+g),y=4+Math.floor(i/cols)*(ch+g),ph=i*1.7,f=u=>y+ch/2-(ch/2-4)*Math.sin(u*4+ph)*0.8;ctx.strokeStyle='rgba(120,169,255,.35)';ctx.strokeRect(Math.round(x)+0.5,Math.round(y)+0.5,Math.round(cw)-1,Math.round(ch)-1);
+        const P=[],F=[];for(let k=0;k<=10;k++){const u=k/10;(u<=0.65?P:F).push([x+2+(cw-4)*u,f(u)]);}F.unshift(P[P.length-1]);line(P,'#f4f4f4',1);ctx.setLineDash([2,2]);line(F,'#78a9ff',1.2);ctx.setLineDash([]);}return;}
+    if(type==='smooth'){/* FlowState: one pattern at three sampling rates */[44,18,7].forEach((n,r)=>{const y0=6+r*(H-12)/3,hh=(H-12)/3-4,f=u=>y0+hh/2-(hh/2-2)*Math.sin(u*Math.PI*3);const P=[];for(let k=0;k<=n;k++){const u=k/n*0.66;P.push([4+(W-8)*u,f(u)]);}line(P,'rgba(244,244,244,.85)',1);
+      if(n<=18){ctx.fillStyle='#fff';P.forEach(p=>{ctx.beginPath();ctx.arc(p[0],p[1],n<=7?2.2:1.4,0,Math.PI*2);ctx.fill();});}const F=[];for(let k=0;k<=12;k++){const u=0.66+0.34*k/12;F.push([4+(W-8)*u,f(u)]);}ctx.setLineDash([3,2]);line(F,'#78a9ff',1.4);ctx.setLineDash([]);});return;}
+    if(type==='quant'){/* PatchTST-FM: long history, a wide fan of quantiles */const sp=0.6,X=u=>4+(W-8)*u,r=prng(5);let v=0.5;const P=[];for(let k=0;k<=70;k++){v+=(r()-0.5)*0.07;v=clamp(v,0.25,0.75);P.push([X(k/70*sp),H-6-(H-12)*v]);}line(P,'#f4f4f4',1);
+      const m=P[P.length-1][1];[[0.42,.16],[0.26,.24],[0.12,.34]].forEach(([a,o])=>{ctx.fillStyle='rgba(69,137,255,'+o+')';ctx.beginPath();for(let k=0;k<=20;k++){const u=sp+(1-sp)*k/20;ctx.lineTo(X(u),m-(H-12)*a*Math.sqrt(k/20));}for(let k=20;k>=0;k--){const u=sp+(1-sp)*k/20;ctx.lineTo(X(u),m+(H-12)*a*Math.sqrt(k/20));}ctx.closePath();ctx.fill();});
+      ctx.setLineDash([3,2]);line([[X(sp),m],[X(1),m]],'#78a9ff',1.4);ctx.setLineDash([]);return;}
+    /* TSPulse: a flagged spike, a matched window and a filled gap */const X=u=>4+(W-8)*u,f=u=>H/2-(H/2-10)*(0.35*Math.sin(u*16)+(Math.abs(u-0.78)<0.025?1.3:0)*0.6);
+    ctx.fillStyle='rgba(190,149,255,.2)';ctx.fillRect(X(0.12),4,X(0.3)-X(0.12),H-8);ctx.strokeStyle='#be95ff';ctx.strokeRect(Math.round(X(0.12))+0.5,4.5,Math.round(X(0.3)-X(0.12)),H-9);
+    const P=[];for(let k=0;k<=80;k++){const u=k/80;if(u>0.44&&u<0.58)continue;P.push([X(u),f(u)]);}const A=P.filter(p=>p[0]<X(0.44)),B=P.filter(p=>p[0]>X(0.58));line(A,'#f4f4f4',1.1);line(B,'#f4f4f4',1.1);
+    const G=[];for(let k=0;k<=10;k++){const u=0.44+0.14*k/10;G.push([X(u),f(u)]);}ctx.setLineDash([2,2]);line(G,'#42be65',1.4);ctx.setLineDash([]);
+    ctx.strokeStyle='#fa4d56';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(X(0.78),f(0.78),5,0,Math.PI*2);ctx.stroke();}
+  function glyphs(){$$('canvas[data-glyph]',tabs).forEach(c=>glyph(c,c.dataset.glyph));}
+  glyphs();window.addEventListener('resize',()=>{clearTimeout(glyphs.t);glyphs.t=setTimeout(glyphs,150);});
+
+  /* picking a tab picks the model for every simulation on the page */
+  $$('[role=tab]',tabs).forEach(b=>b.addEventListener('click',()=>{if(typeof setModel==='function')setModel(b.dataset.m);}));
+  /* use case links jump to that use case, opened */
+  $$('.md-uc').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.uc;if(App.tabSel&&App.tabSel[id])App.tabSel[id]();const t=$('#uctabs');if(t){const hp=t.previousElementSibling,h=hp&&hp.classList.contains('strip-hint')&&hp.offsetParent?hp:t,nav=document.querySelector('.nav'),y=h.getBoundingClientRect().top+scrollY-(nav?nav.offsetHeight:56)-16;window.scrollTo({top:y,behavior:reduced?'auto':'smooth'});}}));
+
+  /* size across the family, on a log scale */
+  const SIZE=[['TSPulse',1.1,1.1,'tspulse'],['TTM',1,35,'ttm'],['FlowState',18.5,18.5,'flowstate'],['PatchTST-FM',385,385,'patchtstfm']];
+  function ladder(c){const cv=new Cv(c);if(!cv.fit())return;const ctx=cv.ctx,W=cv.W,H=cv.H,k=c.dataset.m;ctx.clearRect(0,0,W,H);
+    const lo=Math.log10(0.6),hi=Math.log10(700),X=v=>10+(W-20)*(Math.log10(v)-lo)/(hi-lo),ay=H-16;
+    ctx.strokeStyle='rgba(255,255,255,.25)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(10,ay+0.5);ctx.lineTo(W-10,ay+0.5);ctx.stroke();
+    [[1,'1M'],[10,'10M'],[100,'100M']].forEach(([v,s])=>{const x=Math.round(X(v))+0.5;ctx.beginPath();ctx.moveTo(x,ay-3);ctx.lineTo(x,ay+3);ctx.stroke();txt(ctx,s,x,ay+10,'rgba(255,255,255,.45)',9.5,'center');});
+    SIZE.forEach(([n,a,b,m],i)=>{const on=m===k,y=on?18:ay-14-((i%2)*0);const x0=X(a),x1=X(b);
+      if(b>a){ctx.fillStyle=on?'rgba(69,137,255,.5)':'rgba(255,255,255,.18)';ctx.fillRect(x0,ay-4,x1-x0,8);}
+      ctx.fillStyle=on?'#4589ff':'rgba(255,255,255,.55)';ctx.beginPath();ctx.arc((x0+x1)/2,ay,on?5:3.5,0,Math.PI*2);ctx.fill();if(on){ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();}
+      if(on){const xm=(x0+x1)/2;ctx.strokeStyle='rgba(166,200,255,.6)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(xm+0.5,ay-7);ctx.lineTo(xm+0.5,26);ctx.stroke();txt(ctx,n+(b>a?' · 1M to 35M':' · '+(a<2?'1M':a+'M')),clamp(xm,60,W-60),14,'#fff',11,'center','600',SANS);}
+      else txt(ctx,n,(x0+x1)/2,ay-13,'rgba(255,255,255,.5)',9.5,'center');});}
+
+  /* the live picture in each panel */
+  const VIZ={
+    /* TTM: one model sweeps through dozens of series, each one gets its forecast */
+    ttm:{init(s){s.r=prng(4);s.cells=[];for(let i=0;i<48;i++)s.cells.push({ph:s.r()*6,a:0.18+s.r()*0.2,f:2+s.r()*3,tr:(s.r()-0.5)*0.3});s.t0=performance.now();s.count=0;},
+      draw(s,ctx,W,H,now){const cols=W>=560?12:6,rows=W>=560?4:5,gap=6,top=26,cw=(W-gap*(cols-1))/cols,chh=(H-top-gap*(rows-1))/rows,n=cols*rows;
+        const el=(now-s.t0)/1000,rate=14,done=reduced?n:Math.floor(el*rate);if(done>n+14){s.base=(s.base||0)+Math.floor(el*180);s.t0=now;s.cells.forEach(c=>{c.ph=s.r()*6;});}
+        const tot=reduced?2480:Math.floor(el*180)+(s.base||0);
+        txt(ctx,'one model, every series',0,9,'rgba(255,255,255,.6)',10);txt(ctx,'forecasts made · '+tot.toLocaleString('en-US'),W,9,'#a6c8ff',10,'right','600');
+        for(let i=0;i<n;i++){const c=s.cells[i%48],cx=(i%cols)*(cw+gap),cy=top+Math.floor(i/cols)*(chh+gap),ok=i<done,cur=i===done;
+          ctx.fillStyle=cur?'rgba(15,98,254,.35)':ok?'rgba(15,98,254,.12)':'rgba(255,255,255,.03)';ctx.fillRect(cx,cy,cw,chh);ctx.strokeStyle=cur?'#78a9ff':ok?'rgba(120,169,255,.35)':'rgba(255,255,255,.1)';ctx.lineWidth=1;ctx.strokeRect(Math.round(cx)+0.5,Math.round(cy)+0.5,Math.round(cw)-1,Math.round(chh)-1);
+          const v=u=>0.5+c.a*Math.sin(u*c.f+c.ph)+c.tr*u,Y=u=>cy+chh-4-(chh-8)*clamp(v(u),0,1),sp=0.65;
+          ctx.strokeStyle='rgba(255,255,255,.75)';ctx.lineWidth=1;ctx.beginPath();for(let k=0;k<=16;k++){const u=k/16*sp,x=cx+3+(cw-6)*u;k?ctx.lineTo(x,Y(u)):ctx.moveTo(x,Y(u));}ctx.stroke();
+          if(ok||cur){const r=cur?0.5:1;ctx.strokeStyle='#78a9ff';ctx.setLineDash([2,2]);ctx.beginPath();for(let k=0;k<=8*r;k++){const u=sp+k/8*(1-sp),x=cx+3+(cw-6)*u;k?ctx.lineTo(x,Y(u)):ctx.moveTo(x,Y(u));}ctx.stroke();ctx.setLineDash([]);}}}},
+    /* FlowState: the same pattern sampled every second, every 15 minutes and every day, one model forecasts all three */
+    flowstate:{init(s){s.t0=performance.now();},
+      draw(s,ctx,W,H,now){const L=[['every second','sensor',90],['every 15 minutes','meter',30],['every day','demand',10]],lab=W>=520?140:96,x0=lab+10,x1=W-(W>=520?92:8),lh=(H-16)/3,el=reduced?99:(now-s.t0)/1000,cyc=7.5,ph=el%cyc;
+        if(W>=520){txt(ctx,'one model',W-36,H/2-8,'#fff',11,'center','600',SANS);txt(ctx,'any rate',W-36,H/2+9,'rgba(255,255,255,.55)',10,'center','400',SANS);ctx.strokeStyle='rgba(166,200,255,.55)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x1+10,8);ctx.lineTo(x1+16,8);ctx.lineTo(x1+16,H-8);ctx.lineTo(x1+10,H-8);ctx.stroke();}
+        L.forEach(([a,b,n],i)=>{const y0=8+i*lh,yb=y0+lh-10,f=u=>0.5+0.28*Math.sin(u*Math.PI*4+el*0.4)+0.08*Math.sin(u*31),Y=u=>yb-(yb-y0-6)*f(u),sp=0.66,X=u=>x0+(x1-x0)*u,rev=reduced?1:ease((ph-0.8-i*1.1)/1.2);
+          txt(ctx,a,0,y0+lh/2-12,'#fff',W>=520?11.5:10.5,'left','500',SANS);txt(ctx,b,0,y0+lh/2+5,'rgba(255,255,255,.5)',10);
+          ctx.strokeStyle='rgba(255,255,255,.08)';ctx.beginPath();ctx.moveTo(x0,yb+0.5);ctx.lineTo(x1,yb+0.5);ctx.stroke();
+          ctx.strokeStyle='rgba(255,255,255,.8)';ctx.lineWidth=1.2;ctx.beginPath();for(let k=0;k<=n;k++){const u=k/n*sp;k?ctx.lineTo(X(u),Y(u)):ctx.moveTo(X(u),Y(u));}ctx.stroke();
+          if(n<=30){ctx.fillStyle='#fff';for(let k=0;k<=n;k++){const u=k/n*sp;ctx.beginPath();ctx.arc(X(u),Y(u),n<=10?2.6:1.6,0,Math.PI*2);ctx.fill();}}
+          if(rev>0){const ue=sp+(1-sp)*rev;ctx.fillStyle='rgba(69,137,255,.2)';ctx.beginPath();for(let k=0;k<=24;k++){const u=sp+(ue-sp)*k/24;ctx.lineTo(X(u),Y(u)-4-10*(u-sp));}for(let k=24;k>=0;k--){const u=sp+(ue-sp)*k/24;ctx.lineTo(X(u),Y(u)+4+10*(u-sp));}ctx.closePath();ctx.fill();
+            ctx.strokeStyle='#78a9ff';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.beginPath();for(let k=0;k<=24;k++){const u=sp+(ue-sp)*k/24;k?ctx.lineTo(X(u),Y(u)):ctx.moveTo(X(u),Y(u));}ctx.stroke();ctx.setLineDash([]);}
+          ctx.strokeStyle='rgba(255,255,255,.3)';ctx.beginPath();ctx.moveTo(Math.round(X(sp))+0.5,y0+2);ctx.lineTo(Math.round(X(sp))+0.5,yb);ctx.stroke();});}},
+    /* PatchTST-FM: a long history, a fan of quantiles, and the chance of crossing a limit */
+    patchtstfm:{init(s){const r=prng(9);s.v=[];let v=0.45;for(let i=0;i<320;i++){v+=(r()-0.5)*0.035+Math.sin(i/22)*0.004;v=clamp(v,0.15,0.75);s.v.push(v);}s.t0=performance.now();},
+      draw(s,ctx,W,H,now){const sp=0.62,x0=0,x1=W,X=u=>x0+(x1-x0)*u,top=8,bot=H-26,Y=v=>bot-(bot-top)*v,el=reduced?99:(now-s.t0)/1000,rev=reduced?1:ease(((el%8)-0.5)/1.6),n=s.v.length;
+        ctx.strokeStyle='rgba(255,255,255,.08)';for(let k=1;k<4;k++){const y=Math.round(top+(bot-top)*k/4)+0.5;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+        ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=1.1;ctx.beginPath();s.v.forEach((v,i)=>{const x=X(i/(n-1)*sp);i?ctx.lineTo(x,Y(v)):ctx.moveTo(x,Y(v));});ctx.stroke();
+        ctx.strokeStyle='rgba(166,200,255,.6)';ctx.beginPath();ctx.moveTo(X(0),bot+8.5);ctx.lineTo(X(sp),bot+8.5);ctx.moveTo(X(0)+0.5,bot+4);ctx.lineTo(X(0)+0.5,bot+12);ctx.moveTo(X(sp)-0.5,bot+4);ctx.lineTo(X(sp)-0.5,bot+12);ctx.stroke();
+        txt(ctx,'reads up to 8,192 points of history',X(sp/2),bot+19,'#a6c8ff',10,'center');
+        const m0=s.v[n-1],sg=h=>0.05+0.22*Math.sqrt(h),mu=h=>m0+0.04*h,ue=sp+(1-sp)*rev,H2=u=>(u-sp)/(1-sp);
+        [[1.28,0.14],[0.84,0.18],[0.52,0.22],[0.25,0.28]].forEach(([z,a])=>{if(rev<=0)return;ctx.fillStyle='rgba(69,137,255,'+a+')';ctx.beginPath();for(let k=0;k<=30;k++){const u=sp+(ue-sp)*k/30;ctx.lineTo(X(u),Y(mu(H2(u))+z*sg(H2(u))));}for(let k=30;k>=0;k--){const u=sp+(ue-sp)*k/30;ctx.lineTo(X(u),Y(mu(H2(u))-z*sg(H2(u))));}ctx.closePath();ctx.fill();});
+        const lim=m0+0.2+0.03*Math.sin(el*0.7),yl=Math.round(Y(lim))+0.5;ctx.strokeStyle='rgba(250,77,86,.85)';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(X(sp*0.7),yl);ctx.lineTo(W,yl);ctx.stroke();ctx.setLineDash([]);txt(ctx,'limit',X(sp*0.7),yl-8,'#ff8389',10);
+        if(rev>0){ctx.strokeStyle='#78a9ff';ctx.lineWidth=1.6;ctx.setLineDash([4,3]);ctx.beginPath();for(let k=0;k<=30;k++){const u=sp+(ue-sp)*k/30;k?ctx.lineTo(X(u),Y(mu(H2(u)))):ctx.moveTo(X(u),Y(mu(H2(u))));}ctx.stroke();ctx.setLineDash([]);}
+        if(rev>0.95){const z=(lim-mu(1))/sg(1),p=0.5*(1-erf(z/Math.SQRT2));txt(ctx,Math.round(p*100)+'% chance above the limit',W-4,top+8,'#ffb3b8',10.5,'right','600');txt(ctx,'q10 to q90 of 99 quantiles',W-4,bot-8,'#a6c8ff',10,'right');}
+        ctx.strokeStyle='rgba(255,255,255,.35)';ctx.beginPath();ctx.moveTo(Math.round(X(sp))+0.5,top);ctx.lineTo(Math.round(X(sp))+0.5,bot);ctx.stroke();}},
+    /* TSPulse: four jobs, one small model, lit one at a time */
+    tspulse:{init(s){s.t0=performance.now();s.r=prng(21);},
+      draw(s,ctx,W,H,now){const wide=W>=640,cols=wide?4:2,rows=wide?1:2,gap=8,tw=(W-gap*(cols-1))/cols,th=(H-gap*(rows-1))/rows,el=reduced?0:(now-s.t0)/1000,act=reduced?-1:Math.floor(el/2.2)%4,lt=(el%2.2)/2.2;
+        const T=[['DETECT','#ffb3b8'],['SEARCH','#e8daff'],['CLASSIFY','#a6c8ff'],['FILL GAPS','#a7f0ba']];
+        T.forEach(([name,col],k)=>{const x=(k%cols)*(tw+gap),y=Math.floor(k/cols)*(th+gap),on=k===act,px=x+8,pw=tw-16,py=y+24,ph=th-32,X=u=>px+pw*u,Y=v=>py+ph-ph*clamp(v,0,1);
+          ctx.fillStyle=on?'rgba(15,98,254,.16)':'rgba(255,255,255,.03)';ctx.fillRect(x,y,tw,th);ctx.strokeStyle=on?'#78a9ff':'rgba(255,255,255,.14)';ctx.lineWidth=1;ctx.strokeRect(Math.round(x)+0.5,Math.round(y)+0.5,Math.round(tw)-1,Math.round(th)-1);
+          ctx.font='600 10px '+MF;ctx.fillStyle=on?col:'rgba(255,255,255,.55)';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(name,x+8,y+12);
+          const base=u=>0.45+0.11*Math.sin(u*13+k)+0.04*Math.sin(u*41);
+          if(k===0){ctx.fillStyle='rgba(69,137,255,.16)';ctx.beginPath();for(let i=0;i<=40;i++){const u=i/40;ctx.lineTo(X(u),Y(base(u)+0.1));}for(let i=40;i>=0;i--){const u=i/40;ctx.lineTo(X(u),Y(base(u)-0.1));}ctx.closePath();ctx.fill();
+            const su=0.72;ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.beginPath();for(let i=0;i<=60;i++){const u=i/60;const v=base(u)+(Math.abs(u-su)<0.02?0.36:0);i?ctx.lineTo(X(u),Y(v)):ctx.moveTo(X(u),Y(v));}ctx.stroke();
+            if(on||reduced){ctx.strokeStyle='#fa4d56';ctx.lineWidth=1.6;ctx.beginPath();ctx.arc(X(su),Y(base(su)+0.36),5+(on?4*(1-lt):0),0,Math.PI*2);ctx.stroke();}}
+          if(k===1){const q=u=>u<0.5?0.3+u:0.8-(u-0.5)*1.2,qs=[0.08,0.55],best=on?(lt<0.5?0:1):1;ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.beginPath();for(let i=0;i<=60;i++){const u=i/60;let v=0.4+0.07*Math.sin(u*20);qs.forEach(a=>{if(u>=a&&u<=a+0.18)v=0.2+q((u-a)/0.18)*0.6;});i?ctx.lineTo(X(u),Y(v)):ctx.moveTo(X(u),Y(v));}ctx.stroke();
+            const a=qs[best];ctx.strokeStyle='#be95ff';ctx.fillStyle='rgba(190,149,255,.18)';ctx.fillRect(X(a),py,pw*0.18,ph);ctx.strokeRect(Math.round(X(a))+0.5,py+0.5,Math.round(pw*0.18),ph-1);txt(ctx,'match',X(a)+3,py+8,'#e8daff',9.5);}
+          if(k===2){const lab=['steady','drift','spike'],li=reduced?1:Math.floor(el/1.1)%3,shape=u=>li===0?0.45+0.06*Math.sin(u*25):li===1?0.25+0.4*u+0.04*Math.sin(u*25):0.35+0.04*Math.sin(u*25)+(Math.abs(u-0.6)<0.03?0.4:0);
+            ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.beginPath();for(let i=0;i<=60;i++){const u=i/60;i?ctx.lineTo(X(u),Y(shape(u))):ctx.moveTo(X(u),Y(shape(u)));}ctx.stroke();
+            ctx.font='600 10px '+MF;const w=ctx.measureText(lab[li]).width+12;ctx.fillStyle='rgba(15,98,254,.5)';ctx.fillRect(x+tw-8-w,y+5,w,15);ctx.fillStyle='#fff';ctx.textAlign='left';ctx.fillText(lab[li],x+tw-8-w+6,y+12.5);}
+          if(k===3){const g0=0.42,g1=0.62,fill=on?ease(lt*1.6):reduced?1:0;ctx.strokeStyle='#fff';ctx.lineWidth=1.2;ctx.beginPath();let pen=false;for(let i=0;i<=60;i++){const u=i/60;if(u>g0&&u<g1){pen=false;continue;}const yy=Y(base(u));pen?ctx.lineTo(X(u),yy):ctx.moveTo(X(u),yy);pen=true;}ctx.stroke();
+            ctx.fillStyle='rgba(255,255,255,.06)';ctx.fillRect(X(g0),py,X(g1)-X(g0),ph);
+            if(fill>0){ctx.strokeStyle='#42be65';ctx.setLineDash([3,2]);ctx.lineWidth=1.5;ctx.beginPath();for(let i=0;i<=20;i++){const u=g0+(g1-g0)*i/20*fill;i?ctx.lineTo(X(u),Y(base(u))):ctx.moveTo(X(u),Y(base(u)));}ctx.stroke();ctx.setLineDash([]);}}});}}
+  };
+  function erf(x){const t=1/(1+0.3275911*Math.abs(x)),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return x>=0?y:-y;}
+  $$('.md-cv').forEach(c=>{const k=c.dataset.viz,V=VIZ[k];if(!V)return;const cv=new Cv(c),s={};V.init(s);const panel=c.closest('.mdpanel');
+    reg({el:panel,resize(){cv.fit();const lad=$('.md-ladder',panel);if(lad)ladder(lad);},draw(){if(!cv.W&&!cv.fit())return;const ctx=cv.ctx;ctx.clearRect(0,0,cv.W,cv.H);V.draw(s,ctx,cv.W,cv.H,performance.now());}});});
 })();
 
 /* ============ 02 three things change: productivity, accuracy, responsiveness ============ */
@@ -2757,7 +2968,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   const scrollTo=el=>el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
   const arrowL='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
   const arrowR='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
-  [['uctabs','decision'],['indtabs','industry'],['cstabs','case study']].forEach(([id,noun])=>{const tabs=document.getElementById(id);if(!tabs)return;const btns=$$('[role=tab]',tabs);const n=btns.length;
+  [['uctabs','decision'],['mdtabs','model'],['indtabs','industry'],['cstabs','case study']].forEach(([id,noun])=>{const tabs=document.getElementById(id);if(!tabs)return;const btns=$$('[role=tab]',tabs);const n=btns.length;
     const name=b=>{const x=b.querySelector('b');if(b.classList.contains('ind')){const il=b.querySelector('.il');return il?il.childNodes[0].textContent.trim():'';}return x?x.textContent.trim():'';};
     const names=btns.map(name);
     /* swipe hint above the strip on phones */
