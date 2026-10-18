@@ -5,14 +5,14 @@
   {
    "id": "01",
    "file": "01.mp3",
-   "dur": 10.32,
-   "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run inside Confluent, on every live stream."
+   "dur": 9.17,
+   "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run live inside Confluent."
   },
   {
    "id": "02",
    "file": "02.mp3",
-   "dur": 9.36,
-   "text": "When the context changes, a warmer room or a faster line, the forecast sees it coming, minutes before the line drifts out of spec."
+   "dur": 8.16,
+   "text": "When the context changes, say a warmer room, the forecast sees it coming, minutes before the line drifts out of spec."
   },
   {
    "id": "03",
@@ -29,8 +29,8 @@
   {
    "id": "05",
    "file": "05.mp3",
-   "dur": 9.53,
-   "text": "For your teams, that means ten times faster time to value, five to ten percent more accuracy, and decisions in seconds, not days."
+   "dur": 8.38,
+   "text": "For your teams: ten times faster time to value, five to ten percent more accuracy, and decisions in seconds."
   },
   {
    "id": "06",
