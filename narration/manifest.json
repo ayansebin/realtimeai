@@ -5,8 +5,8 @@
   {
    "id": "01",
    "file": "01.mp3",
-   "dur": 9.22,
-   "text": "Every event in your stream is a decision. Granite Time Series models score each one in flight, on Confluent. Poke it."
+   "dur": 9.94,
+   "text": "Every event in your stream is a decision. I B M Granite Time Series models score each one in flight, on Confluent. Poke it."
   },
   {
    "id": "02",
@@ -17,8 +17,8 @@
   {
    "id": "03",
    "file": "03.mp3",
-   "dur": 6.55,
-   "text": "No training. It has never seen this signal, and it finds the pattern in milliseconds."
+   "dur": 8.95,
+   "text": "Then optimize it. The optimizer finds the setting that earns the most and still meets spec. The operator approves."
   },
   {
    "id": "04",
@@ -29,8 +29,8 @@
   {
    "id": "05",
    "file": "05.mp3",
-   "dur": 9.02,
-   "text": "Thirty bespoke models become two. Six months become eight weeks. Accuracy from ninety-three to ninety-nine percent."
+   "dur": 9.65,
+   "text": "Three things change. Ten times faster to value, five to ten percent more accurate, and decisions in seconds, not days."
   },
   {
    "id": "06",
@@ -41,14 +41,20 @@
   {
    "id": "07",
    "file": "07.mp3",
-   "dur": 6.19,
-   "text": "The kiln finds its own setpoint inside the guardrails. The operator approves."
+   "dur": 10.75,
+   "text": "I B M Network Intelligence. T S Pulse flags the anomaly, agents confirm the cause, and a ticket opens only when it is real."
   },
   {
    "id": "08",
    "file": "08.mp3",
-   "dur": 4.73,
-   "text": "One statement of Flink S Q L. Run it on your stream."
+   "dur": 8.95,
+   "text": "Thirty models become two. Six months become eight to ten weeks. Accuracy from ninety-three to ninety-nine percent."
+  },
+  {
+   "id": "09",
+   "file": "09.mp3",
+   "dur": 5.45,
+   "text": "Bring us a stream and a decision. Contact us for opportunities."
   }
  ]
 }
