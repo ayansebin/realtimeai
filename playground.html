@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Playground · Real-Time Intelligence on Confluent">
 <meta name="twitter:description" content="Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts for Flink SQL.">
 <meta name="twitter:image" content="https://realtimeintelligence.io/og-image.png">
-<meta name="theme-color" content="#2a3f75">
+<meta name="theme-color" content="#ecebe6">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Playground · Real-Time Intelligence on Confluent","url":"https://realtimeintelligence.io/playground","description":"Try IBM Granite Time Series models on real public and synthetic streams. Real zero-shot forecasts and anomaly scores from TTM, FlowState, PatchTST-FM and TSPulse, the same models Confluent hosts for Flink SQL."}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -688,6 +688,62 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
 .ind::after{background:linear-gradient(180deg,rgba(10,20,50,.25) 0,rgba(10,20,50,.7) 42%,rgba(10,20,50,.96) 100%)}
 .pcard .pimg{filter:saturate(.7)}
 .chapter{padding-block:clamp(64px,7vw,112px) 0}
+
+/* ---------- theme: paper page, grainy gradient bands where the product lives ---------- */
+:root{
+  --paper:#ecebe6; --paper-2:#e4e2dc;
+  --ink:#161616; --ink-2:#3e3e3e; --ink-3:#6a6a66; --ink-4:#8f8e89;
+  --line:rgba(22,22,22,.14); --line-2:rgba(22,22,22,.32);
+  --panel:rgba(22,22,22,.03); --panel-2:rgba(22,22,22,.05); --panel-3:rgba(22,22,22,.08);
+  --bg:var(--paper); --bg-2:var(--paper);
+  --btn-bg:#161616; --btn-hover:#393939;
+  color-scheme:light;
+}
+body{background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-attachment:scroll;color:var(--ink)}
+body::before{background:var(--paper)}
+.btn{background:var(--btn-bg)}
+.btn:hover{background:var(--btn-hover)}
+.nav{background:rgba(236,235,230,.86);border-bottom:1px solid var(--line-2)}
+.nav-pitch{border-color:var(--line-2)}
+.nav-pitch svg{color:var(--ink)}
+.nav-pitch:hover{background:var(--panel-3)}
+.nav-links a.on{border-bottom-color:var(--ink)}
+.brand .dot{background:var(--blue)}
+.pill{border-color:var(--line-2);color:var(--ink-2)}
+.pill.live{border-color:rgba(25,128,56,.45);color:#198038}
+.pill.live::before{background:#24a148}
+.h-display em,.h-display em.rot{color:#0f62fe}
+.h-display em.rot2{color:#198038}
+.h-display .caret{background:#0f62fe}
+.h-display .caret.c2{background:#198038}
+.chapter-head .n{color:var(--ink-3)}
+.stile{background:transparent;border-color:var(--line-2)}
+.stile .sn{color:var(--ink-3)}
+.stile pre{background:#1d2235;border-color:transparent;color:#d2d8e2}
+.stile pre .k{color:#78a9ff}.stile pre .f{color:#be95ff}.stile pre .s{color:#6fdc8c}.stile pre .n{color:#ff832b}
+.ref{border-color:var(--line-2)}
+.foot{border-top:1px solid var(--line-2)}
+/* the dark bands: tokens flip back so every chart keeps its light ink */
+.stage,.uc,.ind,.pitch,.walk,.tip,.dcard,.pg-card,.pg-how>div{
+  --ink:#f6f7fb; --ink-2:#d6dbe5; --ink-3:#adb7c8; --ink-4:#8a95a8;
+  --line:rgba(255,255,255,.15); --line-2:rgba(255,255,255,.28);
+  --panel:rgba(255,255,255,.05); --panel-2:rgba(255,255,255,.09); --panel-3:rgba(255,255,255,.14);
+  --grid:rgba(255,255,255,.08); --bg:#283a64; --bg-2:#283a64;
+  --btn-bg:var(--blue); --btn-hover:#0353e9;
+  color:var(--ink);color-scheme:dark}
+.stage,.uc,.uc[aria-selected="true"],body .dcard,body .dcard:hover,body .dcard[aria-pressed="true"],body .pg-card,body .pg-how>div{
+  border-color:transparent;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(116deg, transparent 0 24%, rgba(255,255,255,.06) 24.4%, transparent 34%),
+    radial-gradient(110% 90% at 0% 0%, rgba(74,150,160,.6), transparent 58%),
+    radial-gradient(95% 110% at 100% 100%, rgba(118,108,190,.55), transparent 62%),
+    linear-gradient(120deg, #2c5066 0%, #26375f 46%, #343a76 100%)}
+.uc,.dcard{background-size:auto,auto,auto,auto,auto}
+.uc:hover,.dcard:hover{filter:brightness(1.08)}
+.uc[aria-selected="true"],body .dcard[aria-pressed="true"]{box-shadow:0 0 0 2px #0f62fe}
+.ind[aria-selected="true"]{box-shadow:0 0 0 2px #0f62fe}
+.stage::before{opacity:.18}
 /* ---- playground ---- */
 .pg-hero .hero-head{margin-bottom:0}
 .pg-built{font-family:var(--font-mono);font-size:.78rem;color:var(--ink-3);margin-top:.4rem}

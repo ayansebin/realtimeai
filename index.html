@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Real-Time Intelligence on Confluent">
 <meta name="twitter:description" content="Predict the next stockout. Optimize for service level. Granite Time Series models and Streaming Agents on Confluent, live simulations you can touch.">
 <meta name="twitter:image" content="https://realtimeintelligence.io/og-image.png">
-<meta name="theme-color" content="#2a3f75">
+<meta name="theme-color" content="#ecebe6">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Real-Time Intelligence on Confluent","url":"https://realtimeintelligence.io/","description":"IBM Granite Time Series foundation models and Streaming Agents run natively on Confluent Cloud for Apache Flink. Interactive simulations of forecasting, anomaly detection, optimization and semantic search in the stream.","about":[{"@type":"Thing","name":"Time series foundation models"},{"@type":"Thing","name":"Apache Flink SQL"},{"@type":"Thing","name":"Streaming Agents"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -688,6 +688,62 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
 .ind::after{background:linear-gradient(180deg,rgba(10,20,50,.25) 0,rgba(10,20,50,.7) 42%,rgba(10,20,50,.96) 100%)}
 .pcard .pimg{filter:saturate(.7)}
 .chapter{padding-block:clamp(64px,7vw,112px) 0}
+
+/* ---------- theme: paper page, grainy gradient bands where the product lives ---------- */
+:root{
+  --paper:#ecebe6; --paper-2:#e4e2dc;
+  --ink:#161616; --ink-2:#3e3e3e; --ink-3:#6a6a66; --ink-4:#8f8e89;
+  --line:rgba(22,22,22,.14); --line-2:rgba(22,22,22,.32);
+  --panel:rgba(22,22,22,.03); --panel-2:rgba(22,22,22,.05); --panel-3:rgba(22,22,22,.08);
+  --bg:var(--paper); --bg-2:var(--paper);
+  --btn-bg:#161616; --btn-hover:#393939;
+  color-scheme:light;
+}
+body{background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-attachment:scroll;color:var(--ink)}
+body::before{background:var(--paper)}
+.btn{background:var(--btn-bg)}
+.btn:hover{background:var(--btn-hover)}
+.nav{background:rgba(236,235,230,.86);border-bottom:1px solid var(--line-2)}
+.nav-pitch{border-color:var(--line-2)}
+.nav-pitch svg{color:var(--ink)}
+.nav-pitch:hover{background:var(--panel-3)}
+.nav-links a.on{border-bottom-color:var(--ink)}
+.brand .dot{background:var(--blue)}
+.pill{border-color:var(--line-2);color:var(--ink-2)}
+.pill.live{border-color:rgba(25,128,56,.45);color:#198038}
+.pill.live::before{background:#24a148}
+.h-display em,.h-display em.rot{color:#0f62fe}
+.h-display em.rot2{color:#198038}
+.h-display .caret{background:#0f62fe}
+.h-display .caret.c2{background:#198038}
+.chapter-head .n{color:var(--ink-3)}
+.stile{background:transparent;border-color:var(--line-2)}
+.stile .sn{color:var(--ink-3)}
+.stile pre{background:#1d2235;border-color:transparent;color:#d2d8e2}
+.stile pre .k{color:#78a9ff}.stile pre .f{color:#be95ff}.stile pre .s{color:#6fdc8c}.stile pre .n{color:#ff832b}
+.ref{border-color:var(--line-2)}
+.foot{border-top:1px solid var(--line-2)}
+/* the dark bands: tokens flip back so every chart keeps its light ink */
+.stage,.uc,.ind,.pitch,.walk,.tip,.dcard,.pg-card,.pg-how>div{
+  --ink:#f6f7fb; --ink-2:#d6dbe5; --ink-3:#adb7c8; --ink-4:#8a95a8;
+  --line:rgba(255,255,255,.15); --line-2:rgba(255,255,255,.28);
+  --panel:rgba(255,255,255,.05); --panel-2:rgba(255,255,255,.09); --panel-3:rgba(255,255,255,.14);
+  --grid:rgba(255,255,255,.08); --bg:#283a64; --bg-2:#283a64;
+  --btn-bg:var(--blue); --btn-hover:#0353e9;
+  color:var(--ink);color-scheme:dark}
+.stage,.uc,.uc[aria-selected="true"],body .dcard,body .dcard:hover,body .dcard[aria-pressed="true"],body .pg-card,body .pg-how>div{
+  border-color:transparent;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(116deg, transparent 0 24%, rgba(255,255,255,.06) 24.4%, transparent 34%),
+    radial-gradient(110% 90% at 0% 0%, rgba(74,150,160,.6), transparent 58%),
+    radial-gradient(95% 110% at 100% 100%, rgba(118,108,190,.55), transparent 62%),
+    linear-gradient(120deg, #2c5066 0%, #26375f 46%, #343a76 100%)}
+.uc,.dcard{background-size:auto,auto,auto,auto,auto}
+.uc:hover,.dcard:hover{filter:brightness(1.08)}
+.uc[aria-selected="true"],body .dcard[aria-pressed="true"]{box-shadow:0 0 0 2px #0f62fe}
+.ind[aria-selected="true"]{box-shadow:0 0 0 2px #0f62fe}
+.stage::before{opacity:.18}
 </style>
 </head>
 <body>
@@ -1552,7 +1608,7 @@ $$('.tabs').forEach(tabs=>{const btns=$$('[role=tab]',tabs);btns.forEach(b=>b.ad
 (function(){const d=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'shadowBlur');if(d&&d.set)Object.defineProperty(CanvasRenderingContext2D.prototype,'shadowBlur',{get:d.get,set(v){d.set.call(this,v*0.3);},configurable:true});})();
 
 /* ============ colors ============ */
-const C={ink:'#f6f7fb',ink2:'#d2d8e2',ink3:'#a9b4c6',ink4:'#8490a3',grid:'rgba(255,255,255,.09)',blue:'#0f62fe',blue2:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',band:'rgba(120,169,255,.16)',red:'#fa4d56',red2:'#ff8389',green:'#42be65',green2:'#6fdc8c',orange:'#ff832b',purple:'#be95ff',teal:'#08bdba',teal2:'#3ddbd9',bg:'#2a3f75',yellow:'#f1c21b'};
+const C={ink:'#f6f7fb',ink2:'#d2d8e2',ink3:'#a9b4c6',ink4:'#8490a3',grid:'rgba(255,255,255,.09)',blue:'#0f62fe',blue2:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',band:'rgba(120,169,255,.16)',red:'#fa4d56',red2:'#ff8389',green:'#42be65',green2:'#6fdc8c',orange:'#ff832b',purple:'#be95ff',teal:'#08bdba',teal2:'#3ddbd9',bg:'#283a64',yellow:'#f1c21b'};
 const MONO='11px "IBM Plex Mono", Menlo, monospace';
 
 /* ============ canvas + stage loop ============ */
@@ -1983,7 +2039,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const el=$('#st-plant');if(!el)return;
   const cv=new Cv($('#pl-cv'));const tip=$('#pl-tip');const inner=$('.plant-inner',el);
   const VW=1300,VH=680;
-  const P={bg:'#2a3f75',line:'rgba(255,255,255,.16)',ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',blue:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',teal:'#3ddbd9',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b',steel:'#9fb3c8',steel2:'#6b7f94'};
+  const P={bg:'#283a64',line:'rgba(255,255,255,.16)',ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',blue:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',teal:'#3ddbd9',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b',steel:'#9fb3c8',steel2:'#6b7f94'};
   const FONT='"IBM Plex Sans", Arial, sans-serif',MONOF='"IBM Plex Mono", Menlo, monospace';
   /* ---------- layout (virtual coordinates) ---------- */
   const EQ={
@@ -2218,7 +2274,7 @@ function twin(spec){
   const p=spec.prefix;const q=k=>$('#'+p+'-'+k);
   const cv=new Cv(q('cv'));const tip=q('tip');const inner=$('.plant-inner',el);const wrap=q('wrap');
   const VW=1300,VH=680;
-  const P={bg:'#2a3f75',line:'rgba(255,255,255,.16)',ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',blue:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',teal:'#3ddbd9',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b',steel:'#9fb3c8',steel2:'#6b7f94'};
+  const P={bg:'#283a64',line:'rgba(255,255,255,.16)',ink:'#f4f4f4',ink2:'#c1c7cd',ink3:'#8d99a8',blue:'#4589ff',blue3:'#78a9ff',blue4:'#a6c8ff',teal:'#3ddbd9',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b',steel:'#9fb3c8',steel2:'#6b7f94'};
   const FONT='"IBM Plex Sans", Arial, sans-serif',MONOF='"IBM Plex Mono", Menlo, monospace';
   const N=spec.nodes,SIG=spec.signals,SRC=spec.sources,TOPICS=spec.topics,FNK=spec.fn,DROWS=spec.decisions;
   const CTRL={x:1000,y:34,w:270,h:118};
