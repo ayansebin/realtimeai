@@ -5,54 +5,60 @@
   {
    "id": "01",
    "file": "01.mp3",
-   "dur": 9.94,
-   "text": "Every event in your stream is a decision. I B M Granite Time Series models score each one in flight, on Confluent. Poke it."
+   "dur": 11.35,
+   "text": "What is new: I B M Granite Time Series models now run inside Confluent. Every event in your stream is scored in flight, with no training."
   },
   {
    "id": "02",
    "file": "02.mp3",
-   "dur": 5.09,
-   "text": "Switch to forecast: the next thirty-two steps, with the band."
+   "dur": 6.38,
+   "text": "One line of Flink S Q L forecasts the next thirty-two steps, with the band."
   },
   {
    "id": "03",
    "file": "03.mp3",
-   "dur": 8.95,
-   "text": "Then optimize it. The optimizer finds the setting that earns the most and still meets spec. The operator approves."
+   "dur": 8.06,
+   "text": "Forecast it, then optimize it. The optimizer picks the setting that earns the most and still meets spec."
   },
   {
    "id": "04",
    "file": "04.mp3",
-   "dur": 8.26,
-   "text": "Then an agent acts. Forecast, flag, reasoning, purchase order. Under a second, inside Confluent."
+   "dur": 6.89,
+   "text": "Then an agent acts. Forecast, flag, reasoning, purchase order, in under a second."
   },
   {
    "id": "05",
    "file": "05.mp3",
-   "dur": 9.65,
-   "text": "Three things change. Ten times faster to value, five to ten percent more accurate, and decisions in seconds, not days."
+   "dur": 9.05,
+   "text": "The value: ten times faster to value, five to ten percent more accurate, and decisions in seconds, not days."
   },
   {
    "id": "06",
    "file": "06.mp3",
-   "dur": 6.48,
-   "text": "Every card has its own normal. The odd swipe is held before authorization."
+   "dur": 8.23,
+   "text": "The use cases: mission-critical decisions. Production, anomalies, supply chain, fraud, search and trading."
   },
   {
    "id": "07",
    "file": "07.mp3",
-   "dur": 10.75,
-   "text": "I B M Network Intelligence. T S Pulse flags the anomaly, agents confirm the cause, and a ticket opens only when it is real."
+   "dur": 7.66,
+   "text": "Take fraud. Every card has its own normal, so the odd swipe is held before authorization."
   },
   {
    "id": "08",
    "file": "08.mp3",
-   "dur": 8.95,
-   "text": "Thirty models become two. Six months become eight to ten weeks. Accuracy from ninety-three to ninety-nine percent."
+   "dur": 7.56,
+   "text": "In the field, I B M Network Intelligence opens a ticket only when the cause is confirmed."
   },
   {
    "id": "09",
    "file": "09.mp3",
+   "dur": 7.94,
+   "text": "In cement, thirty models become two, and accuracy rises from ninety-three to ninety-nine percent."
+  },
+  {
+   "id": "10",
+   "file": "10.mp3",
    "dur": 5.45,
    "text": "Bring us a stream and a decision. Contact us for opportunities."
   }
