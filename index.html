@@ -1110,6 +1110,7 @@ body.pitching #st-arch .stage-foot{display:none}
 .hx-say.b{color:#d0e2ff}.hx-say.r{color:#ffd7d9}.hx-say.g{color:#defbe6}
 @media (min-width:761px) and (max-width:1100px){.hx-c small{display:none}.hx-st{padding:13px 14px 14px}.hx-k{gap:.45rem}.hx-ic{display:none}}
 @media (min-width:761px) and (max-width:900px){.hx-tl{display:none}.hx-ts{display:inline}}
+@media (min-width:761px) and (max-width:1000px){.hx-ben canvas{display:none}.hx-ben{padding:.55rem .75rem}}
 @media (max-width:760px){.hx-body{padding:8px 4px 0}.hero .canvas-wrap.hx-wrap{height:480px}
   .hx-foot{padding:12px 8px 14px}.hx-flow{gap:12px}.hx-st{grid-template-columns:1fr auto;padding:10px 10px 11px;gap:6px}
   .hx-ic,.hx-l,.hx-c small,.hx-tl{display:none}.hx-ts{display:inline}.hx-k{font-size:.74rem;gap:.4rem;letter-spacing:.05em}.hx-n{width:24px;height:24px;font-size:.64rem}
@@ -1150,21 +1151,21 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     <div class="stage" id="st-live">
       <div class="hx-top">
         <div class="hx-bens">
-          <div class="hx-ben" data-ck="dist"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Varying distributions</b><span>pretrained on diverse data: counts, cash, °C, kW</span></div></div>
+          <div class="hx-ben" data-ck="dist"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Varying distributions</b><span>counts, bursts, gaps and heavy tails, one model</span></div></div>
           <div class="hx-ben" data-ck="dom"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Transfer across patterns and SKUs</b><span>no model per SKU, store or use case</span></div></div>
-          <div class="hx-ben" data-ck="inter"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Complex interdependencies</b><span>weather, events and payroll read with the stream</span></div></div>
+          <div class="hx-ben" data-ck="inter"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Complex interdependencies</b><span>one weather topic moves sales, plants and load</span></div></div>
         </div>
       </div>
       <div class="hx-body">
-        <div class="canvas-wrap hx-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="One pretrained IBM Granite Time Series model reads six live streams from six industries: store sales, ATM cash, a line temperature, cell traffic, emergency arrivals and building load. It forecasts all six at once with no model per series, a heat wave on the weather topic bends the four streams that depend on it, anomalies are flagged as they happen, and every forecast becomes a decision."></canvas></div>
+        <div class="canvas-wrap hx-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="One pretrained IBM Granite Time Series model reads six use cases from six industries, each with a different kind of data: sales demand, payment fraud, process data from three plants, intermittent supply chain deliveries, heavy tailed API latency and a building energy peak. It forecasts all six at once with no model per series, a heat wave on the weather topic bends the three that depend on it, anomalies are flagged as they happen, and every forecast becomes a decision."></canvas></div>
       </div>
       <div class="hx-foot">
         <div class="hx-flow" id="hx-steps" role="group" aria-label="What the chart shows">
-          <button type="button" class="hx-st on" data-s="0" title="Replay: one model forecasts all six streams"><span class="hx-k"><i class="hx-n">01</i><svg class="hx-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 17l4-4 3 2 4-6"/><path class="hx-f" d="M13 9l4 3 5-6"/></svg><span class="hx-t"><span class="hx-tl">Forecasting</span><span class="hx-ts">Forecast</span></span></span><span class="hx-c"><b id="hx-c0">6</b><small>of 6 streams</small></span><span class="hx-l" id="hx-l0">Six streams, one model, zero-shot</span></button>
+          <button type="button" class="hx-st on" data-s="0" title="Replay: one model forecasts all six streams"><span class="hx-k"><i class="hx-n">01</i><svg class="hx-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 17l4-4 3 2 4-6"/><path class="hx-f" d="M13 9l4 3 5-6"/></svg><span class="hx-t"><span class="hx-tl">Forecasting</span><span class="hx-ts">Forecast</span></span></span><span class="hx-c"><b id="hx-c0">6</b><small>of 6 use cases</small></span><span class="hx-l" id="hx-l0">Six use cases, one model, zero-shot</span></button>
           <button type="button" class="hx-st" data-s="1" title="Replay: anomalies flagged as they happen"><span class="hx-k"><i class="hx-n">02</i><svg class="hx-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 15h4l2-3 2 3h3l2-8 2 8h5"/><circle class="hx-pk" cx="15" cy="7" r="2.2"/></svg><span class="hx-t"><span class="hx-tl">Anomaly detection</span><span class="hx-ts">Detect</span></span></span><span class="hx-c"><b id="hx-c1">0</b><small>flagged</small></span><span class="hx-l" id="hx-l1">Every event scored as it lands</span></button>
           <button type="button" class="hx-st" data-s="2" title="Replay: every forecast becomes a decision"><span class="hx-k"><i class="hx-n">03</i><svg class="hx-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle class="hx-dot" cx="12" cy="12" r="1.9"/></svg><span class="hx-t"><span class="hx-tl">Optimization</span><span class="hx-ts">Optimize</span></span></span><span class="hx-c"><b id="hx-c2">0</b><small>decisions</small></span><span class="hx-l" id="hx-l2">Every forecast becomes a decision</span></button>
         </div>
-        <p class="hx-say b" id="hx-say">Six streams, one model, zero-shot</p>
+        <p class="hx-say b" id="hx-say">Six use cases, one model, zero-shot</p>
       </div>
     </div>
   </div>
@@ -1888,10 +1889,10 @@ function drawStream(cv,sim,o){
 function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundingClientRect();const px=(ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left;let best=-1,bd=1e9;layout.vis.forEach((r,k)=>{const d=Math.abs(layout.X(k)-px);if(d<bd){bd=d;best=k;}});return bd>24?-1:best;}
 
 /* ============ 01 hero: every industry, one time series foundation layer, three outcomes ============ */
-/* One pretrained model, six live streams. Cash, bottles, degrees, gigabits, patients and kilowatts: six very different
-   distributions, all read by the same IBM Granite Time Series model with no model per series. It forecasts all six at
-   once, one heat wave on the weather topic bends the four streams that depend on it, the same model flags what is not
-   normal, and every forecast becomes a decision. The panel in the spotlight is the one the headline types. */
+/* One pretrained model, six use cases from six industries, each with its own kind of data: daily counts, bursts, three
+   plants at once, intermittent deliveries, a heavy tailed latency and a smooth peak. The same IBM Granite Time Series
+   model reads all six with no model per series. It forecasts all six at once, one heat wave on the weather topic bends
+   the three that depend on it, the same model flags what is not normal, and every forecast becomes a decision. */
 (function(){
   const el=$('#st-live');if(!el)return;
   const cv=new Cv($('#live-cv')),sayEl=$('#hx-say'),stepEls=$$('#hx-steps .hx-st');
@@ -1899,54 +1900,59 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   const SANS='"IBM Plex Sans","Helvetica Neue",Arial,sans-serif',MF='"IBM Plex Mono",Menlo,monospace',LS='letterSpacing' in CanvasRenderingContext2D.prototype;
   const cl=x=>x<0?0:x>1?1:x,sm=x=>{x=cl(x);return x*x*(3-2*x);},fr=x=>x-Math.floor(x);
   const rel=s=>{const m=Math.max(5,Math.round(s*5)),h=Math.floor(m/60),mm=m%60;return (h?h+' h':'')+(h&&mm?' ':'')+(mm?mm+' min':'');};
-  /* six streams, six distributions: counts, bursts, a tight temperature, a wide daily wave, small counts, a big load */
+  /* six use cases, six distributions */
   const S=[
-    {k:'retail',pair:['stockout','service level'],name:'RETAIL',what:'store 112 · water sales',base:60,amp:0.22,cv:0.11,int:true,
-      cx:{mul:0.8,delay:1},ctxTag:()=>'heat wave: demand +80 %',an:{type:'drop',f:1,len:4,tag:'no sales for 20 min'},dec:{tag:'+204 on the next truck',mode:'keep'},fmt:v=>Math.round(v)+' bottles/h',fmtS:v=>Math.round(v)+'/h'},
-    {k:'banking',pair:['fraud','risk'],name:'BANKING',what:'branch 22 · ATM cash out',base:18,amp:0.12,cv:0.13,burst:true,
-      an:{type:'spike',mul:4,len:2,tag:'4× payouts at ATM 3'},dec:{tag:'ATM 3 paused, cards blocked',tagS:'ATM 3 paused',mode:'keep'},fmt:v=>'$'+Math.round(v)+'k/h'},
-    {k:'manufacturing',pair:['quality slip','yield'],name:'MANUFACTURING',what:'line 2 · zone temperature',add:true,base:31.6,amp:0.12,sd:0.03,limit:32.2,limTag:'spec 32.2 °C',
-      cx:{add:1.0,delay:14},ctxTag:j=>j?'leaves spec in '+rel(j):'runs hotter',dec:{tag:'heater −1.2 °C',mode:'lower'},fmt:v=>v.toFixed(1)+' °C'},
-    {k:'telecom',pair:['outage','uptime'],name:'TELECOM',what:'cell 4017 · traffic',base:6.2,amp:0.3,cv:0.035,
-      an:{type:'drop',f:0.6,len:4,tag:'sector 2 down 60 %'},dec:{tag:'ticket open, traffic rerouted',tagS:'traffic rerouted',mode:'keep'},fmt:v=>v.toFixed(1)+' Gbps'},
-    {k:'healthcare',pair:['surge','wait times'],name:'HEALTHCARE',what:'ER · arrivals',base:9,amp:0.12,cv:0.15,int:true,limit:14,limTag:'capacity 14',
-      cx:{mul:0.8,delay:15},ctxTag:j=>j?'over capacity in '+rel(j):'arrivals rise',dec:{tag:'+2 nurses before the surge',mode:'raise',raise:6},fmt:v=>Math.round(v)+' patients/h',fmtS:v=>Math.round(v)+'/h'},
-    {k:'energy',pair:['grid peak','cost'],name:'ENERGY',what:'building 7 · load',base:720,amp:0.1,cv:0.018,limit:1000,limTag:'peak 1,000 kW',
+    {k:'sales',pair:['stockout','service level'],name:'SALES DEMAND',nameS:'SALES',what:'retail · store 112',dist:'counts · daily cycle',distS:'counts',base:60,amp:0.22,cv:0.11,int:true,
+      cx:{mul:0.8,delay:1},ctxTag:()=>'heat wave: demand +80 %',an:{type:'drop',f:1,len:4,tag:'no sales for 20 min'},dec:{tag:'+204 on the next truck',tagS:'+204 next truck',mode:'keep'},fmt:v=>Math.round(v)+' units/h',fmtS:v=>Math.round(v)+'/h'},
+    {k:'fraud',pair:['fraud','risk'],name:'PAYMENT FRAUD',nameS:'FRAUD',what:'banking · card payments',dist:'bursty',distS:'bursty',base:1200,amp:0.12,cv:0.1,burst:true,
+      an:{type:'spike',mul:3,len:2,tag:'card testing: 3× attempts',tagS:'card testing 3×'},dec:{tag:'attack blocked in 2 s',tagS:'attack blocked',mode:'keep'},fmt:v=>fmtInt(v)+' tx/min',fmtS:v=>fmtInt(v)+'/min'},
+    {k:'process',pair:['quality slip','yield'],name:'MULTI-PLANT PROCESS',nameS:'MULTI-PLANT',what:'manufacturing · 3 plants',dist:'3 plants · tight',distS:'3 plants',add:true,multi:[-0.34,-0.14,0.06],main:2,base:31.6,amp:0.12,sd:0.03,limit:32.2,limTag:'spec 32.2 °C',
+      cx:{add:1.0,delay:14},ctxTag:j=>j?'plant C leaves spec in '+rel(j):'plants run hotter',ctxTagS:j=>j?'off spec in '+rel(j):'plants run hotter',dec:{tag:'plant C setpoint −1.2 °C',tagS:'plant C −1.2 °C',mode:'lower'},fmt:v=>v.toFixed(1)+' °C max',fmtS:v=>v.toFixed(1)+' °C'},
+    {k:'supply',pair:['late delivery','on-time supply'],name:'SUPPLY CHAIN',nameS:'SUPPLY',what:'logistics · inbound parts',dist:'intermittent',distS:'gaps',spiky:true,base:120,every:8,cv:0.12,int:true,
+      an:{type:'miss',tag:'delivery 4471 missed its slot',tagS:'delivery missed'},dec:{tag:'rerouted via DC east, 40 min',tagS:'rerouted via DC east',mode:'keep'}},
+    {k:'itops',pair:['outage','uptime'],name:'IT OPERATIONS',nameS:'IT OPS',what:'telecom · checkout API',dist:'heavy tail',distS:'heavy tail',tail:true,base:140,amp:0.15,cv:0.09,
+      an:{type:'spike',mul:3,len:3,tag:'latency 3× on checkout',tagS:'latency 3×'},dec:{tag:'traffic shifted to region 2',tagS:'shifted to region 2',mode:'keep'},fmt:v=>Math.round(v)+' ms'},
+    {k:'energy',pair:['grid peak','cost'],name:'ENERGY PEAK',nameS:'ENERGY',what:'utilities · building 7',dist:'smooth · peak',distS:'smooth',base:720,amp:0.1,cv:0.018,limit:1000,limTag:'peak 1,000 kW',
       cx:{mul:0.38,delay:13},ctxTag:j=>j?'over the peak in '+rel(j):'cooling load rises',dec:{tag:'pre-cool now, EVs after',mode:'lower'},fmt:v=>fmtInt(v)+' kW'}
   ];
-  const ORDER=['retail','manufacturing','telecom','healthcare','energy','banking'],PILLS=['banking','retail','manufacturing','telecom','healthcare','energy'];
+  const ORDER=['sales','process','itops','supply','energy','fraud'],PILLS=S.map(s=>s.k),PLANT=['#be95ff','#82cfff','#f6f7fb'];
   /* the three outcomes, each with a short line that changes as the story moves */
-  const LINES=[['Six streams, one model, zero-shot','A heat wave bends four forecasts at once'],['Every event scored as it lands','No sales, 4× payouts, a traffic drop. In seconds'],['Every forecast becomes a decision','Six decisions, each before its risk lands']];
+  const LINES=[['Six use cases, one model, zero-shot','A heat wave bends three forecasts at once'],['Every event scored as it lands','Empty shelf, card testing, a missed delivery, slow API'],['Every forecast becomes a decision','Six decisions, each before its risk lands']];
   const TONES=['b','r','g'];
   const st={n:0,ctx:null,an:null,dec:null,phase:0,phaseT:0,loopAt:0,hold:0,acc:0,spot:0,pinT:-1e9,focus:false,sweepT:-1e9,sayK:'',flashT:{}};
-  S.forEach((s,i)=>{Object.assign(s,{i,ph:i*1.7,off:i*5,rows:[],z:0,plan:new Map(),raiseAt:null,yr:null,nx:null,risk:0});});
+  S.forEach((s,i)=>{Object.assign(s,{i,ph:i*1.7,off:i*5,rows:[],z:0,zs:[0,0,0],plan:new Map(),raiseAt:null,yr:null,nx:null,risk:0,flagT:null,missAt:null});});
 
   /* ---------- the streams ---------- */
-  function shape(s,n){const u=2*Math.PI*n/72+s.ph;
-    if(s.add)return s.base+s.amp*Math.sin(u)+0.04*Math.sin(3.1*u+1);
+  function shape(s,n,k){if(s.spiky)return (((n+s.off)%s.every)+s.every)%s.every===0?s.base:0;
+    const u=2*Math.PI*n/72+s.ph+(k||0)*1.3;
+    if(s.add)return s.base+(s.multi?s.multi[k==null?s.main:k]:0)+s.amp*Math.sin(u)+0.04*Math.sin(3.1*u+1);
     let w=1+s.amp*Math.sin(u)+s.amp*0.3*Math.sin(3*u+1.1);
     if(s.burst){const q=(((n+s.off)%24)+24)%24;w+=0.75*Math.exp(-((q-6)**2)/2.5);}
     return s.base*w;}
   const eff=(n,s)=>{const c=st.ctx;if(!c)return 0;const a=n-(c.n+(s&&s.cx?s.cx.delay:3));return a<0?0:sm((a+1)/6);};
-  const level=(s,n,useCtx)=>{const e=useCtx&&s.cx?eff(n,s):0,b=shape(s,n);return s.add?b+(s.cx?s.cx.add:0)*e:b*(1+(s.cx?s.cx.mul:0)*e);};
+  const level=(s,n,useCtx,k)=>{const e=useCtx&&s.cx?eff(n,s):0,b=shape(s,n,k);return s.add?b+(s.cx?s.cx.add:0)*e:b*(1+(s.cx?s.cx.mul:0)*e);};
   const ctl=(s,n)=>s.plan.get(n)||0;
   const cap=(s,n,dec)=>s.limit+(dec&&s.raiseAt!=null&&n>=s.raiseAt?s.dec.raise:0);
-  const anOn=(s,n)=>!!(st.an&&s.an&&n>=st.an.n&&n<st.an.n+s.an.len);
-  function sim(s,n,e){const z=0.5*s.z+e,lv=level(s,n,true);let v=s.add?lv+s.sd*z:lv*(1+s.cv*z);v+=ctl(s,n);
-    const a=anOn(s,n);if(a){if(s.an.type==='drop')v*=1-s.an.f;else v+=s.base*(s.an.mul-1);}
-    v=Math.max(0,v);if(s.int)v=Math.round(v);return {i:n,v,z,e,an:a};}
+  const anOn=(s,n)=>!!(st.an&&s.an&&(s.an.type==='miss'?n===s.missAt:n>=st.an.n&&n<st.an.n+s.an.len));
+  const nextDrop=(s,n)=>{let d=n;while((((d+s.off)%s.every)+s.every)%s.every)d++;return d;};
+  function one(s,n,k,z,e){const lv=level(s,n,true,k);let v=s.add?lv+s.sd*z:s.tail?lv*Math.exp(s.cv*z)*(e>1.7?1+(e-1.7)*1.6:1):lv*(1+s.cv*z);return v+ctl(s,n);}
+  function sim(s,n,E){const e=E||[0.87*gauss(),0.87*gauss(),0.87*gauss()],zs=s.zs.map((z,k)=>0.5*z+e[k]),a=anOn(s,n);
+    const fix=v=>{if(a){if(s.an.type==='drop')v*=1-s.an.f;else if(s.an.type==='miss')v=0;else v+=s.base*(s.an.mul-1);}v=Math.max(0,v);return s.int?Math.round(v):v;};
+    let vs=null,v;if(s.multi){vs=s.multi.map((o,k)=>one(s,n,k,zs[k],e[k]));v=vs[s.main];}else v=fix(one(s,n,null,zs[0],e[0]));
+    if(vs)vs=vs.map((x,k)=>k===s.main?fix(x):Math.max(0,x)),v=vs[s.main];
+    return {i:n,v,vs,zs,e,an:a};}
   function fc(){const n0=st.n-1;S.forEach(s=>{const B=[],C=[],D=[];for(let j=1;j<=HF+2;j++){const m=n0+j,c=level(s,m,true);B.push(level(s,m,false));C.push(c);D.push(c+ctl(s,m));}
     s.fB=B;s.fC=C;s.fD=D;s.risk=0;if(s.limit!=null&&st.ctx&&s.cx){for(let j=1;j<=HF;j++)if(C[j-1]>cap(s,n0+j,false)){s.risk=j;break;}}});}
-  function refresh(){S.forEach(s=>{s.nx=sim(s,st.n,s.nx?s.nx.e:0.87*gauss());});fc();}
-  function commit(){S.forEach(s=>{s.rows.push(s.nx);if(s.rows.length>90)s.rows.shift();s.z=s.nx.z;s.nx=null;});st.n++;refresh();}
+  function refresh(){S.forEach(s=>{s.nx=sim(s,st.n,s.nx?s.nx.e:null);});fc();}
+  function commit(){const now=performance.now();S.forEach(s=>{const r=s.nx;s.rows.push(r);if(s.rows.length>90)s.rows.shift();s.zs=r.zs;if(r.an&&!s.flagT&&st.an)s.flagT=now;s.nx=null;});st.n++;refresh();}
   function setPhase(p){st.phase=p;st.phaseT=performance.now();}
   const flash=(k,d)=>{st.flashT[k]=performance.now()+(d||0);};
   const lit=k=>{const t=st.flashT[k],now=performance.now();return t!=null&&now>=t&&now-t<3600;};
 
   /* ---------- the story: forecast all six, context, detect, decide, again ---------- */
-  function restart(){st.ctx=null;st.an=null;st.dec=null;S.forEach(s=>{s.plan=new Map();s.raiseAt=null;});st.loopAt=st.n;st.sweepT=performance.now();setPhase(0);flash('dist');flash('dom',600);refresh();}
+  function restart(){st.ctx=null;st.an=null;st.dec=null;S.forEach(s=>{s.plan=new Map();s.raiseAt=null;s.flagT=null;s.missAt=null;});st.loopAt=st.n;st.sweepT=performance.now();setPhase(0);flash('dist');flash('dom',600);refresh();}
   function context(){if(st.ctx)return;st.ctx={n:st.n,T:performance.now()};flash('inter');refresh();}
-  function anomaly(){if(st.an)return;if(!st.ctx)context();st.an={n:st.n,T:performance.now()};setPhase(1);refresh();}
+  function anomaly(){if(st.an)return;if(!st.ctx)context();st.an={n:st.n,T:performance.now()};S.forEach(s=>{if(s.an&&s.an.type==='miss')s.missAt=nextDrop(s,st.n);});setPhase(1);refresh();}
   function optimize(){if(st.dec)return;if(!st.ctx)context();const n0=st.n-1;
     S.forEach(s=>{if(s.dec.mode==='lower'){for(let m=n0+1;m<n0+260;m++){const o=s.add?-s.cx.add*eff(m,s):-Math.max(0,level(s,m,true)-(s.limit-40));if(o)s.plan.set(m,o);}}
       else if(s.dec.mode==='raise')s.raiseAt=n0+Math.max(1,(s.risk||6)-2);});
@@ -1968,7 +1974,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     stepEls.forEach((b,i)=>{const on=i===ph,done=i<ph;if(b.classList.contains('on')!==on)b.classList.toggle('on',on);if(b.classList.contains('done')!==done)b.classList.toggle('done',done);
       b.style.setProperty('--p',on?p.toFixed(3):done?'1':'0');b.setAttribute('aria-current',on?'step':'false');});
     $$('.hx-ben').forEach(c=>c.classList.toggle('on',lit(c.dataset.ck)));
-    const c=[0,0,0];S.forEach((s,i)=>{if(now>=st.sweepT+i*110+PD*0.8+330)c[0]++;if(st.an&&s.an&&now>st.an.T+RATE*0.7)c[1]++;if(st.dec&&now>st.dec.T+i*110+PD+500)c[2]++;});
+    const c=[0,0,0];S.forEach((s,i)=>{if(now>=st.sweepT+i*110+PD*0.8+330)c[0]++;if(st.an&&s.flagT)c[1]++;if(st.dec&&now>st.dec.T+i*110+PD+500)c[2]++;});
     const ln=[LINES[0][st.ctx&&now>st.ctx.T+900?1:0],LINES[1][st.an?1:0],LINES[2][st.dec?1:0]];
     for(let i=0;i<3;i++){const ce=cEls[i],le=lEls[i];if(ce&&ce.textContent!==String(c[i]))ce.textContent=c[i];if(le&&le.textContent!==ln[i]){le.textContent=ln[i];}}
     if(sayEl){const t=ln[ph];if(sayEl.dataset.t!==t){sayEl.dataset.t=t;sayEl.className='hx-say '+TONES[ph];sayEl.textContent=t;}}}
@@ -1999,7 +2005,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   const pulses=now=>{const out=[];
     S.forEach((s,i)=>{out.push({i,t0:st.sweepT+i*110,c:'#a6c8ff',dir:1});
       if(st.ctx&&s.cx)out.push({i,t0:st.ctx.T+350+i*70,c:'#3ddbd9',dir:1});
-      if(st.an&&s.an)out.push({i,t0:st.an.T+RATE*0.7,c:'#ff8389',dir:-1});
+      if(st.an&&s.flagT)out.push({i,t0:s.flagT,c:'#ff8389',dir:-1});
       if(st.dec)out.push({i,t0:st.dec.T+i*110,c:'#6fdc8c',dir:1});});return out;};
   const PD=520;
   function arrival(i,now){let best=null;pulses(now).forEach(p=>{if(p.i!==i)return;const a=p.dir>0?p.t0+PD:p.t0,d=now-a;if(d>=0&&d<700&&(!best||d<best.d))best={d,c:p.c};});return best;}
@@ -2022,9 +2028,9 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
       ctx.font='500 10px '+MF;ctx.fillStyle='#a6c8ff';if(LS)ctx.letterSpacing='1.2px';ctx.fillText(fitText(ctx,'IBM GRANITE TIME SERIES',w-16),cx,my-34);if(LS)ctx.letterSpacing='0px';
       let tz=14;for(let z=21;z>=14;z-=0.5){ctx.font='500 '+z+'px '+SANS;if(ctx.measureText('One pretrained').width<=w-28){tz=z;break;}}
       ctx.font='500 '+tz+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText('One pretrained',cx,my-10);ctx.fillText('model',cx,my+tz*0.95-10);
-      ctx.font='400 10.5px '+MF;ctx.fillStyle='rgba(166,200,255,.8)';ctx.fillText(fitText(ctx,'six streams · zero-shot',w-16),cx,my+34);}
+      ctx.font='400 10.5px '+MF;ctx.fillStyle='rgba(166,200,255,.8)';ctx.fillText(fitText(ctx,'six use cases · zero-shot',w-16),cx,my+34);}
     else{ctx.textAlign='left';ctx.font='500 9.5px '+MF;ctx.fillStyle='#a6c8ff';if(LS)ctx.letterSpacing='1px';ctx.fillText('IBM GRANITE TIME SERIES',h.x0+12,h.y0+19);if(LS)ctx.letterSpacing='0px';
-      ctx.font='500 15px '+SANS;ctx.fillStyle='#fff';ctx.fillText(fitText(ctx,w-(st.ctx?110:0)>300?'One pretrained model, six streams':'One pretrained model',w-24-(st.ctx?100:0)),h.x0+12,h.y0+39);}
+      ctx.font='500 15px '+SANS;ctx.fillStyle='#fff';ctx.fillText(fitText(ctx,w-(st.ctx?110:0)>300?'One pretrained model, six use cases':'One pretrained model',w-24-(st.ctx?100:0)),h.x0+12,h.y0+39);}
     /* the context lands on the model, from its topic */
     if(st.ctx){const a=sm((now-st.ctx.T)/450),txt=nar?'+ heat wave':'+ weather topic · heat wave 34 °C';
       if(nar)pill(ctx,txt,h.x1-8,h.y0+hh/2,'right','t',a,10.5);
@@ -2038,8 +2044,8 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     /* what happened to this stream: it decides the panel's color and its one line */
     let txt=null,tone=null,a=0;
     if(st.dec){txt=nar&&s.dec.tagS?s.dec.tagS:s.dec.tag;tone='g';a=sm((now-st.dec.T-s.i*110-PD-300)/400);}
-    else if(st.an&&s.an&&now>st.an.T+RATE*0.7){txt=s.an.tag;tone='r';a=sm((now-st.an.T-RATE*0.7)/350);}
-    else if(st.ctx&&s.cx&&uc>0.7){txt=s.ctxTag(s.risk);tone='t';a=sm((uc-0.7)/0.3);}
+    else if(st.an&&s.flagT){txt=nar&&s.an.tagS?s.an.tagS:s.an.tag;tone='r';a=sm((now-s.flagT)/350);}
+    else if(st.ctx&&s.cx&&uc>0.7){txt=(nar&&s.ctxTagS?s.ctxTagS:s.ctxTag)(s.risk);tone='t';a=sm((uc-0.7)/0.3);}
     const bg=ctx.createLinearGradient(0,p.y,0,p.y+p.h);bg.addColorStop(0,'rgba(20,38,82,.94)');bg.addColorStop(1,'rgba(7,15,38,.94)');
     ctx.save();if(tone&&a>0.05&&!reduced){ctx.shadowColor='rgba('+RGB[tone]+','+(0.5*a)+')';ctx.shadowBlur=24;}ctx.fillStyle=bg;ctx.fillRect(p.x,p.y,p.w,p.h);ctx.restore();
     const ar=arrival(s.i,now);
@@ -2047,21 +2053,26 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     if(ar&&!reduced){ctx.save();ctx.globalAlpha*=1-ar.d/700;ctx.strokeStyle=ar.c;ctx.lineWidth=2;ctx.strokeRect(Math.round(p.x)+1,Math.round(p.y)+1,Math.round(p.w)-2,Math.round(p.h)-2);ctx.restore();}
     if(tone&&a>0.05){ctx.fillStyle='rgba('+RGB[tone]+','+a+')';ctx.fillRect(p.x,p.y,p.w,2);}else if(spot){ctx.fillStyle='#4589ff';ctx.fillRect(p.x,p.y,p.w,2);}
     const rows=s.rows,last=rows[rows.length-1],tipV=lerp(last.v,s.nx.v,s.int?0:f),hx=p.x+(nar?8:12),hy=p.y+(nar?13:16);
-    ctx.textBaseline='middle';ctx.font='500 '+(nar?10:11)+'px '+MF;let val=s.fmt(tipV);
-    let fzN=nar?9.5:10.5,spN=LS?(nar?0.5:1):0;const nW=()=>{ctx.font='600 '+fzN+'px '+MF;if(LS)ctx.letterSpacing='0px';return ctx.measureText(s.name).width+spN*s.name.length;};
-    ctx.font='500 '+(nar?10:11)+'px '+MF;if(s.fmtS&&ctx.measureText(val).width+nW()+(nar?24:34)>p.w)val=s.fmtS(tipV);
-    ctx.font='500 '+(nar?10:11)+'px '+MF;const vw=ctx.measureText(val).width;if(nW()+vw+(nar?24:34)>p.w){spN=0;fzN-=1;}
-    const nw=nW();ctx.textAlign='left';ctx.fillStyle=spot?'#fff':'rgba(255,255,255,.82)';if(LS)ctx.letterSpacing=spN+'px';ctx.fillText(s.name,hx,hy);if(LS)ctx.letterSpacing='0px';
+    let tipM=tipV;if(s.multi){tipM=Math.max(...last.vs.map((x,k)=>lerp(x,s.nx.vs[k],f)));}
+    ctx.textBaseline='middle';ctx.font='500 '+(nar?10:11)+'px '+MF;let val=s.spiky?(nar?'in ':'next drop in ')+rel(nextDrop(s,st.n)-n0):s.fmt(tipM),name=s.name;
+    let fzN=nar?9.5:10.5,spN=LS?(nar?0.5:1):0;const nW=()=>{ctx.font='600 '+fzN+'px '+MF;if(LS)ctx.letterSpacing='0px';return ctx.measureText(name).width+spN*name.length;};
+    ctx.font='500 '+(nar?10:11)+'px '+MF;if(s.fmtS&&ctx.measureText(val).width+nW()+(nar?24:34)>p.w)val=s.fmtS(tipM);
+    ctx.font='500 '+(nar?10:11)+'px '+MF;const vw=ctx.measureText(val).width;if(nW()+vw+(nar?24:34)>p.w){spN=0;fzN-=1;}if(nW()+vw+(nar?24:34)>p.w&&s.nameS){name=s.nameS;fzN+=1;spN=LS?(nar?0.5:1):0;}
+    const nw=nW();ctx.textAlign='left';ctx.fillStyle=spot?'#fff':'rgba(255,255,255,.82)';if(LS)ctx.letterSpacing=spN+'px';ctx.fillText(name,hx,hy);if(LS)ctx.letterSpacing='0px';
     ctx.font='500 '+(nar?10:11)+'px '+MF;ctx.textAlign='right';ctx.fillStyle='#fff';ctx.fillText(val,p.x+p.w-(nar?8:12),hy);
     if(!nar){ctx.font='400 11.5px '+SANS;ctx.textAlign='left';ctx.fillStyle='rgba(185,195,211,.85)';const room=p.w-24-nw-vw-28;if(room>50)ctx.fillText(fitText(ctx,s.what,room),hx+nw+12,hy);}
     /* the chart: the last few hours live, the next two forecast */
     const cx0=p.x+(nar?6:12),cx1=p.x+p.w-(nar?6:12),cy0=p.y+(nar?25:31),cy1=p.y+p.h-(nar?22:27);
     const HV=nar?22:38,HFv=nar?18:22,dx=(cx1-cx0)/(HV+HFv),nowX=Math.round(cx0+HV*dx)+0.5,tn=n0+f,X=n=>nowX+(n-tn)*dx;
     const F=s.fB.map((b,j)=>lerp(lerp(b,s.fC[j],uc),s.fD[j],ud));
+    const OF=s.multi?s.multi.map((o,k)=>k===s.main?null:Array.from({length:HF+2},(_,j)=>{const m=n0+j+1,b=level(s,m,false,k),c=level(s,m,true,k);return lerp(lerp(b,c,uc),c+ctl(s,m),ud);})):null;
+    const line=(c,P)=>{if(s.spiky){c.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++)c.lineTo(P[i][0],P[i][1]);}else smooth(c,P);};
+    const rev=reduced?1:sm((now-st.sweepT-s.i*110-PD*0.8)/650);
     const sig=j=>s.add?s.sd*1.4*(1+0.3*Math.sqrt(j)):Math.max(0,F[j-1])*s.cv*0.9*(0.6+0.18*Math.sqrt(j));
     const vis=[];for(let i=rows.length-1;i>=0;i--){if(X(rows[i].i)<cx0-dx*2)break;vis.unshift(rows[i]);}
     let lo=Infinity,hi=-Infinity;const see=v=>{if(v<lo)lo=v;if(v>hi)hi=v;};vis.forEach(r=>see(r.v));see(tipV);for(let j=1;j<=HFv;j++){see(F[j-1]+sig(j));see(F[j-1]-sig(j));}
     if(s.limit!=null){see(s.limit);if(s.raiseAt!=null)see(s.limit+s.dec.raise*ud);}
+    if(OF){vis.forEach(r=>r.vs&&r.vs.forEach(see));OF.forEach(a=>a&&a.slice(0,HFv).forEach(see));}
     const pd=(hi-lo)*0.14||1;lo-=pd;hi+=pd;if(!s.add)lo=Math.max(0,lo);
     if(!s.yr)s.yr={lo,hi};s.yr.lo+=(lo-s.yr.lo)*0.07;s.yr.hi+=(hi-s.yr.hi)*0.07;const Y=v=>cy1-(v-s.yr.lo)/(s.yr.hi-s.yr.lo)*(cy1-cy0);
     ctx.save();ctx.beginPath();ctx.rect(cx0,cy0-6,cx1-cx0,cy1-cy0+12);ctx.clip();
@@ -2071,22 +2082,27 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     if(s.limit!=null){const ya=Math.round(Y(s.limit))+0.5,xr=s.raiseAt!=null?Math.max(cx0,Math.min(cx1,X(s.raiseAt))):cx1;ctx.setLineDash([4,3]);ctx.strokeStyle='rgba(255,131,137,.7)';ctx.beginPath();ctx.moveTo(cx0,ya);ctx.lineTo(xr,ya);ctx.stroke();
       if(s.raiseAt!=null&&xr<cx1){const yb=Math.round(Y(s.limit+s.dec.raise*ud))+0.5;ctx.strokeStyle='rgba(111,220,140,.9)';ctx.beginPath();ctx.moveTo(xr,ya);ctx.lineTo(xr,yb);ctx.lineTo(cx1,yb);ctx.stroke();}ctx.setLineDash([]);}
     if(st.ctx&&s.cx){const x=Math.round(X(st.ctx.n))+0.5;if(x>cx0){ctx.strokeStyle='rgba(61,219,217,.65)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(x,cy0-6);ctx.lineTo(x,cy1+6);ctx.stroke();ctx.setLineDash([]);}}
+    /* the other plants, read and forecast by the same model */
+    if(OF)s.multi.forEach((o,k)=>{if(k===s.main)return;const hp=vis.filter(r=>r.vs).map(r=>[X(r.i),Y(r.vs[k])]),tk=lerp(last.vs[k],s.nx.vs[k],f);hp.push([nowX,Y(tk)]);if(hp.length<3)return;
+      ctx.save();ctx.strokeStyle=PLANT[k];ctx.globalAlpha*=0.8;ctx.lineWidth=nar?1:1.3;ctx.lineJoin='round';ctx.beginPath();smooth(ctx,hp);ctx.stroke();
+      if(rev>0){ctx.beginPath();ctx.rect(nowX,cy0-6,(cx1-nowX)*rev+1,cy1-cy0+12);ctx.clip();ctx.setLineDash([4,3]);ctx.lineDashOffset=reduced?0:-(now/45)%7;ctx.beginPath();smooth(ctx,[[nowX,Y(tk)]].concat(OF[k].map((v,j)=>[X(n0+j+1),Y(v)])));ctx.stroke();}
+      ctx.restore();});
     /* the live line: smooth, glowing, with a soft fill under it */
     const pts=vis.map(r=>[X(r.i),Y(r.v)]);pts.push([nowX,Y(tipV)]);
-    if(pts.length>2){ctx.beginPath();smooth(ctx,pts);ctx.lineTo(nowX,cy1+6);ctx.lineTo(pts[0][0],cy1+6);ctx.closePath();const ag=ctx.createLinearGradient(0,cy0,0,cy1);ag.addColorStop(0,'rgba(166,200,255,.24)');ag.addColorStop(1,'rgba(166,200,255,0)');ctx.fillStyle=ag;ctx.fill();
-      ctx.save();ctx.shadowColor='rgba(166,200,255,.9)';ctx.shadowBlur=reduced?0:8;ctx.strokeStyle='#f6f7fb';ctx.lineWidth=nar?1.4:1.8;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();smooth(ctx,pts);ctx.stroke();ctx.restore();}
-    const ap=st.an?cl((now-st.an.T)/2600):1;
+    if(pts.length>2){ctx.beginPath();line(ctx,pts);ctx.lineTo(nowX,cy1+6);ctx.lineTo(pts[0][0],cy1+6);ctx.closePath();const ag=ctx.createLinearGradient(0,cy0,0,cy1);ag.addColorStop(0,'rgba(166,200,255,.24)');ag.addColorStop(1,'rgba(166,200,255,0)');ctx.fillStyle=ag;ctx.fill();
+      ctx.save();ctx.shadowColor='rgba(166,200,255,.9)';ctx.shadowBlur=reduced?0:8;ctx.strokeStyle='#f6f7fb';ctx.lineWidth=nar?1.4:1.8;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();line(ctx,pts);ctx.stroke();ctx.restore();}
+    const ap=s.flagT?cl((now-s.flagT)/2600):1;
     vis.forEach(r=>{if(!r.an)return;const x=X(r.i),y=Y(r.v);ctx.save();ctx.shadowColor='#fa4d56';ctx.shadowBlur=reduced?0:10;ctx.beginPath();ctx.arc(x,y,nar?2.6:3.4,0,Math.PI*2);ctx.fillStyle='#ff8389';ctx.fill();ctx.restore();
-      if(!reduced&&ap<1){const q=fr((now-st.an.T)/900);ctx.beginPath();ctx.arc(x,y,4+9*q,0,Math.PI*2);ctx.strokeStyle='rgba(255,131,137,'+(0.7*(1-q)*(1-ap))+')';ctx.lineWidth=1.2;ctx.stroke();}});
+      if(!reduced&&ap<1){const q=fr((now-s.flagT)/900);ctx.beginPath();ctx.arc(x,y,4+9*q,0,Math.PI*2);ctx.strokeStyle='rgba(255,131,137,'+(0.7*(1-q)*(1-ap))+')';ctx.lineWidth=1.2;ctx.stroke();}});
     /* the forecast draws in when the model answers, then keeps flowing ahead */
-    const rev=reduced?1:sm((now-st.sweepT-s.i*110-PD*0.8)/650),c=decOn?RGB.g:RGB.b;
+    const c=decOn?RGB.g:RGB.b;
     if(rev>0){ctx.save();ctx.beginPath();ctx.rect(nowX,cy0-6,(cx1-nowX)*rev+1,cy1-cy0+12);ctx.clip();const ty=Y(tipV);
       const up=[[nowX,ty]].concat(F.map((v,j)=>[X(n0+j+1),Y(v+sig(j+1))])),dn=[[nowX,ty]].concat(F.map((v,j)=>[X(n0+j+1),Y(v-sig(j+1))]));
-      ctx.beginPath();smooth(ctx,up);for(let k=dn.length-1;k>=0;k--)ctx.lineTo(dn[k][0],dn[k][1]);ctx.closePath();
+      ctx.beginPath();line(ctx,up);for(let k=dn.length-1;k>=0;k--)ctx.lineTo(dn[k][0],dn[k][1]);ctx.closePath();
       const cg=ctx.createLinearGradient(nowX,0,cx1,0);cg.addColorStop(0,'rgba('+c+',.34)');cg.addColorStop(1,'rgba('+c+',.06)');ctx.fillStyle=cg;ctx.fill();
       ctx.lineWidth=nar?1.6:2;ctx.setLineDash([5,3]);ctx.lineDashOffset=reduced?0:-(now/45)%8;ctx.lineCap='round';const runs=[];let cur=null,px=nowX,py=ty;
       F.forEach((v,j)=>{const x=X(n0+j+1),y=Y(v),k=s.limit!=null&&v>cap(s,n0+j+1,decOn)?'r':decOn?'g':'b';if(!cur||cur.k!==k){cur={k,p:[[px,py]]};runs.push(cur);}cur.p.push([x,y]);px=x;py=y;});
-      ctx.save();ctx.shadowBlur=reduced?0:7;runs.forEach(r=>{ctx.strokeStyle=TONE[r.k][0];ctx.shadowColor=TONE[r.k][0];ctx.beginPath();r.p.length>2?smooth(ctx,r.p):(ctx.moveTo(r.p[0][0],r.p[0][1]),ctx.lineTo(r.p[1][0],r.p[1][1]));ctx.stroke();});ctx.restore();ctx.setLineDash([]);
+      ctx.save();ctx.shadowBlur=reduced?0:7;runs.forEach(r=>{ctx.strokeStyle=TONE[r.k][0];ctx.shadowColor=TONE[r.k][0];ctx.beginPath();r.p.length>2?line(ctx,r.p):(ctx.moveTo(r.p[0][0],r.p[0][1]),ctx.lineTo(r.p[1][0],r.p[1][1]));ctx.stroke();});ctx.restore();ctx.setLineDash([]);
       if(!reduced){const fp=[[nowX,ty]].concat(F.map((v,j)=>[X(n0+j+1),Y(v)])),u=fr(now/2400+s.i*0.13),q=along(fp,u);ctx.save();ctx.shadowColor='#fff';ctx.shadowBlur=10;ctx.beginPath();ctx.arc(q[0],q[1],2.2,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+(0.9*(1-u))+')';ctx.fill();ctx.restore();}
       ctx.restore();}
     ctx.restore();
@@ -2094,7 +2110,12 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     const ng=ctx.createLinearGradient(0,cy0-6,0,cy1+6);ng.addColorStop(0,'rgba(255,255,255,0)');ng.addColorStop(0.5,'rgba(255,255,255,.35)');ng.addColorStop(1,'rgba(255,255,255,0)');ctx.strokeStyle=ng;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(nowX,cy0-6);ctx.lineTo(nowX,cy1+6);ctx.stroke();
     const ty=Y(tipV);if(!reduced){const q=fr(now/1500+s.i*0.17);ctx.beginPath();ctx.arc(nowX,ty,3+8*q,0,Math.PI*2);ctx.strokeStyle='rgba(166,200,255,'+(0.6*(1-q))+')';ctx.lineWidth=1.2;ctx.stroke();}
     ctx.save();ctx.shadowColor='rgba(166,200,255,1)';ctx.shadowBlur=reduced?0:10;ctx.beginPath();ctx.arc(nowX,ty,nar?2.6:3.4,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.restore();
-    if(s.limit!=null&&!nar){ctx.font='500 9.5px '+MF;ctx.textAlign='left';ctx.fillStyle='rgba(255,131,137,.85)';const yl=Y(s.limit)-8;if(yl>cy0)ctx.fillText(s.limTag,cx0+2,yl);}
+    {ctx.font='500 '+(nar?8.5:9.5)+'px '+MF;let t=s.dist.toUpperCase(),w=ctx.measureText(t).width+(LS?t.length*0.6:0);if(nar||w>nowX-cx0-16){t=s.distS.toUpperCase();w=ctx.measureText(t).width+(LS?t.length*0.6:0);}
+      const xr=Math.max(cx0+4+w,nowX-8);ctx.fillStyle='rgba(8,16,40,.75)';ctx.fillRect(Math.round(xr-w-5),Math.round(cy0-3),Math.ceil(w+10),14);
+      ctx.fillStyle='rgba(166,200,255,.85)';ctx.textAlign='right';if(LS)ctx.letterSpacing='0.6px';ctx.fillText(t,xr,cy0+4);if(LS)ctx.letterSpacing='0px';}
+    if(s.multi&&vis[0]&&vis[0].vs){ctx.font='600 9px '+MF;ctx.textAlign='left';const L3=s.multi.map((o,k)=>({k,y:Y(vis[0].vs[k])-7})).sort((p1,p2)=>p1.y-p2.y);
+      for(let i=1;i<L3.length;i++)if(L3[i].y-L3[i-1].y<10)L3[i].y=L3[i-1].y+10;L3.forEach(q=>{ctx.fillStyle=PLANT[q.k];ctx.fillText('ABC'[q.k],cx0+1,Math.min(cy1,q.y));});}
+    if(s.limit!=null&&!nar){ctx.font='500 9.5px '+MF;ctx.textAlign='left';ctx.fillStyle='rgba(255,131,137,.85)';let yl=Y(s.limit)-8;if(yl<cy0+16)yl=Y(s.limit)+10;if(yl>cy0-4&&yl<cy1)ctx.fillText(s.limTag,cx0+2,yl);}
     if(txt){const fy=p.y+p.h-(nar?11:13.5);pill(ctx,txt,p.x+(nar?5:9),fy,'left',tone,a*(dim?0.4:1),nar?9.5:11,p.w-(nar?10:18));}
     ctx.restore();}
   function draw(){const ctx=cv.ctx;if(!cv.W||!cv.H||!S[0].nx)return;if(!L||L.W!==cv.W||L.H!==cv.H)layout();const now=performance.now(),t=reduced?0:now/1000,f=reduced?0:Math.min(1,st.acc/RATE);
@@ -2115,7 +2136,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
       ctx.strokeStyle=lit('inter')?'rgba(255,255,255,.95)':'rgba(166,200,255,.45)';ctx.lineWidth=1;E.forEach(([a,b])=>{ctx.beginPath();ctx.moveTo(P[a][0],P[a][1]);ctx.lineTo(P[b][0],P[b][1]);ctx.stroke();});
       const e=E[Math.floor(t*1.2)%E.length],u=fr(t*1.2);ctx.beginPath();ctx.arc(lerp(P[e[0]][0],P[e[1]][0],u),lerp(P[e[0]][1],P[e[1]][1],u),2.4,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
       P.forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='#78a9ff';ctx.fill();});}}
-  S.forEach(s=>{s.nx=sim(s,0,0.87*gauss());});fc();for(let i=0;i<90;i++)commit();
+  S.forEach(s=>{s.nx=sim(s,0,null);});fc();for(let i=0;i<90;i++)commit();
   restart();
   if(/[?&]debug/.test(location.search))window.__hero={st,S};
   reg({el,resize(){cv.fit();gl.forEach(c=>c.fit());L=null;draw();},update(dt){st.acc+=dt;while(st.acc>=RATE){st.acc-=RATE;commit();loop();}ui(performance.now());},draw(){draw();drawGlyphs();}});
