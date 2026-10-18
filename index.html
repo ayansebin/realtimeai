@@ -877,18 +877,39 @@ button.hf:focus-visible{outline:2px solid #4589ff;outline-offset:-2px}
 .hx-ind::after{content:"";position:absolute;left:50%;bottom:-10px;width:6px;height:6px;border-right:1.5px solid rgba(61,219,217,.55);border-bottom:1.5px solid rgba(61,219,217,.55);transform:translateX(-50%) rotate(45deg)}
 .hx-ind[aria-pressed="true"]::after{border-color:#3ddbd9}
 .hx-ind:focus-visible{outline:2px solid #4589ff;outline-offset:2px}
-.hx-layer{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:4px;padding:.7rem 1.1rem;border-radius:10px;background:linear-gradient(90deg,#08bdba,#33b1ff);color:#04213b}
-.hx-layer span{flex:1;text-align:center;font-weight:600;font-size:clamp(.84rem,1.25vw,1.02rem);letter-spacing:.005em}
-.hx-layer b{font-weight:700;font-size:.84rem;white-space:nowrap}
-.hx-checks{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.35rem 1.15rem;font-size:.8rem;color:#7fe4e4}
-.hx-lead{color:var(--ink-2)}
-.hx-ck{display:inline-flex;align-items:center;gap:.4rem;transition:color .3s,text-shadow .3s}
-.hx-ck::before{content:"";width:9px;height:5px;border-left:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-2px) rotate(-45deg)}
-.hx-ck.on{color:#fff;text-shadow:0 0 14px rgba(61,219,217,.9)}
 @media (max-width:760px){.hx-inds{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.hx-ind{font-size:.78rem;min-height:34px;padding:.3rem .35rem;gap:.3rem}.hx-ind::after{display:none}
-  .hx-layer{flex-wrap:wrap;justify-content:space-between;padding:.6rem .8rem;gap:.3rem .8rem}.hx-layer span{flex-basis:100%;order:-1;font-size:.84rem}.hx-lead{display:none}.hx-checks{font-size:.74rem;gap:.3rem .9rem}}
-body.pitching #st-live .hx-inds,body.pitching #st-live .hx-checks{display:none}
+  }
+body.pitching #st-live .hx-inds{display:none}
 body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(300px,42vh,460px)}
+/* the universal layer: blue to violet, alive */
+.hx-layer{position:relative;overflow:hidden;margin-top:4px;padding:0;border-radius:12px;min-height:106px;display:grid;place-items:center;color:#fff;
+  background:radial-gradient(55% 130% at 50% 50%,rgba(105,41,196,.55),rgba(105,41,196,0) 70%),linear-gradient(100deg,#001d6c 0%,#0043ce 44%,#6929c4 100%);
+  border:1px solid rgba(166,200,255,.35);box-shadow:0 10px 30px rgba(0,29,108,.35)}
+.hx-layer-cv{position:absolute;inset:0;width:100%;height:100%}
+.hx-layer-in{position:relative;z-index:1;display:grid;justify-items:center;gap:3px;text-align:center;padding:14px 34px;background:radial-gradient(closest-side,rgba(0,17,65,.78),rgba(0,17,65,0))}
+.hx-ey{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:#d0e2ff;font-weight:500}
+.hx-layer-in b{font-size:clamp(1.05rem,1.8vw,1.45rem);font-weight:500;color:#fff;letter-spacing:-.005em}
+.hx-sub{font-size:.74rem;color:#d4bbff;letter-spacing:.04em}
+.hx-bens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.hx-ben{display:flex;align-items:center;gap:.75rem;padding:.55rem .85rem;border:1px solid rgba(190,170,255,.22);border-radius:10px;background:rgba(0,17,65,.28);transition:background .35s,border-color .35s,box-shadow .35s}
+.hx-ben canvas{width:64px;height:30px;flex:none}
+.hx-ben b{display:block;font-size:.88rem;font-weight:500;color:#fff}
+.hx-ben span{display:block;font-size:.74rem;color:#c3cbe8;line-height:1.3}
+.hx-ben.on{border-color:#a56eff;background:rgba(105,41,196,.3);box-shadow:0 0 0 1px rgba(165,110,255,.55),0 6px 20px rgba(105,41,196,.25)}
+.hx-ind[aria-pressed="true"]{background:rgba(69,137,255,.22);border-color:#78a9ff}
+.hx-ind::after{border-color:rgba(166,200,255,.5)}.hx-ind[aria-pressed="true"]::after{border-color:#a6c8ff}
+/* the three cards run as one loop: each fills while its step runs */
+.hf{position:relative}
+.hf::before{content:"";position:absolute;left:0;top:0;height:2px;width:calc(var(--p,0) * 100%);background:var(--hc,#4589ff)}
+#hf-fc{--hc:#4589ff}#hf-ad{--hc:#fa4d56}#hf-op{--hc:#42be65}
+.hf.done::before{width:100%;opacity:.5}
+.hf.on,#hf-ad.on,#hf-op.on{box-shadow:none}
+#hf-ad.on{background:rgba(250,77,86,.1)}#hf-op.on{background:rgba(66,190,101,.1)}
+@media (max-width:920px){.hx-layer{min-height:132px;place-items:start center}.hx-layer-in{padding:12px 14px 0;background:none}}
+@media (max-width:760px){.hx-bens{grid-template-columns:1fr;gap:6px}.hx-ben{padding:.42rem .65rem}.hx-ben canvas{width:52px;height:26px}}
+body.pitching #st-live .hx-bens{display:none}
+body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(280px,36vh,420px)}
+body.pitching .hx-layer{min-height:86px}
 /* during the demo the line and its three cards fit on one screen */
 body.pitching #st-live .stage-top{display:none}
 @media (max-width:760px){body.pitching .hero .canvas-wrap.hx-wrap{height:38vh}}
@@ -931,8 +952,15 @@ body.pitching #st-live .stage-top{display:none}
         <button type="button" class="hx-ind" data-ind="healthcare" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8.5h3l1.6-3.4 2.2 6.6 1.6-3.2h4.6"/></svg>Healthcare</button>
         <button type="button" class="hx-ind" data-ind="energy" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.2 1.5L3.6 9h4.2l-1.1 5.5L12.4 7H8.2z"/></svg>Energy</button>
         </div>
-        <div class="hx-layer"><b>IBM Granite Time Series</b><span>Universal time series foundation layer · stream-native, real-time</span><b>Confluent</b></div>
-        <div class="hx-checks"><span class="hx-lead">One model for every stream, not one per use case or SKU:</span><span class="hx-ck" data-ck="dist">varying distributions</span><span class="hx-ck" data-ck="inter">complex interdependencies</span><span class="hx-ck" data-ck="decay">time-decaying value</span></div>
+        <div class="hx-layer" id="hx-layer">
+          <canvas class="hx-layer-cv" id="hx-layer-cv" aria-hidden="true"></canvas>
+          <div class="hx-layer-in"><span class="hx-ey">IBM Granite Time Series × Confluent</span><b>One universal time series layer</b><span class="hx-sub">stream-native · real-time · zero-shot</span></div>
+        </div>
+        <div class="hx-bens">
+          <div class="hx-ben" data-ck="dist"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Varying distributions</b><span>counts, cash, °C, Gbps and kW in one model</span></div></div>
+          <div class="hx-ben" data-ck="dom"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Varying domains</b><span>six industries, no model per use case or SKU</span></div></div>
+          <div class="hx-ben" data-ck="inter"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Complex interdependencies</b><span>weather, events and payroll read with the stream</span></div></div>
+        </div>
       </div>
       <div class="stage-body">
         <div class="canvas-wrap hx-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="One live stream for the chosen industry. The forecast that reads its real-time context sees the change coming, an anomaly is flagged as it happens, and the decision is optimized before the plan fails."></canvas><div class="tip" id="live-tip"></div></div>
@@ -1608,7 +1636,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
 (function(){
   const el=$('#st-live');if(!el)return;
   const cv=new Cv($('#live-cv')),tip=$('#live-tip');
-  const HN=48,ZB=2.5758,LOOP=33,CTX_AT=3,AN_AT=10,OPT_AT=16;
+  const HN=48,ZB=2.5758,LOOP=24,CTX_AT=2,AN_AT=9,OPT_AT=15;
   const ORDER=['retail','manufacturing','telecom','healthcare','energy','banking'];
   const rel=steps=>{const m=Math.round(Math.abs(steps)*5),h=Math.floor(m/60),mm=m%60;return (h?h+' h':'')+(h&&mm?' ':'')+(mm||!h?mm+' min':'');};
   const k$=v=>'$'+Math.round(v)+'k';
@@ -1669,7 +1697,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     for(let i=0;i<170;i++)step(true);
     if(cfg.kind==='stock')st.deliv={at:st.n+30,q:cfg.stock.plan,opt:false};
     st.loopAt=st.n;forecast();
-    $$('.hx-ind').forEach(b=>b.setAttribute('aria-pressed',b.dataset.ind===key?'true':'false'));flash('dist');}
+    $$('.hx-ind').forEach(b=>b.setAttribute('aria-pressed',b.dataset.ind===key?'true':'false'));st.phase=0;st.phaseT=performance.now();flash('dom');flash('dist',1400);}
   function step(warm){const n=st.n,lv=level(n);
     st.z=0.5*st.z+(cfg.kind==='spec'?cfg.sd:cfg.cv*0.87)*gauss();
     let v=cfg.kind==='spec'?lv+st.z+ctl(n):lv*(1+st.z)+ctl(n);
@@ -1691,7 +1719,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   function context(){st.ctx={n:st.n};st.ctxT=performance.now();st.dec=null;st.plan=new Map();st.raise=null;
     if(cfg.kind==='stock'){st.stock=cfg.stock.s0;st.deliv={at:st.n+cfg.stock.first,q:cfg.stock.plan,opt:false};}
     forecast();flash('inter');}
-  function anomaly(){if(st.an&&st.n<st.an.n+cfg.an.len)return;st.an={n:st.n};st.anT=performance.now();st.anStock=Math.round(st.stock);}
+  function anomaly(){if(st.an&&st.n<st.an.n+cfg.an.len)return;st.an={n:st.n};st.anT=performance.now();st.anStock=Math.round(st.stock);st.phase=1;st.phaseT=st.anT;}
   function optimize(){if(st.dec)return;const n0=st.n-1;let d=null;
     if(cfg.kind==='stock'){const D=st.deliv;let s=st.stock;for(let m=n0+1;m<D.at;m++)s-=(level(m)+ctl(m))/12;
       let need=0;for(let m=D.at;m<D.at+cfg.stock.every;m++)need+=(level(m)+ctl(m))/12;
@@ -1701,16 +1729,18 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     else if(cfg.act==='raise'){const j=st.out||HN;st.raise={at:n0+Math.max(1,j-2)};d={at:st.raise.at};}
     else{let first=0,mx=0;for(let m=n0+1;m<n0+HN+80;m++){const over=level(m)-(cfg.limit-60);if(over>0){st.plan.set(m,-over);mx=Math.max(mx,over);if(!first)first=m;}}
       if(first)for(let m=Math.max(n0+1,first-6);m<first;m++)st.plan.set(m,(st.plan.get(m)||0)+Math.min(0.3*mx,cfg.limit-80-level(m)));d={at:first||n0+1};}
-    d.n=n0;st.dec=d;st.decT=performance.now();forecast();flash('decay');}
+    d.n=n0;st.dec=d;st.decT=performance.now();st.phase=2;st.phaseT=st.decT;forecast();}
   /* the story, on the stream's own clock: context, anomaly, decision, then the next industry */
   function loop(){if(st.hold>performance.now())return;const k=st.n-st.loopAt;
     if(k===CTX_AT)context();else if(k===AN_AT)anomaly();else if(k>=OPT_AT&&st.out&&!st.dec&&st.ctx)optimize();
+    else if(k>=OPT_AT+3&&(st.phase||0)<2){st.phase=2;st.phaseT=performance.now();}
     else if(k>=LOOP){const pinned=performance.now()-st.pinT<60000;switchTo(pinned?key:ORDER[(ORDER.indexOf(key)+1)%ORDER.length],false);}}
   function switchTo(k,byUser){const pinT=byUser?performance.now():st.pinT;init(k);st.pinT=pinT;if(App.headline)App.headline(cfg.pair[0],cfg.pair[1]);}
   $$('.hx-ind').forEach(b=>b.addEventListener('click',()=>switchTo(b.dataset.ind,true)));
   /* the three checks on the layer light up when the line shows them */
-  const flashT={};function flash(k){flashT[k]=performance.now();}
-  function checks(){const now=performance.now();$$('.hx-ck').forEach(c=>c.classList.toggle('on',now-(flashT[c.dataset.ck]||-1e9)<3200));}
+  const flashT={};function flash(k,d){flashT[k]=performance.now()+(d||0);}
+  const lit=k=>{const t=flashT[k],now=performance.now();return t!=null&&now>=t&&now-t<3200;};
+  function checks(){$$('.hx-ben').forEach(c=>c.classList.toggle('on',lit(c.dataset.ck)));}
 
   /* the cards say what the line shows, in words, and replay their part on a tap */
   const txt={};
@@ -1726,8 +1756,9 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     if(st.dec){const d=Object.assign({left:st.dec.at-(st.n-1)},st.dec);put('hf-op-b',o.done(d),'ok');put('hf-op-s',o.doneS(d));}
     else if(st.out){put('hf-op-b',o.risk(rel(st.out)),'warn');put('hf-op-s',o.riskS);}
     else{put('hf-op-b',o.steady({plan:cfg.stock?cfg.stock.plan:0}),'');put('hf-op-s',o.steadyS);}
-    $('#hf-fc').classList.toggle('on',!!st.ctx&&now-st.ctxT<5000);$('#hf-ad').classList.toggle('on',!!live);
-    $('#hf-op').classList.toggle('on',(!!st.out&&!st.dec)||(!!st.dec&&now-st.decT<5000));}
+    /* the loop: forecast, then detect, then optimize, then the next stream */
+    const ph=st.phase||0,pr=Math.min(1,(now-(st.phaseT||now))/[5800,3900,5600][ph]);
+    ['hf-fc','hf-ad','hf-op'].forEach((id,i)=>{const e=$('#'+id);e.classList.toggle('on',i===ph);e.classList.toggle('done',i<ph);e.style.setProperty('--p',i===ph?pr.toFixed(3):i<ph?'1':'0');});}
   $('#hf-fc').addEventListener('click',()=>{st.hold=0;st.loopAt=st.n-CTX_AT;context();});
   $('#hf-ad').addEventListener('click',()=>{st.hold=0;anomaly();});
   $('#hf-op').addEventListener('click',()=>{st.hold=0;if(st.out&&!st.dec)optimize();else{context();st.loopAt=st.n-OPT_AT+2;}});
@@ -1818,6 +1849,39 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     tip.style.display='block';const x=layout.X(k);tip.style.left=(x>cv.W*0.6?x-8-tip.offsetWidth:x+8)+'px';tip.style.top=(layout.Y(r.v)+2)+'px';}
   cv.c.addEventListener('mousemove',onMove);cv.c.addEventListener('touchstart',onMove,{passive:true});cv.c.addEventListener('touchmove',onMove,{passive:true});
   cv.c.addEventListener('mouseleave',()=>{st.hover=-1;tip.style.display='none';});
+  /* the universal layer: six very different streams flow in, their interdependencies tie them together,
+     and the three outcomes flow out, the one the loop is on in front */
+  const layerEl=$('#hx-layer'),lcv=layerEl?new Cv($('#hx-layer-cv')):null,gl=$$('.hx-g').map(c=>new Cv(c));
+  const PILLS=['banking','retail','manufacturing','telecom','healthcare','energy'];
+  const fr=x=>x-Math.floor(x),sm=t=>t*t*(3-2*t);
+  function shape(i,u){switch(i){case 0:return 0.12*Math.sin(u*7)+(fr(u*0.9)<0.07?1.1:0)-0.25;case 1:return 0.45*Math.sin(u*11)+0.3*Math.sin(u*29+1.3);
+    case 2:return 0.55*Math.sin(u*3.4);case 3:return 0.75*Math.sin(u*2.2)+0.15*Math.sin(u*17);case 4:return Math.round(Math.sin(u*4.5)*2)/2.6;default:return 0.85*Math.sin(u*3)*Math.abs(Math.sin(u*1.4))-0.25;}}
+  function drawLayer(){if(!lcv||!lcv.W)return;const ctx=lcv.ctx,W=lcv.W,H=lcv.H,t=reduced?0:performance.now()/1000,narrow=window.innerWidth<=920;ctx.clearRect(0,0,W,H);
+    const y0=narrow?H*0.6:0,HB=H-y0,xIn=W*(narrow?0.4:0.34),xOut=W*(narrow?0.6:0.66),cy=y0+HB/2,sel=PILLS.indexOf(key),ph=st.phase||0;
+    const g=ctx.createRadialGradient(W/2,cy,0,W/2,cy,W*0.32);g.addColorStop(0,'rgba(190,149,255,'+(0.3+0.07*Math.sin(t*2))+')');g.addColorStop(1,'rgba(190,149,255,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    const laneY=i=>y0+HB*(0.12+i*0.152);
+    for(let i=0;i<6;i++){const on=i===sel;ctx.beginPath();for(let x=0;x<=xIn;x+=3){const u=x/xIn,y=lerp(laneY(i),cy,sm(u))+(narrow?2.5:4.5)*(1-u*0.8)*shape(i,x/46-t*0.9+i*3.1);x?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+      ctx.strokeStyle=on?'rgba(255,255,255,.95)':'rgba(198,212,255,.34)';ctx.lineWidth=on?1.8:1.1;ctx.stroke();}
+    const io=lit('inter'),xa=xIn*0.62;ctx.setLineDash([3,4]);ctx.lineDashOffset=-t*18;
+    [[0,2],[1,4],[3,5],[2,5],[0,3]].forEach(([a,b],k)=>{const ya=lerp(laneY(a),cy,sm(0.62)),yb=lerp(laneY(b),cy,sm(0.62));ctx.beginPath();ctx.moveTo(xa,ya);ctx.quadraticCurveTo(xa-(14+k*5),(ya+yb)/2,xa,yb);
+      ctx.strokeStyle='rgba(208,180,255,'+(io?0.9:0.34)+')';ctx.lineWidth=io?1.5:1;ctx.stroke();});
+    ctx.setLineDash([]);
+    [['forecast','#78a9ff'],['anomaly','#ff8389'],['decision','#6fdc8c']].forEach(([lab,col],k)=>{const yo=y0+HB*(0.24+k*0.26),on=k===ph;ctx.beginPath();
+      for(let x=xOut;x<=W;x+=3){const u=(x-xOut)/(W-xOut),y=lerp(cy,yo,sm(Math.min(1,u*1.4)));x===xOut?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+      ctx.globalAlpha=on?1:0.36;ctx.strokeStyle=col;ctx.lineWidth=on?2:1.2;ctx.stroke();
+      for(let d=0;d<3;d++){const u=fr(t*(on?0.6:0.35)+d/3+k*0.13),x=xOut+u*(W-xOut),y=lerp(cy,yo,sm(Math.min(1,u*1.4)));ctx.beginPath();ctx.arc(x,y,on?2.8:1.8,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();}
+      if(!narrow){ctx.font=MONO;ctx.textAlign='right';ctx.textBaseline='bottom';ctx.fillStyle=col;ctx.fillText(lab,W-10,yo-4);}ctx.globalAlpha=1;});}
+  function drawGlyphs(){const t=reduced?0:performance.now()/1000;
+    const g0=gl[0];if(g0&&g0.W){const ctx=g0.ctx,W=g0.W,H=g0.H;ctx.clearRect(0,0,W,H);const q=(t/2.4)%3,a=Math.floor(q),b=(a+1)%3,f=sm(fr(q));
+      const D=[x=>Math.exp(-((x-0.25)**2)/0.02)+0.35*Math.exp(-((x-0.62)**2)/0.08),x=>Math.exp(-((x-0.25)**2)/0.012)+Math.exp(-((x-0.74)**2)/0.012),x=>Math.exp(-((x-0.5)**2)/0.04)];
+      const n=9,bw=W/n;ctx.fillStyle=lit('dist')?'#e8daff':'rgba(190,170,255,.75)';for(let i=0;i<n;i++){const x=(i+0.5)/n,v=lerp(D[a](x),D[b](x),f),h=Math.max(2,Math.min(1,v)*(H-3));ctx.fillRect(i*bw+1,H-h,bw-2,h);}}
+    const g1=gl[1];if(g1&&g1.W){const ctx=g1.ctx,W=g1.W,H=g1.H;ctx.clearRect(0,0,W,H);const sel=PILLS.indexOf(key);ctx.strokeStyle='rgba(190,170,255,.45)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(6,H/2);ctx.lineTo(W-6,H/2);ctx.stroke();
+      for(let i=0;i<6;i++){const x=6+i*(W-12)/5,on=i===sel;ctx.beginPath();ctx.arc(x,H/2,on?5:3,0,Math.PI*2);ctx.fillStyle=on?(lit('dom')?'#fff':'#e8daff'):'rgba(190,170,255,.55)';ctx.fill();}}
+    const g2=gl[2];if(g2&&g2.W){const ctx=g2.ctx,W=g2.W,H=g2.H;ctx.clearRect(0,0,W,H);const P=[[0.12,0.3],[0.4,0.8],[0.62,0.22],[0.9,0.66]].map(([x,y])=>[x*W,y*H]),E=[[0,1],[0,2],[1,2],[2,3],[1,3]];
+      ctx.strokeStyle=lit('inter')?'rgba(232,218,255,.95)':'rgba(190,170,255,.45)';ctx.lineWidth=1;E.forEach(([a,b])=>{ctx.beginPath();ctx.moveTo(P[a][0],P[a][1]);ctx.lineTo(P[b][0],P[b][1]);ctx.stroke();});
+      const e=E[Math.floor(t*1.2)%E.length],u=fr(t*1.2);ctx.beginPath();ctx.arc(lerp(P[e[0]][0],P[e[1]][0],u),lerp(P[e[0]][1],P[e[1]][1],u),2.4,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+      P.forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='#be95ff';ctx.fill();});}}
+  if(layerEl)reg({el:layerEl,resize(){lcv.fit();gl.forEach(c=>c.fit());},update(){},draw(){drawLayer();drawGlyphs();}});
   st.pinT=-1e9;init('retail');
   reg({el,resize(){cv.fit();draw();},update(dt){st.acc=(st.acc||0)+dt;const rate=reduced?1400:650;while(st.acc>rate){st.acc-=rate;step();}cards();checks();},draw});
   App.listeners.push(()=>cards());

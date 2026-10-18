@@ -877,18 +877,39 @@ button.hf:focus-visible{outline:2px solid #4589ff;outline-offset:-2px}
 .hx-ind::after{content:"";position:absolute;left:50%;bottom:-10px;width:6px;height:6px;border-right:1.5px solid rgba(61,219,217,.55);border-bottom:1.5px solid rgba(61,219,217,.55);transform:translateX(-50%) rotate(45deg)}
 .hx-ind[aria-pressed="true"]::after{border-color:#3ddbd9}
 .hx-ind:focus-visible{outline:2px solid #4589ff;outline-offset:2px}
-.hx-layer{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:4px;padding:.7rem 1.1rem;border-radius:10px;background:linear-gradient(90deg,#08bdba,#33b1ff);color:#04213b}
-.hx-layer span{flex:1;text-align:center;font-weight:600;font-size:clamp(.84rem,1.25vw,1.02rem);letter-spacing:.005em}
-.hx-layer b{font-weight:700;font-size:.84rem;white-space:nowrap}
-.hx-checks{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.35rem 1.15rem;font-size:.8rem;color:#7fe4e4}
-.hx-lead{color:var(--ink-2)}
-.hx-ck{display:inline-flex;align-items:center;gap:.4rem;transition:color .3s,text-shadow .3s}
-.hx-ck::before{content:"";width:9px;height:5px;border-left:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-2px) rotate(-45deg)}
-.hx-ck.on{color:#fff;text-shadow:0 0 14px rgba(61,219,217,.9)}
 @media (max-width:760px){.hx-inds{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.hx-ind{font-size:.78rem;min-height:34px;padding:.3rem .35rem;gap:.3rem}.hx-ind::after{display:none}
-  .hx-layer{flex-wrap:wrap;justify-content:space-between;padding:.6rem .8rem;gap:.3rem .8rem}.hx-layer span{flex-basis:100%;order:-1;font-size:.84rem}.hx-lead{display:none}.hx-checks{font-size:.74rem;gap:.3rem .9rem}}
-body.pitching #st-live .hx-inds,body.pitching #st-live .hx-checks{display:none}
+  }
+body.pitching #st-live .hx-inds{display:none}
 body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(300px,42vh,460px)}
+/* the universal layer: blue to violet, alive */
+.hx-layer{position:relative;overflow:hidden;margin-top:4px;padding:0;border-radius:12px;min-height:106px;display:grid;place-items:center;color:#fff;
+  background:radial-gradient(55% 130% at 50% 50%,rgba(105,41,196,.55),rgba(105,41,196,0) 70%),linear-gradient(100deg,#001d6c 0%,#0043ce 44%,#6929c4 100%);
+  border:1px solid rgba(166,200,255,.35);box-shadow:0 10px 30px rgba(0,29,108,.35)}
+.hx-layer-cv{position:absolute;inset:0;width:100%;height:100%}
+.hx-layer-in{position:relative;z-index:1;display:grid;justify-items:center;gap:3px;text-align:center;padding:14px 34px;background:radial-gradient(closest-side,rgba(0,17,65,.78),rgba(0,17,65,0))}
+.hx-ey{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:#d0e2ff;font-weight:500}
+.hx-layer-in b{font-size:clamp(1.05rem,1.8vw,1.45rem);font-weight:500;color:#fff;letter-spacing:-.005em}
+.hx-sub{font-size:.74rem;color:#d4bbff;letter-spacing:.04em}
+.hx-bens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.hx-ben{display:flex;align-items:center;gap:.75rem;padding:.55rem .85rem;border:1px solid rgba(190,170,255,.22);border-radius:10px;background:rgba(0,17,65,.28);transition:background .35s,border-color .35s,box-shadow .35s}
+.hx-ben canvas{width:64px;height:30px;flex:none}
+.hx-ben b{display:block;font-size:.88rem;font-weight:500;color:#fff}
+.hx-ben span{display:block;font-size:.74rem;color:#c3cbe8;line-height:1.3}
+.hx-ben.on{border-color:#a56eff;background:rgba(105,41,196,.3);box-shadow:0 0 0 1px rgba(165,110,255,.55),0 6px 20px rgba(105,41,196,.25)}
+.hx-ind[aria-pressed="true"]{background:rgba(69,137,255,.22);border-color:#78a9ff}
+.hx-ind::after{border-color:rgba(166,200,255,.5)}.hx-ind[aria-pressed="true"]::after{border-color:#a6c8ff}
+/* the three cards run as one loop: each fills while its step runs */
+.hf{position:relative}
+.hf::before{content:"";position:absolute;left:0;top:0;height:2px;width:calc(var(--p,0) * 100%);background:var(--hc,#4589ff)}
+#hf-fc{--hc:#4589ff}#hf-ad{--hc:#fa4d56}#hf-op{--hc:#42be65}
+.hf.done::before{width:100%;opacity:.5}
+.hf.on,#hf-ad.on,#hf-op.on{box-shadow:none}
+#hf-ad.on{background:rgba(250,77,86,.1)}#hf-op.on{background:rgba(66,190,101,.1)}
+@media (max-width:920px){.hx-layer{min-height:132px;place-items:start center}.hx-layer-in{padding:12px 14px 0;background:none}}
+@media (max-width:760px){.hx-bens{grid-template-columns:1fr;gap:6px}.hx-ben{padding:.42rem .65rem}.hx-ben canvas{width:52px;height:26px}}
+body.pitching #st-live .hx-bens{display:none}
+body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(280px,36vh,420px)}
+body.pitching .hx-layer{min-height:86px}
 /* during the demo the line and its three cards fit on one screen */
 body.pitching #st-live .stage-top{display:none}
 @media (max-width:760px){body.pitching .hero .canvas-wrap.hx-wrap{height:38vh}}
