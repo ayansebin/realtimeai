@@ -859,6 +859,12 @@ body.pitching .csgrid{opacity:.22;filter:saturate(.3);transition:opacity .6s,fil
 #hf-dec.on{box-shadow:inset 0 2px 0 #42be65;background:rgba(66,190,101,.1)}
 @media (min-width:761px) and (max-width:1100px){.hf-k em{display:none}}
 @media (max-width:760px){.hflow{grid-template-columns:1fr}.hf+.hf{border-left:0;border-top:1px solid var(--line)}.hf{padding:11px 16px 12px;gap:.2rem}.hf b{font-size:1.05rem}}
+/* one color language from the headline to the chart: blue predicts, teal is the real-time context, green is the optimized decision */
+.hero-kicker{font-size:clamp(1.2rem,2.1vw,1.75rem);font-weight:400;line-height:1.25;letter-spacing:-.012em;color:var(--ink);max-width:36ch;margin-bottom:-.25rem;text-wrap:balance}
+.hero-kicker .k-ts{color:#0f62fe}
+.hero-kicker .k-ctx{color:#007d79}
+#hf-ctx .hf-k i{color:#3ddbd9}#hf-ts .hf-k i{color:#78a9ff}#hf-dec .hf-k i{color:#6fdc8c}
+#hx-ctx .chip[aria-pressed="true"]{background:rgba(8,189,186,.18);border-color:rgba(61,219,217,.85);color:#fff}
 /* during the demo the line and its three cards fit on one screen */
 body.pitching #st-live .stage-top{display:none}
 @media (max-width:760px){body.pitching .hero .canvas-wrap.hx-wrap{height:38vh}}
@@ -885,7 +891,8 @@ body.pitching #st-live .stage-top{display:none}
   <div class="wrap" id="top">
     <div class="hero-head">
       <div class="pills"><span class="pill live">Now on Confluent Cloud</span></div>
-      <h1 class="h-display">Time series intelligence<br>meets <em>real-time context</em>.</h1>
+      <p class="hero-kicker"><span class="k-ts">Time series intelligence</span> meets <span class="k-ctx">real-time context</span>.</p>
+      <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
       <p class="lede">IBM Granite Time Series models now run inside Confluent. They read every live signal in its context and optimize mission-critical decisions while they still matter.</p>
       <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>1 min, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
     </div>
@@ -3281,6 +3288,19 @@ const CS={
 /* ============ share ============ */
 (function(){
   const share=$('#share-link');if(share)share.addEventListener('click',()=>{if(navigator.share){navigator.share({title:document.title,url:location.href}).catch(()=>{});return;}copyText(location.href,null,ok=>{$('#share-toast').textContent=ok?'Link copied.':'Copy the address from your browser bar.';});});
+})();
+
+/* ============ hero: what we predict, and what the optimizer is pointed at ============ */
+(function(){
+  const el=$('#rot'),el2=$('#rot2');if(!el)return;
+  const pairs=[['stockout','service level'],['fraud','risk'],['outage','uptime'],['kiln drift','energy'],['grid peak','cost'],['price swing','margin'],['quality slip','yield'],['anomaly','security']];
+  if(reduced){el.textContent='stockout';if(el2)el2.textContent='service level';return;}
+  let i=0;
+  function type(node,word,done){let k=0;const tick=()=>{node.textContent=word.slice(0,++k);if(k<word.length)setTimeout(tick,55);else done();};tick();}
+  function erase(node,done){const tick=()=>{node.textContent=node.textContent.slice(0,-1);if(node.textContent.length)setTimeout(tick,28);else done();};tick();}
+  function cycle(){setTimeout(()=>erase(el,()=>{i=(i+1)%pairs.length;type(el,pairs[i][0],()=>{if(!el2){cycle();return;}erase(el2,()=>type(el2,pairs[i][1],cycle));});}),2600);}
+  if(el2&&!el2.textContent)el2.textContent=pairs[0][1];
+  cycle();
 })();
 
 /* ============ architecture particles ============ */
