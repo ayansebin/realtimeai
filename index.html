@@ -1249,6 +1249,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .v5proof li{position:relative;padding-left:1rem;font-size:.84rem;line-height:1.4;color:var(--ink-3)}
 .v5proof li::before{content:"";position:absolute;left:0;top:.5em;width:6px;height:6px;border-radius:50%;background:#78a9ff}
 .v5proof b{color:#fff;font-weight:500}
+.v5proof a{color:inherit;text-decoration:underline;text-decoration-color:rgba(208,226,255,.3);text-underline-offset:3px}
+.v5proof a:hover{color:#d0e2ff;text-decoration-color:#d0e2ff}
 .v5dp{margin:0;padding-top:.55rem;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem;color:var(--ink-3)}
 .v5dp b{color:#a7f0ba;font-weight:500}
 .v4c{grid-template-rows:auto auto auto auto auto 1fr}
@@ -1517,7 +1519,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
         <div class="v4">
           <article class="v4c" data-k="prod">
             <div class="v4top"><span class="v4n"><i>01</i>Productivity</span><span class="v4p">For data and AI teams</span></div>
-            <p class="v4pain">Each forecast use case is a pipeline to build and keep alive, per series.</p>
+            <p class="v4pain">Every forecast is a pipeline to build and maintain, per series.</p>
             <div class="v4m"><b>6 steps → 1</b><span>to a first forecast in production</span></div>
             <div class="v4viz">
               <div class="v4k">The usual way · for every series</div>
@@ -1526,10 +1528,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
               <div class="v5one"><span class="v5s t"><i>1</i>Call the model in Flink SQL</span><span class="v5ret">forecast with q10, q50, q90 back</span></div>
             </div>
             <ul class="v5proof">
-              <li><b>Zero-shot.</b> No training and no model per series. The model is managed and hosted in Confluent Cloud.</li>
-              <li><b>TTM beats popular models by 4 to 40%</b> zero and few-shot, from 1M parameters, on CPU.</li>
+              <li><b>Zero-shot,</b> hosted in Confluent Cloud. <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">No model per series.</a></li>
             </ul>
-            <p class="v5dp">Design partners report <b>10× faster time to value</b></p>
           </article>
           <article class="v4c" data-k="acc">
             <div class="v4top"><span class="v4n"><i>02</i>Accuracy</span><span class="v4p">For planners and risk teams</span></div>
@@ -1541,20 +1541,16 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
               <div class="v4k">Keeps improving</div>
               <div class="v6imp">
                 <div class="v6r"><span class="v4l">In the stream</span><span class="v6ctx"><i></i></span><span class="v4v" data-v="ctx">20 points</span></div>
-                <p class="v6n">Every event adds history, from 20 points up to 512 by default.</p>
                 <div class="v6r"><span class="v4l">Each release</span><span class="v6rel"><b data-r="0">r1<em>250M</em></b><b data-r="1">r2<em>700M</em></b><b data-r="2">r2.1<em>~1B</em></b></span><span class="v4v" data-v="rel">+15%</span></div>
-                <p class="v6n">TTM pretraining samples per release. r2 beats r1 by 15%+. Upgrade with one setting.</p>
               </div>
             </div>
             <ul class="v5proof">
-              <li><b>GIFT-Eval:</b> PatchTST-FM-r2 at 0.68 MASE and 0.47 CRPS against seasonal naive at 1.00. <b>#2 of replicable zero-shot models, #1 with a commercial-friendly license</b> (Sep 2026).</li>
-              <li><b>TSPulse is #1 on TSB-AD</b> for anomaly detection, 14 to 16% above the best baselines zero-shot.</li>
+              <li><b>Top 2 zero-shot on GIFT-Eval,</b> <a href="https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series" target="_blank" rel="noopener">#1 with a commercial-friendly license.</a></li>
             </ul>
-            <p class="v5dp">Design partners report <b>5 to 10% more accurate decisions</b></p>
           </article>
           <article class="v4c" data-k="resp">
             <div class="v4top"><span class="v4n"><i>03</i>Responsiveness</span><span class="v4p">For operations teams</span></div>
-            <p class="v4pain">A nightly batch scores events hours after they happened.</p>
+            <p class="v4pain">A nightly batch scores events hours late.</p>
             <div class="v4m"><b>12 h → 0</b><span>average wait for the scoring run</span></div>
             <div class="v4viz">
               <div class="v4k">Value of the decision, by time to act <span class="v5il">illustrative curves</span></div>
@@ -1564,14 +1560,11 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
               <div class="v6o u"><span class="v6dot"></span><b>Nightly batch · 12 h on average</b><span data-o="u"></span><em data-p="u">4%</em></div>
             </div>
             <ul class="v5proof">
-              <li><b>Scored as each event arrives</b>, as a function on the stream inside Flink, billed in CFUs with the compute pool.</li>
-              <li><b>Small enough to run per event:</b> TTM on CPU, TSPulse GPU-free.</li>
+              <li><b>Scored as each event lands,</b> <a href="https://arxiv.org/abs/2401.03955" target="_blank" rel="noopener">small enough to run on CPU.</a></li>
             </ul>
-            <p class="v5dp">Design partners report <b>days to seconds</b> from signal to decision</p>
           </article>
         </div>
       </div>
-      <div class="stage-foot"><div class="v5src"><span>Sources</span><a href="https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series" target="_blank" rel="noopener">PatchTST-FM-r2 on GIFT-Eval</a><a href="https://huggingface.co/spaces/Salesforce/GIFT-Eval" target="_blank" rel="noopener">GIFT-Eval leaderboard</a><a href="https://arxiv.org/abs/2401.03955" target="_blank" rel="noopener">TTM, NeurIPS 2024</a><a href="https://arxiv.org/abs/2505.13033" target="_blank" rel="noopener">TSPulse</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent forecast functions</a><a href="https://huggingface.co/ibm-granite/granite-timeseries-ttm-r2" target="_blank" rel="noopener">TTM model card, pretraining data</a><em>Design partner figures are as reported in early engagements. The 12 h wait assumes a nightly batch. The decay curves and the transfer picture are illustrative.</em></div></div>
     </div>
   </div>
 </section>
