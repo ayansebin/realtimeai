@@ -1,6 +1,11 @@
 name: onnx
 on:
   workflow_dispatch:
+    inputs:
+      only:
+        description: "Comma separated variant names to export (empty for all)"
+        required: false
+        default: ""
 permissions:
   contents: write
 jobs:
@@ -16,11 +21,12 @@ jobs:
         run: |
           python -m pip install -q --upgrade pip
           pip install -q "torch>=2.10,<2.12" --index-url https://download.pytorch.org/whl/cpu
-          pip install -q "git+https://github.com/ibm-granite/granite-tsfm@main" numpy onnx onnxscript onnxruntime
-          python -c "import torch, onnx, onnxruntime, tsfm_public; print('torch', torch.__version__, 'onnx', onnx.__version__, 'ort', onnxruntime.__version__)"
+          pip install -q "git+https://github.com/ibm-granite/granite-tsfm@main" numpy onnx onnxscript "onnxruntime==1.20.1"
+          python -c "import torch, onnx, onnxscript, onnxruntime, tsfm_public; print('torch', torch.__version__, 'onnx', onnx.__version__, 'onnxscript', onnxscript.__version__, 'ort', onnxruntime.__version__)"
       - name: Export
         env:
           HF_HUB_DISABLE_TELEMETRY: "1"
+          ONLY: ${{ github.event.inputs.only }}
         run: |
           python scripts/export_onnx.py || echo "export exited with an error, partial results are kept"
           ls -la models
