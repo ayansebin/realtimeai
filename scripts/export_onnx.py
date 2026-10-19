@@ -1,15 +1,24 @@
 #!/usr/bin/env python3
 """Export Granite TTM r3 to ONNX so the playground can forecast a visitor's own data in the browser.
 
-The browser runs the same open weights with ONNX Runtime Web. Nothing the visitor uploads leaves
-their machine. Six context and horizon pairs cover sub-daily, daily, weekly and monthly data, and
-short series. Each model returns its point forecast and its own quantiles.
+The browser runs TTM r3 with ONNX Runtime Web. Nothing the visitor uploads leaves their machine.
+Six context and horizon pairs cover sub-daily, daily, weekly and monthly data, and short series.
+Each model returns its point forecast and its own quantiles.
 
-The decomposed r3 models take a robust median inside their trend filter. The ONNX op library has no
-median, so the export swaps in a sort based median that returns exactly the same value (the lower of
-the two middle values, as torch.median does). The swap is checked for equality, and every exported
-model is checked against the untouched PyTorch model on a test series. That series and its expected
-output are saved next to the model so the page can be tested end to end.
+Three changes make the export work and keep it small. Each one is checked against the untouched
+PyTorch model.
+
+1. The decomposed r3 models take a robust median inside their trend filter. The ONNX op library has
+   no median, so the export swaps in a sort based median that returns the same value (the lower of
+   the two middle values, as torch.median does).
+2. The same filter divides by a sum plus 1e-8. The ONNX optimizer reads an add of 1e-8 as an add of
+   zero and drops it, which turns a block of outliers into 0 / 0. The swap uses 1e-7, which it keeps.
+3. Large weight tensors are stored at half precision and cast back to full precision when the model
+   loads, which halves the download. The model still computes in full precision.
+
+Every exported model is compared with PyTorch on a test series and on five hard cases: a block of
+outliers, a flat line, mostly zeros, a step and a spike. The test series and its expected output are
+saved next to the model so the page can be tested end to end.
 
 Runs in GitHub Actions (see .github/workflows/onnx.yml). A variant that fails is logged and skipped.
 """
@@ -28,12 +37,11 @@ import torch.nn.functional as F
 
 OUT = pathlib.Path("models")
 OUT.mkdir(parents=True, exist_ok=True)
-ONLY_ = [v for v in __import__("os").environ.get("ONLY", "").split(",") if v]
-LOG = open(OUT / "log.txt", "a" if ONLY_ else "w")
+ONLY = [v for v in os.environ.get("ONLY", "").split(",") if v]
+LOG = open(OUT / "log.txt", "a" if ONLY else "w")
 REPO = "ibm-granite/granite-timeseries-ttm-r3"
 # file name, model revision on the Hugging Face repo
 VARIANTS = [
-    ("ttm-r3-2048-96", "2048-96-r3"),
     ("ttm-r3-1024-96", "1024-96-r3"),
     ("ttm-r3-512-96", "512-96-dec-512-r3"),
     ("ttm-r3-180-60", "180-60-dec-180-r3"),
@@ -42,8 +50,9 @@ VARIANTS = [
     ("ttm-r3-156-16", "156-16-dec-52-r3"),
     ("ttm-r3-52-16", "52-16-dec-52-r3"),
 ]
-ONLY = [v for v in os.environ.get("ONLY", "").split(",") if v]
 MAX_IR = 10  # ONNX Runtime Web 1.20 reads IR version 10
+EPS = 1e-7  # the trend filter's 1e-8, raised so the ONNX optimizer keeps it
+HALF_MIN = 4096  # weight tensors with at least this many values are stored at half precision
 
 
 def log(*a):
@@ -60,13 +69,11 @@ def median_dim1(t):
     return torch.sort(t, dim=1).values[:, k:k + 1, :]
 
 
-def patch_trend_filter():
-    import tsfm_public.models.tinytimemixer.modeling_tinytimemixer as M
-
-    original = M.robust_lowess_like
+def patched_trend_filter(M):
     gauss_kernel = M._gaussian_kernel
 
     def robust_lowess_like(x, frac=0.15, iters=2, eps=1e-8, pad_mode="reflect"):
+        eps = EPS
         B, T, C = x.shape
         w = max(5, int(round(frac * T)))
         if w % 2 == 0:
@@ -97,23 +104,11 @@ def patch_trend_filter():
             trend = trend - trend.mean(dim=1, keepdim=True) + x.mean(dim=1, keepdim=True)
         return trend, x - trend
 
-    # the swap must not change a single value
-    g = torch.Generator().manual_seed(1)
-    worst = 0.0
-    for T in (52, 90, 156, 180, 512, 513):
-        x = torch.randn(3, T, 1, generator=g) * 3 + torch.linspace(0, 4, T).view(1, T, 1)
-        a, _ = original(x)
-        b, _ = robust_lowess_like(x)
-        worst = max(worst, float((a - b).abs().max()))
-    log(f"trend filter swap: max difference {worst:.3g} over six lengths")
-    if worst > 1e-5:
-        raise RuntimeError("the sort based median does not match torch.median")
-    M.robust_lowess_like = robust_lowess_like
-    return original
+    return robust_lowess_like
 
 
 class Wrap(torch.nn.Module):
-    """past_values [batch, context, 1] (and freq_token [batch] when used) to forecast [batch, h, 1] and quantiles [batch, q, h, 1]."""
+    """past_values [batch, context, 1] to forecast [batch, h, 1] and quantiles [batch, q, h, 1]."""
 
     def __init__(self, model, with_token, with_q):
         super().__init__()
@@ -135,8 +130,7 @@ def export(wrap, args, names, outs, path):
     errors = []
     batch = torch.export.Dim("batch", min=1, max=512)
     dyn = tuple({0: batch} for _ in names)
-    attempts = [("dynamic batch", dict(dynamic_shapes=dyn)), ("fixed batch", {})]
-    for label, extra in attempts:
+    for label, extra in (("dynamic batch", dict(dynamic_shapes=dyn)), ("fixed batch", {})):
         for f in glob.glob("onnx_export_*.md"):
             os.remove(f)
         try:
@@ -156,8 +150,9 @@ def export(wrap, args, names, outs, path):
 
 
 def slim(path):
-    """Cap the IR version and drop exporter metadata (stack traces, names, shape notes). The graph and weights stay as they are."""
+    """Cap the IR version, drop exporter metadata, store large weights at half precision with a cast back."""
     import onnx
+    from onnx import helper, numpy_helper
 
     before = path.stat().st_size
     m = onnx.load(str(path))
@@ -173,15 +168,45 @@ def slim(path):
         del m.graph.metadata_props[:]
     m.graph.doc_string = ""
     m.doc_string = ""
+    keep, casts, halved = [], [], 0
+    for init in m.graph.initializer:
+        a = numpy_helper.to_array(init)
+        if init.data_type == onnx.TensorProto.FLOAT and a.size >= HALF_MIN and np.abs(a).max() < 6e4:
+            h = numpy_helper.from_array(a.astype(np.float16), init.name + "__half")
+            keep.append(h)
+            casts.append(helper.make_node("Cast", [h.name], [init.name], to=onnx.TensorProto.FLOAT,
+                                          name="cast_" + init.name))
+            halved += a.size
+        else:
+            keep.append(init)
+    del m.graph.initializer[:]
+    m.graph.initializer.extend(keep)
+    nodes = list(m.graph.node)
+    del m.graph.node[:]
+    m.graph.node.extend(casts + nodes)
     onnx.checker.check_model(m)
     onnx.save(m, str(path))
     opsets = {o.domain or "ai.onnx": o.version for o in m.opset_import}
     ops = sorted({n.op_type for n in m.graph.node})
-    return ir0, m.ir_version, opsets, ops, before, path.stat().st_size
+    return ir0, m.ir_version, opsets, ops, before, path.stat().st_size, halved
+
+
+def hard_cases(C, rng):
+    t = np.arange(C)
+    base = 50 + 10 * np.sin(2 * np.pi * t / 24)
+    block = base + rng.randn(C)
+    block[C // 2:C // 2 + max(8, C // 5)] += 400  # a long block of outliers
+    zeros = np.where(rng.rand(C) < 0.7, 0.0, rng.poisson(4, C).astype(float))
+    step = base + rng.randn(C) + np.where(t > C * 0.6, 30.0, 0.0)
+    spike = base + rng.randn(C)
+    spike[-3] += 300
+    return {"outlier block": block, "flat line": np.full(C, 5.0), "mostly zeros": zeros, "step": step,
+            "spike": spike}
 
 
 def main():
     from tsfm_public.toolkit.get_model import get_model
+    import tsfm_public.models.tinytimemixer.modeling_tinytimemixer as M
 
     import onnxruntime as ort
 
@@ -192,14 +217,27 @@ def main():
         log("frequency mapping unavailable:", repr(e)[:200])
         FREQ = None
 
-    patch_trend_filter()
+    original = M.robust_lowess_like
+    patched = patched_trend_filter(M)
+    g = torch.Generator().manual_seed(1)
+    worst = 0.0
+    for T in (52, 90, 156, 180, 512, 513, 1024):
+        x = torch.randn(3, T, 1, generator=g) * 3 + torch.linspace(0, 4, T).view(1, T, 1)
+        worst = max(worst, float((original(x)[0] - patched(x)[0]).abs().max()))
+    log(f"trend filter swap: max difference {worst:.3g} over seven lengths")
+    if worst > 1e-4:
+        raise RuntimeError("the swapped trend filter does not match the original")
+
     manifest = {"built": datetime.now(timezone.utc).isoformat(), "repo": REPO, "license": "Apache-2.0",
-                "torch": torch.__version__, "onnxruntime": ort.__version__, "freq_tokens": FREQ, "variants": []}
+                "torch": torch.__version__, "onnxruntime": ort.__version__, "freq_tokens": FREQ,
+                "weights": "float16 storage for tensors of %d values or more, float32 compute" % HALF_MIN,
+                "variants": []}
     for name, rev in VARIANTS:
         if ONLY and name not in ONLY:
             continue
         t0 = time.time()
         try:
+            M.robust_lowess_like = original
             ctx_req, h_req = int(rev.split("-")[0]), int(rev.split("-")[1])
             log(f"{name}: loading {rev}")
             model = get_model(REPO, context_length=ctx_req, prediction_length=h_req, model_revision=rev)
@@ -221,48 +259,65 @@ def main():
                 args = (args[0], torch.zeros(2, dtype=torch.long))
             outs = ["forecast"] + (["quantiles"] if with_q else [])
             path = OUT / f"{name}.onnx"
+            M.robust_lowess_like = patched
             how = export(wrap, args, names, outs, path)
-            ir0, ir1, opsets, ops, b0, b1 = slim(path)
+            M.robust_lowess_like = original
+            ir0, ir1, opsets, ops, b0, b1, halved = slim(path)
             log(f"  exported ({how}), IR {ir0} -> {ir1}, opsets {opsets}, {len(ops)} op types, "
-                f"{b0 / 1e6:.1f} MB -> {b1 / 1e6:.1f} MB without exporter metadata")
+                f"{b0 / 1e6:.1f} MB -> {b1 / 1e6:.1f} MB, {halved:,} weights stored at half precision")
 
             so = ort.SessionOptions()
             so.intra_op_num_threads = 1
             sess = ort.InferenceSession(str(path), so, providers=["CPUExecutionProvider"])
             fixed = how == "fixed batch"
+            tok = int((FREQ or {}).get("h", 0)) if with_token else None
+
+            def run_onnx(batch):
+                n_in = len(batch)
+                pad = batch + [batch[0]] * (2 - n_in) if fixed and n_in < 2 else batch
+                f = {"past_values": np.stack(pad).reshape(len(pad), C, 1).astype(np.float32)}
+                if with_token:
+                    f["freq_token"] = np.full(len(pad), tok, dtype=np.int64)
+                got = sess.run(None, f)
+                return [g_[:n_in] for g_ in got]
+
+            def run_torch(series):
+                with torch.no_grad():
+                    targs = [torch.from_numpy(np.asarray(series, np.float32).reshape(1, C, 1))]
+                    if with_token:
+                        targs.append(torch.tensor([tok], dtype=torch.long))
+                    ref = wrap(*targs)
+                return [r.numpy() for r in ref] if with_q else [ref.numpy()]
+
             rng = np.random.RandomState(0)
             t = np.arange(C)
             series = (50 + 10 * np.sin(2 * np.pi * t / 24) + 4 * np.sin(2 * np.pi * t / 168) + 0.02 * t
                       + rng.randn(C)).astype(np.float32)
-            tok = int((FREQ or {}).get("h", 0)) if with_token else None
-
-            def feeds_for(batch):
-                f = {"past_values": np.stack(batch).reshape(len(batch), C, 1).astype(np.float32)}
-                if with_token:
-                    f["freq_token"] = np.full(len(batch), tok, dtype=np.int64)
-                return f
-
-            n_b = 2
-            got = sess.run(None, feeds_for([series] * n_b if fixed else [series]))
-            y_onnx = got[0][:1]
-            q_onnx = got[1][:1] if with_q else None
-            with torch.no_grad():
-                targs = [torch.from_numpy(series.reshape(1, C, 1))]
-                if with_token:
-                    targs.append(torch.tensor([tok], dtype=torch.long))
-                ref = Wrap(model, with_token, with_q)(*targs)
-            y_t = (ref[0] if with_q else ref).numpy()
-            diff = float(np.abs(y_onnx - y_t).max())
-            qdiff = float(np.abs(q_onnx - ref[1].numpy()).max()) if with_q else None
-            H = int(y_onnx.shape[1])
+            got = run_onnx([series])
+            ref = run_torch(series)
+            diff = float(np.abs(got[0] - ref[0]).max())
+            qdiff = float(np.abs(got[1] - ref[1]).max()) if with_q else None
+            H = int(got[0].shape[1])
+            hard = {}
+            for label, s in hard_cases(C, np.random.RandomState(1)).items():
+                go, rf = run_onnx([s.astype(np.float32)]), run_torch(s)
+                scale = float(np.std(s)) or 1.0
+                hard[label] = {"finite": bool(np.isfinite(go[0]).all() and all(np.isfinite(x).all() for x in go)),
+                               "torch_finite": bool(np.isfinite(rf[0]).all()),
+                               "max_diff_rel": round(float(np.abs(go[0] - rf[0]).max()) / scale, 6)}
+            bad = [k for k, v in hard.items() if not v["finite"] and v["torch_finite"]]
+            log("  hard cases: " + ", ".join(f"{k} {'ok' if v['finite'] else 'NaN'} {v['max_diff_rel']:.1e}"
+                                             for k, v in hard.items()))
+            if bad:
+                raise RuntimeError("ONNX returns NaN where PyTorch does not: " + ", ".join(bad))
             bdiff = None
             if not fixed:
-                y2 = sess.run(None, feeds_for([series, series[::-1].copy(), series * 2]))[0]
-                bdiff = float(np.abs(y2[0] - y_onnx[0]).max())
+                y2 = run_onnx([series, series[::-1].copy(), series * 2])[0]
+                bdiff = float(np.abs(y2[0] - got[0][0]).max())
             n = 20
             t1 = time.perf_counter()
             for _ in range(n):
-                sess.run(None, feeds_for([series] * (n_b if fixed else 1)))
+                run_onnx([series])
             ms = (time.perf_counter() - t1) * 1000 / n
             params = int(sum(p.numel() for p in model.parameters()))
             entry = {"name": name, "revision": rev, "file": path.name, "ctx": C, "h": H, "freq_token": with_token,
@@ -270,34 +325,43 @@ def main():
                      "bytes": path.stat().st_size, "params": params, "export": how,
                      "max_abs_diff_vs_torch": round(diff, 6),
                      "quantile_diff_vs_torch": None if qdiff is None else round(qdiff, 6),
-                     "batch_diff": None if bdiff is None else round(bdiff, 6), "cpu_ms_1_thread": round(ms, 2)}
+                     "batch_diff": None if bdiff is None else round(bdiff, 6), "hard_cases": hard,
+                     "cpu_ms_1_thread": round(ms, 2)}
             manifest["variants"].append(entry)
             refj = {"name": name, "revision": rev, "freq_token": tok,
                     "input": [round(float(v), 5) for v in series],
-                    "output": [round(float(v), 5) for v in y_onnx.reshape(-1)]}
+                    "output": [round(float(v), 5) for v in got[0].reshape(-1)]}
             if with_q:
-                refj["quantiles"] = [[round(float(v), 5) for v in row] for row in q_onnx[0, :, :, 0]]
+                refj["quantiles"] = [[round(float(v), 5) for v in row] for row in got[1][0, :, :, 0]]
             (OUT / f"{name}.ref.json").write_text(json.dumps(refj))
-            log(f"{name}: ok, {params:,} params, {path.stat().st_size / 1e6:.2f} MB, diff {diff:.2e}, "
-                f"quantile diff {qdiff if qdiff is None else f'{qdiff:.2e}'}, batch diff {bdiff}, {ms:.1f} ms, "
+            log(f"{name}: ok, {params:,} params, {path.stat().st_size / 1e6:.2f} MB, diff vs torch {diff:.2e}, "
+                f"quantiles {qdiff if qdiff is None else f'{qdiff:.2e}'}, batch {bdiff}, {ms:.1f} ms, "
                 f"{time.time() - t0:.0f} s")
         except Exception as e:  # noqa: BLE001
             log(f"{name}: FAILED {repr(e)[:600]}")
             log(traceback.format_exc()[-3000:])
+            M.robust_lowess_like = original
     for f in glob.glob("onnx_export_*"):
         try:
             os.remove(f)
         except OSError:
             pass
+    names_now = {n for n, _ in VARIANTS}
     if ONLY:  # a partial run keeps the variants it did not touch
         try:
             old = json.loads((OUT / "manifest.json").read_text())
-            keep = [v for v in old.get("variants", []) if v["name"] not in ONLY]
+            keep = [v for v in old.get("variants", []) if v["name"] not in ONLY and v["name"] in names_now]
             order = [n for n, _ in VARIANTS]
-            manifest["variants"] = sorted(keep + manifest["variants"],
-                                          key=lambda v: order.index(v["name"]) if v["name"] in order else 99)
+            manifest["variants"] = sorted(keep + manifest["variants"], key=lambda v: order.index(v["name"]))
         except Exception as e:  # noqa: BLE001
             log("could not merge the old manifest:", repr(e)[:200])
+    for f in OUT.glob("ttm-*.onnx"):  # files from variants that are no longer listed
+        if f.stem not in names_now:
+            f.unlink()
+            ref = OUT / (f.stem + ".ref.json")
+            if ref.exists():
+                ref.unlink()
+            log("removed", f.name)
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=1))
     log("done,", len(manifest["variants"]), "variants")
     return 0 if manifest["variants"] else 1
