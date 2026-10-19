@@ -1,26 +1,26 @@
 trend filter swap: max difference 0 over six lengths
 ttm-r3-512-96: loading 512-96-dec-512-r3
   TinyTimeMixerForDecomposedPrediction, context 512, horizon 96, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
-ttm-r3-512-96: ok, 5,328,932 params, 29.48 MB, diff 1.91e-05, quantile diff 1.91e-05, batch diff 4.57763671875e-05, 10.2 ms, 30 s
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types, 29.5 MB -> 21.5 MB without exporter metadata
+ttm-r3-512-96: ok, 5,328,932 params, 21.55 MB, diff 1.91e-05, quantile diff 1.91e-05, batch diff 4.57763671875e-05, 10.0 ms, 30 s
 ttm-r3-180-60: loading 180-60-dec-180-r3
   TinyTimeMixerForDecomposedPrediction, context 180, horizon 60, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
-ttm-r3-180-60: ok, 1,772,018 params, 11.67 MB, diff 3.05e-05, quantile diff 4.58e-05, batch diff 3.814697265625e-05, 3.5 ms, 20 s
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types, 11.7 MB -> 7.2 MB without exporter metadata
+ttm-r3-180-60: ok, 1,772,018 params, 7.23 MB, diff 3.05e-05, quantile diff 4.58e-05, batch diff 3.814697265625e-05, 3.4 ms, 20 s
 ttm-r3-90-30: loading 90-30-dec-90-r3
   TinyTimeMixerForDecomposedPrediction, context 90, horizon 30, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
-ttm-r3-90-30: ok, 1,481,062 params, 10.48 MB, diff 7.63e-06, quantile diff 1.14e-05, batch diff 3.814697265625e-06, 2.4 ms, 20 s
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types, 10.5 MB -> 6.1 MB without exporter metadata
+ttm-r3-90-30: ok, 1,481,062 params, 6.06 MB, diff 7.63e-06, quantile diff 1.14e-05, batch diff 3.814697265625e-06, 2.2 ms, 19 s
 ttm-r3-512-30: loading 512-30-dec-90-r3
   TinyTimeMixerForDecomposedPrediction, context 512, horizon 30, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
-ttm-r3-512-30: ok, 1,414,514 params, 10.23 MB, diff 7.63e-06, quantile diff 1.53e-05, batch diff 3.0517578125e-05, 2.4 ms, 20 s
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types, 10.2 MB -> 5.8 MB without exporter metadata
+ttm-r3-512-30: ok, 1,414,514 params, 5.80 MB, diff 7.63e-06, quantile diff 1.53e-05, batch diff 3.0517578125e-05, 2.3 ms, 20 s
 ttm-r3-156-16: loading 156-16-dec-52-r3
   TinyTimeMixerForDecomposedPrediction, context 156, horizon 16, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
-ttm-r3-156-16: ok, 1,501,420 params, 10.58 MB, diff 1.53e-05, quantile diff 1.53e-05, batch diff 2.288818359375e-05, 2.7 ms, 20 s
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types, 10.6 MB -> 6.1 MB without exporter metadata
+ttm-r3-156-16: ok, 1,501,420 params, 6.15 MB, diff 1.53e-05, quantile diff 1.53e-05, batch diff 2.288818359375e-05, 2.6 ms, 20 s
 ttm-r3-52-16: loading 52-16-dec-52-r3
   TinyTimeMixerForDecomposedPrediction, context 52, horizon 16, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
-ttm-r3-52-16: ok, 1,453,596 params, 10.37 MB, diff 7.63e-06, quantile diff 7.63e-06, batch diff 7.62939453125e-06, 2.5 ms, 19 s
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types, 10.4 MB -> 6.0 MB without exporter metadata
+ttm-r3-52-16: ok, 1,453,596 params, 5.95 MB, diff 7.63e-06, quantile diff 7.63e-06, batch diff 7.62939453125e-06, 2.3 ms, 20 s
 done, 6 variants

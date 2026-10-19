@@ -1,5 +1,5 @@
 {
- "built": "2026-10-19T12:29:45.307605+00:00",
+ "built": "2026-10-19T12:36:39.411306+00:00",
  "repo": "ibm-granite/granite-timeseries-ttm-r3",
  "license": "Apache-2.0",
  "torch": "2.11.0+cpu",
@@ -39,13 +39,13 @@
     0.9
    ],
    "batch": "dynamic",
-   "bytes": 29483566,
+   "bytes": 21547278,
    "params": 5328932,
    "export": "dynamic batch",
    "max_abs_diff_vs_torch": 1.9e-05,
    "quantile_diff_vs_torch": 1.9e-05,
    "batch_diff": 4.6e-05,
-   "cpu_ms_1_thread": 10.21
+   "cpu_ms_1_thread": 10.04
   },
   {
    "name": "ttm-r3-180-60",
@@ -67,13 +67,13 @@
     0.9
    ],
    "batch": "dynamic",
-   "bytes": 11671788,
+   "bytes": 7229916,
    "params": 1772018,
    "export": "dynamic batch",
    "max_abs_diff_vs_torch": 3.1e-05,
    "quantile_diff_vs_torch": 4.6e-05,
    "batch_diff": 3.8e-05,
-   "cpu_ms_1_thread": 3.52
+   "cpu_ms_1_thread": 3.43
   },
   {
    "name": "ttm-r3-90-30",
@@ -95,13 +95,13 @@
     0.9
    ],
    "batch": "dynamic",
-   "bytes": 10476571,
+   "bytes": 6062772,
    "params": 1481062,
    "export": "dynamic batch",
    "max_abs_diff_vs_torch": 8e-06,
    "quantile_diff_vs_torch": 1.1e-05,
    "batch_diff": 4e-06,
-   "cpu_ms_1_thread": 2.44
+   "cpu_ms_1_thread": 2.2
   },
   {
    "name": "ttm-r3-512-30",
@@ -123,13 +123,13 @@
     0.9
    ],
    "batch": "dynamic",
-   "bytes": 10226670,
+   "bytes": 5801067,
    "params": 1414514,
    "export": "dynamic batch",
    "max_abs_diff_vs_torch": 8e-06,
    "quantile_diff_vs_torch": 1.5e-05,
    "batch_diff": 3.1e-05,
-   "cpu_ms_1_thread": 2.38
+   "cpu_ms_1_thread": 2.28
   },
   {
    "name": "ttm-r3-156-16",
@@ -151,13 +151,13 @@
     0.9
    ],
    "batch": "dynamic",
-   "bytes": 10576980,
+   "bytes": 6145615,
    "params": 1501420,
    "export": "dynamic batch",
    "max_abs_diff_vs_torch": 1.5e-05,
    "quantile_diff_vs_torch": 1.5e-05,
    "batch_diff": 2.3e-05,
-   "cpu_ms_1_thread": 2.66
+   "cpu_ms_1_thread": 2.59
   },
   {
    "name": "ttm-r3-52-16",
@@ -179,13 +179,13 @@
     0.9
    ],
    "batch": "dynamic",
-   "bytes": 10366151,
+   "bytes": 5952269,
    "params": 1453596,
    "export": "dynamic batch",
    "max_abs_diff_vs_torch": 8e-06,
    "quantile_diff_vs_torch": 8e-06,
    "batch_diff": 8e-06,
-   "cpu_ms_1_thread": 2.49
+   "cpu_ms_1_thread": 2.34
   }
  ]
 }
