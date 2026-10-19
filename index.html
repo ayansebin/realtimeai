@@ -1344,6 +1344,12 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .v4c[data-k="prod"] .v5one{display:grid;gap:8px}
 .v4c[data-k="prod"] .v5one .v5s{min-height:42px;padding:.55rem .75rem;font-size:.88rem}
 }
+/* value panels, decluttered */
+.v4c .v5s i{display:none}
+.v5steps::after{display:none}
+.v4c .v5s{border-color:rgba(255,255,255,.1)}
+.v6il{font-style:normal;font-weight:400;letter-spacing:.04em;text-transform:none;color:var(--ink-3);margin-left:.45rem}
+@media (max-width:600px){.v6uc{gap:4px}.v6uc button{padding:.2rem .5rem;font-size:.72rem}}
 </style>
 </head>
 <body>
@@ -1536,7 +1542,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <p class="v4pain">Every forecast is a pipeline to build and maintain, per series.</p>
             <div class="v4m"><b>6 steps → 1</b><span>to a first forecast in production</span></div>
             <div class="v4viz">
-              <div class="v4k">The usual way · for every series</div>
+              <div class="v4k">The usual way, per series</div>
               <div class="v5steps" id="v5-steps"><span class="v5s"><i>1</i>Export the data</span><span class="v5s"><i>2</i>Build features</span><span class="v5s"><i>3</i>Train a model</span><span class="v5s"><i>4</i>Validate</span><span class="v5s"><i>5</i>Deploy an endpoint</span><span class="v5s"><i>6</i>Monitor and retrain</span></div>
               <div class="v4k">Together</div>
               <div class="v5one"><span class="v5s t"><i>1</i>Call the model in Flink SQL</span><span class="v5ret">forecast with q10, q50, q90 back</span></div>
@@ -1547,7 +1553,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <p class="v4pain">Rules and per series models miss what just changed.</p>
             <div class="v4m"><b data-c="32">0%</b><span>less error than a seasonal baseline, zero-shot</span></div>
             <div class="v4viz">
-              <div class="v4k">Learned across domains, reused on your series <span class="v5il">how transfer works</span></div>
+              <div class="v4k">Learned across domains</div>
               <div class="v6tr"><canvas id="v6-tr" role="img" aria-label="Eight pretraining domains, electricity, weather, traffic, solar and wind, smart meters, web traffic, cash withdrawals and bitcoin, each with its own pattern. The patterns that match a new series light up and flow into one model, which forecasts the new series zero-shot."></canvas></div>
               <div class="v4k">Keeps improving</div>
               <div class="v6imp">
@@ -1561,8 +1567,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <p class="v4pain">A nightly batch scores events hours late.</p>
             <div class="v4m"><b>12 h → 0</b><span>average wait for the scoring run</span></div>
             <div class="v4viz">
-              <div class="v4k">Value of the decision, by time to act <span class="v5il">illustrative curves</span></div>
-              <div class="v6uc" role="group" aria-label="Pick a use case"><button type="button" class="on" data-u="0">Card fraud</button><button type="button" data-u="1">Stockout</button><button type="button" data-u="2">Network fault</button><button type="button" data-u="3">Process drift</button></div>
+              <div class="v4k">Value of the decision over time <em class="v6il">illustrative</em></div>
+              <div class="v6uc" role="group" aria-label="Pick a use case"><button type="button" class="on" data-u="0">Fraud</button><button type="button" data-u="1">Stockout</button><button type="button" data-u="2">Network</button><button type="button" data-u="3">Process</button></div>
               <div class="v6dc"><canvas id="v6-dc" role="img" aria-label="The value of a decision falls as the time to act grows from seconds to a week. Scored in the stream it acts in seconds and keeps most of the value. A nightly batch acts after 12 hours on average and keeps little."></canvas></div>
               <div class="v6o t"><span class="v6dot"></span><b>In the stream · seconds</b><span data-o="t"></span><em data-p="t">96%</em></div>
               <div class="v6o u"><span class="v6dot"></span><b>Nightly batch · 12 h on average</b><span data-o="u"></span><em data-p="u">4%</em></div>
@@ -2579,12 +2585,12 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     {n:'Card payments',m:[4,5,6],p:'bursts, trend, paydays',f:u=>(fr(u*4.7)<0.1?0.7:0)+u*0.4-0.35+0.1*Math.sin(u*33)}];
   const TCY=4200;
   function drawTr(t){if(!tr||!tr.W)return;const ctx=tr.ctx,W=tr.W,H=tr.H,narrow=W<330;ctx.clearRect(0,0,W,H);
-    const k=Math.floor(t/TCY)%NEW.length,u=(t%TCY)/TCY,N=NEW[k],g=6,cols=2,rows=4,tw=Math.round(0.47*W/cols)-g,th=(H-18-g*(rows-1))/rows,mx=cols*(tw+g)+(narrow?20:26),sx=mx+(narrow?18:26),sw=W-sx,cy=(H-18)/2;
+    const k=Math.floor(t/TCY)%NEW.length,u=(t%TCY)/TCY,N=NEW[k],g=6,cols=2,rows=4,tw=Math.round(0.47*W/cols)-g,th=(H-g*(rows-1))/rows,mx=cols*(tw+g)+(narrow?20:26),sx=mx+(narrow?18:26),sw=W-sx,cy=H/2;
     const lit=i=>N.m.includes(i);
     DOM.forEach(([name,f],i)=>{const x=(i%cols)*(tw+g),y=Math.floor(i/cols)*(th+g),on=lit(i)&&(reduced||u>0.08),a=on?(reduced?1:sm((u-0.08)/0.12)):0;
-      ctx.fillStyle=on?'rgba(69,137,255,'+(0.08+0.32*a)+')':'rgba(255,255,255,.035)';ctx.fillRect(x,y,tw,th);ctx.strokeStyle=on?'rgba(166,200,255,'+(0.3+0.7*a)+')':'rgba(255,255,255,.12)';ctx.lineWidth=1;ctx.strokeRect(x+0.5,y+0.5,tw-1,th-1);
-      ctx.font='500 '+(narrow?8.5:9)+'px '+MF;ctx.fillStyle=on?'#fff':'rgba(255,255,255,.5)';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText(name,x+4,y+3);
-      const py=y+th*0.68,amp=th*0.18;ctx.beginPath();for(let s=0;s<=24;s++){const q=s/24,xx=x+4+(tw-8)*q,yy=py-amp*f(q);s?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.strokeStyle=on?'#fff':'rgba(255,255,255,.3)';ctx.lineWidth=on?1.4:1.1;ctx.stroke();
+      ctx.fillStyle=on?'rgba(69,137,255,'+(0.08+0.32*a)+')':'rgba(255,255,255,.025)';ctx.fillRect(x,y,tw,th);if(on){ctx.strokeStyle='rgba(166,200,255,'+(0.3+0.7*a)+')';ctx.lineWidth=1;ctx.strokeRect(x+0.5,y+0.5,tw-1,th-1);}
+      ctx.font='500 '+(narrow?8.5:9)+'px '+MF;ctx.fillStyle=on?'#fff':'rgba(255,255,255,.32)';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText(name,x+4,y+3);
+      const py=y+th*0.68,amp=th*0.18;ctx.beginPath();for(let s=0;s<=24;s++){const q=s/24,xx=x+4+(tw-8)*q,yy=py-amp*f(q);s?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.strokeStyle=on?'#fff':'rgba(255,255,255,.16)';ctx.lineWidth=on?1.4:1;ctx.stroke();
       /* what it learned flows into the model */
       if(on){const x0=x+tw,y0=y+th/2,xm=x0+(mx-x0)*0.6;ctx.beginPath();ctx.moveTo(x0,y0);ctx.bezierCurveTo(xm,y0,xm,cy,mx,cy);ctx.strokeStyle='rgba(166,200,255,'+(0.55*a)+')';ctx.stroke();
         if(!reduced&&u>0.2){const q=(t/600+i*0.3)%1,bx=(1-q)**3*x0+3*(1-q)**2*q*xm+3*(1-q)*q*q*xm+q**3*mx,by=(1-q)**3*y0+3*(1-q)**2*q*y0+3*(1-q)*q*q*cy+q**3*cy;ctx.fillStyle='#fff';ctx.fillRect(bx-1.5,by-1.5,3,3);}}});
@@ -2592,17 +2598,14 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     const r0=narrow?7:9;ctx.save();if(!reduced){ctx.shadowColor='rgba(69,137,255,.9)';ctx.shadowBlur=14;}ctx.beginPath();ctx.arc(mx,cy,r0,0,Math.PI*2);ctx.fillStyle='#0f62fe';ctx.fill();ctx.restore();ctx.strokeStyle='#fff';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(mx,cy,r0,0,Math.PI*2);ctx.stroke();
     ctx.beginPath();ctx.moveTo(mx+r0,cy);ctx.lineTo(sx,cy);ctx.strokeStyle='rgba(166,200,255,.6)';ctx.lineWidth=1;ctx.stroke();
     /* your series, never seen in training, and its forecast */
-    const top=0,bot=H-18,ph=bot-top;ctx.fillStyle='rgba(255,255,255,.035)';ctx.fillRect(sx,top,sw,ph);ctx.strokeStyle='rgba(255,255,255,.14)';ctx.strokeRect(sx+0.5,top+0.5,sw-1,ph-1);
-    ctx.font='600 '+(narrow?8.5:9)+'px '+MF;ctx.fillStyle='#a6c8ff';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText('NEW, NEVER SEEN',sx+5,top+5);
-    ctx.font='500 '+(narrow?11:12)+'px '+SANS;ctx.fillStyle='#fff';{let n=N.n;while(n.length>3&&ctx.measureText(n).width>sw-10)n=n.slice(0,-1);ctx.fillText(n===N.n?n:n.slice(0,-1)+'…',sx+5,top+18);}
+    const top=0,bot=H,ph=bot-top;ctx.fillStyle='rgba(255,255,255,.03)';ctx.fillRect(sx,top,sw,ph);
+    ctx.font='500 '+(narrow?11:12)+'px '+SANS;ctx.fillStyle='#fff';ctx.textAlign='left';ctx.textBaseline='top';{const mw=sw-12;if(ctx.measureText(N.n).width<=mw)ctx.fillText(N.n,sx+6,top+7);else{const w=N.n.split(' ');let l1=w[0],k=1;while(k<w.length&&ctx.measureText(l1+' '+w[k]).width<=mw){l1+=' '+w[k];k++;}ctx.fillText(l1,sx+6,top+7);ctx.fillText(w.slice(k).join(' '),sx+6,top+21);}}
     const hx0=sx+5,hx1=sx+sw*0.62,fx1=sx+sw-5,ly=top+ph*0.66,amp=ph*0.2,Y=v=>ly-amp*v;
     ctx.beginPath();for(let s=0;s<=40;s++){const q=s/40*0.66,xx=hx0+(hx1-hx0)*(s/40);s?ctx.lineTo(xx,Y(N.f(q))):ctx.moveTo(xx,Y(N.f(q)));}ctx.strokeStyle='#fff';ctx.lineWidth=1.3;ctx.stroke();
     const rv=reduced?1:sm((u-0.45)/0.3);if(rv>0){const xe=hx1+(fx1-hx1)*rv,v=q=>N.f(0.66+0.34*q*rv);ctx.beginPath();for(let s=0;s<=20;s++){const q=s/20;ctx.lineTo(hx1+(xe-hx1)*q,Y(v(q))-3-7*q);}for(let s=20;s>=0;s--){const q=s/20;ctx.lineTo(hx1+(xe-hx1)*q,Y(v(q))+3+7*q);}ctx.closePath();ctx.fillStyle='rgba(69,137,255,.28)';ctx.fill();
       ctx.setLineDash([3,2]);ctx.beginPath();for(let s=0;s<=20;s++){const q=s/20,xx=hx1+(xe-hx1)*q;s?ctx.lineTo(xx,Y(v(q))):ctx.moveTo(xx,Y(v(q)));}ctx.strokeStyle='#a6c8ff';ctx.lineWidth=1.4;ctx.stroke();ctx.setLineDash([]);}
-    ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(hx1)+0.5,top+34);ctx.lineTo(Math.round(hx1)+0.5,bot-4);ctx.stroke();
-    if(rv>0.6){ctx.font='500 '+(narrow?9:9.5)+'px '+MF;ctx.fillStyle='#a7f0ba';ctx.textAlign='right';ctx.textBaseline='bottom';ctx.fillText('zero-shot',sx+sw-5,bot-4);}
-    /* the patterns it reused, under the picture */
-    ctx.font='400 '+(narrow?10:10.5)+'px '+SANS;ctx.fillStyle='rgba(208,226,255,.9)';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText('Reuses: '+N.p,0,H-7);}
+    ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(hx1)+0.5,top+(ctx.measureText(N.n).width>sw-12?42:28));ctx.lineTo(Math.round(hx1)+0.5,bot-6);ctx.stroke();
+  }
 
   /* ---------- responsiveness: the value of the decision decays while it waits ---------- */
   const dcC=$('#v6-dc'),dc=dcC?new Cv(dcC):null,ucB=$$('.v6uc button',R);
@@ -2620,8 +2623,8 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     if(now-dcs.pin>14000&&!reduced){const k=Math.floor(now/6500)%4;if(k!==dcs.u){dcs.u=k;dcs.t0=now;}}
     const L=LANES[dcs.u],x0=32,x1=W-8,y0=8,y1=H-20,X=x=>x0+(x1-x0)*x,Y=v=>y1-(y1-y0)*v,pr=reduced?1:sm(((now-dcs.t0)-300)/2200);
     ucB.forEach((b,i)=>tog(b,'on',i===dcs.u));
-    ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;[0.25,0.5,0.75,1].forEach(v=>{const y=Math.round(Y(v))+0.5;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();});
-    ctx.font='400 9.5px '+MF;ctx.fillStyle='rgba(185,195,211,.75)';ctx.textAlign='right';ctx.textBaseline='middle';[[1,'100%'],[0.5,'50%'],[0,'0']].forEach(([v,s])=>ctx.fillText(s,x0-5,Y(v)));
+    ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;[0.5,1].forEach(v=>{const y=Math.round(Y(v))+0.5;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();});
+    ctx.font='400 9.5px '+MF;ctx.fillStyle='rgba(185,195,211,.75)';ctx.textAlign='right';ctx.textBaseline='middle';[[1,'100%'],[0,'0']].forEach(([v,s])=>ctx.fillText(s,x0-5,Y(v)));
     ctx.textBaseline='top';['sec','min','hour','day','week'].forEach((s,i)=>{const x=X(i/4);ctx.textAlign=i===0?'left':i===4?'right':'center';ctx.fillStyle='rgba(185,195,211,.75)';ctx.fillText(s,x,y1+6);ctx.fillStyle='rgba(255,255,255,.18)';ctx.fillRect(Math.round(x),y1,1,4);});
     /* the curve, with the value lost while the batch waits shaded */
     ctx.beginPath();for(let i=0;i<=80;i++){const x=i/80;i?ctx.lineTo(X(x),Y(L.f(x))):ctx.moveTo(X(x),Y(L.f(x)));}ctx.strokeStyle='rgba(255,255,255,.75)';ctx.lineWidth=1.6;ctx.stroke();
@@ -2629,7 +2632,6 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     if(pr>0.05){ctx.setLineDash([3,3]);ctx.strokeStyle='rgba(255,131,137,.7)';ctx.beginPath();ctx.moveTo(X(XS),Y(vS));ctx.lineTo(X(xb),Y(vS));ctx.moveTo(X(xb)+0.5,Y(vS));ctx.lineTo(X(xb)+0.5,Y(vB));ctx.stroke();ctx.setLineDash([]);}
     const dot=(x,c)=>{const v=L.f(x);ctx.save();if(!reduced){ctx.shadowColor=c;ctx.shadowBlur=10;}ctx.beginPath();ctx.arc(X(x),Y(v),5.5,0,Math.PI*2);ctx.fillStyle=c;ctx.fill();ctx.restore();ctx.beginPath();ctx.arc(X(x),Y(v),5.5,0,Math.PI*2);ctx.strokeStyle='#fff';ctx.lineWidth=1.4;ctx.stroke();};
     dot(xb,pr>=1?'#fa4d56':'#b9c3d3');dot(XS,'#42be65');
-    const lost=Math.round((vS-vB)*100);if(pr>0.1&&lost>4){ctx.font='600 10px '+MF;ctx.fillStyle='#ff8389';ctx.textAlign='left';ctx.textBaseline='middle';const ty=Y(vS)+14;ctx.fillText('−'+lost+'% while it waits',Math.min(X(XS)+10,x1-120),ty);}
     const go=pr>0.12;set(oT,L.txt(XS));set(oU,go?L.txt(xb):'waiting for the nightly run');set(pT,Math.round(vS*100)+'%');set(pU,go?Math.round(vB*100)+'%':'');tog(R,'done',pr>=1);}
 
   function frame(t){
@@ -2646,6 +2648,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   reg({el,resize(){if(tr)tr.fit();if(dc)dc.fit();},update(dt){if(reduced)return;if(!st.seen){st.seen=true;start();}if(!st.run)return;st.t+=dt;frame(st.t);if(st.t>=T){st.run=false;frame(T);}},
     draw(){const now=performance.now();drawTr(reduced?TCY*0.9:now);drawDc(now);}});
 })();
+
 /* ============ 02 dials, proof count-ups ============ */
 function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'',suf=b.dataset.suffix||'';const t0=performance.now(),dur=reduced?1:1400;function f(t){const u=clamp((t-t0)/dur,0,1);b.textContent=pre+fmtInt(target*ease(u))+suf;if(u<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
 (function(){const d=$('#dials');if(d)once(d,()=>{d.classList.add('in');$$('b[data-count]',d).forEach(countUp);});})();
