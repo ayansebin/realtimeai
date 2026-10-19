@@ -1721,6 +1721,39 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
 
 .tw-panel .btn.ghost{color:#fff;border:1px solid rgba(255,255,255,.45);background:transparent}
 .tw-panel .btn.ghost:hover{background:rgba(255,255,255,.08)}
+
+/* try it on Confluent: one form, the page does the rest */
+.tw1{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);border:1px solid #0f62fe;background:linear-gradient(150deg,#2c5066 0%,#26375f 70%);color:#f6f7fb}
+@media (max-width:900px){.tw1{grid-template-columns:minmax(0,1fr)}}
+.tw1-do{list-style:none;margin:0;padding:clamp(18px,2.4vw,30px);display:grid;gap:1.15rem;align-content:center;border-right:1px solid rgba(255,255,255,.14)}
+@media (max-width:900px){.tw1-do{border-right:0;border-bottom:1px solid rgba(255,255,255,.14)}}
+.tw1-do li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:.8rem;align-items:start}
+.tw1-do li i{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.45);margin-top:.1rem;box-sizing:border-box;transition:background .25s,border-color .25s}
+.tw1-do li.busy i{border-color:#f1c21b;border-top-color:transparent;animation:twspin .9s linear infinite}
+.tw1-do li.ok i{background:#42be65 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.6 2.5L12 5.5' fill='none' stroke='%23fff' stroke-width='1.8'/%3E%3C/svg%3E") center/14px no-repeat;border-color:#42be65}
+.tw1-do li.warn i{background:#f1c21b;border-color:#f1c21b}
+.tw1-do b{display:block;font-weight:500;font-size:1rem;color:#fff;line-height:1.35}
+.tw1-do span{display:block;font-size:.84rem;color:#c1c7d6;line-height:1.45;margin-top:.15rem}
+.tw1-do .tw1-x:empty{display:none}
+.tw1-panel{padding:clamp(18px,2.4vw,30px);display:grid;align-content:center;min-height:300px}
+.tw1-panel .tw-form{max-width:none}
+.tw1-want{display:grid;gap:.4rem}
+.tw1-want>span{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#a6c8ff}
+.tw1-want .chip{color:#e0e4ec;border-color:rgba(255,255,255,.3)}
+.tw1-want .chip[aria-pressed="true"]{background:#0f62fe;border-color:#0f62fe;color:#fff}
+.tw1-go{display:flex;align-items:center;gap:.6rem 1.2rem;flex-wrap:wrap;margin-top:.2rem}
+.tw1-go .btn{margin-left:0;gap:1rem}
+.tw1-go .tw-fine{flex:1 1 220px}
+.tw1-done{display:grid;gap:.75rem;justify-items:start}
+.tw1-done h3{margin:0;font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:300;color:#fff}
+.tw1-done p{margin:0;font-size:1rem;line-height:1.55;color:#d6dbe5;max-width:58ch}
+.tw1-done p b{font-weight:500;color:#fff}
+.tw1-done .tw-code{width:100%}
+.tw1-panel,.tw1-done,.tw1-do{min-width:0}
+.tw1-done>*{max-width:100%}
+.tw1-done .tw-code{justify-self:stretch;width:100%;min-width:0}
+.tw1-go .btn{background:#0f62fe;color:#fff;border-color:#0f62fe}
+.tw1-go .btn:hover{background:#0043ce;color:#fff}
 </style>
 </head>
 <body class="pg">
@@ -1818,17 +1851,17 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
   <div class="wrap">
     <div class="chapter-head">
       <span class="n">TRY IT ON CONFLUENT</span>
-      <h2>We set it up with you.</h2>
-      <p>You make the account and one key. This page does the rest on Confluent Cloud and shows you the results here.</p>
+      <h2>Tell us who you are. We set up the rest.</h2>
     </div>
-    <div class="tw" id="tw">
-      <div class="tw-side">
-        <div class="tw-prog"><b id="tw-count">Step 1 of 8</b><i><span id="tw-bar"></span></i></div>
-        <ol class="tw-steps" id="tw-steps"></ol>
-      </div>
-      <div class="tw-panel" id="tw-panel" aria-live="polite"></div>
+    <div class="tw1" id="tw1">
+      <ul class="tw1-do" id="tw1-do">
+        <li data-k="ea"><i aria-hidden="true"></i><div><b>We request access to the Granite models</b><span>Early Access on Confluent Cloud, for your company</span><span class="tw1-x"></span></div></li>
+        <li data-k="open"><i aria-hidden="true"></i><div><b>We open Confluent&#39;s sign-up for you</b><span>New accounts get free credits for 30 days</span><span class="tw1-x"></span></div></li>
+        <li data-k="sql"><i aria-hidden="true"></i><div><b>We hand you your first forecast</b><span>The query is copied, ready to paste</span><span class="tw1-x"></span></div></li>
+      </ul>
+      <div class="tw1-panel" id="tw1-panel" aria-live="polite"></div>
     </div>
-    <p class="tw-note">The Granite models are in Early Access on Confluent Cloud on AWS, for evaluation in development and test environments. To do it by hand, follow <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">the forecast docs</a> and <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/detect-anomalies.html" target="_blank" rel="noopener">the anomaly docs</a>.</p>
+    <p class="tw-note">The Granite models are in Early Access on Confluent Cloud on AWS, for evaluation in development and test environments. See <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">the forecast docs</a> and <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/detect-anomalies.html" target="_blank" rel="noopener">the anomaly docs</a>.</p>
   </div>
 </section>
 
@@ -2060,228 +2093,61 @@ cv.addEventListener('touchmove',e=>{const r=cv.getBoundingClientRect();st.hover=
 cv.addEventListener('touchend',()=>{setTimeout(()=>{st.hover=null;draw();},1500);},{passive:true});
 window.addEventListener('keydown',e=>{if(!st.ds||MINE.mode||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;if(e.key==='ArrowLeft')$('#pg-prev').click();else if(e.key==='ArrowRight')$('#pg-next').click();else if(e.key==='Enter'&&e.target.tagName!=='BUTTON')run();});
 
-/* ---------- try it on Confluent: the visitor makes the account and one key, this page does the rest through Confluent's API ---------- */
+/* ---------- try it on Confluent: one short form, then the page does the rest for the visitor ---------- */
 (function(){
-  const list=$('#tw-steps'),panel=$('#tw-panel');if(!list||!panel)return;
-  const S=[
-    {k:'who',t:'Who is trying it',by:'you'},
-    {k:'signup',t:'Create your free account',by:'you'},
-    {k:'key',t:'Make one key for us',by:'you'},
-    {k:'access',t:'Request Early Access',by:'we'},
-    {k:'setup',t:'Set up Flink',by:'we'},
-    {k:'stream',t:'Watch a live stream',by:'we'},
-    {k:'forecast',t:'Forecast and flag anomalies',by:'we'},
-    {k:'feedback',t:'Tell us how it went',by:'you'}];
-  const REGIONS=[['us-east-1','US East, N. Virginia'],['us-east-2','US East, Ohio'],['us-west-2','US West, Oregon'],['eu-west-1','Europe, Ireland'],['eu-central-1','Europe, Frankfurt'],['ap-southeast-1','Asia Pacific, Singapore'],['ap-southeast-2','Asia Pacific, Sydney']];
-  const ORDERS='`examples`.`marketplace`.`orders`',WIN=5,MINCTX=20,HORIZON=10,LIMIT=72;
-  const SUB="  SELECT window_time, CAST(SUM(price) AS DOUBLE) AS revenue\n  FROM TABLE(TUMBLE(TABLE "+ORDERS+", DESCRIPTOR($rowtime), INTERVAL '"+WIN+"' SECOND))\n  GROUP BY window_start, window_end, window_time";
-  const OVER="  OVER (ORDER BY window_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)";
-  const Q={
-    stream:'SELECT * FROM '+ORDERS+' LIMIT 40;',
-    forecast:"SELECT window_time, revenue,\n  AI_FORECAST(revenue, window_time,\n    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE "+HORIZON+", 'minContextSize' VALUE "+MINCTX+"))\n"+OVER+" AS forecast\nFROM (\n"+SUB+"\n)\nLIMIT "+LIMIT+";",
-    anomaly:"SELECT window_time, revenue,\n  AI_DETECT_ANOMALIES(revenue, window_time,\n    JSON_OBJECT('model' VALUE 'ttm', 'confidencePercentage' VALUE 95.0, 'minContextSize' VALUE "+MINCTX+"))\n"+OVER+" AS anomaly\nFROM (\n"+SUB+"\n)\nLIMIT "+LIMIT+";"};
-  const KEY='pg-try-v2';
-  /* what survives a reload: who they are, how far they got, the Early Access request. Keys never leave memory. */
-  let P={cur:0,max:0,who:{name:'',email:'',company:''},region:'us-east-1',ea:null,fb:false};
+  const root=$('#tw1'),panel=$('#tw1-panel'),todo=$('#tw1-do');if(!root||!panel||!todo)return;
+  const SIGNUP='https://www.confluent.io/get-started/';
+  const SQL="SELECT window_time, revenue,\n  AI_FORECAST(revenue, window_time,\n    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 10, 'minContextSize' VALUE 20))\n  OVER (ORDER BY window_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS forecast\nFROM (\n  SELECT window_time, CAST(SUM(price) AS DOUBLE) AS revenue\n  FROM TABLE(TUMBLE(TABLE `examples`.`marketplace`.`orders`, DESCRIPTOR($rowtime), INTERVAL '10' SECOND))\n  GROUP BY window_start, window_end, window_time\n);";
+  const WANT=['Demand and sales','Energy and utilities','Payments and fraud','IT and operations','Something else'];
+  const KEY='pg-try-v3';let P={who:null,want:[],done:false,ok:{}};
   try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(j&&typeof j==='object')P=Object.assign(P,j);}catch(e){}
   const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(P));}catch(e){}};
-  const X={made:[],key:'',secret:'',org:null,owner:null,envs:[],regions:[],env:null,envNew:false,pool:null,poolNew:false,phase:'',fkey:'',fsecret:'',endpoint:'',live:{},log:{},stream:{cols:[],rows:[],n:0,phase:''},fc:{w:{},order:[],phase:{},err:'',started:false,ended:false},chain:null,cleaned:false};
-  if(P.cur>=3&&P.cur<7&&!X.key)P.cur=2;
-  const t0=Date.now();
+  const t0=Date.now(),sleep=ms=>new Promise(r=>setTimeout(r,ms));
   const arrow='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
-  const ext='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3H3v10h10v-3M9 2h5v5M14 2L7 9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
-  const lock='<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>';
-  const hl=q=>highlight(q).replace(/\b(GROUP|CAST|SUM|TABLE|TUMBLE|DESCRIPTOR|INTERVAL|SECOND|DOUBLE|LIMIT)\b/g,'<span class="k">$1</span>');
-  const sqlBox=(label,qs)=>'<details class="tw-sql"><summary>'+label+'</summary>'+qs.map(q=>'<div class="tw-code"><button type="button" class="tw-copy" data-q="'+esc(q)+'">Copy</button><pre><code>'+hl(q)+'</code></pre></div>').join('')+'</details>';
-  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-  const rid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-
-  /* the helper on this site that talks to Confluent */
-  async function cc(action,extra){let r,j;try{r=await fetch('/api/confluent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({action},extra||{}))});j=await r.json();}catch(e){j=null;}
-    if(!j||!j.ok){const e=new Error((j&&j.error)||'The helper on this site did not answer. Try again.');e.upstream=j&&j.upstream;throw e;}return j;}
-  const cloud=()=>({key:X.key,secret:X.secret});
-  const flink=()=>({fkey:X.fkey,fsecret:X.fsecret,endpoint:X.endpoint,org:X.org.id,env:X.env.id});
-  async function lead(kind,extra){try{const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({kind,name:P.who.name,email:P.who.email,company:P.who.company,page:'/playground#try',t:Date.now()-t0},extra||{}))});return r.ok;}catch(e){return false;}}
-
-  /* side by side: Confluent opens in a window next to this one */
-  function openBeside(url){const sw=screen.availWidth||1440,sh=screen.availHeight||900,w=Math.max(480,Math.round(sw*0.5)),l=(screen.availLeft||0)+sw-w;
-    const win=window.open(url,'confluent','popup,width='+w+',height='+sh+',left='+l+',top='+(screen.availTop||0));if(!win)window.open(url,'_blank','noopener');else try{win.focus();}catch(e){}}
-
-  function go(i){i=clamp(i,0,S.length-1);if(i>=3&&!X.key&&i<7)i=Math.min(i,2);P.cur=i;P.max=Math.max(P.max,i);save();render();if(window.innerWidth<900){const el=$('#tw');if(el&&el.getBoundingClientRect().top<0)el.scrollIntoView({behavior:'smooth',block:'start'});}}
-  function doneStep(i){return i<P.max||(i===7&&P.fb);}
-  function renderList(){list.innerHTML=S.map((s,i)=>'<li><button type="button" data-i="'+i+'" class="'+(i===P.cur?'on ':'')+(doneStep(i)?'ok':'')+'" aria-current="'+(i===P.cur?'step':'false')+'"'+(i>P.max?' disabled':'')+'><i>'+(doneStep(i)?'✓':i+1)+'</i><span>'+esc(s.t)+'</span><em>'+(s.by==='we'?'we do it':'you')+'</em></button></li>').join('');
-    $$('button',list).forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.i;if(i<=P.max)go(i);}));
-    const n=Math.min(S.length,P.max+(P.fb?1:0));$('#tw-count').textContent=(P.fb?'All done':'Step '+(P.cur+1)+' of '+S.length);$('#tw-bar').style.width=(n/S.length*100)+'%';}
-  const head=(i,sub)=>'<div class="tw-k">Step '+(i+1)+' of '+S.length+' · '+(S[i].by==='we'?'we do this':'you')+(sub?', '+sub:'')+'</div><h3>'+esc(S[i].t)+'</h3>';
-  const logList=items=>'<ul class="tw-log">'+items.map(([st,html])=>'<li class="'+st+'">'+html+'</li>').join('')+'</ul>';
-  const nav=(back,next)=>'<div class="tw-nav">'+(back?'<button type="button" class="btn sm ghost" data-go="-1">Back</button>':'<span></span>')+(next||'')+'</div>';
-
-  function render(){renderList();const s=S[P.cur],i=P.cur;let h='';
-    if(s.k==='who'){const w=P.who;h=head(i)+'<p>We use this to ask Confluent to turn on the Granite models for your organization, and to follow up.</p>'+
-      '<form class="tw-form" id="tw-who" novalidate><label><span>Name</span><input name="name" autocomplete="name" value="'+esc(w.name)+'" required></label><label><span>Work email</span><input name="email" type="email" autocomplete="email" value="'+esc(w.email)+'" required></label><label><span>Company</span><input name="company" autocomplete="organization" value="'+esc(w.company)+'" required></label>'+
-      '<input name="website" class="tw-hp" tabindex="-1" autocomplete="off" aria-hidden="true"><label class="tw-check"><input type="checkbox" name="ok"'+(w.email?' checked':'')+'><span>Share these with the team behind this site for Early Access and a follow up</span></label><p class="tw-err" hidden></p>'+
-      nav(false,'<button class="btn sm" type="submit">Continue '+arrow+'</button>')+'</form>';}
-    else if(s.k==='signup'){h=head(i,'about 2 minutes')+'<p>Confluent opens beside this page. New accounts get free credits for their first 30 days.</p>'+
-      '<ol class="tw-do"><li>Sign up with <b>'+esc(P.who.email||'your work email')+'</b>'+(P.who.email?' <button type="button" class="tw-chip" data-copy="'+esc(P.who.email)+'">Copy</button>':'')+'</li><li>Confirm the email Confluent sends you</li><li>Come back here</li></ol>'+
-      '<div class="tw-acts"><button type="button" class="btn" data-open="https://www.confluent.io/get-started/">Open sign-up beside this page '+ext+'</button></div>'+
-      nav(true,'<span class="tw-alt"><button type="button" class="tw-link" data-go="1">I already have an account</button><button type="button" class="btn sm" data-go="1">I\'m signed in '+arrow+'</button></span>');}
-    else if(s.k==='key'){h=head(i,'about 1 minute')+'<p>'+(P.ea?'Welcome back. Paste a key again and we pick up where you left off.':'With it, this page sets up Flink and runs the queries for you through Confluent\'s API.')+'</p>'+
-      '<ol class="tw-do"><li>Open API keys and press <b>Add key</b></li><li>Choose <b>My account</b>, then <b>Cloud resource management</b></li><li>Create it and paste both parts here</li></ol>'+
-      '<div class="tw-acts"><button type="button" class="btn ghost" data-open="https://confluent.cloud/settings/api-keys">Open API keys beside this page '+ext+'</button></div>'+
-      '<form class="tw-form" id="tw-key" novalidate autocomplete="off"><div class="tw-row"><label><span>API key</span><input name="key" spellcheck="false" autocomplete="off" required></label><label><span>API secret</span><input name="secret" type="password" spellcheck="false" autocomplete="new-password" required></label></div>'+
-      '<label class="tw-reg"><span>Region</span><select name="region">'+REGIONS.map(([v,l])=>'<option value="'+v+'"'+(v===P.region?' selected':'')+'>'+esc(l)+' · aws '+v+'</option>').join('')+'</select></label>'+
-      '<p class="tw-fine">'+lock+'Used only while this page is open. It goes to Confluent through this site and is never stored. Delete it in Confluent when you are done.</p><p class="tw-err" hidden></p>'+
-      nav(true,'<button class="btn sm" type="submit">Connect and set it up '+arrow+'</button>')+'</form>';}
-    else if(s.k==='access'){const L=X.log.access||[];h=head(i)+'<p>The Granite models are in Early Access on Confluent Cloud. We ask for your organization so you do not have to.</p>'+logList(L)+
-      (P.ea&&X.org&&P.ea.org===X.org.id?'<p class="tw-fine">You will hear back at <b>'+esc(P.who.email)+'</b> once it is on. The live stream works in the meantime.</p>':'');}
-    else if(s.k==='setup'){h=head(i)+'<p>A small compute pool in your account. It costs nothing while idle and uses your free credits while a query runs.</p>'+logList(X.log.setup||[]);}
-    else if(s.k==='stream'){const st=X.stream;h=head(i)+'<p>Orders from Confluent\'s sample marketplace, read live by Flink in your account.</p>'+logList(X.log.stream||[])+
-      '<div class="tw-table" id="tw-table">'+streamTable()+'</div>'+sqlBox('The SQL we ran',[Q.stream])+
-      (st.phase==='done'?nav(false,'<button type="button" class="btn sm" data-go="1">Next: the forecast '+arrow+'</button>'):'');}
-    else if(s.k==='forecast'){h=head(i)+'<p>Revenue every '+WIN+' seconds. TTM forecasts the next '+HORIZON+' windows and flags any window outside its 95% range.</p>'+logList(X.log.forecast||[])+
-      (X.fc.err&&!X.fc.order.length?'':'<div class="tw-chart"><canvas id="tw-cv" aria-label="Revenue per window with the TTM forecast and flagged windows"></canvas></div>'+
-      '<div class="tw-legend"><span><i style="background:#f4f4f4"></i>revenue</span><span><i class="band"></i>expected range</span><span><i style="background:#78a9ff"></i>forecast</span><span><i class="dot"></i>flagged</span></div>'+
-      '<p class="tw-fine" id="tw-fcs">'+fcStatus()+'</p>')+sqlBox('The SQL we ran',[Q.forecast,Q.anomaly])+
-      nav(false,(X.fc.err?'<button type="button" class="btn sm ghost" data-act="rerun">Run again</button>':'')+'<button type="button" class="btn sm" data-go="1">Next: tell us how it went '+arrow+'</button>');}
-    else if(s.k==='feedback'){h=head(i)+(P.fb?'<p>Thank you. It went straight to the team.</p>':'<p>Two quick questions. Your answers go straight to the team.</p>'+
-      '<form class="tw-form" id="tw-fb" novalidate><div class="tw-q">How useful was this?</div><div class="tw-rate" role="radiogroup" aria-label="Rating">'+[1,2,3,4,5].map(n=>'<button type="button" role="radio" aria-checked="false" data-r="'+n+'">'+n+'</button>').join('')+'</div>'+
-      '<label><span>What would you forecast with it?</span><textarea name="notes" rows="3"></textarea></label><p class="tw-err" hidden></p>'+nav(false,'<button class="btn sm" type="submit">Send '+arrow+'</button>')+'</form>')+cleanBox();}
-    panel.innerHTML=h;wire();if(s.k==='forecast')drawFc();}
-  function cleanBox(){if(!X.key)return P.fb?'<p class="tw-fine">If you made a Cloud API key for this, you can delete it in Confluent: <button type="button" class="tw-link" data-open="https://confluent.cloud/settings/api-keys">open API keys</button>.</p>':'';
-    const made=[X.poolNew?'the compute pool':'',X.fkey?'the Flink key':''].filter(Boolean);
-    return '<div class="tw-clean"><b>Clean up</b><p>'+(X.cleaned?'Done. We stopped our queries'+(made.length?' and deleted '+made.join(' and '):'')+'. Delete the Cloud key you made in step 3 too: <button type="button" class="tw-link" data-open="https://confluent.cloud/settings/api-keys">open API keys</button>.':'Stops our queries'+(made.length?' and deletes '+made.join(' and ')+' we made':'')+'. Your account and data stay as they are.')+'</p>'+(X.cleaned?'':'<button type="button" class="btn sm ghost" data-act="clean">Clean up now</button>')+'</div>';}
-  function wire(){
-    $$('[data-go]',panel).forEach(b=>b.addEventListener('click',()=>go(P.cur+(+b.dataset.go))));
-    $$('[data-open]',panel).forEach(b=>b.addEventListener('click',()=>openBeside(b.dataset.open)));
-    $$('[data-copy]',panel).forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.copy;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1500);},()=>{});}));
-    $$('.tw-copy',panel).forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.q;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1500);},()=>{});}));
-    const who=$('#tw-who',panel);if(who)who.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(who),err=$('.tw-err',who);const w={name:String(f.get('name')||'').trim(),email:String(f.get('email')||'').trim(),company:String(f.get('company')||'').trim()};
-      const bad=!w.name?'Add your name.':!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(w.email)?'Add a valid work email.':!w.company?'Add your company.':!f.get('ok')?'Tick the box so we can request Early Access for you.':'';
-      if(bad){err.textContent=bad;err.hidden=false;return;}const fresh=w.email!==P.who.email;P.who=w;save();if(fresh&&!f.get('website'))lead('trial',{notes:'Started the guided Confluent trial'});go(1);});
-    const key=$('#tw-key',panel);if(key)key.addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(key),err=$('.tw-err',key),btn=$('button[type=submit]',key);const k=String(f.get('key')||'').trim(),s=String(f.get('secret')||'').trim();P.region=String(f.get('region')||'us-east-1');save();
-      if(!k||!s){err.textContent='Paste both the key and the secret.';err.hidden=false;return;}
-      btn.disabled=true;btn.innerHTML='Connecting…';err.hidden=true;
-      try{X.key=k;X.secret=s;const r=await cc('connect',cloud());X.org=r.org;X.owner=r.owner;X.envs=r.envs||[];X.regions=r.regions||[];
-        if(!X.owner)throw new Error('This key has no owner we can use. Create it under My account.');
-        if(X.regions.length&&!X.regions.some(g=>g.region===P.region))throw new Error('Flink does not run in aws '+P.region+' for this organization. Pick another region.');
-        key.reset();go(3);chain();}
-      catch(er){X.key='';X.secret='';err.textContent=er.message;err.hidden=false;btn.disabled=false;btn.innerHTML='Connect and set it up '+arrow;}});
-    const fb=$('#tw-fb',panel);if(fb){let rating=0;$$('.tw-rate button',fb).forEach(b=>b.addEventListener('click',()=>{rating=+b.dataset.r;$$('.tw-rate button',fb).forEach(x=>{x.setAttribute('aria-checked',+x.dataset.r===rating?'true':'false');});}));
-      fb.addEventListener('submit',async e=>{e.preventDefault();const err=$('.tw-err',fb),notes=String(new FormData(fb).get('notes')||'').trim();if(!rating&&!notes){err.textContent='Pick a number or write a line.';err.hidden=false;return;}
-        const btn=$('button[type=submit]',fb);btn.disabled=true;btn.textContent='Sending…';
-        const extra={rating,notes:(notes||'(no comment)')+(X.fc.err?' · forecast step: '+X.fc.err.slice(0,200):''),org:X.org?X.org.id:(P.ea&&P.ea.org)||'',region:'aws.'+P.region};
-        const ok=await lead('feedback',extra);if(!ok){err.textContent='That did not send. Try again in a moment.';err.hidden=false;btn.disabled=false;btn.textContent='Send';return;}
-        P.fb=true;save();stopAll();render();});}
-    $$('[data-act="clean"]',panel).forEach(b=>b.addEventListener('click',()=>cleanUp(b)));
-    $$('[data-act="rerun"]',panel).forEach(b=>b.addEventListener('click',()=>{X.fc={w:{},order:[],phase:{},err:'',started:false,ended:false};runForecast();}));}
-
-  /* the part we do: Early Access, Flink, the live stream and the forecast, one after the other */
-  function setLog(step,items){X.log[step]=items;if(S[P.cur].k===step)render();}
-  async function chain(){if(X.chain)return;X.chain=true;try{await access();await setup();go(5);await runStream();go(6);await runForecast();}catch(e){}finally{X.chain=false;}}
-  async function access(){const org=X.org;const L=[['ok','Connected to <b>'+esc(org.name||'your organization')+'</b> <code>'+esc(org.id)+'</code>']];
-    if(P.ea&&P.ea.org===org.id){L.push(['ok','Early Access already requested on '+esc(new Date(P.ea.at).toLocaleDateString('en-US',{month:'short',day:'numeric'}))+' for aws '+esc(P.ea.region)]);setLog('access',L);await sleep(1400);return;}
-    L.push(['busy','Requesting Early Access for this organization in aws '+esc(P.region)]);setLog('access',L.slice());
-    const ok=await lead('early-access',{org:org.id,region:'aws.'+P.region,notes:'Organization name: '+(org.name||'')+' · asked from the guided trial'});
-    L[1]=ok?['ok','Early Access requested for this organization in aws '+esc(P.region)]:['warn','We could not send the request just now. We will try again when you send feedback.'];
-    if(ok){P.ea={org:org.id,region:P.region,at:new Date().toISOString()};save();}setLog('access',L);await sleep(1600);}
-  async function setup(){go(4);const L=[];const upd=()=>setLog('setup',L.map(x=>x.slice()));
-    try{
-      L.push(['busy','Choosing an environment']);upd();
-      const pick=X.envs.find(e=>/^default$/i.test(e.name))||X.envs[0];
-      const r=await cc('env',Object.assign(cloud(),pick?{envId:pick.id}:{}));X.env=r.env;X.envNew=r.created;
-      L[0]=['ok',(r.created?'Created environment ':'Using environment ')+'<b>'+esc(r.env.name)+'</b> <code>'+esc(r.env.id)+'</code>'];
-      L.push(['busy','Compute pool in aws '+esc(P.region)]);upd();
-      const p=await cc('pool',Object.assign(cloud(),{env:X.env.id,region:P.region}));X.pool=p.pool;X.poolNew=p.created||p.pool.name==='granite-playground';let ph=p.phase;const ts=Date.now();
-      while(!/PROVISIONED|RUNNING/i.test(ph)){if(/FAIL/i.test(ph))throw new Error('The compute pool did not start.');if(Date.now()-ts>6*60e3)throw new Error('The compute pool is taking long to start. Try again in a few minutes.');
-        L[1]=['busy',(X.poolNew?'Starting compute pool ':'Waiting for compute pool ')+'<b>'+esc(X.pool.name)+'</b>, '+(X.pool.cfu||5)+' CFU, aws '+esc(P.region)+' <span class="tw-t">'+Math.round((Date.now()-ts)/1000)+' s</span>'];upd();
-        await sleep(3000);ph=(await cc('poolStatus',Object.assign(cloud(),{env:X.env.id,pool:X.pool.id}))).phase;}
-      L[1]=['ok',(X.poolNew?'Started compute pool ':'Using compute pool ')+'<b>'+esc(X.pool.name)+'</b> <code>'+esc(X.pool.id)+'</code>, aws '+esc(P.region)];
-      L.push(['busy','Making a Flink key for this session']);upd();
-      if(!X.fkey){const k=await cc('flinkKey',Object.assign(cloud(),{env:X.env.id,region:P.region,owner:X.owner.id}));X.fkey=k.key;X.fsecret=k.secret;}
-      const rg=X.regions.find(g=>g.region===P.region);X.endpoint=(rg&&rg.endpoint)||('https://flink.'+P.region+'.aws.confluent.cloud');
-      L[2]=['ok','Made a Flink key for this session <code>'+esc(X.fkey)+'</code>'];upd();await sleep(900);}
-    catch(e){L[L.length-1]=['err',esc(e.message)];L.push(['', '<button type="button" class="btn sm ghost" data-act="retry-setup">Try again</button>']);upd();
-      const b=$('[data-act="retry-setup"]',panel);if(b)b.addEventListener('click',()=>{if(!X.chain)chain();});throw e;}}
-  /* run one statement, waiting out the few seconds a new Flink key needs */
-  async function start(kind,statement,onWait){const name='rti-'+kind+'-'+rid();const ts=Date.now();
-    for(;;){try{await cc('sql',Object.assign(flink(),{pool:X.pool.id,name,statement}));X.live[name]=true;X.made.push(name);return name;}
-      catch(e){if((e.upstream===401||e.upstream===403)&&Date.now()-ts<150e3){if(onWait)onWait(Math.round((Date.now()-ts)/1000));await sleep(5000);continue;}throw e;}}}
-  async function stop(name){if(!name||!X.live[name])return;delete X.live[name];try{await cc('stop',Object.assign(flink(),{name}));}catch(e){}}
-  function stopAll(){Object.keys(X.live).forEach(n=>stop(n));}
-  async function runStream(){const st=X.stream;const L=[['busy','Starting a query on the sample orders stream']];setLog('stream',L.slice());let name;
-    try{name=await start('orders',Q.stream,s=>{L[0]=['busy','Waiting for the new Flink key to become active <span class="tw-t">'+s+' s</span>'];setLog('stream',L.slice());});
-      L[0]=['ok','Query running <code>'+esc(name)+'</code>'];setLog('stream',L.slice());
-      let next='',schema=null;const ts=Date.now();
-      while(Date.now()-ts<45e3){const s=await cc('status',Object.assign(flink(),{name}));if(s.schema)schema=s.schema;
-        if(/FAIL/i.test(s.phase))throw new Error(s.detail||'The query failed.');
-        if(schema&&!st.cols.length)st.cols=(schema.columns||[]).map(c=>c.name);
-        if(/RUNNING|COMPLETED/i.test(s.phase)){const r=await cc('results',Object.assign(flink(),{name,next}));next=r.next||next;
-          r.rows.forEach(x=>{if(x&&Array.isArray(x.row)&&(x.op==null||x.op===0||x.op===2)){st.rows.unshift(rowObj(x.row,schema));st.n++;}});st.rows=st.rows.slice(0,6);const tb=$('#tw-table');if(tb)tb.innerHTML=streamTable();
-          if(/COMPLETED/i.test(s.phase)&&!r.rows.length)break;if(st.n>=40)break;}
-        await sleep(1200);}
-      await stop(name);st.phase='done';L.push(['ok',st.n+' orders read, query stopped']);setLog('stream',L);await sleep(1800);}
-    catch(e){await stop(name);L.push(['err',esc(e.message)]);st.phase='done';setLog('stream',L);throw e;}}
-  function streamTable(){const st=X.stream;if(!st.rows.length)return '<div class="tw-empty">Waiting for the first orders…</div>';const cols=st.cols.length?st.cols:Object.keys(st.rows[0]);
-    return '<table><tr>'+cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr>'+st.rows.map(r=>'<tr>'+cols.map(c=>'<td>'+esc(fmtCell(r[c]))+'</td>').join('')+'</tr>').join('')+'</table><div class="tw-t">'+st.n+' orders so far</div>';}
-  const fmtCell=v=>v==null?'':typeof v==='number'?(Math.abs(v)>=100?v.toFixed(0):v.toFixed(2)):typeof v==='object'?JSON.stringify(v):String(v);
-  /* Flink result rows, decoded with the statement's own schema */
-  function ftype(f){return f.field_type||f.fieldType||f.type||{};}
-  function decode(v,t){if(v==null||!t)return v;const ty=String(t.type||t.typeName||'').toUpperCase();
-    if(ty==='ROW'&&Array.isArray(v)){const o={};(t.fields||[]).forEach((f,i)=>{o[f.name]=decode(v[i],ftype(f));});return o;}
-    if(ty==='ARRAY'&&Array.isArray(v)){const et=t.element_type||t.elementType;return v.map(x=>decode(x,et));}
-    if(/INT|DOUBLE|FLOAT|DECIMAL|REAL|NUMERIC/.test(ty)){const n=Number(v);return isFinite(n)?n:v;}
-    if(ty==='BOOLEAN')return v===true||String(v).toLowerCase()==='true';return v;}
-  function rowObj(row,schema){const cols=(schema&&schema.columns)||[];if(!cols.length){const o={};row.forEach((v,i)=>o['c'+i]=v);return o;}const o={};cols.forEach((c,i)=>{o[c.name]=decode(row[i],c.type);});return o;}
-  const tms=s=>{if(s==null)return NaN;if(typeof s==='number')return s;let x=String(s).trim().replace(' ','T');if(!/[zZ]|[+-]\d\d:?\d\d$/.test(x))x+='Z';return Date.parse(x);};
-  /* positional fallback when a schema is missing: find the forecast tuples and the anomaly flags by shape */
-  function fcOf(v){if(v&&v.forecast&&Array.isArray(v.forecast))return v.forecast.map(p=>({t:tms(p.timestamp),mean:+p.mean,q10:+p.q10,q50:+p.q50,q90:+p.q90}));
-    if(Array.isArray(v)&&Array.isArray(v[0]))return v[0].map(p=>Array.isArray(p)?{t:tms(p[0]),mean:+p[1],q10:+p[2],q50:+p[3],q90:+p[4]}:null).filter(Boolean);return null;}
-  function adOf_(v){if(v&&typeof v==='object'&&!Array.isArray(v)&&('is_anomaly' in v))return {lo:+v.lower_bound,hi:+v.upper_bound,fv:+v.forecast_value,an:v.is_anomaly===true||v.is_anomaly==='true'};
-    if(Array.isArray(v)&&v.length>=8)return {lo:+v[4],hi:+v[7],fv:+v[2],an:v[3]===true||v[3]==='true'};return null;}
-  async function runForecast(){const F=X.fc;F.started=true;const L=[['busy','Starting the forecast and the anomaly check']];setLog('forecast',L.slice());const names={};
-    try{names.fc=await start('forecast',Q.forecast,s=>{L[0]=['busy','Waiting for the new Flink key to become active <span class="tw-t">'+s+' s</span>'];setLog('forecast',L.slice());});
-      names.ad=await start('anomaly',Q.anomaly);
-      L[0]=['ok','Started two queries on revenue per '+WIN+' second window'];setLog('forecast',L.slice());
-      const st={fc:{next:'',schema:null,done:false},ad:{next:'',schema:null,done:false}};const ts=Date.now();
-      while(!(st.fc.done&&st.ad.done)&&Date.now()-ts<10*60e3&&S[P.cur].k==='forecast'){
-        for(const k of ['fc','ad']){if(st[k].done)continue;const nm=names[k];const s=await cc('status',Object.assign(flink(),{name:nm}));if(s.schema)st[k].schema=s.schema;F.phase[k]=s.phase;
-          if(/FAIL/i.test(s.phase)){st[k].done=true;delete X.live[nm];F.err=s.detail||'The query failed.';continue;}
-          if(/RUNNING|COMPLETED/i.test(s.phase)){const r=await cc('results',Object.assign(flink(),{name:nm,next:st[k].next}));st[k].next=r.next||st[k].next;
-            r.rows.forEach(x=>{if(!x||!Array.isArray(x.row))return;const o=rowObj(x.row,st[k].schema),vals=Object.values(o);const wt=o.window_time!=null?o.window_time:vals[0],rev=o.revenue!=null?o.revenue:vals[1],third=o.forecast!=null?o.forecast:o.anomaly!=null?o.anomaly:vals[2];
-              const key=String(wt);if(!F.w[key]){F.w[key]={t:tms(wt),rev:+rev};F.order.push(key);}const w=F.w[key];if(k==='fc'){const f=fcOf(third);if(f&&f.length&&isFinite(f[0].mean))w.fc=f;}else{const a=adOf_(third);if(a&&isFinite(a.hi))w.ad=a;}});
-            if(/COMPLETED/i.test(s.phase)&&!r.rows.length){st[k].done=true;delete X.live[nm];}}}
-        const p=$('#tw-fcs');if(p)p.innerHTML=fcStatus();drawFc();if(F.err)break;await sleep(2000);}
-      if(!(st.fc.done&&st.ad.done)&&!F.err){await stop(names.fc);await stop(names.ad);if(S[P.cur].k!=='forecast')return;}
-      if(F.err){await stop(names.fc);await stop(names.ad);const ea=/AI_FORECAST|AI_DETECT|function|signature|not (enabled|available|supported|found)|early access|permission|entitle/i.test(F.err);
-        L.push(['err',ea?'The Granite models are not on for your organization yet. We asked for Early Access in step 4, and you will hear back at <b>'+esc(P.who.email)+'</b>. Come back then and run it again.':esc(F.err)]);setLog('forecast',L);return;}
-      F.ended=true;L.push(['ok','Done. '+F.order.length+' windows, '+F.order.filter(k=>F.w[k].ad&&F.w[k].ad.an).length+' flagged, queries stopped']);setLog('forecast',L);}
-    catch(e){await stop(names.fc);await stop(names.ad);F.err=e.message;L.push(['err',esc(e.message)]);setLog('forecast',L);}}
-  function fcStatus(){const F=X.fc;const n=F.order.length,withFc=F.order.filter(k=>F.w[k].fc).length,flag=F.order.filter(k=>F.w[k].ad&&F.w[k].ad.an).length;
-    if(F.err)return 'Stopped.';if(!F.started)return 'Starting…';if(!n)return 'Waiting for the first window…';if(!withFc)return 'Collecting windows: '+n+' of '+MINCTX+' before the first forecast';
-    return (F.ended?'Finished':'Forecasting live')+' · '+n+' windows · '+flag+' flagged';}
-  function drawFc(){const cv=$('#tw-cv');if(!cv)return;const r=cv.getBoundingClientRect();if(r.width<2)return;const dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(r.width*dpr);cv.height=Math.round(r.height*dpr);const x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);const w=r.width,h=r.height;x.clearRect(0,0,w,h);
-    const F=X.fc,ws=F.order.map(k=>F.w[k]).filter(o=>isFinite(o.t)).sort((a,b)=>a.t-b.t);
-    x.font='400 10px '+MONO;x.fillStyle='rgba(255,255,255,.45)';x.textAlign='center';if(ws.length<2){x.fillText(F.err?'':'Revenue windows appear here as they close',w/2,h/2);return;}
-    const last=ws[ws.length-1],lf=ws.slice().reverse().find(o=>o.fc),fut=lf?lf.fc.filter(p=>p.t>last.t):[];
-    const t0=ws[0].t,t1=Math.max(last.t,fut.length?fut[fut.length-1].t:last.t)+WIN*1000*0.5;
-    let lo=Infinity,hi=-Infinity;const sc=v=>{if(isFinite(v)){lo=Math.min(lo,v);hi=Math.max(hi,v);}};ws.forEach(o=>{sc(o.rev);if(o.ad){sc(o.ad.lo);sc(o.ad.hi);}});fut.forEach(p=>{sc(p.q10);sc(p.q90);});
-    if(!isFinite(lo)){lo=0;hi=1;}const pad=(hi-lo)*0.1||1;lo=Math.max(0,lo-pad);hi+=pad;
-    const L=44,R=10,T=10,B=22,X_=t=>L+(w-L-R)*(t-t0)/Math.max(1,t1-t0),Y=v=>T+(h-T-B)*(1-(v-lo)/(hi-lo));
-    x.strokeStyle='rgba(255,255,255,.08)';x.lineWidth=1;x.textAlign='right';for(let i=0;i<=3;i++){const v=lo+(hi-lo)*i/3,y=Y(v);x.beginPath();x.moveTo(L,y+.5);x.lineTo(w-R,y+.5);x.stroke();x.fillText(v>=1000?Math.round(v).toLocaleString('en-US'):v.toFixed(0),L-6,y+3);}
-    x.textAlign='left';x.fillText(new Date(t0).toISOString().slice(11,19)+' UTC',L,h-6);x.textAlign='right';x.fillText(new Date(t1).toISOString().slice(11,19),w-R,h-6);
-    /* the 95% range the anomaly check expected */const band=ws.filter(o=>o.ad&&isFinite(o.ad.lo));if(band.length>1){x.beginPath();band.forEach((o,i)=>{const px=X_(o.t),py=Y(o.ad.hi);i?x.lineTo(px,py):x.moveTo(px,py);});band.slice().reverse().forEach(o=>x.lineTo(X_(o.t),Y(o.ad.lo)));x.closePath();x.fillStyle='rgba(120,169,255,.16)';x.fill();}
-    /* the forecast for the next windows */if(fut.length){x.beginPath();const pts=[{t:last.t,q10:last.rev,q90:last.rev}].concat(fut);pts.forEach((p,i)=>{const px=X_(p.t),py=Y(p.q90);i?x.lineTo(px,py):x.moveTo(px,py);});pts.slice().reverse().forEach(p=>x.lineTo(X_(p.t),Y(p.q10)));x.closePath();x.fillStyle='rgba(120,169,255,.26)';x.fill();
-      x.beginPath();x.moveTo(X_(last.t),Y(last.rev));fut.forEach(p=>x.lineTo(X_(p.t),Y(isFinite(p.q50)?p.q50:p.mean)));x.strokeStyle='#78a9ff';x.lineWidth=2;x.stroke();}
-    x.beginPath();ws.forEach((o,i)=>{const px=X_(o.t),py=Y(o.rev);i?x.lineTo(px,py):x.moveTo(px,py);});x.strokeStyle='#f4f4f4';x.lineWidth=1.4;x.stroke();
-    ws.forEach(o=>{if(o.ad&&o.ad.an){x.fillStyle='#fa4d56';x.beginPath();x.arc(X_(o.t),Y(o.rev),3.5,0,Math.PI*2);x.fill();}});}
-  if(window.ResizeObserver)new ResizeObserver(()=>{if(S[P.cur].k==='forecast')drawFc();}).observe(panel);
-  async function cleanUp(btn){if(btn){btn.disabled=true;btn.textContent='Cleaning up…';}for(const n of X.made){X.live[n]=true;await stop(n);}X.made=[];
-    if(X.fkey){try{await cc('dropKey',Object.assign(cloud(),{id:X.fkey}));}catch(e){}}
-    if(X.poolNew&&X.pool){try{await cc('dropPool',Object.assign(cloud(),{env:X.env.id,pool:X.pool.id}));}catch(e){}}
-    X.cleaned=true;render();}
-  /* leaving the page stops anything still running, so no query keeps using credits */
-  window.addEventListener('pagehide',()=>{Object.keys(X.live).forEach(name=>{try{fetch('/api/confluent',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({action:'stop',name},flink()))});}catch(e){}});});
-  render();
+  const hl=q=>highlight(q).replace(/\b(GROUP|CAST|SUM|TABLE|TUMBLE|DESCRIPTOR|INTERVAL|SECOND|DOUBLE)\b/g,'<span class="k">$1</span>');
+  /* the three things the page does, ticked as they happen */
+  function mark(k,state,extra){const li=$('[data-k="'+k+'"]',todo);if(!li)return;li.className=state||'';const x=$('.tw1-x',li);if(x)x.innerHTML=extra||'';}
+  function actions(){mark('ea',P.ok.ea?'ok':'warn',P.ok.ea?'':'<button type="button" class="tw-link" data-act="retry">Send again</button>');
+    mark('open','ok','<button type="button" class="tw-link" data-act="open">Open it again</button>');
+    mark('sql','ok','<button type="button" class="tw-link" data-act="show">'+(P.ok.sql?'Show it':'Copy it')+'</button>');wireTodo();}
+  function wireTodo(){$$('[data-act]',todo).forEach(b=>{b.onclick=()=>{const a=b.dataset.act;
+    if(a==='open')openSignup();else if(a==='retry')request().then(actions);else if(a==='show'){copy();const box=$('#tw1-sql');if(box)box.hidden=!box.hidden;}};});}
+  function openSignup(){const w=window.open(SIGNUP,'_blank');if(w){try{w.opener=null;}catch(e){}}return !!w;}
+  function copy(){try{if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(SQL).then(()=>true,()=>false);}catch(e){}return Promise.resolve(false);}
+  async function request(){const w=P.who;try{const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind:'early-access',name:w.name,email:w.email,company:w.company,
+      notes:'Wants to forecast: '+(P.want.length?P.want.join(', '):'not said')+(w.more?' · '+w.more:'')+' · signing up from the playground',page:'/playground#try',t:Date.now()-t0})});P.ok.ea=r.ok;}catch(e){P.ok.ea=false;}save();return P.ok.ea;}
+  function form(){const w=P.who||{};todo.querySelectorAll('li').forEach(li=>{li.className='';const x=$('.tw1-x',li);if(x)x.innerHTML='';});
+    panel.innerHTML='<form class="tw-form" id="tw1-form" novalidate>'+
+      '<div class="tw-row"><label><span>Name</span><input name="name" autocomplete="name" value="'+esc(w.name||'')+'" required></label><label><span>Work email</span><input name="email" type="email" autocomplete="email" value="'+esc(w.email||'')+'" required></label></div>'+
+      '<label><span>Company</span><input name="company" autocomplete="organization" value="'+esc(w.company||'')+'" required></label>'+
+      '<div class="tw1-want"><span>What do you want to forecast?</span><div class="chips">'+WANT.map(x=>'<button type="button" class="chip sm" aria-pressed="'+(P.want.indexOf(x)>=0?'true':'false')+'">'+esc(x)+'</button>').join('')+'</div></div>'+
+      '<label><span>Anything else</span><input name="more" autocomplete="off" maxlength="300" value="'+esc(w.more||'')+'" placeholder="Optional, for example: hourly load for 40 plants"></label>'+
+      '<input name="website" class="tw-hp" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+      '<p class="tw-err" hidden></p><div class="tw1-go"><button class="btn" type="submit">Set it up for me '+arrow+'</button><p class="tw-fine">We use these details only to request access for you and follow up.</p></div></form>';
+    $$('.tw1-want .chip',panel).forEach(b=>b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');}));
+    const f=$('#tw1-form',panel);f.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(f),err=$('.tw-err',f);
+      const who={name:String(d.get('name')||'').trim(),email:String(d.get('email')||'').trim(),company:String(d.get('company')||'').trim(),more:String(d.get('more')||'').trim()};
+      const bad=!who.name?'Add your name.':!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(who.email)?'Add a valid work email.':!who.company?'Add your company.':'';
+      if(bad){err.textContent=bad;err.hidden=false;return;}
+      /* inside the click, so the browser allows the new tab and the clipboard */
+      const opened=openSignup(),copied=copy();
+      P.who=who;P.want=$$('.tw1-want .chip[aria-pressed="true"]',f).map(b=>b.textContent);P.ok={open:opened};save();
+      run(copied,!!d.get('website'));});}
+  async function run(copied,bot){panel.innerHTML='<div class="tw1-done"><div class="tw-k">Working on it</div><h3>Setting it up, '+esc(P.who.name.split(' ')[0])+'.</h3></div>';
+    mark('ea','busy');const ea=bot?Promise.resolve(true):request();
+    await sleep(500);mark('ea',(await ea)?'ok':'warn');
+    await sleep(450);mark('open',P.ok.open?'ok':'warn',P.ok.open?'':'<button type="button" class="tw-link" data-act="open">Open it now</button>');
+    await sleep(450);P.ok.sql=await copied;mark('sql','ok');
+    P.done=true;save();await sleep(300);done();}
+  function done(){const w=P.who;actions();
+    panel.innerHTML='<div class="tw1-done"><div class="tw-k">All set</div><h3>You are all set, '+esc(w.name.split(' ')[0])+'.</h3>'+
+      '<p>Finish sign-up in the Confluent tab with <b>'+esc(w.email)+'</b>. We will email you as soon as the Granite models are on for your account. Then paste the query into a Flink SQL workspace and run it.</p>'+
+      (P.ok.ea?'':'<p class="tw-err">We could not send your request just now. Use Send again on the left.</p>')+
+      '<div class="tw-code" id="tw1-sql" hidden><button type="button" class="tw-copy">Copy</button><pre><code>'+hl(SQL)+'</code></pre></div>'+
+      '<button type="button" class="tw-link" data-act="reset">Start over</button></div>';
+    const c=$('.tw-copy',panel);if(c)c.addEventListener('click',()=>{copy().then(ok=>{c.textContent=ok?'Copied':'Copy';setTimeout(()=>c.textContent='Copy',1500);});});
+    $('[data-act="reset"]',panel).addEventListener('click',()=>{P.done=false;P.ok={};save();form();});}
+  if(P.done&&P.who)done();else form();
 })();
 
 /* ---------- your data: upload a file or describe a stream, then TTM r3 forecasts it in this browser ---------- */

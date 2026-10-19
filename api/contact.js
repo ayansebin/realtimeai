@@ -48,16 +48,17 @@ async function readBody(req) {
 // tell the owner about an early access request or new feedback; best effort, never blocks the visitor
 async function notify(lead) {
   const subject = lead.kind === 'early-access'
-    ? 'Early Access request: ' + lead.company + ', org ' + (lead.org || 'unknown')
+    ? 'Early Access request: ' + lead.company + (lead.org ? ', org ' + lead.org : '')
     : 'Playground feedback from ' + lead.company + (lead.rating ? ', ' + lead.rating + ' of 5' : '');
-  const text = [
-    subject, '',
+  const facts = [
     'Name: ' + lead.name, 'Email: ' + lead.email, 'Company: ' + lead.company,
     lead.org ? 'Confluent organization: ' + lead.org : '', lead.region ? 'Region: ' + lead.region : '',
     lead.rating ? 'Rating: ' + lead.rating + ' of 5' : '', lead.notes ? 'Notes: ' + lead.notes : '',
-    'Country: ' + (lead.country || 'unknown'), 'Received: ' + lead.received, '',
-    lead.kind === 'early-access' ? 'Turn on the Granite models for this organization, then reply to the visitor.' : '',
-  ].filter((l, i, a) => l || (i > 0 && a[i - 1])).join('\n');
+    'Country: ' + (lead.country || 'unknown'), 'Received: ' + lead.received,
+  ].filter(Boolean);
+  const todo = lead.kind === 'early-access' ? (lead.org ? 'Turn on the Granite models for this organization, then reply to the visitor.'
+    : 'They are signing up for Confluent Cloud now. Ask Confluent to turn on the Granite models for the organization registered to ' + lead.email + ', then email them.') : '';
+  const text = [subject, '', facts.join('\n')].concat(todo ? ['', todo] : []).join('\n');
   const jobs = [];
   const timed = (p) => Promise.race([p, new Promise((r) => setTimeout(r, 4000))]);
   if (process.env.RESEND_API_KEY && process.env.NOTIFY_EMAIL) {
