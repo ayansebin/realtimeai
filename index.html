@@ -1228,6 +1228,54 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .v4c.done .v4row.u .v4v,.v4c.u-done .v4row.u .v4v{color:#ff8389}
 @media (max-width:420px){.v4row{grid-template-columns:78px minmax(0,1fr) auto;gap:8px}.v4l{font-size:.74rem}.v4v{font-size:.74rem}.v4grids{gap:10px}.v4g{grid-template-columns:auto 1fr;grid-template-rows:auto auto;row-gap:4px}.v4dots{grid-row:auto;grid-column:1/-1;grid-template-columns:repeat(10,5px);gap:3px}.v4dots i{width:5px;height:5px}.v4g b{font-size:1.5rem}}
 @media (prefers-reduced-motion:reduce){.v4c *{transition:none!important}}
+/* value, built on what can be checked */
+.v5steps{display:flex;flex-wrap:wrap;gap:6px}
+.v5s{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--ink-3);padding:.3rem .55rem;border:1px solid rgba(255,255,255,.14);border-radius:3px;background:rgba(255,255,255,.03);transition:color .3s,border-color .3s,background .3s}
+.v5s i{font:600 .62rem/1 var(--font-mono);font-style:normal;color:rgba(255,255,255,.4)}
+.v5s.on{color:#fff;border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.08)}
+.v4c.u-done .v5steps .v5s.on{border-color:rgba(255,131,137,.55)}
+.v5steps::after{content:"× every series";align-self:center;font:600 .66rem/1 var(--font-mono);letter-spacing:.06em;color:#ff8389;padding-left:2px;opacity:0;transition:opacity .4s}
+.v4c.u-done .v5steps::after{opacity:1}
+.v5one{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.v5s.t.on{color:#fff;border-color:#42be65;background:rgba(66,190,101,.2);box-shadow:0 0 12px rgba(66,190,101,.35)}
+.v5s.t i{color:#a7f0ba}
+.v5ret{font:500 .74rem/1.2 var(--font-mono);color:#a7f0ba;opacity:0;transition:opacity .4s .2s}
+.v5one.on .v5ret{opacity:1}
+.v5cap{font:500 .7rem/1.2 var(--font-mono);color:#a6c8ff;text-align:right;margin-top:2px}
+.v4c[data-k="acc"] .v4row{grid-template-columns:108px minmax(0,1fr) 40px}
+.v4c[data-k="acc"] .v4row.t .v4bar i{background:linear-gradient(90deg,#4589ff,#a6c8ff);box-shadow:0 0 10px rgba(69,137,255,.6)}
+.v4c[data-k="acc"] .v4row.t .v4l,.v4c[data-k="acc"] .v4row.t .v4v{color:#a6c8ff}
+.v5proof{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.v5proof li{position:relative;padding-left:1rem;font-size:.84rem;line-height:1.4;color:var(--ink-3)}
+.v5proof li::before{content:"";position:absolute;left:0;top:.5em;width:6px;height:6px;border-radius:50%;background:#78a9ff}
+.v5proof b{color:#fff;font-weight:500}
+.v5dp{margin:0;padding-top:.55rem;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem;color:var(--ink-3)}
+.v5dp b{color:#a7f0ba;font-weight:500}
+.v4c{grid-template-rows:auto auto auto auto auto 1fr}
+.v5day{display:grid;gap:8px}
+.v5lane{display:grid;gap:5px}
+.v5lh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.v5axis{margin-top:-2px}
+.v5track{position:relative;height:24px;border-radius:3px;background:rgba(255,255,255,.05)}
+.v5track i{position:absolute;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:rgba(255,255,255,.12);transition:background .25s,box-shadow .25s}
+.v5lane.u .v5track i.on{background:rgba(255,255,255,.75)}
+.v5lane.u .v5track i.done{background:#fa4d56;box-shadow:0 0 6px #fa4d56}
+.v5track u{position:absolute;top:50%;height:2px;margin-top:-1px;width:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 3px,transparent 3px 6px);text-decoration:none}
+.v5track u.done{background:repeating-linear-gradient(90deg,rgba(255,131,137,.85) 0 3px,transparent 3px 6px)}
+.v5track i{z-index:1}
+.v5lane.t .v5track i.on{background:#42be65;box-shadow:0 0 8px rgba(66,190,101,.8)}
+.v5batch{position:absolute;right:-2px;top:-5px;bottom:-5px;width:3px;border-radius:2px;background:rgba(255,255,255,.25);font-size:0;transition:background .3s,box-shadow .3s}
+.v5batch.on{background:#ff8389;box-shadow:0 0 10px #fa4d56}
+.v5lane.u .v4v{color:#ff8389}
+.v5ax{display:block;position:relative;height:12px;margin:0 2px}
+.v5ax em{position:absolute;top:0;white-space:nowrap;transform:translateX(-50%);font:400 .66rem/1 var(--font-mono);font-style:normal;color:var(--ink-3)}
+.v5ax em:first-child{transform:none}.v5ax em:last-child{transform:translateX(-100%)}
+.v5src{display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem 1rem;font-size:.78rem}
+.v5src>span{font:600 .62rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#78a9ff}
+.v5src a{color:#d0e2ff;text-decoration:underline;text-decoration-color:rgba(208,226,255,.35);text-underline-offset:3px}
+.v5src a:hover{text-decoration-color:#d0e2ff}
+.v5src em{flex-basis:100%;font-style:normal;color:var(--ink-3)}
+@media (max-width:420px){.v4c[data-k="acc"] .v4row{grid-template-columns:96px minmax(0,1fr) 34px}}
 </style>
 </head>
 <body>
@@ -1417,45 +1465,58 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
         <div class="v4">
           <article class="v4c" data-k="prod">
             <div class="v4top"><span class="v4n"><i>01</i>Productivity</span><span class="v4p">For data and AI teams</span></div>
-            <p class="v4pain">Each use case was a months long project for a team of experts.</p>
-            <div class="v4m"><b>10×</b><span>faster time to value</span></div>
+            <p class="v4pain">Each forecast use case is a pipeline to build and keep alive, per series.</p>
+            <div class="v4m"><b>6 steps → 1</b><span>to a first forecast in production</span></div>
             <div class="v4viz">
-              <div class="v4k">Time to first value</div>
-              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4bar"><i></i></span><span class="v4v" data-v="u">0 months</span></div>
-              <div class="v4row t"><span class="v4l">Together</span><span class="v4bar"><i></i></span><span class="v4v" data-v="t">0 weeks</span></div>
-              <div class="v4k">Team per use case</div>
-              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4ppl" data-n="5"></span><span class="v4v">5 experts</span></div>
-              <div class="v4row t"><span class="v4l">Together</span><span class="v4ppl" data-n="1"></span><span class="v4v">1 analyst</span></div>
+              <div class="v4k">The usual way · for every series</div>
+              <div class="v5steps" id="v5-steps"><span class="v5s"><i>1</i>Export the data</span><span class="v5s"><i>2</i>Build features</span><span class="v5s"><i>3</i>Train a model per series</span><span class="v5s"><i>4</i>Validate</span><span class="v5s"><i>5</i>Deploy an endpoint</span><span class="v5s"><i>6</i>Monitor and retrain</span></div>
+              <div class="v4k">Together</div>
+              <div class="v5one"><span class="v5s t"><i>1</i>Call the model in Flink SQL</span><span class="v5ret">forecast with q10, q50, q90 back</span></div>
             </div>
+            <ul class="v5proof">
+              <li><b>Zero-shot.</b> No training and no model per series. The model is managed and hosted in Confluent Cloud.</li>
+              <li><b>TTM beats popular models by 4 to 40%</b> zero and few-shot, from 1M parameters, on CPU.</li>
+            </ul>
+            <p class="v5dp">Design partners report <b>10× faster time to value</b></p>
           </article>
           <article class="v4c" data-k="acc">
             <div class="v4top"><span class="v4n"><i>02</i>Accuracy</span><span class="v4p">For planners and risk teams</span></div>
             <p class="v4pain">Rules and per series models miss what just changed.</p>
-            <div class="v4m"><b>5 to 10%</b><span>more accurate decisions</span></div>
+            <div class="v4m"><b data-c="32">0%</b><span>less forecast error than a seasonal baseline</span></div>
             <div class="v4viz">
-              <div class="v4k">Wrong calls in 100 decisions</div>
-              <div class="v4grids"><div class="v4g u"><span class="v4dots" data-miss="7"></span><span class="v4gl">The usual way</span><b data-v="u">0</b></div><div class="v4g t"><span class="v4dots" data-miss="2"></span><span class="v4gl">Together</span><b data-v="t">0</b></div></div>
-              <div class="v4k">Training before the first forecast</div>
-              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4bar"><i></i></span><span class="v4v">weeks per series</span></div>
-              <div class="v4row t"><span class="v4l">Together</span><span class="v4bar"><i></i></span><span class="v4v">none, zero-shot</span></div>
+              <div class="v4k">Error vs seasonal naive · lower is better</div>
+              <div class="v4row u"><span class="v4l">Seasonal naive</span><span class="v4bar"><i data-w="1"></i></span><span class="v4v">1.00</span></div>
+              <div class="v4row t"><span class="v4l">Point (MASE)</span><span class="v4bar"><i data-w=".6846"></i></span><span class="v4v">0.68</span></div>
+              <div class="v4row t"><span class="v4l">Range (CRPS)</span><span class="v4bar"><i data-w=".467"></i></span><span class="v4v">0.47</span></div>
+              <div class="v5cap">IBM Granite PatchTST-FM-r2, zero-shot, 97 configurations</div>
             </div>
+            <ul class="v5proof">
+              <li><b>#2 of all replicable zero-shot models</b> on GIFT-Eval, <b>#1 with a commercial-friendly license</b> (Sep 2026).</li>
+              <li><b>TSPulse is #1 on TSB-AD</b> for anomaly detection, 14 to 16% above the best baselines zero-shot, from 1M parameters.</li>
+            </ul>
+            <p class="v5dp">Design partners report <b>5 to 10% more accurate decisions</b></p>
           </article>
           <article class="v4c" data-k="resp">
             <div class="v4top"><span class="v4n"><i>03</i>Responsiveness</span><span class="v4p">For operations teams</span></div>
-            <p class="v4pain">The batch run decides after the moment has passed.</p>
-            <div class="v4m"><b>Days → seconds</b><span>from signal to decision</span></div>
+            <p class="v4pain">A nightly batch scores events hours after they happened.</p>
+            <div class="v4m"><b>12 h → 0</b><span>average wait for the scoring run</span></div>
             <div class="v4viz">
-              <div class="v4k">Decisions that land in time</div>
-              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4ev"></span><span class="v4v" data-v="u">0 of 12</span></div>
-              <div class="v4row t"><span class="v4l">Together</span><span class="v4ev"></span><span class="v4v" data-v="t">0 of 12</span></div>
-              <div class="v4k">Signal to decision</div>
-              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4bar"><i></i></span><span class="v4v">2 days</span></div>
-              <div class="v4row t"><span class="v4l">Together</span><span class="v4bar"><i></i></span><span class="v4v">0.8 s</span></div>
+              <div class="v4k">One day of events</div>
+              <div class="v5day">
+                <div class="v5lane u"><div class="v5lh"><span class="v4l">Nightly batch</span><span class="v4v" data-v="u">wait 0 h</span></div><span class="v5track"><i style="left:5.00%" data-h="1.2"></i><i style="left:15.00%" data-h="3.6"></i><i style="left:25.00%" data-h="6.0"></i><i style="left:35.00%" data-h="8.4"></i><i style="left:45.00%" data-h="10.8"></i><i style="left:55.00%" data-h="13.2"></i><i style="left:65.00%" data-h="15.6"></i><i style="left:75.00%" data-h="18.0"></i><i style="left:85.00%" data-h="20.4"></i><i style="left:95.00%" data-h="22.8"></i><b class="v5batch" title="batch run">batch</b></span></div>
+                <div class="v5lane t"><div class="v5lh"><span class="v4l">In the stream</span><span class="v4v" data-v="t">wait 0 h</span></div><span class="v5track"><i style="left:5.00%" data-h="1.2"></i><i style="left:15.00%" data-h="3.6"></i><i style="left:25.00%" data-h="6.0"></i><i style="left:35.00%" data-h="8.4"></i><i style="left:45.00%" data-h="10.8"></i><i style="left:55.00%" data-h="13.2"></i><i style="left:65.00%" data-h="15.6"></i><i style="left:75.00%" data-h="18.0"></i><i style="left:85.00%" data-h="20.4"></i><i style="left:95.00%" data-h="22.8"></i></span></div>
+                <div class="v5axis"><span class="v5ax"><em style="left:0">0 h</em><em style="left:25%">6 h</em><em style="left:50%">12 h</em><em style="left:75%">18 h</em><em style="left:100%">24 h</em></span></div>
+              </div>
             </div>
+            <ul class="v5proof">
+              <li><b>Scored as each event arrives</b>, as a function on the stream inside Flink, billed in CFUs with the compute pool.</li>
+              <li><b>Small enough to run per event:</b> TTM on CPU, TSPulse GPU-free.</li>
+            </ul>
+            <p class="v5dp">Design partners report <b>days to seconds</b> from signal to decision</p>
           </article>
         </div>
       </div>
-      <div class="stage-foot"><div class="hint">Illustrative. Impact figures from design partner engagements.</div></div>
+      <div class="stage-foot"><div class="v5src"><span>Sources</span><a href="https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series" target="_blank" rel="noopener">PatchTST-FM-r2 on GIFT-Eval</a><a href="https://huggingface.co/spaces/Salesforce/GIFT-Eval" target="_blank" rel="noopener">GIFT-Eval leaderboard</a><a href="https://arxiv.org/abs/2401.03955" target="_blank" rel="noopener">TTM, NeurIPS 2024</a><a href="https://arxiv.org/abs/2505.13033" target="_blank" rel="noopener">TSPulse</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent forecast functions</a><em>Design partner figures are as reported in early engagements. A nightly batch is assumed for the wait.</em></div></div>
     </div>
   </div>
 </section>
@@ -2427,48 +2488,40 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
       if(ob&&s.out!=null&&ob.textContent!==s.out)ob.textContent=s.out;if(ol&&s.outL&&ol.textContent!==s.outL)ol.textContent=s.outL;if(ob&&s.outC&&ob.style.color!==s.outC)ob.style.color=s.outC;}});});
 })();
 /* ============ 02 three things change: productivity, accuracy, responsiveness ============ */
-/* Three cards, one picture language: the usual way against Confluent and IBM Granite together. Each card names who
-   feels it and the pain, then plays a short race: time to first value and the team it takes, wrong calls in a hundred
-   decisions, and twelve events that either land in time or wait for the batch. It plays when it scrolls in, and again
-   on Replay or a tap. */
+/* Three cards, each built on something you can check. Productivity shows the work that goes away: a pipeline per
+   series against one function call. Accuracy shows public GIFT-Eval scores relative to a seasonal naive baseline.
+   Responsiveness is arithmetic: with a nightly batch an event waits until the run, in the stream it does not wait.
+   Design partner figures are labeled as such. Each card plays when it scrolls in, and again on Replay or a tap. */
 (function(){
   const el=$('#st-three');if(!el)return;
   const cards=$$('.v4c',el),C=k=>cards.find(c=>c.dataset.k===k);
   const P=C('prod'),A=C('acc'),R=C('resp');if(!P||!A||!R)return;
   const cl=x=>x<0?0:x>1?1:x,ez=x=>{x=cl(x);return 1-Math.pow(1-x,3);};
-  const PERSON='<svg viewBox="0 0 16 20" aria-hidden="true"><circle cx="8" cy="5" r="3.6"/><path d="M1.5 19c0-4.2 2.9-7 6.5-7s6.5 2.8 6.5 7z"/></svg>';
-  /* build the people, the dot grids and the event squares once */
-  $$('.v4ppl',el).forEach(s=>{s.innerHTML=PERSON.repeat(+s.dataset.n);});
-  const MISS={7:[6,19,33,48,62,77,91],2:[38,83]};
-  $$('.v4dots',el).forEach(s=>{const m=new Set(MISS[s.dataset.miss]||[]);let h='';for(let i=0;i<100;i++)h+='<i'+(m.has(i)?' class="x"':'')+'></i>';s.innerHTML=h;});
-  $$('.v4ev',el).forEach(s=>{let h='';for(let i=0;i<12;i++)h+='<i></i>';s.innerHTML=h;});
-  const q=(c,sel)=>$$(sel,c);
-  const [pU,pT]=q(P,'.v4row .v4bar i'),[pUv,pTv]=[$('[data-v="u"]',P),$('[data-v="t"]',P)],ppl=q(P,'.v4ppl');
-  const [aU,aT]=q(A,'.v4dots'),[aUb,aTb]=[$('[data-v="u"]',A),$('[data-v="t"]',A)],[aTrU,aTrT]=q(A,'.v4row .v4bar i');
-  const [rU,rT]=q(R,'.v4ev'),[rUv,rTv]=[$('[data-v="u"]',R),$('[data-v="t"]',R)],[rSU,rST]=q(R,'.v4row .v4bar i');
-  const T=5200,st={t:0,run:false,seen:false};
+  const steps=$$('.v5steps .v5s',P),one=$('.v5one',P);
+  const big=$('.v4m b[data-c]',A),bars=$$('.v4bar i[data-w]',A);
+  const lanes=$$('.v5lane',R),uDots=$$('.v5lane.u .v5track i',R),tDots=$$('.v5lane.t .v5track i',R),batch=$('.v5batch',R),uV=$('[data-v="u"]',R),tV=$('[data-v="t"]',R);
+  const T=6200,st={t:0,run:false,seen:false};
   const set=(e,v)=>{if(e&&e.textContent!==v)e.textContent=v;};
-  /* light the first n children of a container, and only touch the ones that change */
-  const lightN=(box,n)=>{if(!box)return;const k=box.__n==null?-1:box.__n;if(k===n)return;const ch=box.children;for(let i=0;i<ch.length;i++){const on=i<n;if(ch[i].classList.contains('on')!==on)ch[i].classList.toggle('on',on);}box.__n=n;};
-  const w=(e,p)=>{if(e)e.style.width=(p*100).toFixed(2)+'%';};
+  const tog=(e,c,on)=>{if(e&&e.classList.contains(c)!==on)e.classList.toggle(c,on);};
+  /* wait lines for the batch lane, drawn once */
+  const waits=uDots.map(d=>{const w=document.createElement('u');w.style.left=d.style.left;d.parentNode.insertBefore(w,d);return w;});
   function frame(t){
-    /* productivity: both start together, Together reaches first value at three weeks, the usual way runs to seven months */
-    const pu=ez(t/3600),months=7*pu;w(pU,pu);set(pUv,(pu>=1?'7':months<1?'<1':Math.floor(months))+' months');
-    const pt=ez(t/700)*0.1;w(pT,pt);set(pTv,t>=700?'3 weeks ✓':Math.max(0,Math.round(21*cl(t/700)))+' days');P.classList.toggle('t-done',t>=700);P.classList.toggle('u-done',pu>=1);
-    ppl.forEach((s,k)=>lightN(s,Math.min(k?1:5,Math.ceil(cl((t-500)/1500)*(k?1:5)))));
-    /* accuracy: a hundred decisions each, the wrong calls in red */
-    const n=Math.floor(cl((t-200)/2600)*100);[aU,aT].forEach(g=>lightN(g,n));
-    const cnt=(m)=>m.filter(i=>i<n).length;set(aUb,String(cnt(MISS[7])));set(aTb,String(cnt(MISS[2])));
-    w(aTrU,ez((t-2800)/900));w(aTrT,0);A.classList.toggle('done',t>=3000);
-    /* responsiveness: twelve events, Together decides each one as it lands, the batch decides them all too late */
-    const arr=Math.min(12,Math.floor(cl((t-300)/2700)*12.99)),batch=t>=3900;
-    [rU,rT].forEach(g=>lightN(g,arr));rU.classList.toggle('late',batch);
-    set(rTv,arr+' in time');set(rUv,batch?'all 12 late':arr?'waiting':'0 of 12');
-    w(rSU,batch?1:cl(t/3900));w(rST,arr?0.012:0);R.classList.toggle('done',batch);}
-  function start(){st.t=0;st.run=true;el.classList.add('v4on');}
+    /* productivity: the usual way lights its six steps one by one, together is done in one */
+    steps.forEach((s,k)=>tog(s,'on',t>=500+k*520));tog(one,'on',t>=450);tog(P,'u-done',t>=500+5*520+300);
+    /* accuracy: bars grow to the benchmark scores, the headline counts to 32 */
+    bars.forEach((i,k)=>{i.style.width=(+i.dataset.w*100*ez((t-300-k*250)/1100)).toFixed(2)+'%';});
+    set(big,Math.round(32*ez((t-600)/1400))+'%');
+    /* responsiveness: the day runs left to right, events arrive, the batch scores them all at 24 h */
+    const day=24*cl((t-300)/4200),done=t>=4600;
+    let sum=0,n=0;uDots.forEach((d,k)=>{const h=+d.dataset.h,arr=day>=h,end=done?24:day;tog(d,'on',arr);tog(d,'done',done);
+      waits[k].style.width=arr?((end-h)/24*100).toFixed(2)+'%':'0';tog(waits[k],'done',done);if(arr){sum+=end-h;n++;}});
+    tDots.forEach(d=>{const arr=day>=+d.dataset.h;tog(d,'on',arr);});
+    tog(batch,'on',done);
+    set(uV,n?(done?'avg wait 12 h':'waiting '+(sum/n).toFixed(0)+' h'):'wait 0 h');set(tV,'wait 0 h');}
+  function start(){st.t=0;st.run=true;}
   const rp=$('#th-replay');if(rp)rp.addEventListener('click',start);
   cards.forEach(c=>c.addEventListener('click',e=>{if(e.target.closest('a,button'))return;start();}));
-  if(reduced){frame(T);el.classList.add('v4on');}else frame(0);
+  if(reduced)frame(T);else frame(0);
   reg({el,update(dt){if(reduced)return;if(!st.seen){st.seen=true;start();}if(!st.run)return;st.t+=dt;frame(st.t);if(st.t>=T){st.run=false;frame(T);}},draw(){}});
 })();
 /* ============ 02 dials, proof count-ups ============ */
