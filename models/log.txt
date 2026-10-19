@@ -1,37 +1,26 @@
-ttm-r3-512-96: loading context 512, horizon 96
-  export attempt failed (dynamo=False): ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug t
-  export attempt failed (dynamo=True): ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug t
-ttm-r3-512-96: FAILED RuntimeError('ConversionError("Failed to convert the exported program to an ONNX model. \\x1b[96mThis is step 3/3\\x1b[0m of exporting the model to ONNX. Next steps:\\n- If there is a missing ONNX function, implement it and register it to the registry.\\n- If there is an internal error during ONNX conversion, debug the error and submit a PR to PyTorch.\\n- Create an error report with `torch.onnx.e
-Traceback (most recent call last):
-  File "/home/runner/work/realtimeai/realtimeai/scripts/export_onnx.py", line 103, in main
-    how = export(wrap, args, names, path)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/realtimeai/realtimeai/scripts/export_onnx.py", line 69, in export
-    raise RuntimeError(" | ".join(errors))
-RuntimeError: ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug the error and submit a PR to PyTorch.\n- Create an error report with `torch.onnx.export(..., report=T | ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug the error and submit a PR to PyTorch.\n- Create an error report with `torch.onnx.export(..., report=T
-
-ttm-r3-512-30: loading context 512, horizon 30
-  export attempt failed (dynamo=False): ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug t
-  export attempt failed (dynamo=True): ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug t
-ttm-r3-512-30: FAILED RuntimeError('ConversionError("Failed to convert the exported program to an ONNX model. \\x1b[96mThis is step 3/3\\x1b[0m of exporting the model to ONNX. Next steps:\\n- If there is a missing ONNX function, implement it and register it to the registry.\\n- If there is an internal error during ONNX conversion, debug the error and submit a PR to PyTorch.\\n- Create an error report with `torch.onnx.e
-Traceback (most recent call last):
-  File "/home/runner/work/realtimeai/realtimeai/scripts/export_onnx.py", line 103, in main
-    how = export(wrap, args, names, path)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/realtimeai/realtimeai/scripts/export_onnx.py", line 69, in export
-    raise RuntimeError(" | ".join(errors))
-RuntimeError: ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug the error and submit a PR to PyTorch.\n- Create an error report with `torch.onnx.export(..., report=T | ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug the error and submit a PR to PyTorch.\n- Create an error report with `torch.onnx.export(..., report=T
-
-ttm-r3-156-16: loading context 156, horizon 16
-  export attempt failed (dynamo=False): ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug t
-  export attempt failed (dynamo=True): ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug t
-ttm-r3-156-16: FAILED RuntimeError('ConversionError("Failed to convert the exported program to an ONNX model. \\x1b[96mThis is step 3/3\\x1b[0m of exporting the model to ONNX. Next steps:\\n- If there is a missing ONNX function, implement it and register it to the registry.\\n- If there is an internal error during ONNX conversion, debug the error and submit a PR to PyTorch.\\n- Create an error report with `torch.onnx.e
-Traceback (most recent call last):
-  File "/home/runner/work/realtimeai/realtimeai/scripts/export_onnx.py", line 103, in main
-    how = export(wrap, args, names, path)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/realtimeai/realtimeai/scripts/export_onnx.py", line 69, in export
-    raise RuntimeError(" | ".join(errors))
-RuntimeError: ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug the error and submit a PR to PyTorch.\n- Create an error report with `torch.onnx.export(..., report=T | ConversionError("Failed to convert the exported program to an ONNX model. \x1b[96mThis is step 3/3\x1b[0m of exporting the model to ONNX. Next steps:\n- If there is a missing ONNX function, implement it and register it to the registry.\n- If there is an internal error during ONNX conversion, debug the error and submit a PR to PyTorch.\n- Create an error report with `torch.onnx.export(..., report=T
-
-done, 0 variants
+trend filter swap: max difference 0 over six lengths
+ttm-r3-512-96: loading 512-96-dec-512-r3
+  TinyTimeMixerForDecomposedPrediction, context 512, horizon 96, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
+ttm-r3-512-96: ok, 5,328,932 params, 29.48 MB, diff 1.91e-05, quantile diff 1.91e-05, batch diff 4.57763671875e-05, 10.2 ms, 30 s
+ttm-r3-180-60: loading 180-60-dec-180-r3
+  TinyTimeMixerForDecomposedPrediction, context 180, horizon 60, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
+ttm-r3-180-60: ok, 1,772,018 params, 11.67 MB, diff 3.05e-05, quantile diff 4.58e-05, batch diff 3.814697265625e-05, 3.5 ms, 20 s
+ttm-r3-90-30: loading 90-30-dec-90-r3
+  TinyTimeMixerForDecomposedPrediction, context 90, horizon 30, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
+ttm-r3-90-30: ok, 1,481,062 params, 10.48 MB, diff 7.63e-06, quantile diff 1.14e-05, batch diff 3.814697265625e-06, 2.4 ms, 20 s
+ttm-r3-512-30: loading 512-30-dec-90-r3
+  TinyTimeMixerForDecomposedPrediction, context 512, horizon 30, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
+ttm-r3-512-30: ok, 1,414,514 params, 10.23 MB, diff 7.63e-06, quantile diff 1.53e-05, batch diff 3.0517578125e-05, 2.4 ms, 20 s
+ttm-r3-156-16: loading 156-16-dec-52-r3
+  TinyTimeMixerForDecomposedPrediction, context 156, horizon 16, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
+ttm-r3-156-16: ok, 1,501,420 params, 10.58 MB, diff 1.53e-05, quantile diff 1.53e-05, batch diff 2.288818359375e-05, 2.7 ms, 20 s
+ttm-r3-52-16: loading 52-16-dec-52-r3
+  TinyTimeMixerForDecomposedPrediction, context 52, horizon 16, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types
+ttm-r3-52-16: ok, 1,453,596 params, 10.37 MB, diff 7.63e-06, quantile diff 7.63e-06, batch diff 7.62939453125e-06, 2.5 ms, 19 s
+done, 6 variants
