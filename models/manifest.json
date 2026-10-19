@@ -1,5 +1,5 @@
 {
- "built": "2026-10-19T12:36:39.411306+00:00",
+ "built": "2026-10-19T12:50:27.792030+00:00",
  "repo": "ibm-granite/granite-timeseries-ttm-r3",
  "license": "Apache-2.0",
  "torch": "2.11.0+cpu",
@@ -19,6 +19,62 @@
   "W": 9
  },
  "variants": [
+  {
+   "name": "ttm-r3-2048-96",
+   "revision": "2048-96-r3",
+   "file": "ttm-r3-2048-96.onnx",
+   "ctx": 2048,
+   "h": 96,
+   "freq_token": false,
+   "test_freq_token": null,
+   "quantiles": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+   ],
+   "batch": "dynamic",
+   "bytes": 67778262,
+   "params": 16909263,
+   "export": "dynamic batch",
+   "max_abs_diff_vs_torch": 0.000175,
+   "quantile_diff_vs_torch": 0.000183,
+   "batch_diff": 3.8e-05,
+   "cpu_ms_1_thread": 40.3
+  },
+  {
+   "name": "ttm-r3-1024-96",
+   "revision": "1024-96-r3",
+   "file": "ttm-r3-1024-96.onnx",
+   "ctx": 1024,
+   "h": 96,
+   "freq_token": false,
+   "test_freq_token": null,
+   "quantiles": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+   ],
+   "batch": "dynamic",
+   "bytes": 41812378,
+   "params": 10420047,
+   "export": "dynamic batch",
+   "max_abs_diff_vs_torch": 2.3e-05,
+   "quantile_diff_vs_torch": 3.1e-05,
+   "batch_diff": 3.8e-05,
+   "cpu_ms_1_thread": 21.96
+  },
   {
    "name": "ttm-r3-512-96",
    "revision": "512-96-dec-512-r3",

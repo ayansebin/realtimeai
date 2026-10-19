@@ -24,3 +24,13 @@ ttm-r3-52-16: loading 52-16-dec-52-r3
   exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 35 op types, 10.4 MB -> 6.0 MB without exporter metadata
 ttm-r3-52-16: ok, 1,453,596 params, 5.95 MB, diff 7.63e-06, quantile diff 7.63e-06, batch diff 7.62939453125e-06, 2.3 ms, 20 s
 done, 6 variants
+trend filter swap: max difference 0 over six lengths
+ttm-r3-2048-96: loading 2048-96-r3
+  TinyTimeMixerForPrediction, context 2048, horizon 96, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 34 op types, 71.9 MB -> 67.8 MB without exporter metadata
+ttm-r3-2048-96: ok, 16,909,263 params, 67.78 MB, diff 1.75e-04, quantile diff 1.83e-04, batch diff 3.814697265625e-05, 40.3 ms, 18 s
+ttm-r3-1024-96: loading 1024-96-r3
+  TinyTimeMixerForPrediction, context 1024, horizon 96, freq token False, quantiles [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  exported (dynamic batch), IR 10 -> 10, opsets {'ai.onnx': 18}, 34 op types, 45.9 MB -> 41.8 MB without exporter metadata
+ttm-r3-1024-96: ok, 10,420,047 params, 41.81 MB, diff 2.29e-05, quantile diff 3.05e-05, batch diff 3.814697265625e-05, 22.0 ms, 16 s
+done, 8 variants
