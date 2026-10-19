@@ -1330,6 +1330,20 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 @media (max-width:600px){.ucl{margin:12px 12px 4px;font-size:.9rem}}
 #cstabs .cs .cs-badge{justify-self:start;font:600 .6rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:#0e6027;border:1px solid rgba(36,161,72,.5);background:rgba(36,161,72,.08);border-radius:999px;padding:.25rem .5rem}
 #cstabs .cs[aria-selected="true"] .cs-badge{color:#a7f0ba;border-color:rgba(111,220,140,.6);background:rgba(66,190,101,.16)}
+
+/* value cards: one row per section, aligned across the three */
+.v4viz{display:flex;flex-direction:column;gap:8px}
+.v4viz>.v4k:not(:first-child){margin-top:auto;padding-top:12px}
+.v4c[data-k="resp"] .v6o.t{margin-top:auto;padding-top:6px}
+@media (min-width:1061px){.v4{grid-template-rows:auto auto auto 1fr;column-gap:16px;row-gap:0}.v4c{grid-row:span 4;grid-template-rows:subgrid;row-gap:.75rem;padding:18px 18px 18px}}
+@media (max-width:1060px){.v4c{grid-template-rows:auto auto auto auto}}
+@media (min-width:1061px){
+.v4c[data-k="prod"] .v5steps{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.v4c[data-k="prod"] .v5steps .v5s{min-height:36px;padding:.45rem .6rem}
+.v4c[data-k="prod"] .v5steps::after{grid-column:1/-1;padding:2px 0 0}
+.v4c[data-k="prod"] .v5one{display:grid;gap:8px}
+.v4c[data-k="prod"] .v5one .v5s{min-height:42px;padding:.55rem .75rem;font-size:.88rem}
+}
 </style>
 </head>
 <body>
@@ -1523,13 +1537,10 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <div class="v4m"><b>6 steps → 1</b><span>to a first forecast in production</span></div>
             <div class="v4viz">
               <div class="v4k">The usual way · for every series</div>
-              <div class="v5steps" id="v5-steps"><span class="v5s"><i>1</i>Export the data</span><span class="v5s"><i>2</i>Build features</span><span class="v5s"><i>3</i>Train a model per series</span><span class="v5s"><i>4</i>Validate</span><span class="v5s"><i>5</i>Deploy an endpoint</span><span class="v5s"><i>6</i>Monitor and retrain</span></div>
+              <div class="v5steps" id="v5-steps"><span class="v5s"><i>1</i>Export the data</span><span class="v5s"><i>2</i>Build features</span><span class="v5s"><i>3</i>Train a model</span><span class="v5s"><i>4</i>Validate</span><span class="v5s"><i>5</i>Deploy an endpoint</span><span class="v5s"><i>6</i>Monitor and retrain</span></div>
               <div class="v4k">Together</div>
               <div class="v5one"><span class="v5s t"><i>1</i>Call the model in Flink SQL</span><span class="v5ret">forecast with q10, q50, q90 back</span></div>
             </div>
-            <ul class="v5proof">
-              <li><b>Zero-shot,</b> hosted in Confluent Cloud. <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">No model per series.</a></li>
-            </ul>
           </article>
           <article class="v4c" data-k="acc">
             <div class="v4top"><span class="v4n"><i>02</i>Accuracy</span><span class="v4p">For planners and risk teams</span></div>
@@ -1544,9 +1555,6 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
                 <div class="v6r"><span class="v4l">Each release</span><span class="v6rel"><b data-r="0">r1<em>250M</em></b><b data-r="1">r2<em>700M</em></b><b data-r="2">r2.1<em>~1B</em></b></span><span class="v4v" data-v="rel">+15%</span></div>
               </div>
             </div>
-            <ul class="v5proof">
-              <li><b>Top 2 zero-shot on GIFT-Eval,</b> <a href="https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series" target="_blank" rel="noopener">#1 with a commercial-friendly license.</a></li>
-            </ul>
           </article>
           <article class="v4c" data-k="resp">
             <div class="v4top"><span class="v4n"><i>03</i>Responsiveness</span><span class="v4p">For operations teams</span></div>
@@ -1559,9 +1567,6 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
               <div class="v6o t"><span class="v6dot"></span><b>In the stream · seconds</b><span data-o="t"></span><em data-p="t">96%</em></div>
               <div class="v6o u"><span class="v6dot"></span><b>Nightly batch · 12 h on average</b><span data-o="u"></span><em data-p="u">4%</em></div>
             </div>
-            <ul class="v5proof">
-              <li><b>Scored as each event lands,</b> <a href="https://arxiv.org/abs/2401.03955" target="_blank" rel="noopener">small enough to run on CPU.</a></li>
-            </ul>
           </article>
         </div>
       </div>
