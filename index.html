@@ -2273,10 +2273,10 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
       ctx.save();for(let k=0;k<32;k++){const [x,y]=pt(d-k*3);ctx.fillStyle='rgba(208,226,255,'+(0.95*(1-k/32)).toFixed(3)+')';ctx.fillRect(x-0.9,y-0.9,1.8,1.8);}ctx.restore();}
     ctx.textBaseline='middle';
     if(!nar){ctx.textAlign='center';const my=(h.y0+h.y1)/2;
-      let tz=16;for(let z=28;z>=16;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText('foundation model').width<=w-40){tz=z;break;}}
+      let tz=16;for(let z=28;z>=16;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText('Foundation Model').width<=w-40){tz=z;break;}}
       const ey=h.y0+26,l1=ey+16+tz*0.55,l2=l1+tz*1.05;
       ctx.font='400 11px '+MF;ctx.fillStyle='rgba(166,200,255,.85)';{const T='IBM GRANITE TIME SERIES';let sp=0;if(LS)for(const q of [2.6,2,1.4,0.8,0]){ctx.letterSpacing=q+'px';sp=q;if(ctx.measureText(T).width<=w-20)break;}ctx.fillText(fitText(ctx,T,w-18),cx+sp/2,ey);if(LS)ctx.letterSpacing='0px';}
-      ctx.font='300 '+tz+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText('Universal',cx,l1);ctx.fillText('foundation model',cx,l2);
+      ctx.font='300 '+tz+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText('Universal',cx,l1);ctx.fillText('Foundation Model',cx,l2);
       const dv=Math.round(l2+tz*0.5+16)+0.5,ix0=h.x0+14,ix1=h.x1-14,r0=dv+4,RH=(h.y1-10-r0)/3,t=reduced?0:now/1000;
       ctx.strokeStyle='rgba(166,200,255,.22)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ix0,dv);ctx.lineTo(ix1,dv);ctx.stroke();
       const gw=Math.min(54,Math.round(w*0.17)),gh=26,tx=ix0+gw+12,tw=ix1-tx;
@@ -2290,7 +2290,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
         yy+=4-7.5+6.75;ctx.font='300 11px '+SANS;ctx.fillStyle=on?'rgba(208,226,255,.95)':'rgba(185,195,211,.78)';SL.forEach(l=>{ctx.fillText(l,tx,yy);yy+=13.5;});});
       ctx.textAlign='center';}
     else{ctx.textAlign='left';ctx.font='400 10px '+MF;ctx.fillStyle='rgba(166,200,255,.85)';if(LS)ctx.letterSpacing='1.8px';ctx.fillText('IBM GRANITE TIME SERIES',h.x0+13,h.y0+22);if(LS)ctx.letterSpacing='0px';
-      {const T='Universal foundation model';let z=21;for(;z>15;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText(T).width<=w-26)break;}ctx.font='300 '+z+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText(fitText(ctx,T,w-26),h.x0+13,h.y0+48);}
+      {const T='Universal Foundation Model';let z=21;for(;z>15;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText(T).width<=w-26)break;}ctx.font='300 '+z+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText(fitText(ctx,T,w-26),h.x0+13,h.y0+48);}
       {const t=reduced?0:now/1000,cw=(w-26)/3;ctx.strokeStyle='rgba(166,200,255,.2)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(h.x0+13,h.y0+68.5);ctx.lineTo(h.x1-13,h.y0+68.5);ctx.stroke();
         CL.forEach((c,i)=>{const on=lit(c.k),x=h.x0+13+i*cw,gw2=Math.min(46,cw-14);if(on){ctx.fillStyle='#78a9ff';ctx.fillRect(x,h.y0+68,gw2,1.5);}
           glyph(ctx,c.k,x,h.y0+80,gw2,20,on,t);ctx.textAlign='left';ctx.font='400 10px '+SANS;ctx.fillStyle=on?'#fff':'rgba(208,226,255,.78)';ctx.fillText(fitText(ctx,c.m,cw-6),x,h.y0+114);});}}
