@@ -1597,20 +1597,20 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     <!-- production optimization -->
     <div class="stage ucpanel" id="uc-prod" role="tabpanel">
       <div class="stage-top">
-        <div class="stage-title"><h3>The kiln finds its own setpoint</h3></div>
+        <div class="stage-title"><h3>Every bar in temper</h3></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Re-optimize every</span><div class="chips" id="pr-cycle"><button class="chip sm" data-v="2">2 h</button><button class="chip sm" data-v="4" aria-pressed="true">4 h</button><button class="chip sm" data-v="8">8 h</button></div></div>
           <div class="ctl-group"><span class="eyebrow">Spec</span><div class="chips" id="pr-spec"><button class="chip sm" data-v="98">98%</button><button class="chip sm" data-v="98.5" aria-pressed="true">98.5%</button><button class="chip sm" data-v="99">99%</button></div></div>
-          <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="pr-inject"><button class="chip sm" data-v="feed">Raw feed change</button><button class="chip sm" data-v="fuel">Fuel quality drop</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="pr-inject"><button class="chip sm" data-v="butter">New cocoa butter lot</button><button class="chip sm" data-v="humid">Warm, humid day</button></div></div>
         </div>
       </div>
-      <p class="ucl"><b>Run every line at its best setpoint.</b> A pretrained model forecasts quality on every reading, so setpoints adjust inside spec before the lab result is back.</p>
+      <p class="ucl"><b>Keep every chocolate bar in temper.</b> A pretrained model forecasts temper quality on every reading, so cooling and reheat setpoints adjust before a new cocoa butter lot turns into rework.</p>
       <div class="stage-body">
         <div class="side">
-          <div class="canvas-wrap"><canvas class="stage-canvas" id="pr-cv" aria-label="Kiln quality over the shift with the forecast band, the re-optimize cycles and the setpoints"></canvas></div>
+          <div class="canvas-wrap"><canvas class="stage-canvas" id="pr-cv" aria-label="Share of chocolate bars in temper over the shift with the forecast band, the re-optimize cycles and the cooling and reheat setpoints"></canvas></div>
           <div class="panel">
-            <div class="ph">Operator console · kiln 1</div>
-            <div class="kv"><span>quality now</span><b id="pr-q">–</b><span>forecast, as is</span><b id="pr-fq" class="blue">–</b><span>feed</span><b id="pr-spf">–</b><span>kiln</span><b id="pr-spt">–</b><span>vs leaving them alone</span><b id="pr-m" class="green">–</b></div>
+            <div class="ph">Operator console · tempering line 1</div>
+            <div class="kv"><span>in temper now</span><b id="pr-q">–</b><span>forecast, as is</span><b id="pr-fq" class="blue">–</b><span>cooling zone</span><b id="pr-spf">–</b><span>reheat zone</span><b id="pr-spt">–</b><span>rework vs leaving them alone</span><b id="pr-m" class="green">–</b></div>
             <div class="action" id="pr-action"><small>proposed change</small><span id="pr-actiont">–</span></div>
             <div class="btn-row"><button class="btn sm" id="pr-approve" type="button" disabled>Approve <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button class="btn sm ghost" id="pr-auto" type="button" aria-pressed="false">Auto-approve</button></div>
           </div>
@@ -1743,8 +1743,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     </div>
 
     <div class="inds" role="tablist" id="indtabs" aria-label="Industries">
-      <button class="ind" role="tab" aria-selected="true" aria-controls="st-plant" type="button" style="--img:url(photos/cement-night.jpg)">
-        <span class="il">Industrial AI<small>cement · steel · pulp and paper · chemicals · food</small></span>
+      <button class="ind" role="tab" aria-selected="true" aria-controls="st-plant" type="button" style="--img:url(photos/factory-pipes.jpg)">
+        <span class="il">Industrial AI<small>chocolate · food · chemicals · pulp and paper · steel</small></span>
         <b>Setpoints corrected inside the cycle.</b>
         <span class="is"><i>Production optimization</i><i>Predictive maintenance</i><i>Anomaly detection</i></span>
       </button>
@@ -1773,17 +1773,17 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <div class="chips" id="pl-sc"><button class="chip" data-v="opt" aria-pressed="true">Production optimization</button><button class="chip" data-v="pdm" aria-pressed="false">Predictive maintenance</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
         </div>
       </div>
-      <p class="ucl"><b>A live cement plant, from sensor to setpoint.</b> SCADA, lab and meter streams are forecast and optimized as they land, so setpoints, maintenance and alerts reach the floor inside the cycle.</p>
+      <p class="ucl"><b>A live chocolate factory, from sensor to setpoint.</b> SCADA, QA lab and meter streams are forecast and optimized as they land, so setpoints, maintenance and alerts reach the floor inside the cycle.</p>
       <div class="stage-body">
-        <div class="plant-wrap" id="plant-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="pl-cv" aria-label="Animated cement line: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="pl-tip"></div></div></div>
-        <div class="plant-cap" id="pl-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="pl-cap-k">Production optimization</span><span class="plant-steps" id="pl-steps" aria-hidden="true"></span><button class="switch" id="pl-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="pl-cap-t">Free lime is trending up. The quality forecast says 97.1% in 40 minutes, below the 98.5% target.</p></div>
+        <div class="plant-wrap" id="plant-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="pl-cv" aria-label="Animated chocolate line: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="pl-tip"></div></div></div>
+        <div class="plant-cap" id="pl-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="pl-cap-k">Production optimization</span><span class="plant-steps" id="pl-steps" aria-hidden="true"></span><button class="switch" id="pl-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="pl-cap-t">A new cocoa butter lot is softer. The temper index is drifting, and the forecast says 96.8% of bars in temper in 40 minutes, below the 98.5% target.</p></div>
       </div>
       <div class="stage-foot">
         <div class="readouts">
-          <div class="readout"><b id="pl-q">97.1%</b><span>quality in spec · target 98.5</span></div>
+          <div class="readout"><b id="pl-q">96.8%</b><span>bars in temper · target 98.5</span></div>
           <div class="readout"><b id="pl-e">94</b><span>kWh per ton · target 92</span></div>
-          <div class="readout"><b id="pl-t">196</b><span>t/h throughput</span></div>
-          <div class="readout"><b id="pl-m" class="green">$0.00</b><span>margin vs baseline, per ton</span></div>
+          <div class="readout"><b id="pl-t">4.6</b><span>t/h line output</span></div>
+          <div class="readout"><b id="pl-m">3.2%</b><span>rework · bars re-melted</span></div>
           <div class="readout"><b id="pl-d" class="blue">0 h</b><span>downtime avoided</span></div>
         </div>
         <div class="hint">Simulated line. The topics and the gates are the real ones.</div>
@@ -1993,7 +1993,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 <footer class="foot">
   <div class="wrap">
     <div class="row"><span class="tag">Every event is a decision.</span><span>IBM Granite Time Series models on Confluent Cloud for Apache Flink. October 2026.</span></div>
-    <details class="row" id="credits"><summary>Photo credits</summary><div><a href="https://commons.wikimedia.org/wiki/File:Cimenterie_Jbal_Ressas_la_nuit.jpg" target="_blank" rel="noopener">Cimenterie Jbal Ressas la nuit</a> by Smailtn (CC BY-SA 4.0) · <a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div></details>
+    <details class="row" id="credits"><summary>Photo credits</summary><div><a href="https://www.rawpixel.com/image/5914150/image-background-public-domain-free" target="_blank" rel="noopener">Factory pipe system</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6082112/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/6081498/vegetables-supermarket" target="_blank" rel="noopener">Vegetables in a supermarket</a> by rawpixel (CC0) · <a href="https://www.rawpixel.com/image/8809237/credit-card-payment-shopping" target="_blank" rel="noopener">Credit card payment</a> by rawpixel (CC0) · <a href="https://stocksnap.io/photo/creditcard-money-71MH9ATF4S" target="_blank" rel="noopener">Creditcard Money</a> by Michal Jarmoluk (CC0) · <a href="https://www.flickr.com/photos/14829735@N00/51750792923" target="_blank" rel="noopener">We belong to the light, we belong to the</a> by dullhunk (CC BY-SA 2.0) · <a href="https://stocksnap.io/photo/airplane-turbofan-3FA6983C6D" target="_blank" rel="noopener">Airplane Turbofan</a> by Little Visuals (CC0). Edited for color and crop.</div></details>
     <div class="row"><a href="https://huggingface.co/ibm-granite" target="_blank" rel="noopener">Hugging Face</a><a href="https://github.com/ibm-granite/granite-tsfm" target="_blank" rel="noopener">GitHub</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent docs</a><a href="https://www.ibm.com/new/announcements/ibm-granite-time-series-models-bring-real-time-forecasting-and-anomaly-detection-to-confluent-cloud" target="_blank" rel="noopener">IBM announcement</a></div>
     <div class="row"><span>Simulations on this page run in your browser and are illustrative. Benchmark and case figures from IBM and Confluent materials. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners. Not an official IBM or Confluent site.</span></div>
   </div>
@@ -2691,49 +2691,51 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const FONT='"IBM Plex Sans", Arial, sans-serif',MONOF='"IBM Plex Mono", Menlo, monospace';
   /* ---------- layout (virtual coordinates) ---------- */
   const EQ={
-    quarry:{x:60,y:95,w:110,h:70,label:'Quarry · crusher'},
-    rawmill:{x:205,y:150,w:120,h:60,label:'Raw mill'},
-    preheater:{x:365,y:55,w:70,h:200,label:'Preheater'},
-    kiln:{x1:445,y1:225,x2:725,y2:262,r:22,label:'Rotary kiln'},
-    cooler:{x:735,y:238,w:115,h:48,label:'Clinker cooler'},
-    cmill:{x:880,y:195,w:120,h:58,label:'Cement mill'},
-    silos:{x:1035,y:170,w:120,h:120,label:'Silos · dispatch'},
+    roaster:{x:60,y:150,w:110,h:50,label:'Bean roaster'},
+    mill:{x:200,y:165,w:100,h:46,label:'Liquor mill'},
+    refiner:{x:335,y:55,w:70,h:200,label:'Five-roll refiner'},
+    conche:{x:440,y:168,w:120,h:84,label:'Conche'},
+    temper:{x:592,y:178,w:176,h:58,label:'Tempering machine'},
+    tunnel:{x:800,y:206,w:180,h:40,label:'Cooling tunnel'},
+    pack:{x:1012,y:186,w:140,h:72,label:'Wrapping · dispatch'},
     ctrl:{x:1000,y:34,w:270,h:118,label:'Control room · objectives'}
   };
+  const CHOC='rgba(150,95,60,.9)';
   const SENS=[
-    {id:'WT-101',name:'belt scale',unit:'t/h',x:120,y:122,eq:'quarry',src:'scada',topic:0},
-    {id:'FT-110',name:'raw feed rate',unit:'t/h',x:262,y:150,eq:'rawmill',src:'scada',topic:0},
-    {id:'PT-302',name:'cyclone 4 pressure drop',unit:'mbar',x:417,y:118,eq:'preheater',src:'scada',topic:2},
-    {id:'TE-305',name:'preheater gas temp',unit:'°C',x:417,y:190,eq:'preheater',src:'scada',topic:2},
-    {id:'TE-401',name:'kiln shell temp',unit:'°C',x:585,y:243,eq:'kiln',src:'scada',topic:0},
-    {id:'AT-402',name:'kiln O2 · NOx',unit:'%',x:690,y:255,eq:'kiln',src:'scada',topic:0},
-    {id:'TE-403',name:'clinker temp',unit:'°C',x:795,y:262,eq:'cooler',src:'scada',topic:0},
-    {id:'VT-205',name:'mill bearing vibration',unit:'mm/s',x:898,y:224,eq:'cmill',src:'historian',topic:1},
-    {id:'EM-009',name:'mill motor energy',unit:'kWh',x:985,y:224,eq:'cmill',src:'energy',topic:4},
-    {id:'AT-501',name:'free lime · fineness (lab)',unit:'%',x:860,y:208,eq:'cooler',src:'lims',topic:3},
-    {id:'LT-610',name:'silo level',unit:'%',x:1095,y:180,eq:'silos',src:'mes',topic:5}
+    {id:'TE-101',name:'roast drum temp',unit:'°C',x:115,y:175,eq:'roaster',src:'scada',topic:0},
+    {id:'FT-110',name:'liquor flow',unit:'kg/min',x:250,y:165,eq:'mill',src:'scada',topic:0},
+    {id:'PT-302',name:'roll 4 pressure',unit:'bar',x:387,y:118,eq:'refiner',src:'scada',topic:2},
+    {id:'TE-305',name:'roll temperature',unit:'°C',x:387,y:194,eq:'refiner',src:'scada',topic:2},
+    {id:'VT-205',name:'agitator bearing vibration',unit:'mm/s',x:470,y:252,eq:'conche',src:'historian',topic:1},
+    {id:'EM-009',name:'conche motor energy',unit:'kWh',x:535,y:252,eq:'conche',src:'energy',topic:4},
+    {id:'TE-401',name:'cooling zone temp',unit:'°C',x:680,y:236,eq:'temper',src:'scada',topic:0},
+    {id:'TE-403',name:'reheat zone temp',unit:'°C',x:740,y:236,eq:'temper',src:'scada',topic:0},
+    {id:'AT-501',name:'temper index (temper meter)',unit:'TI',x:784,y:218,eq:'temper',src:'lims',topic:3},
+    {id:'TE-410',name:'tunnel air temp',unit:'°C',x:850,y:246,eq:'tunnel',src:'scada',topic:0},
+    {id:'HT-411',name:'tunnel humidity',unit:'% RH',x:930,y:246,eq:'tunnel',src:'scada',topic:0},
+    {id:'LT-610',name:'finished goods',unit:'pallets',x:1120,y:196,eq:'pack',src:'mes',topic:5}
   ];
   const SRC={
     scada:{x:80,y:325,w:150,h:50,label:'SCADA · PLC',sub:'OPC UA, 1 s'},
     historian:{x:255,y:325,w:150,h:50,label:'Historian',sub:'10 years of tags'},
-    lims:{x:430,y:325,w:150,h:50,label:'LIMS · lab',sub:'samples, hourly'},
+    lims:{x:430,y:325,w:150,h:50,label:'LIMS · QA lab',sub:'temper, viscosity, hourly'},
     energy:{x:605,y:325,w:150,h:50,label:'Energy meters',sub:'kWh, 15 min'},
     cmms:{x:780,y:325,w:150,h:50,label:'CMMS',sub:'work orders, assets'},
-    mes:{x:955,y:325,w:150,h:50,label:'MES · ERP',sub:'orders, grades'}
+    mes:{x:955,y:325,w:150,h:50,label:'MES · ERP',sub:'orders, recipes'}
   };
-  const TOPICS=['kiln.telemetry','mill.vibration','preheater.telemetry','lab.quality','energy.meters','mes.orders'];
+  const TOPICS=['line.telemetry','conche.vibration','refiner.telemetry','qa.temper','energy.meters','mes.orders'];
   const CC={x:40,y:415,w:1230,h:200};
   const KAFKA={x:60,y:440,w:305,h:160};
   const FLINK={x:395,y:440,w:380,h:160};
   const FN=[{k:'Forecast',y:478},{k:'Detect anomalies',y:514},{k:'Optimize',y:550}];
   const AG={x:800,y:440,w:195,h:160};
   const DEC={x:1020,y:440,w:240,h:160};
-  const DROWS=[{k:'Setpoint → kiln',y:482,c:P.green},{k:'Work order → CMMS',y:518,c:P.orange},{k:'Alert → operator',y:554,c:P.red}];
+  const DROWS=[{k:'Setpoint → temperer',y:482,c:P.green},{k:'Work order → CMMS',y:518,c:P.orange},{k:'Alert → operator',y:554,c:P.red}];
   const topicY=i=>KAFKA.y+36+i*24;
   const cx=o=>o.x+o.w/2,cy=o=>o.y+o.h/2;
   /* ---------- state ---------- */
-  const st={sc:'opt',auto:true,focus:'all',t:0,phase:-1,phaseT:0,parts:[],hover:null,kiln:{feed:196,temp:1418,q:97.1,e:94},vib:4.1,vibRise:0,draft:1.0,spike:0,flag:false,blast:0,wo:false,gate:0,fn:[0,0,0],agent:0,dec:[0,0,0],highlight:null,kpi:{q:97.1,e:94,t:196,m:0,d:0},kpiT:{q:97.1,e:94,t:196,m:0,d:0},callouts:[],evt:0,scen:0,hist:{vib:[],draft:[],lime:[]}};
-  for(let i=0;i<40;i++){st.hist.vib.push(4.1+0.15*gauss());st.hist.draft.push(6.3+0.12*gauss());st.hist.lime.push(1.2+0.1*gauss());}
+  const st={sc:'opt',auto:true,focus:'all',t:0,phase:-1,phaseT:0,parts:[],hover:null,line:{cool:27.4,reheat:31.6},vib:3.2,vibRise:0,draft:1.0,spike:0,flag:false,blast:0,wo:false,gate:0,fn:[0,0,0],agent:0,dec:[0,0,0],highlight:null,kpi:{q:96.8,e:94,t:4.6,m:3.2,d:0},kpiT:{q:96.8,e:94,t:4.6,m:3.2,d:0},callouts:[],evt:0,scen:0,hist:{vib:[],draft:[],lime:[]}};
+  for(let i=0;i<40;i++){st.hist.vib.push(3.2+0.12*gauss());st.hist.draft.push(28.5+0.5*gauss());}
   /* ---------- particles along polylines ---------- */
   function plen(path){let L=0;for(let i=1;i<path.length;i++)L+=Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y);return L;}
   function pat(path,d){for(let i=1;i<path.length;i++){const seg=Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y);if(d<=seg){const u=seg?d/seg:0;return {x:lerp(path[i-1].x,path[i].x,u),y:lerp(path[i-1].y,path[i].y,u)};}d-=seg;}return path[path.length-1];}
@@ -2746,42 +2748,42 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   function agentToDec(di){return [pt(AG.x+AG.w,DROWS[di].y),pt(DEC.x,DROWS[di].y)];}
   const ctrlIn=pt(EQ.ctrl.x+EQ.ctrl.w-30,EQ.ctrl.y+EQ.ctrl.h);
   function decToCtrl(di){return [pt(DEC.x+DEC.w,DROWS[di].y),pt(1285,DROWS[di].y),pt(1285,ctrlIn.y+14),pt(ctrlIn.x,ctrlIn.y+14),pt(ctrlIn.x,ctrlIn.y)];}
-  function ctrlToKiln(){return [pt(EQ.ctrl.x,100),pt(640,100),pt(640,226)];}
+  function ctrlToTemper(){return [pt(EQ.ctrl.x,100),pt(680,100),pt(680,EQ.temper.y)];}
   function decToCmms(){const b=SRC.cmms;return [pt(DEC.x,DROWS[1].y),pt(DEC.x-14,DROWS[1].y),pt(DEC.x-14,399),pt(cx(b)+20,399),pt(cx(b)+20,b.y+b.h)];}
-  function cmmsToMill(){const b=SRC.cmms;return [pt(cx(b)+20,b.y),pt(cx(b)+20,300),pt(940,300),pt(940,EQ.cmill.y+EQ.cmill.h+6)];}
-  function ctrlToPre(){return [pt(EQ.ctrl.x,86),pt(440,86),pt(440,221),pt(426,221)];}
+  function cmmsToConche(){const b=SRC.cmms;return [pt(cx(b)+20,b.y),pt(cx(b)+20,300),pt(500,300),pt(500,EQ.conche.y+EQ.conche.h+6)];}
+  function ctrlToRefiner(){return [pt(EQ.ctrl.x,92),pt(412,92),pt(412,118),pt(400,118)];}
   /* steady-state telemetry */
   let amb=0;
   function ambient(dt){amb+=dt;if(amb>420){amb=0;const s=SENS[Math.floor(Math.random()*SENS.length)];const p1=sensorPath(s);spawn(p1,{speed:200,size:2.2,color:P.blue3,onEnd:()=>{spawn(srcToTopic(s.src,s.topic),{speed:260,size:2.2,color:P.blue3,onEnd:()=>{if(Math.random()<0.5){const fi=Math.random()<0.6?0:1;spawn(topicToFn(s.topic,fi),{speed:260,size:2.2,color:P.blue4});}}});}});}}
   /* ---------- scenarios ---------- */
   const SC={
-    opt:{name:'Production optimization',eq:'kiln',phases:[
-      {d:2600,cap:'Free lime is trending up. The quality forecast says 97.1% in 40 minutes, below the 98.5% target.',on:()=>{st.highlight='kiln';st.callouts=[{x:660,y:118,c:P.yellow,to:{x:860,y:208},l:['AT-501 free lime 1.2 → 1.6 %','quality forecast 97.1 % in 40 min','target 98.5 %']}];kpiTo({q:97.1});flow(['kiln','cooler'],0,0,P.yellow);}},
-      {d:2600,cap:'The forecast reads the kiln and lab topics. The optimizer searches feed and temperature inside the guardrails.',on:()=>{st.fn=[1,0,1];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['search feed 150–205 t/h, temp 1400–1485 °C','quality ≥ 98.5 · energy ↓ · emissions cap']}];flow(['kiln','cooler'],0,2,P.blue3,true);}},
-      {d:2600,cap:'The agent proposes feed 178 t/h and kiln 1,462 °C, worth about $2 per ton. The operator approves at the gate.',on:()=>{st.agent=1;st.dec=[1,0,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: feed 178 t/h · temp 1,462 °C','+$2.0 /t · inside guardrails','→ operator gate']}];spawn(agentToDec(0),{color:P.green,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(0),{color:P.green,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
-      {d:3200,cap:'Approved. The setpoints land on the kiln. Quality back to 99.0%, 3 kWh per ton less, margin up.',on:()=>{st.gate=2;spawn(ctrlToKiln(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.kiln.feed=178;st.kiln.temp=1462;kpiTo({q:99.0,e:91,t:178,m:2.0});st.callouts=[{x:660,y:118,c:P.green,to:{x:640,y:222},l:['setpoint applied: feed 178 t/h · 1,462 °C','quality 99.0 % · 91 kWh/t · +$2.0 /t']}];}});}},
-      {d:1800,cap:'Every cycle. 2 to 5× faster than tuning by hand, and the same models score every mill.',on:()=>{}}
+    opt:{name:'Production optimization',eq:'temper',phases:[
+      {d:2600,cap:'A new cocoa butter lot is softer. The temper index is drifting, and the forecast says 96.8% of bars in temper in 40 minutes, below the 98.5% target.',on:()=>{st.highlight='temper';st.callouts=[{x:560,y:96,c:P.yellow,to:{x:784,y:218},l:['AT-501 temper index 5.0 → 4.2','in temper forecast 96.8 % in 40 min','target 98.5 %']}];kpiTo({q:96.8,m:3.2});flow(['temper','tunnel'],0,0,P.yellow);}},
+      {d:2600,cap:'The forecast reads the temperer and QA topics. The optimizer searches the cooling and reheat temperatures inside the guardrails.',on:()=>{st.fn=[1,0,1];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['search cool 26.0 to 28.5 °C, reheat 30.5 to 32.0 °C','in temper ≥ 98.5 · rework ↓ · energy ↓']}];flow(['temper','tunnel'],0,2,P.blue3,true);}},
+      {d:2600,cap:'The agent proposes cooling at 26.8 °C and reheat at 31.2 °C. The operator approves at the gate.',on:()=>{st.agent=1;st.dec=[1,0,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: cool 26.8 °C · reheat 31.2 °C','rework 3.2 → 0.9 % · inside guardrails','→ operator gate']}];spawn(agentToDec(0),{color:P.green,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(0),{color:P.green,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
+      {d:3200,cap:'Approved. The setpoints land on the temperer. Bars in temper back to 99.1%, rework under 1%, line speed held.',on:()=>{st.gate=2;spawn(ctrlToTemper(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.line.cool=26.8;st.line.reheat=31.2;kpiTo({q:99.1,e:92,m:0.9});st.callouts=[{x:560,y:96,c:P.green,to:{x:680,y:182},l:['setpoint applied: cool 26.8 °C · reheat 31.2 °C','in temper 99.1 % · rework 0.9 %']}];}});}},
+      {d:1800,cap:'Every lot, every shift. The same models score every line.',on:()=>{}}
     ]},
-    pdm:{name:'Predictive maintenance',eq:'cmill',phases:[
-      {d:2600,cap:'The cement mill bearing vibration is creeping up. VT-205 streams to the historian and to Kafka.',on:()=>{st.highlight='cmill';st.vibRise=1;st.callouts=[{x:600,y:112,c:P.yellow,to:{x:898,y:224},l:['VT-205 bearing vibration 4.1 → 5.3 mm/s','alarm limit 7.1 mm/s']}];flow('cmill',1,0,P.yellow);}},
-      {d:2600,cap:'The forecast projects the crossing: 9 days to the alarm limit, 6 days at P90.',on:()=>{st.fn=[1,0,0];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['forecast crosses 7.1 mm/s in 9 d','P90: 6 d · next planned stop: 6 d']}];flow('cmill',1,0,P.blue3,true);}},
-      {d:2600,cap:'The agent reserves the bearing and schedules the swap in the planned stop. A work order lands in the CMMS.',on:()=>{st.agent=1;st.dec=[0,1,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: RUL 9 d < P90 6 d → act','work order VT-205 raised']}];spawn(agentToDec(1),{color:P.orange,speed:240,size:3.5,onEnd:()=>{spawn(decToCmms(),{color:P.orange,speed:320,size:3.5,onEnd:()=>{st.wo=true;}});}});}},
-      {d:3200,cap:'WO-4471 scheduled, parts reserved, maintenance confirms at the gate. 18 hours of unplanned downtime avoided.',on:()=>{st.gate=2;spawn(cmmsToMill(),{color:P.orange,speed:300,size:3.5,onEnd:()=>{kpiTo({d:18});st.callouts=[{x:600,y:112,c:P.green,to:{x:898,y:224},l:['WO-4471 · bearing swap in planned stop','parts reserved · 18 h downtime avoided']}];}});}},
-      {d:1800,cap:'Thousands of bearings, one statement each. No labeled failures needed.',on:()=>{}}
+    pdm:{name:'Predictive maintenance',eq:'conche',phases:[
+      {d:2600,cap:'The conche agitator bearing vibration is creeping up. VT-205 streams to the historian and to Kafka.',on:()=>{st.highlight='conche';st.vibRise=1;st.callouts=[{x:600,y:96,c:P.yellow,to:{x:470,y:252},l:['VT-205 bearing vibration 3.2 → 4.4 mm/s','alarm limit 6.0 mm/s']}];flow('conche',1,0,P.yellow);}},
+      {d:2600,cap:'The forecast projects the crossing: 9 days to the alarm limit, 6 days at P90.',on:()=>{st.fn=[1,0,0];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['forecast crosses 6.0 mm/s in 9 d','P90: 6 d · next planned stop: 6 d']}];flow('conche',1,0,P.blue3,true);}},
+      {d:2600,cap:'The agent reserves the bearing and schedules the swap in the planned stop. A work order lands in the CMMS.',on:()=>{st.agent=1;st.dec=[0,1,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: P90 crossing 6 d · planned stop 6 d → act','work order VT-205 raised']}];spawn(agentToDec(1),{color:P.orange,speed:240,size:3.5,onEnd:()=>{spawn(decToCmms(),{color:P.orange,speed:320,size:3.5,onEnd:()=>{st.wo=true;}});}});}},
+      {d:3200,cap:'WO-4471 scheduled, parts reserved, maintenance confirms at the gate. No conche stops mid-batch, 18 hours of unplanned downtime avoided.',on:()=>{st.gate=2;spawn(cmmsToConche(),{color:P.orange,speed:300,size:3.5,onEnd:()=>{kpiTo({d:18});st.callouts=[{x:600,y:96,c:P.green,to:{x:470,y:252},l:['WO-4471 · bearing swap in planned stop','parts reserved · 18 h downtime avoided']}];}});}},
+      {d:1800,cap:'Thousands of motors and bearings, one statement each. No labeled failures needed.',on:()=>{}}
     ]},
-    anom:{name:'Anomaly detection',eq:'preheater',phases:[
-      {d:2400,cap:'Cyclone 4 draft pressure jumps. PT-302 is scored against its own band on every reading.',on:()=>{st.highlight='preheater';st.spike=1;st.callouts=[{x:470,y:40,c:P.red,to:{x:417,y:118},l:['PT-302 cyclone 4 ΔP 6.2 → 9.8 mbar','4.2 σ outside the 99.9 % band']}];flow('preheater',2,1,P.red);}},
-      {d:2600,cap:'Anomaly detection flags it. The agent checks the neighbors: gas temperature and ID fan amps are normal.',on:()=>{st.fn=[0,1,0];st.flag=true;st.callouts=[{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound 8.1','TE-305 normal · ID fan amps normal']}];flow('preheater',2,1,P.red,true);}},
-      {d:2600,cap:'Likely cause: partial blockage in cyclone 4. Alert to the operator with the evidence, not a trip.',on:()=>{st.agent=1;st.dec=[0,0,1];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: pattern = cyclone blockage','alert operator · suggest air blaster C4']}];spawn(agentToDec(2),{color:P.red,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(2),{color:P.red,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
-      {d:3200,cap:'The operator fires the air blaster. Pressure comes back inside the band in a minute, kiln never stopped.',on:()=>{st.gate=2;spawn(ctrlToPre(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.blast=1;st.spike=0;st.flag=false;st.callouts=[{x:470,y:40,c:P.green,to:{x:422,y:221},l:['air blaster C4 fired','ΔP back to 6.4 mbar · no trip']}];kpiTo({d:st.kpiT.d+4});}});}},
-      {d:1800,cap:'Weekend cycles and start-ups are inside the band, so they are not alarms. False alarms down, trips avoided.',on:()=>{}}
+    anom:{name:'Anomaly detection',eq:'refiner',phases:[
+      {d:2400,cap:'Refiner roll 4 pressure jumps. PT-302 is scored against its own band on every reading.',on:()=>{st.highlight='refiner';st.spike=1;st.callouts=[{x:470,y:40,c:P.red,to:{x:387,y:118},l:['PT-302 roll 4 pressure 28 → 41 bar','4.2 σ outside the 99.9 % band']}];flow('refiner',2,1,P.red);}},
+      {d:2600,cap:'Anomaly detection flags it. The agent checks the neighbors: roll temperature and motor amps are normal.',on:()=>{st.fn=[0,1,0];st.flag=true;st.callouts=[{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound 34 bar','TE-305 normal · motor amps normal']}];flow('refiner',2,1,P.red,true);}},
+      {d:2600,cap:'Likely cause: a hard lump in the feed at roll 4. Alert to the operator with the evidence, not a trip.',on:()=>{st.agent=1;st.dec=[0,0,1];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: pattern = feed lump at roll 4','alert operator · suggest a gap flush on R4']}];spawn(agentToDec(2),{color:P.red,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(2),{color:P.red,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
+      {d:3200,cap:'The operator flushes the gap. Pressure comes back inside the band in a minute, and the line never stopped.',on:()=>{st.gate=2;spawn(ctrlToRefiner(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.blast=1;st.spike=0;st.flag=false;st.callouts=[{x:470,y:40,c:P.green,to:{x:400,y:118},l:['gap flush R4 done','pressure back to 29 bar · no trip']}];kpiTo({d:st.kpiT.d+4});}});}},
+      {d:1800,cap:'Start-ups and recipe changes stay inside the band, so they are not alarms. False alarms down, trips avoided.',on:()=>{}}
     ]}
   };
   function flow(eq,ti,fi,color,toFn){const eqs=[].concat(eq);SENS.filter(s=>eqs.indexOf(s.eq)>=0).forEach((s,k)=>{setTimeout(()=>{spawn(sensorPath(s),{color,speed:230,size:3,onEnd:()=>{spawn(srcToTopic(s.src,s.topic),{color,speed:280,size:3,onEnd:()=>{if(toFn)spawn(topicToFn(ti,fi),{color,speed:280,size:3,onEnd:()=>{spawn(fnToAgent(fi),{color,speed:280,size:3});}});}});}});},k*260);});}
   const wrap=$('#plant-wrap');const stepsEl=$('#pl-steps');stepsEl.innerHTML='<i></i>'.repeat(5);const steps=$$('i',stepsEl);
   function panTo(vx){if(!st.auto||!wrap||wrap.scrollWidth<=wrap.clientWidth+10)return;const left=clamp(vx*S-wrap.clientWidth/2,0,wrap.scrollWidth-wrap.clientWidth);try{wrap.scrollTo({left,behavior:'smooth'});}catch(e){wrap.scrollLeft=left;}}
   function kpiTo(o){Object.assign(st.kpiT,o);}
-  function startScenario(k,resetAll){st.sc=k;chipSet('pl-sc',k);st.phase=-1;st.phaseT=0;st.fn=[0,0,0];st.agent=0;st.dec=[0,0,0];st.gate=0;st.callouts=[];st.highlight=null;if(resetAll!==false){st.kiln={feed:196,temp:1418,q:97.1,e:94};st.vibRise=0;st.spike=0;st.flag=false;st.blast=0;st.wo=false;kpiTo({q:97.1,e:94,t:196,m:0});}$('#pl-cap-k').textContent=SC[k].name;nextPhase();}
+  function startScenario(k,resetAll){st.sc=k;chipSet('pl-sc',k);st.phase=-1;st.phaseT=0;st.fn=[0,0,0];st.agent=0;st.dec=[0,0,0];st.gate=0;st.callouts=[];st.highlight=null;if(resetAll!==false){st.line={cool:27.4,reheat:31.6};st.vibRise=0;st.spike=0;st.flag=false;st.blast=0;st.wo=false;kpiTo({q:96.8,e:94,t:4.6,m:3.2});}$('#pl-cap-k').textContent=SC[k].name;nextPhase();}
   function nextPhase(){const sc=SC[st.sc];st.phase++;st.phaseT=0;if(st.phase>=sc.phases.length){if(st.auto){const keys=Object.keys(SC);startScenario(keys[(keys.indexOf(st.sc)+1)%keys.length]);}else{st.phase=sc.phases.length-1;st.phaseT=-1e9;}return;}const ph=sc.phases[st.phase];$('#pl-cap-t').textContent=ph.cap;ph.on();if(st.callouts.length){const c0=st.callouts[0];panTo(c0.to?(c0.x+130+c0.to.x)/2:c0.x+130);}}
   /* ---------- update ---------- */
   function update(dt){st.t+=dt;ambient(dt);
@@ -2789,8 +2791,8 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     if(st.phase>=0){st.phaseT+=dt;const ph=SC[st.sc].phases[st.phase];if(st.phaseT>ph.d&&st.phaseT<1e8)nextPhase();}
     const k=1-Math.pow(0.02,dt/1000);for(const key in st.kpiT)st.kpi[key]=lerp(st.kpi[key],st.kpiT[key],k);
     if(st.phase>=0){const ph2=SC[st.sc].phases[st.phase];const pct=st.phaseT<-1e8?100:Math.round(clamp(st.phaseT/ph2.d,0,1)*50)*2;if(pct!==st._pct||st.phase!==st._ph){st._pct=pct;st._ph=st.phase;steps.forEach((el,i)=>{el.className=i<st.phase?'on':i===st.phase?'cur':'';if(i===st.phase)el.style.setProperty('--p',pct+'%');});}}
-    if(st.t%400<dt){st.hist.vib.push(clamp((st.vibRise?lerp(st.hist.vib[st.hist.vib.length-1],5.4,0.08):4.1)+0.12*gauss(),3,7));st.hist.vib.shift();const d0=st.spike?9.8:6.3;st.hist.draft.push(d0+0.12*gauss());st.hist.draft.shift();}
-    $('#pl-q').textContent=st.kpi.q.toFixed(1)+'%';$('#pl-q').className=st.kpi.q>=98.5?'green':'';$('#pl-e').textContent=Math.round(st.kpi.e);$('#pl-t').textContent=Math.round(st.kpi.t);$('#pl-m').textContent=(st.kpi.m>=0?'+':'')+'$'+st.kpi.m.toFixed(2);$('#pl-d').textContent=Math.round(st.kpi.d)+' h';}
+    if(st.t%400<dt){st.hist.vib.push(clamp((st.vibRise?lerp(st.hist.vib[st.hist.vib.length-1],4.5,0.08):3.2)+0.1*gauss(),2,7));st.hist.vib.shift();const d0=st.spike?41:28.5;st.hist.draft.push(d0+0.5*gauss());st.hist.draft.shift();}
+    $('#pl-q').textContent=st.kpi.q.toFixed(1)+'%';$('#pl-q').className=st.kpi.q>=98.5?'green':'';$('#pl-e').textContent=Math.round(st.kpi.e);$('#pl-t').textContent=st.kpi.t.toFixed(1);$('#pl-m').textContent=st.kpi.m.toFixed(1)+'%';$('#pl-m').className=st.kpi.m<=1.5?'green':'';$('#pl-d').textContent=Math.round(st.kpi.d)+' h';}
   /* ---------- drawing helpers ---------- */
   let ctx,S=1;
   const X=x=>x*S,Y=y=>y*S;
@@ -2814,54 +2816,70 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     /* grid */
     ctx.strokeStyle='rgba(255,255,255,.04)';ctx.lineWidth=1;for(let x=0;x<VW;x+=50){ctx.beginPath();ctx.moveTo(X(x),0);ctx.lineTo(X(x),H);ctx.stroke();}for(let y=0;y<VH;y+=50){ctx.beginPath();ctx.moveTo(0,Y(y));ctx.lineTo(W,Y(y));ctx.stroke();}
     /* band labels */
-    eyebrow('PLANT FLOOR · CEMENT LINE 1',48,24);eyebrow('SYSTEMS OF RECORD',48,312);eyebrow('CONFLUENT CLOUD · STREAMING INTELLIGENCE',48,404,{c:P.blue3});
+    eyebrow('PLANT FLOOR · CHOCOLATE LINE 1',48,24);eyebrow('SYSTEMS OF RECORD',48,312);eyebrow('CONFLUENT CLOUD · STREAMING INTELLIGENCE',48,404,{c:P.blue3});
     line([pt(40,300),pt(1270,300)],'rgba(255,255,255,.08)',1,[2,6]);line([pt(40,392),pt(1270,392)],'rgba(255,255,255,.08)',1,[2,6]);
     /* ---- plant floor ---- */
     ctx.globalAlpha=alphaFor('plant');
-    const q=EQ.quarry;ctx.beginPath();ctx.moveTo(X(q.x),Y(q.y));ctx.lineTo(X(q.x+q.w),Y(q.y));ctx.lineTo(X(q.x+q.w-30),Y(q.y+q.h));ctx.lineTo(X(q.x+30),Y(q.y+q.h));ctx.closePath();ctx.fillStyle=metal(q.y,q.h);ctx.fill();ctx.strokeStyle=P.steel;ctx.lineWidth=1.2*S;ctx.stroke();text(q.label,q.x+q.w/2,q.y-12,{px:10,a:'center',c:P.ink2});
-    conveyor(pt(q.x+q.w-30,q.y+q.h),pt(EQ.rawmill.x,EQ.rawmill.y+30));
-    const rm=EQ.rawmill;cylinder(rm.x,rm.y,rm.w,rm.h,hl('rawmill')?P.blue3:P.steel,hl('rawmill'));text(rm.label,rm.x+rm.w/2,rm.y+rm.h+14,{px:10,a:'center',c:P.ink2});
-    conveyor(pt(rm.x+rm.w,rm.y+30),pt(EQ.preheater.x,EQ.preheater.y+20));
-    const ph=EQ.preheater;const pc=hl('preheater')?(st.spike?P.red:P.blue3):P.steel;ctx.save();if(hl('preheater'))glow(pc,14);rr(ph.x+18,ph.y,ph.w-36,ph.h,2,metal(ph.y,ph.h),pc,hl('preheater')?2:1.2);noglow();ctx.restore();
-    for(let i=0;i<4;i++){const cyy=ph.y+22+i*48;const r=16;ctx.beginPath();ctx.arc(X(ph.x+ph.w/2),Y(cyy),r*S,0,Math.PI*2);ctx.strokeStyle=(i===3&&st.spike)?P.red:pc;ctx.lineWidth=1.2*S;ctx.stroke();ctx.beginPath();ctx.moveTo(X(ph.x+ph.w/2-r),Y(cyy));ctx.lineTo(X(ph.x+ph.w/2),Y(cyy+r+8));ctx.lineTo(X(ph.x+ph.w/2+r),Y(cyy));ctx.stroke();text('C'+(i+1),ph.x+ph.w/2,cyy-1,{px:8,mono:true,a:'center',c:P.ink3});}
-    if(st.blast){const a=0.5+0.5*Math.sin(st.t/120);ctx.fillStyle='rgba(111,220,140,'+a.toFixed(2)+')';ctx.beginPath();ctx.arc(X(ph.x+ph.w/2+22),Y(ph.y+22+3*48),5*S,0,Math.PI*2);ctx.fill();}
-    text(ph.label,ph.x+ph.w/2,ph.y-12,{px:10,a:'center',c:P.ink2});
-    /* kiln */
-    const k=EQ.kiln;const kc=hl('kiln')?P.blue3:P.steel;ctx.save();ctx.translate(X(k.x1),Y(k.y1));const ang=Math.atan2(k.y2-k.y1,k.x2-k.x1);ctx.rotate(ang);const kl=Math.hypot(k.x2-k.x1,k.y2-k.y1)*S,kr=k.r*S;if(hl('kiln'))glow(kc,16);rpath(0,-kr,kl,kr*2,kr*0.5);const kg=ctx.createLinearGradient(0,-kr,0,kr);kg.addColorStop(0,'rgba(140,160,185,.30)');kg.addColorStop(.45,'rgba(0,7,20,.6)');kg.addColorStop(1,'rgba(0,7,20,.88)');ctx.fillStyle=kg;ctx.fill();ctx.strokeStyle=kc;ctx.lineWidth=(hl('kiln')?2:1.3)*S;ctx.stroke();noglow();
-    /* rotating stripes */
-    ctx.save();rpath(0,-kr,kl,kr*2,kr*0.5);ctx.clip();const sp=(st.t/14)%24;ctx.strokeStyle='rgba(159,179,200,.35)';ctx.lineWidth=1*S;for(let x=-24;x<kl+24;x+=24){ctx.beginPath();ctx.moveTo(x+sp,-kr);ctx.lineTo(x+sp-12*S,kr);ctx.stroke();}
-    /* heat glow inside the kiln toward the burner end */
-    const g=ctx.createLinearGradient(kl*0.35,0,kl,0);g.addColorStop(0,'rgba(255,131,43,0)');g.addColorStop(1,'rgba(255,131,43,'+(0.35+0.1*Math.sin(st.t/300)).toFixed(2)+')');ctx.fillStyle=g;ctx.fillRect(0,-kr,kl,kr*2);ctx.restore();
-    /* tyres */
-    [0.22,0.6].forEach(u=>{ctx.beginPath();ctx.rect(kl*u-4*S,-kr-4*S,8*S,kr*2+8*S);ctx.strokeStyle=P.steel2;ctx.lineWidth=1*S;ctx.stroke();});
-    /* flame */
-    const fl=0.8+0.2*Math.sin(st.t/90);ctx.beginPath();ctx.moveTo(kl-6*S,-6*S);ctx.quadraticCurveTo(kl-40*S*fl,0,kl-6*S,6*S);ctx.fillStyle='rgba(255,170,60,.9)';ctx.fill();ctx.restore();
-    text(k.label,(k.x1+k.x2)/2,k.y1-36,{px:10,a:'center',c:P.ink2});
-    text('feed '+Math.round(st.kiln.feed)+' t/h · '+Math.round(st.kiln.temp).toLocaleString('en-US')+' °C',(k.x1+k.x2)/2,k.y2+30,{px:10,mono:true,a:'center',c:hl('kiln')?P.blue4:P.ink3});
-    /* cooler */
-    const co=EQ.cooler;const cc=hl('cooler')?P.blue3:P.steel;rr(co.x,co.y,co.w,co.h,2,metal(co.y,co.h),cc,1.2);for(let i=0;i<3;i++){const fx=co.x+20+i*38,fy=co.y+co.h+14;ctx.save();ctx.translate(X(fx),Y(fy));ctx.rotate(st.t/160+i);ctx.strokeStyle=P.steel2;ctx.lineWidth=1.5*S;for(let b=0;b<3;b++){ctx.rotate(Math.PI*2/3);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(7*S,0);ctx.stroke();}ctx.restore();}
-    text(co.label,co.x+co.w/2,co.y-12,{px:10,a:'center',c:P.ink2});
-    conveyor(pt(co.x+co.w,co.y+24),pt(EQ.cmill.x,EQ.cmill.y+29));
-    /* cement mill */
-    const cm=EQ.cmill;const mc=hl('cmill')?(st.vibRise?P.yellow:P.blue3):P.steel;cylinder(cm.x,cm.y,cm.w,cm.h,mc,hl('cmill'));text(cm.label,cm.x+cm.w/2,cm.y+cm.h+16,{px:10,a:'center',c:P.ink2});
-    if(st.wo){ctx.save();glow(P.orange,10);rr(cm.x+cm.w-30,cm.y-22,28,18,2,'rgba(0,7,20,.9)',P.orange,1);noglow();ctx.restore();text('WO',cm.x+cm.w-16,cm.y-13,{px:9,mono:true,a:'center',c:P.orange,w:600});}
-    if(hl('cmill')||st.vibRise)spark(cm.x+10,cm.y-78,100,46,st.hist.vib,3,8,st.vibRise?P.yellow:P.blue3,7.1,'VT-205','mm/s');
-    if(hl('preheater')||st.spike)spark(ph.x+ph.w+10,ph.y+54,120,46,st.hist.draft,5,11,st.spike?P.red:P.blue3,8.1,'PT-302','mbar');
-    conveyor(pt(cm.x+cm.w,cm.y+29),pt(EQ.silos.x,EQ.silos.y+60));
-    /* silos + truck */
-    const si=EQ.silos;for(let i=0;i<3;i++){const sx=si.x+i*40;rr(sx,si.y,30,si.h,8,metal(si.y,si.h),P.steel,1.2);const lvl=0.55+0.25*Math.sin(st.t/5000+i);ctx.fillStyle='rgba(159,179,200,.25)';ctx.fillRect(X(sx+2),Y(si.y+si.h-si.h*lvl),26*S,si.h*lvl*S-2*S);}
-    text(si.label,si.x+si.w/2-5,si.y-8,{px:10,a:'center',c:P.ink2});
+    /* roaster: a hopper of beans over a turning drum */
+    const ro=EQ.roaster;const rc=hl('roaster')?P.blue3:P.steel;
+    ctx.beginPath();ctx.moveTo(X(ro.x+15),Y(ro.y-44));ctx.lineTo(X(ro.x+ro.w-15),Y(ro.y-44));ctx.lineTo(X(ro.x+ro.w/2+14),Y(ro.y-8));ctx.lineTo(X(ro.x+ro.w/2-14),Y(ro.y-8));ctx.closePath();ctx.fillStyle=metal(ro.y-44,36);ctx.fill();ctx.strokeStyle=P.steel;ctx.lineWidth=1.2*S;ctx.stroke();
+    for(let i=0;i<9;i++){const bx=ro.x+29+(i%5)*13+(i>4?6:0),by=ro.y-36+(i>4?9:0);ctx.fillStyle='rgba(170,115,80,.8)';ctx.beginPath();ctx.ellipse(X(bx),Y(by),3.2*S,2*S,0.5,0,Math.PI*2);ctx.fill();}
+    cylinder(ro.x,ro.y,ro.w,ro.h,rc,hl('roaster'));
+    {const f=0.6+0.4*Math.sin(st.t/110);ctx.fillStyle='rgba(255,131,43,'+(0.25+0.25*f).toFixed(2)+')';ctx.fillRect(X(ro.x+16),Y(ro.y+ro.h+5),(ro.w-32)*S,3*S);}
+    text(ro.label,ro.x+ro.w/2,ro.y-56,{px:10,a:'center',c:P.ink2});
+    conveyor(pt(ro.x+ro.w,ro.y+30),pt(EQ.mill.x,EQ.mill.y+26));
+    /* liquor mill */
+    const ml=EQ.mill;cylinder(ml.x,ml.y,ml.w,ml.h,hl('mill')?P.blue3:P.steel,hl('mill'));text(ml.label,ml.x+ml.w/2,ml.y+ml.h+14,{px:10,a:'center',c:P.ink2});
+    /* five-roll refiner: the liquor climbs the stack as a thin film */
+    const rf=EQ.refiner;const RY=i=>rf.y+177-i*38;const rcx=rf.x+rf.w/2;
+    line([pt(ml.x+ml.w,ml.y+20),pt(rf.x+8,ml.y+20),pt(rf.x+8,RY(0)),pt(rcx-15,RY(0))],CHOC,2.5);
+    const pc=hl('refiner')?(st.spike?P.red:P.blue3):P.steel;ctx.save();if(hl('refiner'))glow(pc,14);rr(rf.x+14,rf.y,rf.w-28,rf.h,2,metal(rf.y,rf.h),pc,hl('refiner')?2:1.2);noglow();ctx.restore();
+    for(let i=0;i<5;i++){const yy=RY(i),bad=i===3&&st.spike;ctx.beginPath();ctx.arc(X(rcx),Y(yy),15*S,0,Math.PI*2);ctx.fillStyle='rgba(0,7,20,.6)';ctx.fill();ctx.strokeStyle=bad?P.red:pc;ctx.lineWidth=1.2*S;ctx.stroke();
+      const side=i%2?Math.PI:0;ctx.beginPath();ctx.arc(X(rcx),Y(yy),15*S,side-0.9,side+0.9);ctx.strokeStyle=CHOC;ctx.lineWidth=2.4*S;ctx.stroke();
+      const an=st.t/(240-i*30)*(i%2?-1:1);ctx.beginPath();ctx.moveTo(X(rcx),Y(yy));ctx.lineTo(X(rcx+Math.cos(an)*10),Y(yy+Math.sin(an)*10));ctx.strokeStyle='rgba(159,179,200,.45)';ctx.lineWidth=1*S;ctx.stroke();
+      text('R'+(i+1),rcx,yy,{px:8,mono:true,a:'center',c:bad?P.red:P.ink3});}
+    if(st.blast){const a=0.5+0.5*Math.sin(st.t/120);ctx.fillStyle='rgba(111,220,140,'+a.toFixed(2)+')';ctx.beginPath();ctx.arc(X(rcx+24),Y(RY(3)),5*S,0,Math.PI*2);ctx.fill();}
+    text(rf.label,rcx,rf.y-12,{px:10,a:'center',c:P.ink2});
+    line([pt(rcx+15,RY(4)),pt(424,RY(4)),pt(424,EQ.conche.y+14),pt(EQ.conche.x+4,EQ.conche.y+14)],CHOC,2);
+    /* conche: a warm tank, two agitators working the chocolate */
+    const co=EQ.conche;const mc=hl('conche')?(st.vibRise?P.yellow:P.blue3):P.steel;
+    ctx.save();if(hl('conche'))glow(mc,14);rr(co.x,co.y,co.w,co.h,18,metal(co.y,co.h),mc,hl('conche')?2:1.2);noglow();ctx.restore();
+    ctx.save();rpath(X(co.x+4),Y(co.y+co.h*0.42),(co.w-8)*S,(co.h*0.58-4)*S,14*S);ctx.fillStyle='rgba(120,72,40,.5)';ctx.fill();ctx.restore();
+    [co.x+co.w*0.32,co.x+co.w*0.68].forEach((ax,j)=>{const ay=co.y+co.h*0.55;ctx.save();ctx.translate(X(ax),Y(ay));ctx.rotate(st.t/300*(j?-1:1)+(st.vibRise&&j===0?Math.sin(st.t/28)*0.06:0));ctx.strokeStyle=P.steel;ctx.lineWidth=1.6*S;for(let b=0;b<3;b++){ctx.rotate(Math.PI*2/3);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(16*S,0);ctx.stroke();}ctx.restore();ctx.fillStyle=P.steel;ctx.beginPath();ctx.arc(X(ax),Y(ay),2.5*S,0,Math.PI*2);ctx.fill();});
+    text(co.label,co.x+co.w/2,co.y+co.h+20,{px:10,a:'center',c:P.ink2});
+    if(st.wo){ctx.save();glow(P.orange,10);rr(co.x+co.w-30,co.y-22,28,18,2,'rgba(0,7,20,.9)',P.orange,1);noglow();ctx.restore();text('WO',co.x+co.w-16,co.y-13,{px:9,mono:true,a:'center',c:P.orange,w:600});}
+    /* tempering machine: melt, cool, reheat */
+    const tm=EQ.temper;line([pt(co.x+co.w,co.y+co.h*0.62),pt(tm.x,co.y+co.h*0.62)],CHOC,2.5);
+    const tc=hl('temper')?P.blue3:P.steel;ctx.save();if(hl('temper'))glow(tc,16);rr(tm.x,tm.y,tm.w,tm.h,4,metal(tm.y,tm.h),tc,hl('temper')?2:1.3);noglow();ctx.restore();
+    const ZN=[{k:'melt',v:45,d:0,col:P.orange,f:'rgba(255,131,43,.14)'},{k:'cool',v:st.line.cool,d:1,col:P.blue3,f:'rgba(69,137,255,.16)'},{k:'reheat',v:st.line.reheat,d:1,col:P.teal,f:'rgba(61,219,217,.14)'}];const zw=tm.w/3;
+    ZN.forEach((z,i)=>{const zx=tm.x+i*zw;ctx.fillStyle=z.f;ctx.fillRect(X(zx+3),Y(tm.y+3),(zw-6)*S,(tm.h-6)*S);if(i)line([pt(zx,tm.y+4),pt(zx,tm.y+tm.h-4)],'rgba(255,255,255,.18)',1);text(z.k,zx+zw/2,tm.y+15,{px:8.5,mono:true,a:'center',c:P.ink3});text(z.v.toFixed(z.d)+' °C',zx+zw/2,tm.y+31,{px:9.5,mono:true,a:'center',c:z.col});});
+    for(let i=0;i<9;i++){const u=((st.t/2600)+i/9)%1;ctx.fillStyle=CHOC;ctx.beginPath();ctx.arc(X(tm.x+6+u*(tm.w-12)),Y(tm.y+tm.h-10),2.2*S,0,Math.PI*2);ctx.fill();}
+    text(tm.label,tm.x+tm.w/2,tm.y-14,{px:10,a:'center',c:P.ink2});
+    text('cool '+st.line.cool.toFixed(1)+' °C · reheat '+st.line.reheat.toFixed(1)+' °C',tm.x+tm.w/2,tm.y+tm.h+20,{px:10,mono:true,a:'center',c:hl('temper')?P.blue4:P.ink3});
+    conveyor(pt(tm.x+tm.w,tm.y+tm.h-12),pt(EQ.tunnel.x,EQ.tunnel.y+20));
+    /* cooling tunnel: moulds ride through cold air */
+    const tu=EQ.tunnel;rr(tu.x,tu.y,tu.w,tu.h,3,metal(tu.y,tu.h),hl('tunnel')?P.blue3:P.steel,1.2);
+    for(let i=0;i<7;i++){const u=((st.t/5200)+i/7)%1;const mx=tu.x+6+u*(tu.w-26);ctx.fillStyle='rgba(120,72,40,.85)';ctx.fillRect(X(mx),Y(tu.y+tu.h-14),14*S,7*S);ctx.strokeStyle='rgba(159,179,200,.5)';ctx.lineWidth=1*S;ctx.strokeRect(X(mx),Y(tu.y+tu.h-14),14*S,7*S);}
+    for(let i=0;i<4;i++){const fx=tu.x+24+i*44,fy=tu.y+tu.h+14;ctx.save();ctx.translate(X(fx),Y(fy));ctx.rotate(st.t/160+i);ctx.strokeStyle=P.steel2;ctx.lineWidth=1.5*S;for(let b=0;b<3;b++){ctx.rotate(Math.PI*2/3);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(7*S,0);ctx.stroke();}ctx.restore();}
+    text(tu.label,tu.x+tu.w/2,tu.y-12,{px:10,a:'center',c:P.ink2});
+    conveyor(pt(tu.x+tu.w,tu.y+26),pt(EQ.pack.x,EQ.pack.y+40));
+    /* wrapping and dispatch: the pallet fills, the truck leaves */
+    const pk=EQ.pack;rr(pk.x,pk.y+14,60,44,3,metal(pk.y+14,44),hl('pack')?P.blue3:P.steel,1.2);text('wrap',pk.x+30,pk.y+36,{px:8.5,mono:true,a:'center',c:P.ink3});
+    {const nb=3+Math.floor((st.t/1800)%4);for(let i=0;i<nb;i++){rr(pk.x+78+(i%2)*30,pk.y+48-Math.floor(i/2)*16,26,14,1,'rgba(159,179,200,.16)',P.steel,1);}rr(pk.x+74,pk.y+64,64,5,1,'rgba(159,179,200,.4)');}
+    text(pk.label,pk.x+pk.w/2,pk.y-4,{px:10,a:'center',c:P.ink2});
     const tx=1180+((st.t/40)%90);rr(tx,262,34,16,2,'rgba(0,7,20,.6)',P.steel,1);rr(tx+34,268,14,10,2,'rgba(0,7,20,.6)',P.steel,1);ctx.fillStyle=P.steel2;[tx+8,tx+26,tx+42].forEach(wx=>{ctx.beginPath();ctx.arc(X(wx),Y(280),3*S,0,Math.PI*2);ctx.fill();});
+    if(hl('conche')||st.vibRise)spark(co.x+4,co.y-60,124,46,st.hist.vib,2,7,st.vibRise?P.yellow:P.blue3,6.0,'VT-205','mm/s');
+    if(hl('refiner')||st.spike)spark(rf.x+rf.w+10,rf.y+54,120,46,st.hist.draft,24,44,st.spike?P.red:P.blue3,34,'PT-302','bar');
     /* sensors */
     SENS.forEach(s=>{const on=st.hover===s||hl(s.eq);const c=on?P.blue4:P.blue3;ctx.save();if(on)glow(c,10);ctx.fillStyle=c;ctx.beginPath();ctx.arc(X(s.x),Y(s.y),(on?4:3)*S,0,Math.PI*2);ctx.fill();noglow();ctx.restore();ctx.strokeStyle='rgba(69,137,255,.35)';ctx.lineWidth=1*S;ctx.beginPath();ctx.arc(X(s.x),Y(s.y),7*S,0,Math.PI*2);ctx.stroke();if(st.hover===s)text(s.id,s.x+9,s.y-8,{px:8.5,mono:true,c:P.blue4});});
     ctx.globalAlpha=1;
     /* ---- control room / objectives ---- */
     ctx.globalAlpha=alphaFor('objectives');
     const cr=EQ.ctrl;ctx.save();if(st.gate===1)glow(P.yellow,16);rr(cr.x,cr.y,cr.w,cr.h,2,'rgba(0,7,20,.75)',st.gate===1?P.yellow:st.gate===2?P.green:P.line,1.2);noglow();ctx.restore();
-    eyebrow('CONTROL ROOM · BUSINESS TARGETS',cr.x+10,cr.y+12);
-    const K=[{k:'Quality in spec',v:st.kpi.q,u:'%',lo:95,hi:100,tg:98.5,up:true},{k:'Energy',v:st.kpi.e,u:' kWh/t',lo:85,hi:100,tg:92,up:false},{k:'Throughput',v:st.kpi.t,u:' t/h',lo:150,hi:210,tg:175,up:true},{k:'Emissions',v:0.60+(st.kpi.e-94)*0.004,u:' tCO₂/t',lo:0.5,hi:0.7,tg:0.6,up:false}];
-    K.forEach((o,i)=>{const yy=cr.y+28+i*19;text(o.k,cr.x+10,yy,{px:9,c:P.ink2});const bx=cr.x+104,bw=104;rr(bx,yy-4,bw,8,1,'rgba(255,255,255,.08)');const u=clamp((o.v-o.lo)/(o.hi-o.lo),0,1);const good=o.up?o.v>=o.tg:o.v<=o.tg;ctx.fillStyle=good?P.green:P.yellow;ctx.fillRect(X(bx),Y(yy-4),bw*u*S,8*S);const tu=clamp((o.tg-o.lo)/(o.hi-o.lo),0,1);ctx.fillStyle=P.ink;ctx.fillRect(X(bx+bw*tu)-1*S,Y(yy-6),2*S,12*S);text((o.u.indexOf('CO')>=0?o.v.toFixed(2):o.v.toFixed(o.u==='%'?1:0))+o.u,cr.x+cr.w-10,yy,{px:9,mono:true,a:'right',c:good?P.green:P.yellow});});
-    text('objective: max margin · quality ≥ 98.5 % · CO₂ cap',cr.x+10,cr.y+cr.h-10,{px:8.5,mono:true,c:P.ink3});
+    eyebrow('CONTROL ROOM · TARGETS',cr.x+10,cr.y+12);
+    const K=[{k:'Bars in temper',v:st.kpi.q,u:'%',lo:95,hi:100,tg:98.5,up:true},{k:'Energy',v:st.kpi.e,u:' kWh/t',lo:85,hi:100,tg:92,up:false},{k:'Line output',v:st.kpi.t,u:' t/h',lo:3,hi:6,tg:4.5,up:true},{k:'Rework',v:st.kpi.m,u:'%',lo:0,hi:5,tg:1.5,up:false}];
+    K.forEach((o,i)=>{const yy=cr.y+28+i*19;text(o.k,cr.x+10,yy,{px:9,c:P.ink2});const bx=cr.x+104,bw=104;rr(bx,yy-4,bw,8,1,'rgba(255,255,255,.08)');const u=clamp((o.v-o.lo)/(o.hi-o.lo),0,1);const good=o.up?o.v>=o.tg:o.v<=o.tg;ctx.fillStyle=good?P.green:P.yellow;ctx.fillRect(X(bx),Y(yy-4),bw*u*S,8*S);const tu=clamp((o.tg-o.lo)/(o.hi-o.lo),0,1);ctx.fillStyle=P.ink;ctx.fillRect(X(bx+bw*tu)-1*S,Y(yy-6),2*S,12*S);text(o.v.toFixed(o.u.indexOf('kWh')>=0?0:1)+o.u,cr.x+cr.w-10,yy,{px:9,mono:true,a:'right',c:good?P.green:P.yellow});});
+    text('objective: in temper ≥ 98.5 % · rework ↓',cr.x+10,cr.y+cr.h-10,{px:8.5,mono:true,c:P.ink3});
     if(st.gate===1){text('operator gate: approve?',cr.x+cr.w-10,cr.y+12,{px:8.5,mono:true,a:'right',c:P.yellow});}
     if(st.gate===2){text('approved ✓',cr.x+cr.w-10,cr.y+12,{px:8.5,mono:true,a:'right',c:P.green});}
     ctx.globalAlpha=1;
@@ -2877,7 +2895,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     rr(CC.x,CC.y,CC.w,CC.h,2,'rgba(0,29,108,.18)','rgba(69,137,255,.35)',1);
     /* static routes */
     line([pt(KAFKA.x+KAFKA.w,KAFKA.y+80),pt(FLINK.x,KAFKA.y+80)],'rgba(120,169,255,.25)',1,[3,4]);line([pt(FLINK.x+FLINK.w,KAFKA.y+80),pt(AG.x,KAFKA.y+80)],'rgba(190,149,255,.3)',1,[3,4]);line([pt(AG.x+AG.w,KAFKA.y+80),pt(DEC.x,KAFKA.y+80)],'rgba(190,149,255,.3)',1,[3,4]);
-    line(decToCtrl(0),'rgba(111,220,140,.14)',1);line(decToCmms(),'rgba(255,131,43,.14)',1);line(ctrlToKiln(),'rgba(111,220,140,.12)',1,[2,5]);line(cmmsToMill(),'rgba(255,131,43,.12)',1,[2,5]);line(ctrlToPre(),'rgba(255,131,137,.12)',1,[2,5]);
+    line(decToCtrl(0),'rgba(111,220,140,.14)',1);line(decToCmms(),'rgba(255,131,43,.14)',1);line(ctrlToTemper(),'rgba(111,220,140,.12)',1,[2,5]);line(cmmsToConche(),'rgba(255,131,43,.12)',1,[2,5]);line(ctrlToRefiner(),'rgba(255,131,137,.12)',1,[2,5]);
     rr(KAFKA.x,KAFKA.y,KAFKA.w,KAFKA.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('KAFKA TOPICS',KAFKA.x+10,KAFKA.y+14);
     TOPICS.forEach((t,i)=>{const y=topicY(i);text(t,KAFKA.x+14,y,{px:10,mono:true,c:P.blue4});const ph2=(st.t/30+i*7)%16;ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1*S;ctx.setLineDash([3*S,13*S]);ctx.lineDashOffset=-ph2*S;ctx.beginPath();ctx.moveTo(X(KAFKA.x+150),Y(y));ctx.lineTo(X(KAFKA.x+KAFKA.w-10),Y(y));ctx.stroke();ctx.setLineDash([]);});
     rr(FLINK.x,FLINK.y,FLINK.w,FLINK.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('CONFLUENT CLOUD FOR APACHE FLINK',FLINK.x+10,FLINK.y+14);
@@ -2898,16 +2916,16 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   }
   /* ---------- interaction ---------- */
   const HOT=[].concat(SENS.map(s=>({x:s.x,y:s.y,r:12,html:'<b>'+s.id+'</b> '+s.name+'<br>unit '+s.unit+' · source '+SRC[s.src].label+'<br>topic '+TOPICS[s.topic],s,eq:s.eq})),
-    [{x:cx({x:EQ.kiln.x1,y:EQ.kiln.y1,w:EQ.kiln.x2-EQ.kiln.x1,h:0}),y:EQ.kiln.y1+18,r:60,eq:'kiln',html:'<b>Rotary kiln</b><br>click: production optimization'},
-     {x:cx(EQ.cmill),y:cy(EQ.cmill),r:50,eq:'cmill',html:'<b>Cement mill</b><br>click: predictive maintenance'},
-     {x:cx(EQ.preheater),y:cy(EQ.preheater),r:60,eq:'preheater',html:'<b>Preheater tower</b><br>click: anomaly detection'}],
+    [{x:cx(EQ.temper),y:cy(EQ.temper),r:70,eq:'temper',html:'<b>Tempering machine</b><br>click: production optimization'},
+     {x:cx(EQ.conche),y:cy(EQ.conche),r:55,eq:'conche',html:'<b>Conche</b><br>click: predictive maintenance'},
+     {x:cx(EQ.refiner),y:cy(EQ.refiner),r:60,eq:'refiner',html:'<b>Five-roll refiner</b><br>click: anomaly detection'}],
     Object.keys(SRC).map(k=>({x:cx(SRC[k]),y:cy(SRC[k]),r:40,html:'<b>'+SRC[k].label+'</b><br>'+SRC[k].sub+' → Kafka via connector'})),
     [{x:cx(KAFKA),y:cy(KAFKA),r:70,html:'<b>Kafka topics</b><br>one topic per source, Schema Registry contracts'},{x:cx(FLINK),y:cy(FLINK),r:70,html:'<b>Flink</b><br>forecast · detect anomalies · optimize'},{x:cx(AG),y:cy(AG),r:60,html:'<b>Streaming Agents</b><br>reason on the forecast and the flag, call tools, write decisions'},{x:cx(DEC),y:cy(DEC),r:60,html:'<b>Decisions</b><br>topics the floor consumes: setpoints, work orders, alerts'},{x:cx(EQ.ctrl),y:cy(EQ.ctrl),r:70,html:'<b>Control room</b><br>objectives, targets and the operator gate'}]);
   function vpos(ev){const r=cv.c.getBoundingClientRect();const e=ev.touches?ev.touches[0]:ev;return {x:(e.clientX-r.left)/S,y:(e.clientY-r.top)/S};}
   function hit(p){let best=null,bd=1e9;HOT.forEach(h=>{const d=Math.hypot(h.x-p.x,h.y-p.y);if(d<h.r&&d<bd){bd=d;best=h;}});return best;}
-  cv.c.addEventListener('mousemove',ev=>{const p=vpos(ev);const h=hit(p);st.hover=h&&h.s?h.s:null;if(!h){tip.style.display='none';cv.c.style.cursor='default';return;}tip.innerHTML=h.html;tip.style.display='block';const r=inner.getBoundingClientRect();const px=(ev.clientX-r.left),py=(ev.clientY-r.top);tip.style.left=(px>r.width*0.7?px-10-tip.offsetWidth:px+12)+'px';tip.style.top=(py+10)+'px';cv.c.style.cursor=(h.eq==='kiln'||h.eq==='cmill'||h.eq==='preheater')?'pointer':'default';});
+  cv.c.addEventListener('mousemove',ev=>{const p=vpos(ev);const h=hit(p);st.hover=h&&h.s?h.s:null;if(!h){tip.style.display='none';cv.c.style.cursor='default';return;}tip.innerHTML=h.html;tip.style.display='block';const r=inner.getBoundingClientRect();const px=(ev.clientX-r.left),py=(ev.clientY-r.top);tip.style.left=(px>r.width*0.7?px-10-tip.offsetWidth:px+12)+'px';tip.style.top=(py+10)+'px';cv.c.style.cursor=(h.eq==='temper'||h.eq==='conche'||h.eq==='refiner')?'pointer':'default';});
   cv.c.addEventListener('mouseleave',()=>{tip.style.display='none';st.hover=null;});
-  cv.c.addEventListener('click',ev=>{const h=hit(vpos(ev));const map={kiln:'opt',cmill:'pdm',preheater:'anom'};if(h&&map[h.eq]){st.auto=false;$('#pl-auto').setAttribute('aria-pressed','false');startScenario(map[h.eq]);}});
+  cv.c.addEventListener('click',ev=>{const h=hit(vpos(ev));const map={temper:'opt',conche:'pdm',refiner:'anom'};if(h&&map[h.eq]){st.auto=false;$('#pl-auto').setAttribute('aria-pressed','false');startScenario(map[h.eq]);}});
   chipGroup('pl-sc',v=>{startScenario(v);});
   chipGroup('pl-focus',v=>{st.focus=v;});
   $('#pl-auto').addEventListener('click',e=>{st.auto=!st.auto;e.currentTarget.setAttribute('aria-pressed',st.auto);if(st.auto&&st.phaseT<-1e8)nextPhase();});
@@ -3229,7 +3247,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
       {d:2600,cap:'The forecast projects bag loading, fueling and boarding. The optimizer re-sequences the ramp inside the safety rules.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['bags done 11:42 · fuel 11:38 · boarding 11:47','search: parallel fueling · second loader · 2 gates']}]);a.flow(['ramp'],2,2,P.blue3,true);}},
       {d:2600,cap:'The agent proposes a second loader and fueling during boarding. Operations control approves at the gate.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: second loader · fuel during boarding','turnaround 52 → 41 min · crew within duty','→ ops gate']}]);a.toGate(0,P.green);}},
       {d:3400,cap:'Approved. The plan reaches the ramp, the aircraft leaves 3 minutes late instead of 14. The connection bank holds.',on:a=>{a.fromGate('gate',P.green,()=>{a.flag('turn',41);a.kpi({turn:41,otp:88});a.co([{x:240,y:40,c:P.green,to:{x:140,y:90},l:['departed +3 min · 212 connections held','turnaround 41 min · on-time 88 %']}]);});}},
-      {d:1800,cap:'Every turnaround, every gate, every day. The same models run the ramp and the kiln.',on:a=>{}}
+      {d:1800,cap:'Every turnaround, every gate, every day. The same models run the ramp and the factory line.',on:a=>{}}
     ]},
     plan:{name:'Supply chain planning',phases:[
       {d:2600,cap:'Hub to Lisbon, Friday. Bookings come in daily per route. The forecast says the flight fills to 96% with 11 days to go.',on:a=>{a.hl('network');a.flag('route',3);a.spark('BOOK-LIS',{from:120,to:168,lo:60,hi:190,limit:174,label:'BOOK-LIS seats',unit:'',dec:0,color:P.blue3,dx:100,dy:130});a.co([{x:960,y:232,c:P.yellow,to:{x:845,y:45},l:['HUB–LIS Fri · 168 of 174 seats forecast','P90: full 3 days early · fare class Y open']}]);a.kpi({lf:84});a.flow(['network'],3,0,P.yellow);}},
@@ -3357,33 +3375,33 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
     reg({el:c.closest('.uc')||c,resize(){cv.fit();},update(dt){if(!reduced)M.update(st,Math.min(dt,120));},draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W){cv.fit();return;}ctx.clearRect(0,0,W,H);ctx.lineJoin='round';ctx.lineCap='round';M.draw(st,ctx,W,H);}});});
 })();
 
-/* ============ 03 production optimization: the kiln finds its own setpoint, the operator approves ============ */
+/* ============ 03 production optimization: the tempering line finds its own setpoint, the operator approves ============ */
 (function(){
   const el=$('#uc-prod');if(!el)return;
   const cv=new Cv($('#pr-cv'));
-  const GF=205,GT=1485,ECAP=98,BAR=10;/* one bar is ten minutes */
+  /* f is the cooling zone, t the reheat zone, both in °C. Guardrails: cool 26.0 to 28.5, reheat 30.5 to 32.0 */
+  const CL=26.0,CH=28.5,RL=30.5,RH=32.0,ECAP=99,BAR=10;/* one bar is ten minutes */
   const H=24;/* four hours of forecast */
-  const st={spec:98.5,cycle:4,auto:false,acc:0,dirty:true,i:0,f:184,t:1450,tf:184,tt:1450,fs:178,ts:1462,rows:[],prop:null,pend:0,since:0,flash:0,f0:184,t0:1450,rt:0};
-  /* the plant: quality peaks at (fs,ts), which drifts; energy rises with heat and falls with throughput */
-  const quality=(f,t,fs,ts)=>clamp(99-0.0028*(f-fs)*(f-fs)-0.0017*(t-ts)*(t-ts),85,99);
-  const energy=(f,t)=>90+0.11*(t-1400)-0.06*(f-150);
-  const obj=(f,t,fs,ts)=>1.3*(quality(f,t,fs,ts)-93)-0.045*(energy(f,t)-100)+0.02*(f-150);
-  const SCALE=0.41;/* dollars per ton per objective unit, same scale as the trade-off stage */
-  const inLimits=(f,t)=>f<=GF&&t<=GT&&energy(f,t)<=ECAP;
-  const n1=n=>Math.round(n).toLocaleString('en-US');
-  const money=v=>(v>=0?'+':'')+'$'+v.toFixed(2)+'/t';
+  const st={spec:98.5,cycle:4,auto:false,acc:0,dirty:true,i:0,f:27.5,t:31.4,tf:27.5,tt:31.4,fs:27.3,ts:31.3,rows:[],prop:null,pend:0,since:0,flash:0,f0:27.5,t0:31.4,rt:0};
+  /* the line: bars in temper peak at (fs,ts), which drift with the cocoa butter lot and the room; colder cooling and hotter reheat cost energy */
+  const quality=(f,t,fs,ts)=>clamp(99-4.0*(f-fs)*(f-fs)-4.8*(t-ts)*(t-ts),85,99);
+  const energy=(f,t)=>90+3*(CH-f)+2*(t-RL);
+  const obj=(f,t,fs,ts)=>quality(f,t,fs,ts)-0.15*(energy(f,t)-95);
+  const inLimits=(f,t)=>f>=CL&&f<=CH&&t>=RL&&t<=RH&&energy(f,t)<=ECAP;
+  const n1=n=>n.toFixed(1);
+  const pts=v=>Math.abs(v)<0.05?'0.0 pt':(v<0?'−':'+')+Math.abs(v).toFixed(1)+' pt';
   const label=k=>{const h=k*BAR/60;return (h<0?'-':h>0?'+':'')+Math.abs(h).toFixed(0)+' h';};
-  function optimize(){let best=null;for(let f=150;f<=210;f+=1)for(let t=1400;t<=1500;t+=2){if(!inLimits(f,t))continue;const q=quality(f,t,st.fs,st.ts);const ok=q>=st.spec;const m=obj(f,t,st.fs,st.ts);const key=(ok?1e3:0)+(ok?m:q);if(!best||key>best.key)best={f,t,q,m,ok,key};}return best;}
-  function propose(kind){const b=optimize();if(!b)return;const cur={f:st.tf,t:st.tt};const dq=quality(b.f,b.t,st.fs,st.ts)-quality(cur.f,cur.t,st.fs,st.ts);const move=Math.abs(b.f-cur.f)>1||Math.abs(b.t-cur.t)>2;
+  function optimize(){let best=null;for(let f=CL;f<=CH+1e-6;f+=0.1)for(let t=RL;t<=RH+1e-6;t+=0.1){if(!inLimits(f,t))continue;const q=quality(f,t,st.fs,st.ts);const ok=q>=st.spec;const m=obj(f,t,st.fs,st.ts);const key=(ok?1e3:0)+(ok?m:q);if(!best||key>best.key)best={f,t,q,m,ok,key};}return best;}
+  function propose(kind){const b=optimize();if(!b)return;const cur={f:st.tf,t:st.tt};const dq=quality(b.f,b.t,st.fs,st.ts)-quality(cur.f,cur.t,st.fs,st.ts);const move=Math.abs(b.f-cur.f)>0.05||Math.abs(b.t-cur.t)>0.05;
     const row=st.rows[st.rows.length-1];if(row)row.mark=kind;
-    if(move&&dq>0.03){st.prop={f:b.f,t:b.t,q:b.q,ok:b.ok,gain:(obj(b.f,b.t,st.fs,st.ts)-obj(cur.f,cur.t,st.fs,st.ts))*SCALE,kind};st.pend=0;}else{st.prop=null;}
+    if(move&&dq>0.03){st.prop={f:b.f,t:b.t,q:b.q,ok:b.ok,gain:quality(cur.f,cur.t,st.fs,st.ts)-b.q,kind};st.pend=0;}else{st.prop=null;}
     st.since=0;st.dirty=true;}
   function approve(){if(!st.prop)return;st.tf=st.prop.f;st.tt=st.prop.t;st.prop=null;st.flash=6;const row=st.rows[st.rows.length-1];if(row)row.mark='apply';st.dirty=true;}
   function step(){st.i++;st.since++;
     /* the optimum drifts a little every bar */
-    st.fs=clamp(st.fs+0.12*gauss(),162,194);st.ts=clamp(st.ts+0.2*gauss(),1438,1484);
+    st.fs=clamp(st.fs+0.0035*gauss(),26.4,28.2);st.ts=clamp(st.ts+0.004*gauss(),30.7,31.8);
     /* setpoints ramp to their targets */
-    st.f+= (st.tf-st.f)*0.4;st.t+=(st.tt-st.t)*0.4;if(Math.abs(st.tf-st.f)<0.3)st.f=st.tf;if(Math.abs(st.tt-st.t)<0.5)st.t=st.tt;
+    st.f+= (st.tf-st.f)*0.4;st.t+=(st.tt-st.t)*0.4;if(Math.abs(st.tf-st.f)<0.02)st.f=st.tf;if(Math.abs(st.tt-st.t)<0.02)st.t=st.tt;
     const q=quality(st.f,st.t,st.fs,st.ts)+0.09*gauss();
     st.rows.push({i:st.i,q,f:st.f,t:st.t,mark:null});if(st.rows.length>72)st.rows.shift();
     if(st.flash>0)st.flash--;
@@ -3393,14 +3411,14 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
     else if(!st.prop&&fq<st.spec-0.05&&st.since>=3)propose('exc');
     if(st.prop&&st.auto){st.pend++;if(st.pend>=2)approve();}
     st.dirty=true;}
-  function sql(){($('#pr-sql')||{}).innerHTML=highlight("SELECT kiln_id, event_time, AI_FORECAST(free_lime, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 24)) OVER (PARTITION BY kiln_id ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f, TS_OPTIMIZE(f, JSON_OBJECT('objective' VALUE 'margin', 'spec' VALUE "+st.spec+", 'every' VALUE '"+st.cycle+"h')) AS setpoint FROM kiln_telemetry;");}
+  function sql(){($('#pr-sql')||{}).innerHTML=highlight("SELECT line_id, event_time, AI_FORECAST(temper_index, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 24)) OVER (PARTITION BY line_id ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f, TS_OPTIMIZE(f, JSON_OBJECT('objective' VALUE 'rework', 'spec' VALUE "+st.spec+", 'every' VALUE '"+st.cycle+"h')) AS setpoint FROM temperer_telemetry;");}
   function panel(){const row=st.rows[st.rows.length-1];if(!row)return;const fq=quality(st.tf,st.tt,st.fs,st.ts);
     $('#pr-q').textContent=row.q.toFixed(1)+'%';$('#pr-q').className=row.q<st.spec?'red':'';
     $('#pr-fq').textContent=fq.toFixed(1)+'%';$('#pr-fq').className=fq<st.spec?'red':'blue';
-    $('#pr-spf').textContent=n1(st.tf)+' t/h';$('#pr-spt').textContent=n1(st.tt)+' °C';
-    const gain=(obj(st.tf,st.tt,st.fs,st.ts)-obj(st.f0,st.t0,st.fs,st.ts))*SCALE;$('#pr-m').textContent=money(gain);$('#pr-m').className=gain>=0?'green':'red';
+    $('#pr-spf').textContent=n1(st.tf)+' °C';$('#pr-spt').textContent=n1(st.tt)+' °C';
+    const gain=quality(st.f0,st.t0,st.fs,st.ts)-quality(st.tf,st.tt,st.fs,st.ts);$('#pr-m').textContent=pts(gain);$('#pr-m').className=gain<=0?'green':'red';
     const a=$('#pr-action'),ap=$('#pr-approve');a.classList.remove('red','green');
-    if(st.prop){a.classList.add('red');ap.disabled=false;$('#pr-actiont').textContent=(st.prop.kind==='exc'?'Forecast slips under spec. ':'')+'Feed '+n1(st.prop.f)+' t/h at '+n1(st.prop.t)+' °C: quality '+st.prop.q.toFixed(1)+'% forecast, '+money(st.prop.gain)+(st.prop.ok?'':', best reachable')+'. '+(st.auto?'Auto-approving.':'Waiting for the operator.');}
+    if(st.prop){a.classList.add('red');ap.disabled=false;$('#pr-actiont').textContent=(st.prop.kind==='exc'?'Forecast slips under spec. ':'')+'Cool '+n1(st.prop.f)+' °C, reheat '+n1(st.prop.t)+' °C: '+st.prop.q.toFixed(1)+'% in temper forecast, rework '+pts(st.prop.gain)+(st.prop.ok?'':', best reachable')+'. '+(st.auto?'Auto-approving.':'Waiting for the operator.');}
     else{a.classList.add('green');ap.disabled=true;const left=Math.max(0,st.cycle*6-st.since)*BAR;$('#pr-actiont').textContent=(st.flash>0?'Applied, ramping now. ':'Setpoints hold. ')+'Next re-optimize in '+(left>=60?Math.floor(left/60)+' h'+(left%60?' '+left%60+' min':''):left+' min')+'.';}}
   let ctx,W,Hh;
   function txt(s,x,y,o){o=o||{};ctx.font=(o.w||400)+' '+(o.px||10)+'px "IBM Plex Mono", Menlo, monospace';ctx.fillStyle=o.c||C.ink3;ctx.textAlign=o.a||'left';ctx.textBaseline='middle';ctx.fillText(s,x,y);}
@@ -3423,18 +3441,18 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
     const last=rows[k0];ctx.save();ctx.shadowColor=last.q<st.spec?C.red:'#fff';ctx.shadowBlur=12;ctx.fillStyle=last.q<st.spec?C.red2:'#fff';ctx.beginPath();ctx.arc(X(k0),Y(last.q),4.5,0,Math.PI*2);ctx.fill();ctx.restore();
     ctx.strokeStyle=C.ink3;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(X(k0))+0.5,padT);ctx.lineTo(Math.round(X(k0))+0.5,padT+ph+sh+10);ctx.stroke();
     /* setpoint strip */const sy=padT+ph+10;ctx.strokeStyle=C.grid;ctx.beginPath();ctx.moveTo(padL,sy-4+0.5);ctx.lineTo(padL+pw,sy-4+0.5);ctx.stroke();
-    const FY=f=>sy+sh-4-(f-150)/60*(sh-8),TY=t=>sy+sh-4-(t-1400)/100*(sh-8);
+    const FY=f=>sy+sh-4-(f-CL)/(CH-CL)*(sh-8)*0.46,TY=t=>sy+sh-4-(sh-8)*0.54-(t-RL)/(RH-RL)*(sh-8)*0.46;
     const strip=(key,fn,col)=>{ctx.strokeStyle=col;ctx.lineWidth=1.8;ctx.beginPath();rows.forEach((r,k)=>{const y=fn(r[key]);if(k===0)ctx.moveTo(X(k),y);else{ctx.lineTo(X(k),fn(rows[k-1][key]));ctx.lineTo(X(k),y);}});ctx.stroke();
       if(st.prop){ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(X(k0),fn(rows[k0][key]));ctx.lineTo(X(k0+3),fn(key==='f'?st.prop.f:st.prop.t));ctx.lineTo(X(k0+H),fn(key==='f'?st.prop.f:st.prop.t));ctx.stroke();ctx.setLineDash([]);}};
     strip('f',FY,C.green2);strip('t',TY,C.orange);
-    txt('feed '+n1(st.f)+' t/h',padL+4,sy+4,{px:9,c:C.green2});txt('kiln '+n1(st.t)+' °C',padL+pw-4,sy+4,{px:9,c:C.orange,a:'right'});
+    txt('cool '+n1(st.f)+' °C',padL+4,sy+4,{px:9,c:C.green2});txt('reheat '+n1(st.t)+' °C',padL+pw-4,sy+4,{px:9,c:C.orange,a:'right'});
     panel();}
   /* warm up a shift of history */
   for(let i=0;i<60;i++){step();}st.prop=null;st.rows.forEach(r=>r.mark=null);st.since=Math.floor(st.cycle*6*0.4);
   reg({el,resize(){cv.fit();st.dirty=true;draw();},update(dt){st.acc+=dt;if(st.acc>(reduced?1600:700)){st.acc=0;step();}},draw});
   chipGroup('pr-cycle',v=>{st.cycle=Number(v);st.since=Math.min(st.since,st.cycle*6-1);sql();st.dirty=true;});
   chipGroup('pr-spec',v=>{st.spec=Number(v);sql();st.dirty=true;});
-  chipGroup('pr-inject',(v,b)=>{if(v==='feed')st.fs=clamp(st.fs-11,162,194);else st.ts=clamp(st.ts+15,1438,1484);st.acc=1e9;setTimeout(()=>b.setAttribute('aria-pressed','false'),600);});
+  chipGroup('pr-inject',(v,b)=>{if(v==='butter')st.fs=clamp(st.fs-0.35,26.4,28.2);else st.ts=clamp(st.ts+0.25,30.7,31.8);st.acc=1e9;setTimeout(()=>b.setAttribute('aria-pressed','false'),600);});
   $('#pr-approve').addEventListener('click',approve);
   $('#pr-auto').addEventListener('click',e=>{st.auto=!st.auto;e.currentTarget.setAttribute('aria-pressed',st.auto?'true':'false');st.dirty=true;});
   App.listeners.push(()=>{sql();st.dirty=true;});sql();
