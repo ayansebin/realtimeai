@@ -1350,6 +1350,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .v4c .v5s{border-color:rgba(255,255,255,.1)}
 .v6il{font-style:normal;font-weight:400;letter-spacing:.04em;text-transform:none;color:var(--ink-3);margin-left:.45rem}
 @media (max-width:600px){.v6uc{gap:4px}.v6uc button{padding:.2rem .5rem;font-size:.72rem}}
+.cspanel .stage-title{max-width:none;flex:1 1 360px;min-width:0}
 </style>
 </head>
 <body>
@@ -1825,24 +1826,68 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     <div class="chapter-head sub" id="cases">
       <span class="n">CASE STUDIES</span>
       <h2>Time series models at work.</h2>
-      <p>Three engagements on live operational data. The numbers are engagement results. Client identities withheld.</p>
+      <p>Three engagements on live data. Client identities withheld.</p>
     </div>
 
     <div class="csgrid" role="tablist" id="cstabs" aria-label="Case studies">
-      <button class="cs" role="tab" aria-selected="true" aria-controls="cs-telco" type="button"><span class="cs-badge">Engagement result</span><span class="cs-k">Telco · network operations</span><b>IBM Network Intelligence</b><span class="cs-m">0<small>tickets without a confirmed cause</small></span><code>Granite TSPulse</code></button>
-      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-cement" type="button"><span class="cs-badge">Engagement result</span><span class="cs-k">Manufacturing · cement</span><b>Cement plant production</b><span class="cs-m">93% &#8594; 99%<small>process and quality accuracy</small></span><code>Granite Time Series models</code></button>
-      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-fin" type="button"><span class="cs-badge">Engagement result</span><span class="cs-k">Financial services · investments</span><b>Multivariate asset forecasting</b><span class="cs-m">~10%<small>lower RMSE than the current approach</small></span><code>Granite TTM</code></button>
+      <button class="cs" role="tab" aria-selected="true" aria-controls="cs-cement" type="button"><span class="cs-k">Manufacturing</span><b>Cement plant production</b><span class="cs-m">93% &#8594; 99%<small>process and quality accuracy</small></span></button>
+      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-fin" type="button"><span class="cs-k">Financial services</span><b>Asset forecasting for trading</b><span class="cs-m">~10%<small>lower forecast error than the current approach</small></span></button>
+      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-telco" type="button"><span class="cs-k">Telco</span><b>Network Intelligence</b><span class="cs-m">0<small>tickets without a confirmed cause</small></span></button>
     </div>
 
-    <!-- telco -->
-    <div class="stage cspanel" id="cs-telco" role="tabpanel">
+    <!-- cement -->
+    <div class="stage cspanel" id="cs-cement" role="tabpanel">
       <div class="stage-top">
-        <div class="stage-title"><h3>IBM Network Intelligence, powered by Granite TSPulse</h3><p>Telemetry in, anomalies out. Agents investigate, and a ticket opens only when a cause is confirmed.</p></div>
+        <div class="stage-title"><h3>Cement plant production optimization</h3><p>Simulated data. The results are from the engagement.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Approach</span><div class="chips" id="cm-mode"><button class="chip sm" data-v="ml" aria-pressed="true">Traditional ML</button><button class="chip sm" data-v="fm" aria-pressed="false">Foundation models</button></div></div>
+        </div>
+      </div>
+      <p class="ucl"><b>One mill, three grades.</b> Two foundation models replaced 24 to 30 regression models, shipped in weeks instead of months, and lifted accuracy from 93% to 99%.</p>
+      <div class="stage-body">
+        <div class="side">
+          <div class="canvas-wrap cs-wrap"><canvas class="stage-canvas" id="cm-cv" aria-label="Regression models per cement grade collapsing into two foundation models, the delivery time and the quality prediction accuracy"></canvas></div>
+          <div class="panel cs-panel">
+            <div class="ph">Outcome</div>
+            <div class="cs-big"><b class="green">$2 / ton</b><span>EBITDA improvement per ton of cement</span></div>
+            <div class="cs-big"><b>$10s to $100s M</b><span>financial benefit, savings and added production</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- trading -->
+    <div class="stage cspanel" id="cs-fin" role="tabpanel" hidden>
+      <div class="stage-top">
+        <div class="stage-title"><h3>Forecasting for trading</h3><p>Simulated data. The results are from the engagement.</p></div>
+        <div class="ctl">
+          <div class="ctl-group"><span class="eyebrow">Asset class</span><div class="chips" id="fs-asset"><button class="chip sm" data-v="eq" aria-pressed="true">Equities</button><button class="chip sm" data-v="fi" aria-pressed="false">Fixed income</button><button class="chip sm" data-v="co" aria-pressed="false">Commodities</button></div></div>
+          <div class="ctl-group"><span class="eyebrow">Signals fused</span><div class="chips" id="fs-sig"><button class="chip sm" data-v="esg" aria-pressed="true">ESG</button><button class="chip sm" data-v="news" aria-pressed="true">News sentiment</button><button class="chip sm" data-v="exo" aria-pressed="true">Exogenous and control</button></div></div>
+        </div>
+      </div>
+      <p class="ucl"><b>Investment strategies and portfolios.</b> One fine-tuned model per asset class fuses market, ESG and news signals, with about 10% lower error.</p>
+      <div class="stage-body">
+        <div class="side">
+          <div class="canvas-wrap cs-wrap"><canvas class="stage-canvas" id="fs-cv" aria-label="Market, ESG, news and control signals feeding a fine-tuned Granite TTM, jointly forecasting two variables with uncertainty, against the current approach"></canvas></div>
+          <div class="panel cs-panel">
+            <div class="ph">Outcome</div>
+            <div class="cs-big"><b class="green" id="fs-imp">10.0%</b><span id="fs-impl">lower RMSE, all signals fused</span></div>
+            <div class="cs-big"><b>1 model</b><span>per asset class, fine-tuned once, runs on CPU</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- network intelligence -->
+    <div class="stage cspanel" id="cs-telco" role="tabpanel" hidden>
+      <div class="stage-top">
+        <div class="stage-title"><h3>Network Intelligence</h3><p>Simulated data. The results are from the engagement.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Mode</span><div class="chips" id="ni-mode"><button class="chip sm" data-v="assist" aria-pressed="true">Assist</button><button class="chip sm" data-v="agentic" aria-pressed="false">Agentic</button></div></div>
           <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="ni-inject"><button class="chip sm" data-v="fiber">Fiber degradation</button><button class="chip sm" data-v="config">Config drift</button><button class="chip sm" data-v="peak">Expected peak</button></div></div>
         </div>
       </div>
+      <p class="ucl"><b>Network operations at a telco.</b> TSPulse flags anomalies in the telemetry, agents investigate, and a ticket opens only when the cause is confirmed.</p>
       <div class="stage-body">
         <div class="side">
           <div class="plant-wrap"><div class="cs-inner"><canvas class="stage-canvas" id="ni-cv" aria-label="Telemetry flowing through four stages: ingest, detect with TSPulse, investigate with agents, remediate, with the funnel from datapoints to confirmed issues"></canvas></div></div>
@@ -1854,61 +1899,6 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="cs-tags"><span>Granite TSPulse</span><span>agentic RCA</span><span>MCP and API tools</span><span>SaaS</span></div><div class="hint">Simulated telemetry. The four stages are the ones it runs today.</div></div>
-    </div>
-
-    <!-- cement -->
-    <div class="stage cspanel" id="cs-cement" role="tabpanel" hidden>
-      <div class="stage-top">
-        <div class="stage-title"><h3>Cement plant production optimization</h3><p>One mill, three cement grades. Flip the approach.</p></div>
-        <div class="ctl">
-          <div class="ctl-group"><span class="eyebrow">Approach</span><div class="chips" id="cm-mode"><button class="chip sm" data-v="ml" aria-pressed="true">Traditional ML</button><button class="chip sm" data-v="fm" aria-pressed="false">Time series foundation models</button></div></div>
-        </div>
-      </div>
-      <div class="stage-body">
-        <div class="side">
-          <div class="canvas-wrap cs-wrap"><canvas class="stage-canvas" id="cm-cv" aria-label="Regression models per cement grade collapsing into two foundation models, the delivery time and the quality prediction accuracy"></canvas></div>
-          <div class="panel cs-panel">
-            <div class="ph">Per mill</div>
-            <table class="op-table cm-table" id="cm-table">
-              <tr><th></th><th class="c-ml">Traditional ML</th><th class="c-fm">Foundation models</th></tr>
-              <tr><td>Models</td><td class="c-ml">24 to 30</td><td class="c-fm">2</td></tr>
-              <tr><td>Time to deliver</td><td class="c-ml">6 months</td><td class="c-fm">8 to 10 weeks</td></tr>
-              <tr><td>Accuracy</td><td class="c-ml">93%</td><td class="c-fm">99%</td></tr>
-            </table>
-            <div class="cs-big"><b class="green">$2 / ton</b><span>EBITDA improvement per ton of cement</span></div>
-            <div class="cs-big"><b>$10s to $100s M</b><span>financial benefit, savings and added production</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="stage-foot"><div class="cs-tags"><span>process parameters model</span><span>qualities model</span><span>fine-tuned per mill</span></div><div class="hint">Client identity withheld.</div></div>
-    </div>
-
-    <!-- financial services -->
-    <div class="stage cspanel" id="cs-fin" role="tabpanel" hidden>
-      <div class="stage-top">
-        <div class="stage-title"><h3>Multivariate forecasting for financial services</h3><p>AI-driven investment strategies and portfolios. Fuse the signals, fine-tune once per asset class, forecast on CPU.</p></div>
-        <div class="ctl">
-          <div class="ctl-group"><span class="eyebrow">Asset class</span><div class="chips" id="fs-asset"><button class="chip sm" data-v="eq" aria-pressed="true">Equities</button><button class="chip sm" data-v="fi" aria-pressed="false">Fixed income</button><button class="chip sm" data-v="co" aria-pressed="false">Commodities</button></div></div>
-          <div class="ctl-group"><span class="eyebrow">Signals fused</span><div class="chips" id="fs-sig"><button class="chip sm" data-v="esg" aria-pressed="true">ESG</button><button class="chip sm" data-v="news" aria-pressed="true">News sentiment</button><button class="chip sm" data-v="exo" aria-pressed="true">Exogenous and control</button></div></div>
-          <div class="ctl-group"><span class="eyebrow">Horizon</span><div class="chips" id="fs-h"><button class="chip sm" data-v="5" aria-pressed="false">1 week</button><button class="chip sm" data-v="20" aria-pressed="true">1 month</button><button class="chip sm" data-v="60" aria-pressed="false">1 quarter</button></div></div>
-        </div>
-      </div>
-      <div class="stage-body">
-        <div class="side">
-          <div class="canvas-wrap cs-wrap"><canvas class="stage-canvas" id="fs-cv" aria-label="Market, ESG, news and control signals feeding a fine-tuned Granite TTM, jointly forecasting two variables with uncertainty, against the current approach"></canvas></div>
-          <div class="panel cs-panel">
-            <div class="ph">Granite TTM vs the current approach</div>
-            <div class="cs-big"><b class="green" id="fs-imp">10.0%</b><span id="fs-impl">lower RMSE, all signals fused</span></div>
-            <ul class="cs-list">
-              <li><b>One model per asset group</b>less data science and model management effort</li>
-              <li><b>Fast fine-tuning</b>rapid adaptation to new assets and markets</li>
-              <li><b>CPU inference</b>cost-effective, scalable deployment</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="stage-foot"><div class="cs-tags"><span>Granite TTM</span><span>multivariate</span><span>multi-horizon</span><span>uncertainty bands</span></div><div class="hint">Simulated series. The engagement measured about 10% lower RMSE with the signals fused.</div></div>
     </div>
   </div>
 </section>
@@ -3622,7 +3612,7 @@ const CS={
   seed(n){let s=n>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
 };
 
-/* ============ 03 case study: IBM Network Intelligence ============ */
+/* ============ 03 case study: Network Intelligence ============ */
 (function(){
   const el=$('#cs-telco');if(!el)return;
   const cv=new Cv($('#ni-cv'));const rnd=CS.seed(17);
@@ -3669,10 +3659,10 @@ const CS={
       fun:[0,1,2,3].map(i=>w>=540?{x:pad+i*((w-36)/4+12),y:fy,w:(w-36)/4,bw:(w-36)/4*(1-i*0.2),stack:true}:{x:pad+(i%2)*(half+12),y:fy+Math.floor(i/2)*46,w:half,bw:half*(1-i*0.2),stack:true})};}
   function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);
     const L=layout(W,H),R=L.R,wide=L.wide,c=L.core;st.slots=L.slots;
-    const NM=['INGEST','DETECT','INVESTIGATE','REMEDIATE'],SUB=['unified ingestion','Granite TSPulse','agentic root cause',st.mode==='assist'?'human in the loop':'autonomous'],SUBC=[C.ink3,C.blue3,C.ink3,st.mode==='assist'?C.yellow:C.green2];
+    const NM=['INGEST','DETECT','INVESTIGATE','REMEDIATE'],SUB=['','','',st.mode==='assist'?'human in the loop':'autonomous'],SUBC=[C.ink3,C.blue3,C.ink3,st.mode==='assist'?C.yellow:C.green2];
     R.forEach((r,i)=>{
-      if(wide){CS.txt(ctx,'0'+(i+1),r.x,14,{c:C.ink3});CS.txt(ctx,NM[i],r.x+24,14,{c:C.ink,w:500});CS.txt(ctx,SUB[i],r.x,31,{c:SUBC[i],max:r.w});}
-      else{const hy=r.y-10;CS.txt(ctx,'0'+(i+1),r.x,hy,{c:C.ink3});CS.txt(ctx,NM[i],r.x+24,hy,{c:C.ink,w:500});const nw=ctx.measureText(NM[i]).width;CS.txt(ctx,SUB[i],r.x+24+nw+12,hy,{c:SUBC[i],max:r.w-36-nw});}
+      if(wide){CS.txt(ctx,'0'+(i+1),r.x,14,{c:C.ink3});CS.txt(ctx,NM[i],r.x+24,14,{c:C.ink,w:500});if(SUB[i])CS.txt(ctx,SUB[i],r.x,31,{c:SUBC[i],max:r.w});}
+      else{const hy=r.y-10;CS.txt(ctx,'0'+(i+1),r.x,hy,{c:C.ink3});CS.txt(ctx,NM[i],r.x+24,hy,{c:C.ink,w:500});const nw=ctx.measureText(NM[i]).width;if(SUB[i])CS.txt(ctx,SUB[i],r.x+24+nw+12,hy,{c:SUBC[i],max:r.w-36-nw});}
       ctx.fillStyle='rgba(255,255,255,.035)';ctx.fillRect(r.x,r.y,r.w,r.h);ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;ctx.strokeRect(r.x+.5,r.y+.5,r.w-1,r.h-1);
       if(i<3){ctx.strokeStyle='rgba(255,255,255,.28)';ctx.beginPath();if(wide){const ax=r.x+r.w+7,ay=r.y+r.h/2;ctx.moveTo(ax-3,ay-5);ctx.lineTo(ax+2,ay);ctx.lineTo(ax-3,ay+5);}else{const ax=r.x+r.w/2,ay=r.y+r.h+8;ctx.moveTo(ax-5,ay-2);ctx.lineTo(ax,ay+3);ctx.lineTo(ax+5,ay-2);}ctx.stroke();}});
     /* 01 telemetry domains */
@@ -3683,8 +3673,8 @@ const CS={
     /* 02 TSPulse */
     const pulsing=st.items.some(o=>o.t>=T.detect&&o.t<T.flag);
     ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.arc(c.x,c.y,c.r,0,Math.PI*2);ctx.stroke();
-    if(wide){CS.txt(ctx,'TSPulse',c.x,c.y-c.r-14,{px:12,c:C.blue4,a:'center',w:500});CS.txt(ctx,'scores every point',c.x,c.y+c.r+14,{c:C.ink3,a:'center',max:R[1].w-20});CS.txt(ctx,'normal points pass',R[1].x+10,R[1].y+R[1].h-14,{c:C.ink3,max:R[1].w-20});}
-    else{const tx=c.x+c.r+16;CS.txt(ctx,'TSPulse',tx,c.y-16,{px:12,c:C.blue4,w:500});CS.txt(ctx,'scores every point',tx,c.y+2,{c:C.ink3,max:W-tx-20});CS.txt(ctx,pulsing?'observation flagged':'normal points pass',tx,c.y+18,{c:pulsing?C.yellow:C.ink3,max:W-tx-20});}
+    if(wide){CS.txt(ctx,'TSPulse',c.x,c.y-c.r-14,{px:12,c:C.blue4,a:'center',w:500});CS.txt(ctx,'scores every point',c.x,c.y+c.r+14,{c:C.ink3,a:'center',max:R[1].w-20});}
+    else{const tx=c.x+c.r+16;CS.txt(ctx,'TSPulse',tx,c.y-16,{px:12,c:C.blue4,w:500});CS.txt(ctx,'scores every point',tx,c.y+2,{c:C.ink3,max:W-tx-20});if(pulsing)CS.txt(ctx,'observation flagged',tx,c.y+18,{c:C.yellow,max:W-tx-20});}
     st.items.forEach(o=>{const s=L.sp[o.d];
       if(o.t<T.detect){const u=o.t/T.detect;ctx.fillStyle=C.yellow;ctx.beginPath();ctx.arc(lerp(s.ax,c.x,u),lerp(s.ay,c.y,u),4,0,Math.PI*2);ctx.fill();}
       else if(o.t<T.flag){const pu=(o.t-T.detect)/(T.flag-T.detect);ctx.strokeStyle='rgba(241,194,27,'+(1-pu).toFixed(2)+')';ctx.lineWidth=2;ctx.beginPath();ctx.arc(c.x,c.y,6+pu*22,0,Math.PI*2);ctx.stroke();ctx.fillStyle=C.yellow;ctx.beginPath();ctx.arc(c.x,c.y,4.5,0,Math.PI*2);ctx.fill();if(wide)CS.txt(ctx,'observation',c.x,c.y+c.r+30,{c:C.yellow,a:'center'});}});
@@ -3737,7 +3727,7 @@ const CS={
   function update(dt){if(!st.auto){st.autoT=(st.autoT||0)+dt;if(st.autoT>1600){st.auto=true;if(!st.fm)set(true);}}const k=1-Math.pow(0.004,dt/1000);st.u=lerp(st.u,st.target,k);if(Math.abs(st.u-st.target)<0.002)st.u=st.target;}
   function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);const u=ease(clamp(st.u,0,1));
     const nw=W<560,pad=16,gx=pad+(nw?34:64),topH=H*0.46,rowH=(topH-40)/3;
-    const head=u<0.5?(nw?'24 to 30 regression models':'24 to 30 regression models · 8 to 10 per grade · retrained in batch'):(nw?'2 foundation models, every grade':'2 foundation models · fine-tuned per mill · one model covers every grade');
+    const head=u<0.5?(nw?'24 to 30 regression models':'24 to 30 regression models, retrained in batch'):(nw?'2 foundation models':'2 foundation models, fine-tuned per mill');
     CS.txt(ctx,head,pad,14,{c:u<0.5?C.ink2:C.green2,max:W-2*pad});
     const fmw=nw?132:176,fmx=W-pad-fmw,fmh=(topH-44)/2-6,cols=nw?5:10,rws=nw?2:1,gp=nw?4:6;
     const tw=Math.max(4,Math.min(30,(fmx-12-gx)/cols-gp,(rowH-8)/rws-gp)),ta=1-u;
@@ -3792,7 +3782,7 @@ const CS={
   function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);const D=st.data;const narrow=W<640;const pad=14;
     let cx0=pad;
     if(!narrow){const lw=W*0.24,lh=(H-2*pad-10)/LANES.length;LANES.forEach((l,k)=>{const on=!l[1]||st.sig[l[1]];const y=pad+k*lh;ctx.globalAlpha=on?1:0.3;CS.txt(ctx,l[0],pad,y+8,{c:on?C.ink2:C.ink3,max:lw-10});const s=laneSeries[k];const sh=lh-26;ctx.strokeStyle=k<2?C.blue3:k===2?C.green2:k===3?C.purple:C.orange;ctx.lineWidth=1.2;ctx.beginPath();s.forEach((v,i)=>{const x=pad+i/(s.length-1)*(lw-16),yy=y+18+sh/2-v*sh/6;i?ctx.lineTo(x,yy):ctx.moveTo(x,yy);});ctx.stroke();ctx.globalAlpha=1;});
-      const mx=pad+lw+8,mw=W*0.13,my=H/2-46,mh=92;CS.rr(ctx,mx,my,mw,mh,4);ctx.fillStyle='rgba(15,98,254,.3)';ctx.fill();ctx.strokeStyle=C.blue3;ctx.lineWidth=1;ctx.stroke();CS.txt(ctx,'Granite TTM',mx+mw/2,my+20,{px:12,c:C.ink,a:'center',w:500,max:mw-10});CS.txt(ctx,'fine-tuned',mx+mw/2,my+40,{c:C.ink2,a:'center',max:mw-10});CS.txt(ctx,{eq:'equities',fi:'fixed income',co:'commodities'}[st.asset],mx+mw/2,my+56,{c:C.blue4,a:'center',max:mw-10});CS.txt(ctx,'CPU',mx+mw/2,my+74,{c:C.ink3,a:'center'});
+      const mx=pad+lw+8,mw=W*0.13,my=H/2-46,mh=92;CS.rr(ctx,mx,my,mw,mh,4);ctx.fillStyle='rgba(15,98,254,.3)';ctx.fill();ctx.strokeStyle=C.blue3;ctx.lineWidth=1;ctx.stroke();CS.txt(ctx,'Granite TTM',mx+mw/2,my+mh/2-9,{px:12,c:C.ink,a:'center',w:500,max:mw-10});CS.txt(ctx,'fine-tuned',mx+mw/2,my+mh/2+11,{c:C.ink2,a:'center',max:mw-10});
       st.parts.forEach(p=>{const sy=pad+p.k*lh+18+(lh-26)/2,sx=pad+lw-14;ctx.fillStyle='rgba(166,200,255,'+(0.8*(1-p.u*0.5)).toFixed(2)+')';ctx.beginPath();ctx.arc(lerp(sx,mx,p.u),lerp(sy,my+mh/2,p.u),2,0,Math.PI*2);ctx.fill();});
       ctx.strokeStyle='rgba(255,255,255,.3)';ctx.beginPath();ctx.moveTo(mx+mw,H/2);ctx.lineTo(mx+mw+16,H/2);ctx.stroke();cx0=mx+mw+22;}
     /* two jointly forecast variables */
