@@ -1743,59 +1743,45 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     <div class="chapter-head sub" id="h-ind">
       <span class="n">INDUSTRIES</span>
       <h2>Where it lands first.</h2>
-      <p>Pick an industry. Each one is a live twin, sensor to decision and back.</p>
+      <p>Pick an industry. Every twin is live.</p>
     </div>
 
     <div class="inds" role="tablist" id="indtabs" aria-label="Industries">
       <button class="ind" role="tab" aria-selected="true" aria-controls="st-plant" type="button" style="--img:url(photos/factory-pipes.jpg)">
-        <span class="il">Industrial AI<small>chocolate · food · chemicals · pulp and paper · steel</small></span>
+        <span class="il">Industrial AI</span>
         <b>Setpoints corrected inside the cycle.</b>
-        <span class="is"><i>Production optimization</i><i>Predictive maintenance</i><i>Anomaly detection</i></span>
       </button>
       <button class="ind" role="tab" aria-selected="false" aria-controls="st-retail" type="button" style="--img:url(photos/retail-produce.jpg)">
-        <span class="il">Retail<small>grocery · general merchandise · e-commerce</small></span>
+        <span class="il">Retail</span>
         <b>Full shelves, no full back room.</b>
-        <span class="is"><i>Supply chain planning</i><i>Anomaly detection</i><i>Fraud and security</i></span>
       </button>
       <button class="ind" role="tab" aria-selected="false" aria-controls="st-bank" type="button" style="--img:url(photos/banking-card2.jpg)">
-        <span class="il">Banking<small>payments · cards · markets</small></span>
+        <span class="il">Banking</span>
         <b>The odd swipe held before authorization.</b>
-        <span class="is"><i>Fraud and security</i><i>Trading</i><i>Anomaly detection</i></span>
       </button>
       <button class="ind" role="tab" aria-selected="false" aria-controls="st-air" type="button" style="--img:url(photos/jet-engine.jpg)">
-        <span class="il">Airlines<small>network · maintenance · ground operations</small></span>
+        <span class="il">Airlines</span>
         <b>See the disruption before the gate does.</b>
-        <span class="is"><i>Anomaly detection</i><i>Production optimization</i><i>Supply chain planning</i></span>
       </button>
     </div>
 
     <div class="stage" id="st-plant" role="tabpanel">
       <div class="stage-top">
-        <div class="stage-title"><h3>From sensor to setpoint</h3><p>Pick a story, or click the equipment.</p></div>
+        <div class="stage-title"><h3>From sensor to setpoint</h3><p>Simulated data. The topics and gates are real.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Story</span>
             <div class="chips" id="pl-sc"><button class="chip" data-v="opt" aria-pressed="true">Production optimization</button><button class="chip" data-v="pdm" aria-pressed="false">Predictive maintenance</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
         </div>
       </div>
-      <p class="ucl"><b>A live chocolate factory, from sensor to setpoint.</b> SCADA, QA lab and meter streams are forecast and optimized as they land, so setpoints, maintenance and alerts reach the floor inside the cycle.</p>
+      <p class="ucl"><b>A live chocolate factory.</b> SCADA, QA lab and meter streams are forecast and optimized as they land, so setpoints, maintenance and alerts reach the floor inside the cycle.</p>
       <div class="stage-body">
         <div class="plant-wrap" id="plant-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="pl-cv" aria-label="Animated chocolate line: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="pl-tip"></div></div></div>
-        <div class="plant-cap" id="pl-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="pl-cap-k">Production optimization</span><span class="plant-steps" id="pl-steps" aria-hidden="true"></span><button class="switch" id="pl-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="pl-cap-t">A new cocoa butter lot is softer. The temper index is drifting, and the forecast says 96.8% of bars in temper in 40 minutes, below the 98.5% target.</p></div>
-      </div>
-      <div class="stage-foot">
-        <div class="readouts">
-          <div class="readout"><b id="pl-q">96.8%</b><span>bars in temper · target 98.5</span></div>
-          <div class="readout"><b id="pl-e">94</b><span>kWh per ton · target 92</span></div>
-          <div class="readout"><b id="pl-t">4.6</b><span>t/h line output</span></div>
-          <div class="readout"><b id="pl-m">3.2%</b><span>rework · bars re-melted</span></div>
-          <div class="readout"><b id="pl-d" class="blue">0 h</b><span>downtime avoided</span></div>
-        </div>
-        <div class="hint">Simulated line. The topics and the gates are the real ones.</div>
+        <div class="plant-cap" id="pl-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="pl-cap-k">Production optimization</span><span class="plant-steps" id="pl-steps" aria-hidden="true"></span><button class="switch" id="pl-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="pl-cap-t">A softer cocoa butter lot arrives. Temper starts to drift.</p></div>
       </div>
     </div>
     <div class="stage" id="st-retail" role="tabpanel" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Store 112 and its supply chain</h3><p>Pick a story, or click the equipment.</p></div>
+        <div class="stage-title"><h3>Store 112 and its supply chain</h3><p>Simulated data. The topics and gates are real.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="rt-sc"><button class="chip" data-v="plan" aria-pressed="true">Supply chain planning</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button><button class="chip" data-v="fraud" aria-pressed="false">Fraud and security</button></div></div>
         </div>
@@ -1805,12 +1791,11 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
         <div class="plant-wrap" id="rt-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="rt-cv" aria-label="Animated store 112 and its supply chain: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="rt-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="rt-cap-k"></span><span class="plant-steps" id="rt-steps" aria-hidden="true"></span><button class="switch" id="rt-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="rt-cap-t"></p></div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="rt-r0">–</b><span>on-shelf availability · target 98%</span></div><div class="readout"><b id="rt-r1">–</b><span>waste · target 2%</span></div><div class="readout"><b id="rt-r2">–</b><span>inventory days · target 12</span></div><div class="readout"><b id="rt-r3">–</b><span>fraud loss, bps · target 5</span></div></div><div class="hint">Simulated store. The topics and the gates are the real ones.</div></div>
     </div>
 
     <div class="stage" id="st-bank" role="tabpanel" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Payments and the trading desk</h3><p>Pick a story, or click the equipment.</p></div>
+        <div class="stage-title"><h3>Payments and the trading desk</h3><p>Simulated data. The topics and gates are real.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="bk-sc"><button class="chip" data-v="fraud" aria-pressed="true">Fraud and security</button><button class="chip" data-v="trade" aria-pressed="false">Trading</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
         </div>
@@ -1820,12 +1805,11 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
         <div class="plant-wrap" id="bk-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="bk-cv" aria-label="Animated payments and the trading desk: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="bk-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="bk-cap-k"></span><span class="plant-steps" id="bk-steps" aria-hidden="true"></span><button class="switch" id="bk-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="bk-cap-t"></p></div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="bk-r0">–</b><span>fraud loss, bps · target 3</span></div><div class="readout"><b id="bk-r1">–</b><span>false declines · target 1%</span></div><div class="readout"><b id="bk-r2">–</b><span>slippage, bps · target 2</span></div><div class="readout"><b id="bk-r3">–</b><span>settlement on time · target 99.5%</span></div></div><div class="hint">Simulated bank. The topics and the gates are the real ones.</div></div>
     </div>
 
     <div class="stage" id="st-air" role="tabpanel" hidden>
       <div class="stage-top">
-        <div class="stage-title"><h3>Hub operations, fleet and network</h3><p>Pick a story, or click the equipment.</p></div>
+        <div class="stage-title"><h3>Hub operations, fleet and network</h3><p>Simulated data. The topics and gates are real.</p></div>
         <div class="ctl">
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="al-sc"><button class="chip" data-v="anom" aria-pressed="true">Anomaly detection</button><button class="chip" data-v="opt" aria-pressed="false">Production optimization</button><button class="chip" data-v="plan" aria-pressed="false">Supply chain planning</button></div></div>
         </div>
@@ -1835,7 +1819,6 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
         <div class="plant-wrap" id="al-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="al-cv" aria-label="Animated hub operations, fleet and network: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="al-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="al-cap-k"></span><span class="plant-steps" id="al-steps" aria-hidden="true"></span><button class="switch" id="al-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="al-cap-t"></p></div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="al-r0">–</b><span>on-time departures · target 85%</span></div><div class="readout"><b id="al-r1">–</b><span>load factor · target 86%</span></div><div class="readout"><b id="al-r2">–</b><span>unplanned AOG per month · target 1</span></div><div class="readout"><b id="al-r3">–</b><span>turnaround, min · target 45</span></div></div><div class="hint">Simulated airline. The topics and the gates are the real ones.</div></div>
     </div>
 
     <!-- case studies -->
@@ -2732,7 +2715,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   const AG={x:800,y:440,w:195,h:160};
   const DEC={x:1020,y:440,w:240,h:160};
   const DROWS=[{k:'Setpoint → temperer',y:482,c:P.green},{k:'Work order → CMMS',y:518,c:P.orange},{k:'Alert → operator',y:554,c:P.red}];
-  const topicY=i=>KAFKA.y+36+i*24;
+  const topicY=i=>KAFKA.y+36+i*22;
   const cx=o=>o.x+o.w/2,cy=o=>o.y+o.h/2;
   /* ---------- state ---------- */
   const st={sc:'opt',auto:true,focus:'all',t:0,phase:-1,phaseT:0,parts:[],hover:null,line:{cool:27.4,reheat:31.6},vib:3.2,vibRise:0,draft:1.0,spike:0,flag:false,blast:0,wo:false,gate:0,fn:[0,0,0],agent:0,dec:[0,0,0],highlight:null,kpi:{q:96.8,e:94,t:4.6,m:3.2,d:0},kpiT:{q:96.8,e:94,t:4.6,m:3.2,d:0},callouts:[],evt:0,scen:0,hist:{vib:[],draft:[],lime:[]}};
@@ -2759,25 +2742,25 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
   /* ---------- scenarios ---------- */
   const SC={
     opt:{name:'Production optimization',eq:'temper',phases:[
-      {d:2600,cap:'A new cocoa butter lot is softer. The temper index is drifting, and the forecast says 96.8% of bars in temper in 40 minutes, below the 98.5% target.',on:()=>{st.highlight='temper';st.callouts=[{x:560,y:96,c:P.yellow,to:{x:784,y:218},l:['AT-501 temper index 5.0 → 4.2','in temper forecast 96.8 % in 40 min','target 98.5 %']}];kpiTo({q:96.8,m:3.2});flow(['temper','tunnel'],0,0,P.yellow);}},
-      {d:2600,cap:'The forecast reads the temperer and QA topics. The optimizer searches the cooling and reheat temperatures inside the guardrails.',on:()=>{st.fn=[1,0,1];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['search cool 26.0 to 28.5 °C, reheat 30.5 to 32.0 °C','in temper ≥ 98.5 · rework ↓ · energy ↓']}];flow(['temper','tunnel'],0,2,P.blue3,true);}},
-      {d:2600,cap:'The agent proposes cooling at 26.8 °C and reheat at 31.2 °C. The operator approves at the gate.',on:()=>{st.agent=1;st.dec=[1,0,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: cool 26.8 °C · reheat 31.2 °C','rework 3.2 → 0.9 % · inside guardrails','→ operator gate']}];spawn(agentToDec(0),{color:P.green,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(0),{color:P.green,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
-      {d:3200,cap:'Approved. The setpoints land on the temperer. Bars in temper back to 99.1%, rework under 1%, line speed held.',on:()=>{st.gate=2;spawn(ctrlToTemper(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.line.cool=26.8;st.line.reheat=31.2;kpiTo({q:99.1,e:92,m:0.9});st.callouts=[{x:560,y:96,c:P.green,to:{x:680,y:182},l:['setpoint applied: cool 26.8 °C · reheat 31.2 °C','in temper 99.1 % · rework 0.9 %']}];}});}},
-      {d:1800,cap:'Every lot, every shift. The same models score every line.',on:()=>{}}
+      {d:2600,cap:'A softer cocoa butter lot arrives. Temper starts to drift.',on:()=>{st.highlight='temper';st.callouts=[{x:560,y:96,c:P.yellow,to:{x:784,y:218},l:['AT-501 temper index 5.0 → 4.2','in temper forecast 96.8 % in 40 min','target 98.5 %']}];kpiTo({q:96.8,m:3.2});flow(['temper','tunnel'],0,0,P.yellow);}},
+      {d:2600,cap:'The forecast reads the line. The optimizer searches safe setpoints.',on:()=>{st.fn=[1,0,1];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['search cool 26.0 to 28.5 °C, reheat 30.5 to 32.0 °C','in temper ≥ 98.5 · rework ↓ · energy ↓']}];flow(['temper','tunnel'],0,2,P.blue3,true);}},
+      {d:2600,cap:'The agent proposes new cooling and reheat. The operator approves.',on:()=>{st.agent=1;st.dec=[1,0,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: cool 26.8 °C · reheat 31.2 °C','rework 3.2 → 0.9 % · inside guardrails','→ operator gate']}];spawn(agentToDec(0),{color:P.green,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(0),{color:P.green,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
+      {d:3200,cap:'Setpoints land. Bars back in temper, rework under 1%.',on:()=>{st.gate=2;spawn(ctrlToTemper(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.line.cool=26.8;st.line.reheat=31.2;kpiTo({q:99.1,e:92,m:0.9});st.callouts=[{x:560,y:96,c:P.green,to:{x:680,y:182},l:['setpoint applied: cool 26.8 °C · reheat 31.2 °C','in temper 99.1 % · rework 0.9 %']}];}});}},
+      {d:1800,cap:'Every lot, every shift, every line.',on:()=>{}}
     ]},
     pdm:{name:'Predictive maintenance',eq:'conche',phases:[
-      {d:2600,cap:'The conche agitator bearing vibration is creeping up. VT-205 streams to the historian and to Kafka.',on:()=>{st.highlight='conche';st.vibRise=1;st.callouts=[{x:600,y:96,c:P.yellow,to:{x:470,y:252},l:['VT-205 bearing vibration 3.2 → 4.4 mm/s','alarm limit 6.0 mm/s']}];flow('conche',1,0,P.yellow);}},
-      {d:2600,cap:'The forecast projects the crossing: 9 days to the alarm limit, 6 days at P90.',on:()=>{st.fn=[1,0,0];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['forecast crosses 6.0 mm/s in 9 d','P90: 6 d · next planned stop: 6 d']}];flow('conche',1,0,P.blue3,true);}},
-      {d:2600,cap:'The agent reserves the bearing and schedules the swap in the planned stop. A work order lands in the CMMS.',on:()=>{st.agent=1;st.dec=[0,1,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: P90 crossing 6 d · planned stop 6 d → act','work order VT-205 raised']}];spawn(agentToDec(1),{color:P.orange,speed:240,size:3.5,onEnd:()=>{spawn(decToCmms(),{color:P.orange,speed:320,size:3.5,onEnd:()=>{st.wo=true;}});}});}},
-      {d:3200,cap:'WO-4471 scheduled, parts reserved, maintenance confirms at the gate. No conche stops mid-batch, 18 hours of unplanned downtime avoided.',on:()=>{st.gate=2;spawn(cmmsToConche(),{color:P.orange,speed:300,size:3.5,onEnd:()=>{kpiTo({d:18});st.callouts=[{x:600,y:96,c:P.green,to:{x:470,y:252},l:['WO-4471 · bearing swap in planned stop','parts reserved · 18 h downtime avoided']}];}});}},
-      {d:1800,cap:'Thousands of motors and bearings, one statement each. No labeled failures needed.',on:()=>{}}
+      {d:2600,cap:'The conche bearing vibration is creeping up.',on:()=>{st.highlight='conche';st.vibRise=1;st.callouts=[{x:600,y:96,c:P.yellow,to:{x:470,y:252},l:['VT-205 bearing vibration 3.2 → 4.4 mm/s','alarm limit 6.0 mm/s']}];flow('conche',1,0,P.yellow);}},
+      {d:2600,cap:'The forecast shows when it crosses the alarm limit.',on:()=>{st.fn=[1,0,0];st.callouts=[{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['forecast crosses 6.0 mm/s in 9 d','P90: 6 d · next planned stop: 6 d']}];flow('conche',1,0,P.blue3,true);}},
+      {d:2600,cap:'The agent books the bearing swap into the planned stop.',on:()=>{st.agent=1;st.dec=[0,1,0];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: P90 crossing 6 d · planned stop 6 d → act','work order VT-205 raised']}];spawn(agentToDec(1),{color:P.orange,speed:240,size:3.5,onEnd:()=>{spawn(decToCmms(),{color:P.orange,speed:320,size:3.5,onEnd:()=>{st.wo=true;}});}});}},
+      {d:3200,cap:'Maintenance confirms. No stop mid-batch, 18 hours saved.',on:()=>{st.gate=2;spawn(cmmsToConche(),{color:P.orange,speed:300,size:3.5,onEnd:()=>{kpiTo({d:18});st.callouts=[{x:600,y:96,c:P.green,to:{x:470,y:252},l:['WO-4471 · bearing swap in planned stop','parts reserved · 18 h downtime avoided']}];}});}},
+      {d:1800,cap:'Every motor and bearing. No failure labels needed.',on:()=>{}}
     ]},
     anom:{name:'Anomaly detection',eq:'refiner',phases:[
-      {d:2400,cap:'Refiner roll 4 pressure jumps. PT-302 is scored against its own band on every reading.',on:()=>{st.highlight='refiner';st.spike=1;st.callouts=[{x:470,y:40,c:P.red,to:{x:387,y:118},l:['PT-302 roll 4 pressure 28 → 41 bar','4.2 σ outside the 99.9 % band']}];flow('refiner',2,1,P.red);}},
-      {d:2600,cap:'Anomaly detection flags it. The agent checks the neighbors: roll temperature and motor amps are normal.',on:()=>{st.fn=[0,1,0];st.flag=true;st.callouts=[{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound 34 bar','TE-305 normal · motor amps normal']}];flow('refiner',2,1,P.red,true);}},
-      {d:2600,cap:'Likely cause: a hard lump in the feed at roll 4. Alert to the operator with the evidence, not a trip.',on:()=>{st.agent=1;st.dec=[0,0,1];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: pattern = feed lump at roll 4','alert operator · suggest a gap flush on R4']}];spawn(agentToDec(2),{color:P.red,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(2),{color:P.red,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
-      {d:3200,cap:'The operator flushes the gap. Pressure comes back inside the band in a minute, and the line never stopped.',on:()=>{st.gate=2;spawn(ctrlToRefiner(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.blast=1;st.spike=0;st.flag=false;st.callouts=[{x:470,y:40,c:P.green,to:{x:400,y:118},l:['gap flush R4 done','pressure back to 29 bar · no trip']}];kpiTo({d:st.kpiT.d+4});}});}},
-      {d:1800,cap:'Start-ups and recipe changes stay inside the band, so they are not alarms. False alarms down, trips avoided.',on:()=>{}}
+      {d:2400,cap:'Refiner roll 4 pressure jumps.',on:()=>{st.highlight='refiner';st.spike=1;st.callouts=[{x:470,y:40,c:P.red,to:{x:387,y:118},l:['PT-302 roll 4 pressure 28 → 41 bar','4.2 σ outside the 99.9 % band']}];flow('refiner',2,1,P.red);}},
+      {d:2600,cap:'Flagged against its own band. Its neighbors look normal.',on:()=>{st.fn=[0,1,0];st.flag=true;st.callouts=[{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound 34 bar','TE-305 normal · motor amps normal']}];flow('refiner',2,1,P.red,true);}},
+      {d:2600,cap:'Likely cause: a hard lump at roll 4. An alert, not a trip.',on:()=>{st.agent=1;st.dec=[0,0,1];st.callouts=[{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: pattern = feed lump at roll 4','alert operator · suggest a gap flush on R4']}];spawn(agentToDec(2),{color:P.red,speed:240,size:3.5,onEnd:()=>{spawn(decToCtrl(2),{color:P.red,speed:320,size:3.5,onEnd:()=>{st.gate=1;}});}});}},
+      {d:3200,cap:'The operator flushes the gap. The line never stops.',on:()=>{st.gate=2;spawn(ctrlToRefiner(),{color:P.green,speed:300,size:3.5,onEnd:()=>{st.blast=1;st.spike=0;st.flag=false;st.callouts=[{x:470,y:40,c:P.green,to:{x:400,y:118},l:['gap flush R4 done','pressure back to 29 bar · no trip']}];kpiTo({d:st.kpiT.d+4});}});}},
+      {d:1800,cap:'Start-ups and recipe changes stay inside the band.',on:()=>{}}
     ]}
   };
   function flow(eq,ti,fi,color,toFn){const eqs=[].concat(eq);SENS.filter(s=>eqs.indexOf(s.eq)>=0).forEach((s,k)=>{setTimeout(()=>{spawn(sensorPath(s),{color,speed:230,size:3,onEnd:()=>{spawn(srcToTopic(s.src,s.topic),{color,speed:280,size:3,onEnd:()=>{if(toFn)spawn(topicToFn(ti,fi),{color,speed:280,size:3,onEnd:()=>{spawn(fnToAgent(fi),{color,speed:280,size:3});}});}});}});},k*260);});}
@@ -2793,7 +2776,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     const k=1-Math.pow(0.02,dt/1000);for(const key in st.kpiT)st.kpi[key]=lerp(st.kpi[key],st.kpiT[key],k);
     if(st.phase>=0){const ph2=SC[st.sc].phases[st.phase];const pct=st.phaseT<-1e8?100:Math.round(clamp(st.phaseT/ph2.d,0,1)*50)*2;if(pct!==st._pct||st.phase!==st._ph){st._pct=pct;st._ph=st.phase;steps.forEach((el,i)=>{el.className=i<st.phase?'on':i===st.phase?'cur':'';if(i===st.phase)el.style.setProperty('--p',pct+'%');});}}
     if(st.t%400<dt){st.hist.vib.push(clamp((st.vibRise?lerp(st.hist.vib[st.hist.vib.length-1],4.5,0.08):3.2)+0.1*gauss(),2,7));st.hist.vib.shift();const d0=st.spike?41:28.5;st.hist.draft.push(d0+0.5*gauss());st.hist.draft.shift();}
-    $('#pl-q').textContent=st.kpi.q.toFixed(1)+'%';$('#pl-q').className=st.kpi.q>=98.5?'green':'';$('#pl-e').textContent=Math.round(st.kpi.e);$('#pl-t').textContent=st.kpi.t.toFixed(1);$('#pl-m').textContent=st.kpi.m.toFixed(1)+'%';$('#pl-m').className=st.kpi.m<=1.5?'green':'';$('#pl-d').textContent=Math.round(st.kpi.d)+' h';}
+    if($('#pl-q')){$('#pl-q').textContent=st.kpi.q.toFixed(1)+'%';$('#pl-q').className=st.kpi.q>=98.5?'green':'';$('#pl-e').textContent=Math.round(st.kpi.e);$('#pl-t').textContent=st.kpi.t.toFixed(1);$('#pl-m').textContent=st.kpi.m.toFixed(1)+'%';$('#pl-m').className=st.kpi.m<=1.5?'green':'';$('#pl-d').textContent=Math.round(st.kpi.d)+' h';}}
   /* ---------- drawing helpers ---------- */
   let ctx,S=1;
   const X=x=>x*S,Y=y=>y*S;
@@ -2868,7 +2851,7 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     const pk=EQ.pack;rr(pk.x,pk.y+14,60,44,3,metal(pk.y+14,44),hl('pack')?P.blue3:P.steel,1.2);text('wrap',pk.x+30,pk.y+36,{px:8.5,mono:true,a:'center',c:P.ink3});
     {const nb=3+Math.floor((st.t/1800)%4);for(let i=0;i<nb;i++){rr(pk.x+78+(i%2)*30,pk.y+48-Math.floor(i/2)*16,26,14,1,'rgba(159,179,200,.16)',P.steel,1);}rr(pk.x+74,pk.y+64,64,5,1,'rgba(159,179,200,.4)');}
     text(pk.label,pk.x+pk.w/2,pk.y-4,{px:10,a:'center',c:P.ink2});
-    const tx=1180+((st.t/40)%90);rr(tx,262,34,16,2,'rgba(0,7,20,.6)',P.steel,1);rr(tx+34,268,14,10,2,'rgba(0,7,20,.6)',P.steel,1);ctx.fillStyle=P.steel2;[tx+8,tx+26,tx+42].forEach(wx=>{ctx.beginPath();ctx.arc(X(wx),Y(280),3*S,0,Math.PI*2);ctx.fill();});
+    const tx=1176+((st.t/40)%66);rr(tx,262,34,16,2,'rgba(0,7,20,.6)',P.steel,1);rr(tx+34,268,14,10,2,'rgba(0,7,20,.6)',P.steel,1);ctx.fillStyle=P.steel2;[tx+8,tx+26,tx+42].forEach(wx=>{ctx.beginPath();ctx.arc(X(wx),Y(280),3*S,0,Math.PI*2);ctx.fill();});
     if(hl('conche')||st.vibRise)spark(co.x+4,co.y-60,124,46,st.hist.vib,2,7,st.vibRise?P.yellow:P.blue3,6.0,'VT-205','mm/s');
     if(hl('refiner')||st.spike)spark(rf.x+rf.w+10,rf.y+54,120,46,st.hist.draft,24,44,st.spike?P.red:P.blue3,34,'PT-302','bar');
     /* sensors */
@@ -2879,14 +2862,14 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     const cr=EQ.ctrl;ctx.save();if(st.gate===1)glow(P.yellow,16);rr(cr.x,cr.y,cr.w,cr.h,2,'rgba(0,7,20,.75)',st.gate===1?P.yellow:st.gate===2?P.green:P.line,1.2);noglow();ctx.restore();
     eyebrow('CONTROL ROOM · TARGETS',cr.x+10,cr.y+12);
     const K=[{k:'Bars in temper',v:st.kpi.q,u:'%',lo:95,hi:100,tg:98.5,up:true},{k:'Energy',v:st.kpi.e,u:' kWh/t',lo:85,hi:100,tg:92,up:false},{k:'Line output',v:st.kpi.t,u:' t/h',lo:3,hi:6,tg:4.5,up:true},{k:'Rework',v:st.kpi.m,u:'%',lo:0,hi:5,tg:1.5,up:false}];
-    K.forEach((o,i)=>{const yy=cr.y+28+i*19;text(o.k,cr.x+10,yy,{px:9,c:P.ink2});const bx=cr.x+104,bw=104;rr(bx,yy-4,bw,8,1,'rgba(255,255,255,.08)');const u=clamp((o.v-o.lo)/(o.hi-o.lo),0,1);const good=o.up?o.v>=o.tg:o.v<=o.tg;ctx.fillStyle=good?P.green:P.yellow;ctx.fillRect(X(bx),Y(yy-4),bw*u*S,8*S);const tu=clamp((o.tg-o.lo)/(o.hi-o.lo),0,1);ctx.fillStyle=P.ink;ctx.fillRect(X(bx+bw*tu)-1*S,Y(yy-6),2*S,12*S);text(o.v.toFixed(o.u.indexOf('kWh')>=0?0:1)+o.u,cr.x+cr.w-10,yy,{px:9,mono:true,a:'right',c:good?P.green:P.yellow});});
-    text('objective: in temper ≥ 98.5 % · rework ↓',cr.x+10,cr.y+cr.h-10,{px:8.5,mono:true,c:P.ink3});
+    K.forEach((o,i)=>{const yy=cr.y+32+i*24;text(o.k,cr.x+10,yy,{px:9,c:P.ink2});const bx=cr.x+104,bw=104;rr(bx,yy-4,bw,8,1,'rgba(255,255,255,.08)');const u=clamp((o.v-o.lo)/(o.hi-o.lo),0,1);const good=o.up?o.v>=o.tg:o.v<=o.tg;ctx.fillStyle=good?P.green:P.yellow;ctx.fillRect(X(bx),Y(yy-4),bw*u*S,8*S);const tu=clamp((o.tg-o.lo)/(o.hi-o.lo),0,1);ctx.fillStyle=P.ink;ctx.fillRect(X(bx+bw*tu)-1*S,Y(yy-6),2*S,12*S);text(o.v.toFixed(o.u.indexOf('kWh')>=0?0:1)+o.u,cr.x+cr.w-10,yy,{px:9,mono:true,a:'right',c:good?P.green:P.yellow});});
+    
     if(st.gate===1){text('operator gate: approve?',cr.x+cr.w-10,cr.y+12,{px:8.5,mono:true,a:'right',c:P.yellow});}
     if(st.gate===2){text('approved ✓',cr.x+cr.w-10,cr.y+12,{px:8.5,mono:true,a:'right',c:P.green});}
     ctx.globalAlpha=1;
     /* ---- data sources ---- */
     ctx.globalAlpha=alphaFor('sources');
-    Object.keys(SRC).forEach(key=>{const b=SRC[key];const lit=(key==='cmms'&&st.wo);ctx.save();if(lit)glow(P.orange,12);rr(b.x,b.y,b.w,b.h,2,'rgba(0,7,20,.7)',lit?P.orange:P.line,1.2);noglow();ctx.restore();text(b.label,b.x+10,b.y+17,{px:10.5,c:P.ink,w:500});text(b.sub,b.x+10,b.y+34,{px:9,c:P.ink3});
+    Object.keys(SRC).forEach(key=>{const b=SRC[key];const lit=(key==='cmms'&&st.wo);ctx.save();if(lit)glow(P.orange,12);rr(b.x,b.y,b.w,b.h,2,'rgba(0,7,20,.7)',lit?P.orange:P.line,1.2);noglow();ctx.restore();text(b.label,b.x+12,b.y+b.h/2,{px:10.5,c:P.ink,w:500});
       /* connector down to kafka */line([pt(cx(b),b.y+b.h),pt(cx(b),CC.y-10),pt(KAFKA.x+KAFKA.w+8,CC.y-10)],'rgba(69,137,255,.14)',1);});
     if(st.wo)text('WO-4471 · bearing swap · planned stop',SRC.cmms.x+SRC.cmms.w/2,SRC.cmms.y-10,{px:9,mono:true,a:'center',c:P.orange});
     SENS.forEach(s=>{const b=SRC[s.src];line([pt(s.x,s.y),pt(s.x,s.y+22),pt(cx(b),s.y+22),pt(cx(b),b.y)],'rgba(69,137,255,.10)',1);});
@@ -2901,10 +2884,9 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     TOPICS.forEach((t,i)=>{const y=topicY(i);text(t,KAFKA.x+14,y,{px:10,mono:true,c:P.blue4});const ph2=(st.t/30+i*7)%16;ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1*S;ctx.setLineDash([3*S,13*S]);ctx.lineDashOffset=-ph2*S;ctx.beginPath();ctx.moveTo(X(KAFKA.x+150),Y(y));ctx.lineTo(X(KAFKA.x+KAFKA.w-10),Y(y));ctx.stroke();ctx.setLineDash([]);});
     rr(FLINK.x,FLINK.y,FLINK.w,FLINK.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('CONFLUENT CLOUD FOR APACHE FLINK',FLINK.x+10,FLINK.y+14);
     FN.forEach((f,i)=>{const lit=st.fn[i];ctx.save();if(lit)glow(P.blue,14);rr(FLINK.x+14,f.y-11,170,22,2,lit?'rgba(15,98,254,.9)':'rgba(255,255,255,.05)',lit?P.blue3:P.line,1);noglow();ctx.restore();text(f.k,FLINK.x+24,f.y,{px:10,mono:true,c:lit?'#fff':P.ink2,w:lit?500:400});});
-    text('Granite Time Series models',FLINK.x+196,FN[0].y,{px:10,c:P.ink2,w:500});text('TTM · FlowState · PatchTST-FM · TSPulse',FLINK.x+196,FN[0].y+16,{px:8.5,c:P.ink3});text('zero-shot · hosted by Confluent',FLINK.x+196,FN[1].y+8,{px:9,c:P.ink3});text('backtest MASE · WAPE · CRPS',FLINK.x+196,FN[2].y,{px:9,c:P.ink3});
+    text('IBM Granite Time Series models',FLINK.x+196,FN[1].y-7,{px:10,c:P.ink,w:500});text('zero-shot · hosted by Confluent',FLINK.x+196,FN[1].y+10,{px:9,c:P.ink3});
     ctx.save();if(st.agent)glow(P.purple,14);rr(AG.x,AG.y,AG.w,AG.h,2,st.agent?'rgba(49,19,94,.55)':'rgba(0,7,20,.6)',st.agent?P.purple:P.line,1);noglow();ctx.restore();eyebrow('STREAMING AGENTS',AG.x+10,AG.y+14,{c:st.agent?P.purple:P.ink3});
-    ['tools from your systems','a goal and a prompt','runs on every event','checks before it acts'].forEach((t,i)=>text(t,AG.x+12,AG.y+40+i*20,{px:9.5,mono:false,c:st.agent?P.ink:P.ink2}));
-    text('5 expert gates',AG.x+AG.w-10,AG.y+AG.h-14,{px:9,mono:true,a:'right',c:P.purple});
+    ['calls your tools','checks before it acts'].forEach((t,i)=>text(t,AG.x+12,AG.y+70+i*22,{px:9.5,mono:false,c:st.agent?P.ink:P.ink2}));
     rr(DEC.x,DEC.y,DEC.w,DEC.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('DECISIONS · BACK TO THE FLOOR',DEC.x+10,DEC.y+14);
     DROWS.forEach((d,i)=>{const lit=st.dec[i];ctx.save();if(lit)glow(d.c,12);rr(DEC.x+12,d.y-11,DEC.w-24,22,2,lit?'rgba(0,7,20,.9)':'rgba(255,255,255,.04)',lit?d.c:P.line,1);noglow();ctx.restore();text(d.k,DEC.x+22,d.y,{px:10,mono:true,c:lit?d.c:P.ink2});});
     /* particles */
@@ -2913,7 +2895,6 @@ function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'
     /* callouts */
     st.callouts.forEach(callout);
     /* legend */
-    const lg=[['telemetry',P.blue3],['setpoint',P.green],['work order',P.orange],['alert',P.red],['agent',P.purple]];let lx=560;lg.forEach(([t,c])=>{ctx.fillStyle=c;ctx.beginPath();ctx.arc(X(lx),Y(24),3*S,0,Math.PI*2);ctx.fill();text(t,lx+8,24,{px:8.5,c:P.ink3});lx+=ctx.measureText(t).width/S+26;});
   }
   /* ---------- interaction ---------- */
   const HOT=[].concat(SENS.map(s=>({x:s.x,y:s.y,r:12,html:'<b>'+s.id+'</b> '+s.name+'<br>unit '+s.unit+' · source '+SRC[s.src].label+'<br>topic '+TOPICS[s.topic],s,eq:s.eq})),
@@ -2947,7 +2928,7 @@ function twin(spec){
   const CTRL={x:1000,y:34,w:270,h:118};
   const CC={x:40,y:415,w:1230,h:200},KAFKA={x:60,y:440,w:305,h:160},FLINK={x:395,y:440,w:380,h:160},AG={x:800,y:440,w:195,h:160},DEC={x:1020,y:440,w:240,h:160};
   const FN=FNK.map((k,i)=>({k,y:478+i*36}));DROWS.forEach((d,i)=>{d.y=482+i*36;});
-  const topicY=i=>KAFKA.y+36+i*24;
+  const topicY=i=>KAFKA.y+36+i*22;
   const cx=o=>o.x+o.w/2,cy=o=>o.y+o.h/2;
   const pt=(x,y)=>({x,y});
   /* ---------- state ---------- */
@@ -3055,14 +3036,14 @@ function twin(spec){
     ctx.globalAlpha=alphaFor('objectives');
     ctx.save();if(st.gate===1)glow(P.yellow,16);rr(CTRL.x,CTRL.y,CTRL.w,CTRL.h,2,'rgba(0,7,20,.75)',st.gate===1?P.yellow:st.gate===2?P.green:P.line,1.2);noglow();ctx.restore();
     eyebrow(spec.ctrlLabel,CTRL.x+10,CTRL.y+12);
-    spec.kpis.forEach((o,i)=>{const yy=CTRL.y+28+i*19;const v=st.kpi[o.key];text(o.k,CTRL.x+10,yy,{px:9,c:P.ink2});const bx=CTRL.x+104,bw=104;rr(bx,yy-4,bw,8,1,'rgba(255,255,255,.08)');const u=clamp((v-o.lo)/(o.hi-o.lo),0,1);const good=o.up?v>=o.tg:v<=o.tg;ctx.fillStyle=good?P.green:P.yellow;ctx.fillRect(X(bx),Y(yy-4),bw*u*S,8*S);const tu=clamp((o.tg-o.lo)/(o.hi-o.lo),0,1);ctx.fillStyle=P.ink;ctx.fillRect(X(bx+bw*tu)-1*S,Y(yy-6),2*S,12*S);text((o.fmt?o.fmt(v):v.toFixed(o.dec||0)+(o.u||'')),CTRL.x+CTRL.w-10,yy,{px:9,mono:true,a:'right',c:good?P.green:P.yellow});});
-    text(spec.objective,CTRL.x+10,CTRL.y+CTRL.h-10,{px:8.5,mono:true,c:P.ink3});
+    font(9);const klw=Math.max(...spec.kpis.map(o=>ctx.measureText(o.k).width/S));const bx=Math.max(CTRL.x+104,CTRL.x+20+klw),bw=Math.min(104,CTRL.x+CTRL.w-66-bx);
+    spec.kpis.forEach((o,i)=>{const yy=CTRL.y+32+i*24;const v=st.kpi[o.key];text(o.k,CTRL.x+10,yy,{px:9,c:P.ink2});rr(bx,yy-4,bw,8,1,'rgba(255,255,255,.08)');const u=clamp((v-o.lo)/(o.hi-o.lo),0,1);const good=o.up?v>=o.tg:v<=o.tg;ctx.fillStyle=good?P.green:P.yellow;ctx.fillRect(X(bx),Y(yy-4),bw*u*S,8*S);const tu=clamp((o.tg-o.lo)/(o.hi-o.lo),0,1);ctx.fillStyle=P.ink;ctx.fillRect(X(bx+bw*tu)-1*S,Y(yy-6),2*S,12*S);text((o.fmt?o.fmt(v):v.toFixed(o.dec||0)+(o.u||'')),CTRL.x+CTRL.w-10,yy,{px:9,mono:true,a:'right',c:good?P.green:P.yellow});});
     if(st.gate===1)text(spec.gateLabel||'operator gate: approve?',CTRL.x+CTRL.w-10,CTRL.y+12,{px:8.5,mono:true,a:'right',c:P.yellow});
     if(st.gate===2)text('approved ✓',CTRL.x+CTRL.w-10,CTRL.y+12,{px:8.5,mono:true,a:'right',c:P.green});
     ctx.globalAlpha=1;
     /* sources */
     ctx.globalAlpha=alphaFor('sources');
-    Object.keys(SRC).forEach(key=>{const b=SRC[key];const lit=st.flags.src===key;ctx.save();if(lit)glow(P.orange,12);rr(b.x,b.y,b.w,b.h,2,'rgba(0,7,20,.7)',lit?P.orange:P.line,1.2);noglow();ctx.restore();text(b.label,b.x+10,b.y+17,{px:10.5,c:P.ink,w:500});text(b.sub,b.x+10,b.y+34,{px:9,c:P.ink3});line([pt(cx(b),b.y+b.h),pt(cx(b),CC.y-10),pt(KAFKA.x+KAFKA.w+8,CC.y-10)],'rgba(69,137,255,.14)',1);});
+    Object.keys(SRC).forEach(key=>{const b=SRC[key];const lit=st.flags.src===key;ctx.save();if(lit)glow(P.orange,12);rr(b.x,b.y,b.w,b.h,2,'rgba(0,7,20,.7)',lit?P.orange:P.line,1.2);noglow();ctx.restore();text(b.label,b.x+12,b.y+b.h/2,{px:10.5,c:P.ink,w:500});line([pt(cx(b),b.y+b.h),pt(cx(b),CC.y-10),pt(KAFKA.x+KAFKA.w+8,CC.y-10)],'rgba(69,137,255,.14)',1);});
     if(st.flags.srcNote)text(st.flags.srcNote.t,SRC[st.flags.srcNote.src].x+75,SRC[st.flags.srcNote.src].y-10,{px:9,mono:true,a:'center',c:P.orange});
     SIG.forEach(s=>{const b=SRC[s.src];line([pt(s.x,s.y),pt(s.x,s.y+22),pt(cx(b),s.y+22),pt(cx(b),b.y)],'rgba(69,137,255,.10)',1);});
     ctx.globalAlpha=1;
@@ -3075,16 +3056,14 @@ function twin(spec){
     TOPICS.forEach((t,i)=>{const y=topicY(i);text(t,KAFKA.x+14,y,{px:10,mono:true,c:P.blue4});const ph2=(st.t/30+i*7)%16;ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1*S;ctx.setLineDash([3*S,13*S]);ctx.lineDashOffset=-ph2*S;ctx.beginPath();ctx.moveTo(X(KAFKA.x+150),Y(y));ctx.lineTo(X(KAFKA.x+KAFKA.w-10),Y(y));ctx.stroke();ctx.setLineDash([]);});
     rr(FLINK.x,FLINK.y,FLINK.w,FLINK.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow('CONFLUENT CLOUD FOR APACHE FLINK',FLINK.x+10,FLINK.y+14);
     FN.forEach((f,i)=>{const lit=st.fn[i];ctx.save();if(lit)glow(P.blue,14);rr(FLINK.x+14,f.y-11,170,22,2,lit?'rgba(15,98,254,.9)':'rgba(255,255,255,.05)',lit?P.blue3:P.line,1);noglow();ctx.restore();text(f.k,FLINK.x+24,f.y,{px:10,mono:true,c:lit?'#fff':P.ink2,w:lit?500:400});});
-    text('Granite Time Series models',FLINK.x+196,FN[0].y,{px:10,c:P.ink2,w:500});text('TTM · FlowState · PatchTST-FM · TSPulse',FLINK.x+196,FN[0].y+16,{px:8.5,c:P.ink3});text('zero-shot · hosted by Confluent',FLINK.x+196,FN[1].y+8,{px:9,c:P.ink3});text('backtest MASE · WAPE · CRPS',FLINK.x+196,FN[2].y,{px:9,c:P.ink3});
+    text('IBM Granite Time Series models',FLINK.x+196,FN[1].y-7,{px:10,c:P.ink,w:500});text('zero-shot · hosted by Confluent',FLINK.x+196,FN[1].y+10,{px:9,c:P.ink3});
     ctx.save();if(st.agent)glow(P.purple,14);rr(AG.x,AG.y,AG.w,AG.h,2,st.agent?'rgba(49,19,94,.55)':'rgba(0,7,20,.6)',st.agent?P.purple:P.line,1);noglow();ctx.restore();eyebrow('STREAMING AGENTS',AG.x+10,AG.y+14,{c:st.agent?P.purple:P.ink3});
-    ['tools from your systems','a goal and a prompt','runs on every event','checks before it acts'].forEach((t,i)=>text(t,AG.x+12,AG.y+40+i*20,{px:9.5,mono:false,c:st.agent?P.ink:P.ink2}));
-    text('5 expert gates',AG.x+AG.w-10,AG.y+AG.h-14,{px:9,mono:true,a:'right',c:P.purple});
+    ['calls your tools','checks before it acts'].forEach((t,i)=>text(t,AG.x+12,AG.y+70+i*22,{px:9.5,mono:false,c:st.agent?P.ink:P.ink2}));
     rr(DEC.x,DEC.y,DEC.w,DEC.h,2,'rgba(0,7,20,.6)',P.line,1);eyebrow(spec.decLabel||'DECISIONS · BACK TO THE FLOOR',DEC.x+10,DEC.y+14);
     DROWS.forEach((d,i)=>{const lit=st.dec[i];ctx.save();if(lit)glow(d.c,12);rr(DEC.x+12,d.y-11,DEC.w-24,22,2,lit?'rgba(0,7,20,.9)':'rgba(255,255,255,.04)',lit?d.c:P.line,1);noglow();ctx.restore();text(d.k,DEC.x+22,d.y,{px:10,mono:true,c:lit?d.c:P.ink2});});
     st.parts.forEach(pp=>{const o=pat(pp.path,pp.d);ctx.save();if(pp.glow)glow(pp.color,10);dot(o.x,o.y,pp.size,pp.color);noglow();ctx.restore();});
     ctx.globalAlpha=1;
-    st.callouts.forEach(callout);
-    const lg=spec.legend||[['telemetry',P.blue3],['decision',P.green],['work order',P.orange],['alert',P.red],['agent',P.purple]];let lx=560;lg.forEach(([t,c])=>{dot(lx,24,3,c);text(t,lx+8,24,{px:8.5,c:P.ink3});lx+=ctx.measureText(t).width/S+26;});}
+    st.callouts.forEach(callout);}
   /* ---------- interaction ---------- */
   const HOT=[].concat(SIG.map(s=>({x:s.x,y:s.y,r:12,html:'<b>'+s.id+'</b> '+s.name+'<br>unit '+s.unit+' · source '+SRC[s.src].label+'<br>topic '+TOPICS[s.topic],s})),
     Object.keys(N).map(k=>({x:cx(N[k]),y:cy(N[k]),r:Math.max(N[k].w,N[k].h)/2+6,node:k,html:'<b>'+(N[k].label||k)+'</b>'+(N[k].sc?'<br>click: '+spec.scenarios[N[k].sc].name:'')})),
@@ -3104,7 +3083,7 @@ function twin(spec){
 
 /* ---------- Retail: store 112 and its supply chain ---------- */
 twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b'};return {
-  id:'st-retail',prefix:'rt',floorLabel:'STORE 112 · GROCERY · ITS SUPPLY CHAIN',ctrlLabel:'CATEGORY PLANNER · BUSINESS TARGETS',ctrlName:'Category planner',objective:'objective: availability ≥ 98 % · waste ↓ · fraud loss ↓',gateLabel:'planner gate: approve?',
+  id:'st-retail',prefix:'rt',floorLabel:'STORE 112 · GROCERY · ITS SUPPLY CHAIN',ctrlLabel:'CATEGORY PLANNER · TARGETS',ctrlName:'Category planner',objective:'objective: availability ≥ 98 % · waste ↓ · fraud loss ↓',gateLabel:'planner gate: approve?',
   nodes:{
     supplier:{x:50,y:100,w:110,h:70,label:'Supplier',type:'factory'},
     dc:{x:215,y:95,w:150,h:85,label:'Distribution center',type:'warehouse',sc:'plan'},
@@ -3134,31 +3113,31 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
     /* shoppers */for(let i=0;i<3;i++){const sx=480+((t/(50+i*13)+i*70)%230);D.dot(sx,208,2.5,'rgba(166,200,255,.6)');}},
   scenarios:{
     plan:{name:'Supply chain planning',phases:[
-      {d:2600,cap:'Oat milk sells 40 a day in store 112. A promo starts next week. The forecast at P90 says 68 a day, lead time 2 days.',on:a=>{a.hl('shelf');a.co([{x:560,y:232,c:P.yellow,to:{x:540,y:108},l:['SKU 44102 oat milk 1L · 40/day','promo next week · forecast P90: 68/day','lead time 2 d · on hand 140']}]);a.kpi({osa:96.2});a.flow(['shelf','pos','store'],0,0,P.yellow);}},
-      {d:2600,cap:'The forecast runs on the sales topic with the promo as a driver. The band sets the reorder point: 136 units before the promo day.',on:a=>{a.fn([1,0,0]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 28 d · quantiles P50 P90','reorder point 136 · order up to 376']}]);a.flow(['shelf','store'],1,0,P.blue3,true);}},
-      {d:2600,cap:'The agent raises PO-8821 for 240 units to the distribution center, inside the planner budget. The planner approves.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: PO-8821 · 240 units · DC → store 112','ships day 5 · arrives day 7 · budget ok','→ planner gate']}]);a.toGate(0,P.green);}},
-      {d:3400,cap:'Approved. The order lands in the WMS, the truck rolls, the shelf is full on promo day. Availability 99%, waste flat.',on:a=>{a.fromGate('dc',P.green,()=>{a.flag('src','wms');a.flag('srcNote',{src:'wms',t:'PO-8821 · 240 units · picked'});a.flag('truck',true);a.flag('shelf',0.95);a.kpi({osa:99.1,days:11});a.co([{x:560,y:232,c:P.green,to:{x:540,y:108},l:['shelf full on promo day · 99.1 % availability','inventory days 14 → 11 · waste flat']}]);});}},
-      {d:1800,cap:'Every SKU, every store, every hour. 100,000 SKUs on one statement.',on:a=>{}}
+      {d:2600,cap:'A promo is coming for oat milk in store 112.',on:a=>{a.hl('shelf');a.co([{x:560,y:232,c:P.yellow,to:{x:540,y:108},l:['SKU 44102 oat milk 1L · 40/day','promo next week · forecast P90: 68/day','lead time 2 d · on hand 140']}]);a.kpi({osa:96.2});a.flow(['shelf','pos','store'],0,0,P.yellow);}},
+      {d:2600,cap:'The forecast prices in the promo and sets the reorder point.',on:a=>{a.fn([1,0,0]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 28 d · quantiles P50 P90','reorder point 136 · order up to 376']}]);a.flow(['shelf','store'],1,0,P.blue3,true);}},
+      {d:2600,cap:'The agent raises a purchase order. The planner approves.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: PO-8821 · 240 units · DC → store 112','ships day 5 · arrives day 7 · budget ok','→ planner gate']}]);a.toGate(0,P.green);}},
+      {d:3400,cap:'The truck rolls. The shelf is full on promo day.',on:a=>{a.fromGate('dc',P.green,()=>{a.flag('src','wms');a.flag('srcNote',{src:'wms',t:'PO-8821 · 240 units · picked'});a.flag('truck',true);a.flag('shelf',0.95);a.kpi({osa:99.1,days:11});a.co([{x:560,y:232,c:P.green,to:{x:540,y:108},l:['shelf full on promo day · 99.1 % availability','inventory days 14 → 11 · waste flat']}]);});}},
+      {d:1800,cap:'Every SKU, every store, every hour.',on:a=>{}}
     ]},
     anom:{name:'Anomaly detection',phases:[
-      {d:2600,cap:'Oat milk sales drop to 6 on a Tuesday. The shelf camera shows a gap, the back room still has 140 units.',on:a=>{a.hl('shelf');a.flag('shelf',0.15);a.spark('SHELF-A4',{from:38,to:6,lo:0,hi:60,limit:18,label:'POS-112 units/h',unit:'',dec:0,color:P.red,dx:-180,dy:-60});a.co([{x:600,y:232,c:P.red,to:{x:540,y:108},l:['POS-112 sales 38 → 6 /h · shelf gap','BACK-112 back room on hand 140']}]);a.flow(['shelf','store'],0,1,P.red);}},
-      {d:2600,cap:'Anomaly detection flags the dip against the band. No labels, no rules per SKU.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · lower bound 22','weekend peaks inside the band: not flagged']}]);a.flow(['shelf'],0,1,P.red,true);}},
-      {d:2600,cap:'The agent diagnoses: stock in the back room, not on the shelf. A task goes to the store team, not a purchase order.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: gap with stock on hand = replenish shelf','task store team · no PO · no markdown']}]);a.toGate(1,P.orange);}},
-      {d:3200,cap:'Shelf refilled in 20 minutes. 1,100 units of lost sales avoided this week across the category.',on:a=>{a.fromGate('shelf',P.orange,()=>{a.flag('shelf',0.9);a.spark('SHELF-A4',null);a.kpi({osa:98.6});a.co([{x:600,y:232,c:P.green,to:{x:540,y:108},l:['shelf refilled in 20 min','1,100 units of lost sales avoided']}]);});}},
-      {d:1800,cap:'Same statement on 100,000 SKUs. A flag becomes the right action, the same day.',on:a=>{}}
+      {d:2600,cap:'Oat milk sales drop on a Tuesday. The shelf has a gap.',on:a=>{a.hl('shelf');a.flag('shelf',0.15);a.spark('SHELF-A4',{from:38,to:6,lo:0,hi:60,limit:18,label:'POS-112 units/h',unit:'',dec:0,color:P.red,dx:-180,dy:-60});a.co([{x:600,y:232,c:P.red,to:{x:540,y:108},l:['POS-112 sales 38 → 6 /h · shelf gap','BACK-112 back room on hand 140']}]);a.flow(['shelf','store'],0,1,P.red);}},
+      {d:2600,cap:'Flagged against its own band. No rules per SKU.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · lower bound 22','weekend peaks inside the band: not flagged']}]);a.flow(['shelf'],0,1,P.red,true);}},
+      {d:2600,cap:'The stock is in the back room, so the store team gets a task.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: gap with stock on hand = replenish shelf','task store team · no PO · no markdown']}]);a.toGate(1,P.orange);}},
+      {d:3200,cap:'Shelf refilled in 20 minutes. Lost sales avoided.',on:a=>{a.fromGate('shelf',P.orange,()=>{a.flag('shelf',0.9);a.spark('SHELF-A4',null);a.kpi({osa:98.6});a.co([{x:600,y:232,c:P.green,to:{x:540,y:108},l:['shelf refilled in 20 min','1,100 units of lost sales avoided']}]);});}},
+      {d:1800,cap:'A flag becomes the right action, the same day.',on:a=>{}}
     ]},
     fraud:{name:'Fraud and security',phases:[
-      {d:2600,cap:'At checkout, card ••4417 tries 14 small authorizations in two minutes.',on:a=>{a.hl('pos');a.spark('AUTH-112',{from:1,to:14,lo:0,hi:16,limit:6,label:'AUTH ••4417 /min',unit:'',dec:0,color:P.red,dx:70,dy:70});a.co([{x:890,y:200,c:P.red,to:{x:690,y:150},l:['card ••4417 · 14 auths in 2 min · $1 to $4','normal for this card: 2 a week']}]);a.flow(['pos'],4,1,P.red);}},
-      {d:2600,cap:'Anomaly detection scores every card against its own normal: 4.8σ outside the band. Card testing pattern.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · 4.8 σ · per card','pattern: card testing']}]);a.flow(['pos'],4,1,P.red,true);}},
-      {d:2600,cap:'The agent holds the card, alerts the issuer and keeps the lane open for everyone else.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: hold ••4417 · alert issuer','lane stays open · no rule rewrite']}]);a.toGate(2,P.red);}},
-      {d:3200,cap:'Held before the authorization window closes, under 50 ms. $2,400 of loss avoided on one card.',on:a=>{a.fromGate('pos',P.red,()=>{a.flag('held','pos');a.spark('AUTH-112',null);a.kpi({fraud:4});a.co([{x:890,y:200,c:P.green,to:{x:690,y:150},l:['held in 41 ms · issuer notified','$2,400 loss avoided · false declines flat']}]);});}},
-      {d:1800,cap:'Every card has its own normal. Rules are not rewritten for each new attack.',on:a=>{}}
+      {d:2600,cap:'One card tries 14 small payments in two minutes.',on:a=>{a.hl('pos');a.spark('AUTH-112',{from:1,to:14,lo:0,hi:16,limit:6,label:'AUTH ••4417 /min',unit:'',dec:0,color:P.red,dx:70,dy:70});a.co([{x:890,y:200,c:P.red,to:{x:690,y:150},l:['card ••4417 · 14 auths in 2 min · $1 to $4','normal for this card: 2 a week']}]);a.flow(['pos'],4,1,P.red);}},
+      {d:2600,cap:'Scored against its own normal. A card testing pattern.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · 4.8 σ · per card','pattern: card testing']}]);a.flow(['pos'],4,1,P.red,true);}},
+      {d:2600,cap:'The agent holds the card. The lane stays open.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: hold ••4417 · alert issuer','lane stays open · no rule rewrite']}]);a.toGate(2,P.red);}},
+      {d:3200,cap:'Held in 41 ms. $2,400 of loss avoided.',on:a=>{a.fromGate('pos',P.red,()=>{a.flag('held','pos');a.spark('AUTH-112',null);a.kpi({fraud:4});a.co([{x:890,y:200,c:P.green,to:{x:690,y:150},l:['held in 41 ms · issuer notified','$2,400 loss avoided · false declines flat']}]);});}},
+      {d:1800,cap:'Every card has its own normal. No rule rewrites.',on:a=>{}}
     ]}
   }};})());
 
 /* ---------- Banking: payments and the trading desk ---------- */
 twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b'};return {
-  id:'st-bank',prefix:'bk',floorLabel:'PAYMENTS · DIGITAL BANKING · TRADING DESK',ctrlLabel:'RISK OFFICE · BUSINESS TARGETS',ctrlName:'Risk office',objective:'objective: fraud loss ↓ · false declines ↓ · slippage ↓ · settlement on time',gateLabel:'risk gate: approve?',
+  id:'st-bank',prefix:'bk',floorLabel:'PAYMENTS · DIGITAL BANKING · TRADING DESK',ctrlLabel:'RISK OFFICE · TARGETS',ctrlName:'Risk office',objective:'objective: fraud loss ↓ · false declines ↓ · slippage ↓ · settlement on time',gateLabel:'risk gate: approve?',
   nodes:{
     cardholders:{x:50,y:95,w:120,h:80,label:'Cardholders · devices',type:'phone'},
     merchants:{x:225,y:100,w:130,h:70,label:'Merchants · ATMs',type:'pos'},
@@ -3186,31 +3165,31 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   extra(D){const t=D.st.t;/* auth pulses between merchants and the switch */for(let i=0;i<4;i++){const u=((t/900)+i*0.25)%1;D.dot(355+u*70,135,2,'rgba(166,200,255,.7)');}if(D.st.flags.lat){const a=0.5+0.5*Math.sin(t/150);D.text('latency '+Math.round(D.st.flags.lat)+' ms',715,165,{px:9,mono:true,a:'center',c:D.st.flags.lat>400?D.P.red:D.P.green});}},
   scenarios:{
     fraud:{name:'Fraud and security',phases:[
-      {d:2600,cap:'Card ••4417: three authorizations in 90 seconds, two countries, amounts far above its normal.',on:a=>{a.hl('switch');a.spark('AUTH-RT',{from:40,to:1194,lo:0,hi:1400,limit:420,label:'••4417 amount',unit:'$',dec:0,color:P.red,dx:-205,dy:105});a.co([{x:600,y:232,c:P.red,to:{x:505,y:80},l:['••4417 · $1,194 · $334 · $174 in 90 s','two countries · normal for this card: $46']}]);a.flow(['switch','merchants'],0,1,P.red);}},
-      {d:2600,cap:'Anomaly detection scores the amount against the card’s own band inside the authorization window.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound $420','scored in 38 ms · per card']}]);a.flow(['switch'],0,1,P.red,true);}},
-      {d:2600,cap:'The agent holds the authorization, pushes a step-up to the cardholder and keeps the card alive for the real owner.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: hold · step-up to cardholder','merchant notified · no blanket block']}]);a.toGate(2,P.red);}},
-      {d:3200,cap:'Cardholder confirms fraud in the app. $1,700 held, card reissued, no false decline for the next trip abroad.',on:a=>{a.fromGate('switch',P.red,()=>{a.flag('held','switch');a.spark('AUTH-RT',null);a.kpi({fraud:2.8,fd:1.1});a.co([{x:600,y:232,c:P.green,to:{x:505,y:80},l:['$1,702 held · card reissued','trip abroad next week: band learns the new normal']}]);});}},
-      {d:1800,cap:'Every card has its own normal. 20,000 authorizations a second on one statement.',on:a=>{}}
+      {d:2600,cap:'Three large payments in 90 seconds, from two countries.',on:a=>{a.hl('switch');a.spark('AUTH-RT',{from:40,to:1194,lo:0,hi:1400,limit:420,label:'••4417 amount',unit:'$',dec:0,color:P.red,dx:-205,dy:105});a.co([{x:600,y:232,c:P.red,to:{x:505,y:80},l:['••4417 · $1,194 · $334 · $174 in 90 s','two countries · normal for this card: $46']}]);a.flow(['switch','merchants'],0,1,P.red);}},
+      {d:2600,cap:'Scored against the card’s own band, inside authorization.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound $420','scored in 38 ms · per card']}]);a.flow(['switch'],0,1,P.red,true);}},
+      {d:2600,cap:'The agent holds it and asks the cardholder to confirm.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: hold · step-up to cardholder','merchant notified · no blanket block']}]);a.toGate(2,P.red);}},
+      {d:3200,cap:'Fraud confirmed. $1,700 held, and no false decline later.',on:a=>{a.fromGate('switch',P.red,()=>{a.flag('held','switch');a.spark('AUTH-RT',null);a.kpi({fraud:2.8,fd:1.1});a.co([{x:600,y:232,c:P.green,to:{x:505,y:80},l:['$1,702 held · card reissued','trip abroad next week: band learns the new normal']}]);});}},
+      {d:1800,cap:'Every card has its own normal, at 20,000 a second.',on:a=>{}}
     ]},
     trade:{name:'Trading',phases:[
-      {d:2600,cap:'The desk has 100,000 shares to work by the close. Volume per minute comes off the exchange feed as bars.',on:a=>{a.hl('desk');a.co([{x:540,y:232,c:P.yellow,to:{x:870,y:200},l:['order 100,000 shares · participation cap 10 %','tape: 42k shares/min and falling']}]);a.flow(['markets','desk'],3,0,P.yellow);}},
-      {d:2600,cap:'The forecast projects the next 30 minutes of volume with a band. The slices are sized from the band, not from yesterday.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 30 bars · P10 to P90','1.2M shares forecast · 30 slices · done 14:11']}]);a.flow(['markets'],3,0,P.blue3,true);}},
-      {d:2600,cap:'The agent writes the slice schedule to the OMS and watches the band for a burst.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: 30 slices · largest 5,700 now','pause rule: burst above the band']}]);a.toSrc(0,'oms',P.green,()=>{a.flag('src','oms');a.flag('srcNote',{src:'oms',t:'30 slices scheduled'});a.srcToNode('oms','desk',P.green,()=>{a.kpi({slip:1.6});});});}},
-      {d:3200,cap:'A news burst hits at 13:52. The slices pause, the forecast refreshes on the next bar, the order completes at 14:13 inside the cap.',on:a=>{a.co([{x:540,y:232,c:P.green,to:{x:870,y:200},l:['burst 125k/min · slices paused 2 min','filled 14:13 · slippage 3.1 → 1.6 bps']}]);a.kpi({slip:1.6});}},
-      {d:1800,cap:'Every symbol, every minute. The risk desk scores volatility with the same statement.',on:a=>{}}
+      {d:2600,cap:'The desk has 100,000 shares to work by the close.',on:a=>{a.hl('desk');a.co([{x:540,y:232,c:P.yellow,to:{x:870,y:200},l:['order 100,000 shares · participation cap 10 %','tape: 42k shares/min and falling']}]);a.flow(['markets','desk'],3,0,P.yellow);}},
+      {d:2600,cap:'The forecast sizes each slice from the volume band.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['horizon 30 bars · P10 to P90','1.2M shares forecast · 30 slices · done 14:11']}]);a.flow(['markets'],3,0,P.blue3,true);}},
+      {d:2600,cap:'The agent sends the slice schedule to the OMS.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: 30 slices · largest 5,700 now','pause rule: burst above the band']}]);a.toSrc(0,'oms',P.green,()=>{a.flag('src','oms');a.flag('srcNote',{src:'oms',t:'30 slices scheduled'});a.srcToNode('oms','desk',P.green,()=>{a.kpi({slip:1.6});});});}},
+      {d:3200,cap:'A news burst. Slices pause, and the order still fills inside the cap.',on:a=>{a.co([{x:540,y:232,c:P.green,to:{x:870,y:200},l:['burst 125k/min · slices paused 2 min','filled 14:13 · slippage 3.1 → 1.6 bps']}]);a.kpi({slip:1.6});}},
+      {d:1800,cap:'Every symbol, every minute.',on:a=>{}}
     ]},
     anom:{name:'Anomaly detection',phases:[
-      {d:2600,cap:'Settlement latency on the primary rail jumps from 120 to 480 ms at 14:02. Nothing has failed yet.',on:a=>{a.hl('core');a.flag('lat',480);a.spark('SETTLE',{from:120,to:480,lo:0,hi:600,limit:300,label:'SETTLE latency',unit:'ms',dec:0,color:P.red,dx:-75,dy:78});a.co([{x:620,y:232,c:P.red,to:{x:715,y:75},l:['SETTLE p95 120 → 480 ms · 14:02','rail A · queue growing']}]);a.flow(['core'],2,1,P.red);}},
-      {d:2600,cap:'Anomaly detection flags the latency against its own band, before the SLA breach.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound 300 ms','forecast: SLA breach in 11 min']}]);a.flow(['core'],2,1,P.red,true);}},
-      {d:2600,cap:'The agent checks the secondary rail and the queue depth, then proposes rerouting the batch. Operations approves.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: rail B healthy · 40 ms','reroute batch 7 · notify treasury']}]);a.toGate(1,P.orange);}},
-      {d:3200,cap:'Rerouted. Settlement on time at 99.6%, the SLA never tripped, the incident ticket was opened with the evidence attached.',on:a=>{a.fromGate('core',P.orange,()=>{a.flag('lat',60);a.spark('SETTLE',null);a.kpi({sot:99.6});a.co([{x:620,y:232,c:P.green,to:{x:715,y:75},l:['batch 7 on rail B · 60 ms','on time 99.6 % · SLA kept']}]);});}},
-      {d:1800,cap:'Payments operations, scored per rail and per batch, not per rulebook.',on:a=>{}}
+      {d:2600,cap:'Settlement latency jumps. Nothing has failed yet.',on:a=>{a.hl('core');a.flag('lat',480);a.spark('SETTLE',{from:120,to:480,lo:0,hi:600,limit:300,label:'SETTLE latency',unit:'ms',dec:0,color:P.red,dx:-75,dy:78});a.co([{x:620,y:232,c:P.red,to:{x:715,y:75},l:['SETTLE p95 120 → 480 ms · 14:02','rail A · queue growing']}]);a.flow(['core'],2,1,P.red);}},
+      {d:2600,cap:'Flagged against its own band, before the SLA breach.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.red,to:{x:495,y:600},l:['anomaly · upper bound 300 ms','forecast: SLA breach in 11 min']}]);a.flow(['core'],2,1,P.red,true);}},
+      {d:2600,cap:'The agent proposes the backup rail. Operations approves.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: rail B healthy · 40 ms','reroute batch 7 · notify treasury']}]);a.toGate(1,P.orange);}},
+      {d:3200,cap:'Rerouted. Settlement on time, SLA kept.',on:a=>{a.fromGate('core',P.orange,()=>{a.flag('lat',60);a.spark('SETTLE',null);a.kpi({sot:99.6});a.co([{x:620,y:232,c:P.green,to:{x:715,y:75},l:['batch 7 on rail B · 60 ms','on time 99.6 % · SLA kept']}]);});}},
+      {d:1800,cap:'Scored per rail and per batch, not per rulebook.',on:a=>{}}
     ]}
   }};})());
 
 /* ---------- Airlines: hub operations, fleet and network ---------- */
 twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff832b',red:'#ff8389',purple:'#be95ff',yellow:'#f1c21b'};return {
-  id:'st-air',prefix:'al',floorLabel:'HUB OPERATIONS · FLEET · NETWORK',ctrlLabel:'OPERATIONS CONTROL · BUSINESS TARGETS',ctrlName:'Operations control',objective:'objective: on-time ≥ 85 % · load factor ↑ · unplanned AOG ↓',gateLabel:'ops gate: approve?',
+  id:'st-air',prefix:'al',floorLabel:'HUB OPERATIONS · FLEET · NETWORK',ctrlLabel:'OPERATIONS CONTROL · TARGETS',ctrlName:'Operations control',objective:'objective: on-time ≥ 85 % · load factor ↑ · unplanned AOG ↓',gateLabel:'ops gate: approve?',
   nodes:{
     gate:{x:50,y:95,w:180,h:105,label:'Gate B12 · turnaround',type:'gate',sc:'opt'},
     ramp:{x:265,y:160,w:150,h:65,label:'Ramp · ground crew',labelPos:'below',type:'ramp'},
@@ -3237,25 +3216,25 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   extra(D){const t=D.st.t;/* contrail behind the climbing aircraft */for(let i=0;i<6;i++){const u=((t/700)+i/6)%1;D.dot(470-10-u*60,145+u*6,2-u*1.5,'rgba(166,200,255,'+(0.5*(1-u)).toFixed(2)+')');}},
   scenarios:{
     anom:{name:'Anomaly detection',phases:[
-      {d:2600,cap:'Flight 214 on climb. Engine 1 exhaust gas temperature runs 12 °C above its own band, vibration is normal.',on:a=>{a.hl('aircraft');a.flag('engine',true);a.spark('EGT-1',{from:612,to:638,lo:560,hi:680,limit:640,label:'EGT-1',unit:'°C',dec:0,color:P.yellow,dx:-150,dy:-120});a.co([{x:430,y:232,c:P.yellow,to:{x:566,y:168},l:['EGT-1 626 → 638 °C on climb · band to 628','VIB-1 normal · N1 normal']}]);a.flow(['aircraft'],0,1,P.yellow);}},
-      {d:2600,cap:'Anomaly detection scores every parameter per engine, per flight. No failure labels needed.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.yellow,to:{x:495,y:600},l:['anomaly · 3.6 σ · engine 1','trend: margin to redline gone in 9 flights']}]);a.flow(['aircraft'],0,1,P.yellow,true);}},
-      {d:2600,cap:'The agent matches the pattern to a borescope finding, reserves the slot in tonight’s overnight check and books the part.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: pattern = HPT blade erosion','WO tonight · part reserved · crew swap not needed']}]);a.toSrc(1,'crew',P.orange,()=>{a.flag('src','crew');a.flag('srcNote',{src:'crew',t:'WO-7731 · overnight · hangar 2'});a.srcToNode('crew','hangar',P.orange,()=>{a.flag('wo',true);});});}},
-      {d:3200,cap:'Aircraft flies its day, swaps the part overnight. An AOG with 6 cancelled flights avoided.',on:a=>{a.flag('engine',false);a.spark('EGT-1',null);a.kpi({aog:2});a.co([{x:430,y:232,c:P.green,to:{x:566,y:168},l:['overnight fix · 0 cancellations','AOG avoided · 6 flights protected']}]);}},
-      {d:1800,cap:'Every engine, every flight, one model. The fleet learns from itself.',on:a=>{}}
+      {d:2600,cap:'Flight 214 on climb. Engine 1 runs hot for its band.',on:a=>{a.hl('aircraft');a.flag('engine',true);a.spark('EGT-1',{from:612,to:638,lo:560,hi:680,limit:640,label:'EGT-1',unit:'°C',dec:0,color:P.yellow,dx:-290,dy:-120});a.co([{x:430,y:232,c:P.yellow,to:{x:566,y:168},l:['EGT-1 626 → 638 °C on climb · band to 628','VIB-1 normal · N1 normal']}]);a.flow(['aircraft'],0,1,P.yellow);}},
+      {d:2600,cap:'Flagged per engine, per flight. No failure labels.',on:a=>{a.fn([0,1,0]);a.co([{x:400,y:622,c:P.yellow,to:{x:495,y:600},l:['anomaly · 3.6 σ · engine 1','trend: margin to redline gone in 9 flights']}]);a.flow(['aircraft'],0,1,P.yellow,true);}},
+      {d:2600,cap:'The agent books the fix into tonight’s check.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: pattern = HPT blade erosion','WO tonight · part reserved · crew swap not needed']}]);a.toSrc(1,'crew',P.orange,()=>{a.flag('src','crew');a.flag('srcNote',{src:'crew',t:'WO-7731 · overnight · hangar 2'});a.srcToNode('crew','hangar',P.orange,()=>{a.flag('wo',true);});});}},
+      {d:3200,cap:'The part is swapped overnight. No cancellations.',on:a=>{a.flag('engine',false);a.spark('EGT-1',null);a.kpi({aog:2});a.co([{x:430,y:232,c:P.green,to:{x:566,y:168},l:['overnight fix · 0 cancellations','AOG avoided · 6 flights protected']}]);}},
+      {d:1800,cap:'Every engine, every flight, one model.',on:a=>{}}
     ]},
     opt:{name:'Production optimization',phases:[
-      {d:2600,cap:'The inbound aircraft for gate B12 is 14 minutes late. The turnaround clock says 52 minutes against a 45 minute plan.',on:a=>{a.hl('gate');a.flag('turn',52);a.co([{x:240,y:40,c:P.yellow,to:{x:140,y:90},l:['inbound +14 min · plan 45 · forecast 52 min','crew duty remaining 190 min · bags 40 %']}]);a.kpi({turn:52});a.flow(['gate','ramp'],1,0,P.yellow);}},
-      {d:2600,cap:'The forecast projects bag loading, fueling and boarding. The optimizer re-sequences the ramp inside the safety rules.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['bags done 11:42 · fuel 11:38 · boarding 11:47','search: parallel fueling · second loader · 2 gates']}]);a.flow(['ramp'],2,2,P.blue3,true);}},
-      {d:2600,cap:'The agent proposes a second loader and fueling during boarding. Operations control approves at the gate.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: second loader · fuel during boarding','turnaround 52 → 41 min · crew within duty','→ ops gate']}]);a.toGate(0,P.green);}},
-      {d:3400,cap:'Approved. The plan reaches the ramp, the aircraft leaves 3 minutes late instead of 14. The connection bank holds.',on:a=>{a.fromGate('gate',P.green,()=>{a.flag('turn',41);a.kpi({turn:41,otp:88});a.co([{x:240,y:40,c:P.green,to:{x:140,y:90},l:['departed +3 min · 212 connections held','turnaround 41 min · on-time 88 %']}]);});}},
-      {d:1800,cap:'Every turnaround, every gate, every day. The same models run the ramp and the factory line.',on:a=>{}}
+      {d:2600,cap:'The inbound aircraft for gate B12 is 14 minutes late.',on:a=>{a.hl('gate');a.flag('turn',52);a.co([{x:240,y:40,c:P.yellow,to:{x:140,y:90},l:['inbound +14 min · plan 45 · forecast 52 min','crew duty remaining 190 min · bags 40 %']}]);a.kpi({turn:52});a.flow(['gate','ramp'],1,0,P.yellow);}},
+      {d:2600,cap:'The forecast projects the turnaround. The optimizer re-sequences the ramp.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['bags done 11:42 · fuel 11:38 · boarding 11:47','search: parallel fueling · second loader · 2 gates']}]);a.flow(['ramp'],2,2,P.blue3,true);}},
+      {d:2600,cap:'A second loader and fueling during boarding. Ops control approves.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: second loader · fuel during boarding','turnaround 52 → 41 min · crew within duty','→ ops gate']}]);a.toGate(0,P.green);}},
+      {d:3400,cap:'It leaves 3 minutes late instead of 14. Connections hold.',on:a=>{a.fromGate('gate',P.green,()=>{a.flag('turn',41);a.kpi({turn:41,otp:88});a.co([{x:240,y:40,c:P.green,to:{x:140,y:90},l:['departed +3 min · 212 connections held','turnaround 41 min · on-time 88 %']}]);});}},
+      {d:1800,cap:'Every turnaround, every gate, every day.',on:a=>{}}
     ]},
     plan:{name:'Supply chain planning',phases:[
-      {d:2600,cap:'Hub to Lisbon, Friday. Bookings come in daily per route. The forecast says the flight fills to 96% with 11 days to go.',on:a=>{a.hl('network');a.flag('route',3);a.spark('BOOK-LIS',{from:120,to:168,lo:60,hi:190,limit:174,label:'BOOK-LIS seats',unit:'',dec:0,color:P.blue3,dx:100,dy:130});a.co([{x:960,y:232,c:P.yellow,to:{x:845,y:45},l:['HUB–LIS Fri · 168 of 174 seats forecast','P90: full 3 days early · fare class Y open']}]);a.kpi({lf:84});a.flow(['network'],3,0,P.yellow);}},
-      {d:2600,cap:'The forecast runs per route and per fare class, with the weather topic as a driver for the hub.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['180 routes · 6 fare classes · horizon 21 d','demand P50 P90 · catering and fuel from the same band']}]);a.flow(['network'],3,0,P.blue3,true);}},
-      {d:2600,cap:'The agent closes the lowest fare class, releases 8 seats on the evening flight and sizes catering and fuel for the load.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: close class Q · +8 seats evening','catering 168 meals · fuel for 86 % load']}]);a.toSrc(0,'pss',P.green,()=>{a.flag('src','pss');a.flag('srcNote',{src:'pss',t:'class Q closed · +8 seats'});a.srcToNode('pss','network',P.green,()=>{a.kpi({lf:88});});});}},
-      {d:3200,cap:'Load factor 88% across the bank, no spoiled seats, no missed meals.',on:a=>{a.co([{x:960,y:232,c:P.green,to:{x:845,y:45},l:['Friday bank 88 % load · +$41k revenue','0 spoiled seats · catering exact']}]);}},
-      {d:1800,cap:'Bookings, parts, meals and fuel from one forecast. Every route, every day.',on:a=>{}}
+      {d:2600,cap:'Friday to Lisbon is filling fast.',on:a=>{a.hl('network');a.flag('route',3);a.spark('BOOK-LIS',{from:120,to:168,lo:60,hi:190,limit:174,label:'BOOK-LIS seats',unit:'',dec:0,color:P.blue3,dx:100,dy:130});a.co([{x:960,y:232,c:P.yellow,to:{x:845,y:45},l:['HUB–LIS Fri · 168 of 174 seats forecast','P90: full 3 days early · fare class Y open']}]);a.kpi({lf:84});a.flow(['network'],3,0,P.yellow);}},
+      {d:2600,cap:'The forecast runs per route and per fare class.',on:a=>{a.fn([1,0,1]);a.co([{x:400,y:622,c:P.blue4,to:{x:495,y:600},l:['180 routes · 6 fare classes · horizon 21 d','demand P50 P90 · catering and fuel from the same band']}]);a.flow(['network'],3,0,P.blue3,true);}},
+      {d:2600,cap:'The agent closes the lowest fare and sizes meals and fuel.',on:a=>{a.co([{x:800,y:622,c:P.purple,to:{x:897,y:600},l:['agent: close class Q · +8 seats evening','catering 168 meals · fuel for 86 % load']}]);a.toSrc(0,'pss',P.green,()=>{a.flag('src','pss');a.flag('srcNote',{src:'pss',t:'class Q closed · +8 seats'});a.srcToNode('pss','network',P.green,()=>{a.kpi({lf:88});});});}},
+      {d:3200,cap:'Load factor 88%, no spoiled seats, no missed meals.',on:a=>{a.co([{x:960,y:232,c:P.green,to:{x:845,y:45},l:['Friday bank 88 % load · +$41k revenue','0 spoiled seats · catering exact']}]);}},
+      {d:1800,cap:'Bookings, meals and fuel from one forecast.',on:a=>{}}
     ]}
   }};})());
 
@@ -4155,7 +4134,7 @@ const CS={
       say:'Six mission-critical decisions, no data science team required: production, anomalies, supply chain, fraud, search and trading.',
       subs:['<em>Six mission-critical decisions</em>,','no data science team required:','production, anomalies, supply chain,','fraud, search and trading.'],
       run:async(w,at)=>{hi('#uctabs [role=tab]');await montage(at,'uctabs',[['production','uc-prod'],['anomalies','uc-anom'],['supply chain','uc-demand'],['fraud','uc-fraud'],['search','uc-search'],['trading','uc-trade']]);}},
-    {n:7,act:2,focus:'#h-ind,#indtabs,#st-plant,#st-retail,#st-bank,#st-air',scroll:'#h-ind',top:true,scrollM:'#indtabs',dur:5130,hold:1300,
+    {n:7,act:2,focus:'#h-ind,#indtabs,#st-plant,#st-retail,#st-bank,#st-air',scroll:'#indtabs',top:true,scrollM:'#indtabs',dur:5130,hold:1300,
       say:'Live twins for industrial plants, retail, banking and airlines.',
       subs:['<em>Live twins</em> for industrial plants,','retail, banking and airlines.'],
       run:async(w,at)=>{hi('#indtabs [role=tab]');await montage(at,'indtabs',[['industrial plants','st-plant'],['retail','st-retail'],['banking','st-bank'],['airlines','st-air']]);}},
