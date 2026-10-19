@@ -1302,6 +1302,42 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .v6o.t .v6dot{background:#42be65;box-shadow:0 0 6px #42be65}.v6o.t em{color:#a7f0ba}
 .v6o.u .v6dot{background:#b9c3d3}.v4c.done .v6o.u .v6dot{background:#fa4d56;box-shadow:0 0 6px #fa4d56}.v6o.u em{color:#ff8389}
 @media (max-width:420px){.v6r{grid-template-columns:78px minmax(0,1fr) 64px;gap:8px}}
+/* ---------- enterprise use cases: one story line, who it is for, the model behind it ---------- */
+.ucflow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 18px}
+.ucflow a{position:relative;display:grid;grid-template-columns:auto 1fr;column-gap:.7rem;align-items:center;padding:.75rem .95rem;border:1px solid rgba(22,22,22,.16);background:#f8f7f3;color:#161616;text-decoration:none;transition:border-color .15s,transform .15s}
+.ucflow a:hover{border-color:#0f62fe;transform:translateY(-1px)}
+.ucflow a:not(:last-child)::after{content:"";position:absolute;right:-9px;top:50%;width:8px;height:8px;margin-top:-4px;border-top:1.5px solid #0f62fe;border-right:1.5px solid #0f62fe;transform:rotate(45deg);z-index:1}
+.ucflow i{grid-row:1/3;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1.5px solid #0f62fe;color:#0f62fe;font:600 .72rem/1 var(--font-mono);font-style:normal}
+.ucflow b{font-weight:500;font-size:.98rem}
+.ucflow span{font-size:.78rem;color:#6a6a66}
+@media (max-width:700px){.ucflow{grid-template-columns:1fr;gap:6px}.ucflow a:not(:last-child)::after{display:none}}
+.uc-tags{display:flex;flex-wrap:wrap;gap:4px}
+.uc-tags em{font-style:normal;font:600 .6rem/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;padding:.22rem .4rem;border-radius:999px;border:1px solid}
+.uc-tags .t-f{color:#0043ce;border-color:rgba(15,98,254,.45);background:rgba(15,98,254,.08)}
+.uc-tags .t-d{color:#a2191f;border-color:rgba(218,30,40,.4);background:rgba(218,30,40,.06)}
+.uc-tags .t-o{color:#0e6027;border-color:rgba(36,161,72,.45);background:rgba(36,161,72,.08)}
+.uc-tags .t-s{color:#6929c4;border-color:rgba(138,63,252,.4);background:rgba(138,63,252,.07)}
+.uc-mdl{font:500 .66rem/1.2 var(--font-mono);color:#6929c4}
+#uctabs .uc[aria-selected="true"] .uc-mdl{color:#d4bbff}
+#uctabs .uc[aria-selected="true"] .uc-tags .t-f{color:#a6c8ff;border-color:rgba(120,169,255,.6);background:rgba(69,137,255,.16)}
+#uctabs .uc[aria-selected="true"] .uc-tags .t-d{color:#ffb3b8;border-color:rgba(255,131,137,.55);background:rgba(250,77,86,.14)}
+#uctabs .uc[aria-selected="true"] .uc-tags .t-o{color:#a7f0ba;border-color:rgba(111,220,140,.55);background:rgba(66,190,101,.14)}
+#uctabs .uc[aria-selected="true"] .uc-tags .t-s{color:#e8daff;border-color:rgba(190,149,255,.55);background:rgba(138,63,252,.16)}
+.ucs{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.5fr) minmax(0,.85fr);gap:14px;align-items:stretch;margin:14px clamp(16px,2.4vw,28px) 4px;padding:12px 14px;border:1px solid rgba(255,255,255,.14);border-radius:4px;background:rgba(10,20,48,.4)}
+.ucs-a{display:grid;align-content:start;gap:.45rem}
+.ucs-a .v4p{justify-self:start}
+.ucs-b{display:grid;align-content:center;gap:.35rem;padding:0 14px;border-left:1px solid rgba(255,255,255,.1);border-right:1px solid rgba(255,255,255,.1)}
+.ucs-b p{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;font-size:.86rem;line-height:1.35;color:var(--ink-2)}
+.ucs-b b{font:600 .62rem/1.35 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;padding-top:.1rem}
+.ucs-u b{color:#b9c3d3}.ucs-u{color:var(--ink-3)!important}
+.ucs-t b{color:#6fdc8c}.ucs-t{color:#fff!important}
+.ucs-c{display:grid;align-content:center;gap:.3rem}
+.ucs-c span{font:600 .62rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#6fdc8c}
+.ucs-c b{font-weight:400;font-size:1.02rem;line-height:1.3;color:#fff}
+@media (max-width:1000px){.ucs{grid-template-columns:1fr 1fr}.ucs-b{grid-column:1/-1;grid-row:2;padding:10px 0 0;border:0;border-top:1px solid rgba(255,255,255,.1)}}
+@media (max-width:600px){.ucs{grid-template-columns:1fr;gap:10px;margin:0 12px 4px}.ucs-b{grid-row:auto}.ucs-b p{grid-template-columns:1fr;gap:2px}}
+#cstabs .cs .cs-badge{justify-self:start;font:600 .6rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:#0e6027;border:1px solid rgba(36,161,72,.5);background:rgba(36,161,72,.08);border-radius:999px;padding:.25rem .5rem}
+#cstabs .cs[aria-selected="true"] .cs-badge{color:#a7f0ba;border-color:rgba(111,220,140,.6);background:rgba(66,190,101,.16)}
 </style>
 </head>
 <body>
@@ -1556,16 +1592,17 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     <div class="chapter-head">
       <span class="n">03 / ENTERPRISE USE CASES</span>
       <h2>Mission-critical enterprise decisions.</h2>
-      <p>Pick one. Every demo is live.</p>
+      <p>Six decisions, one model family. Pick a decision, see it in your industry, then see it measured.</p>
     </div>
+    <nav class="ucflow" aria-label="How this chapter reads"><a href="#uctabs"><i>01</i><b>Pick a decision</b><span>six live use cases</span></a><a href="#h-ind"><i>02</i><b>See it in your industry</b><span>four live twins</span></a><a href="#cases"><i>03</i><b>See it measured</b><span>three client engagements</span></a></nav>
 
     <div class="ucgrid" role="tablist" id="uctabs" aria-label="Use cases">
-      <button class="uc" role="tab" aria-selected="true" aria-controls="uc-prod" type="button"><i>01</i><canvas class="uc-cv" data-mini="prod" aria-hidden="true"></canvas><b>Production optimization</b></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-anom" type="button"><i>02</i><canvas class="uc-cv" data-mini="anom" aria-hidden="true"></canvas><b>Anomaly detection</b></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-demand" type="button"><i>03</i><canvas class="uc-cv" data-mini="fc" aria-hidden="true"></canvas><b>Supply chain planning</b></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-fraud" type="button"><i>04</i><canvas class="uc-cv" data-mini="fraud" aria-hidden="true"></canvas><b>Fraud and security</b></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-search" type="button"><i>05</i><canvas class="uc-cv" data-mini="search" aria-hidden="true"></canvas><b>Semantic search</b></button>
-      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-trade" type="button"><i>06</i><canvas class="uc-cv" data-mini="trade" aria-hidden="true"></canvas><b>Trading</b></button>
+      <button class="uc" role="tab" aria-selected="true" aria-controls="uc-prod" type="button"><i>01</i><canvas class="uc-cv" data-mini="prod" aria-hidden="true"></canvas><b>Production optimization</b><span class="uc-tags"><em class="t-f">Forecast</em><em class="t-o">Optimize</em></span><span class="uc-mdl">TTM · FlowState</span></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-anom" type="button"><i>02</i><canvas class="uc-cv" data-mini="anom" aria-hidden="true"></canvas><b>Anomaly detection</b><span class="uc-tags"><em class="t-d">Detect</em></span><span class="uc-mdl">TSPulse</span></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-demand" type="button"><i>03</i><canvas class="uc-cv" data-mini="fc" aria-hidden="true"></canvas><b>Supply chain planning</b><span class="uc-tags"><em class="t-f">Forecast</em><em class="t-o">Optimize</em></span><span class="uc-mdl">TTM · PatchTST-FM</span></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-fraud" type="button"><i>04</i><canvas class="uc-cv" data-mini="fraud" aria-hidden="true"></canvas><b>Fraud and security</b><span class="uc-tags"><em class="t-d">Detect</em></span><span class="uc-mdl">TSPulse</span></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-search" type="button"><i>05</i><canvas class="uc-cv" data-mini="search" aria-hidden="true"></canvas><b>Semantic search</b><span class="uc-tags"><em class="t-s">Search</em></span><span class="uc-mdl">TSPulse</span></button>
+      <button class="uc" role="tab" aria-selected="false" aria-controls="uc-trade" type="button"><i>06</i><canvas class="uc-cv" data-mini="trade" aria-hidden="true"></canvas><b>Trading</b><span class="uc-tags"><em class="t-f">Forecast</em><em class="t-o">Optimize</em></span><span class="uc-mdl">PatchTST-FM · FlowState</span></button>
     </div>
 
     <!-- production optimization -->
@@ -1578,6 +1615,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="pr-inject"><button class="chip sm" data-v="feed">Raw feed change</button><button class="chip sm" data-v="fuel">Fuel quality drop</button></div></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For plant and process engineers</span><p class="v4pain">Setpoints are tuned by shift, and quality is known hours later from the lab.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>lab samples every few hours, setpoints by shift</p><p class="ucs-t"><b>Together</b>a quality forecast on every reading, a setpoint proposed inside the spec</p></div><div class="ucs-c"><span>Outcome</span><b>Setpoints re-optimized every few hours, inside spec</b></div></div>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="pr-cv" aria-label="Kiln quality over the shift with the forecast band, the re-optimize cycles and the setpoints"></canvas></div>
@@ -1600,6 +1638,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="an-conf"><button class="chip sm" data-v="95" aria-pressed="false">95%</button><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.9" aria-pressed="true">99.9%</button></div></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For operations and reliability teams</span><p class="v4pain">Static thresholds flag every weekend peak and miss the real breaks.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>fixed thresholds, reviewed the next day</p><p class="ucs-t"><b>Together</b>a band learned from each series, zero-shot, scored as data lands</p></div><div class="ucs-c"><span>Outcome</span><b>Only the unusual is flagged, with a likely cause</b></div></div>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="an-cv" aria-label="Daily sales with anomaly band and flagged days"></canvas><div class="tip" id="an-tip"></div></div>
@@ -1610,7 +1649,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="an-scored">0</b><span>days scored</span></div><div class="readout"><b id="an-flagged" class="red">0</b><span>flagged</span></div><div class="readout"><b>same day</b><span>time to action</span></div></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="an-scored">0</b><span>days scored</span></div><div class="readout"><b id="an-flagged" class="red">0</b><span>flagged</span></div><div class="readout"><b>per event</b><span>scored as data lands</span></div></div></div>
     </div>
 
     <!-- demand -->
@@ -1623,6 +1662,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Stock on hand</span><label class="range"><input type="range" id="dm-stock" min="100" max="1000" step="10" value="400" aria-label="Stock on hand"><output id="dm-stockv">400</output></label></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For demand planners</span><p class="v4pain">A weekly forecast per SKU misses the promo and the heat wave.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>a weekly batch, a model per SKU</p><p class="ucs-t"><b>Together</b>one model for every SKU and store, re-forecast as events land</p></div><div class="ucs-c"><span>Outcome</span><b>Reorders set at the service level you choose</b></div></div>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="dm-cv" aria-label="Daily sales, 28 day forecast band and projected stock"></canvas></div>
@@ -1633,7 +1673,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">+5 to 10</b><span>accuracy points</span></div><div class="readout"><b>100k</b><span>SKUs, thousands of stores</span></div><div class="readout"><b>hourly</b><span>not weekly</span></div></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b>one model</b><span>every SKU and store, zero-shot</span></div><div class="readout"><b>P50 to P95</b><span>the service level you pick</span></div><div class="readout"><b class="green">+5 to 10</b><span>accuracy points, design partners report</span></div></div></div>
     </div>
 
     <!-- fraud -->
@@ -1645,6 +1685,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="fr-conf"><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.5" aria-pressed="true">99.5%</button><button class="chip sm" data-v="99.9" aria-pressed="false">99.9%</button></div></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For fraud and risk teams</span><p class="v4pain">One rule set for every card blocks travelers and misses card testing.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>shared rules, reviewed after settlement</p><p class="ucs-t"><b>Together</b>each card scored against its own normal, per authorization, in the stream</p></div><div class="ucs-c"><span>Outcome</span><b>The odd swipe held, the traveler let through</b></div></div>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="fr-cv" aria-label="Card payment amounts with the expected band and flagged transactions"></canvas><div class="tip" id="fr-tip"></div></div>
@@ -1655,7 +1696,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="fr-scored">0</b><span>authorizations scored</span></div><div class="readout"><b id="fr-flagged" class="red">0</b><span>held</span></div><div class="readout"><b>&lt;50 ms</b><span>inside the auth window</span></div></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b id="fr-scored">0</b><span>authorizations scored</span></div><div class="readout"><b id="fr-flagged" class="red">0</b><span>held</span></div><div class="readout"><b>per card</b><span>its own expected band</span></div></div></div>
     </div>
 
     <!-- search -->
@@ -1667,6 +1708,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">&nbsp;</span><div class="btn-row"><button class="btn sm ghost" id="se-clear">Clear</button></div></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For engineers and analysts</span><p class="v4pain">Finding the last time it looked like this means scrolling years of charts.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>tags and manual chart review</p><p class="ucs-t"><b>Together</b>TSPulse embeddings, the nearest shapes by meaning</p></div><div class="ucs-c"><span>Outcome</span><b>Every match in seconds, tagged</b></div></div>
       <div class="stage-body">
         <div class="side">
           <div class="tiles" id="tiles"></div>
@@ -1678,7 +1720,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b>1.1M</b><span>parameters</span></div><div class="readout"><b>GPU-free</b><span>embedding</span></div></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b>1M</b><span>parameters, TSPulse</span></div><div class="readout"><b>GPU-free</b><span>embedding</span></div><div class="readout"><b>#1</b><span>on TSB-AD for anomaly detection</span></div></div></div>
     </div>
 
     <!-- trading -->
@@ -1691,6 +1733,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="tr-inject"><button class="chip sm" data-v="news">News burst</button><button class="chip sm" data-v="quiet">Quiet tape</button></div></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For execution desks</span><p class="v4pain">A fixed schedule trades into thin volume and moves the price.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>a static volume curve from history</p><p class="ucs-t"><b>Together</b>a volume band forecast every bar, slices capped by participation</p></div><div class="ucs-c"><span>Outcome</span><b>Orders paced with the tape</b></div></div>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="tr-cv" aria-label="Traded volume per minute, the 30 minute forecast band and the planned slices"></canvas></div>
@@ -1701,7 +1744,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           </div>
         </div>
       </div>
-      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">every symbol</b><span>one model</span></div><div class="readout"><b>&lt;10 ms</b><span>per bar</span></div><div class="readout"><b>P10 to P90</b><span>a band, not a point</span></div></div></div>
+      <div class="stage-foot"><div class="readouts"><div class="readout"><b class="green">every symbol</b><span>one model</span></div><div class="readout"><b>P10 to P90</b><span>a band, not a point</span></div><div class="readout"><b>99</b><span>quantiles from PatchTST-FM</span></div></div></div>
     </div>
 
     <div class="chapter-head sub" id="h-ind">
@@ -1741,6 +1784,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <div class="chips" id="pl-sc"><button class="chip" data-v="opt" aria-pressed="true">Production optimization</button><button class="chip" data-v="pdm" aria-pressed="false">Predictive maintenance</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For plant leaders</span><p class="v4pain">Quality, energy and throughput are run by shift from lagging lab data.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>historian dashboards and lab samples, reviewed by shift</p><p class="ucs-t"><b>Together</b>SCADA, lab and meter topics forecast and optimized in the stream, back to the floor as setpoints</p></div><div class="ucs-c"><span>Outcome</span><b>Setpoints corrected inside the cycle</b></div></div>
       <div class="stage-body">
         <div class="plant-wrap" id="plant-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="pl-cv" aria-label="Animated cement line: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="pl-tip"></div></div></div>
         <div class="plant-cap" id="pl-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="pl-cap-k">Production optimization</span><span class="plant-steps" id="pl-steps" aria-hidden="true"></span><button class="switch" id="pl-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="pl-cap-t">Free lime is trending up. The quality forecast says 97.1% in 40 minutes, below the 98.5% target.</p></div>
@@ -1763,6 +1807,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="rt-sc"><button class="chip" data-v="plan" aria-pressed="true">Supply chain planning</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button><button class="chip" data-v="fraud" aria-pressed="false">Fraud and security</button></div></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For store and supply chain leaders</span><p class="v4pain">Shelves run empty on the hot day while the back room overflows.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>weekly replenishment from last week’s sales</p><p class="ucs-t"><b>Together</b>sales, weather and promo topics forecast every SKU and store, orders and alerts out</p></div><div class="ucs-c"><span>Outcome</span><b>Full shelves, no full back room</b></div></div>
       <div class="stage-body">
         <div class="plant-wrap" id="rt-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="rt-cv" aria-label="Animated store 112 and its supply chain: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="rt-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="rt-cap-k"></span><span class="plant-steps" id="rt-steps" aria-hidden="true"></span><button class="switch" id="rt-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="rt-cap-t"></p></div>
@@ -1777,6 +1822,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="bk-sc"><button class="chip" data-v="fraud" aria-pressed="true">Fraud and security</button><button class="chip" data-v="trade" aria-pressed="false">Trading</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For payments and markets leaders</span><p class="v4pain">Fraud is caught after settlement, and orders trade into thin volume.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>shared rules and static schedules</p><p class="ucs-t"><b>Together</b>every card and symbol scored against its own normal, in the stream</p></div><div class="ucs-c"><span>Outcome</span><b>The odd swipe held before authorization</b></div></div>
       <div class="stage-body">
         <div class="plant-wrap" id="bk-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="bk-cv" aria-label="Animated payments and the trading desk: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="bk-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="bk-cap-k"></span><span class="plant-steps" id="bk-steps" aria-hidden="true"></span><button class="switch" id="bk-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="bk-cap-t"></p></div>
@@ -1791,6 +1837,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="al-sc"><button class="chip" data-v="anom" aria-pressed="true">Anomaly detection</button><button class="chip" data-v="opt" aria-pressed="false">Production optimization</button><button class="chip" data-v="plan" aria-pressed="false">Supply chain planning</button></div></div>
         </div>
       </div>
+      <div class="ucs"><div class="ucs-a"><span class="v4p">For operations control</span><p class="v4pain">Disruptions surface at the gate, after crews and aircraft are committed.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>daily plans and fixed alert thresholds</p><p class="ucs-t"><b>Together</b>engine, gate and network streams forecast and flagged as they land</p></div><div class="ucs-c"><span>Outcome</span><b>See the disruption before the gate does</b></div></div>
       <div class="stage-body">
         <div class="plant-wrap" id="al-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="al-cv" aria-label="Animated hub operations, fleet and network: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="al-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="al-cap-k"></span><span class="plant-steps" id="al-steps" aria-hidden="true"></span><button class="switch" id="al-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="al-cap-t"></p></div>
@@ -1802,13 +1849,13 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     <div class="chapter-head sub" id="cases">
       <span class="n">CASE STUDIES</span>
       <h2>Time series models at work.</h2>
-      <p>Three engagements on live operational data. Client identities withheld.</p>
+      <p>Three engagements on live operational data. The numbers are engagement results. Client identities withheld.</p>
     </div>
 
     <div class="csgrid" role="tablist" id="cstabs" aria-label="Case studies">
-      <button class="cs" role="tab" aria-selected="true" aria-controls="cs-telco" type="button"><span class="cs-k">Telco · network operations</span><b>IBM Network Intelligence</b><span class="cs-m">0<small>tickets without a confirmed cause</small></span><code>Granite TSPulse</code></button>
-      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-cement" type="button"><span class="cs-k">Manufacturing · cement</span><b>Cement plant production</b><span class="cs-m">93% &#8594; 99%<small>process and quality accuracy</small></span><code>Granite Time Series models</code></button>
-      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-fin" type="button"><span class="cs-k">Financial services · investments</span><b>Multivariate asset forecasting</b><span class="cs-m">~10%<small>lower RMSE than the current approach</small></span><code>Granite TTM</code></button>
+      <button class="cs" role="tab" aria-selected="true" aria-controls="cs-telco" type="button"><span class="cs-badge">Engagement result</span><span class="cs-k">Telco · network operations</span><b>IBM Network Intelligence</b><span class="cs-m">0<small>tickets without a confirmed cause</small></span><code>Granite TSPulse</code></button>
+      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-cement" type="button"><span class="cs-badge">Engagement result</span><span class="cs-k">Manufacturing · cement</span><b>Cement plant production</b><span class="cs-m">93% &#8594; 99%<small>process and quality accuracy</small></span><code>Granite Time Series models</code></button>
+      <button class="cs" role="tab" aria-selected="false" aria-controls="cs-fin" type="button"><span class="cs-badge">Engagement result</span><span class="cs-k">Financial services · investments</span><b>Multivariate asset forecasting</b><span class="cs-m">~10%<small>lower RMSE than the current approach</small></span><code>Granite TTM</code></button>
     </div>
 
     <!-- telco -->
@@ -2057,7 +2104,7 @@ function drawStream(cv,sim,o){
   ctx.strokeStyle=C.grid;ctx.lineWidth=1;ctx.fillStyle=C.ink3;ctx.textAlign='right';
   niceTicks(lo,hi,4).forEach(v=>{const y=Math.round(Y(v))+0.5;ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(padL+pw,y);ctx.stroke();ctx.fillText(o.fmtY?o.fmtY(v):v.toFixed(sim.dec),padL-7,y);});
   ctx.textAlign='center';ctx.textBaseline='alphabetic';
-  const nLab=Math.max(2,Math.floor(pw/130));
+  const nLab=Math.max(h?1:2,Math.floor(pw*(vis.length-1)/Math.max(1,total-1)/130));
   for(let j=0;j<=nLab;j++){const k=Math.round(j*(vis.length-1)/nLab);const r=vis[k];if(!r)continue;ctx.textAlign=j===0?'left':j===nLab&&h===0?'right':'center';ctx.fillText(o.label(r.i),X(k),H-8);}
   ctx.textBaseline='middle';
   if(o.mode==='ad'){
@@ -2081,7 +2128,7 @@ function drawStream(cv,sim,o){
     for(let j=f.length-1;j>=0;j--)ctx.lineTo(X(k0+1+j),Y(f[j].mean-Z80*f[j].sig));ctx.closePath();ctx.fillStyle=C.band;ctx.fill();
     ctx.save();ctx.shadowColor='rgba(69,137,255,.9)';ctx.shadowBlur=8;ctx.strokeStyle=C.blue3;ctx.lineWidth=2;ctx.setLineDash([6,4]);ctx.beginPath();ctx.moveTo(X(k0),Y(r0.v));f.forEach((p,j)=>ctx.lineTo(X(k0+1+j),Y(p.mean)));ctx.stroke();ctx.setLineDash([]);ctx.restore();
     ctx.strokeStyle=C.ink3;ctx.lineWidth=1;const xn=Math.round(X(k0))+0.5;ctx.beginPath();ctx.moveTo(xn,padT);ctx.lineTo(xn,padT+ph);ctx.stroke();
-    ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText('now',xn+5,padT+6);ctx.textAlign='right';ctx.fillText('+'+h+(o.stepName||' steps'),padL+pw-2,padT+6);
+    ctx.fillStyle=C.ink3;ctx.textAlign='left';ctx.fillText('now',xn+5,padT+6);ctx.textAlign='right';{const hl='+'+h+(o.stepName||' steps');const tight=xn+5+ctx.measureText('now').width+8>padL+pw-2-ctx.measureText(hl).width;ctx.fillText(hl,padL+pw-2,padT+(tight?20:6));}
     const pe=f[f.length-1];ctx.beginPath();ctx.arc(X(k0+h),Y(pe.mean),4.5,0,Math.PI*2);ctx.fillStyle=C.blue3;ctx.fill();ctx.strokeStyle=C.bg;ctx.lineWidth=2;ctx.stroke();
     ctx.fillStyle=C.ink;ctx.textAlign='right';ctx.fillText((o.fmtY?o.fmtY(pe.mean):pe.mean.toFixed(sim.dec))+(sim.unit?' '+sim.unit:''),X(k0+h)-8,Y(pe.mean)-12);
   }
@@ -3410,8 +3457,8 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
   const sim=new Sim({base:40,amp:11,amp2:3,period:7,noise:3,stepSec:86400,dec:0,unit:'',floor:0,maxRows:400,warm:120});
   const cv=new Cv($('#dm-cv'));
   const st={promo:0,sl:90,stock:400,acc:0,lead:2,res:null,dirty:true};
-  const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  const label=i=>DAYS[i%7]+' '+(1+(i%28));
+  const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const label=i=>{const d=new Date(2026,0,1+i);return MON[d.getMonth()]+' '+d.getDate();};
   const H=28;
   function compute(){const z=Z[st.sl]||0;const f=sim.fc(H,{mult:k=>k<=7?1+st.promo:1});if(!f)return null;const q=f.map(p=>Math.max(0,p.mean+z*p.sig*0.9));const mu=f.map(p=>Math.max(0,p.mean));
     const rop=q.slice(0,st.lead).reduce((a,b)=>a+b,0)+mu[0];
@@ -3426,7 +3473,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
     {const e=$('#dm-model');if(e)e.textContent=sqlModel();}}
   function sql(){($('#dm-sql')||{}).innerHTML=highlight("SELECT sku, event_time, AI_FORECAST(units_sold, event_time, JSON_OBJECT('model' VALUE '"+sqlModel()+"', 'horizon' VALUE 28, 'maxContextSize' VALUE 730)) OVER (PARTITION BY sku ORDER BY event_time RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS f FROM daily_sales;");}
   function draw(){if(!st.dirty)return;st.dirty=false;const r=compute();st.res=r;const z=Z[st.sl]||0;
-    drawStream(cv,sim,{mode:'fc',z,h:H,nVis:84,label,stepName:' days',floorZero:true,fcOpts:{mult:k=>k<=7?1+st.promo:1},padR:58,
+    drawStream(cv,sim,{mode:'fc',z,h:H,nVis:cv.W<560?56:84,label,stepName:' days',floorZero:true,fcOpts:{mult:k=>k<=7?1+st.promo:1},padR:58,
       after(L){if(!r)return;const ctx=cv.ctx;const k0=L.vis.length-1;const FX=j=>L.X(k0+j);const xr=L.padL+L.pw;
         if(st.promo>0){ctx.fillStyle='rgba(241,194,27,.08)';ctx.fillRect(FX(1),L.padT,FX(7)-FX(1),L.ph);ctx.fillStyle=C.yellow;ctx.font=MONO;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText('promo +'+Math.round(st.promo*100)+'%',FX(1)+4,L.padT+22);}
         const smax=Math.max(st.stock,Math.max.apply(null,r.proj),r.rop*1.2,60)*1.08;const SY=v=>L.padT+(1-v/smax)*L.ph;
@@ -3435,7 +3482,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
         ctx.save();ctx.shadowColor=C.teal2;ctx.shadowBlur=8;ctx.strokeStyle=C.teal2;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(FX(0),SY(st.stock));r.proj.forEach((v,k)=>ctx.lineTo(FX(k+1),SY(v)));ctx.stroke();ctx.restore();
         ctx.setLineDash([3,4]);ctx.strokeStyle=C.teal;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(FX(0),Math.round(SY(r.rop))+0.5);ctx.lineTo(xr,Math.round(SY(r.rop))+0.5);ctx.stroke();ctx.setLineDash([]);
         /* right axis for stock */
-        ctx.font=MONO;ctx.fillStyle=C.teal2;ctx.textAlign='left';ctx.textBaseline='middle';[0,Math.round(smax/2/50)*50,Math.round(smax/50)*50].forEach(v=>{if(v<=smax)ctx.fillText(v,xr+6,SY(v));});ctx.fillText('stock',xr+6,L.padT+22);
+        ctx.font=MONO;ctx.fillStyle=C.teal2;ctx.textAlign='left';ctx.textBaseline='middle';[0,Math.round(smax/2/50)*50,Math.round(smax/50)*50].forEach(v=>{if(v<=smax&&SY(v)>L.padT+18)ctx.fillText(v,xr+6,SY(v));});ctx.fillText('stock',xr+6,L.padT+6);
         ctx.textAlign='right';ctx.fillText('reorder point '+Math.round(r.rop),xr-4,SY(r.rop)-9);
         r.pos.forEach((p,i)=>{const x=FX(p.po);ctx.fillStyle='rgba(66,190,101,.9)';ctx.fillRect(x-1,L.padT,2,L.ph);ctx.fillStyle=C.green2;ctx.textAlign='left';ctx.fillText('PO '+p.qty,x+5,L.padT+36+(i%2)*14);const xa=FX(p.arrive);ctx.fillStyle='rgba(66,190,101,.35)';ctx.fillRect(x,L.padT+L.ph-6,xa-x,6);if(i===0){ctx.fillStyle=C.green2;ctx.fillText('arrives',xa+4,L.padT+L.ph-14);}});
         if(r.out>0){const x=FX(r.out);ctx.save();ctx.shadowColor=C.red;ctx.shadowBlur=12;ctx.fillStyle=C.red2;ctx.beginPath();ctx.arc(x,SY(0),5,0,Math.PI*2);ctx.fill();ctx.restore();ctx.textAlign='left';ctx.fillStyle=C.red2;ctx.fillText('runs out',x+7,SY(0)-12);}
@@ -3527,7 +3574,7 @@ twin((()=>{const P={blue3:'#78a9ff',blue4:'#a6c8ff',green:'#6fdc8c',orange:'#ff8
         ctx.font=MONO;ctx.textBaseline='middle';
         const bw=Math.max(2,(FX(1)-FX(0))*0.6);
         r.slices.forEach((s,k)=>{if(s<=0)return;const hgt=Math.max(2,s/smax*sh_);const x=FX(k+1)-bw/2;ctx.fillStyle=r.mode==='burst'?'rgba(255,131,137,.45)':'rgba(66,190,101,.75)';ctx.fillRect(x,base-hgt,bw,hgt);});
-        ctx.fillStyle=r.mode==='burst'?C.red2:C.green2;ctx.textAlign='left';ctx.fillText(r.mode==='burst'?'slices paused':'planned slices · '+Math.round(st.cap*100)+'% of forecast',FX(1)+2,base-sh_-10);
+        ctx.fillStyle=r.mode==='burst'?C.red2:C.green2;ctx.textAlign='left';{let t=r.mode==='burst'?'slices paused':'planned slices · '+Math.round(st.cap*100)+'% of forecast',tx=FX(1)+2;if(tx+ctx.measureText(t).width>L.padL+L.pw){if(r.mode!=='burst')t='slices · '+Math.round(st.cap*100)+'%';ctx.textAlign='right';tx=L.padL+L.pw-2;}ctx.fillText(t,tx,base-sh_-10);}
         if(r.done>0){const x=Math.round(FX(r.done))+0.5;ctx.strokeStyle=C.green2;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x,L.padT+28);ctx.lineTo(x,base);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=C.green2;ctx.textAlign=r.done>H*0.7?'right':'left';ctx.fillText('order done',x+(r.done>H*0.7?-5:5),L.padT+36);}
         if(r.mode==='burst'){const x=L.X(k0);ctx.save();ctx.shadowColor=C.red;ctx.shadowBlur=14;ctx.fillStyle=C.red2;ctx.beginPath();ctx.arc(x,L.Y(r.last.v),6,0,Math.PI*2);ctx.fill();ctx.restore();ctx.fillStyle=C.red2;ctx.textAlign='right';ctx.fillText('burst',x-10,L.Y(r.last.v)-12);}
       }});
@@ -4096,7 +4143,7 @@ const CS={
       say:'For your teams: ten times faster time to value, five to ten percent more accuracy, and decisions in seconds.',
       subs:['For your teams: <em>ten times faster</em> time to value,','<em>five to ten percent</em> more accuracy,','and decisions <em>in seconds</em>.'],
       run:async w=>{}},
-    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#usecases > .wrap > .chapter-head:first-child',top:true,scrollM:'#uctabs',dur:9040,
+    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',dur:9040,
       say:'Six mission-critical decisions, no data science team required: production, anomalies, supply chain, fraud, search and trading.',
       subs:['<em>Six mission-critical decisions</em>,','no data science team required:','production, anomalies, supply chain,','fraud, search and trading.'],
       run:async(w,at)=>{hi('#uctabs [role=tab]');await montage(at,'uctabs',[['production','uc-prod'],['anomalies','uc-anom'],['supply chain','uc-demand'],['fraud','uc-fraud'],['search','uc-search'],['trading','uc-trade']]);}},
