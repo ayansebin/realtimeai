@@ -1323,19 +1323,9 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 #uctabs .uc[aria-selected="true"] .uc-tags .t-d{color:#ffb3b8;border-color:rgba(255,131,137,.55);background:rgba(250,77,86,.14)}
 #uctabs .uc[aria-selected="true"] .uc-tags .t-o{color:#a7f0ba;border-color:rgba(111,220,140,.55);background:rgba(66,190,101,.14)}
 #uctabs .uc[aria-selected="true"] .uc-tags .t-s{color:#e8daff;border-color:rgba(190,149,255,.55);background:rgba(138,63,252,.16)}
-.ucs{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.5fr) minmax(0,.85fr);gap:14px;align-items:stretch;margin:14px clamp(16px,2.4vw,28px) 4px;padding:12px 14px;border:1px solid rgba(255,255,255,.14);border-radius:4px;background:rgba(10,20,48,.4)}
-.ucs-a{display:grid;align-content:start;gap:.45rem}
-.ucs-a .v4p{justify-self:start}
-.ucs-b{display:grid;align-content:center;gap:.35rem;padding:0 14px;border-left:1px solid rgba(255,255,255,.1);border-right:1px solid rgba(255,255,255,.1)}
-.ucs-b p{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;font-size:.86rem;line-height:1.35;color:var(--ink-2)}
-.ucs-b b{font:600 .62rem/1.35 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;padding-top:.1rem}
-.ucs-u b{color:#b9c3d3}.ucs-u{color:var(--ink-3)!important}
-.ucs-t b{color:#6fdc8c}.ucs-t{color:#fff!important}
-.ucs-c{display:grid;align-content:center;gap:.3rem}
-.ucs-c span{font:600 .62rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#6fdc8c}
-.ucs-c b{font-weight:400;font-size:1.02rem;line-height:1.3;color:#fff}
-@media (max-width:1000px){.ucs{grid-template-columns:1fr 1fr}.ucs-b{grid-column:1/-1;grid-row:2;padding:10px 0 0;border:0;border-top:1px solid rgba(255,255,255,.1)}}
-@media (max-width:600px){.ucs{grid-template-columns:1fr;gap:10px;margin:0 12px 4px}.ucs-b{grid-row:auto}.ucs-b p{grid-template-columns:1fr;gap:2px}}
+.ucl{margin:14px clamp(16px,2.4vw,28px) 4px;padding:10px 14px;border-left:2px solid #78a9ff;background:rgba(10,20,48,.38);font-size:.95rem;line-height:1.45;color:#c6d2e6}
+.ucl b{color:#fff;font-weight:500}
+@media (max-width:600px){.ucl{margin:12px 12px 4px;font-size:.9rem}}
 #cstabs .cs .cs-badge{justify-self:start;font:600 .6rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:#0e6027;border:1px solid rgba(36,161,72,.5);background:rgba(36,161,72,.08);border-radius:999px;padding:.25rem .5rem}
 #cstabs .cs[aria-selected="true"] .cs-badge{color:#a7f0ba;border-color:rgba(111,220,140,.6);background:rgba(66,190,101,.16)}
 </style>
@@ -1614,7 +1604,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="pr-inject"><button class="chip sm" data-v="feed">Raw feed change</button><button class="chip sm" data-v="fuel">Fuel quality drop</button></div></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For plant and process engineers</span><p class="v4pain">Setpoints are tuned by shift, and quality is known hours later from the lab.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>lab samples every few hours, setpoints by shift</p><p class="ucs-t"><b>Together</b>a quality forecast on every reading, a setpoint proposed inside the spec</p></div><div class="ucs-c"><span>Outcome</span><b>Setpoints re-optimized every few hours, inside spec</b></div></div>
+      <p class="ucl"><b>Run every line at its best setpoint.</b> A pretrained model forecasts quality on every reading, so setpoints adjust inside spec before the lab result is back.</p>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="pr-cv" aria-label="Kiln quality over the shift with the forecast band, the re-optimize cycles and the setpoints"></canvas></div>
@@ -1637,7 +1627,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="an-conf"><button class="chip sm" data-v="95" aria-pressed="false">95%</button><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.9" aria-pressed="true">99.9%</button></div></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For operations and reliability teams</span><p class="v4pain">Static thresholds flag every weekend peak and miss the real breaks.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>fixed thresholds, reviewed the next day</p><p class="ucs-t"><b>Together</b>a band learned from each series, zero-shot, scored as data lands</p></div><div class="ucs-c"><span>Outcome</span><b>Only the unusual is flagged, with a likely cause</b></div></div>
+      <p class="ucl"><b>Catch the real breaks across thousands of signals.</b> Each series gets its own expected band zero-shot, so weekend peaks pass and only the unusual is flagged.</p>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="an-cv" aria-label="Daily sales with anomaly band and flagged days"></canvas><div class="tip" id="an-tip"></div></div>
@@ -1661,7 +1651,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Stock on hand</span><label class="range"><input type="range" id="dm-stock" min="100" max="1000" step="10" value="400" aria-label="Stock on hand"><output id="dm-stockv">400</output></label></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For demand planners</span><p class="v4pain">A weekly forecast per SKU misses the promo and the heat wave.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>a weekly batch, a model per SKU</p><p class="ucs-t"><b>Together</b>one model for every SKU and store, re-forecast as events land</p></div><div class="ucs-c"><span>Outcome</span><b>Reorders set at the service level you choose</b></div></div>
+      <p class="ucl"><b>Stock every SKU in every store at the service level you choose.</b> One pretrained model forecasts each series zero-shot and re-forecasts as promos and weather land.</p>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="dm-cv" aria-label="Daily sales, 28 day forecast band and projected stock"></canvas></div>
@@ -1684,7 +1674,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Confidence</span><div class="chips" id="fr-conf"><button class="chip sm" data-v="99" aria-pressed="false">99%</button><button class="chip sm" data-v="99.5" aria-pressed="true">99.5%</button><button class="chip sm" data-v="99.9" aria-pressed="false">99.9%</button></div></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For fraud and risk teams</span><p class="v4pain">One rule set for every card blocks travelers and misses card testing.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>shared rules, reviewed after settlement</p><p class="ucs-t"><b>Together</b>each card scored against its own normal, per authorization, in the stream</p></div><div class="ucs-c"><span>Outcome</span><b>The odd swipe held, the traveler let through</b></div></div>
+      <p class="ucl"><b>Hold the odd card payment before authorization.</b> Every card is scored against its own expected spend, learned zero-shot, so card testing is caught and travelers get through.</p>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="fr-cv" aria-label="Card payment amounts with the expected band and flagged transactions"></canvas><div class="tip" id="fr-tip"></div></div>
@@ -1707,7 +1697,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">&nbsp;</span><div class="btn-row"><button class="btn sm ghost" id="se-clear">Clear</button></div></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For engineers and analysts</span><p class="v4pain">Finding the last time it looked like this means scrolling years of charts.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>tags and manual chart review</p><p class="ucs-t"><b>Together</b>TSPulse embeddings, the nearest shapes by meaning</p></div><div class="ucs-c"><span>Outcome</span><b>Every match in seconds, tagged</b></div></div>
+      <p class="ucl"><b>Find every time a signal looked like this.</b> Time series embeddings make years of history searchable by shape, so one query replaces scrolling through charts.</p>
       <div class="stage-body">
         <div class="side">
           <div class="tiles" id="tiles"></div>
@@ -1732,7 +1722,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Inject</span><div class="chips" id="tr-inject"><button class="chip sm" data-v="news">News burst</button><button class="chip sm" data-v="quiet">Quiet tape</button></div></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For execution desks</span><p class="v4pain">A fixed schedule trades into thin volume and moves the price.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>a static volume curve from history</p><p class="ucs-t"><b>Together</b>a volume band forecast every bar, slices capped by participation</p></div><div class="ucs-c"><span>Outcome</span><b>Orders paced with the tape</b></div></div>
+      <p class="ucl"><b>Work large orders without moving the price.</b> A volume forecast with a probability band on every bar paces each slice to the market, not to an average curve from history.</p>
       <div class="stage-body">
         <div class="side">
           <div class="canvas-wrap"><canvas class="stage-canvas" id="tr-cv" aria-label="Traded volume per minute, the 30 minute forecast band and the planned slices"></canvas></div>
@@ -1783,7 +1773,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <div class="chips" id="pl-sc"><button class="chip" data-v="opt" aria-pressed="true">Production optimization</button><button class="chip" data-v="pdm" aria-pressed="false">Predictive maintenance</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For plant leaders</span><p class="v4pain">Quality, energy and throughput are run by shift from lagging lab data.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>historian dashboards and lab samples, reviewed by shift</p><p class="ucs-t"><b>Together</b>SCADA, lab and meter topics forecast and optimized in the stream, back to the floor as setpoints</p></div><div class="ucs-c"><span>Outcome</span><b>Setpoints corrected inside the cycle</b></div></div>
+      <p class="ucl"><b>A live cement plant, from sensor to setpoint.</b> SCADA, lab and meter streams are forecast and optimized as they land, so setpoints, maintenance and alerts reach the floor inside the cycle.</p>
       <div class="stage-body">
         <div class="plant-wrap" id="plant-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="pl-cv" aria-label="Animated cement line: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="pl-tip"></div></div></div>
         <div class="plant-cap" id="pl-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="pl-cap-k">Production optimization</span><span class="plant-steps" id="pl-steps" aria-hidden="true"></span><button class="switch" id="pl-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="pl-cap-t">Free lime is trending up. The quality forecast says 97.1% in 40 minutes, below the 98.5% target.</p></div>
@@ -1806,7 +1796,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="rt-sc"><button class="chip" data-v="plan" aria-pressed="true">Supply chain planning</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button><button class="chip" data-v="fraud" aria-pressed="false">Fraud and security</button></div></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For store and supply chain leaders</span><p class="v4pain">Shelves run empty on the hot day while the back room overflows.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>weekly replenishment from last week’s sales</p><p class="ucs-t"><b>Together</b>sales, weather and promo topics forecast every SKU and store, orders and alerts out</p></div><div class="ucs-c"><span>Outcome</span><b>Full shelves, no full back room</b></div></div>
+      <p class="ucl"><b>A live store and its supply chain.</b> Sales, weather and promo streams are forecast for every SKU, so orders, store tasks and fraud holds go out before the shelf runs empty.</p>
       <div class="stage-body">
         <div class="plant-wrap" id="rt-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="rt-cv" aria-label="Animated store 112 and its supply chain: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="rt-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="rt-cap-k"></span><span class="plant-steps" id="rt-steps" aria-hidden="true"></span><button class="switch" id="rt-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="rt-cap-t"></p></div>
@@ -1821,7 +1811,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="bk-sc"><button class="chip" data-v="fraud" aria-pressed="true">Fraud and security</button><button class="chip" data-v="trade" aria-pressed="false">Trading</button><button class="chip" data-v="anom" aria-pressed="false">Anomaly detection</button></div></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For payments and markets leaders</span><p class="v4pain">Fraud is caught after settlement, and orders trade into thin volume.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>shared rules and static schedules</p><p class="ucs-t"><b>Together</b>every card and symbol scored against its own normal, in the stream</p></div><div class="ucs-c"><span>Outcome</span><b>The odd swipe held before authorization</b></div></div>
+      <p class="ucl"><b>Live card payments and markets.</b> Every card and symbol is scored against its own expected pattern as it lands, so the odd swipe is held and orders pace with volume.</p>
       <div class="stage-body">
         <div class="plant-wrap" id="bk-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="bk-cv" aria-label="Animated payments and the trading desk: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="bk-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="bk-cap-k"></span><span class="plant-steps" id="bk-steps" aria-hidden="true"></span><button class="switch" id="bk-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="bk-cap-t"></p></div>
@@ -1836,7 +1826,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <div class="ctl-group"><span class="eyebrow">Story</span><div class="chips" id="al-sc"><button class="chip" data-v="anom" aria-pressed="true">Anomaly detection</button><button class="chip" data-v="opt" aria-pressed="false">Production optimization</button><button class="chip" data-v="plan" aria-pressed="false">Supply chain planning</button></div></div>
         </div>
       </div>
-      <div class="ucs"><div class="ucs-a"><span class="v4p">For operations control</span><p class="v4pain">Disruptions surface at the gate, after crews and aircraft are committed.</p></div><div class="ucs-b"><p class="ucs-u"><b>The usual way</b>daily plans and fixed alert thresholds</p><p class="ucs-t"><b>Together</b>engine, gate and network streams forecast and flagged as they land</p></div><div class="ucs-c"><span>Outcome</span><b>See the disruption before the gate does</b></div></div>
+      <p class="ucl"><b>A live airline network.</b> Engine, gate and network streams are forecast and flagged as they land, so operations control sees the disruption before the gate does.</p>
       <div class="stage-body">
         <div class="plant-wrap" id="al-wrap"><div class="plant-inner"><canvas class="stage-canvas" id="al-cv" aria-label="Animated hub operations, fleet and network: the floor, its systems of record, the stream into Confluent and the decisions coming back"></canvas><div class="tip" id="al-tip"></div></div></div>
         <div class="plant-cap"><div class="plant-cap-head"><span class="plant-cap-k" id="al-cap-k"></span><span class="plant-steps" id="al-steps" aria-hidden="true"></span><button class="switch" id="al-auto" aria-pressed="true"><i></i>Autoplay</button></div><p id="al-cap-t"></p></div>
