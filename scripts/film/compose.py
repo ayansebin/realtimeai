@@ -9,6 +9,7 @@ from PIL import Image
 D, OUT = sys.argv[1], sys.argv[2]
 TAIL = float(sys.argv[3]) if len(sys.argv) > 3 else 1.6
 FPS, XF, FIN, FOUT, CAPIN = 30, 0.45, 0.45, 0.7, 0.18
+PAPER = np.array([236, 235, 230], dtype=np.float32)  # the site's paper color, fades go to it
 NAR = os.environ.get('NARRATION', os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'narration')) + '/'
 
 m = json.load(open(D + '/meta.json'))
@@ -80,8 +81,8 @@ for k in range(N):
     fr = img(at(t)).copy()
     for w, c, oldt in xcuts:
         if c <= t < c + XF:
-            a = ease((t - c) / XF); dip = 1 - 0.18 * math.sin(math.pi * a)
-            fr = (img(at(oldt)) * (1 - a) + fr * a) * dip
+            a = ease((t - c) / XF)
+            fr = img(at(oldt)) * (1 - a) + fr * a
             break
     ov = min(ease((vt - OV_ON) / XF), 1 - ease((vt - OV_OFF) / XF))
     if ov > 0:
@@ -95,7 +96,7 @@ for k in range(N):
         if i >= 0:
             comp(fr, CAPS.get(caps[i][1]), ov * ease((vt - caps[i][0]) / CAPIN))
     g = min(ease(vt / FIN), ease((END - vt) / FOUT))
-    if g < 1: fr = fr * g
+    if g < 1: fr = fr * g + PAPER * (1 - g)
     ff.stdin.write(np.clip(fr, 0, 255).astype(np.uint8).tobytes())
 ff.stdin.close(); ff.wait()
 print(OUT, round(END, 2), 's,', N, 'frames; visual cuts at', [round(c - T0, 2) for w, c, o in xcuts])
