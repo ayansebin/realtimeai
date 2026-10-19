@@ -2406,7 +2406,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   reg({el,resize(){cv.fit();gl.forEach(c=>c.fit());L=null;draw();},update(dt){st.acc+=dt;while(st.acc>=RATE){st.acc-=RATE;commit();loop();}ui(performance.now());},draw(){draw();drawGlyphs();}});
   /* the demo drives the same chart, starting on the store */
   const hold=ms=>{st.hold=performance.now()+ms;};
-  App.hero={reset(){hold(60000);restart();setSpot(0,false);st.focus=true;},ctx(){hold(60000);context();},anomaly(){hold(60000);anomaly();},optimize(){hold(30000);optimize();}};
+  App.hero={reset(){hold(60000);restart();setSpot(0,false);st.focus=true;},flash(k){flash(k);},ctx(){hold(60000);context();},anomaly(){hold(60000);anomaly();},optimize(){hold(30000);optimize();}};
 })();
 
 /* ============ 01 agent loop ============ */
@@ -4172,7 +4172,7 @@ const CS={
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>{const f=App.tabSel&&App.tabSel[id];if(f){f();return true;}return click('[role=tab][aria-controls="'+id+'"]');};
-  /* one pitch, about a minute: time series intelligence meets real-time context, the forecast that sees it coming,
+  /* one pitch, about a minute and a quarter: time series intelligence meets real-time context, the forecast that sees it coming,
      the decision in time, Confluent and Granite better together, the value, then the proof of breadth: six decisions, four industries, three case studies, and the ask.
      subs are the subtitles, timed to the voice by their length. at('phrase') waits for that phrase in the line.
      hold keeps a step on screen a moment after the voice ends */
@@ -4181,10 +4181,10 @@ const CS={
   const show=(strip,id)=>{tab(id);$$('#'+strip+' [role=tab]').forEach(x=>x.classList.toggle('tour-hi',x.getAttribute('aria-controls')===id));};
   const montage=async(at,strip,list)=>{for(const [p,id] of list){await at(p);show(strip,id);}};
   const SCRIPT=[
-    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:9070,
-      say:'Time series intelligence meets real-time context. IBM Granite Time Series models now run live inside Confluent.',
-      subs:['<em>Time series intelligence</em>','meets <em>real-time context</em>.','IBM Granite Time Series models now run','<em>live inside Confluent</em>.'],
-      run:async w=>{if(App.hero)App.hero.reset();}},
+    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:14830,
+      say:'Time series intelligence meets real-time context. IBM Granite Time Series models now run live inside Confluent: pretrained and scalable, efficient on standard CPUs, and learning as each event lands.',
+      subs:['<em>Time series intelligence</em>','meets <em>real-time context</em>.','IBM Granite Time Series models now run','<em>live inside Confluent</em>:','<em>pretrained and scalable</em>,','<em>efficient</em> on standard CPUs,','and <em>learning</em> as each event lands.'],
+      run:async(w,at)=>{const H=App.hero;if(!H)return;H.reset();await at('live inside');scrollTo('#st-live');await at('pretrained');H.flash('dom');await at('efficient');H.flash('dist');await at('and learning');H.flash('inter');}},
     {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:8920,
       say:'Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, and an empty shelf is flagged in seconds.',
       subs:['Take <em>one store</em> on a hot day.','The forecast reads the heat wave','and <em>sees the stockout coming</em>,','and an empty shelf is <em>flagged in seconds</em>.'],
@@ -4240,7 +4240,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-10-18h';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='2026-10-19a';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}
