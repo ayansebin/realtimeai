@@ -1153,6 +1153,29 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .md-rk{font:600 .62rem/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#78a9ff}
 .md-row .md-c{font-size:.8rem;padding:.26rem .55rem}
 @media (max-width:600px){.md-fit{grid-template-columns:1fr;gap:12px}.md-flow{grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr);row-gap:8px}.md-flow>:nth-child(4){display:none}.mf-o{grid-column:1/-1}.mf-s>span{font-size:.78rem;white-space:normal}}
+/* the family at a glance: one row per model, smallest to largest */
+.md-fam{display:grid;gap:4px;margin-bottom:14px}
+.md-fh,.md-fr{display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center}
+.md-fh{padding:0 10px 2px;font:600 .62rem/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#78a9ff}
+.md-fr{margin:0;padding:8px 10px;border:1px solid transparent;border-radius:4px;background:rgba(255,255,255,.035);color:inherit;font:inherit;text-align:left;cursor:pointer;transition:background .25s,border-color .25s}
+.md-fr:hover{background:rgba(255,255,255,.08)}
+.md-fr.on{background:rgba(15,98,254,.24);border-color:#78a9ff;box-shadow:0 6px 18px rgba(15,98,254,.25)}
+.md-fr:focus-visible{outline:2px solid #4589ff;outline-offset:1px}
+.md-fn{font-size:.88rem;color:var(--ink-2);white-space:nowrap}
+.md-fr.on .md-fn{color:#fff;font-weight:500}
+.md-fc{display:grid;gap:4px;min-width:0}
+.md-bar{position:relative;height:8px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden}
+.md-bar i{position:absolute;top:0;bottom:0;left:0;width:var(--b);min-width:7px;border-radius:4px;background:rgba(255,255,255,.35)}
+.md-fr.on .md-bar i{background:linear-gradient(90deg,#4589ff,#a6c8ff);box-shadow:0 0 10px rgba(69,137,255,.7)}
+.md-fv{font:500 .8rem/1 var(--font-mono);color:var(--ink-3);white-space:nowrap}
+.md-fr.on .md-fv{color:#fff}
+.mdpanel:not([hidden]) .md-bar i{animation:mdGrow .9s cubic-bezier(.2,.8,.2,1) both}
+.mdpanel:not([hidden]) .md-fr:nth-of-type(2) .md-bar i{animation-delay:.06s}.mdpanel:not([hidden]) .md-fr:nth-of-type(3) .md-bar i{animation-delay:.12s}.mdpanel:not([hidden]) .md-fr:nth-of-type(4) .md-bar i{animation-delay:.18s}
+@keyframes mdGrow{from{width:0}}
+.md-line{display:grid;grid-template-columns:80px minmax(0,1fr);align-items:baseline;margin:0 0 .45rem;font-size:.9rem;line-height:1.4;color:var(--ink-2)}
+.md-line b{font:600 .62rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#78a9ff}
+@media (prefers-reduced-motion:reduce){.mdpanel:not([hidden]) .md-bar i{animation:none}}
+@media (max-width:420px){.md-fh,.md-fr{grid-template-columns:84px minmax(0,1fr) minmax(0,1fr);gap:8px}.md-fn{font-size:.82rem}}
 </style>
 </head>
 <body>
@@ -1255,9 +1278,10 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <div class="md-fit"><div class="md-best"><span class="md-h">Best for</span><div class="md-chips"><span class="md-c">millions of series</span><span class="md-c">millisecond latency on CPU</span><span class="md-c">control variables like price</span></div></div><div class="md-use-row"><span class="md-h">Use cases it powers</span><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-demand">Supply chain planning <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-prod">Production optimization <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div></div>
           </div>
           <div class="md-side">
-            <div class="md-h">How it fits the family</div>
-            <canvas class="md-ladder" data-m="ttm" role="img" aria-label="Size and history across the family on log scales. TTM: 1M to 35M parameters, reads 512 to 1,536 points."></canvas>
-            <div class="md-rows"><div class="md-row"><span class="md-rk">Runs on</span><span class="md-chips"><span class="md-c on">CPU</span><em>about 180 forecasts a second, 800 with Lite</em></span></div><div class="md-row"><span class="md-rk">Returns</span><span class="md-chips"><span class="md-c">point forecasts</span><span class="md-c">quantiles</span></span></div></div>
+            <div class="md-h">The family at a glance</div>
+            <div class="md-fam"><div class="md-fh"><span></span><span>Size</span><span>History read</span></div><button type="button" class="md-fr" data-m="tspulse"><span class="md-fn">TSPulse</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:11.4%"></i></span><span class="md-fv">1M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:15.2%;--b:54.8%"></i></span><span class="md-fv">512 to 2K</span></span></button><button type="button" class="md-fr on" data-m="ttm" aria-current="true"><span class="md-fn">TTM</span><span class="md-fc"><span class="md-bar"><i style="--a:11.4%;--b:62.1%"></i></span><span class="md-fv">1M to 35M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:15.2%;--b:46.6%"></i></span><span class="md-fv">512 to 1.5K</span></span></button><button type="button" class="md-fr" data-m="flowstate"><span class="md-fn">FlowState</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:53.0%"></i></span><span class="md-fv">18.5M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:74.5%"></i></span><span class="md-fv">4K</span></span></button><button type="button" class="md-fr" data-m="patchtstfm"><span class="md-fn">PatchTST-FM</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:96.3%"></i></span><span class="md-fv">385M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:94.3%"></i></span><span class="md-fv">8K</span></span></button></div>
+            <p class="md-line"><b>Runs on</b><span>CPU, about 180 forecasts a second, 800 with Lite</span></p>
+            <p class="md-line"><b>Returns</b><span>point forecasts and quantiles</span></p>
             <p class="md-proof">NeurIPS 2024 · 15 to 50× faster than typical models</p>
           </div>
         </div>
@@ -1273,9 +1297,10 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <div class="md-fit"><div class="md-best"><span class="md-h">Best for</span><div class="md-chips"><span class="md-c">streams at any rate</span><span class="md-c">no model per rate</span><span class="md-c">long horizons, compact</span></div></div><div class="md-use-row"><span class="md-h">Use cases it powers</span><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-prod">Production optimization <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-trade">Trading <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div></div>
           </div>
           <div class="md-side">
-            <div class="md-h">How it fits the family</div>
-            <canvas class="md-ladder" data-m="flowstate" role="img" aria-label="Size and history across the family on log scales. FlowState: 18.5M parameters, reads up to 4,096 points."></canvas>
-            <div class="md-rows"><div class="md-row"><span class="md-rk">Runs on</span><span class="md-chips"><span class="md-c on">CPU</span><span class="md-c on">GPU</span><em>compact</em></span></div><div class="md-row"><span class="md-rk">Returns</span><span class="md-chips"><span class="md-c">quantile forecasts</span><span class="md-c">horizon set by the data</span></span></div></div>
+            <div class="md-h">The family at a glance</div>
+            <div class="md-fam"><div class="md-fh"><span></span><span>Size</span><span>History read</span></div><button type="button" class="md-fr" data-m="tspulse"><span class="md-fn">TSPulse</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:11.4%"></i></span><span class="md-fv">1M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:15.2%;--b:54.8%"></i></span><span class="md-fv">512 to 2K</span></span></button><button type="button" class="md-fr" data-m="ttm"><span class="md-fn">TTM</span><span class="md-fc"><span class="md-bar"><i style="--a:11.4%;--b:62.1%"></i></span><span class="md-fv">1M to 35M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:15.2%;--b:46.6%"></i></span><span class="md-fv">512 to 1.5K</span></span></button><button type="button" class="md-fr on" data-m="flowstate" aria-current="true"><span class="md-fn">FlowState</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:53.0%"></i></span><span class="md-fv">18.5M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:74.5%"></i></span><span class="md-fv">4K</span></span></button><button type="button" class="md-fr" data-m="patchtstfm"><span class="md-fn">PatchTST-FM</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:96.3%"></i></span><span class="md-fv">385M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:94.3%"></i></span><span class="md-fv">8K</span></span></button></div>
+            <p class="md-line"><b>Runs on</b><span>CPU or GPU, compact</span></p>
+            <p class="md-line"><b>Returns</b><span>quantile forecasts, horizon set by the data</span></p>
             <p class="md-proof">ICML 2026 · more than 10× smaller than the next best models on GIFT-Eval</p>
           </div>
         </div>
@@ -1291,9 +1316,10 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <div class="md-fit"><div class="md-best"><span class="md-h">Best for</span><div class="md-chips"><span class="md-c">risk and limits</span><span class="md-c">long, complex history</span><span class="md-c">top accuracy</span></div></div><div class="md-use-row"><span class="md-h">Use cases it powers</span><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-trade">Trading <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-demand">Supply chain planning <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div></div>
           </div>
           <div class="md-side">
-            <div class="md-h">How it fits the family</div>
-            <canvas class="md-ladder" data-m="patchtstfm" role="img" aria-label="Size and history across the family on log scales. PatchTST-FM: 385M parameters, reads up to 8,192 points."></canvas>
-            <div class="md-rows"><div class="md-row"><span class="md-rk">Runs on</span><span class="md-chips"><span class="md-c on">CPU</span><span class="md-c on">GPU</span><em>the heaviest per call</em></span></div><div class="md-row"><span class="md-rk">Returns</span><span class="md-chips"><span class="md-c">99 quantiles</span><span class="md-c">q10 to q90 shown</span></span></div></div>
+            <div class="md-h">The family at a glance</div>
+            <div class="md-fam"><div class="md-fh"><span></span><span>Size</span><span>History read</span></div><button type="button" class="md-fr" data-m="tspulse"><span class="md-fn">TSPulse</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:11.4%"></i></span><span class="md-fv">1M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:15.2%;--b:54.8%"></i></span><span class="md-fv">512 to 2K</span></span></button><button type="button" class="md-fr" data-m="ttm"><span class="md-fn">TTM</span><span class="md-fc"><span class="md-bar"><i style="--a:11.4%;--b:62.1%"></i></span><span class="md-fv">1M to 35M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:15.2%;--b:46.6%"></i></span><span class="md-fv">512 to 1.5K</span></span></button><button type="button" class="md-fr" data-m="flowstate"><span class="md-fn">FlowState</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:53.0%"></i></span><span class="md-fv">18.5M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:74.5%"></i></span><span class="md-fv">4K</span></span></button><button type="button" class="md-fr on" data-m="patchtstfm" aria-current="true"><span class="md-fn">PatchTST-FM</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:96.3%"></i></span><span class="md-fv">385M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:94.3%"></i></span><span class="md-fv">8K</span></span></button></div>
+            <p class="md-line"><b>Runs on</b><span>CPU or GPU, the heaviest per call</span></p>
+            <p class="md-line"><b>Returns</b><span>99 quantiles, q10 to q90 shown</span></p>
             <p class="md-proof">Top commercial-friendly zero-shot model on GIFT-Eval, August 2026</p>
           </div>
         </div>
@@ -1309,9 +1335,10 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <div class="md-fit"><div class="md-best"><span class="md-h">Best for</span><div class="md-chips"><span class="md-c">a flag on every event</span><span class="md-c">find the moment like now</span><span class="md-c">fill sensor gaps</span></div></div><div class="md-use-row"><span class="md-h">Use cases it powers</span><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-anom">Anomaly detection <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-fraud">Fraud and security <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-search">Semantic search <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div></div>
           </div>
           <div class="md-side">
-            <div class="md-h">How it fits the family</div>
-            <canvas class="md-ladder" data-m="tspulse" role="img" aria-label="Size and history across the family on log scales. TSPulse: 1M parameters, reads 512 points, about 2,048 for anomaly detection."></canvas>
-            <div class="md-rows"><div class="md-row"><span class="md-rk">Runs on</span><span class="md-chips"><span class="md-c on">CPU</span><span class="md-c free">GPU-free</span></span></div><div class="md-row"><span class="md-rk">Returns</span><span class="md-chips"><span class="md-c">anomaly scores</span><span class="md-c">labels</span><span class="md-c">embeddings</span><span class="md-c">filled gaps</span></span></div></div>
+            <div class="md-h">The family at a glance</div>
+            <div class="md-fam"><div class="md-fh"><span></span><span>Size</span><span>History read</span></div><button type="button" class="md-fr on" data-m="tspulse" aria-current="true"><span class="md-fn">TSPulse</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:11.4%"></i></span><span class="md-fv">1M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:15.2%;--b:54.8%"></i></span><span class="md-fv">512 to 2K</span></span></button><button type="button" class="md-fr" data-m="ttm"><span class="md-fn">TTM</span><span class="md-fc"><span class="md-bar"><i style="--a:11.4%;--b:62.1%"></i></span><span class="md-fv">1M to 35M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:15.2%;--b:46.6%"></i></span><span class="md-fv">512 to 1.5K</span></span></button><button type="button" class="md-fr" data-m="flowstate"><span class="md-fn">FlowState</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:53.0%"></i></span><span class="md-fv">18.5M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:74.5%"></i></span><span class="md-fv">4K</span></span></button><button type="button" class="md-fr" data-m="patchtstfm"><span class="md-fn">PatchTST-FM</span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:96.3%"></i></span><span class="md-fv">385M</span></span><span class="md-fc"><span class="md-bar"><i style="--a:0%;--b:94.3%"></i></span><span class="md-fv">8K</span></span></button></div>
+            <p class="md-line"><b>Runs on</b><span>CPU, no GPU needed</span></p>
+            <p class="md-line"><b>Returns</b><span>anomaly scores, labels, embeddings, filled gaps</span></p>
             <p class="md-proof">ICLR 2026 · #1 on TSB-AD, univariate and multivariate</p>
           </div>
         </div>
@@ -2235,6 +2262,8 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
 
   /* picking a tab picks the model for every simulation on the page */
   $$('[role=tab]',tabs).forEach(b=>b.addEventListener('click',()=>{if(typeof setModel==='function')setModel(b.dataset.m);}));
+  /* a row in the family table opens that model */
+  $$('.md-fr').forEach(r=>r.addEventListener('click',()=>{const t=$('#mdtabs [data-m="'+r.dataset.m+'"]');if(t&&t.getAttribute('aria-selected')!=='true')t.click();}));
   /* use case links jump to that use case, opened */
   $$('.md-uc').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.uc;if(App.tabSel&&App.tabSel[id])App.tabSel[id]();const t=$('#uctabs');if(t){const hp=t.previousElementSibling,h=hp&&hp.classList.contains('strip-hint')&&hp.offsetParent?hp:t,nav=document.querySelector('.nav'),y=h.getBoundingClientRect().top+scrollY-(nav?nav.offsetHeight:56)-16;window.scrollTo({top:y,behavior:reduced?'auto':'smooth'});}}));
 
