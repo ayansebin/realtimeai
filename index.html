@@ -3623,14 +3623,14 @@ const CS={
     confirm:[{what:'optical power drop · A-17',d:0,cause:'fiber degradation, A-17',plan:['reroute to link B-2','dispatch field team']},{what:'config drift · PE-12',d:0,cause:'change CHG-4471 at 02:10',plan:['roll back CHG-4471','verify routes']},{what:'drop rate up · cells 300+',d:1,cause:'faulty radio unit RU-88',plan:['reset RU-88','monitor 30 min']}]
   };
   const INJ={fiber:['confirm',0],config:['confirm',1],peak:['dismiss',1]};
-  const st={mode:'assist',acc:0,next:900,dp:1284310,obs:312,inv:37,conf:6,items:[],seq:1040,tk:55030,spark:DOM.map(()=>[]),marks:[],dots:[],dotAcc:0,sparkAcc:0,slots:3};
+  const st={mode:'assist',acc:0,next:900,flash:0,dp:1284310,obs:312,inv:37,conf:6,items:[],seq:1040,tk:55030,spark:DOM.map(()=>[]),marks:[],dots:[],dotAcc:0,sparkAcc:0,slots:3};
   for(let d=0;d<3;d++)for(let i=0;i<70;i++)st.spark[d].push(0.5+0.16*Math.sin(i/5+d*2)+0.1*(rnd()-0.5));
   function latest(s){$('#ni-actiont').textContent=s;}
   function spawn(kind,spec){const o=Object.assign({id:'OBS-'+(++st.seq),kind,t:0},spec);st.obs++;st.items.push(o);st.marks.push({d:o.d,i:69,c:kind==='confirm'?C.red2:C.yellow});st.spark[o.d][69]=kind==='confirm'?0.12:0.92;latest(o.id+' · '+o.what+' flagged by TSPulse');return o;}
   function auto(){const r=rnd();const kind=r<0.78?'dismiss':r<0.9?'watch':'confirm';const L=LIB[kind];spawn(kind,L[Math.floor(rnd()*L.length)]);}
   const T={detect:0.8,flag:1.4,move:1.9,inv:3.6,out:5.2,col4:4.3,conf:4.8,gate:6.3,done:7.0,end:9.0};
   const gateT=()=>st.mode==='assist'?T.gate:T.conf+0.5;
-  function update(dt){const s=dt/1000;
+  function update(dt){const s=dt/1000;st.flash=Math.max(0,st.flash-dt/900);
     st.dp+=Math.round(s*(2200+800*rnd()));
     st.sparkAcc+=dt;while(st.sparkAcc>140){st.sparkAcc-=140;for(let d=0;d<3;d++){const a=st.spark[d];a.shift();const i=st.dp/40+d*13;a.push(0.5+0.16*Math.sin(i/5+d*2)+0.1*(rnd()-0.5));}st.marks.forEach(m=>m.i--);st.marks=st.marks.filter(m=>m.i>=0);}
     st.dotAcc+=dt;while(st.dotAcc>70){st.dotAcc-=70;if(st.dots.length<70)st.dots.push({d:Math.floor(rnd()*3),u:0,v:0.6+0.8*rnd(),y:rnd(),z:rnd()});}
@@ -3638,7 +3638,7 @@ const CS={
     st.acc+=dt;if(st.acc>st.next&&st.items.filter(o=>o.t<T.out).length<st.slots){st.acc=0;st.next=1500+rnd()*1500;auto();}
     st.items.forEach(o=>{const t0=o.t;o.t+=s;const cross=k=>t0<k&&o.t>=k;
       if(cross(T.inv)){if(o.kind==='dismiss')latest(o.id+' dismissed · '+o.why+' · no ticket');else{st.inv++;if(o.kind==='watch')latest(o.id+' valid, '+o.why+' · no ticket');else latest(o.id+' cause confirmed · '+o.cause);}}
-      if(o.kind==='confirm'){if(cross(T.conf)){st.conf++;latest(st.mode==='assist'?'Remediation plan sent to the engineer: '+o.plan.join(', '):'Executing autonomously: '+o.plan.join(', '));}
+      if(o.kind==='confirm'){if(cross(T.conf)){st.conf++;st.flash=1;latest(st.mode==='assist'?'Remediation plan sent to the engineer: '+o.plan.join(', '):'Executing autonomously: '+o.plan.join(', '));}
         if(cross(gateT())){o.tk='TCK-'+(++st.tk);latest(o.tk+' opened with the cause attached · '+o.cause);}}});
     st.items=st.items.filter(o=>o.t<(o.kind==='confirm'?T.end:T.out+0.4));
     $('#ni-ratio').textContent='1 in '+Math.max(1,Math.round(st.obs/Math.max(1,st.conf)));}
@@ -3650,13 +3650,13 @@ const CS={
       const r0=R[0],rowH=(r0.h-16)/3,r1=R[1];const cardH=Math.min(72,(R[2].h-24)/3),mw=Math.min(...R.map(r=>r.w));
       const sp=DOM.map((d,k)=>{const sy=r0.y+10+k*rowH;return{lab:d.k,lx:r0.x+10,ly:sy+6,x:r0.x+10,y:sy+18,w:r0.w-20,h:rowH-26,ax:r0.x+r0.w-6,ay:sy+rowH*0.55};});
       return{wide:true,R,sp,core:{x:r1.x+r1.w/2,y:r1.y+r1.h/2,r:Math.min(r1.w,r1.h)*0.24},slots:3,cardH,remSlots:2,remH:cardH*1.45,
-        fun:R.map((r,i)=>({x:r.x,y:H-bot+12,w:r.w,bw:mw*(1-i*0.2),stack:false}))};}
+        fun:R.map((r,i)=>({x:r.x,y:H-bot+12,w:r.w,bm:mw,stack:false}))};}
     const w=W-2*pad,cardH=72,remH=100,hs=[70,76,2*cardH+6+16,remH+16];const R=[];let y=8;
     hs.forEach(h=>{R.push({x:pad,y:y+18,w,h});y+=18+h+16;});
     const r0=R[0],cw=(r0.w-36)/3,r1=R[1],half=(w-12)/2,fy=y-8;
     const sp=DOM.map((d,k)=>{const x=r0.x+10+k*(cw+8);return{lab:d.s,lx:x,ly:r0.y+12,x,y:r0.y+24,w:cw,h:r0.h-32,ax:x+cw/2,ay:r1.y+2};});
     return{wide:false,R,sp,core:{x:r1.x+44,y:r1.y+r1.h/2,r:24},slots:2,cardH,remSlots:1,remH,
-      fun:[0,1,2,3].map(i=>w>=540?{x:pad+i*((w-36)/4+12),y:fy,w:(w-36)/4,bw:(w-36)/4*(1-i*0.2),stack:true}:{x:pad+(i%2)*(half+12),y:fy+Math.floor(i/2)*46,w:half,bw:half*(1-i*0.2),stack:true})};}
+      fun:[0,1,2,3].map(i=>w>=540?{x:pad+i*((w-36)/4+12),y:fy,w:(w-36)/4,bm:(w-36)/4,stack:true}:{x:pad+(i%2)*(half+12),y:fy+Math.floor(i/2)*46,w:half,bm:half,stack:true})};}
   function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);
     const L=layout(W,H),R=L.R,wide=L.wide,c=L.core;st.slots=L.slots;
     const NM=['INGEST','DETECT','INVESTIGATE','REMEDIATE'],SUB=['','','',st.mode==='assist'?'human in the loop':'autonomous'],SUBC=[C.ink3,C.blue3,C.ink3,st.mode==='assist'?C.yellow:C.green2];
@@ -3706,7 +3706,7 @@ const CS={
     if(!rem.length)CS.txt(ctx,'no confirmed issue',r3.x+10,r3.y+20,{c:C.ink3,max:r3.w-20});
     /* funnel */
     const F=[[st.dp,'datapoints'],[st.obs,'observations'],[st.inv,wide?'valid investigations':'investigations'],[st.conf,'confirmed issues']];
-    F.forEach((f,i)=>{const p=L.fun[i],num=f[0].toLocaleString('en-US');ctx.fillStyle=i===3?'rgba(111,220,140,.28)':'rgba(120,169,255,'+(0.26-i*0.05).toFixed(2)+')';ctx.fillRect(p.x,p.y,p.bw,6);
+    const lg0=Math.log10(1+F[0][0]);F.forEach((f,i)=>{const p=L.fun[i],num=f[0].toLocaleString('en-US'),fw=p.bm*Math.max(0.05,Math.log10(1+f[0])/lg0);ctx.save();if(i===3&&st.flash>0&&!reduced){ctx.shadowColor=C.green2;ctx.shadowBlur=14*st.flash;}ctx.fillStyle=i===3?'rgba(111,220,140,'+(0.35+0.5*st.flash).toFixed(2)+')':'rgba(120,169,255,'+(0.42-i*0.07).toFixed(2)+')';ctx.fillRect(p.x,p.y,fw,6);ctx.restore();
       if(p.stack){CS.txt(ctx,num,p.x,p.y+19,{px:13,c:i===3?C.green2:C.ink,w:500});CS.txt(ctx,f[1],p.x,p.y+34,{c:C.ink3,max:p.w});}
       else{CS.txt(ctx,num,p.x,p.y+24,{px:13,c:i===3?C.green2:C.ink,w:500});const nw=ctx.measureText(num).width;CS.txt(ctx,f[1],p.x+nw+10,p.y+24,{c:C.ink3,max:p.w-nw-10});}});}
   const inner=$('#ni-cv').parentElement;
@@ -3719,37 +3719,70 @@ const CS={
 (function(){
   const el=$('#cs-cement');if(!el)return;
   const cv=new Cv($('#cm-cv'));const rnd=CS.seed(5);
-  const st={fm:false,u:0,target:0,auto:false};
-  /* lab quality and the two predictions */
-  const N=48,act=[],eMl=[],eFm=[];let a=0.5,b=0;for(let i=0;i<N;i++){a=clamp(a+0.07*(rnd()-0.5)+0.04*Math.sin(i/4),0.15,0.85);act.push(a);b=0.75*b+0.5*(rnd()-0.5);eMl.push(b);}
-  let c=0;for(let i=0;i<N;i++){c=0.6*c+0.5*(rnd()-0.5);eFm.push(c);}
-  function set(fm){st.fm=fm;st.target=fm?1:0;chipSet('cm-mode',fm?'fm':'ml');const t=$('#cm-table');if(t){t.classList.toggle('fm',fm);}}
-  function update(dt){if(!st.auto){st.autoT=(st.autoT||0)+dt;if(st.autoT>1600){st.auto=true;if(!st.fm)set(true);}}const k=1-Math.pow(0.004,dt/1000);st.u=lerp(st.u,st.target,k);if(Math.abs(st.u-st.target)<0.002)st.u=st.target;}
+  /* the story loops: models per grade, then two foundation models, then back. A chip click pins it. */
+  const st={fm:!!reduced,u:reduced?1:0,target:reduced?1:0,pin:false,cyc:2400,race:1,t:0,flick:[],parts:[],fAcc:0,pAcc:0,sAcc:0};
+  /* lab quality and the two predictions, as a stream that keeps arriving */
+  const N=48,act=[],eMl=[],eFm=[];const g={a:0.5,b:0,c:0,i:0};
+  function push(){g.a=clamp(g.a+0.07*(rnd()-0.5)+0.04*Math.sin(g.i/4),0.15,0.85);g.b=0.75*g.b+0.5*(rnd()-0.5);g.c=0.6*g.c+0.5*(rnd()-0.5);g.i++;act.push(g.a);eMl.push(g.b);eFm.push(g.c);if(act.length>N+1){act.shift();eMl.shift();eFm.shift();}}
+  for(let k=0;k<N+1;k++)push();
+  function mode(fm){if(fm===st.fm)return;st.fm=fm;st.target=fm?1:0;st.cyc=0;if(fm&&!reduced)st.race=0;chipSet('cm-mode',fm?'fm':'ml');}
+  function set(fm){st.pin=true;mode(fm);}
+  if(reduced)chipSet('cm-mode','fm');
+  function update(dt){st.t+=dt;
+    if(!st.pin&&!reduced){st.cyc+=dt;if(!st.fm&&st.cyc>4200)mode(true);else if(st.fm&&st.cyc>7800)mode(false);}
+    const k=1-Math.pow(0.004,dt/1000);st.u=lerp(st.u,st.target,k);if(Math.abs(st.u-st.target)<0.002)st.u=st.target;
+    if(st.race<1)st.race=Math.min(1,st.race+dt/3000);
+    if(reduced)return;
+    /* batch retraining: a model per grade keeps getting refreshed */
+    st.fAcc+=dt;if(st.fAcc>180){st.fAcc=0;if(st.u<0.5)st.flick.push({g:Math.floor(rnd()*3),i:Math.floor(rnd()*10),t:0});}
+    st.flick.forEach(f=>{f.t+=dt;});st.flick=st.flick.filter(f=>f.t<700);
+    /* every grade feeds the same two models */
+    st.pAcc+=dt;if(st.pAcc>110){st.pAcc=0;if(st.u>0.9)st.parts.push({g:Math.floor(rnd()*3),k:rnd()<0.5?0:1,u:0});}
+    st.parts.forEach(p=>{p.u+=dt/700;});st.parts=st.parts.filter(p=>p.u<1);
+    /* a new lab result lands every 0.7 s */
+    st.sAcc+=dt;while(st.sAcc>700){st.sAcc-=700;push();}}
   function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);const u=ease(clamp(st.u,0,1));
-    const nw=W<560,pad=16,gx=pad+(nw?34:64),topH=H*0.46,rowH=(topH-40)/3;
+    const nw=W<560,pad=16,gx=pad+(nw?34:64),topH=H*0.42,rowH=(topH-40)/3;
     const head=u<0.5?(nw?'24 to 30 regression models':'24 to 30 regression models, retrained in batch'):(nw?'2 foundation models':'2 foundation models, fine-tuned per mill');
     CS.txt(ctx,head,pad,14,{c:u<0.5?C.ink2:C.green2,max:W-2*pad});
     const fmw=nw?132:176,fmx=W-pad-fmw,fmh=(topH-44)/2-6,cols=nw?5:10,rws=nw?2:1,gp=nw?4:6;
     const tw=Math.max(4,Math.min(30,(fmx-12-gx)/cols-gp,(rowH-8)/rws-gp)),ta=1-u;
-    for(let g=0;g<3;g++){const y=34+g*rowH;CS.txt(ctx,(nw?'G':'Grade ')+(g+1),pad,y+rowH/2-4,{c:C.ink2});
-      if(ta>0.01)for(let i=0;i<10;i++){const x0=gx+(i%cols)*(tw+gp),y0=y+4+Math.floor(i/cols)*(tw+gp);const tgt=(g*10+i)%2,tx=fmx+fmw/2-tw/2,ty=34+tgt*(fmh+12)+fmh/2-tw/2;ctx.globalAlpha=ta;ctx.fillStyle='rgba(159,179,200,.55)';ctx.fillRect(lerp(x0,tx,u),lerp(y0,ty,u),tw,tw);ctx.globalAlpha=1;}}
+    const fl={};st.flick.forEach(f=>{const key=f.g*10+f.i;fl[key]=Math.max(fl[key]||0,1-f.t/700);});
+    for(let gg=0;gg<3;gg++){const y=34+gg*rowH;CS.txt(ctx,(nw?'G':'Grade ')+(gg+1),pad,y+rowH/2-4,{c:C.ink2});
+      if(ta>0.01)for(let k=0;k<10;k++){const x0=gx+(k%cols)*(tw+gp),y0=y+4+Math.floor(k/cols)*(tw+gp);const tgt=(gg*10+k)%2,tx=fmx+fmw/2-tw/2,ty=34+tgt*(fmh+12)+fmh/2-tw/2;const x=lerp(x0,tx,u),yy=lerp(y0,ty,u),f=fl[gg*10+k]||0;
+        ctx.globalAlpha=ta;ctx.fillStyle=f>0?'rgba(255,170,90,'+(0.3+0.5*f).toFixed(2)+')':'rgba(159,179,200,.55)';ctx.fillRect(x,yy,tw,tw);
+        if(f>0){ctx.strokeStyle='rgba(255,170,90,'+f.toFixed(2)+')';ctx.lineWidth=1.4;ctx.strokeRect(x-2.5,yy-2.5,tw+5,tw+5);}ctx.globalAlpha=1;}}
     /* foundation models */
     const NMS=nw?[['process','parameters'],['qualities']]:[['process parameters'],['qualities']];
-    NMS.forEach((nm,k)=>{const y=34+k*(fmh+12),ix=fmx+(nw?8:10),mx=fmw-(nw?16:20);ctx.globalAlpha=u;CS.rr(ctx,fmx,y,fmw,fmh,4);ctx.fillStyle='rgba(15,98,254,.35)';ctx.fill();ctx.strokeStyle=C.blue3;ctx.lineWidth=1.2;ctx.stroke();
-      CS.txt(ctx,'Foundation model',ix,y+(nw?13:16),{c:C.ink3,max:mx});nm.forEach((ln,j)=>CS.txt(ctx,ln,ix,y+(nw?29:33)+j*14,{px:12,c:C.ink,w:500,max:mx}));
-      for(let g=0;g<3;g++){const gy=34+g*rowH+rowH/2-4;ctx.strokeStyle='rgba(120,169,255,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad+(nw?24:56),gy);ctx.lineTo(fmx,y+fmh/2);ctx.stroke();}ctx.globalAlpha=1;});
-    /* delivery timeline, with room for its label */
-    const ty=topH+18;CS.txt(ctx,'Time to deliver one mill',pad,ty,{c:C.ink2});CS.mono(ctx,11.5,500);const lw=ctx.measureText('8 to 10 weeks').width+14;
-    const bx=pad,bw=W-2*pad-lw,weeks=lerp(26,9,u);ctx.fillStyle='rgba(255,255,255,.08)';ctx.fillRect(bx,ty+12,bw,10);ctx.fillStyle=u>0.5?C.green2:'rgba(159,179,200,.8)';ctx.fillRect(bx,ty+12,bw*weeks/26,10);
-    CS.txt(ctx,u>0.5?'8 to 10 weeks':'6 months',bx+bw*weeks/26+8,ty+17,{px:11.5,c:u>0.5?C.green2:C.ink,w:500});
-    /* quality prediction against the lab */
-    const cy=ty+44,ch=H-cy-26,cx=pad+30,cwid=W-pad-cx;CS.txt(ctx,nw?'Prediction vs lab':'Quality prediction vs lab result',pad,cy,{c:C.ink2});const acc=lerp(93,99,u);CS.txt(ctx,'accuracy '+acc.toFixed(0)+'%',W-pad,cy,{px:12,c:u>0.5?C.green2:C.ink,a:'right',w:500});
-    const X=i=>cx+i/(N-1)*cwid,Y=v=>cy+14+(1-v)*(ch-14);ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;for(let k=0;k<=2;k++){const yy=Math.round(cy+14+k*(ch-14)/2)+.5;ctx.beginPath();ctx.moveTo(cx,yy);ctx.lineTo(cx+cwid,yy);ctx.stroke();}
-    const amp=lerp(0.16,0.025,u);ctx.strokeStyle=u>0.5?C.green2:'rgba(255,170,90,.9)';ctx.lineWidth=1.6;ctx.beginPath();for(let i=0;i<N;i++){const e=lerp(eMl[i],eFm[i],u);const v=clamp(act[i]+e*amp*2.2,0.02,0.98);i?ctx.lineTo(X(i),Y(v)):ctx.moveTo(X(i),Y(v));}ctx.stroke();
-    for(let i=0;i<N;i++){ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(i),Y(act[i]),2,0,Math.PI*2);ctx.fill();}
-    CS.txt(ctx,'● lab',cx,H-10,{c:C.ink2});const pc=u>0.5?C.green2:'#ffaa5a';ctx.strokeStyle=pc;ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(cx+60,H-10);ctx.lineTo(cx+74,H-10);ctx.stroke();CS.txt(ctx,'prediction',cx+80,H-10,{c:pc});}
+    NMS.forEach((nm,k)=>{const y=34+k*(fmh+12),ix=fmx+(nw?8:10),mx=fmw-(nw?16:20);ctx.globalAlpha=u;
+      for(let gg=0;gg<3;gg++){const gy=34+gg*rowH+rowH/2-4;ctx.strokeStyle='rgba(120,169,255,.3)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad+(nw?24:56),gy);ctx.lineTo(fmx,y+fmh/2);ctx.stroke();}
+      ctx.save();if(!reduced&&u>0.9){ctx.shadowColor='rgba(69,137,255,.85)';ctx.shadowBlur=10+6*Math.sin(st.t/420+k*1.7);}CS.rr(ctx,fmx,y,fmw,fmh,4);ctx.fillStyle='rgba(15,98,254,.38)';ctx.fill();ctx.restore();
+      CS.rr(ctx,fmx,y,fmw,fmh,4);ctx.strokeStyle=C.blue3;ctx.lineWidth=1.2;ctx.stroke();
+      CS.txt(ctx,'Foundation model',ix,y+(nw?13:16),{c:C.ink3,max:mx});nm.forEach((ln,jj)=>CS.txt(ctx,ln,ix,y+(nw?29:33)+jj*14,{px:12,c:C.ink,w:500,max:mx}));ctx.globalAlpha=1;});
+    st.parts.forEach(p=>{const gy=34+p.g*rowH+rowH/2-4,ty=34+p.k*(fmh+12)+fmh/2,x0=pad+(nw?24:56),q=ease(p.u);ctx.fillStyle='rgba(166,200,255,'+(0.95-0.4*p.u).toFixed(2)+')';ctx.beginPath();ctx.arc(lerp(x0,fmx,q),lerp(gy,ty,q),2.1,0,Math.PI*2);ctx.fill();});
+    /* time to deliver: the two approaches race on one axis of weeks */
+    const ty=topH+14;CS.txt(ctx,'Time to deliver one mill',pad,ty,{c:C.ink2});
+    CS.mono(ctx,11,500);const vw=ctx.measureText('8 to 10 weeks ✓').width+14,lab=nw?30:136,bx=pad+lab,bw=W-pad-vw-bx,wk=st.race*26;
+    [[nw?'ML':'Traditional ML',26,'6 months','rgba(185,195,211,.85)',C.ink],[nw?'FM':'Foundation models',9,'8 to 10 weeks ✓',C.green2,C.green2]].forEach((ln,k)=>{const y=ty+15+k*17;ctx.globalAlpha=k===1&&u<0.5?0.35:1;
+      CS.txt(ctx,ln[0],pad,y+4,{c:C.ink3});ctx.fillStyle='rgba(255,255,255,.08)';ctx.fillRect(bx,y,bw,8);const done=Math.min(wk,ln[1]),fin=wk>=ln[1];
+      ctx.fillStyle=ln[3];ctx.fillRect(bx,y,bw*done/26,8);if(!fin&&done>0){ctx.fillStyle='#fff';ctx.fillRect(bx+bw*done/26-1,y-2,2,12);}
+      CS.txt(ctx,fin?ln[2]:Math.round(done)+' wk',bx+bw*done/26+8,y+4,{px:11,c:fin?ln[4]:C.ink3,w:fin?500:400});ctx.globalAlpha=1;});
+    /* quality prediction against the lab, as results keep landing */
+    const cy=ty+58,ch=H-cy-26,cx=pad+30,cwid=W-pad-cx;CS.txt(ctx,nw?'Prediction vs lab':'Quality prediction vs lab result',pad,cy,{c:C.ink2});
+    const acc=lerp(93,99,u);CS.txt(ctx,'accuracy '+acc.toFixed(0)+'%',W-pad,cy,{px:13,c:u>0.5?C.green2:'#ffaa5a',a:'right',w:500});
+    const off=reduced?0:st.sAcc/700,X=k=>cx+(k-off)/(N-1)*cwid,Y=v=>cy+14+(1-v)*(ch-14);
+    ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;for(let k=0;k<=2;k++){const yy=Math.round(cy+14+k*(ch-14)/2)+.5;ctx.beginPath();ctx.moveTo(cx,yy);ctx.lineTo(cx+cwid,yy);ctx.stroke();}
+    const amp=lerp(0.16,0.025,u),pv=k=>clamp(act[k]+lerp(eMl[k],eFm[k],u)*amp*2.2,0.02,0.98),n=act.length,pc=u>0.5?C.green2:'#ffaa5a';
+    ctx.save();ctx.beginPath();ctx.rect(cx-4,cy+6,cwid+8,ch+4);ctx.clip();
+    /* the error, shaded between prediction and lab */
+    ctx.beginPath();for(let k=0;k<n;k++){k?ctx.lineTo(X(k),Y(pv(k))):ctx.moveTo(X(k),Y(pv(k)));}for(let k=n-1;k>=0;k--)ctx.lineTo(X(k),Y(act[k]));ctx.closePath();ctx.fillStyle=u>0.5?'rgba(111,220,140,.16)':'rgba(255,170,90,.22)';ctx.fill();
+    ctx.strokeStyle=pc;ctx.lineWidth=1.6;ctx.beginPath();for(let k=0;k<n;k++){k?ctx.lineTo(X(k),Y(pv(k))):ctx.moveTo(X(k),Y(pv(k)));}ctx.stroke();
+    for(let k=0;k<n;k++){ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(k),Y(act[k]),2,0,Math.PI*2);ctx.fill();}
+    {const k=n-2,x=X(k),y=Y(act[k]);ctx.save();if(!reduced){ctx.shadowColor='#fff';ctx.shadowBlur=10;}ctx.beginPath();ctx.arc(x,y,3.6,0,Math.PI*2);ctx.fill();ctx.restore();}
+    ctx.restore();
+    CS.txt(ctx,'● lab',cx,H-10,{c:C.ink2});ctx.strokeStyle=pc;ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(cx+60,H-10);ctx.lineTo(cx+74,H-10);ctx.stroke();CS.txt(ctx,'prediction',cx+80,H-10,{c:pc});}
   reg({el,resize(){cv.fit();},update,draw});
-  chipGroup('cm-mode',v=>{st.auto=true;set(v==='fm');});
+  chipGroup('cm-mode',v=>{set(v==='fm');});
   App.cement={set};
 })();
 
@@ -3758,13 +3791,15 @@ const CS={
   const el=$('#cs-fin');if(!el)return;
   const cv=new Cv($('#fs-cv'));
   const AS={eq:{v:['Price index','Volatility'],seed:3},fi:{v:['10-year yield','Credit spread'],seed:8},co:{v:['Price','Volatility'],seed:12}};
-  const st={asset:'eq',h:20,sig:{esg:true,news:true,exo:true},imp:0.10,impD:0.10,data:null,t:0,parts:[],pAcc:0};
+  const st={asset:'eq',h:20,sig:{esg:true,news:true,exo:true},imp:0.10,impD:0.10,data:null,t:0,parts:[],pAcc:0,lAcc:0,rp:reduced?1:0,rpT:0};
+  /* walk forward: the forecast is issued at now, then the actuals land and both errors add up */
+  const REV=4200,HOLD=2800;const replay=()=>{st.rpT=0;st.rp=reduced?1:0;};
   const target=()=>0.04+(st.sig.esg?0.02:0)+(st.sig.news?0.02:0)+(st.sig.exo?0.02:0);
   function smooth(r,n,phi){const out=[];let x=0;for(let i=0;i<n;i++){x=phi*x+(r()-0.5);out.push(x);}return out;}
   function lowpass(a,k){return a.map((_,i)=>{let s=0,n=0;for(let j=-k;j<=k;j++){const t=i+j;if(t>=0&&t<a.length){s+=a[t];n++;}}return s/n;});}
   /* scale an error path so the forecast lands exactly on a target RMSE against the actuals */
   function fitRmse(d,e,tg){const ee=mean(e.map(v=>v*v)),de=mean(d.map((v,i)=>v*e[i])),dd=mean(d.map(v=>v*v));if(!ee)return 0;const B=2*de,disc=B*B-4*ee*(dd-tg*tg);return Math.max(0,disc<0?-B/(2*ee):(-B+Math.sqrt(disc))/(2*ee));}
-  function build(){const A=AS[st.asset];const r=CS.seed(A.seed*97+st.h);const HN=90,n=HN+st.h,h=st.h;
+  function build(){const A=AS[st.asset];const r=CS.seed(A.seed*97+st.h);const HN=52,n=HN+st.h,h=st.h;
     const vars=A.v.map((nm,k)=>{const w=smooth(r,n,0.97);const base=k===0?0.5:0.35;const ser=[];for(let i=0;i<n;i++)ser.push(clamp(base+0.25*w[i]/6+(k===0?0.08*Math.sin(i/9):0.05*Math.sin(i/13+1)),0.06,0.94));
       const lp=lowpass(ser,h<12?0:Math.round(h/12)).slice(HN),fut=ser.slice(HN),d=lp.map((v,j)=>v-fut[j]);
       const env=j=>Math.sqrt((j+1)/h),s=0.022*Math.sqrt(h/20)*(k===0?1:0.8),ke=Math.max(1,Math.round(h/10));
@@ -3774,36 +3809,41 @@ const CS={
     st.data={HN,n,vars};}
   build();
   const LANES=[['Asset indicators',null],['Lag features',null],['ESG signals','esg'],['News sentiment','news'],['Exogenous and control','exo']];
-  const laneSeries=LANES.map((l,k)=>{const r=CS.seed(40+k);return smooth(r,60,0.9);});
+  const laneGen=LANES.map((l,k)=>({r:CS.seed(40+k),x:0}));
+  const laneSeries=LANES.map((l,k)=>{const G=laneGen[k],out=[];for(let i=0;i<60;i++){G.x=0.9*G.x+(G.r()-0.5);out.push(G.x);}return out;});
   function update(dt){st.t+=dt;st.impD=lerp(st.impD,st.imp,1-Math.pow(0.01,dt/1000));
+    if(!reduced){st.rpT+=dt;if(st.rpT>REV+HOLD)st.rpT=0;st.rp=Math.min(1,st.rpT/REV);
+      st.lAcc+=dt;while(st.lAcc>160){st.lAcc-=160;laneSeries.forEach((s,k)=>{const G=laneGen[k];G.x=0.9*G.x+(G.r()-0.5);s.push(G.x);s.shift();});}}
     st.pAcc+=dt;if(st.pAcc>160){st.pAcc=0;const on=LANES.map((l,k)=>!l[1]||st.sig[l[1]]?k:-1).filter(k=>k>=0);st.parts.push({k:on[Math.floor(Math.random()*on.length)],u:0});}
     st.parts.forEach(p=>{p.u+=dt/900;});st.parts=st.parts.filter(p=>p.u<1);
     $('#fs-imp').textContent=(st.impD*100).toFixed(1)+'%';const nOn=['esg','news','exo'].filter(k=>st.sig[k]).length;$('#fs-impl').textContent='lower RMSE'+(nOn===3?', all signals fused':nOn===0?', market data only':', '+nOn+' of 3 extra signals fused');}
   function draw(){const ctx=cv.ctx,W=cv.W,H=cv.H;if(!W)return;ctx.clearRect(0,0,W,H);const D=st.data;const narrow=W<640;const pad=14;
     let cx0=pad;
     if(!narrow){const lw=W*0.24,lh=(H-2*pad-10)/LANES.length;LANES.forEach((l,k)=>{const on=!l[1]||st.sig[l[1]];const y=pad+k*lh;ctx.globalAlpha=on?1:0.3;CS.txt(ctx,l[0],pad,y+8,{c:on?C.ink2:C.ink3,max:lw-10});const s=laneSeries[k];const sh=lh-26;ctx.strokeStyle=k<2?C.blue3:k===2?C.green2:k===3?C.purple:C.orange;ctx.lineWidth=1.2;ctx.beginPath();s.forEach((v,i)=>{const x=pad+i/(s.length-1)*(lw-16),yy=y+18+sh/2-v*sh/6;i?ctx.lineTo(x,yy):ctx.moveTo(x,yy);});ctx.stroke();ctx.globalAlpha=1;});
-      const mx=pad+lw+8,mw=W*0.13,my=H/2-46,mh=92;CS.rr(ctx,mx,my,mw,mh,4);ctx.fillStyle='rgba(15,98,254,.3)';ctx.fill();ctx.strokeStyle=C.blue3;ctx.lineWidth=1;ctx.stroke();CS.txt(ctx,'Granite TTM',mx+mw/2,my+mh/2-9,{px:12,c:C.ink,a:'center',w:500,max:mw-10});CS.txt(ctx,'fine-tuned',mx+mw/2,my+mh/2+11,{c:C.ink2,a:'center',max:mw-10});
+      const mx=pad+lw+8,mw=W*0.13,my=H/2-46,mh=92;ctx.save();if(!reduced){ctx.shadowColor='rgba(69,137,255,.85)';ctx.shadowBlur=9+6*Math.sin(st.t/380);}CS.rr(ctx,mx,my,mw,mh,4);ctx.fillStyle='rgba(15,98,254,.34)';ctx.fill();ctx.restore();CS.rr(ctx,mx,my,mw,mh,4);ctx.strokeStyle=C.blue3;ctx.lineWidth=1;ctx.stroke();CS.txt(ctx,'Granite TTM',mx+mw/2,my+mh/2-9,{px:12,c:C.ink,a:'center',w:500,max:mw-10});CS.txt(ctx,'fine-tuned',mx+mw/2,my+mh/2+11,{c:C.ink2,a:'center',max:mw-10});
       st.parts.forEach(p=>{const sy=pad+p.k*lh+18+(lh-26)/2,sx=pad+lw-14;ctx.fillStyle='rgba(166,200,255,'+(0.8*(1-p.u*0.5)).toFixed(2)+')';ctx.beginPath();ctx.arc(lerp(sx,mx,p.u),lerp(sy,my+mh/2,p.u),2,0,Math.PI*2);ctx.fill();});
       ctx.strokeStyle='rgba(255,255,255,.3)';ctx.beginPath();ctx.moveTo(mx+mw,H/2);ctx.lineTo(mx+mw+16,H/2);ctx.stroke();cx0=mx+mw+22;}
     /* two jointly forecast variables */
-    const barH=44,cw=W-pad-cx0,chH=(H-2*pad-barH-14)/2,imp=st.impD,h=st.h;
+    const barH=44,cw=W-pad-cx0,chH=(H-2*pad-barH-14)/2,imp=st.impD,h=st.h,J=st.rp*h;let sC=0,sG=0,sCa=0;
     D.vars.forEach((v,k)=>{const y0=pad+k*(chH+8);const X=i=>cx0+30+i/(D.n-1)*(cw-30);const Y=a=>y0+16+(1-(a-v.lo)/(v.hi-v.lo))*(chH-20);
       CS.txt(ctx,v.nm,cx0,y0+6,{c:C.ink2});
       if(k===1){CS.mono(ctx,10.5);const tEnd=cx0+ctx.measureText(v.nm).width+16;const items=[['Granite TTM',C.blue3],['current','#ffaa5a'],['actual','rgba(255,255,255,.75)']];const wOf=a=>a.reduce((q,[t])=>q+ctx.measureText(t).width+14,-14);while(items.length>2&&cx0+cw-wOf(items)<tEnd)items.pop();let x=cx0+cw;items.forEach(([t,cl])=>{CS.mono(ctx,10.5);x-=ctx.measureText(t).width;CS.txt(ctx,t,x,y0+6,{c:cl});x-=14;});}
       ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;for(let g=0;g<3;g++){const yy=Math.round(y0+16+g*(chH-20)/2)+.5;ctx.beginPath();ctx.moveTo(cx0+30,yy);ctx.lineTo(cx0+cw,yy);ctx.stroke();}
       const xo=X(D.HN-1);ctx.strokeStyle='rgba(255,255,255,.35)';ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(Math.round(xo)+.5,y0+12);ctx.lineTo(Math.round(xo)+.5,y0+chH-2);ctx.stroke();ctx.setLineDash([]);if(k===0)CS.txt(ctx,'now',xo+5,y0+6,{c:C.ink3});
       const kb=fitRmse(v.d,v.et,v.s*(1-imp)),tt=j=>v.lp[j]+v.et[j]*kb,sd=j=>1.5*v.s*(1-imp)*Math.sqrt((j+1)/h);
+      for(let j=0;j<h;j++){const ec=v.d[j]+v.ec[j],eg=v.d[j]+v.et[j]*kb,wgt=clamp(J-j,0,1);sCa+=ec*ec;sC+=wgt*ec*ec;sG+=wgt*eg*eg;}
       /* band */ctx.beginPath();for(let j=0;j<h;j++)ctx.lineTo(X(D.HN+j),Y(tt(j)+sd(j)));for(let j=h-1;j>=0;j--)ctx.lineTo(X(D.HN+j),Y(tt(j)-sd(j)));ctx.closePath();ctx.fillStyle='rgba(120,169,255,.16)';ctx.fill();
-      /* history and actuals */ctx.strokeStyle=C.ink;ctx.lineWidth=1.5;ctx.beginPath();for(let i=0;i<D.HN;i++){i?ctx.lineTo(X(i),Y(v.ser[i])):ctx.moveTo(X(i),Y(v.ser[i]));}ctx.stroke();ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1;ctx.beginPath();for(let i=D.HN-1;i<D.n;i++){i>D.HN-1?ctx.lineTo(X(i),Y(v.ser[i])):ctx.moveTo(X(i),Y(v.ser[i]));}ctx.stroke();
+      /* history and actuals */ctx.strokeStyle=C.ink;ctx.lineWidth=1.5;ctx.beginPath();for(let i=0;i<D.HN;i++){i?ctx.lineTo(X(i),Y(v.ser[i])):ctx.moveTo(X(i),Y(v.ser[i]));}ctx.stroke();{const jf=Math.min(h,J),jn=Math.floor(jf),fr=jf-jn;ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(X(D.HN-1),Y(v.ser[D.HN-1]));for(let j=0;j<jn;j++)ctx.lineTo(X(D.HN+j),Y(v.ser[D.HN+j]));let hx=X(D.HN-1+jn),hy=Y(v.ser[D.HN-1+jn]);if(fr>0&&jn<h){hx=lerp(X(D.HN-1+jn),X(D.HN+jn),fr);hy=lerp(Y(v.ser[D.HN-1+jn]),Y(v.ser[D.HN+jn]),fr);ctx.lineTo(hx,hy);}ctx.stroke();
+        if(st.rp<1&&jf>0){ctx.strokeStyle='rgba(255,255,255,.22)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(Math.round(hx)+.5,y0+12);ctx.lineTo(Math.round(hx)+.5,y0+chH-2);ctx.stroke();ctx.setLineDash([]);ctx.save();if(!reduced){ctx.shadowColor='#fff';ctx.shadowBlur=10;}ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(hx,hy,3,0,Math.PI*2);ctx.fill();ctx.restore();}}
       /* current approach */ctx.strokeStyle='rgba(255,170,90,.9)';ctx.setLineDash([4,3]);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(X(D.HN-1),Y(v.ser[D.HN-1]));for(let j=0;j<h;j++)ctx.lineTo(X(D.HN+j),Y(v.lp[j]+v.ec[j]));ctx.stroke();ctx.setLineDash([]);
       /* granite */ctx.strokeStyle=C.blue3;ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(X(D.HN-1),Y(v.ser[D.HN-1]));for(let j=0;j<h;j++)ctx.lineTo(X(D.HN+j),Y(tt(j)));ctx.stroke();});
-    /* rmse bars */const by=H-pad-barH+8,bx=narrow?cx0:cx0+30,lab=narrow?86:124,rw=narrow?96:150,bw=cw-(narrow?0:30)-rw;const rows=[[narrow?'current':'current approach',1,'rgba(255,170,90,.85)'],['Granite TTM',1-imp,C.blue3]];
+    /* rmse bars */const by=H-pad-barH+8,bx=narrow?cx0:cx0+30,lab=narrow?86:124,rw=narrow?96:150,bw=cw-(narrow?0:30)-rw;const nC=sCa>0?Math.sqrt(sC/sCa):0,nG=sCa>0?Math.sqrt(sG/sCa):0,rows=[[narrow?'current':'current approach',nC,'rgba(255,170,90,.85)'],['Granite TTM',nG,C.blue3]];
     rows.forEach((r,k)=>{const y=by+k*18;CS.txt(ctx,r[0],bx,y,{c:C.ink2,max:lab-6});ctx.fillStyle='rgba(255,255,255,.08)';ctx.fillRect(bx+lab,y-4,bw-lab,8);ctx.fillStyle=r[2];ctx.fillRect(bx+lab,y-4,(bw-lab)*r[1],8);});
-    CS.txt(ctx,'RMSE −'+(imp*100).toFixed(1)+'%',bx+bw+10,by+9,{px:13,c:C.green2,w:500});}
+    {const la=clamp((st.rp-0.82)/0.18,0,1);if(la>0){ctx.globalAlpha=la;CS.txt(ctx,'RMSE −'+(imp*100).toFixed(1)+'%',bx+bw+10,by+9,{px:13,c:C.green2,w:500});ctx.globalAlpha=1;}}}
   reg({el,resize(){cv.fit();},update,draw});
-  chipGroup('fs-asset',v=>{st.asset=v;build();});
-  chipGroup('fs-h',v=>{st.h=Number(v);build();});
-  $$('#fs-sig .chip').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.v;st.sig[k]=!st.sig[k];b.setAttribute('aria-pressed',st.sig[k]?'true':'false');st.imp=target();}));
+  chipGroup('fs-asset',v=>{st.asset=v;build();replay();});
+  chipGroup('fs-h',v=>{st.h=Number(v);build();replay();});
+  $$('#fs-sig .chip').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.v;st.sig[k]=!st.sig[k];b.setAttribute('aria-pressed',st.sig[k]?'true':'false');st.imp=target();replay();}));
 })();
 
 /* ============ contact ============ */
