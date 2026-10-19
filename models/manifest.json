@@ -1,0 +1,22 @@
+{
+ "built": "2026-10-19T12:19:36.260204+00:00",
+ "repo": "ibm-granite/granite-timeseries-ttm-r3",
+ "license": "Apache-2.0",
+ "torch": "2.11.0+cpu",
+ "onnxruntime": "1.31.0",
+ "freq_tokens": {
+  "oov": 0,
+  "min": 1,
+  "2min": 2,
+  "5min": 3,
+  "10min": 4,
+  "15min": 5,
+  "30min": 6,
+  "h": 7,
+  "H": 7,
+  "d": 8,
+  "D": 8,
+  "W": 9
+ },
+ "variants": []
+}
