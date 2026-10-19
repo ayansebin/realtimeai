@@ -1396,6 +1396,19 @@ html{scroll-behavior:auto}
 .ch-sub{max-width:56ch;margin:0;color:var(--ink-2);font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.55}
 .ch-off{margin:1rem 0 0;padding:.65rem .85rem;border:1px solid var(--line-2);background:rgba(255,255,255,.4);font-size:.92rem;color:var(--ink-2);max-width:60ch}
 .ch-off a{color:#0f62fe;text-decoration:underline;text-underline-offset:2px}
+.ch-skill{margin:1.1rem 0 0;max-width:60ch;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);font-size:.92rem;color:var(--ink-2)}
+.ch-skill summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .6rem;padding:.6rem 1.4rem .6rem 0;position:relative}
+.ch-skill summary::-webkit-details-marker{display:none}
+.ch-skill summary::after{content:"";position:absolute;right:4px;top:50%;width:7px;height:7px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.ch-skill[open] summary::after{transform:translateY(-20%) rotate(-135deg)}
+.ch-skill summary span{color:var(--ink);font-weight:500}
+.ch-skill summary em{font-style:normal;color:var(--ink-4);font-size:.85rem}
+.ch-skill summary:focus-visible{outline:2px solid #0f62fe;outline-offset:2px}
+.ch-skill ol{margin:.1rem 0 .6rem;padding-left:1.3rem;line-height:1.55}
+.ch-skill li{margin:.2rem 0}
+.ch-skill li span{color:var(--ink-4);font-size:.85rem}
+.ch-skill p{margin:0 0 .8rem;color:var(--ink-3,var(--ink-2));font-size:.86rem;line-height:1.5}
+.ch-skill a{color:#0f62fe;text-decoration:underline;text-underline-offset:2px}
 .ch-thread{display:flex;flex-direction:column;gap:22px;padding:8px 0 24px}
 .ch[data-empty="1"] .ch-thread{display:none}
 .ch[data-empty="0"] .ch-intro{display:none}
@@ -1584,7 +1597,16 @@ html{scroll-behavior:auto}
       <div class="pills"><span class="pill live">Chat · real models, no sign-up</span></div>
       <h1 class="h-display ch-h">Ask the models.</h1>
       <p class="ch-sub">Forecast a stream, find what is unusual, race TTM, FlowState and PatchTST-FM, or bring your own data. Claude runs the IBM Granite Time Series models and tells you what they found.</p>
-      <p class="ch-off" id="ch-off" hidden>The chat opens soon. Until then, the <a href="/playground">playground</a> runs every model on the same streams.</p>
+      <p class="ch-off" id="ch-off" hidden>The chat opens soon. Until then, the <a href="/playground">playground</a> runs every model on the same streams, or <a href="#ch-skill">add the skill</a> to your own Claude.</p>
+      <details class="ch-skill" id="ch-skill">
+        <summary><span>Use it in your own Claude</span><em>a skill that runs TTM r3 on your files, inside Claude</em></summary>
+        <ol>
+          <li><a href="/skills/granite-time-series.zip" download>Download the skill</a> <span>(ZIP, 23 MB, Apache 2.0)</span></li>
+          <li>In Claude, open Customize, then Skills, and upload the ZIP. Code execution must be on.</li>
+          <li>Drop in a CSV, Excel or JSON file and ask for a forecast or the anomalies.</li>
+        </ol>
+        <p>Claude runs the models in its own sandbox and gives back a chart, the backtest and the Flink SQL to run the same models on Confluent Cloud. Team and Enterprise admins can add it for the whole org.</p>
+      </details>
     </section>
     <div class="ch-thread" id="ch-thread"></div>
     <p class="sr" id="ch-sr" aria-live="polite"></p>
@@ -2307,6 +2329,7 @@ async function restore(){let o=null;try{o=JSON.parse(localStorage.getItem(SKEY)|
 /* ---------- start ---------- */
 if(COARSE)Q.placeholder='Ask about the models, or attach a CSV';
 (function(){const on=$('.nav-links a.on');if(on&&on.parentElement.scrollWidth>on.parentElement.clientWidth+4)on.parentElement.scrollLeft=Math.max(0,on.offsetLeft-on.parentElement.clientWidth/2+on.offsetWidth/2);})();
+document.addEventListener('click',e=>{const a=e.target.closest('a[href="#ch-skill"]');if(!a)return;e.preventDefault();const d=$('#ch-skill');d.open=true;d.scrollIntoView({block:'nearest'});d.querySelector('summary').focus({preventScroll:true});});
 fetch('/api/chat',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{S.ready=!!(j&&j.ready);if(j&&!j.ready)$('#ch-off').hidden=false;}).catch(()=>{});
 restore().then(()=>{refreshSend();if(!COARSE&&CH.dataset.empty==='1')Q.focus({preventScroll:true});});
 manifest().catch(()=>{});

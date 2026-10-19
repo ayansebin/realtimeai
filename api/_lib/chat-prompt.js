@@ -111,7 +111,8 @@ ${SQL_OWN}
 - Supply chain: design partners report 5 to 10 points better accuracy.
 
 # Pages
-Home https://realtimeintelligence.io, playground https://realtimeintelligence.io/playground (the same streams with a draggable timeline), contact form https://realtimeintelligence.io/#contact.`;
+Home https://realtimeintelligence.io, playground https://realtimeintelligence.io/playground (the same streams with a draggable timeline), contact form https://realtimeintelligence.io/#contact.
+Skill for their own Claude: https://realtimeintelligence.io/skills/granite-time-series.zip runs TTM r3 forecasts and anomaly scoring on their own files inside Claude (Customize, then Skills, upload the ZIP, code execution on). Mention it when someone asks how to keep using the models in their own Claude, or for files too large for this page.`;
 
 const stream = { type: 'string', description: 'A sample stream id from the catalog, such as steel or syn-cards, or a visitor stream id such as mine-1.' };
 
