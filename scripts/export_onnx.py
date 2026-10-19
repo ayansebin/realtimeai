@@ -152,17 +152,29 @@ def export(wrap, args, names, outs, path):
     raise RuntimeError(" | ".join(errors))
 
 
-def fix_ir(path):
+def slim(path):
+    """Cap the IR version and drop exporter metadata (stack traces, names, shape notes). The graph and weights stay as they are."""
     import onnx
 
+    before = path.stat().st_size
     m = onnx.load(str(path))
-    before = m.ir_version
+    ir0 = m.ir_version
     if m.ir_version > MAX_IR:
         m.ir_version = MAX_IR
-        onnx.save(m, str(path))
+    for n in m.graph.node:
+        del n.metadata_props[:]
+        n.doc_string = ""
+    for coll in (m.graph.value_info, m.metadata_props):
+        del coll[:]
+    if hasattr(m.graph, "metadata_props"):
+        del m.graph.metadata_props[:]
+    m.graph.doc_string = ""
+    m.doc_string = ""
+    onnx.checker.check_model(m)
+    onnx.save(m, str(path))
     opsets = {o.domain or "ai.onnx": o.version for o in m.opset_import}
     ops = sorted({n.op_type for n in m.graph.node})
-    return before, m.ir_version, opsets, ops
+    return ir0, m.ir_version, opsets, ops, before, path.stat().st_size
 
 
 def main():
@@ -207,8 +219,9 @@ def main():
             outs = ["forecast"] + (["quantiles"] if with_q else [])
             path = OUT / f"{name}.onnx"
             how = export(wrap, args, names, outs, path)
-            ir0, ir1, opsets, ops = fix_ir(path)
-            log(f"  exported ({how}), IR {ir0} -> {ir1}, opsets {opsets}, {len(ops)} op types")
+            ir0, ir1, opsets, ops, b0, b1 = slim(path)
+            log(f"  exported ({how}), IR {ir0} -> {ir1}, opsets {opsets}, {len(ops)} op types, "
+                f"{b0 / 1e6:.1f} MB -> {b1 / 1e6:.1f} MB without exporter metadata")
 
             so = ort.SessionOptions()
             so.intra_op_num_threads = 1
