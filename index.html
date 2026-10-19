@@ -1176,6 +1176,58 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .md-line b{font:600 .62rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#78a9ff}
 @media (prefers-reduced-motion:reduce){.mdpanel:not([hidden]) .md-bar i{animation:none}}
 @media (max-width:420px){.md-fh,.md-fr{grid-template-columns:84px minmax(0,1fr) minmax(0,1fr);gap:8px}.md-fn{font-size:.82rem}}
+/* ---------- value: who feels it, the pain, the outcome, and one race per card ---------- */
+#st-three .stage-top{align-items:center}
+.v4rp{display:inline-flex;align-items:center;gap:.4rem}.v4rp svg{width:14px;height:14px}
+.v4{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:1060px){.v4{grid-template-columns:1fr}}
+.v4c{display:grid;grid-template-rows:auto auto auto 1fr;gap:.55rem;min-width:0;padding:16px 16px 18px;border:1px solid rgba(255,255,255,.16);border-radius:4px;background:rgba(10,20,48,.45);cursor:pointer;transition:border-color .3s,box-shadow .3s}
+.v4c:hover{border-color:rgba(120,169,255,.6)}
+.v4top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.v4n{display:inline-flex;align-items:center;gap:.5rem;font:600 .72rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:#d0e2ff}
+.v4n i{font-style:normal;color:#78a9ff}
+.v4p{font-size:.78rem;color:#fff;padding:.25rem .6rem;border-radius:999px;border:1px solid rgba(120,169,255,.55);background:rgba(15,98,254,.2)}
+.v4pain{margin:0;font-size:.9rem;line-height:1.4;color:var(--ink-3)}
+.v4pain::before{content:"Pain · ";font:600 .62rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#ff8389;vertical-align:.12em}
+.v4m{display:flex;align-items:baseline;flex-wrap:wrap;gap:.1rem .65rem}
+.v4m b{font-weight:300;font-size:clamp(2rem,3vw,2.6rem);line-height:1.05;color:#fff}
+.v4m span{font-size:.95rem;color:#a7f0ba}
+.v4viz{display:grid;align-content:start;gap:7px;padding:12px 14px 14px;border:1px solid rgba(255,255,255,.12);border-radius:4px;background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px}
+.v4k{font:600 .62rem/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#78a9ff;margin-top:4px}
+.v4k:not(:first-child){margin-top:10px}
+.v4row{display:grid;grid-template-columns:92px minmax(0,1fr) auto;align-items:center;gap:10px;min-height:22px}
+.v4l{font-size:.8rem;color:var(--ink-3);white-space:nowrap}
+.v4row.t .v4l{color:#a7f0ba}
+.v4v{font:500 .8rem/1.2 var(--font-mono);color:var(--ink-2);white-space:nowrap;text-align:right;min-width:0}
+.v4row.t .v4v{color:#a7f0ba}
+.v4bar{position:relative;height:10px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden}
+.v4bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:5px;background:rgba(255,255,255,.4)}
+.v4row.t .v4bar i{background:linear-gradient(90deg,#42be65,#a7f0ba);box-shadow:0 0 10px rgba(66,190,101,.7);min-width:0}
+.v4c.u-done .v4row.u .v4bar i{background:linear-gradient(90deg,rgba(255,255,255,.4),#ff8389)}
+.v4ppl{display:flex;gap:3px}
+.v4ppl svg{width:14px;height:18px;fill:rgba(255,255,255,.12);transition:fill .3s,transform .3s;transform:scale(.85)}
+.v4ppl svg.on{fill:rgba(255,255,255,.75);transform:scale(1)}
+.v4row.t .v4ppl svg.on{fill:#6fdc8c}
+.v4grids{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.v4g{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;align-items:end}
+.v4dots{grid-row:1/3;display:grid;grid-template-columns:repeat(10,6px);gap:3px}
+.v4dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.08);transition:background .2s}
+.v4dots i.on{background:rgba(166,200,255,.55)}
+.v4g.t .v4dots i.on{background:rgba(111,220,140,.7)}
+.v4dots i.x.on{background:#fa4d56;box-shadow:0 0 6px #fa4d56}
+.v4gl{font-size:.78rem;color:var(--ink-3);line-height:1.2}
+.v4g.t .v4gl{color:#a7f0ba}
+.v4g b{font:300 1.9rem/1 var(--font-sans);color:#ff8389}
+.v4g.t b{color:#a7f0ba}
+.v4ev{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px}
+.v4ev i{height:12px;border-radius:2px;border:1px solid rgba(255,255,255,.12);transition:background .25s,border-color .25s,transform .25s}
+.v4ev i.on{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.08)}
+.v4row.t .v4ev i.on{border-color:#42be65;background:#42be65;box-shadow:0 0 6px rgba(66,190,101,.7)}
+.v4ev.late i.on{border-color:#fa4d56;background:rgba(250,77,86,.55)}
+.v4row.u .v4v{color:var(--ink-3)}
+.v4c.done .v4row.u .v4v,.v4c.u-done .v4row.u .v4v{color:#ff8389}
+@media (max-width:420px){.v4row{grid-template-columns:78px minmax(0,1fr) auto;gap:8px}.v4l{font-size:.74rem}.v4v{font-size:.74rem}.v4grids{gap:10px}.v4g{grid-template-columns:auto 1fr;grid-template-rows:auto auto;row-gap:4px}.v4dots{grid-row:auto;grid-column:1/-1;grid-template-columns:repeat(10,5px);gap:3px}.v4dots i{width:5px;height:5px}.v4g b{font-size:1.5rem}}
+@media (prefers-reduced-motion:reduce){.v4c *{transition:none!important}}
 </style>
 </head>
 <body>
@@ -1353,34 +1405,54 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     <div class="chapter-head">
       <span class="n">02 / VALUE</span>
       <h2>Productivity, accuracy, responsiveness.</h2>
-      <p>One bespoke model at a time, or every decision scored in the stream. Press play.</p>
+      <p>One bespoke model at a time, or every decision scored in the stream. Tap a card to play it again.</p>
     </div>
 
     <div class="stage" id="st-three">
       <div class="stage-top">
-        <div class="stage-title"><h3>Three things change for your teams</h3><p><span class="lg lg-t">Today</span><span class="lg lg-s">IBM Granite on Confluent</span><span class="lg-n">One year, sped up.</span></p></div>
-        <div class="ctl"><div class="ctl-group"><span class="eyebrow">&nbsp;</span><div class="btn-row"><button class="btn sm ghost" id="th-play" type="button" aria-pressed="true">Pause</button><button class="btn sm ghost" id="th-replay" type="button">Replay</button></div></div></div>
+        <div class="stage-title"><h3>Three things change for your teams</h3><p><span class="lg lg-t">The usual way</span><span class="lg lg-s">Together: Confluent + IBM Granite</span></p></div>
+        <button class="btn sm ghost v4rp" id="th-replay" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.2h2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Replay</button>
       </div>
       <div class="stage-body">
-        <div class="v3">
-          <div class="v3c">
-            <div class="v3h"><i>01</i>Productivity</div>
-            <div class="v3m"><b>10×</b><span>faster time to value</span></div>
-            <div class="v3cv"><canvas id="th-prod" role="img" aria-label="Today one use case takes seven months to first value. In the stream the first one lands in six days and nine are live within the year."></canvas></div>
-            <div class="v3s"><b>5×</b> lower skill required, one analyst instead of a team of five experts</div>
-          </div>
-          <div class="v3c">
-            <div class="v3h"><i>02</i>Accuracy</div>
-            <div class="v3m"><b>5 to 10%</b><span>more accurate decisions</span></div>
-            <div class="v3cv"><canvas id="th-acc" role="img" aria-label="Rules and classic ML climb to about 93 percent and plateau. The models start at 97 percent zero-shot and climb to 99."></canvas></div>
-            <div class="v3s"><b>Zero-shot</b> from day one, no training to wait for</div>
-          </div>
-          <div class="v3c">
-            <div class="v3h"><i>03</i>Responsiveness</div>
-            <div class="v3m"><b>Days → seconds</b><span>from signal to decision</span></div>
-            <div class="v3cv"><canvas id="th-resp" role="img" aria-label="A batch run decides after two days, after the decision window closes. The stream decides each event in under a second, inside the window."></canvas></div>
-            <div class="v3s"><b>Inside the window</b>, every time</div>
-          </div>
+        <div class="v4">
+          <article class="v4c" data-k="prod">
+            <div class="v4top"><span class="v4n"><i>01</i>Productivity</span><span class="v4p">For data and AI teams</span></div>
+            <p class="v4pain">Each use case was a months long project for a team of experts.</p>
+            <div class="v4m"><b>10×</b><span>faster time to value</span></div>
+            <div class="v4viz">
+              <div class="v4k">Time to first value</div>
+              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4bar"><i></i></span><span class="v4v" data-v="u">0 months</span></div>
+              <div class="v4row t"><span class="v4l">Together</span><span class="v4bar"><i></i></span><span class="v4v" data-v="t">0 weeks</span></div>
+              <div class="v4k">Team per use case</div>
+              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4ppl" data-n="5"></span><span class="v4v">5 experts</span></div>
+              <div class="v4row t"><span class="v4l">Together</span><span class="v4ppl" data-n="1"></span><span class="v4v">1 analyst</span></div>
+            </div>
+          </article>
+          <article class="v4c" data-k="acc">
+            <div class="v4top"><span class="v4n"><i>02</i>Accuracy</span><span class="v4p">For planners and risk teams</span></div>
+            <p class="v4pain">Rules and per series models miss what just changed.</p>
+            <div class="v4m"><b>5 to 10%</b><span>more accurate decisions</span></div>
+            <div class="v4viz">
+              <div class="v4k">Wrong calls in 100 decisions</div>
+              <div class="v4grids"><div class="v4g u"><span class="v4dots" data-miss="7"></span><span class="v4gl">The usual way</span><b data-v="u">0</b></div><div class="v4g t"><span class="v4dots" data-miss="2"></span><span class="v4gl">Together</span><b data-v="t">0</b></div></div>
+              <div class="v4k">Training before the first forecast</div>
+              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4bar"><i></i></span><span class="v4v">weeks per series</span></div>
+              <div class="v4row t"><span class="v4l">Together</span><span class="v4bar"><i></i></span><span class="v4v">none, zero-shot</span></div>
+            </div>
+          </article>
+          <article class="v4c" data-k="resp">
+            <div class="v4top"><span class="v4n"><i>03</i>Responsiveness</span><span class="v4p">For operations teams</span></div>
+            <p class="v4pain">The batch run decides after the moment has passed.</p>
+            <div class="v4m"><b>Days → seconds</b><span>from signal to decision</span></div>
+            <div class="v4viz">
+              <div class="v4k">Decisions that land in time</div>
+              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4ev"></span><span class="v4v" data-v="u">0 of 12</span></div>
+              <div class="v4row t"><span class="v4l">Together</span><span class="v4ev"></span><span class="v4v" data-v="t">0 of 12</span></div>
+              <div class="v4k">Signal to decision</div>
+              <div class="v4row u"><span class="v4l">The usual way</span><span class="v4bar"><i></i></span><span class="v4v">2 days</span></div>
+              <div class="v4row t"><span class="v4l">Together</span><span class="v4bar"><i></i></span><span class="v4v">0.8 s</span></div>
+            </div>
+          </article>
         </div>
       </div>
       <div class="stage-foot"><div class="hint">Illustrative. Impact figures from design partner engagements.</div></div>
@@ -2355,56 +2427,50 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
       if(ob&&s.out!=null&&ob.textContent!==s.out)ob.textContent=s.out;if(ol&&s.outL&&ol.textContent!==s.outL)ol.textContent=s.outL;if(ob&&s.outC&&ob.style.color!==s.outC)ob.style.color=s.outC;}});});
 })();
 /* ============ 02 three things change: productivity, accuracy, responsiveness ============ */
-/* Three simple before and after pictures on one shared year, sped up. Gray is today, green is IBM Granite on Confluent. */
+/* Three cards, one picture language: the usual way against Confluent and IBM Granite together. Each card names who
+   feels it and the pain, then plays a short race: time to first value and the team it takes, wrong calls in a hundred
+   decisions, and twelve events that either land in time or wait for the batch. It plays when it scrolls in, and again
+   on Replay or a tap. */
 (function(){
   const el=$('#st-three');if(!el)return;
-  const cvs={prod:new Cv($('#th-prod')),acc:new Cv($('#th-acc')),resp:new Cv($('#th-resp'))};
-  const st={t:0,playing:true,dur:reduced?1:14000,dec:0,acc:0,pulses:[]};
-  const MF='"IBM Plex Mono",Menlo,monospace',SANS='"IBM Plex Sans","Helvetica Neue",Arial,sans-serif';
-  const GR='rgba(255,255,255,.62)',GRL='rgba(255,255,255,.14)',GN='#6fdc8c',GND='rgba(111,220,140,.16)',AM='#f1c21b',RD='#ff8389';
-  const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-  function txt(ctx,s,x,y,col,z,al,wt,fam){ctx.font=(wt||'400')+' '+(z||11)+'px '+(fam||SANS);ctx.fillStyle=col;ctx.textAlign=al||'left';ctx.textBaseline='middle';ctx.fillText(s,x,y);}
-  function axis(ctx,x0,x1,y,labels){ctx.strokeStyle='rgba(255,255,255,.18)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0,y+0.5);ctx.lineTo(x1,y+0.5);ctx.stroke();
-    labels.forEach(([u,s],k)=>{const x=Math.round(x0+(x1-x0)*u)+0.5;ctx.beginPath();ctx.moveTo(x,y-3);ctx.lineTo(x,y+3);ctx.stroke();txt(ctx,s,x,y+11,'rgba(255,255,255,.45)',10,k===0?'left':k===labels.length-1?'right':'center','400',MF);});}
-  function row(ctx,x0,x1,y,name,col){txt(ctx,name,0,y,col,12,'left','500');ctx.fillStyle='rgba(255,255,255,.05)';ctx.fillRect(x0,y-5,x1-x0,10);}
-  const LAUNCH=[0.2,1.2,2.2,3.2,4.2,5.2,6.4,7.6,8.8];
-  /* productivity: today one use case takes seven months, in the stream the first lands in days and nine follow */
-  function drawProd(ctx,W,H,t){const x0=58,x1=W-6,y1=40,y2=H-62,ya=H-18,m=t*12,X=v=>x0+(x1-x0)*v/12;
-    row(ctx,x0,x1,y1,'Today',GR);row(ctx,x0,x1,y2,'Stream',GN);
-    const a=Math.min(m,7);ctx.fillStyle='rgba(255,255,255,.45)';ctx.fillRect(x0,y1-5,X(a)-x0,10);
-    if(m>=7){ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(X(7),y1,4.5,0,Math.PI*2);ctx.fill();txt(ctx,'first value at 7 months',X(7),y1-17,'#fff',11,'center','500');}
-    else txt(ctx,'building one use case',X(a)+8,y1-17,GR,11,'left');
-    ctx.fillStyle=GN;ctx.fillRect(x0,y2-1.5,X(Math.max(0,m))-x0,3);let live=0;
-    LAUNCH.forEach((l,k)=>{if(m<l)return;live++;ctx.fillStyle=GN;ctx.fillRect(Math.round(X(l))-4,y2-4,8,8);});
-    if(m>=0.2)txt(ctx,'first value in 6 days',X(0.2)-2,y2-17,GN,11,'left','500');
-    txt(ctx,(m>=7?1:0)+' live',x1,y1+17,GR,11,'right','500',MF);txt(ctx,live+' live',x1,y2+17,GN,11,'right','600',MF);
-    axis(ctx,x0,x1,ya,[[0,'0'],[0.5,'6 mo'],[1,'12 mo']]);}
-  /* accuracy: rules and classic ML climb to a plateau, the models start high, zero-shot, and keep climbing */
-  function drawAcc(ctx,W,H,t){const x0=6,x1=W-96,top=14,bot=H-34,ya=H-18,m=t*12,X=v=>x0+(x1-x0)*v/12,Y=v=>bot-(bot-top)*(v-84)/16;
-    const old=v=>93-7*Math.exp(-v/2.5),gr=v=>97+2*(1-Math.exp(-v/3));
-    ctx.strokeStyle='rgba(255,255,255,.07)';[88,92,96].forEach(v=>{ctx.beginPath();ctx.moveTo(x0,Math.round(Y(v))+0.5);ctx.lineTo(x1,Math.round(Y(v))+0.5);ctx.stroke();});
-    const n=48,me=Math.max(0.01,m);ctx.fillStyle=GND;ctx.beginPath();for(let k=0;k<=n;k++){const v=me*k/n;ctx.lineTo(X(v),Y(gr(v)));}for(let k=n;k>=0;k--){const v=me*k/n;ctx.lineTo(X(v),Y(old(v)));}ctx.closePath();ctx.fill();
-    [[old,'rgba(255,255,255,.7)'],[gr,GN]].forEach(([f,c])=>{ctx.strokeStyle=c;ctx.lineWidth=2;ctx.beginPath();for(let k=0;k<=n;k++){const v=me*k/n;k?ctx.lineTo(X(v),Y(f(v))):ctx.moveTo(X(v),Y(f(v)));}ctx.stroke();});
-    txt(ctx,'Stream '+gr(me).toFixed(1)+'%',X(me)+8,Y(gr(me)),GN,11.5,'left','600');txt(ctx,'Today '+old(me).toFixed(1)+'%',X(me)+8,Y(old(me)),GR,11.5,'left','500');
-    if(m<1.5)txt(ctx,'97% on day one, zero-shot',X(0)+4,Y(98.6),GN,11,'left','400');
-    axis(ctx,x0,x1,ya,[[0,'0'],[0.5,'6 mo'],[1,'12 mo']]);}
-  /* responsiveness: a batch run decides after two days and misses the window, the stream decides every event in under a second */
-  function drawResp(ctx,W,H,t){const x0=58,x1=W-6,y1=40,y2=H-62,ya=H-18,h=t*72,X=v=>x0+(x1-x0)*v/72;
-    const xw=Math.round(X(24))+0.5;ctx.strokeStyle=AM;ctx.setLineDash([3,3]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(xw,22);ctx.lineTo(xw,ya-6);ctx.stroke();ctx.setLineDash([]);txt(ctx,'window closes',xw+5,ya-12,AM,10.5,'left','500');
-    row(ctx,x0,x1,y1,'Today',GR);row(ctx,x0,x1,y2,'Stream',GN);
-    const b=Math.min(h,50);ctx.fillStyle='rgba(255,255,255,.45)';ctx.fillRect(x0,y1-5,X(Math.min(b,24))-x0,10);if(b>24){ctx.fillStyle=RD;ctx.fillRect(X(24),y1-5,X(b)-X(24),10);}
-    if(h>=50)txt(ctx,'decided after 2 days, too late',X(50),y1-17,RD,11,'right','500');else txt(ctx,'batch run',x0,y1-17,GR,11,'left');
-    ctx.fillStyle=GN;ctx.fillRect(x0,y2-5,4,10);st.pulses.forEach(p=>{const r=4+16*p.u;ctx.strokeStyle='rgba(111,220,140,'+(1-p.u)+')';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(x0+2,y2,r,0,Math.PI*2);ctx.stroke();});
-    txt(ctx,'every event in 0.8 s',x0+26,y2-17,GN,11,'left','500');txt(ctx,st.dec+' decided',x1,y2-17,GN,11,'right','600',MF);
-    axis(ctx,x0,x1,ya,[[0,'0'],[1/3,'24 h'],[2/3,'48 h'],[1,'72 h']]);}
-  function draw(){[['prod',drawProd],['acc',drawAcc],['resp',drawResp]].forEach(([k,fn])=>{const cv=cvs[k];if(!cv.W){cv.fit();return;}const ctx=cv.ctx;ctx.clearRect(0,0,cv.W,cv.H);fn(ctx,cv.W,cv.H,Math.min(1,st.t));});}
-  function update(dt){if(reduced){st.t=1;st.dec=17;return;}if(!st.playing)return;st.t+=dt/st.dur;if(st.t>=1.18){st.t=0;st.dec=0;st.pulses=[];}
-    st.acc+=dt;if(st.acc>650&&st.t<1){st.acc=0;st.pulses.push({u:0});st.dec++;}st.pulses.forEach(p=>{p.u+=dt/700;});st.pulses=st.pulses.filter(p=>p.u<1);}
-  reg({el,resize(){Object.values(cvs).forEach(c=>c.fit());},update,draw});
-  const btn=$('#th-play');if(btn)btn.addEventListener('click',()=>{st.playing=!st.playing;btn.textContent=st.playing?'Pause':'Play';btn.setAttribute('aria-pressed',st.playing);});
-  const rp=$('#th-replay');if(rp)rp.addEventListener('click',()=>{st.t=0;st.dec=0;st.pulses=[];st.playing=true;if(btn){btn.textContent='Pause';btn.setAttribute('aria-pressed','true');}});
+  const cards=$$('.v4c',el),C=k=>cards.find(c=>c.dataset.k===k);
+  const P=C('prod'),A=C('acc'),R=C('resp');if(!P||!A||!R)return;
+  const cl=x=>x<0?0:x>1?1:x,ez=x=>{x=cl(x);return 1-Math.pow(1-x,3);};
+  const PERSON='<svg viewBox="0 0 16 20" aria-hidden="true"><circle cx="8" cy="5" r="3.6"/><path d="M1.5 19c0-4.2 2.9-7 6.5-7s6.5 2.8 6.5 7z"/></svg>';
+  /* build the people, the dot grids and the event squares once */
+  $$('.v4ppl',el).forEach(s=>{s.innerHTML=PERSON.repeat(+s.dataset.n);});
+  const MISS={7:[6,19,33,48,62,77,91],2:[38,83]};
+  $$('.v4dots',el).forEach(s=>{const m=new Set(MISS[s.dataset.miss]||[]);let h='';for(let i=0;i<100;i++)h+='<i'+(m.has(i)?' class="x"':'')+'></i>';s.innerHTML=h;});
+  $$('.v4ev',el).forEach(s=>{let h='';for(let i=0;i<12;i++)h+='<i></i>';s.innerHTML=h;});
+  const q=(c,sel)=>$$(sel,c);
+  const [pU,pT]=q(P,'.v4row .v4bar i'),[pUv,pTv]=[$('[data-v="u"]',P),$('[data-v="t"]',P)],ppl=q(P,'.v4ppl');
+  const [aU,aT]=q(A,'.v4dots'),[aUb,aTb]=[$('[data-v="u"]',A),$('[data-v="t"]',A)],[aTrU,aTrT]=q(A,'.v4row .v4bar i');
+  const [rU,rT]=q(R,'.v4ev'),[rUv,rTv]=[$('[data-v="u"]',R),$('[data-v="t"]',R)],[rSU,rST]=q(R,'.v4row .v4bar i');
+  const T=5200,st={t:0,run:false,seen:false};
+  const set=(e,v)=>{if(e&&e.textContent!==v)e.textContent=v;};
+  /* light the first n children of a container, and only touch the ones that change */
+  const lightN=(box,n)=>{if(!box)return;const k=box.__n==null?-1:box.__n;if(k===n)return;const ch=box.children;for(let i=0;i<ch.length;i++){const on=i<n;if(ch[i].classList.contains('on')!==on)ch[i].classList.toggle('on',on);}box.__n=n;};
+  const w=(e,p)=>{if(e)e.style.width=(p*100).toFixed(2)+'%';};
+  function frame(t){
+    /* productivity: both start together, Together reaches first value at three weeks, the usual way runs to seven months */
+    const pu=ez(t/3600),months=7*pu;w(pU,pu);set(pUv,(pu>=1?'7':months<1?'<1':Math.floor(months))+' months');
+    const pt=ez(t/700)*0.1;w(pT,pt);set(pTv,t>=700?'3 weeks ✓':Math.max(0,Math.round(21*cl(t/700)))+' days');P.classList.toggle('t-done',t>=700);P.classList.toggle('u-done',pu>=1);
+    ppl.forEach((s,k)=>lightN(s,Math.min(k?1:5,Math.ceil(cl((t-500)/1500)*(k?1:5)))));
+    /* accuracy: a hundred decisions each, the wrong calls in red */
+    const n=Math.floor(cl((t-200)/2600)*100);[aU,aT].forEach(g=>lightN(g,n));
+    const cnt=(m)=>m.filter(i=>i<n).length;set(aUb,String(cnt(MISS[7])));set(aTb,String(cnt(MISS[2])));
+    w(aTrU,ez((t-2800)/900));w(aTrT,0);A.classList.toggle('done',t>=3000);
+    /* responsiveness: twelve events, Together decides each one as it lands, the batch decides them all too late */
+    const arr=Math.min(12,Math.floor(cl((t-300)/2700)*12.99)),batch=t>=3900;
+    [rU,rT].forEach(g=>lightN(g,arr));rU.classList.toggle('late',batch);
+    set(rTv,arr+' in time');set(rUv,batch?'all 12 late':arr?'waiting':'0 of 12');
+    w(rSU,batch?1:cl(t/3900));w(rST,arr?0.012:0);R.classList.toggle('done',batch);}
+  function start(){st.t=0;st.run=true;el.classList.add('v4on');}
+  const rp=$('#th-replay');if(rp)rp.addEventListener('click',start);
+  cards.forEach(c=>c.addEventListener('click',e=>{if(e.target.closest('a,button'))return;start();}));
+  if(reduced){frame(T);el.classList.add('v4on');}else frame(0);
+  reg({el,update(dt){if(reduced)return;if(!st.seen){st.seen=true;start();}if(!st.run)return;st.t+=dt;frame(st.t);if(st.t>=T){st.run=false;frame(T);}},draw(){}});
 })();
-
 /* ============ 02 dials, proof count-ups ============ */
 function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'',suf=b.dataset.suffix||'';const t0=performance.now(),dur=reduced?1:1400;function f(t){const u=clamp((t-t0)/dur,0,1);b.textContent=pre+fmtInt(target*ease(u))+suf;if(u<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
 (function(){const d=$('#dials');if(d)once(d,()=>{d.classList.add('in');$$('b[data-count]',d).forEach(countUp);});})();
