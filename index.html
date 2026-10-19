@@ -1368,6 +1368,9 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .hx-st:not(:last-child)::after{border-top-width:1px;border-right-width:1px}
 @media (min-width:761px){.hx-k{font-weight:400;letter-spacing:.16em;font-size:clamp(.78rem,1.02vw,.9rem)}}
 @media (max-width:760px){.hx-k{font-weight:500;letter-spacing:.08em}}
+/* hero: the claims live inside the universal layer now */
+.hx-body{padding-top:clamp(12px,1.8vw,20px)}
+@media (max-width:760px){.hero .canvas-wrap.hx-wrap{height:540px}}
 </style>
 </head>
 <body>
@@ -1398,15 +1401,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     </div>
 
     <div class="stage" id="st-live">
-      <div class="hx-top">
-        <div class="hx-bens">
-          <div class="hx-ben" data-ck="dist"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Varying distributions</b><span>counts, bursts, gaps and heavy tails, one model</span></div></div>
-          <div class="hx-ben" data-ck="dom"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Transfer across patterns and SKUs</b><span>no model per SKU, store or use case</span></div></div>
-          <div class="hx-ben" data-ck="inter"><canvas class="hx-g" aria-hidden="true"></canvas><div><b>Complex interdependencies</b><span>one weather topic moves sales, plants and load</span></div></div>
-        </div>
-      </div>
       <div class="hx-body">
-        <div class="canvas-wrap hx-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="One universal IBM Granite Time Series foundation model reads six use cases from six industries, each with a different kind of data: sales demand, payment fraud, process data from three plants, intermittent supply chain deliveries, heavy tailed API latency and a building energy peak. It forecasts all six at once with no model per series, a heat wave on the weather topic bends the three that depend on it, anomalies are flagged as they happen, and every forecast becomes a decision."></canvas></div>
+        <div class="canvas-wrap hx-wrap"><canvas class="stage-canvas" id="live-cv" aria-label="One universal IBM Granite Time Series foundation model reads six use cases from six industries. Inside the model box: varying distributions, transfer across patterns and SKUs, and complex interdependencies. It reads six use cases from six industries, each with a different kind of data: sales demand, payment fraud, process data from three plants, intermittent supply chain deliveries, heavy tailed API latency and a building energy peak. It forecasts all six at once with no model per series, a heat wave on the weather topic bends the three that depend on it, anomalies are flagged as they happen, and every forecast becomes a decision."></canvas></div>
       </div>
       <div class="hx-foot">
         <div class="hx-flow" id="hx-steps" role="group" aria-label="What the chart shows">
@@ -2233,9 +2229,9 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   function layout(){const W=cv.W,H=cv.H,narrow=W<700;let P,hub;
     if(!narrow){const pad=10,gap=18,hubW=Math.round(Math.max(236,Math.min(338,W*0.26))),colW=(W-2*pad-hubW-2*gap)/2,rg=12,ph=(H-2*pad-2*rg)/3;
       P=S.map((s,i)=>{const col=i<3?0:1,row=i%3;return {x:col?W-pad-colW:pad,y:pad+row*(ph+rg),w:colW,h:ph,col,row};});
-      const hx0=pad+colW+gap,hh=Math.min(196,H*0.42),hy0=Math.round(H/2-hh/2);hub={x0:hx0,x1:hx0+hubW,y0:hy0,y1:hy0+hh};
+      const hx0=pad+colW+gap,hh=Math.round(Math.max(300,Math.min(430,H*0.8))),hy0=Math.round(H/2-hh/2);hub={x0:hx0,x1:hx0+hubW,y0:hy0,y1:hy0+hh};
       P.forEach(p=>{const ax=p.col?p.x:p.x+p.w,ay=p.y+p.h/2,px=p.col?hub.x1:hub.x0,py=hub.y0+16+(hub.y1-hub.y0-32)*(p.row+0.5)/3,mx=(ax+px)/2;p.sp=bez(px,py,mx,py,mx,ay,ax,ay);});}
-    else{const pad=4,gap=8,hubH=75,colW=(W-2*pad-gap)/2,rg=8,ph=(H-2*pad-hubH-gap-2*rg)/3;
+    else{const pad=4,gap=8,hubH=132,colW=(W-2*pad-gap)/2,rg=8,ph=(H-2*pad-hubH-gap-2*rg)/3;
       P=S.map((s,i)=>{const col=i<3?0:1,row=i%3;return {x:pad+col*(colW+gap),y:pad+hubH+gap+row*(ph+rg),w:colW,h:ph,col,row};});hub={x0:pad,x1:W-pad,y0:pad,y1:pad+hubH};}
     L={W,H,narrow,P,hub};}
   /* a pulse rides a spoke: out from the model to a panel, or in from a panel to the model */
@@ -2253,16 +2249,20 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     if(reduced)return;
     pulses(now).forEach(p=>{const u=(now-p.t0)/PD;if(u<0||u>1)return;const P=L.P[p.i].sp,v=p.dir>0?u:1-u;ctx.save();ctx.shadowColor=p.c;ctx.shadowBlur=4;ctx.fillStyle=p.c;
       for(let k=0;k<4;k++){const q=along(P,cl(v-k*0.035*p.dir));ctx.globalAlpha=1-k*0.24;const z=k?1.3:2.2;ctx.beginPath();ctx.arc(q[0],q[1],z,0,Math.PI*2);ctx.fill();}ctx.restore();});}
-  /* inside the hub: a series flowing in, now, and the forecast fanning out ahead */
-  function drawTS(ctx,x,y,w,hh,now){const ph=reduced?0:now/1400,N=48,sp=0.62,f=u=>0.5+0.24*Math.sin(u*9+ph)+0.1*Math.sin(u*23+ph*1.7),Yv=v=>y+hh-v*hh,xn=x+sp*w;
-    ctx.save();ctx.lineJoin='round';ctx.lineCap='round';
-    ctx.beginPath();for(let k=0;k<=N;k++){const u=sp*k/N;k?ctx.lineTo(x+u*w,Yv(f(u))):ctx.moveTo(x+u*w,Yv(f(u)));}ctx.strokeStyle='rgba(244,246,251,.9)';ctx.lineWidth=1.1;ctx.stroke();
-    const up=[],dn=[];for(let k=0;k<=24;k++){const u=sp+(1-sp)*k/24,s=0.3*hh*k/24;up.push([x+u*w,Yv(f(u))-s]);dn.push([x+u*w,Yv(f(u))+s]);}
-    ctx.beginPath();up.forEach((q,k)=>k?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));for(let k=dn.length-1;k>=0;k--)ctx.lineTo(dn[k][0],dn[k][1]);ctx.closePath();
-    const g=ctx.createLinearGradient(xn,0,x+w,0);g.addColorStop(0,'rgba(120,169,255,.3)');g.addColorStop(1,'rgba(120,169,255,.06)');ctx.fillStyle=g;ctx.fill();
-    ctx.setLineDash([3,3]);ctx.lineDashOffset=reduced?0:-(now/45)%6;ctx.beginPath();for(let k=0;k<=24;k++){const u=sp+(1-sp)*k/24;k?ctx.lineTo(x+u*w,Yv(f(u))):ctx.moveTo(x+u*w,Yv(f(u)));}ctx.strokeStyle='#a6c8ff';ctx.lineWidth=1.1;ctx.stroke();
-    ctx.strokeStyle='rgba(255,255,255,.28)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(xn)+0.5,y-3);ctx.lineTo(Math.round(xn)+0.5,y+hh+3);ctx.stroke();ctx.setLineDash([]);
-    ctx.beginPath();ctx.arc(xn,Yv(f(sp)),2.4,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.restore();}
+  /* inside the universal layer: why one model works everywhere, each claim with its own small glyph */
+  const CL=[{k:'dist',t:'Varying distributions',s:'counts, bursts, gaps and heavy tails',m:'Distributions'},{k:'dom',t:'Transfer across patterns and SKUs',s:'no model per SKU, store or use case',m:'Transfer'},{k:'inter',t:'Complex interdependencies',s:'one topic moves sales, plants and load',m:'Interdependencies'}];
+  function wrap(ctx,s,w,max){const ws=s.split(' '),out=[];let cur='';ws.forEach(wd=>{const t=cur?cur+' '+wd:wd;if(ctx.measureText(t).width<=w)cur=t;else{if(cur)out.push(cur);cur=wd;}});if(cur)out.push(cur);if(out.length>max){const rest=out.slice(max-1).join(' ');out.length=max-1;out.push(fitText(ctx,rest,w));}return out;}
+  const DSH=[x=>Math.exp(-((x-0.25)**2)/0.02)+0.35*Math.exp(-((x-0.62)**2)/0.08),x=>Math.exp(-((x-0.25)**2)/0.012)+Math.exp(-((x-0.74)**2)/0.012),x=>Math.exp(-((x-0.5)**2)/0.04)];
+  function glyph(ctx,k,x,y,w,hh,on,t){ctx.save();
+    if(k==='dist'){const q=(t/2.4)%3,a=Math.floor(q),b=(a+1)%3,f=sm(fr(q)),n=9,bw=w/n;ctx.fillStyle=on?'#fff':'rgba(166,200,255,.7)';for(let i=0;i<n;i++){const u=(i+0.5)/n,v=lerp(DSH[a](u),DSH[b](u),f),bh=Math.max(1.5,Math.min(1,v)*(hh-2));ctx.fillRect(x+i*bw+1,y+hh-bh,bw-2.2,bh);}}
+    else if(k==='dom'){const my=y+hh/2,sel=PILLS.indexOf(S[st.spot].k);ctx.strokeStyle=on?'rgba(255,255,255,.6)':'rgba(166,200,255,.4)';ctx.lineWidth=0.8;ctx.beginPath();ctx.moveTo(x+3,my);ctx.lineTo(x+w-3,my);ctx.stroke();
+      for(let i=0;i<6;i++){const px=x+3+i*(w-6)/5,s1=i===sel;ctx.beginPath();ctx.arc(px,my,s1?3.2:2,0,Math.PI*2);ctx.fillStyle=s1?'#fff':on?'rgba(208,226,255,.85)':'rgba(166,200,255,.55)';ctx.fill();}
+      if(!reduced){const u=fr(t*0.45);ctx.beginPath();ctx.arc(x+3+u*(w-6),my,1.5,0,Math.PI*2);ctx.fillStyle='#a6c8ff';ctx.fill();}}
+    else{const P=[[0.1,0.3],[0.38,0.82],[0.62,0.18],[0.9,0.68]].map(([u,v])=>[x+u*w,y+v*hh]),E=[[0,1],[0,2],[1,2],[2,3],[1,3]];ctx.strokeStyle=on?'rgba(255,255,255,.75)':'rgba(166,200,255,.4)';ctx.lineWidth=0.8;
+      E.forEach(([a,b])=>{ctx.beginPath();ctx.moveTo(P[a][0],P[a][1]);ctx.lineTo(P[b][0],P[b][1]);ctx.stroke();});
+      if(!reduced){const e=E[Math.floor(t*1.2)%E.length],u=fr(t*1.2);ctx.beginPath();ctx.arc(lerp(P[e[0]][0],P[e[1]][0],u),lerp(P[e[0]][1],P[e[1]][1],u),1.6,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();}
+      P.forEach(([px,py])=>{ctx.beginPath();ctx.arc(px,py,2.1,0,Math.PI*2);ctx.fillStyle=on?'#d0e2ff':'#78a9ff';ctx.fill();});}
+    ctx.restore();}
   function drawHub(ctx,now){const h=L.hub,cx=(h.x0+h.x1)/2,w=h.x1-h.x0,hh=h.y1-h.y0,nar=L.narrow;
     const g=st.ctx?sm(1-(now-st.ctx.T-350)/900)*(now>st.ctx.T+350?1:0):0;
     ctx.save();if(!reduced){ctx.shadowColor=g>0.02?'rgba(61,219,217,.65)':'rgba(69,137,255,.42)';ctx.shadowBlur=g>0.02?18+14*g:26;}
@@ -2272,12 +2272,27 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
       ctx.save();for(let k=0;k<32;k++){const [x,y]=pt(d-k*3);ctx.fillStyle='rgba(208,226,255,'+(0.95*(1-k/32)).toFixed(3)+')';ctx.fillRect(x-0.9,y-0.9,1.8,1.8);}ctx.restore();}
     ctx.textBaseline='middle';
     if(!nar){ctx.textAlign='center';const my=(h.y0+h.y1)/2;
-      let tz=16;for(let z=30;z>=16;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText('foundation model').width<=w-34){tz=z;break;}}
-      const l1=my-tz*0.53-16,l2=my+tz*0.53-16,ey=l1-tz*0.62-15;
+      let tz=16;for(let z=28;z>=16;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText('foundation model').width<=w-40){tz=z;break;}}
+      const ey=h.y0+26,l1=ey+16+tz*0.55,l2=l1+tz*1.05;
       ctx.font='400 11px '+MF;ctx.fillStyle='rgba(166,200,255,.85)';{const T='IBM GRANITE TIME SERIES';let sp=0;if(LS)for(const q of [2.6,2,1.4,0.8,0]){ctx.letterSpacing=q+'px';sp=q;if(ctx.measureText(T).width<=w-20)break;}ctx.fillText(fitText(ctx,T,w-18),cx+sp/2,ey);if(LS)ctx.letterSpacing='0px';}
-      ctx.font='300 '+tz+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText('Universal',cx,l1);ctx.fillText('foundation model',cx,l2);{const iw=Math.min(w-48,210),it=l2+tz*0.5+12;drawTS(ctx,cx-iw/2,it,iw,Math.min(38,h.y1-it-16),now);}}
+      ctx.font='300 '+tz+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText('Universal',cx,l1);ctx.fillText('foundation model',cx,l2);
+      const dv=Math.round(l2+tz*0.5+16)+0.5,ix0=h.x0+14,ix1=h.x1-14,r0=dv+4,RH=(h.y1-10-r0)/3,t=reduced?0:now/1000;
+      ctx.strokeStyle='rgba(166,200,255,.22)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ix0,dv);ctx.lineTo(ix1,dv);ctx.stroke();
+      const gw=Math.min(54,Math.round(w*0.17)),gh=26,tx=ix0+gw+12,tw=ix1-tx;
+      CL.forEach((c,i)=>{const on=lit(c.k),ry=r0+i*RH,rc=ry+RH/2;
+        if(on){ctx.fillStyle='rgba(69,137,255,.14)';ctx.fillRect(h.x0+6,ry+4,w-12,RH-8);ctx.fillStyle='#78a9ff';ctx.fillRect(h.x0+6,ry+4,2,RH-8);}
+        if(i>0){ctx.strokeStyle='rgba(166,200,255,.1)';ctx.beginPath();ctx.moveTo(ix0,Math.round(ry)+0.5);ctx.lineTo(ix1,Math.round(ry)+0.5);ctx.stroke();}
+        glyph(ctx,c.k,ix0,rc-gh/2,gw,gh,on,t);
+        let fz=13;ctx.font='400 '+fz+'px '+SANS;while(fz>11.5&&ctx.measureText(c.t).width>tw){fz-=0.5;ctx.font='400 '+fz+'px '+SANS;}const TL=wrap(ctx,c.t,tw,2);
+        ctx.font='300 11px '+SANS;const SL=wrap(ctx,c.s,tw,2);const bh=TL.length*15+4+SL.length*13.5;let yy=rc-bh/2+7.5;
+        ctx.textAlign='left';ctx.font='400 '+fz+'px '+SANS;ctx.fillStyle=on?'#fff':'rgba(255,255,255,.86)';TL.forEach(l=>{ctx.fillText(l,tx,yy);yy+=15;});
+        yy+=4-7.5+6.75;ctx.font='300 11px '+SANS;ctx.fillStyle=on?'rgba(208,226,255,.95)':'rgba(185,195,211,.78)';SL.forEach(l=>{ctx.fillText(l,tx,yy);yy+=13.5;});});
+      ctx.textAlign='center';}
     else{ctx.textAlign='left';ctx.font='400 10px '+MF;ctx.fillStyle='rgba(166,200,255,.85)';if(LS)ctx.letterSpacing='1.8px';ctx.fillText('IBM GRANITE TIME SERIES',h.x0+13,h.y0+22);if(LS)ctx.letterSpacing='0px';
-      {const T='Universal foundation model';let z=21;for(;z>15;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText(T).width<=w-26)break;}ctx.font='300 '+z+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText(fitText(ctx,T,w-26),h.x0+13,h.y0+50);}if(w>300)drawTS(ctx,h.x1-104,h.y0+11,90,20,now);}
+      {const T='Universal foundation model';let z=21;for(;z>15;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText(T).width<=w-26)break;}ctx.font='300 '+z+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText(fitText(ctx,T,w-26),h.x0+13,h.y0+48);}
+      {const t=reduced?0:now/1000,cw=(w-26)/3;ctx.strokeStyle='rgba(166,200,255,.2)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(h.x0+13,h.y0+68.5);ctx.lineTo(h.x1-13,h.y0+68.5);ctx.stroke();
+        CL.forEach((c,i)=>{const on=lit(c.k),x=h.x0+13+i*cw,gw2=Math.min(46,cw-14);if(on){ctx.fillStyle='#78a9ff';ctx.fillRect(x,h.y0+68,gw2,1.5);}
+          glyph(ctx,c.k,x,h.y0+80,gw2,20,on,t);ctx.textAlign='left';ctx.font='400 10px '+SANS;ctx.fillStyle=on?'#fff':'rgba(208,226,255,.78)';ctx.fillText(fitText(ctx,c.m,cw-6),x,h.y0+114);});}}
   }
   function smooth(ctx,P){ctx.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length-1;i++){const xc=(P[i][0]+P[i+1][0])/2,yc=(P[i][1]+P[i+1][1])/2;ctx.quadraticCurveTo(P[i][0],P[i][1],xc,yc);}const q=P[P.length-1];ctx.lineTo(q[0],q[1]);}
   const RGB={t:'61,219,217',r:'250,77,86',g:'66,190,101',b:'69,137,255'};
