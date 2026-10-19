@@ -1126,6 +1126,33 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 #st-arch .ax-v.on,#st-arch .ax-v:hover,#st-arch .ax-v:focus-visible,#st-arch .ax-v.tour-hi{background:rgba(69,137,255,.2);border-color:#78a9ff}
 #st-live .hx-st{background:rgba(10,20,48,.45);border-color:rgba(255,255,255,.16)}
 #st-live .hx-st.on{background:linear-gradient(180deg,var(--hb),rgba(10,20,48,.45))}
+/* ---------- the model family: in, model, out, best for, and how each one fits ---------- */
+.md-flow{display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr) 22px minmax(0,1.25fr);align-items:stretch;margin:-2px -2px 12px}
+.mf-s{display:grid;align-content:center;gap:2px;padding:7px 10px;border:1px solid rgba(120,169,255,.35);border-radius:4px;background:rgba(69,137,255,.1);min-width:0}
+.mf-s i{font:600 .62rem/1 var(--font-mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:#78a9ff}
+.mf-s>span{font-size:.84rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mf-m{border-color:rgba(190,149,255,.5);background:linear-gradient(90deg,rgba(69,137,255,.18),rgba(138,63,252,.2))}
+.mf-o{grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;border-color:#78a9ff;background:rgba(15,98,254,.22);box-shadow:0 0 0 1px rgba(120,169,255,.25),0 8px 24px rgba(15,98,254,.25)}
+.mf-o i{grid-column:1/-1}
+.mf-o b{font:300 1.45rem/1.05 var(--font-sans);color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mf-o em{font-style:normal;font-size:.76rem;color:#d0e2ff;align-self:center;line-height:1.25}
+.mf-a{position:relative}
+.mf-a::before{content:"";position:absolute;left:3px;right:7px;top:50%;height:1.5px;background:rgba(166,200,255,.6)}
+.mf-a::after{content:"";position:absolute;right:4px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-top:1.5px solid #a6c8ff;border-right:1.5px solid #a6c8ff;transform:rotate(45deg)}
+.md-fit{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px;margin-top:16px}
+.md-chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.md-c{display:inline-flex;align-items:center;gap:.35rem;font-size:.84rem;color:#fff;padding:.34rem .65rem;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.05)}
+.md-best .md-c::before{content:"";width:6px;height:6px;border-radius:50%;background:#78a9ff;box-shadow:0 0 8px #4589ff}
+.md-c.on{border-color:#6fdc8c;background:rgba(66,190,101,.16)}
+.md-c.on::after{content:"✓";color:#6fdc8c;font-size:.78rem}
+.md-c.free{border-color:rgba(255,255,255,.3);color:#d0e2ff}
+.md-chips em{font-style:normal;font-size:.8rem;color:var(--ink-3)}
+.md-ladder{height:150px;margin-bottom:.6rem}
+.md-rows{display:grid;gap:.65rem;margin-bottom:1rem;padding-top:.7rem;border-top:1px solid rgba(255,255,255,.12)}
+.md-row{display:grid;grid-template-columns:72px minmax(0,1fr);gap:.6rem;align-items:center}
+.md-rk{font:600 .62rem/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#78a9ff}
+.md-row .md-c{font-size:.8rem;padding:.26rem .55rem}
+@media (max-width:600px){.md-fit{grid-template-columns:1fr;gap:12px}.md-flow{grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr);row-gap:8px}.md-flow>:nth-child(4){display:none}.mf-o{grid-column:1/-1}.mf-s>span{font-size:.78rem;white-space:normal}}
 </style>
 </head>
 <body>
@@ -1224,17 +1251,13 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <div class="stage-body">
         <div class="md-grid">
           <div class="md-main">
-            <div class="md-viz"><canvas class="md-cv" data-viz="ttm" role="img" aria-label="Dozens of store series forecast one after another by the same model, with a running count"></canvas></div>
-            <div class="md-fit">
-              <div><div class="md-h">Choose it when</div><ul class="md-when"><li>You forecast thousands to millions of series, like every product in every store</li><li>Your latency budget is milliseconds and your fleet runs on CPU</li><li>Control variables matter, like price, promotions or setpoints</li></ul></div>
-              <div><div class="md-h">Use cases it powers</div><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-demand">Supply chain planning <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-prod">Production optimization <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div>
-            </div>
+            <div class="md-viz"><div class="md-flow" data-m="ttm"><span class="mf-s"><i>In</i><span>48 store series</span></span><span class="mf-a" aria-hidden="true"></span><span class="mf-s mf-m"><i>Model</i><span>TTM on CPU</span></span><span class="mf-a" aria-hidden="true"></span><span class="mf-s mf-o"><i>Out</i><b data-out>…</b><em data-outl>forecasts made</em></span></div><canvas class="md-cv" data-viz="ttm" role="img" aria-label="Dozens of store series forecast one after another by the same model, with a running count"></canvas></div>
+            <div class="md-fit"><div class="md-best"><span class="md-h">Best for</span><div class="md-chips"><span class="md-c">millions of series</span><span class="md-c">millisecond latency on CPU</span><span class="md-c">control variables like price</span></div></div><div class="md-use-row"><span class="md-h">Use cases it powers</span><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-demand">Supply chain planning <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-prod">Production optimization <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div></div>
           </div>
           <div class="md-side">
-            <div class="md-h">Efficiency profile</div>
-            <dl class="md-spec"><div><dt>Size</dt><dd>1M to 35M parameters, a mix of tiny experts</dd></div><div><dt>Runs on</dt><dd>CPU, about 180 forecasts a second, 800 with Lite</dd></div><div><dt>Reads</dt><dd>multivariate series with control variables</dd></div><div><dt>Returns</dt><dd>point forecasts and quantiles</dd></div></dl>
-            <div class="md-h">Size across the family</div>
-            <canvas class="md-ladder" data-m="ttm" role="img" aria-label="Parameter counts on a log scale: TSPulse 1M, TTM 1M to 35M, FlowState 18.5M, PatchTST-FM 385M"></canvas>
+            <div class="md-h">How it fits the family</div>
+            <canvas class="md-ladder" data-m="ttm" role="img" aria-label="Size and history across the family on log scales. TTM: 1M to 35M parameters, reads 512 to 1,536 points."></canvas>
+            <div class="md-rows"><div class="md-row"><span class="md-rk">Runs on</span><span class="md-chips"><span class="md-c on">CPU</span><em>about 180 forecasts a second, 800 with Lite</em></span></div><div class="md-row"><span class="md-rk">Returns</span><span class="md-chips"><span class="md-c">point forecasts</span><span class="md-c">quantiles</span></span></div></div>
             <p class="md-proof">NeurIPS 2024 · 15 to 50× faster than typical models</p>
           </div>
         </div>
@@ -1246,17 +1269,13 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <div class="stage-body">
         <div class="md-grid">
           <div class="md-main">
-            <div class="md-viz"><canvas class="md-cv" data-viz="flowstate" role="img" aria-label="Three streams sampled every second, every 15 minutes and every day, forecast by the same model"></canvas></div>
-            <div class="md-fit">
-              <div><div class="md-h">Choose it when</div><ul class="md-when"><li>Your streams arrive at different rates, from sensors every second to daily demand</li><li>Sampling changes over time and you do not want a model per rate</li><li>You want long horizons from a compact model</li></ul></div>
-              <div><div class="md-h">Use cases it powers</div><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-prod">Production optimization <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-trade">Trading <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div>
-            </div>
+            <div class="md-viz"><div class="md-flow" data-m="flowstate"><span class="mf-s"><i>In</i><span>every second, 15 min, day</span></span><span class="mf-a" aria-hidden="true"></span><span class="mf-s mf-m"><i>Model</i><span>FlowState, one model</span></span><span class="mf-a" aria-hidden="true"></span><span class="mf-s mf-o"><i>Out</i><b data-out>…</b><em data-outl>rates, one model</em></span></div><canvas class="md-cv" data-viz="flowstate" role="img" aria-label="Three streams sampled every second, every 15 minutes and every day, forecast by the same model"></canvas></div>
+            <div class="md-fit"><div class="md-best"><span class="md-h">Best for</span><div class="md-chips"><span class="md-c">streams at any rate</span><span class="md-c">no model per rate</span><span class="md-c">long horizons, compact</span></div></div><div class="md-use-row"><span class="md-h">Use cases it powers</span><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-prod">Production optimization <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-trade">Trading <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div></div>
           </div>
           <div class="md-side">
-            <div class="md-h">Efficiency profile</div>
-            <dl class="md-spec"><div><dt>Size</dt><dd>18.5M parameters, a state space model</dd></div><div><dt>Runs on</dt><dd>CPU or GPU, compact</dd></div><div><dt>Reads</dt><dd>up to 4,096 points at any sampling rate</dd></div><div><dt>Returns</dt><dd>quantile forecasts, horizon set by the data</dd></div></dl>
-            <div class="md-h">Size across the family</div>
-            <canvas class="md-ladder" data-m="flowstate" role="img" aria-label="Parameter counts on a log scale: TSPulse 1M, TTM 1M to 35M, FlowState 18.5M, PatchTST-FM 385M"></canvas>
+            <div class="md-h">How it fits the family</div>
+            <canvas class="md-ladder" data-m="flowstate" role="img" aria-label="Size and history across the family on log scales. FlowState: 18.5M parameters, reads up to 4,096 points."></canvas>
+            <div class="md-rows"><div class="md-row"><span class="md-rk">Runs on</span><span class="md-chips"><span class="md-c on">CPU</span><span class="md-c on">GPU</span><em>compact</em></span></div><div class="md-row"><span class="md-rk">Returns</span><span class="md-chips"><span class="md-c">quantile forecasts</span><span class="md-c">horizon set by the data</span></span></div></div>
             <p class="md-proof">ICML 2026 · more than 10× smaller than the next best models on GIFT-Eval</p>
           </div>
         </div>
@@ -1268,17 +1287,13 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <div class="stage-body">
         <div class="md-grid">
           <div class="md-main">
-            <div class="md-viz"><canvas class="md-cv" data-viz="patchtstfm" role="img" aria-label="A long price history with a fan of forecast quantiles and the chance of crossing a limit"></canvas></div>
-            <div class="md-fit">
-              <div><div class="md-h">Choose it when</div><ul class="md-when"><li>A decision depends on risk, like a service level or a trading limit</li><li>Your history is long and complex, up to 8,192 points</li><li>Accuracy matters more than the cost of each call</li></ul></div>
-              <div><div class="md-h">Use cases it powers</div><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-trade">Trading <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-demand">Supply chain planning <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div>
-            </div>
+            <div class="md-viz"><div class="md-flow" data-m="patchtstfm"><span class="mf-s"><i>In</i><span>8,192 points of history</span></span><span class="mf-a" aria-hidden="true"></span><span class="mf-s mf-m"><i>Model</i><span>PatchTST-FM, 99 quantiles</span></span><span class="mf-a" aria-hidden="true"></span><span class="mf-s mf-o"><i>Out</i><b data-out>…</b><em data-outl>chance above the limit</em></span></div><canvas class="md-cv" data-viz="patchtstfm" role="img" aria-label="A long price history with a fan of forecast quantiles and the chance of crossing a limit"></canvas></div>
+            <div class="md-fit"><div class="md-best"><span class="md-h">Best for</span><div class="md-chips"><span class="md-c">risk and limits</span><span class="md-c">long, complex history</span><span class="md-c">top accuracy</span></div></div><div class="md-use-row"><span class="md-h">Use cases it powers</span><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-trade">Trading <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-demand">Supply chain planning <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div></div>
           </div>
           <div class="md-side">
-            <div class="md-h">Efficiency profile</div>
-            <dl class="md-spec"><div><dt>Size</dt><dd>385M parameters, the largest of the four</dd></div><div><dt>Runs on</dt><dd>CPU or GPU, the heaviest per call</dd></div><div><dt>Reads</dt><dd>up to 8,192 points of history</dd></div><div><dt>Returns</dt><dd>99 quantiles, q10 to q90 shown here</dd></div></dl>
-            <div class="md-h">Size across the family</div>
-            <canvas class="md-ladder" data-m="patchtstfm" role="img" aria-label="Parameter counts on a log scale: TSPulse 1M, TTM 1M to 35M, FlowState 18.5M, PatchTST-FM 385M"></canvas>
+            <div class="md-h">How it fits the family</div>
+            <canvas class="md-ladder" data-m="patchtstfm" role="img" aria-label="Size and history across the family on log scales. PatchTST-FM: 385M parameters, reads up to 8,192 points."></canvas>
+            <div class="md-rows"><div class="md-row"><span class="md-rk">Runs on</span><span class="md-chips"><span class="md-c on">CPU</span><span class="md-c on">GPU</span><em>the heaviest per call</em></span></div><div class="md-row"><span class="md-rk">Returns</span><span class="md-chips"><span class="md-c">99 quantiles</span><span class="md-c">q10 to q90 shown</span></span></div></div>
             <p class="md-proof">Top commercial-friendly zero-shot model on GIFT-Eval, August 2026</p>
           </div>
         </div>
@@ -1290,17 +1305,13 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <div class="stage-body">
         <div class="md-grid">
           <div class="md-main">
-            <div class="md-viz"><canvas class="md-cv" data-viz="tspulse" role="img" aria-label="Four small panels: an anomaly flagged, a past match found, a pattern labeled and a gap filled"></canvas></div>
-            <div class="md-fit">
-              <div><div class="md-h">Choose it when</div><ul class="md-when"><li>You need anomaly flags on every event, without a GPU</li><li>You want to find the past moment that looks like now</li><li>Gaps in sensor data or unlabeled patterns slow your teams down</li></ul></div>
-              <div><div class="md-h">Use cases it powers</div><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-anom">Anomaly detection <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-fraud">Fraud and security <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-search">Semantic search <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div>
-            </div>
+            <div class="md-viz"><div class="md-flow" data-m="tspulse"><span class="mf-s"><i>In</i><span>every event</span></span><span class="mf-a" aria-hidden="true"></span><span class="mf-s mf-m"><i>Model</i><span>TSPulse, GPU-free</span></span><span class="mf-a" aria-hidden="true"></span><span class="mf-s mf-o"><i>Out</i><b data-out>…</b><em data-outl></em></span></div><canvas class="md-cv" data-viz="tspulse" role="img" aria-label="Four small panels: an anomaly flagged, a past match found, a pattern labeled and a gap filled"></canvas></div>
+            <div class="md-fit"><div class="md-best"><span class="md-h">Best for</span><div class="md-chips"><span class="md-c">a flag on every event</span><span class="md-c">find the moment like now</span><span class="md-c">fill sensor gaps</span></div></div><div class="md-use-row"><span class="md-h">Use cases it powers</span><div class="md-ucs"><button type="button" class="md-uc" data-uc="uc-anom">Anomaly detection <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-fraud">Fraud and security <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="md-uc" data-uc="uc-search">Semantic search <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div></div></div>
           </div>
           <div class="md-side">
-            <div class="md-h">Efficiency profile</div>
-            <dl class="md-spec"><div><dt>Size</dt><dd>1M parameters</dd></div><div><dt>Runs on</dt><dd>GPU-free</dd></div><div><dt>Reads</dt><dd>512 points, about 2,048 for anomaly detection</dd></div><div><dt>Returns</dt><dd>anomaly scores, labels, embeddings, filled gaps</dd></div></dl>
-            <div class="md-h">Size across the family</div>
-            <canvas class="md-ladder" data-m="tspulse" role="img" aria-label="Parameter counts on a log scale: TSPulse 1M, TTM 1M to 35M, FlowState 18.5M, PatchTST-FM 385M"></canvas>
+            <div class="md-h">How it fits the family</div>
+            <canvas class="md-ladder" data-m="tspulse" role="img" aria-label="Size and history across the family on log scales. TSPulse: 1M parameters, reads 512 points, about 2,048 for anomaly detection."></canvas>
+            <div class="md-rows"><div class="md-row"><span class="md-rk">Runs on</span><span class="md-chips"><span class="md-c on">CPU</span><span class="md-c free">GPU-free</span></span></div><div class="md-row"><span class="md-rk">Returns</span><span class="md-chips"><span class="md-c">anomaly scores</span><span class="md-c">labels</span><span class="md-c">embeddings</span><span class="md-c">filled gaps</span></span></div></div>
             <p class="md-proof">ICLR 2026 · #1 on TSB-AD, univariate and multivariate</p>
           </div>
         </div>
@@ -2227,26 +2238,35 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   /* use case links jump to that use case, opened */
   $$('.md-uc').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.uc;if(App.tabSel&&App.tabSel[id])App.tabSel[id]();const t=$('#uctabs');if(t){const hp=t.previousElementSibling,h=hp&&hp.classList.contains('strip-hint')&&hp.offsetParent?hp:t,nav=document.querySelector('.nav'),y=h.getBoundingClientRect().top+scrollY-(nav?nav.offsetHeight:56)-16;window.scrollTo({top:y,behavior:reduced?'auto':'smooth'});}}));
 
-  /* size across the family, on a log scale */
-  const SIZE=[['TSPulse',1.1,1.1,'tspulse'],['TTM',1,35,'ttm'],['FlowState',18.5,18.5,'flowstate'],['PatchTST-FM',385,385,'patchtstfm']];
+  /* how it fits the family: size and history read, on two log scales, every model on both, the chosen one lit */
+  const SIZE=[['TSPulse',1,1,'tspulse'],['TTM',1,35,'ttm'],['FlowState',18.5,18.5,'flowstate'],['PatchTST-FM',385,385,'patchtstfm']];
+  const HIST=[['TSPulse',512,2048,'tspulse'],['TTM',512,1536,'ttm'],['FlowState',4096,4096,'flowstate'],['PatchTST-FM',8192,8192,'patchtstfm']];
+  const fmtK=v=>v>=1000?(v/1000).toFixed(v%1000?3:0).replace(/\.?0+$/,'')+','+String(v%1000).padStart(3,'0'):String(v);
+  const SEL={ttm:['1M to 35M parameters','512 to 1,536 points'],flowstate:['18.5M parameters','up to 4,096 points'],patchtstfm:['385M parameters','up to 8,192 points'],tspulse:['1M parameters','512 points, 2,048 to detect']};
+  function scale(ctx,W,y0,title,data,lo,hi,ticks,k,selText){const X=v=>12+(W-24)*(Math.log10(v)-lo)/(hi-lo),ay=y0+50;
+    txt(ctx,title,0,y0+6,'#78a9ff',9.5,'left','600');
+    ctx.strokeStyle='rgba(255,255,255,.22)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(12,ay+0.5);ctx.lineTo(W-12,ay+0.5);ctx.stroke();
+    ticks.forEach(([v,s])=>{const x=Math.round(X(v))+0.5;ctx.beginPath();ctx.moveTo(x,ay-3);ctx.lineTo(x,ay+3);ctx.stroke();txt(ctx,s,x,ay+11,'rgba(255,255,255,.45)',9,'center');});
+    const lab=[];data.forEach(([n,a,b,m])=>{const on=m===k,x0=X(a),x1=X(b),xm=(x0+x1)/2;
+      if(b>a){ctx.fillStyle=on?'rgba(69,137,255,.55)':'rgba(255,255,255,.16)';ctx.fillRect(x0,ay-3.5,x1-x0,7);}
+      ctx.beginPath();ctx.arc(xm,ay,on?5.5:3.5,0,Math.PI*2);ctx.fillStyle=on?'#4589ff':'rgba(255,255,255,.5)';ctx.fill();if(on){ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();}
+      if(on){ctx.strokeStyle='rgba(166,200,255,.6)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(xm)+0.5,ay-8);ctx.lineTo(Math.round(xm)+0.5,y0+27);ctx.stroke();
+        ctx.font='600 11px '+SANS;const t=n+' · '+selText,w=ctx.measureText(t).width;txt(ctx,t,clamp(xm,w/2+2,W-w/2-2),y0+21,'#fff',11,'center','600',SANS);}
+      else lab.push([n,xm]);});
+    /* names of the other three, kept apart */
+    ctx.font='400 9px '+MF;let last=-1e9,row=0;lab.sort((p,q)=>p[1]-q[1]).forEach(([n,x])=>{const w=ctx.measureText(n).width;row=x-w/2<last+6?1-row:0;txt(ctx,n,clamp(x,w/2,W-w/2),ay-11-row*10,'rgba(255,255,255,.5)',9,'center');last=x+w/2;});}
   function ladder(c){const cv=new Cv(c);if(!cv.fit())return;const ctx=cv.ctx,W=cv.W,H=cv.H,k=c.dataset.m;ctx.clearRect(0,0,W,H);
-    const lo=Math.log10(0.6),hi=Math.log10(700),X=v=>10+(W-20)*(Math.log10(v)-lo)/(hi-lo),ay=H-16;
-    ctx.strokeStyle='rgba(255,255,255,.25)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(10,ay+0.5);ctx.lineTo(W-10,ay+0.5);ctx.stroke();
-    [[1,'1M'],[10,'10M'],[100,'100M']].forEach(([v,s])=>{const x=Math.round(X(v))+0.5;ctx.beginPath();ctx.moveTo(x,ay-3);ctx.lineTo(x,ay+3);ctx.stroke();txt(ctx,s,x,ay+10,'rgba(255,255,255,.45)',9.5,'center');});
-    SIZE.forEach(([n,a,b,m],i)=>{const on=m===k,y=on?18:ay-14-((i%2)*0);const x0=X(a),x1=X(b);
-      if(b>a){ctx.fillStyle=on?'rgba(69,137,255,.5)':'rgba(255,255,255,.18)';ctx.fillRect(x0,ay-4,x1-x0,8);}
-      ctx.fillStyle=on?'#4589ff':'rgba(255,255,255,.55)';ctx.beginPath();ctx.arc((x0+x1)/2,ay,on?5:3.5,0,Math.PI*2);ctx.fill();if(on){ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();}
-      if(on){const xm=(x0+x1)/2;ctx.strokeStyle='rgba(166,200,255,.6)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(xm+0.5,ay-7);ctx.lineTo(xm+0.5,26);ctx.stroke();txt(ctx,n+(b>a?' · 1M to 35M':' · '+(a<2?'1M':a+'M')),clamp(xm,60,W-60),14,'#fff',11,'center','600',SANS);}
-      else txt(ctx,n,(x0+x1)/2,ay-13,'rgba(255,255,255,.5)',9.5,'center');});}
+    scale(ctx,W,0,'SIZE',SIZE,Math.log10(0.6),Math.log10(700),[[1,'1M'],[10,'10M'],[100,'100M']],k,SEL[k][0]);
+    scale(ctx,W,76,'HISTORY IT READS',HIST,Math.log10(380),Math.log10(11000),[[512,'512'],[1024,'1K'],[2048,'2K'],[4096,'4K'],[8192,'8K']],k,SEL[k][1]);}
 
   /* the live picture in each panel */
   const VIZ={
     /* TTM: one model sweeps through dozens of series, each one gets its forecast */
     ttm:{init(s){s.r=prng(4);s.cells=[];for(let i=0;i<48;i++)s.cells.push({ph:s.r()*6,a:0.18+s.r()*0.2,f:2+s.r()*3,tr:(s.r()-0.5)*0.3});s.t0=performance.now();s.count=0;},
-      draw(s,ctx,W,H,now){const cols=W>=560?12:6,rows=W>=560?4:5,gap=6,top=26,cw=(W-gap*(cols-1))/cols,chh=(H-top-gap*(rows-1))/rows,n=cols*rows;
+      draw(s,ctx,W,H,now){const cols=W>=560?12:6,rows=W>=560?4:5,gap=6,top=2,cw=(W-gap*(cols-1))/cols,chh=(H-top-gap*(rows-1))/rows,n=cols*rows;
         const el=(now-s.t0)/1000,rate=14,done=reduced?n:Math.floor(el*rate);if(done>n+14){s.base=(s.base||0)+Math.floor(el*180);s.t0=now;s.cells.forEach(c=>{c.ph=s.r()*6;});}
         const tot=reduced?2480:Math.floor(el*180)+(s.base||0);
-        txt(ctx,'one model, every series',0,9,'rgba(255,255,255,.6)',10);txt(ctx,'forecasts made · '+tot.toLocaleString('en-US'),W,9,'#a6c8ff',10,'right','600');
+        s.out=tot.toLocaleString('en-US');
         for(let i=0;i<n;i++){const c=s.cells[i%48],cx=(i%cols)*(cw+gap),cy=top+Math.floor(i/cols)*(chh+gap),ok=i<done,cur=i===done;
           ctx.fillStyle=cur?'rgba(15,98,254,.35)':ok?'rgba(15,98,254,.12)':'rgba(255,255,255,.03)';ctx.fillRect(cx,cy,cw,chh);ctx.strokeStyle=cur?'#78a9ff':ok?'rgba(120,169,255,.35)':'rgba(255,255,255,.1)';ctx.lineWidth=1;ctx.strokeRect(Math.round(cx)+0.5,Math.round(cy)+0.5,Math.round(cw)-1,Math.round(chh)-1);
           const v=u=>0.5+c.a*Math.sin(u*c.f+c.ph)+c.tr*u,Y=u=>cy+chh-4-(chh-8)*clamp(v(u),0,1),sp=0.65;
@@ -2256,6 +2276,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     flowstate:{init(s){s.t0=performance.now();},
       draw(s,ctx,W,H,now){const L=[['every second','sensor',90],['every 15 minutes','meter',30],['every day','demand',10]],lab=W>=520?140:96,x0=lab+10,x1=W-(W>=520?92:8),lh=(H-16)/3,el=reduced?99:(now-s.t0)/1000,cyc=7.5,ph=el%cyc;
         if(W>=520){txt(ctx,'one model',W-36,H/2-8,'#fff',11,'center','600',SANS);txt(ctx,'any rate',W-36,H/2+9,'rgba(255,255,255,.55)',10,'center','400',SANS);ctx.strokeStyle='rgba(166,200,255,.55)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x1+10,8);ctx.lineTo(x1+16,8);ctx.lineTo(x1+16,H-8);ctx.lineTo(x1+10,H-8);ctx.stroke();}
+        {const n=reduced?3:[0,1,2].filter(i=>ease((ph-0.8-i*1.1)/1.2)>0.9).length;s.out=(n||3)+' of 3';}
         L.forEach(([a,b,n],i)=>{const y0=8+i*lh,yb=y0+lh-10,f=u=>0.5+0.28*Math.sin(u*Math.PI*4+el*0.4)+0.08*Math.sin(u*31),Y=u=>yb-(yb-y0-6)*f(u),sp=0.66,X=u=>x0+(x1-x0)*u,rev=reduced?1:ease((ph-0.8-i*1.1)/1.2);
           txt(ctx,a,0,y0+lh/2-12,'#fff',W>=520?11.5:10.5,'left','500',SANS);txt(ctx,b,0,y0+lh/2+5,'rgba(255,255,255,.5)',10);
           ctx.strokeStyle='rgba(255,255,255,.08)';ctx.beginPath();ctx.moveTo(x0,yb+0.5);ctx.lineTo(x1,yb+0.5);ctx.stroke();
@@ -2270,17 +2291,18 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
         ctx.strokeStyle='rgba(255,255,255,.08)';for(let k=1;k<4;k++){const y=Math.round(top+(bot-top)*k/4)+0.5;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
         ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=1.1;ctx.beginPath();s.v.forEach((v,i)=>{const x=X(i/(n-1)*sp);i?ctx.lineTo(x,Y(v)):ctx.moveTo(x,Y(v));});ctx.stroke();
         ctx.strokeStyle='rgba(166,200,255,.6)';ctx.beginPath();ctx.moveTo(X(0),bot+8.5);ctx.lineTo(X(sp),bot+8.5);ctx.moveTo(X(0)+0.5,bot+4);ctx.lineTo(X(0)+0.5,bot+12);ctx.moveTo(X(sp)-0.5,bot+4);ctx.lineTo(X(sp)-0.5,bot+12);ctx.stroke();
-        txt(ctx,'reads up to 8,192 points of history',X(sp/2),bot+19,'#a6c8ff',10,'center');
+        {ctx.font='400 10px '+MF;const t=W<420?'8,192 points of history':'reads up to 8,192 points of history',w=ctx.measureText(t).width;txt(ctx,t,Math.max(w/2+2,X(sp/2)),bot+19,'#a6c8ff',10,'center');}
         const m0=s.v[n-1],sg=h=>0.05+0.22*Math.sqrt(h),mu=h=>m0+0.04*h,ue=sp+(1-sp)*rev,H2=u=>(u-sp)/(1-sp);
         [[1.28,0.14],[0.84,0.18],[0.52,0.22],[0.25,0.28]].forEach(([z,a])=>{if(rev<=0)return;ctx.fillStyle='rgba(69,137,255,'+a+')';ctx.beginPath();for(let k=0;k<=30;k++){const u=sp+(ue-sp)*k/30;ctx.lineTo(X(u),Y(mu(H2(u))+z*sg(H2(u))));}for(let k=30;k>=0;k--){const u=sp+(ue-sp)*k/30;ctx.lineTo(X(u),Y(mu(H2(u))-z*sg(H2(u))));}ctx.closePath();ctx.fill();});
         const lim=m0+0.2+0.03*Math.sin(el*0.7),yl=Math.round(Y(lim))+0.5;ctx.strokeStyle='rgba(250,77,86,.85)';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(X(sp*0.7),yl);ctx.lineTo(W,yl);ctx.stroke();ctx.setLineDash([]);txt(ctx,'limit',X(sp*0.7),yl-8,'#ff8389',10);
         if(rev>0){ctx.strokeStyle='#78a9ff';ctx.lineWidth=1.6;ctx.setLineDash([4,3]);ctx.beginPath();for(let k=0;k<=30;k++){const u=sp+(ue-sp)*k/30;k?ctx.lineTo(X(u),Y(mu(H2(u)))):ctx.moveTo(X(u),Y(mu(H2(u))));}ctx.stroke();ctx.setLineDash([]);}
-        if(rev>0.95){const z=(lim-mu(1))/sg(1),p=0.5*(1-erf(z/Math.SQRT2));txt(ctx,Math.round(p*100)+'% chance above the limit',W-4,top+8,'#ffb3b8',10.5,'right','600');txt(ctx,'q10 to q90 of 99 quantiles',W-4,bot-8,'#a6c8ff',10,'right');}
+        if(rev>0.95){const z=(lim-mu(1))/sg(1),p=0.5*(1-erf(z/Math.SQRT2));s.out=Math.round(p*100)+' %';txt(ctx,'q10 to q90 of 99 quantiles',W-4,bot-8,'#a6c8ff',10,'right');}else s.out='…';
         ctx.strokeStyle='rgba(255,255,255,.35)';ctx.beginPath();ctx.moveTo(Math.round(X(sp))+0.5,top);ctx.lineTo(Math.round(X(sp))+0.5,bot);ctx.stroke();}},
     /* TSPulse: four jobs, one small model, lit one at a time */
     tspulse:{init(s){s.t0=performance.now();s.r=prng(21);},
       draw(s,ctx,W,H,now){const wide=W>=640,cols=wide?4:2,rows=wide?1:2,gap=8,tw=(W-gap*(cols-1))/cols,th=(H-gap*(rows-1))/rows,el=reduced?0:(now-s.t0)/1000,act=reduced?-1:Math.floor(el/2.2)%4,lt=(el%2.2)/2.2;
-        const T=[['DETECT','#ffb3b8'],['SEARCH','#e8daff'],['CLASSIFY','#a6c8ff'],['FILL GAPS','#a7f0ba']];
+        const T=[['DETECT','#ffb3b8'],['SEARCH','#e8daff'],['CLASSIFY','#a6c8ff'],['FILL GAPS','#a7f0ba']],RES=[['1 flagged','a spike on one event'],['1 match','the past moment like now'],[null,'the pattern, labeled'],['filled','the missing readings']],ai=act<0?0:act,lab0=['steady','drift','spike'][reduced?1:Math.floor(el/1.1)%3];
+        s.out=RES[ai][0]||lab0;s.outL=RES[ai][1];s.outC=T[ai][1];
         T.forEach(([name,col],k)=>{const x=(k%cols)*(tw+gap),y=Math.floor(k/cols)*(th+gap),on=k===act,px=x+8,pw=tw-16,py=y+24,ph=th-32,X=u=>px+pw*u,Y=v=>py+ph-ph*clamp(v,0,1);
           ctx.fillStyle=on?'rgba(15,98,254,.16)':'rgba(255,255,255,.03)';ctx.fillRect(x,y,tw,th);ctx.strokeStyle=on?'#78a9ff':'rgba(255,255,255,.14)';ctx.lineWidth=1;ctx.strokeRect(Math.round(x)+0.5,Math.round(y)+0.5,Math.round(tw)-1,Math.round(th)-1);
           ctx.font='600 10px '+MF;ctx.fillStyle=on?col:'rgba(255,255,255,.55)';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(name,x+8,y+12);
@@ -2299,9 +2321,10 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   };
   function erf(x){const t=1/(1+0.3275911*Math.abs(x)),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return x>=0?y:-y;}
   $$('.md-cv').forEach(c=>{const k=c.dataset.viz,V=VIZ[k];if(!V)return;const cv=new Cv(c),s={};V.init(s);const panel=c.closest('.mdpanel');
-    reg({el:panel,resize(){cv.fit();const lad=$('.md-ladder',panel);if(lad)ladder(lad);},draw(){if(!cv.W&&!cv.fit())return;const ctx=cv.ctx;ctx.clearRect(0,0,cv.W,cv.H);V.draw(s,ctx,cv.W,cv.H,performance.now());}});});
+    const ob=$('.md-flow [data-out]',panel),ol=$('.md-flow [data-outl]',panel);
+    reg({el:panel,resize(){cv.fit();const lad=$('.md-ladder',panel);if(lad)ladder(lad);},draw(){if(!cv.W&&!cv.fit())return;const ctx=cv.ctx;ctx.clearRect(0,0,cv.W,cv.H);V.draw(s,ctx,cv.W,cv.H,performance.now());
+      if(ob&&s.out!=null&&ob.textContent!==s.out)ob.textContent=s.out;if(ol&&s.outL&&ol.textContent!==s.outL)ol.textContent=s.outL;if(ob&&s.outC&&ob.style.color!==s.outC)ob.style.color=s.outC;}});});
 })();
-
 /* ============ 02 three things change: productivity, accuracy, responsiveness ============ */
 /* Three simple before and after pictures on one shared year, sped up. Gray is today, green is IBM Granite on Confluent. */
 (function(){
