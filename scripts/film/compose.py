@@ -29,7 +29,12 @@ vc = {w: c for w, c, o in xcuts}
 OV_ON, OV_OFF = vc['title'] - T0, dict(cuts)['end'] - T0                     # overlays live between the title card and the end card
 
 man = json.load(open(NAR + 'manifest.json'))['lines']
-plays = [(p['t'] / 1000 - T0, man[k]['dur'], man[k]['file']) for k, p in enumerate(m['plays'])]
+import re as _re
+byfile = {l['file']: l for l in man}
+raw = [(p['t'] / 1000, _re.search(r'(\d\d)\.mp3', p['src']).group(1) + '.mp3') for p in m['plays']]
+# a line cut off by a skipped step is left out: the next line started right away
+raw = [r for k, r in enumerate(raw) if not (k + 1 < len(raw) and raw[k + 1][0] - r[0] < 0.8)]
+plays = [(t - T0, byfile[f]['dur'], f) for t, f in raw]
 END = plays[-1][0] + plays[-1][1] + TAIL
 N = int(round(END * FPS))
 
@@ -44,7 +49,7 @@ def load_ovl(fn):
 brand = load_ovl('brand.png')
 CAPS = {h: load_ovl(f) for h, f in idx['caps'].items()}
 LABS = {h: load_ovl(f) for h, f in idx['labels'].items()}
-caps = [(c['t'] / 1000 - T0, c['h']) for c in m['caps'] if c.get('step') != 12]
+caps = [(c['t'] / 1000 - T0, c['h']) for c in m['caps'] if c.get('step') not in (11, 12)]
 def snap(t):  # labels change with the picture, not with the voice
     best = None
     for w, c, o in xcuts:

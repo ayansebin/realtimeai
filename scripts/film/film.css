@@ -18,6 +18,12 @@ html.film .film-shot .tour-hi{transition:none}
 #film-ui .f-label{font:500 11.5px/1 "IBM Plex Mono",monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--fi2)}
 #film-ui .f-label b{font-weight:500;color:var(--fi4);margin-right:.9em}
 #film-ui .f-label s{text-decoration:none;color:var(--fi4);margin:0 .55em}
+#film-ui .f-label .nav-uc{display:inline-flex;align-items:center;gap:22px;margin-left:20px;padding-left:20px;border-left:1px solid rgba(22,22,22,.2);
+  font:400 13px/1 "IBM Plex Sans",system-ui,sans-serif;letter-spacing:0;text-transform:none;vertical-align:middle}
+#film-ui .f-label .nav-uc i{font-style:normal;color:var(--fi4);position:relative;padding:8px 0}
+#film-ui .f-label .nav-uc i.done{color:var(--fi3)}
+#film-ui .f-label .nav-uc i.on{color:var(--fi);font-weight:500}
+#film-ui .f-label .nav-uc i.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--fb)}
 #film-ui .f-cap{position:absolute;left:80px;right:80px;bottom:0;height:92px;display:flex;align-items:center;justify-content:center;text-align:center;
   font-size:23px;font-weight:400;line-height:1.3;letter-spacing:-.003em;color:var(--fi);text-wrap:balance}
 #film-ui .f-cap > span{display:block;max-width:100%}
