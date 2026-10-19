@@ -1398,7 +1398,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <p class="hero-kicker"><span class="k-ts">Time series intelligence</span> meets <span class="k-ctx">real-time context</span>.</p>
       <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
       <p class="lede">IBM Granite Time Series models now run inside Confluent. They read every live signal in its context and optimize mission-critical decisions while they still matter.</p>
-      <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>90 sec, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
+      <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>2 min, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
     </div>
 
     <div class="stage" id="st-live">
@@ -4172,7 +4172,7 @@ const CS={
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>{const f=App.tabSel&&App.tabSel[id];if(f){f();return true;}return click('[role=tab][aria-controls="'+id+'"]');};
-  /* one pitch, about ninety seconds, told as one story with no pauses between steps: time series intelligence meets real-time context, the forecast that sees it coming,
+  /* one pitch, about two minutes, told as one story with no pauses between steps: time series intelligence meets real-time context, the forecast that sees it coming,
      the decision in time, Confluent and Granite better together, the value, then the proof of breadth: six decisions, four industries, three case studies, and the ask.
      subs are the subtitles, timed to the voice by their length. at('phrase') waits for that phrase in the line.
      hold keeps a step on screen a moment after the voice ends */
@@ -4193,31 +4193,46 @@ const CS={
       say:'and the next order is optimized to keep it full, while the decision still matters.',
       subs:['and the <em>next order is optimized</em> to keep it full,','<em>while the decision still matters</em>.'],
       run:async(w,at)=>{if(App.hero)App.hero.optimize();}},
-    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:15970,
-      say:'That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, with nothing to copy, configure or serve, while the usual way is still a day behind.',
-      subs:['That works because the intelligence','<em>lives where the data already flows</em>.','Confluent <em>streams and governs</em> every event,','and Granite turns it into <em>a decision in under a second</em>,','with nothing to copy, configure or serve,','while the usual way is <em>still a day behind</em>.'],
+    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:12850,
+      say:'That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, while the usual way is still a day behind.',
+      subs:['That works because the intelligence','<em>lives where the data already flows</em>.','Confluent <em>streams and governs</em> every event,','and Granite turns it into <em>a decision in under a second</em>,','while the usual way is <em>still a day behind</em>.'],
       run:async(w,at)=>{const A=App.arch;if(!A)return;const phone=window.innerWidth<=760,v=n=>{A.hi('v'+n);hi('#ax-vals [data-v="'+n+'"]');};A.focus(0,true,1.5);
         await at('lives where');v(3);await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('governs');v(1);v(2);
-        await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);await at('in under a second');if(phone)scrollTo('#arch-a-out',true);A.hi('out');await at('nothing to copy');v(4);v(6);if(phone)scrollTo('#ax-vals',true);
-        await at('the usual way');v(5);}},
+        await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);await at('in under a second');if(phone)scrollTo('#arch-a-out',true);A.hi('out');v(4);await at('while the usual way');v(6);v(5);if(phone)scrollTo('#ax-vals',true);}},
     {n:5,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:9900,
       say:'So your teams ship a forecast in one step instead of six, get thirty-two percent less error than a seasonal baseline, and stop waiting on nightly scoring runs.',
       subs:['So your teams ship a forecast in <em>one step instead of six</em>,','get <em>thirty-two percent less error</em> than a seasonal baseline,','and <em>stop waiting</em> on nightly scoring runs.'],
       run:async w=>{}},
-    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',dur:9680,
-      say:'One pretrained model runs six mission-critical decisions with no data science team: production, anomalies, supply chain, fraud, search and trading,',
-      subs:['One pretrained model runs <em>six mission-critical decisions</em>','with no data science team:','production, anomalies, supply chain,','fraud, search and trading,'],
-      run:async(w,at)=>{hi('#uctabs [role=tab]');await montage(at,'uctabs',[['production','uc-prod'],['anomalies','uc-anom'],['supply chain','uc-demand'],['fraud','uc-fraud'],['search','uc-search'],['trading','uc-trade']]);}},
-    {n:7,act:2,focus:'#h-ind,#indtabs,#st-plant,#st-retail,#st-bank,#st-air',scroll:'#indtabs',top:true,scrollM:'#indtabs',dur:4690,
-      say:'each as a live twin for industrial plants, retail, banking and airlines.',
-      subs:['each as a <em>live twin</em> for industrial plants,','retail, banking and airlines.'],
-      run:async(w,at)=>{hi('#indtabs [role=tab]');await montage(at,'indtabs',[['industrial plants','st-plant'],['retail','st-retail'],['banking','st-bank'],['airlines','st-air']]);}},
-    {n:8,act:2,focus:'#cases,#cstabs,#usecases .cspanel',scroll:'#cstabs',topM:true,pre:()=>{if(App.cement)App.cement.set(false);},dur:14560,
+    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-prod'),dur:13400,
+      say:'Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.',
+      subs:['Time series models <em>optimize mission-critical decisions</em>','as each event lands.','On a chocolate line, <em>temper is forecast on every reading</em>,','so setpoints adjust before a new cocoa butter lot','<em>turns into rework</em>.'],
+      run:async(w,at)=>{hi('#uctabs [role=tab]');await at('On a chocolate');click('#pr-inject .chip[data-v="butter"]');}},
+    {n:7,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-anom'),dur:8410,
+      say:'Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.',
+      subs:['Across thousands of signals,','each series gets <em>its own expected band</em>,','so weekend peaks pass','and <em>only the real breaks are flagged</em>.'],
+      run:async(w,at)=>{await at('so weekend');click('#an-inject .chip[data-v="stockout"]');}},
+    {n:8,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-demand'),dur:6540,
+      say:'In retail, one model forecasts every SKU in every store and reorders at the service level you choose.',
+      subs:['In retail, one model forecasts <em>every SKU in every store</em>','and reorders at <em>the service level you choose</em>.'],
+      run:async(w,at)=>{await at('and reorders');click('#dm-sl .chip[data-v="95"]');}},
+    {n:9,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-fraud'),dur:8290,
+      say:'In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.',
+      subs:['In payments, each card is scored <em>against its own normal</em>','before authorization,','so <em>card testing is held</em>','and travelers get through.'],
+      run:async(w,at)=>{await at('before authorization');click('#fr-inject .chip[data-v="testing"]');}},
+    {n:10,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-search'),dur:5940,
+      say:'Years of history become searchable by shape, so one sketch finds every signal that looked like this.',
+      subs:['Years of history become <em>searchable by shape</em>,','so one sketch finds every signal that looked like this.'],
+      run:async(w,at)=>{await at('so one sketch');click('#se-q .chip[data-v="spike"]');}},
+    {n:11,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-trade'),dur:5960,
+      say:'On the trading desk, a volume forecast with a probability band paces large orders to the market.',
+      subs:['On the trading desk, a volume forecast with <em>a probability band</em>','<em>paces large orders</em> to the market.'],
+      run:async(w,at)=>{await at('paces');click('#tr-inject .chip[data-v="news"]');}},
+    {n:12,act:2,focus:'#cases,#cstabs,#usecases .cspanel',scroll:'#cstabs',topM:true,pre:()=>{if(App.cement)App.cement.set(false);},dur:14560,
       say:'And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error.',
       subs:['And it <em>already works in the field</em>.','Telco tickets open only on <em>confirmed causes</em>,','<em>two models replaced thirty</em> in a cement plant','and lifted accuracy to <em>ninety-nine percent</em>,','and trading forecasts carry <em>about ten percent less error</em>.'],
       run:async(w,at)=>{hi('#cstabs [role=tab]');await at('Telco');show('cstabs','cs-telco');click('#ni-mode .chip[data-v="assist"]');await w(200);click('#ni-inject .chip[data-v="fiber"]');
         await at('two models');show('cstabs','cs-cement');await w(500);if(App.cement)App.cement.set(true);await at('and trading');show('cstabs','cs-fin');}},
-    {n:9,act:3,focus:'.contact',scroll:'#contact',dur:3300,hold:1200,
+    {n:13,act:3,focus:'.contact',scroll:'#contact',dur:3300,hold:1200,
       say:'Bring us a stream and a decision. Contact us to start.',
       subs:['Bring us <em>a stream and a decision</em>.','<em>Contact us</em> to start.'],
       run:async w=>{}}
@@ -4239,7 +4254,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-10-19b';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='2026-10-19c';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}

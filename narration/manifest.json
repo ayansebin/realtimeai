@@ -23,8 +23,8 @@
   {
    "id": "04",
    "file": "04.mp3",
-   "dur": 16.03,
-   "text": "That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, with nothing to copy, configure or serve, while the usual way is still a day behind."
+   "dur": 12.91,
+   "text": "That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, while the usual way is still a day behind."
   },
   {
    "id": "05",
@@ -35,24 +35,48 @@
   {
    "id": "06",
    "file": "06.mp3",
-   "dur": 9.74,
-   "text": "One pretrained model runs six mission-critical decisions with no data science team: production, anomalies, supply chain, fraud, search and trading,"
+   "dur": 13.46,
+   "text": "Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework."
   },
   {
    "id": "07",
    "file": "07.mp3",
-   "dur": 4.75,
-   "text": "each as a live twin for industrial plants, retail, banking and airlines."
+   "dur": 8.47,
+   "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged."
   },
   {
    "id": "08",
    "file": "08.mp3",
-   "dur": 14.62,
-   "text": "And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error."
+   "dur": 6.6,
+   "text": "In retail, one model forecasts every SKU in every store and reorders at the service level you choose."
   },
   {
    "id": "09",
    "file": "09.mp3",
+   "dur": 8.35,
+   "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through."
+  },
+  {
+   "id": "10",
+   "file": "10.mp3",
+   "dur": 6.0,
+   "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this."
+  },
+  {
+   "id": "11",
+   "file": "11.mp3",
+   "dur": 6.02,
+   "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market."
+  },
+  {
+   "id": "12",
+   "file": "12.mp3",
+   "dur": 14.62,
+   "text": "And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error."
+  },
+  {
+   "id": "13",
+   "file": "13.mp3",
    "dur": 3.36,
    "text": "Bring us a stream and a decision. Contact us to start."
   }

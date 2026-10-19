@@ -2,10 +2,14 @@
  {"id": "01", "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands."},
  {"id": "02", "text": "Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,"},
  {"id": "03", "text": "and the next order is optimized to keep it full, while the decision still matters."},
- {"id": "04", "text": "That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, with nothing to copy, configure or serve, while the usual way is still a day behind."},
+ {"id": "04", "text": "That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, while the usual way is still a day behind."},
  {"id": "05", "text": "So your teams ship a forecast in one step instead of six, get thirty-two percent less error than a seasonal baseline, and stop waiting on nightly scoring runs."},
- {"id": "06", "text": "One pretrained model runs six mission-critical decisions with no data science team: production, anomalies, supply chain, fraud, search and trading,"},
- {"id": "07", "text": "each as a live twin for industrial plants, retail, banking and airlines."},
- {"id": "08", "text": "And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error."},
- {"id": "09", "text": "Bring us a stream and a decision. Contact us to start."}
+ {"id": "06", "text": "Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework."},
+ {"id": "07", "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged."},
+ {"id": "08", "text": "In retail, one model forecasts every SKU in every store and reorders at the service level you choose."},
+ {"id": "09", "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through."},
+ {"id": "10", "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this."},
+ {"id": "11", "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market."},
+ {"id": "12", "text": "And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error."},
+ {"id": "13", "text": "Bring us a stream and a decision. Contact us to start."}
 ]
