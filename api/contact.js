@@ -1,7 +1,8 @@
 // Contact form endpoint for realtimeintelligence.io
 //   POST /api/contact                 public, stores one lead privately in Vercel Blob
-//                                     kind: contact (default), trial, early-access or feedback
-//                                     early-access and feedback also notify the owner when one of these is set:
+//                                     kind: contact (default), trial, early-access, feedback or chat-feedback
+//                                     chat-feedback comes from /chat and needs only a rating or a note, the rest is optional
+//                                     early-access, feedback and chat-feedback with a note also notify the owner when one of these is set:
 //                                     RESEND_API_KEY with NOTIFY_EMAIL (and optionally NOTIFY_FROM), or NOTIFY_WEBHOOK
 //   GET  /api/contact?key=KEY         CSV of every lead, newest first (add &format=json for JSON)
 //   GET  /api/contact?key=KEY&check=1 confirms the store is writable and counts the leads
@@ -9,10 +10,10 @@
 const crypto = require('crypto');
 const { put, list, get, del } = require('@vercel/blob');
 
-const LIMITS = { name: 120, email: 200, company: 160, notes: 4000, page: 200, org: 80, region: 40 };
-const KINDS = ['contact', 'trial', 'early-access', 'feedback'];
+const LIMITS = { name: 120, email: 200, company: 160, notes: 4000, page: 200, org: 80, region: 40, context: 6000 };
+const KINDS = ['contact', 'trial', 'early-access', 'feedback', 'chat-feedback'];
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const COLUMNS = ['received', 'kind', 'name', 'email', 'company', 'notes', 'org', 'region', 'rating', 'country', 'page'];
+const COLUMNS = ['received', 'kind', 'name', 'email', 'company', 'notes', 'org', 'region', 'rating', 'country', 'page', 'context'];
 
 const clean = (v, n) => String(v == null ? '' : v).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '').trim().slice(0, n);
 const csvCell = (v) => { const s = String(v == null ? '' : v); return /[",\r\n]/.test(s) || /^[=+\-@]/.test(s) ? '"' + (/^[=+\-@]/.test(s) ? "'" : '') + s.replace(/"/g, '""') + '"' : s; };
@@ -49,12 +50,15 @@ async function readBody(req) {
 async function notify(lead) {
   const subject = lead.kind === 'early-access'
     ? 'Early Access request: ' + lead.company + (lead.org ? ', org ' + lead.org : '')
-    : 'Playground feedback from ' + lead.company + (lead.rating ? ', ' + lead.rating + ' of 5' : '');
+    : lead.kind === 'chat-feedback'
+      ? 'Chat feedback' + (lead.rating === 'up' ? ', thumbs up' : lead.rating === 'down' ? ', thumbs down' : lead.rating ? ', ' + lead.rating : '') + (lead.company ? ' from ' + lead.company : '')
+      : 'Playground feedback from ' + lead.company + (lead.rating ? ', ' + lead.rating + ' of 5' : '');
   const facts = [
-    'Name: ' + lead.name, 'Email: ' + lead.email, 'Company: ' + lead.company,
+    lead.name ? 'Name: ' + lead.name : '', lead.email ? 'Email: ' + lead.email : '', lead.company ? 'Company: ' + lead.company : '',
     lead.org ? 'Confluent organization: ' + lead.org : '', lead.region ? 'Region: ' + lead.region : '',
-    lead.rating ? 'Rating: ' + lead.rating + ' of 5' : '', lead.notes ? 'Notes: ' + lead.notes : '',
+    lead.rating ? 'Rating: ' + lead.rating + (typeof lead.rating === 'number' ? ' of 5' : '') : '', lead.notes ? 'Notes: ' + lead.notes : '',
     'Country: ' + (lead.country || 'unknown'), 'Received: ' + lead.received,
+    lead.context ? '\nThe exchange it is about:\n' + lead.context.slice(0, 2500) : '',
   ].filter(Boolean);
   const todo = lead.kind === 'early-access' ? (lead.org ? 'Turn on the Granite models for this organization, then reply to the visitor.'
     : 'They are signing up for Confluent Cloud now. Ask Confluent to turn on the Granite models for the organization registered to ' + lead.email + ', then email them.') : '';
@@ -66,7 +70,7 @@ async function notify(lead) {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({ from: process.env.NOTIFY_FROM || 'Real-time intelligence <onboarding@resend.dev>',
-        to: process.env.NOTIFY_EMAIL.split(',').map((x) => x.trim()).filter(Boolean), reply_to: lead.email, subject, text }),
+        to: process.env.NOTIFY_EMAIL.split(',').map((x) => x.trim()).filter(Boolean), reply_to: lead.email || undefined, subject, text }),
     })));
   }
   if (process.env.NOTIFY_WEBHOOK) {
@@ -106,7 +110,7 @@ module.exports = async (req, res) => {
     // quiet drops for bots: the hidden field was filled, or the form was sent faster than a person types
     if (b.website || (typeof b.t === 'number' && b.t < 1500)) return send(res, 200, { ok: true });
     const kind = KINDS.indexOf(b.kind) >= 0 ? b.kind : 'contact';
-    const rating = Math.round(Number(b.rating));
+    const rating = kind === 'chat-feedback' && /^(up|down|praise|problem|idea|question|contact)$/.test(String(b.rating)) ? String(b.rating) : Math.round(Number(b.rating));
     const lead = {
       received: new Date().toISOString(),
       kind,
@@ -116,11 +120,15 @@ module.exports = async (req, res) => {
       notes: clean(b.notes, LIMITS.notes),
       org: clean(b.org, LIMITS.org),
       region: clean(b.region, LIMITS.region),
-      rating: rating >= 1 && rating <= 5 ? rating : '',
+      rating: typeof rating === 'string' || (rating >= 1 && rating <= 5) ? rating : '',
       country: clean(req.headers['x-vercel-ip-country'], 8),
       page: clean(b.page, LIMITS.page),
     };
-    if (!lead.name || !lead.company || !EMAIL.test(lead.email)) return send(res, 400, { ok: false, error: 'missing' });
+    if (kind === 'chat-feedback') lead.context = clean(b.context, LIMITS.context);
+    if (kind === 'chat-feedback') {
+      if (!lead.rating && !lead.notes) return send(res, 400, { ok: false, error: 'missing' });
+      if (lead.email && !EMAIL.test(lead.email)) lead.email = '';
+    } else if (!lead.name || !lead.company || !EMAIL.test(lead.email)) return send(res, 400, { ok: false, error: 'missing' });
     const id = lead.received.replace(/[:.]/g, '-') + '-' + crypto.randomBytes(4).toString('hex');
     try {
       await put('leads/' + id + '.json', JSON.stringify(lead, null, 2), { access: 'private', contentType: 'application/json', addRandomSuffix: false });
@@ -129,7 +137,7 @@ module.exports = async (req, res) => {
       return send(res, 500, { ok: false, error: 'store' });
     }
     let notified = false;
-    if (kind === 'early-access' || kind === 'feedback') {
+    if (kind === 'early-access' || kind === 'feedback' || (kind === 'chat-feedback' && lead.notes)) {
       try { notified = await notify(lead); } catch (e) { console.error('contact: notify failed', e && e.message); }
     }
     return send(res, 200, { ok: true, notified });
