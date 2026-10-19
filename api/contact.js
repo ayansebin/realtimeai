@@ -1,14 +1,18 @@
 // Contact form endpoint for realtimeintelligence.io
 //   POST /api/contact                 public, stores one lead privately in Vercel Blob
+//                                     kind: contact (default), trial, early-access or feedback
+//                                     early-access and feedback also notify the owner when one of these is set:
+//                                     RESEND_API_KEY with NOTIFY_EMAIL (and optionally NOTIFY_FROM), or NOTIFY_WEBHOOK
 //   GET  /api/contact?key=KEY         CSV of every lead, newest first (add &format=json for JSON)
 //   GET  /api/contact?key=KEY&check=1 confirms the store is writable and counts the leads
 // KEY is the CONTACT_KEY environment variable. Without it the GET routes stay closed.
 const crypto = require('crypto');
 const { put, list, get, del } = require('@vercel/blob');
 
-const LIMITS = { name: 120, email: 200, company: 160, notes: 4000, page: 200 };
+const LIMITS = { name: 120, email: 200, company: 160, notes: 4000, page: 200, org: 80, region: 40 };
+const KINDS = ['contact', 'trial', 'early-access', 'feedback'];
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const COLUMNS = ['received', 'name', 'email', 'company', 'notes', 'country', 'page'];
+const COLUMNS = ['received', 'kind', 'name', 'email', 'company', 'notes', 'org', 'region', 'rating', 'country', 'page'];
 
 const clean = (v, n) => String(v == null ? '' : v).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '').trim().slice(0, n);
 const csvCell = (v) => { const s = String(v == null ? '' : v); return /[",\r\n]/.test(s) || /^[=+\-@]/.test(s) ? '"' + (/^[=+\-@]/.test(s) ? "'" : '') + s.replace(/"/g, '""') + '"' : s; };
@@ -41,6 +45,37 @@ async function readBody(req) {
   try { return JSON.parse(raw || '{}'); } catch (e) { return {}; }
 }
 
+// tell the owner about an early access request or new feedback; best effort, never blocks the visitor
+async function notify(lead) {
+  const subject = lead.kind === 'early-access'
+    ? 'Early Access request: ' + lead.company + ', org ' + (lead.org || 'unknown')
+    : 'Playground feedback from ' + lead.company + (lead.rating ? ', ' + lead.rating + ' of 5' : '');
+  const text = [
+    subject, '',
+    'Name: ' + lead.name, 'Email: ' + lead.email, 'Company: ' + lead.company,
+    lead.org ? 'Confluent organization: ' + lead.org : '', lead.region ? 'Region: ' + lead.region : '',
+    lead.rating ? 'Rating: ' + lead.rating + ' of 5' : '', lead.notes ? 'Notes: ' + lead.notes : '',
+    'Country: ' + (lead.country || 'unknown'), 'Received: ' + lead.received, '',
+    lead.kind === 'early-access' ? 'Turn on the Granite models for this organization, then reply to the visitor.' : '',
+  ].filter((l, i, a) => l || (i > 0 && a[i - 1])).join('\n');
+  const jobs = [];
+  const timed = (p) => Promise.race([p, new Promise((r) => setTimeout(r, 4000))]);
+  if (process.env.RESEND_API_KEY && process.env.NOTIFY_EMAIL) {
+    jobs.push(timed(fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: process.env.NOTIFY_FROM || 'Real-time intelligence <onboarding@resend.dev>',
+        to: process.env.NOTIFY_EMAIL.split(',').map((x) => x.trim()).filter(Boolean), reply_to: lead.email, subject, text }),
+    })));
+  }
+  if (process.env.NOTIFY_WEBHOOK) {
+    jobs.push(timed(fetch(process.env.NOTIFY_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text }) })));
+  }
+  if (!jobs.length) return false;
+  const out = await Promise.allSettled(jobs);
+  return out.some((o) => o.status === 'fulfilled' && o.value && o.value.ok);
+}
 async function readLead(blob) {
   try {
     const r = await get(blob.pathname, { access: 'private', useCache: false });
@@ -69,12 +104,18 @@ module.exports = async (req, res) => {
     const b = await readBody(req);
     // quiet drops for bots: the hidden field was filled, or the form was sent faster than a person types
     if (b.website || (typeof b.t === 'number' && b.t < 1500)) return send(res, 200, { ok: true });
+    const kind = KINDS.indexOf(b.kind) >= 0 ? b.kind : 'contact';
+    const rating = Math.round(Number(b.rating));
     const lead = {
       received: new Date().toISOString(),
+      kind,
       name: clean(b.name, LIMITS.name),
       email: clean(b.email, LIMITS.email),
       company: clean(b.company, LIMITS.company),
       notes: clean(b.notes, LIMITS.notes),
+      org: clean(b.org, LIMITS.org),
+      region: clean(b.region, LIMITS.region),
+      rating: rating >= 1 && rating <= 5 ? rating : '',
       country: clean(req.headers['x-vercel-ip-country'], 8),
       page: clean(b.page, LIMITS.page),
     };
@@ -86,7 +127,11 @@ module.exports = async (req, res) => {
       console.error('contact: store failed', e && e.message);
       return send(res, 500, { ok: false, error: 'store' });
     }
-    return send(res, 200, { ok: true });
+    let notified = false;
+    if (kind === 'early-access' || kind === 'feedback') {
+      try { notified = await notify(lead); } catch (e) { console.error('contact: notify failed', e && e.message); }
+    }
+    return send(res, 200, { ok: true, notified });
   }
 
   if (req.method === 'GET') {
