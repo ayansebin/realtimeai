@@ -1398,7 +1398,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <p class="hero-kicker"><span class="k-ts">Time series intelligence</span> meets <span class="k-ctx">real-time context</span>.</p>
       <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
       <p class="lede">IBM Granite Time Series models now run inside Confluent. They read every live signal in its context and optimize mission-critical decisions while they still matter.</p>
-      <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>1 min, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
+      <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>90 sec, live</small></button><button class="btn ghost play2" id="walk-open" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></button></div>
     </div>
 
     <div class="stage" id="st-live">
@@ -4172,7 +4172,7 @@ const CS={
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>{const f=App.tabSel&&App.tabSel[id];if(f){f();return true;}return click('[role=tab][aria-controls="'+id+'"]');};
-  /* one pitch, about a minute and a quarter: time series intelligence meets real-time context, the forecast that sees it coming,
+  /* one pitch, about ninety seconds, told as one story with no pauses between steps: time series intelligence meets real-time context, the forecast that sees it coming,
      the decision in time, Confluent and Granite better together, the value, then the proof of breadth: six decisions, four industries, three case studies, and the ask.
      subs are the subtitles, timed to the voice by their length. at('phrase') waits for that phrase in the line.
      hold keeps a step on screen a moment after the voice ends */
@@ -4181,44 +4181,43 @@ const CS={
   const show=(strip,id)=>{tab(id);$$('#'+strip+' [role=tab]').forEach(x=>x.classList.toggle('tour-hi',x.getAttribute('aria-controls')===id));};
   const montage=async(at,strip,list)=>{for(const [p,id] of list){await at(p);show(strip,id);}};
   const SCRIPT=[
-    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:14830,
-      say:'Time series intelligence meets real-time context. IBM Granite Time Series models now run live inside Confluent: pretrained and scalable, efficient on standard CPUs, and learning as each event lands.',
-      subs:['<em>Time series intelligence</em>','meets <em>real-time context</em>.','IBM Granite Time Series models now run','<em>live inside Confluent</em>:','<em>pretrained and scalable</em>,','<em>efficient</em> on standard CPUs,','and <em>learning</em> as each event lands.'],
+    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:17940,
+      say:'Time series intelligence meets real-time context. IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands.',
+      subs:['<em>Time series intelligence</em> meets <em>real-time context</em>.','IBM Granite Time Series models now run <em>live inside Confluent</em>,','<em>pretrained to scale</em> across plants, stores, SKUs and customers,','<em>efficient</em> on standard CPUs,','and <em>learning</em> as each event lands.'],
       run:async(w,at)=>{const H=App.hero;if(!H)return;H.reset();await at('live inside');scrollTo('#st-live');await at('pretrained');H.flash('dom');await at('efficient');H.flash('dist');await at('and learning');H.flash('inter');}},
-    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:8920,
-      say:'Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, and an empty shelf is flagged in seconds.',
-      subs:['Take <em>one store</em> on a hot day.','The forecast reads the heat wave','and <em>sees the stockout coming</em>,','and an empty shelf is <em>flagged in seconds</em>.'],
-      run:async(w,at)=>{await at('reads the heat wave');if(App.hero)App.hero.ctx();await at('and an empty shelf');if(App.hero)App.hero.anomaly();}},
-    {n:3,act:0,focus:'.hero-head,#st-live',dur:7580,
-      say:'Then it optimizes the next order to keep the shelf full, so mission-critical decisions land while they still matter.',
-      subs:['Then it <em>optimizes the next order</em>','to keep the shelf full,','so mission-critical decisions land','<em>while they still matter</em>.'],
-      run:async(w,at)=>{await at('optimizes the next order');if(App.hero)App.hero.optimize();}},
-    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:9930,hold:1800,
-      say:'Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration.',
-      subs:['<em>Better together</em>:','Confluent <em>streams, connects and governs</em> the data,','and Granite turns each event <em>into a decision</em>,','with <em>zero configuration</em>.'],
+    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:8170,
+      say:'Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,',
+      subs:['Take <em>one store</em> on a hot day.','The forecast reads the heat wave','and <em>sees the stockout coming</em>,','so the empty shelf is <em>flagged in seconds</em>,'],
+      run:async(w,at)=>{await at('reads the heat wave');if(App.hero)App.hero.ctx();await at('so the empty shelf');if(App.hero)App.hero.anomaly();}},
+    {n:3,act:0,focus:'.hero-head,#st-live',dur:4500,
+      say:'and the next order is optimized to keep it full, while the decision still matters.',
+      subs:['and the <em>next order is optimized</em> to keep it full,','<em>while the decision still matters</em>.'],
+      run:async(w,at)=>{if(App.hero)App.hero.optimize();}},
+    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:15970,
+      say:'That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, with nothing to copy, configure or serve, while the usual way is still a day behind.',
+      subs:['That works because the intelligence','<em>lives where the data already flows</em>.','Confluent <em>streams and governs</em> every event,','and Granite turns it into <em>a decision in under a second</em>,','with nothing to copy, configure or serve,','while the usual way is <em>still a day behind</em>.'],
       run:async(w,at)=>{const A=App.arch;if(!A)return;const phone=window.innerWidth<=760,v=n=>{A.hi('v'+n);hi('#ax-vals [data-v="'+n+'"]');};A.focus(0,true,1.5);
-        await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('governs');v(1);
-        await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);v(3);await w(700);v(5);
-        await at('into a decision');if(phone)scrollTo('#arch-a-out',true);A.hi('out');await at('zero configuration');v(4);if(phone)scrollTo('#ax-vals',true);
-        for(const n of [1,2,3,5,6]){await w(170);hi('#ax-vals [data-v="'+n+'"]');}}},
-    {n:5,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:8280,
-      say:'For your teams: ten times faster time to value, five to ten percent more accuracy, and decisions in seconds.',
-      subs:['For your teams: <em>ten times faster</em> time to value,','<em>five to ten percent</em> more accuracy,','and decisions <em>in seconds</em>.'],
+        await at('lives where');v(3);await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('governs');v(1);v(2);
+        await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);await at('in under a second');if(phone)scrollTo('#arch-a-out',true);A.hi('out');await at('nothing to copy');v(4);v(6);if(phone)scrollTo('#ax-vals',true);
+        await at('the usual way');v(5);}},
+    {n:5,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:9900,
+      say:'So your teams ship a forecast in one step instead of six, get thirty-two percent less error than a seasonal baseline, and stop waiting on nightly scoring runs.',
+      subs:['So your teams ship a forecast in <em>one step instead of six</em>,','get <em>thirty-two percent less error</em> than a seasonal baseline,','and <em>stop waiting</em> on nightly scoring runs.'],
       run:async w=>{}},
-    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',dur:9040,
-      say:'Six mission-critical decisions, no data science team required: production, anomalies, supply chain, fraud, search and trading.',
-      subs:['<em>Six mission-critical decisions</em>,','no data science team required:','production, anomalies, supply chain,','fraud, search and trading.'],
+    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',dur:9680,
+      say:'One pretrained model runs six mission-critical decisions with no data science team: production, anomalies, supply chain, fraud, search and trading,',
+      subs:['One pretrained model runs <em>six mission-critical decisions</em>','with no data science team:','production, anomalies, supply chain,','fraud, search and trading,'],
       run:async(w,at)=>{hi('#uctabs [role=tab]');await montage(at,'uctabs',[['production','uc-prod'],['anomalies','uc-anom'],['supply chain','uc-demand'],['fraud','uc-fraud'],['search','uc-search'],['trading','uc-trade']]);}},
-    {n:7,act:2,focus:'#h-ind,#indtabs,#st-plant,#st-retail,#st-bank,#st-air',scroll:'#indtabs',top:true,scrollM:'#indtabs',dur:5130,hold:1300,
-      say:'Live twins for industrial plants, retail, banking and airlines.',
-      subs:['<em>Live twins</em> for industrial plants,','retail, banking and airlines.'],
+    {n:7,act:2,focus:'#h-ind,#indtabs,#st-plant,#st-retail,#st-bank,#st-air',scroll:'#indtabs',top:true,scrollM:'#indtabs',dur:4690,
+      say:'each as a live twin for industrial plants, retail, banking and airlines.',
+      subs:['each as a <em>live twin</em> for industrial plants,','retail, banking and airlines.'],
       run:async(w,at)=>{hi('#indtabs [role=tab]');await montage(at,'indtabs',[['industrial plants','st-plant'],['retail','st-retail'],['banking','st-bank'],['airlines','st-air']]);}},
-    {n:8,act:2,focus:'#cases,#cstabs,#usecases .cspanel',scroll:'#cstabs',topM:true,pre:()=>{if(App.cement)App.cement.set(false);},dur:9860,
-      say:'Proven in the field: tickets only on confirmed causes in telco, thirty models to two in cement, ten percent lower error in finance.',
-      subs:['<em>Proven in the field</em>:','tickets only on <em>confirmed causes</em> in telco,','<em>thirty models to two</em> in cement,','<em>ten percent lower error</em> in finance.'],
-      run:async(w,at)=>{hi('#cstabs [role=tab]');await at('tickets only');show('cstabs','cs-telco');click('#ni-mode .chip[data-v="assist"]');await w(200);click('#ni-inject .chip[data-v="fiber"]');
-        await at('thirty models');show('cstabs','cs-cement');await w(500);if(App.cement)App.cement.set(true);await at('ten percent');show('cstabs','cs-fin');}},
-    {n:9,act:3,focus:'.contact',scroll:'#contact',dur:4290,hold:500,
+    {n:8,act:2,focus:'#cases,#cstabs,#usecases .cspanel',scroll:'#cstabs',topM:true,pre:()=>{if(App.cement)App.cement.set(false);},dur:14560,
+      say:'And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error.',
+      subs:['And it <em>already works in the field</em>.','Telco tickets open only on <em>confirmed causes</em>,','<em>two models replaced thirty</em> in a cement plant','and lifted accuracy to <em>ninety-nine percent</em>,','and trading forecasts carry <em>about ten percent less error</em>.'],
+      run:async(w,at)=>{hi('#cstabs [role=tab]');await at('Telco');show('cstabs','cs-telco');click('#ni-mode .chip[data-v="assist"]');await w(200);click('#ni-inject .chip[data-v="fiber"]');
+        await at('two models');show('cstabs','cs-cement');await w(500);if(App.cement)App.cement.set(true);await at('and trading');show('cstabs','cs-fin');}},
+    {n:9,act:3,focus:'.contact',scroll:'#contact',dur:3300,hold:1200,
       say:'Bring us a stream and a decision. Contact us to start.',
       subs:['Bring us <em>a stream and a decision</em>.','<em>Contact us</em> to start.'],
       run:async w=>{}}
@@ -4240,7 +4239,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-10-19a';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='2026-10-19b';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}
@@ -4277,8 +4276,7 @@ const CS={
     segs.forEach((g,j)=>{g.classList.toggle('done',j<i);g.classList.remove('on','paused');g.style.removeProperty('--d');});segBtns.forEach((b,j)=>b.setAttribute('aria-current',j===i?'step':'false'));
     $$('.tour-hi').forEach(e=>e.classList.remove('tour-hi'));
     if(s.pre)s.pre();focus(s.focus);
-    await waitFor(60,token);const phone=window.innerWidth<=760,target=(phone&&s.scrollM)?s.scrollM:s.scroll;if(target)scrollTo(target,s.top||(phone&&s.topM));
-    await waitFor(reduced?60:220,token);
+    const phone=window.innerWidth<=760,target=(phone&&s.scrollM)?s.scrollM:s.scroll;if(target)scrollTo(target,s.top||(phone&&s.topM));
     const seg=segs[i];seg.style.setProperty('--d',len(s)+'ms');void seg.offsetWidth;seg.classList.add('on');st.t0=performance.now();st.pausedMs=0;
     const w=ms=>waitFor(ms,token);
     const at=async p=>{const k=s.say.indexOf(p);if(k<0)return;const t=(k/s.say.length)*s.dur-elapsed();if(t>0)await w(t);};

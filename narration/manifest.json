@@ -5,55 +5,55 @@
   {
    "id": "01",
    "file": "01.mp3",
-   "dur": 14.93,
-   "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run live inside Confluent: pretrained and scalable, efficient on standard CPUs, and learning as each event lands."
+   "dur": 18.0,
+   "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands."
   },
   {
    "id": "02",
    "file": "02.mp3",
-   "dur": 9.02,
-   "text": "Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, and an empty shelf is flagged in seconds."
+   "dur": 8.23,
+   "text": "Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,"
   },
   {
    "id": "03",
    "file": "03.mp3",
-   "dur": 7.68,
-   "text": "Then it optimizes the next order to keep the shelf full, so mission-critical decisions land while they still matter."
+   "dur": 4.56,
+   "text": "and the next order is optimized to keep it full, while the decision still matters."
   },
   {
    "id": "04",
    "file": "04.mp3",
-   "dur": 10.03,
-   "text": "Better together: Confluent streams, connects and governs the data, and Granite turns each event into a decision, with zero configuration."
+   "dur": 16.03,
+   "text": "That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, with nothing to copy, configure or serve, while the usual way is still a day behind."
   },
   {
    "id": "05",
    "file": "05.mp3",
-   "dur": 8.38,
-   "text": "For your teams: ten times faster time to value, five to ten percent more accuracy, and decisions in seconds."
+   "dur": 9.96,
+   "text": "So your teams ship a forecast in one step instead of six, get thirty-two percent less error than a seasonal baseline, and stop waiting on nightly scoring runs."
   },
   {
    "id": "06",
    "file": "06.mp3",
-   "dur": 9.14,
-   "text": "Six mission-critical decisions, no data science team required: production, anomalies, supply chain, fraud, search and trading."
+   "dur": 9.74,
+   "text": "One pretrained model runs six mission-critical decisions with no data science team: production, anomalies, supply chain, fraud, search and trading,"
   },
   {
    "id": "07",
    "file": "07.mp3",
-   "dur": 5.23,
-   "text": "Live twins for industrial plants, retail, banking and airlines."
+   "dur": 4.75,
+   "text": "each as a live twin for industrial plants, retail, banking and airlines."
   },
   {
    "id": "08",
    "file": "08.mp3",
-   "dur": 9.96,
-   "text": "Proven in the field: tickets only on confirmed causes in telco, thirty models to two in cement, ten percent lower error in finance."
+   "dur": 14.62,
+   "text": "And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error."
   },
   {
    "id": "09",
    "file": "09.mp3",
-   "dur": 4.39,
+   "dur": 3.36,
    "text": "Bring us a stream and a decision. Contact us to start."
   }
  ]
