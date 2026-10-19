@@ -1650,110 +1650,6 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
 .mk-priv svg{width:14px;height:14px;flex:none;color:#6fdc8c}
 @media (max-width:600px){.mk-row{grid-template-columns:minmax(0,1fr);gap:4px}.mk-row .mk-k{padding-top:0}.mk-go .btn{width:100%;justify-content:center}#mk-seed{order:3}.mk-cols label,.mk-cols select{width:100%;max-width:none}}
 .mk-row.full{grid-column:1/-1}
-
-/* try it on Confluent: you and we, side by side */
-.tw-steps button em{margin-left:auto;padding-left:.5rem;font-style:normal;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:#8d8d8d;white-space:nowrap}
-.tw-steps button.on em{color:#a6c8ff}
-.tw-steps button[disabled]{opacity:.45;cursor:default}
-.tw-steps button[disabled]:hover{background:transparent;border-color:transparent}
-@media (max-width:900px){.tw-steps button em{display:none}}
-.tw-form{display:grid;gap:.75rem;max-width:620px}
-.tw-form label{display:grid;gap:.3rem}
-.tw-form label>span{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#a6c8ff}
-.tw-form input:not([type=checkbox]),.tw-form select,.tw-form textarea{font:inherit;font-size:.95rem;color:#fff;background:rgba(10,20,48,.5);border:1px solid rgba(255,255,255,.22);border-radius:2px;padding:.55rem .7rem;outline:none;width:100%;box-sizing:border-box}
-.tw-form select option{color:#161616}
-.tw-form input:focus,.tw-form select:focus,.tw-form textarea:focus{border-color:#78a9ff}
-.tw-form .tw-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-@media (max-width:600px){.tw-form .tw-row{grid-template-columns:1fr}}
-.tw-form .tw-check{display:flex;align-items:flex-start;gap:.55rem;cursor:pointer}
-.tw-form .tw-check>span{font-family:var(--font-sans);font-size:.88rem;letter-spacing:0;text-transform:none;color:#d6dbe5}
-.tw-check input{margin:.2rem 0 0;accent-color:#0f62fe;width:16px;height:16px;flex:none}
-.tw-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
-.tw-err{margin:0;color:#ff8389;font-size:.88rem}
-.tw-fine{display:block;margin:0;font-size:.82rem;color:#c1c7d6;line-height:1.5}
-.tw-fine svg{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:.4rem;color:#6fdc8c}
-.tw-fine b{font-weight:500;color:#fff}
-.tw-do{margin:0;padding-left:1.2rem;display:grid;gap:.4rem;color:#e0e4ec;font-size:.95rem;line-height:1.45}
-.tw-do b{font-weight:500;color:#fff}
-.tw-chip{font:inherit;font-size:.72rem;color:#fff;background:rgba(15,98,254,.35);border:1px solid #78a9ff;border-radius:3px;padding:.05rem .45rem;margin-left:.35rem;cursor:pointer}
-.tw-link{font:inherit;font-size:.88rem;color:#a6c8ff;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.tw-alt{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:flex-end}
-.tw-log{list-style:none;margin:0;padding:0;display:grid;gap:.45rem;font-size:.92rem}
-.tw-log li{position:relative;padding-left:1.5rem;color:#e0e4ec;line-height:1.45}
-.tw-log li::before{content:'';position:absolute;left:0;top:.36rem;width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);box-sizing:border-box}
-.tw-log li.ok::before{background:#42be65;border-color:#42be65}
-.tw-log li.busy::before{border-color:#f1c21b;border-top-color:transparent;animation:twspin .9s linear infinite}
-.tw-log li.err{color:#ffd7d9}.tw-log li.err::before{background:#fa4d56;border-color:#fa4d56}
-.tw-log li.warn::before{background:#f1c21b;border-color:#f1c21b}
-.tw-log li[class=""]{padding-left:0}.tw-log li[class=""]::before{display:none}
-.tw-panel code{font-family:var(--font-mono);font-size:.76rem;color:#a6c8ff;background:rgba(0,0,0,.22);padding:.05rem .35rem;border-radius:2px;overflow-wrap:anywhere}
-.tw-log b{font-weight:500;color:#fff}
-.tw-t{font-family:var(--font-mono);font-size:.74rem;color:#a6c8ff;margin-left:.3rem}
-@keyframes twspin{to{transform:rotate(360deg)}}
-.tw-table{overflow-x:auto;background:rgba(10,20,48,.45);border:1px solid rgba(255,255,255,.12);border-radius:3px}
-.tw-table table{width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:.78rem}
-.tw-table th{text-align:left;font-weight:500;color:#a6c8ff;padding:.45rem .6rem;border-bottom:1px solid rgba(255,255,255,.12);white-space:nowrap}
-.tw-table td{padding:.38rem .6rem;border-bottom:1px solid rgba(255,255,255,.06);color:#e0e4ec;white-space:nowrap}
-.tw-table .tw-t{display:block;padding:.45rem .6rem;margin:0}
-.tw-empty{padding:1rem;color:#c1c7d6;font-size:.88rem}
-.tw-chart{height:clamp(200px,24vw,260px);background:rgba(10,20,48,.45);border:1px solid rgba(255,255,255,.12);border-radius:3px}
-.tw-chart canvas{display:block;width:100%;height:100%}
-.tw-legend{display:flex;flex-wrap:wrap;gap:.35rem 1rem;font-size:.78rem;color:#c1c7d6}
-.tw-legend i{display:inline-block;width:14px;height:2px;margin-right:.4rem;vertical-align:middle}
-.tw-legend i.band{height:8px;background:rgba(120,169,255,.3)}
-.tw-legend i.dot{width:8px;height:8px;border-radius:50%;background:#fa4d56}
-.tw-sql summary{cursor:pointer;font-size:.86rem;color:#a6c8ff;list-style:none;display:inline-flex;align-items:center;gap:.45rem}
-.tw-sql summary::-webkit-details-marker{display:none}
-.tw-sql summary::before{content:'';width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
-.tw-sql[open] summary::before{transform:rotate(45deg)}
-.tw-sql[open] summary{margin-bottom:.6rem}
-.tw-sql .tw-code+.tw-code{margin-top:.6rem}
-.tw-q{font-size:.95rem;color:#fff}
-.tw-rate{display:flex;gap:6px}
-.tw-rate button{width:42px;height:38px;font:inherit;color:#fff;background:rgba(10,20,48,.5);border:1px solid rgba(255,255,255,.22);border-radius:2px;cursor:pointer}
-.tw-rate button[aria-checked="true"]{background:#0f62fe;border-color:#0f62fe}
-.tw-clean{margin-top:.4rem;border-top:1px solid rgba(255,255,255,.14);padding-top:.8rem;display:grid;gap:.5rem;justify-items:start}
-.tw-clean b{font-weight:500;color:#fff}.tw-clean p{margin:0;font-size:.9rem}
-.tw-reg{max-width:340px}
-.tw-acts .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
-.tw-acts .btn.ghost:hover{background:rgba(255,255,255,.08)}
-.tw-acts .btn svg,.tw-nav .btn svg{width:13px;height:13px}
-
-.tw-panel .btn.ghost{color:#fff;border:1px solid rgba(255,255,255,.45);background:transparent}
-.tw-panel .btn.ghost:hover{background:rgba(255,255,255,.08)}
-
-/* try it on Confluent: one form, the page does the rest */
-.tw1{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);border:1px solid #0f62fe;background:linear-gradient(150deg,#2c5066 0%,#26375f 70%);color:#f6f7fb}
-@media (max-width:900px){.tw1{grid-template-columns:minmax(0,1fr)}}
-.tw1-do{list-style:none;margin:0;padding:clamp(18px,2.4vw,30px);display:grid;gap:1.15rem;align-content:center;border-right:1px solid rgba(255,255,255,.14)}
-@media (max-width:900px){.tw1-do{border-right:0;border-bottom:1px solid rgba(255,255,255,.14)}}
-.tw1-do li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:.8rem;align-items:start}
-.tw1-do li i{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.45);margin-top:.1rem;box-sizing:border-box;transition:background .25s,border-color .25s}
-.tw1-do li.busy i{border-color:#f1c21b;border-top-color:transparent;animation:twspin .9s linear infinite}
-.tw1-do li.ok i{background:#42be65 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.6 2.5L12 5.5' fill='none' stroke='%23fff' stroke-width='1.8'/%3E%3C/svg%3E") center/14px no-repeat;border-color:#42be65}
-.tw1-do li.warn i{background:#f1c21b;border-color:#f1c21b}
-.tw1-do b{display:block;font-weight:500;font-size:1rem;color:#fff;line-height:1.35}
-.tw1-do span{display:block;font-size:.84rem;color:#c1c7d6;line-height:1.45;margin-top:.15rem}
-.tw1-do .tw1-x:empty{display:none}
-.tw1-panel{padding:clamp(18px,2.4vw,30px);display:grid;align-content:center;min-height:300px}
-.tw1-panel .tw-form{max-width:none}
-.tw1-want{display:grid;gap:.4rem}
-.tw1-want>span{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#a6c8ff}
-.tw1-want .chip{color:#e0e4ec;border-color:rgba(255,255,255,.3)}
-.tw1-want .chip[aria-pressed="true"]{background:#0f62fe;border-color:#0f62fe;color:#fff}
-.tw1-go{display:flex;align-items:center;gap:.6rem 1.2rem;flex-wrap:wrap;margin-top:.2rem}
-.tw1-go .btn{margin-left:0;gap:1rem}
-.tw1-go .tw-fine{flex:1 1 220px}
-.tw1-done{display:grid;gap:.75rem;justify-items:start}
-.tw1-done h3{margin:0;font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:300;color:#fff}
-.tw1-done p{margin:0;font-size:1rem;line-height:1.55;color:#d6dbe5;max-width:58ch}
-.tw1-done p b{font-weight:500;color:#fff}
-.tw1-done .tw-code{width:100%}
-.tw1-panel,.tw1-done,.tw1-do{min-width:0}
-.tw1-done>*{max-width:100%}
-.tw1-done .tw-code{justify-self:stretch;width:100%;min-width:0}
-.tw1-go .btn{background:#0f62fe;color:#fff;border-color:#0f62fe}
-.tw1-go .btn:hover{background:#0043ce;color:#fff}
 </style>
 </head>
 <body class="pg">
@@ -1851,17 +1747,17 @@ body .dcard[aria-pressed="true"],.dcard[aria-pressed="true"]{background:#1b2746;
   <div class="wrap">
     <div class="chapter-head">
       <span class="n">TRY IT ON CONFLUENT</span>
-      <h2>Tell us who you are. We set up the rest.</h2>
+      <h2>From sign-up to your first forecast.</h2>
+      <p>Eight steps on Confluent Cloud. Tick them off as you go.</p>
     </div>
-    <div class="tw1" id="tw1">
-      <ul class="tw1-do" id="tw1-do">
-        <li data-k="ea"><i aria-hidden="true"></i><div><b>We request access to the Granite models</b><span>Early Access on Confluent Cloud, for your company</span><span class="tw1-x"></span></div></li>
-        <li data-k="open"><i aria-hidden="true"></i><div><b>We open Confluent&#39;s sign-up for you</b><span>New accounts get free credits for 30 days</span><span class="tw1-x"></span></div></li>
-        <li data-k="sql"><i aria-hidden="true"></i><div><b>We hand you your first forecast</b><span>The query is copied, ready to paste</span><span class="tw1-x"></span></div></li>
-      </ul>
-      <div class="tw1-panel" id="tw1-panel" aria-live="polite"></div>
+    <div class="tw" id="tw">
+      <div class="tw-side">
+        <div class="tw-prog"><b id="tw-count">0 of 8 done</b><i><span id="tw-bar"></span></i></div>
+        <ol class="tw-steps" id="tw-steps"></ol>
+      </div>
+      <div class="tw-panel" id="tw-panel" aria-live="polite"></div>
     </div>
-    <p class="tw-note">The Granite models are in Early Access on Confluent Cloud on AWS, for evaluation in development and test environments. See <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">the forecast docs</a> and <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/detect-anomalies.html" target="_blank" rel="noopener">the anomaly docs</a>.</p>
+    <p class="tw-note">The models are in Early Access on Confluent Cloud on AWS, for evaluation in development and test environments. Syntax can change, so check <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">the forecast docs</a> and <a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/detect-anomalies.html" target="_blank" rel="noopener">the anomaly docs</a>.</p>
   </div>
 </section>
 
@@ -2093,61 +1989,37 @@ cv.addEventListener('touchmove',e=>{const r=cv.getBoundingClientRect();st.hover=
 cv.addEventListener('touchend',()=>{setTimeout(()=>{st.hover=null;draw();},1500);},{passive:true});
 window.addEventListener('keydown',e=>{if(!st.ds||MINE.mode||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;if(e.key==='ArrowLeft')$('#pg-prev').click();else if(e.key==='ArrowRight')$('#pg-next').click();else if(e.key==='Enter'&&e.target.tagName!=='BUTTON')run();});
 
-/* ---------- try it on Confluent: one short form, then the page does the rest for the visitor ---------- */
+/* ---------- try it on Confluent: an eight step walkthrough you can tick off ---------- */
 (function(){
-  const root=$('#tw1'),panel=$('#tw1-panel'),todo=$('#tw1-do');if(!root||!panel||!todo)return;
-  const SIGNUP='https://www.confluent.io/get-started/';
-  const SQL="SELECT window_time, revenue,\n  AI_FORECAST(revenue, window_time,\n    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 10, 'minContextSize' VALUE 20))\n  OVER (ORDER BY window_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS forecast\nFROM (\n  SELECT window_time, CAST(SUM(price) AS DOUBLE) AS revenue\n  FROM TABLE(TUMBLE(TABLE `examples`.`marketplace`.`orders`, DESCRIPTOR($rowtime), INTERVAL '10' SECOND))\n  GROUP BY window_start, window_end, window_time\n);";
-  const WANT=['Demand and sales','Energy and utilities','Payments and fraud','IT and operations','Something else'];
-  const KEY='pg-try-v3';let P={who:null,want:[],done:false,ok:{}};
-  try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(j&&typeof j==='object')P=Object.assign(P,j);}catch(e){}
-  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(P));}catch(e){}};
-  const t0=Date.now(),sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const list=$('#tw-steps'),panel=$('#tw-panel');if(!list||!panel)return;
+  const SUB="  SELECT window_time, CAST(SUM(price) AS DOUBLE) AS revenue\n  FROM TABLE(TUMBLE(TABLE orders, DESCRIPTOR($rowtime), INTERVAL '10' SECOND))\n  GROUP BY window_start, window_end, window_time";
+  const OVER="  OVER (ORDER BY window_time\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)";
+  const S=[
+    {t:'Create your free account',d:'Sign up for Confluent Cloud. New accounts get free credits for their first 30 days.',a:[['Sign up','https://www.confluent.io/get-started/']]},
+    {t:'Join the Early Access',d:'Request the IBM Granite Time Series models. They open on Confluent Cloud on AWS, at no charge during Early Access.',a:[['Request access','https://events.confluent.io/early-access-flink-features']]},
+    {t:'Open a SQL workspace',d:'In the Cloud Console go to SQL workspaces, create one, and pick AWS and your enabled region. A compute pool is set up for you.',a:[['Open Confluent Cloud','https://confluent.cloud/']]},
+    {t:'Watch a live stream',d:'Set the catalog to examples and the database to marketplace, then run this. Sample orders stream in.',q:'SELECT * FROM orders;'},
+    {t:'Forecast it',d:'Revenue every 10 seconds, the next 10 windows forecast by TTM. Forecasts start once about 50 windows have arrived.',q:"SELECT window_time, revenue,\n  AI_FORECAST(revenue, window_time,\n    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 10))\n"+OVER+" AS forecast\nFROM (\n"+SUB+"\n);"},
+    {t:'Flag anomalies',d:'Same stream. Every window outside the 95% range comes back flagged.',q:"SELECT window_time, revenue,\n  AI_DETECT_ANOMALIES(revenue, window_time,\n    JSON_OBJECT('model' VALUE 'ttm', 'confidencePercentage' VALUE 95.0))\n"+OVER+" AS anomaly\nFROM (\n"+SUB+"\n);"},
+    {t:'Race the models',d:'Change one word and run the forecast again. Nothing else in the pipeline changes.',q:"JSON_OBJECT('model' VALUE 'flowstate', 'horizon' VALUE 10)\nJSON_OBJECT('model' VALUE 'patchtstfm', 'horizon' VALUE 10)"},
+    {t:'Use your own topics',d:'Pick your environment and cluster as catalog and database, swap in your topic and column, and write the result to a topic for alerts, dashboards and agents.',q:"CREATE TABLE my_forecast AS\nSELECT $rowtime AS ts, my_value,\n  AI_FORECAST(CAST(my_value AS DOUBLE), $rowtime,\n    JSON_OBJECT('model' VALUE 'ttm', 'horizon' VALUE 12))\n  OVER (ORDER BY $rowtime\n        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS forecast\nFROM my_topic;",a:[['Read the docs','https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html']]}];
+  const KEY='pg-try-done';let done=[];try{done=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){}
+  let cur=Math.min(S.length-1,(()=>{for(let i=0;i<S.length;i++)if(done.indexOf(i)<0)return i;return S.length-1;})());
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}};
+  const hl=q=>highlight(q).replace(/\b(GROUP|CAST|SUM|TABLE|TUMBLE|DESCRIPTOR|INTERVAL|SECOND|CREATE|DOUBLE)\b/g,'<span class="k">$1</span>');
   const arrow='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
-  const hl=q=>highlight(q).replace(/\b(GROUP|CAST|SUM|TABLE|TUMBLE|DESCRIPTOR|INTERVAL|SECOND|DOUBLE)\b/g,'<span class="k">$1</span>');
-  /* the three things the page does, ticked as they happen */
-  function mark(k,state,extra){const li=$('[data-k="'+k+'"]',todo);if(!li)return;li.className=state||'';const x=$('.tw1-x',li);if(x)x.innerHTML=extra||'';}
-  function actions(){mark('ea',P.ok.ea?'ok':'warn',P.ok.ea?'':'<button type="button" class="tw-link" data-act="retry">Send again</button>');
-    mark('open','ok','<button type="button" class="tw-link" data-act="open">Open it again</button>');
-    mark('sql','ok','<button type="button" class="tw-link" data-act="show">'+(P.ok.sql?'Show it':'Copy it')+'</button>');wireTodo();}
-  function wireTodo(){$$('[data-act]',todo).forEach(b=>{b.onclick=()=>{const a=b.dataset.act;
-    if(a==='open')openSignup();else if(a==='retry')request().then(actions);else if(a==='show'){copy();const box=$('#tw1-sql');if(box)box.hidden=!box.hidden;}};});}
-  function openSignup(){const w=window.open(SIGNUP,'_blank');if(w){try{w.opener=null;}catch(e){}}return !!w;}
-  function copy(){try{if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(SQL).then(()=>true,()=>false);}catch(e){}return Promise.resolve(false);}
-  async function request(){const w=P.who;try{const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind:'early-access',name:w.name,email:w.email,company:w.company,
-      notes:'Wants to forecast: '+(P.want.length?P.want.join(', '):'not said')+(w.more?' · '+w.more:'')+' · signing up from the playground',page:'/playground#try',t:Date.now()-t0})});P.ok.ea=r.ok;}catch(e){P.ok.ea=false;}save();return P.ok.ea;}
-  function form(){const w=P.who||{};todo.querySelectorAll('li').forEach(li=>{li.className='';const x=$('.tw1-x',li);if(x)x.innerHTML='';});
-    panel.innerHTML='<form class="tw-form" id="tw1-form" novalidate>'+
-      '<div class="tw-row"><label><span>Name</span><input name="name" autocomplete="name" value="'+esc(w.name||'')+'" required></label><label><span>Work email</span><input name="email" type="email" autocomplete="email" value="'+esc(w.email||'')+'" required></label></div>'+
-      '<label><span>Company</span><input name="company" autocomplete="organization" value="'+esc(w.company||'')+'" required></label>'+
-      '<div class="tw1-want"><span>What do you want to forecast?</span><div class="chips">'+WANT.map(x=>'<button type="button" class="chip sm" aria-pressed="'+(P.want.indexOf(x)>=0?'true':'false')+'">'+esc(x)+'</button>').join('')+'</div></div>'+
-      '<label><span>Anything else</span><input name="more" autocomplete="off" maxlength="300" value="'+esc(w.more||'')+'" placeholder="Optional, for example: hourly load for 40 plants"></label>'+
-      '<input name="website" class="tw-hp" tabindex="-1" autocomplete="off" aria-hidden="true">'+
-      '<p class="tw-err" hidden></p><div class="tw1-go"><button class="btn" type="submit">Set it up for me '+arrow+'</button><p class="tw-fine">We use these details only to request access for you and follow up.</p></div></form>';
-    $$('.tw1-want .chip',panel).forEach(b=>b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');}));
-    const f=$('#tw1-form',panel);f.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(f),err=$('.tw-err',f);
-      const who={name:String(d.get('name')||'').trim(),email:String(d.get('email')||'').trim(),company:String(d.get('company')||'').trim(),more:String(d.get('more')||'').trim()};
-      const bad=!who.name?'Add your name.':!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(who.email)?'Add a valid work email.':!who.company?'Add your company.':'';
-      if(bad){err.textContent=bad;err.hidden=false;return;}
-      /* inside the click, so the browser allows the new tab and the clipboard */
-      const opened=openSignup(),copied=copy();
-      P.who=who;P.want=$$('.tw1-want .chip[aria-pressed="true"]',f).map(b=>b.textContent);P.ok={open:opened};save();
-      run(copied,!!d.get('website'));});}
-  async function run(copied,bot){panel.innerHTML='<div class="tw1-done"><div class="tw-k">Working on it</div><h3>Setting it up, '+esc(P.who.name.split(' ')[0])+'.</h3></div>';
-    mark('ea','busy');const ea=bot?Promise.resolve(true):request();
-    await sleep(500);mark('ea',(await ea)?'ok':'warn');
-    await sleep(450);mark('open',P.ok.open?'ok':'warn',P.ok.open?'':'<button type="button" class="tw-link" data-act="open">Open it now</button>');
-    await sleep(450);P.ok.sql=await copied;mark('sql','ok');
-    P.done=true;save();await sleep(300);done();}
-  function done(){const w=P.who;actions();
-    panel.innerHTML='<div class="tw1-done"><div class="tw-k">All set</div><h3>You are all set, '+esc(w.name.split(' ')[0])+'.</h3>'+
-      '<p>Finish sign-up in the Confluent tab with <b>'+esc(w.email)+'</b>. We will email you as soon as the Granite models are on for your account. Then paste the query into a Flink SQL workspace and run it.</p>'+
-      (P.ok.ea?'':'<p class="tw-err">We could not send your request just now. Use Send again on the left.</p>')+
-      '<div class="tw-code" id="tw1-sql" hidden><button type="button" class="tw-copy">Copy</button><pre><code>'+hl(SQL)+'</code></pre></div>'+
-      '<button type="button" class="tw-link" data-act="reset">Start over</button></div>';
-    const c=$('.tw-copy',panel);if(c)c.addEventListener('click',()=>{copy().then(ok=>{c.textContent=ok?'Copied':'Copy';setTimeout(()=>c.textContent='Copy',1500);});});
-    $('[data-act="reset"]',panel).addEventListener('click',()=>{P.done=false;P.ok={};save();form();});}
-  if(P.done&&P.who)done();else form();
+  function render(){
+    list.innerHTML=S.map((s,i)=>'<li><button type="button" data-i="'+i+'" class="'+(i===cur?'on ':'')+(done.indexOf(i)>=0?'ok':'')+'" aria-current="'+(i===cur?'step':'false')+'"><i>'+(done.indexOf(i)>=0?'✓':i+1)+'</i><span>'+esc(s.t)+'</span></button></li>').join('');
+    $$('button',list).forEach(b=>b.addEventListener('click',()=>{cur=+b.dataset.i;render();}));
+    const s=S[cur],isDone=done.indexOf(cur)>=0;
+    panel.innerHTML='<div class="tw-k">Step '+(cur+1)+' of '+S.length+'</div><h3>'+esc(s.t)+'</h3><p>'+esc(s.d)+'</p>'+
+      (s.a?'<div class="tw-acts">'+s.a.map(([l,u])=>'<a class="btn" href="'+u+'" target="_blank" rel="noopener">'+esc(l)+' '+arrow+'</a>').join('')+'</div>':'')+
+      (s.q?'<div class="tw-code"><button type="button" class="tw-copy">Copy</button><pre><code>'+hl(s.q)+'</code></pre></div>':'')+
+      '<div class="tw-nav"><button type="button" class="btn sm ghost" data-go="-1"'+(cur===0?' disabled':'')+'>Back</button><button type="button" class="btn sm" data-go="1">'+(cur===S.length-1?(isDone?'All done':'Mark done'):(isDone?'Next step':'Done, next step'))+'</button></div>';
+    const cp=$('.tw-copy',panel);if(cp)cp.addEventListener('click',()=>{const t=s.q;const ok=()=>{cp.textContent='Copied';setTimeout(()=>cp.textContent='Copy',1500);};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,()=>{});});
+    $$('[data-go]',panel).forEach(b=>b.addEventListener('click',()=>{const g=+b.dataset.go;if(g>0&&done.indexOf(cur)<0){done.push(cur);save();}cur=Math.max(0,Math.min(S.length-1,cur+g));render();}));
+    const n=done.length;$('#tw-count').textContent=n+' of '+S.length+' done';$('#tw-bar').style.width=(n/S.length*100)+'%';}
+  render();
 })();
 
 /* ---------- your data: upload a file or describe a stream, then TTM r3 forecasts it in this browser ---------- */
