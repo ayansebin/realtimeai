@@ -1276,6 +1276,32 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .v5src a:hover{text-decoration-color:#d0e2ff}
 .v5src em{flex-basis:100%;font-style:normal;color:var(--ink-3)}
 @media (max-width:420px){.v4c[data-k="acc"] .v4row{grid-template-columns:96px minmax(0,1fr) 34px}}
+/* accuracy: transfer and improvement; responsiveness: value decay */
+.v5il{margin-left:.4rem;font:500 .6rem/1 var(--font-mono);letter-spacing:.04em;text-transform:none;color:var(--ink-3);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:.12rem .4rem}
+.v6tr{height:186px}.v6tr canvas,.v6dc canvas{display:block;width:100%;height:100%}
+.v6imp{display:grid;gap:4px}
+.v6r{display:grid;grid-template-columns:92px minmax(0,1fr) 72px;align-items:center;gap:10px}
+.v6r .v4v{text-align:right;color:#a6c8ff}
+.v6ctx{position:relative;height:10px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden}
+.v6ctx i{position:absolute;left:0;top:0;bottom:0;width:4%;border-radius:5px;background:linear-gradient(90deg,#4589ff,#a6c8ff);box-shadow:0 0 10px rgba(69,137,255,.6)}
+.v6rel{display:flex;gap:4px}
+.v6rel b{flex:1;display:grid;justify-items:center;gap:2px;padding:4px 2px;border-radius:3px;border:1px solid rgba(255,255,255,.14);font:600 .72rem/1 var(--font-mono);color:var(--ink-3);transition:all .35s}
+.v6rel b em{font-style:normal;font-weight:400;font-size:.62rem;color:var(--ink-3)}
+.v6rel b.on{color:#fff;border-color:#78a9ff;background:rgba(69,137,255,.22)}
+.v6rel b.on em{color:#d0e2ff}
+.v6n{margin:0 0 4px;font-size:.76rem;line-height:1.35;color:var(--ink-3)}
+.v6uc{display:flex;flex-wrap:wrap;gap:5px}
+.v6uc button{font:inherit;font-size:.74rem;color:var(--ink-3);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:.22rem .6rem;cursor:pointer;transition:all .25s}
+.v6uc button.on{color:#fff;border-color:#78a9ff;background:rgba(69,137,255,.22)}
+.v6dc{height:150px}
+.v6o{display:grid;grid-template-columns:10px minmax(0,1fr) auto;column-gap:8px;align-items:baseline;font-size:.8rem;color:var(--ink-3)}
+.v6o b{font-weight:500;color:#fff;font-size:.8rem}
+.v6o>span:not(.v6dot){grid-column:2;font-size:.78rem;line-height:1.3}
+.v6o em{grid-row:1/3;grid-column:3;align-self:center;font:300 1.3rem/1 var(--font-sans);font-style:normal}
+.v6dot{width:9px;height:9px;border-radius:50%;align-self:center;grid-row:1}
+.v6o.t .v6dot{background:#42be65;box-shadow:0 0 6px #42be65}.v6o.t em{color:#a7f0ba}
+.v6o.u .v6dot{background:#b9c3d3}.v4c.done .v6o.u .v6dot{background:#fa4d56;box-shadow:0 0 6px #fa4d56}.v6o.u em{color:#ff8389}
+@media (max-width:420px){.v6r{grid-template-columns:78px minmax(0,1fr) 64px;gap:8px}}
 </style>
 </head>
 <body>
@@ -1482,17 +1508,21 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <article class="v4c" data-k="acc">
             <div class="v4top"><span class="v4n"><i>02</i>Accuracy</span><span class="v4p">For planners and risk teams</span></div>
             <p class="v4pain">Rules and per series models miss what just changed.</p>
-            <div class="v4m"><b data-c="32">0%</b><span>less forecast error than a seasonal baseline</span></div>
+            <div class="v4m"><b data-c="32">0%</b><span>less error than a seasonal baseline, zero-shot</span></div>
             <div class="v4viz">
-              <div class="v4k">Error vs seasonal naive · lower is better</div>
-              <div class="v4row u"><span class="v4l">Seasonal naive</span><span class="v4bar"><i data-w="1"></i></span><span class="v4v">1.00</span></div>
-              <div class="v4row t"><span class="v4l">Point (MASE)</span><span class="v4bar"><i data-w=".6846"></i></span><span class="v4v">0.68</span></div>
-              <div class="v4row t"><span class="v4l">Range (CRPS)</span><span class="v4bar"><i data-w=".467"></i></span><span class="v4v">0.47</span></div>
-              <div class="v5cap">IBM Granite PatchTST-FM-r2, zero-shot, 97 configurations</div>
+              <div class="v4k">Learned across domains, reused on your series <span class="v5il">how transfer works</span></div>
+              <div class="v6tr"><canvas id="v6-tr" role="img" aria-label="Eight pretraining domains, electricity, weather, traffic, solar and wind, smart meters, web traffic, cash withdrawals and bitcoin, each with its own pattern. The patterns that match a new series light up and flow into one model, which forecasts the new series zero-shot."></canvas></div>
+              <div class="v4k">Keeps improving</div>
+              <div class="v6imp">
+                <div class="v6r"><span class="v4l">In the stream</span><span class="v6ctx"><i></i></span><span class="v4v" data-v="ctx">20 points</span></div>
+                <p class="v6n">Every event adds history, from 20 points up to 512 by default.</p>
+                <div class="v6r"><span class="v4l">Each release</span><span class="v6rel"><b data-r="0">r1<em>250M</em></b><b data-r="1">r2<em>700M</em></b><b data-r="2">r2.1<em>~1B</em></b></span><span class="v4v" data-v="rel">+15%</span></div>
+                <p class="v6n">TTM pretraining samples per release. r2 beats r1 by 15%+. Upgrade with one setting.</p>
+              </div>
             </div>
             <ul class="v5proof">
-              <li><b>#2 of all replicable zero-shot models</b> on GIFT-Eval, <b>#1 with a commercial-friendly license</b> (Sep 2026).</li>
-              <li><b>TSPulse is #1 on TSB-AD</b> for anomaly detection, 14 to 16% above the best baselines zero-shot, from 1M parameters.</li>
+              <li><b>GIFT-Eval:</b> PatchTST-FM-r2 at 0.68 MASE and 0.47 CRPS against seasonal naive at 1.00. <b>#2 of replicable zero-shot models, #1 with a commercial-friendly license</b> (Sep 2026).</li>
+              <li><b>TSPulse is #1 on TSB-AD</b> for anomaly detection, 14 to 16% above the best baselines zero-shot.</li>
             </ul>
             <p class="v5dp">Design partners report <b>5 to 10% more accurate decisions</b></p>
           </article>
@@ -1501,12 +1531,11 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
             <p class="v4pain">A nightly batch scores events hours after they happened.</p>
             <div class="v4m"><b>12 h → 0</b><span>average wait for the scoring run</span></div>
             <div class="v4viz">
-              <div class="v4k">One day of events</div>
-              <div class="v5day">
-                <div class="v5lane u"><div class="v5lh"><span class="v4l">Nightly batch</span><span class="v4v" data-v="u">wait 0 h</span></div><span class="v5track"><i style="left:5.00%" data-h="1.2"></i><i style="left:15.00%" data-h="3.6"></i><i style="left:25.00%" data-h="6.0"></i><i style="left:35.00%" data-h="8.4"></i><i style="left:45.00%" data-h="10.8"></i><i style="left:55.00%" data-h="13.2"></i><i style="left:65.00%" data-h="15.6"></i><i style="left:75.00%" data-h="18.0"></i><i style="left:85.00%" data-h="20.4"></i><i style="left:95.00%" data-h="22.8"></i><b class="v5batch" title="batch run">batch</b></span></div>
-                <div class="v5lane t"><div class="v5lh"><span class="v4l">In the stream</span><span class="v4v" data-v="t">wait 0 h</span></div><span class="v5track"><i style="left:5.00%" data-h="1.2"></i><i style="left:15.00%" data-h="3.6"></i><i style="left:25.00%" data-h="6.0"></i><i style="left:35.00%" data-h="8.4"></i><i style="left:45.00%" data-h="10.8"></i><i style="left:55.00%" data-h="13.2"></i><i style="left:65.00%" data-h="15.6"></i><i style="left:75.00%" data-h="18.0"></i><i style="left:85.00%" data-h="20.4"></i><i style="left:95.00%" data-h="22.8"></i></span></div>
-                <div class="v5axis"><span class="v5ax"><em style="left:0">0 h</em><em style="left:25%">6 h</em><em style="left:50%">12 h</em><em style="left:75%">18 h</em><em style="left:100%">24 h</em></span></div>
-              </div>
+              <div class="v4k">Value of the decision, by time to act <span class="v5il">illustrative curves</span></div>
+              <div class="v6uc" role="group" aria-label="Pick a use case"><button type="button" class="on" data-u="0">Card fraud</button><button type="button" data-u="1">Stockout</button><button type="button" data-u="2">Network fault</button><button type="button" data-u="3">Process drift</button></div>
+              <div class="v6dc"><canvas id="v6-dc" role="img" aria-label="The value of a decision falls as the time to act grows from seconds to a week. Scored in the stream it acts in seconds and keeps most of the value. A nightly batch acts after 12 hours on average and keeps little."></canvas></div>
+              <div class="v6o t"><span class="v6dot"></span><b>In the stream · seconds</b><span data-o="t"></span><em data-p="t">96%</em></div>
+              <div class="v6o u"><span class="v6dot"></span><b>Nightly batch · 12 h on average</b><span data-o="u"></span><em data-p="u">4%</em></div>
             </div>
             <ul class="v5proof">
               <li><b>Scored as each event arrives</b>, as a function on the stream inside Flink, billed in CFUs with the compute pool.</li>
@@ -1516,7 +1545,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           </article>
         </div>
       </div>
-      <div class="stage-foot"><div class="v5src"><span>Sources</span><a href="https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series" target="_blank" rel="noopener">PatchTST-FM-r2 on GIFT-Eval</a><a href="https://huggingface.co/spaces/Salesforce/GIFT-Eval" target="_blank" rel="noopener">GIFT-Eval leaderboard</a><a href="https://arxiv.org/abs/2401.03955" target="_blank" rel="noopener">TTM, NeurIPS 2024</a><a href="https://arxiv.org/abs/2505.13033" target="_blank" rel="noopener">TSPulse</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent forecast functions</a><em>Design partner figures are as reported in early engagements. A nightly batch is assumed for the wait.</em></div></div>
+      <div class="stage-foot"><div class="v5src"><span>Sources</span><a href="https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series" target="_blank" rel="noopener">PatchTST-FM-r2 on GIFT-Eval</a><a href="https://huggingface.co/spaces/Salesforce/GIFT-Eval" target="_blank" rel="noopener">GIFT-Eval leaderboard</a><a href="https://arxiv.org/abs/2401.03955" target="_blank" rel="noopener">TTM, NeurIPS 2024</a><a href="https://arxiv.org/abs/2505.13033" target="_blank" rel="noopener">TSPulse</a><a href="https://docs.confluent.io/cloud/current/ai/builtin-functions/forecast.html" target="_blank" rel="noopener">Confluent forecast functions</a><a href="https://huggingface.co/ibm-granite/granite-timeseries-ttm-r2" target="_blank" rel="noopener">TTM model card, pretraining data</a><em>Design partner figures are as reported in early engagements. The 12 h wait assumes a nightly batch. The decay curves and the transfer picture are illustrative.</em></div></div>
     </div>
   </div>
 </section>
@@ -2489,40 +2518,99 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
 })();
 /* ============ 02 three things change: productivity, accuracy, responsiveness ============ */
 /* Three cards, each built on something you can check. Productivity shows the work that goes away: a pipeline per
-   series against one function call. Accuracy shows public GIFT-Eval scores relative to a seasonal naive baseline.
-   Responsiveness is arithmetic: with a nightly batch an event waits until the run, in the stream it does not wait.
-   Design partner figures are labeled as such. Each card plays when it scrolls in, and again on Replay or a tap. */
+   series against one function call. Accuracy shows why a pretrained model does better: patterns learned across many
+   domains are reused on a series it has never seen, and it keeps improving as history grows and with each release.
+   Responsiveness shows what waiting costs: the value of a decision decays while a nightly batch waits to score it.
+   Design partner figures are labeled as such. The cards play when they scroll in, and again on Replay or a tap. */
 (function(){
   const el=$('#st-three');if(!el)return;
   const cards=$$('.v4c',el),C=k=>cards.find(c=>c.dataset.k===k);
   const P=C('prod'),A=C('acc'),R=C('resp');if(!P||!A||!R)return;
-  const cl=x=>x<0?0:x>1?1:x,ez=x=>{x=cl(x);return 1-Math.pow(1-x,3);};
-  const steps=$$('.v5steps .v5s',P),one=$('.v5one',P);
-  const big=$('.v4m b[data-c]',A),bars=$$('.v4bar i[data-w]',A);
-  const lanes=$$('.v5lane',R),uDots=$$('.v5lane.u .v5track i',R),tDots=$$('.v5lane.t .v5track i',R),batch=$('.v5batch',R),uV=$('[data-v="u"]',R),tV=$('[data-v="t"]',R);
-  const T=6200,st={t:0,run:false,seen:false};
+  const cl=x=>x<0?0:x>1?1:x,ez=x=>{x=cl(x);return 1-Math.pow(1-x,3);},sm=x=>{x=cl(x);return x*x*(3-2*x);},fr=x=>x-Math.floor(x);
+  const SANS='"IBM Plex Sans","Helvetica Neue",Arial,sans-serif',MF='"IBM Plex Mono",Menlo,monospace';
   const set=(e,v)=>{if(e&&e.textContent!==v)e.textContent=v;};
   const tog=(e,c,on)=>{if(e&&e.classList.contains(c)!==on)e.classList.toggle(c,on);};
-  /* wait lines for the batch lane, drawn once */
-  const waits=uDots.map(d=>{const w=document.createElement('u');w.style.left=d.style.left;d.parentNode.insertBefore(w,d);return w;});
+  const steps=$$('.v5steps .v5s',P),one=$('.v5one',P);
+  const big=$('.v4m b[data-c]',A),ctxBar=$('.v6ctx i',A),ctxV=$('[data-v="ctx"]',A),rel=$$('.v6rel b',A),relV=$('[data-v="rel"]',A);
+  const st={t:0,run:false,seen:false};
+
+  /* ---------- accuracy: transfer across domains ---------- */
+  const trC=$('#v6-tr'),tr=trC?new Cv(trC):null;
+  /* the pretraining domains named on the TTM model card, each with its own pattern */
+  const DOM=[['Power',u=>Math.sin(u*6*Math.PI)*0.55],['Weather',u=>Math.sin(u*1.6*Math.PI)*0.6+0.12*Math.sin(u*31)],['Traffic',u=>(Math.sin(u*4*Math.PI)>0.2?1:0.1)*Math.sin(u*8*Math.PI)*0.7],['Solar, wind',u=>Math.max(0,Math.sin(u*6*Math.PI))*1.1-0.45],
+    ['Meters',u=>(fr(u*5.3)<0.12?0.9:0)-0.25+0.12*Math.sin(u*40)],['Web',u=>u*0.9-0.45+(Math.abs(u-0.62)<0.04?0.6:0)+0.1*Math.sin(u*25)],['ATM cash',u=>0.35*Math.sin(u*4*Math.PI)+(fr(u*2)<0.08?0.55:0)-0.15],['Bitcoin',u=>0.5*Math.sin(u*3.1)+0.25*Math.sin(u*11.7+1)+0.12*Math.sin(u*29)]];
+  /* three series it has never seen, each built from patterns in the domains */
+  const NEW=[{n:'Store sales',m:[0,6,5],p:'daily and weekly cycles, promo spikes',f:u=>0.42*Math.sin(u*6*Math.PI)+0.18*Math.sin(u*2*Math.PI)+(Math.abs(u-0.55)<0.03?0.5:0)},
+    {n:'Plant temperature',m:[1,7,0],p:'slow drift, daily cycle',f:u=>0.45*Math.sin(u*1.5*Math.PI)-0.1+0.16*Math.sin(u*6*Math.PI)+0.08*Math.sin(u*27)},
+    {n:'Card payments',m:[4,5,6],p:'bursts, trend, paydays',f:u=>(fr(u*4.7)<0.1?0.7:0)+u*0.4-0.35+0.1*Math.sin(u*33)}];
+  const TCY=4200;
+  function drawTr(t){if(!tr||!tr.W)return;const ctx=tr.ctx,W=tr.W,H=tr.H,narrow=W<330;ctx.clearRect(0,0,W,H);
+    const k=Math.floor(t/TCY)%NEW.length,u=(t%TCY)/TCY,N=NEW[k],g=6,cols=2,rows=4,tw=Math.round(0.47*W/cols)-g,th=(H-18-g*(rows-1))/rows,mx=cols*(tw+g)+(narrow?20:26),sx=mx+(narrow?18:26),sw=W-sx,cy=(H-18)/2;
+    const lit=i=>N.m.includes(i);
+    DOM.forEach(([name,f],i)=>{const x=(i%cols)*(tw+g),y=Math.floor(i/cols)*(th+g),on=lit(i)&&(reduced||u>0.08),a=on?(reduced?1:sm((u-0.08)/0.12)):0;
+      ctx.fillStyle=on?'rgba(69,137,255,'+(0.08+0.32*a)+')':'rgba(255,255,255,.035)';ctx.fillRect(x,y,tw,th);ctx.strokeStyle=on?'rgba(166,200,255,'+(0.3+0.7*a)+')':'rgba(255,255,255,.12)';ctx.lineWidth=1;ctx.strokeRect(x+0.5,y+0.5,tw-1,th-1);
+      ctx.font='500 '+(narrow?8.5:9)+'px '+MF;ctx.fillStyle=on?'#fff':'rgba(255,255,255,.5)';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText(name,x+4,y+3);
+      const py=y+th*0.68,amp=th*0.18;ctx.beginPath();for(let s=0;s<=24;s++){const q=s/24,xx=x+4+(tw-8)*q,yy=py-amp*f(q);s?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.strokeStyle=on?'#fff':'rgba(255,255,255,.3)';ctx.lineWidth=on?1.4:1.1;ctx.stroke();
+      /* what it learned flows into the model */
+      if(on){const x0=x+tw,y0=y+th/2,xm=x0+(mx-x0)*0.6;ctx.beginPath();ctx.moveTo(x0,y0);ctx.bezierCurveTo(xm,y0,xm,cy,mx,cy);ctx.strokeStyle='rgba(166,200,255,'+(0.55*a)+')';ctx.stroke();
+        if(!reduced&&u>0.2){const q=(t/600+i*0.3)%1,bx=(1-q)**3*x0+3*(1-q)**2*q*xm+3*(1-q)*q*q*xm+q**3*mx,by=(1-q)**3*y0+3*(1-q)**2*q*y0+3*(1-q)*q*q*cy+q**3*cy;ctx.fillStyle='#fff';ctx.fillRect(bx-1.5,by-1.5,3,3);}}});
+    /* one model */
+    const r0=narrow?7:9;ctx.save();if(!reduced){ctx.shadowColor='rgba(69,137,255,.9)';ctx.shadowBlur=14;}ctx.beginPath();ctx.arc(mx,cy,r0,0,Math.PI*2);ctx.fillStyle='#0f62fe';ctx.fill();ctx.restore();ctx.strokeStyle='#fff';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(mx,cy,r0,0,Math.PI*2);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(mx+r0,cy);ctx.lineTo(sx,cy);ctx.strokeStyle='rgba(166,200,255,.6)';ctx.lineWidth=1;ctx.stroke();
+    /* your series, never seen in training, and its forecast */
+    const top=0,bot=H-18,ph=bot-top;ctx.fillStyle='rgba(255,255,255,.035)';ctx.fillRect(sx,top,sw,ph);ctx.strokeStyle='rgba(255,255,255,.14)';ctx.strokeRect(sx+0.5,top+0.5,sw-1,ph-1);
+    ctx.font='600 '+(narrow?8.5:9)+'px '+MF;ctx.fillStyle='#a6c8ff';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillText('NEW, NEVER SEEN',sx+5,top+5);
+    ctx.font='500 '+(narrow?11:12)+'px '+SANS;ctx.fillStyle='#fff';{let n=N.n;while(n.length>3&&ctx.measureText(n).width>sw-10)n=n.slice(0,-1);ctx.fillText(n===N.n?n:n.slice(0,-1)+'…',sx+5,top+18);}
+    const hx0=sx+5,hx1=sx+sw*0.62,fx1=sx+sw-5,ly=top+ph*0.66,amp=ph*0.2,Y=v=>ly-amp*v;
+    ctx.beginPath();for(let s=0;s<=40;s++){const q=s/40*0.66,xx=hx0+(hx1-hx0)*(s/40);s?ctx.lineTo(xx,Y(N.f(q))):ctx.moveTo(xx,Y(N.f(q)));}ctx.strokeStyle='#fff';ctx.lineWidth=1.3;ctx.stroke();
+    const rv=reduced?1:sm((u-0.45)/0.3);if(rv>0){const xe=hx1+(fx1-hx1)*rv,v=q=>N.f(0.66+0.34*q*rv);ctx.beginPath();for(let s=0;s<=20;s++){const q=s/20;ctx.lineTo(hx1+(xe-hx1)*q,Y(v(q))-3-7*q);}for(let s=20;s>=0;s--){const q=s/20;ctx.lineTo(hx1+(xe-hx1)*q,Y(v(q))+3+7*q);}ctx.closePath();ctx.fillStyle='rgba(69,137,255,.28)';ctx.fill();
+      ctx.setLineDash([3,2]);ctx.beginPath();for(let s=0;s<=20;s++){const q=s/20,xx=hx1+(xe-hx1)*q;s?ctx.lineTo(xx,Y(v(q))):ctx.moveTo(xx,Y(v(q)));}ctx.strokeStyle='#a6c8ff';ctx.lineWidth=1.4;ctx.stroke();ctx.setLineDash([]);}
+    ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(Math.round(hx1)+0.5,top+34);ctx.lineTo(Math.round(hx1)+0.5,bot-4);ctx.stroke();
+    if(rv>0.6){ctx.font='500 '+(narrow?9:9.5)+'px '+MF;ctx.fillStyle='#a7f0ba';ctx.textAlign='right';ctx.textBaseline='bottom';ctx.fillText('zero-shot',sx+sw-5,bot-4);}
+    /* the patterns it reused, under the picture */
+    ctx.font='400 '+(narrow?10:10.5)+'px '+SANS;ctx.fillStyle='rgba(208,226,255,.9)';ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText('Reuses: '+N.p,0,H-7);}
+
+  /* ---------- responsiveness: the value of the decision decays while it waits ---------- */
+  const dcC=$('#v6-dc'),dc=dcC?new Cv(dcC):null,ucB=$$('.v6uc button',R);
+  const sig=(x,c,k)=>1/(1+Math.exp((x-c)*k));
+  /* time to act on a log scale, one quarter each: seconds, minutes, hours, days, to a week */
+  const LANES=[{f:x=>0.04+0.96*sig(x,0.2,22),txt:x=>x<0.2?'declined before authorization':x<0.5?'flagged after settlement, chargeback':'loss written off'},
+    {f:x=>0.08+0.92*sig(x,0.55,12),txt:x=>x<0.35?'order raised, the shelf never empties':x<0.65?'expedited at a premium':'lost sales, waste on the rebound'},
+    {f:x=>0.05+0.95*sig(x,0.35,16),txt:x=>x<0.25?'rerouted before anyone notices':x<0.6?'ticket after the complaints':'outage report'},
+    {f:x=>0.1+0.9*sig(x,0.5,10),txt:x=>x<0.4?'setpoint corrected in the cycle':x<0.7?'off spec batch reblended':'scrap and wasted energy'}];
+  const XS=0.03,XB=0.5+11/22*0.25;/* seconds, and 12 hours */
+  const dcs={u:0,pin:-1e9,t0:0};
+  ucB.forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();dcs.u=+b.dataset.u;dcs.pin=performance.now();dcs.t0=performance.now();}));
+  const oT=$('[data-o="t"]',R),oU=$('[data-o="u"]',R),pT=$('[data-p="t"]',R),pU=$('[data-p="u"]',R);
+  function drawDc(now){if(!dc||!dc.W)return;const ctx=dc.ctx,W=dc.W,H=dc.H;ctx.clearRect(0,0,W,H);
+    if(now-dcs.pin>14000&&!reduced){const k=Math.floor(now/6500)%4;if(k!==dcs.u){dcs.u=k;dcs.t0=now;}}
+    const L=LANES[dcs.u],x0=32,x1=W-8,y0=8,y1=H-20,X=x=>x0+(x1-x0)*x,Y=v=>y1-(y1-y0)*v,pr=reduced?1:sm(((now-dcs.t0)-300)/2200);
+    ucB.forEach((b,i)=>tog(b,'on',i===dcs.u));
+    ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;[0.25,0.5,0.75,1].forEach(v=>{const y=Math.round(Y(v))+0.5;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();});
+    ctx.font='400 9.5px '+MF;ctx.fillStyle='rgba(185,195,211,.75)';ctx.textAlign='right';ctx.textBaseline='middle';[[1,'100%'],[0.5,'50%'],[0,'0']].forEach(([v,s])=>ctx.fillText(s,x0-5,Y(v)));
+    ctx.textBaseline='top';['sec','min','hour','day','week'].forEach((s,i)=>{const x=X(i/4);ctx.textAlign=i===0?'left':i===4?'right':'center';ctx.fillStyle='rgba(185,195,211,.75)';ctx.fillText(s,x,y1+6);ctx.fillStyle='rgba(255,255,255,.18)';ctx.fillRect(Math.round(x),y1,1,4);});
+    /* the curve, with the value lost while the batch waits shaded */
+    ctx.beginPath();for(let i=0;i<=80;i++){const x=i/80;i?ctx.lineTo(X(x),Y(L.f(x))):ctx.moveTo(X(x),Y(L.f(x)));}ctx.strokeStyle='rgba(255,255,255,.75)';ctx.lineWidth=1.6;ctx.stroke();
+    const xb=XS+(XB-XS)*pr,vS=L.f(XS),vB=L.f(xb);ctx.beginPath();ctx.moveTo(X(XS),Y(vS));for(let i=0;i<=40;i++){const x=XS+(xb-XS)*i/40;ctx.lineTo(X(x),Y(L.f(x)));}ctx.lineTo(X(xb),Y(vS));ctx.closePath();ctx.fillStyle='rgba(250,77,86,.22)';ctx.fill();
+    if(pr>0.05){ctx.setLineDash([3,3]);ctx.strokeStyle='rgba(255,131,137,.7)';ctx.beginPath();ctx.moveTo(X(XS),Y(vS));ctx.lineTo(X(xb),Y(vS));ctx.moveTo(X(xb)+0.5,Y(vS));ctx.lineTo(X(xb)+0.5,Y(vB));ctx.stroke();ctx.setLineDash([]);}
+    const dot=(x,c)=>{const v=L.f(x);ctx.save();if(!reduced){ctx.shadowColor=c;ctx.shadowBlur=10;}ctx.beginPath();ctx.arc(X(x),Y(v),5.5,0,Math.PI*2);ctx.fillStyle=c;ctx.fill();ctx.restore();ctx.beginPath();ctx.arc(X(x),Y(v),5.5,0,Math.PI*2);ctx.strokeStyle='#fff';ctx.lineWidth=1.4;ctx.stroke();};
+    dot(xb,pr>=1?'#fa4d56':'#b9c3d3');dot(XS,'#42be65');
+    const lost=Math.round((vS-vB)*100);if(pr>0.1&&lost>4){ctx.font='600 10px '+MF;ctx.fillStyle='#ff8389';ctx.textAlign='left';ctx.textBaseline='middle';const ty=Y(vS)+14;ctx.fillText('−'+lost+'% while it waits',Math.min(X(XS)+10,x1-120),ty);}
+    const go=pr>0.12;set(oT,L.txt(XS));set(oU,go?L.txt(xb):'waiting for the nightly run');set(pT,Math.round(vS*100)+'%');set(pU,go?Math.round(vB*100)+'%':'');tog(R,'done',pr>=1);}
+
   function frame(t){
     /* productivity: the usual way lights its six steps one by one, together is done in one */
     steps.forEach((s,k)=>tog(s,'on',t>=500+k*520));tog(one,'on',t>=450);tog(P,'u-done',t>=500+5*520+300);
-    /* accuracy: bars grow to the benchmark scores, the headline counts to 32 */
-    bars.forEach((i,k)=>{i.style.width=(+i.dataset.w*100*ez((t-300-k*250)/1100)).toFixed(2)+'%';});
+    /* accuracy: the headline counts to 32, history grows to 512 points, releases light up in turn */
     set(big,Math.round(32*ez((t-600)/1400))+'%');
-    /* responsiveness: the day runs left to right, events arrive, the batch scores them all at 24 h */
-    const day=24*cl((t-300)/4200),done=t>=4600;
-    let sum=0,n=0;uDots.forEach((d,k)=>{const h=+d.dataset.h,arr=day>=h,end=done?24:day;tog(d,'on',arr);tog(d,'done',done);
-      waits[k].style.width=arr?((end-h)/24*100).toFixed(2)+'%':'0';tog(waits[k],'done',done);if(arr){sum+=end-h;n++;}});
-    tDots.forEach(d=>{const arr=day>=+d.dataset.h;tog(d,'on',arr);});
-    tog(batch,'on',done);
-    set(uV,n?(done?'avg wait 12 h':'waiting '+(sum/n).toFixed(0)+' h'):'wait 0 h');set(tV,'wait 0 h');}
-  function start(){st.t=0;st.run=true;}
+    const pts=Math.round(20+492*ez((t-500)/3200));if(ctxBar)ctxBar.style.width=(pts/512*100).toFixed(1)+'%';set(ctxV,pts+' points');
+    rel.forEach((b,k)=>tog(b,'on',t>=900+k*900));set(relV,t>=1800?'+15%':'');}
+  function start(){st.t=0;st.run=true;dcs.t0=performance.now();}
   const rp=$('#th-replay');if(rp)rp.addEventListener('click',start);
   cards.forEach(c=>c.addEventListener('click',e=>{if(e.target.closest('a,button'))return;start();}));
-  if(reduced)frame(T);else frame(0);
-  reg({el,update(dt){if(reduced)return;if(!st.seen){st.seen=true;start();}if(!st.run)return;st.t+=dt;frame(st.t);if(st.t>=T){st.run=false;frame(T);}},draw(){}});
+  const T=4600;if(reduced)frame(T);else frame(0);
+  reg({el,resize(){if(tr)tr.fit();if(dc)dc.fit();},update(dt){if(reduced)return;if(!st.seen){st.seen=true;start();}if(!st.run)return;st.t+=dt;frame(st.t);if(st.t>=T){st.run=false;frame(T);}},
+    draw(){const now=performance.now();drawTr(reduced?TCY*0.9:now);drawDc(now);}});
 })();
 /* ============ 02 dials, proof count-ups ============ */
 function countUp(b){const target=Number(b.dataset.count),pre=b.dataset.prefix||'',suf=b.dataset.suffix||'';const t0=performance.now(),dur=reduced?1:1400;function f(t){const u=clamp((t-t0)/dur,0,1);b.textContent=pre+fmtInt(target*ease(u))+suf;if(u<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
