@@ -2233,7 +2233,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   function layout(){const W=cv.W,H=cv.H,narrow=W<700;let P,hub;
     if(!narrow){const pad=10,gap=18,hubW=Math.round(Math.max(236,Math.min(338,W*0.26))),colW=(W-2*pad-hubW-2*gap)/2,rg=12,ph=(H-2*pad-2*rg)/3;
       P=S.map((s,i)=>{const col=i<3?0:1,row=i%3;return {x:col?W-pad-colW:pad,y:pad+row*(ph+rg),w:colW,h:ph,col,row};});
-      const hx0=pad+colW+gap,hh=Math.min(196,H*0.42),hy0=Math.round(H/2-hh/2+14);hub={x0:hx0,x1:hx0+hubW,y0:hy0,y1:hy0+hh};
+      const hx0=pad+colW+gap,hh=Math.min(196,H*0.42),hy0=Math.round(H/2-hh/2);hub={x0:hx0,x1:hx0+hubW,y0:hy0,y1:hy0+hh};
       P.forEach(p=>{const ax=p.col?p.x:p.x+p.w,ay=p.y+p.h/2,px=p.col?hub.x1:hub.x0,py=hub.y0+16+(hub.y1-hub.y0-32)*(p.row+0.5)/3,mx=(ax+px)/2;p.sp=bez(px,py,mx,py,mx,ay,ax,ay);});}
     else{const pad=4,gap=8,hubH=75,colW=(W-2*pad-gap)/2,rg=8,ph=(H-2*pad-hubH-gap-2*rg)/3;
       P=S.map((s,i)=>{const col=i<3?0:1,row=i%3;return {x:pad+col*(colW+gap),y:pad+hubH+gap+row*(ph+rg),w:colW,h:ph,col,row};});hub={x0:pad,x1:W-pad,y0:pad,y1:pad+hubH};}
@@ -2263,18 +2263,12 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     ctx.textBaseline='middle';
     if(!nar){ctx.textAlign='center';const my=(h.y0+h.y1)/2;
       let tz=16;for(let z=30;z>=16;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText('foundation model').width<=w-34){tz=z;break;}}
-      const l1=my-tz*0.53,l2=my+tz*0.53,ey=l1-tz*0.62-15,dv=Math.round(l2+tz*0.5+7),sb=dv+17;
+      const l1=my-tz*0.53+9,l2=my+tz*0.53+9,ey=l1-tz*0.62-15;
       ctx.font='400 11px '+MF;ctx.fillStyle='rgba(166,200,255,.85)';{const T='IBM GRANITE TIME SERIES';let sp=0;if(LS)for(const q of [2.6,2,1.4,0.8,0]){ctx.letterSpacing=q+'px';sp=q;if(ctx.measureText(T).width<=w-20)break;}ctx.fillText(fitText(ctx,T,w-18),cx+sp/2,ey);if(LS)ctx.letterSpacing='0px';}
-      ctx.font='300 '+tz+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText('Universal',cx,l1);ctx.fillText('foundation model',cx,l2);ctx.fillStyle='rgba(166,200,255,.45)';ctx.fillRect(Math.round(cx-16),dv,32,1);
-      ctx.font='400 12px '+MF;ctx.fillStyle='rgba(197,206,222,.82)';if(LS)ctx.letterSpacing='0.8px';ctx.fillText(fitText(ctx,'six use cases · zero-shot',w-18),cx,sb);if(LS)ctx.letterSpacing='0px';}
+      ctx.font='300 '+tz+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText('Universal',cx,l1);ctx.fillText('foundation model',cx,l2);}
     else{ctx.textAlign='left';ctx.font='400 10px '+MF;ctx.fillStyle='rgba(166,200,255,.85)';if(LS)ctx.letterSpacing='1.8px';ctx.fillText('IBM GRANITE TIME SERIES',h.x0+13,h.y0+22);if(LS)ctx.letterSpacing='0px';
       {const T='Universal foundation model';let z=21;for(;z>15;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText(T).width<=w-26)break;}ctx.font='300 '+z+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText(fitText(ctx,T,w-26),h.x0+13,h.y0+50);}}
-    /* the context lands on the model, from its topic */
-    if(st.ctx){const a=sm((now-st.ctx.T)/450),txt=nar?'+ heat wave':'+ weather topic · heat wave 34 °C';
-      if(nar)pill(ctx,txt,h.x1-8,h.y0+21,'right','t',a,9.5);
-      else{const y=h.y0-26-8*(1-a);ctx.save();ctx.globalAlpha=a;ctx.strokeStyle='rgba(61,219,217,.75)';ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(Math.round(cx)+0.5,y+10);ctx.lineTo(Math.round(cx)+0.5,h.y0);ctx.stroke();ctx.setLineDash([]);ctx.restore();
-        pill(ctx,txt,cx,y,'center','t',a,11.5);}}
-    if(!nar){ctx.font='400 11px '+MF;ctx.fillStyle='rgba(185,195,211,.7)';ctx.textAlign='center';if(LS)ctx.letterSpacing='2px';ctx.fillText('NO MODEL PER SERIES',cx+1,h.y1+24);if(LS)ctx.letterSpacing='0px';}}
+  }
   function smooth(ctx,P){ctx.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length-1;i++){const xc=(P[i][0]+P[i+1][0])/2,yc=(P[i][1]+P[i+1][1])/2;ctx.quadraticCurveTo(P[i][0],P[i][1],xc,yc);}const q=P[P.length-1];ctx.lineTo(q[0],q[1]);}
   const RGB={t:'61,219,217',r:'250,77,86',g:'66,190,101',b:'69,137,255'};
   function drawPanel(ctx,s,p,now,f){const nar=L.narrow,spot=s.i===st.spot,dim=st.focus&&!spot;ctx.save();if(dim)ctx.globalAlpha=0.4;
