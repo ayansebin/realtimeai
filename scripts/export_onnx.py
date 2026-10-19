@@ -28,10 +28,13 @@ import torch.nn.functional as F
 
 OUT = pathlib.Path("models")
 OUT.mkdir(parents=True, exist_ok=True)
-LOG = open(OUT / "log.txt", "w")
+ONLY_ = [v for v in __import__("os").environ.get("ONLY", "").split(",") if v]
+LOG = open(OUT / "log.txt", "a" if ONLY_ else "w")
 REPO = "ibm-granite/granite-timeseries-ttm-r3"
 # file name, model revision on the Hugging Face repo
 VARIANTS = [
+    ("ttm-r3-2048-96", "2048-96-r3"),
+    ("ttm-r3-1024-96", "1024-96-r3"),
     ("ttm-r3-512-96", "512-96-dec-512-r3"),
     ("ttm-r3-180-60", "180-60-dec-180-r3"),
     ("ttm-r3-90-30", "90-30-dec-90-r3"),
@@ -286,6 +289,15 @@ def main():
             os.remove(f)
         except OSError:
             pass
+    if ONLY:  # a partial run keeps the variants it did not touch
+        try:
+            old = json.loads((OUT / "manifest.json").read_text())
+            keep = [v for v in old.get("variants", []) if v["name"] not in ONLY]
+            order = [n for n, _ in VARIANTS]
+            manifest["variants"] = sorted(keep + manifest["variants"],
+                                          key=lambda v: order.index(v["name"]) if v["name"] in order else 99)
+        except Exception as e:  # noqa: BLE001
+            log("could not merge the old manifest:", repr(e)[:200])
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=1))
     log("done,", len(manifest["variants"]), "variants")
     return 0 if manifest["variants"] else 1
