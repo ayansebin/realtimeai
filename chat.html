@@ -1373,6 +1373,86 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 /* hero: the claims live inside the universal layer now */
 .hx-body{padding-top:clamp(12px,1.8vw,20px)}
 @media (max-width:760px){.hero .canvas-wrap.hx-wrap{height:540px}}
+/* ---------- intro: from words to decisions. Wave one on unstructured data, wave two on time series and streaming data ---------- */
+.why .lg-a{color:var(--ink-2)}.why .lg-a::before{background:rgba(255,255,255,.55)}
+.why .lg-b{color:#a6c8ff}.why .lg-b::before{background:#78a9ff}
+.why .stage-top{align-items:center}
+.why .stage-title{flex:1 1 auto;max-width:none;min-width:0}
+.why .stage-title p{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem 1.25rem}
+.sh-grid{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);gap:12px}
+.sh-card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px 18px;border:1px solid rgba(255,255,255,.16);border-radius:4px;background:rgba(10,20,48,.45);transition:opacity .7s,border-color .7s,box-shadow .7s}
+.sh-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 10px}
+.sh-n{font:600 .74rem/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:#d0e2ff}
+.sh-n b{font-weight:600;color:#78a9ff;margin-right:.7em}
+.sh-pill{font-size:.8rem;line-height:1.5;color:#fff;padding:2px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);white-space:nowrap}
+.sh-pill.on{background:rgba(15,98,254,.22);border-color:rgba(120,169,255,.6)}
+.sh-big{font-size:clamp(1.15rem,1.75vw,1.45rem);font-weight:300;line-height:1.2;color:#fff}
+.sh-foot{font-size:.9rem;color:#a7f0ba}
+.sh-card.a .sh-foot{color:#c6cfdc}
+.sh-viz{position:relative;height:300px;border:1px solid rgba(255,255,255,.12);border-radius:4px;background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px}
+.sh-wires{position:absolute;inset:0;width:100%;height:100%}
+.sh-wires .w{fill:none;stroke:rgba(255,255,255,.3);stroke-width:1.3;stroke-dasharray:3 5;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .6s}
+.sh-card.b .sh-wires .w{stroke:rgba(120,169,255,.75)}
+.sh-col{position:absolute;top:0;bottom:0;display:grid;grid-template-rows:repeat(3,minmax(0,1fr));align-items:center}
+.sh-col.ins{left:2.7%;width:25.4%}
+.sh-col.outs{left:61.2%;width:36.1%}
+.sh-chip{display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px;min-height:42px;padding:7px 10px;border:1px solid rgba(255,255,255,.14);border-radius:4px;background:rgba(255,255,255,.04);font-size:.82rem;line-height:1.2;color:#c6cfdc;opacity:0;transform:translateX(-8px);transition:opacity .5s,transform .5s,border-color .5s,background .5s,color .5s}
+.sh-ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.sh-sp{flex-basis:100%;width:100%;height:14px;overflow:hidden}
+.sh-sp path{fill:none;stroke:#78a9ff;stroke-width:1.3;vector-effect:non-scaling-stroke}
+.sh-sp-g{animation:shsp 2.4s linear infinite}
+@keyframes shsp{from{transform:translateX(0)}to{transform:translateX(-60px)}}
+.sh-node{position:absolute;left:35%;width:19.2%;top:60px;bottom:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0 4px;text-align:center;border-radius:2px;opacity:0;transition:opacity .6s,box-shadow .6s}
+.sh-card.a .sh-node{background:linear-gradient(135deg,rgba(110,124,160,.55),rgba(70,80,120,.55));border:1px solid rgba(255,255,255,.3)}
+.sh-card.b .sh-node{background:linear-gradient(135deg,rgba(20,50,132,.96),rgba(33,34,106,.96));border:1px solid rgba(166,200,255,.62)}
+.sh-node em{font:500 .62rem/1.2 var(--font-mono);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:#a6c8ff}
+.sh-node b{font-size:clamp(1rem,1.5vw,1.25rem);font-weight:300;line-height:1.1;color:#fff}
+.sh-card.a .sh-node b{font-size:clamp(1.2rem,1.9vw,1.55rem)}
+.sh-node span{font-size:.72rem;color:#c6cfdc}
+.sh-mid{display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .6s}
+.sh-mid svg{width:36px;height:16px;fill:none;stroke:#78a9ff;stroke-width:1.5}
+@keyframes shdash{to{stroke-dashoffset:-16}}
+/* the build, one class per step: inputs, the model, the outcomes, then the same for wave two */
+.why .sh-card.b{opacity:.4}
+.why.s1 .a .ins .sh-chip{opacity:1;transform:none}
+.why.s1 .a .ins .sh-chip:nth-child(2){transition-delay:.15s}
+.why.s1 .a .ins .sh-chip:nth-child(3){transition-delay:.3s}
+.why.s2 .a .sh-node,.why.s2 .a .w.in{opacity:1}
+.why.s2 .a .w.in{animation:shdash .9s linear infinite}
+.why.s3 .a .w.out{opacity:1;animation:shdash .9s linear infinite}
+.why.s3 .a .outs .sh-chip{opacity:1;transform:none;color:#fff;border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1)}
+.why.s3 .a .outs .sh-chip:nth-child(2){transition-delay:.5s}
+.why.s3 .a .outs .sh-chip:nth-child(3){transition-delay:1s}
+.why.s4 .sh-card.a{opacity:.6}
+.why.s4 .sh-card.b{opacity:1;border-color:rgba(120,169,255,.6);box-shadow:0 0 0 1px rgba(120,169,255,.25),0 10px 40px rgba(15,98,254,.25)}
+.why.s4 .sh-mid{opacity:1}
+.why.s4 .b .ins .sh-chip{opacity:1;transform:none;color:#e5ecf8}
+.why.s4 .b .ins .sh-chip:nth-child(2){transition-delay:.15s}
+.why.s4 .b .ins .sh-chip:nth-child(3){transition-delay:.3s}
+.why.s4 .b .sh-node{opacity:1;transition-delay:.4s}
+.why.s5 .b .w.in{opacity:1;animation:shdash .7s linear infinite}
+.why.s5 .b .sh-node{box-shadow:0 0 0 1px rgba(166,200,255,.5),0 0 28px rgba(69,137,255,.45)}
+.why.s6 .b .w.out{opacity:1;animation:shdash .7s linear infinite}
+.why.s6 .b .outs .sh-chip{opacity:1;transform:none;color:#fff;border-color:#78a9ff;background:rgba(69,137,255,.2)}
+.why.s6 .b .outs .sh-chip .sh-ic{color:#a6c8ff}
+.why.s6 .b .outs .sh-chip:nth-child(2){transition-delay:.9s}
+.why.s6 .b .outs .sh-chip:nth-child(3){transition-delay:1.8s}
+@media (prefers-reduced-motion:reduce){.sh-sp-g,.why .w{animation:none!important}}
+/* narrower: wave two under wave one */
+@media (max-width:999px){.sh-grid{grid-template-columns:minmax(0,1fr)}.sh-mid{height:30px}.sh-mid svg{transform:rotate(90deg)}}
+/* phones: each wave reads top to bottom, inputs, the model, the outcomes */
+@media (max-width:639px){
+  .sh-card{padding:12px;gap:10px}
+  .sh-viz{height:auto;display:grid;gap:20px;padding:12px 10px}
+  .sh-wires{display:none}
+  .sh-col{position:static;width:auto!important;grid-template-rows:none;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:6px}
+  .sh-chip{flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;min-height:0;padding:7px 8px;font-size:.74rem;transform:translateY(-6px)}
+  .sh-sp{flex-basis:auto;height:12px}
+  .sh-node{position:relative;left:auto;top:auto;bottom:auto;width:auto;padding:10px;gap:3px}
+  .sh-node::before,.sh-node::after{content:"";position:absolute;left:50%;height:14px;border-left:1.5px dashed rgba(255,255,255,.35)}
+  .sh-card.b .sh-node::before,.sh-card.b .sh-node::after{border-left-color:rgba(120,169,255,.75)}
+  .sh-node::before{bottom:calc(100% + 3px)}.sh-node::after{top:calc(100% + 3px)}
+}
 /* phones: the nav row scrolls sideways, a soft edge shows there is more */
 .nav-links.more{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent)}
 /* ---------- 04 demos: one player, four ways to see it ---------- */

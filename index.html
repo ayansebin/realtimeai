@@ -1373,6 +1373,86 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 /* hero: the claims live inside the universal layer now */
 .hx-body{padding-top:clamp(12px,1.8vw,20px)}
 @media (max-width:760px){.hero .canvas-wrap.hx-wrap{height:540px}}
+/* ---------- intro: from words to decisions. Wave one on unstructured data, wave two on time series and streaming data ---------- */
+.why .lg-a{color:var(--ink-2)}.why .lg-a::before{background:rgba(255,255,255,.55)}
+.why .lg-b{color:#a6c8ff}.why .lg-b::before{background:#78a9ff}
+.why .stage-top{align-items:center}
+.why .stage-title{flex:1 1 auto;max-width:none;min-width:0}
+.why .stage-title p{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem 1.25rem}
+.sh-grid{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);gap:12px}
+.sh-card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px 18px;border:1px solid rgba(255,255,255,.16);border-radius:4px;background:rgba(10,20,48,.45);transition:opacity .7s,border-color .7s,box-shadow .7s}
+.sh-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 10px}
+.sh-n{font:600 .74rem/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:#d0e2ff}
+.sh-n b{font-weight:600;color:#78a9ff;margin-right:.7em}
+.sh-pill{font-size:.8rem;line-height:1.5;color:#fff;padding:2px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);white-space:nowrap}
+.sh-pill.on{background:rgba(15,98,254,.22);border-color:rgba(120,169,255,.6)}
+.sh-big{font-size:clamp(1.15rem,1.75vw,1.45rem);font-weight:300;line-height:1.2;color:#fff}
+.sh-foot{font-size:.9rem;color:#a7f0ba}
+.sh-card.a .sh-foot{color:#c6cfdc}
+.sh-viz{position:relative;height:300px;border:1px solid rgba(255,255,255,.12);border-radius:4px;background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px}
+.sh-wires{position:absolute;inset:0;width:100%;height:100%}
+.sh-wires .w{fill:none;stroke:rgba(255,255,255,.3);stroke-width:1.3;stroke-dasharray:3 5;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .6s}
+.sh-card.b .sh-wires .w{stroke:rgba(120,169,255,.75)}
+.sh-col{position:absolute;top:0;bottom:0;display:grid;grid-template-rows:repeat(3,minmax(0,1fr));align-items:center}
+.sh-col.ins{left:2.7%;width:25.4%}
+.sh-col.outs{left:61.2%;width:36.1%}
+.sh-chip{display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px;min-height:42px;padding:7px 10px;border:1px solid rgba(255,255,255,.14);border-radius:4px;background:rgba(255,255,255,.04);font-size:.82rem;line-height:1.2;color:#c6cfdc;opacity:0;transform:translateX(-8px);transition:opacity .5s,transform .5s,border-color .5s,background .5s,color .5s}
+.sh-ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.sh-sp{flex-basis:100%;width:100%;height:14px;overflow:hidden}
+.sh-sp path{fill:none;stroke:#78a9ff;stroke-width:1.3;vector-effect:non-scaling-stroke}
+.sh-sp-g{animation:shsp 2.4s linear infinite}
+@keyframes shsp{from{transform:translateX(0)}to{transform:translateX(-60px)}}
+.sh-node{position:absolute;left:35%;width:19.2%;top:60px;bottom:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0 4px;text-align:center;border-radius:2px;opacity:0;transition:opacity .6s,box-shadow .6s}
+.sh-card.a .sh-node{background:linear-gradient(135deg,rgba(110,124,160,.55),rgba(70,80,120,.55));border:1px solid rgba(255,255,255,.3)}
+.sh-card.b .sh-node{background:linear-gradient(135deg,rgba(20,50,132,.96),rgba(33,34,106,.96));border:1px solid rgba(166,200,255,.62)}
+.sh-node em{font:500 .62rem/1.2 var(--font-mono);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:#a6c8ff}
+.sh-node b{font-size:clamp(1rem,1.5vw,1.25rem);font-weight:300;line-height:1.1;color:#fff}
+.sh-card.a .sh-node b{font-size:clamp(1.2rem,1.9vw,1.55rem)}
+.sh-node span{font-size:.72rem;color:#c6cfdc}
+.sh-mid{display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .6s}
+.sh-mid svg{width:36px;height:16px;fill:none;stroke:#78a9ff;stroke-width:1.5}
+@keyframes shdash{to{stroke-dashoffset:-16}}
+/* the build, one class per step: inputs, the model, the outcomes, then the same for wave two */
+.why .sh-card.b{opacity:.4}
+.why.s1 .a .ins .sh-chip{opacity:1;transform:none}
+.why.s1 .a .ins .sh-chip:nth-child(2){transition-delay:.15s}
+.why.s1 .a .ins .sh-chip:nth-child(3){transition-delay:.3s}
+.why.s2 .a .sh-node,.why.s2 .a .w.in{opacity:1}
+.why.s2 .a .w.in{animation:shdash .9s linear infinite}
+.why.s3 .a .w.out{opacity:1;animation:shdash .9s linear infinite}
+.why.s3 .a .outs .sh-chip{opacity:1;transform:none;color:#fff;border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1)}
+.why.s3 .a .outs .sh-chip:nth-child(2){transition-delay:.5s}
+.why.s3 .a .outs .sh-chip:nth-child(3){transition-delay:1s}
+.why.s4 .sh-card.a{opacity:.6}
+.why.s4 .sh-card.b{opacity:1;border-color:rgba(120,169,255,.6);box-shadow:0 0 0 1px rgba(120,169,255,.25),0 10px 40px rgba(15,98,254,.25)}
+.why.s4 .sh-mid{opacity:1}
+.why.s4 .b .ins .sh-chip{opacity:1;transform:none;color:#e5ecf8}
+.why.s4 .b .ins .sh-chip:nth-child(2){transition-delay:.15s}
+.why.s4 .b .ins .sh-chip:nth-child(3){transition-delay:.3s}
+.why.s4 .b .sh-node{opacity:1;transition-delay:.4s}
+.why.s5 .b .w.in{opacity:1;animation:shdash .7s linear infinite}
+.why.s5 .b .sh-node{box-shadow:0 0 0 1px rgba(166,200,255,.5),0 0 28px rgba(69,137,255,.45)}
+.why.s6 .b .w.out{opacity:1;animation:shdash .7s linear infinite}
+.why.s6 .b .outs .sh-chip{opacity:1;transform:none;color:#fff;border-color:#78a9ff;background:rgba(69,137,255,.2)}
+.why.s6 .b .outs .sh-chip .sh-ic{color:#a6c8ff}
+.why.s6 .b .outs .sh-chip:nth-child(2){transition-delay:.9s}
+.why.s6 .b .outs .sh-chip:nth-child(3){transition-delay:1.8s}
+@media (prefers-reduced-motion:reduce){.sh-sp-g,.why .w{animation:none!important}}
+/* narrower: wave two under wave one */
+@media (max-width:999px){.sh-grid{grid-template-columns:minmax(0,1fr)}.sh-mid{height:30px}.sh-mid svg{transform:rotate(90deg)}}
+/* phones: each wave reads top to bottom, inputs, the model, the outcomes */
+@media (max-width:639px){
+  .sh-card{padding:12px;gap:10px}
+  .sh-viz{height:auto;display:grid;gap:20px;padding:12px 10px}
+  .sh-wires{display:none}
+  .sh-col{position:static;width:auto!important;grid-template-rows:none;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:6px}
+  .sh-chip{flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;min-height:0;padding:7px 8px;font-size:.74rem;transform:translateY(-6px)}
+  .sh-sp{flex-basis:auto;height:12px}
+  .sh-node{position:relative;left:auto;top:auto;bottom:auto;width:auto;padding:10px;gap:3px}
+  .sh-node::before,.sh-node::after{content:"";position:absolute;left:50%;height:14px;border-left:1.5px dashed rgba(255,255,255,.35)}
+  .sh-card.b .sh-node::before,.sh-card.b .sh-node::after{border-left-color:rgba(120,169,255,.75)}
+  .sh-node::before{bottom:calc(100% + 3px)}.sh-node::after{top:calc(100% + 3px)}
+}
 /* phones: the nav row scrolls sideways, a soft edge shows there is more */
 .nav-links.more{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent)}
 /* ---------- 04 demos: one player, four ways to see it ---------- */
@@ -1459,7 +1539,17 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <p class="hero-kicker"><span class="k-ts">Time series intelligence</span> meets <span class="k-ctx">real-time context</span>.</p>
       <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
       <p class="lede">IBM Granite Time Series models now run inside Confluent. They read every live signal in its context and optimize mission-critical decisions while they still matter.</p>
-      <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>2 min, live</small></button><a class="btn ghost play2" id="walk-open" href="https://www.youtube.com/watch?v=knU4XB-90Nw" target="_blank" rel="noopener" aria-label="Walkthrough on Confluent Cloud, a video on YouTube, opens in a new tab"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></a></div>
+      <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>2:20, live</small></button><a class="btn ghost play2" id="walk-open" href="https://www.youtube.com/watch?v=knU4XB-90Nw" target="_blank" rel="noopener" aria-label="Walkthrough on Confluent Cloud, a video on YouTube, opens in a new tab"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></a></div>
+    </div>
+
+    <div class="stage why" id="st-why">
+      <div class="stage-top">
+        <div class="stage-title"><h3>From words to decisions</h3><p><span class="lg lg-a">Wave one: unstructured data</span><span class="lg lg-b">Wave two: time series and streaming data</span></p></div>
+        <button class="btn sm ghost v4rp" id="why-replay" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.2h2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Replay</button>
+      </div>
+      <div class="stage-body">
+        <div class="sh-grid"><div class="sh-card a"><div class="sh-top"><span class="sh-n"><b>01</b>Unstructured data</span><span class="sh-pill">Transformed</span></div><div class="sh-big">Foundation models for language and vision</div><div class="sh-viz"><svg class="sh-wires" viewBox="0 0 520 300" preserveAspectRatio="none" aria-hidden="true"><path class="w in" d="M146 50 C 166 50, 162 150, 182 150"/><path class="w in" d="M146 150 C 166 150, 162 150, 182 150"/><path class="w in" d="M146 250 C 166 250, 162 150, 182 150"/><path class="w out" d="M282 150 C 302 150, 298 50, 318 50"/><path class="w out" d="M282 150 C 302 150, 298 150, 318 150"/><path class="w out" d="M282 150 C 302 150, 298 250, 318 250"/></svg><div class="sh-col ins"><div class="sh-chip i1"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h16M4 14h11M4 18h8"/></svg><span>Text</span></div><div class="sh-chip i2"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1"/><path d="M5 17l5-5.5 4 4 2.5-2.5L20 17"/><circle cx="15.5" cy="9" r="1.6"/></svg><span>Images</span></div><div class="sh-chip i3"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4.5 4.5v12.5h-12.5z"/><path d="M14 3.5V8h4.5M9 12.5h6.5M9 16h6.5"/></svg><span>Documents</span></div></div><div class="sh-node"><b>LLMs</b><span>foundation models</span></div><div class="sh-col outs"><div class="sh-chip o1"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v10H10l-4.5 3.5v-3.5H4z"/><path d="M8 10h.01M12 10h.01M16 10h.01" stroke-width="2.4" stroke-linecap="round"/></svg><span>Chatbots</span></div><div class="sh-chip o2"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg><span>Copilots</span></div><div class="sh-chip o3"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="6" r="2.4"/><circle cx="5.5" cy="17.5" r="2.4"/><circle cx="18.5" cy="17.5" r="2.4"/><path d="M10.9 8.1l-3.9 7.2M13.1 8.1l3.9 7.2M7.9 17.5h8.2"/></svg><span>Agents</span></div></div></div><div class="sh-foot">Where knowledge work lives.</div></div><div class="sh-mid"><svg viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h34M28 2l7 6-7 6"/></svg></div><div class="sh-card b"><div class="sh-top"><span class="sh-n"><b>02</b>Time series and streaming data</span><span class="sh-pill on">The bigger prize</span></div><div class="sh-big">Time series foundation models</div><div class="sh-viz"><svg class="sh-wires" viewBox="0 0 520 300" preserveAspectRatio="none" aria-hidden="true"><path class="w in" d="M146 50 C 166 50, 162 150, 182 150"/><path class="w in" d="M146 150 C 166 150, 162 150, 182 150"/><path class="w in" d="M146 250 C 166 250, 162 150, 182 150"/><path class="w out" d="M282 150 C 302 150, 298 50, 318 50"/><path class="w out" d="M282 150 C 302 150, 298 150, 318 150"/><path class="w out" d="M282 150 C 302 150, 298 250, 318 250"/></svg><div class="sh-col ins"><div class="sh-chip i1"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4l2-5 3.5 9 2.5-6 1.5 2H21"/><circle cx="18.5" cy="6" r="1.6"/></svg><span>Sensors</span><svg class="sh-sp" viewBox="0 0 60 20" preserveAspectRatio="none" aria-hidden="true"><g class="sh-sp-g"><path d="M0 12 L6 9 L12 13 L18 7 L24 11 L30 6 L36 12 L42 10 L48 14 L54 8 L60 12 L66 9 L72 13 L78 7 L84 11 L90 6 L96 12 L102 10 L108 14 L114 8 L120 12"/></g></svg></div><div class="sh-chip i2"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="5.5" y="12" width="3" height="6"/><rect x="10.5" y="8" width="3" height="10"/><rect x="15.5" y="5" width="3" height="13"/></svg><span>Transactions</span><svg class="sh-sp" viewBox="0 0 60 20" preserveAspectRatio="none" aria-hidden="true"><g class="sh-sp-g"><path d="M0 14 L10 14 L14 4 L18 14 L30 14 L34 8 L38 14 L50 14 L54 3 L58 14 L60 14 L70 14 L74 4 L78 14 L90 14 L94 8 L98 14 L110 14 L114 3 L118 14 L120 14"/></g></svg></div><div class="sh-chip i3"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4l2-5 3.5 9 2.5-6 1.5 2H21"/><circle cx="18.5" cy="6" r="1.6"/></svg><span>Telemetry</span><svg class="sh-sp" viewBox="0 0 60 20" preserveAspectRatio="none" aria-hidden="true"><g class="sh-sp-g"><path d="M0 10 C10 4 20 4 30 10 S50 16 60 10 S80 4 90 10 S110 16 120 10"/></g></svg></div></div><div class="sh-node"><em>IBM Granite</em><b>Time Series</b><span>foundation models</span></div><div class="sh-col outs"><div class="sh-chip o1"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 3.5v2.6M12 17.9v2.6M3.5 12h2.6M17.9 12h2.6M6 6l1.8 1.8M16.2 16.2L18 18M6 18l1.8-1.8M16.2 7.8L18 6"/></svg><span>Production optimization</span></div><div class="sh-chip o2"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="5.5" y="12" width="3" height="6"/><rect x="10.5" y="8" width="3" height="10"/><rect x="15.5" y="5" width="3" height="13"/></svg><span>Demand planning</span></div><div class="sh-chip o3"><svg class="sh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h4l2-5 3.5 9 2.5-6 1.5 2H21"/><circle cx="18.5" cy="6" r="1.6"/></svg><span>Anomaly detection</span></div></div></div><div class="sh-foot">Where the mission-critical decisions live.</div></div></div>
+      </div>
     </div>
 
     <div class="stage" id="st-live">
@@ -1993,7 +2083,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <div class="dm-list" id="dm-list" role="tablist" aria-label="Demos" aria-orientation="vertical">
         <button class="dm-it" role="tab" id="dm-t-notebook" aria-selected="true" tabindex="0" aria-controls="dm-infos" type="button" data-d="notebook" data-kind="video" data-src="demos/notebook.mp4" data-poster="demos/notebook.jpg" data-play="Play" data-small="2:56" data-aria="Play Time series on Confluent, simplified, 2 minutes 56 seconds"><span class="dm-th"><img src="demos/notebook-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>2:56</em></span><span class="dm-tx"><b>Time series on Confluent, simplified</b><span>The pitch, drawn by hand</span></span></button>
         <button class="dm-it" role="tab" id="dm-t-film" aria-selected="false" tabindex="-1" aria-controls="dm-infos" type="button" data-d="film" data-kind="video" data-src="demos/film.mp4" data-poster="demos/film.jpg" data-play="Play" data-small="2:55" data-aria="Play Real-time intelligence and use cases, 2 minutes 55 seconds"><span class="dm-th"><img src="demos/film-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>2:55</em></span><span class="dm-tx"><b>Real-time intelligence and use cases</b><span>The pitch, one chart at a time</span></span></button>
-        <button class="dm-it" role="tab" id="dm-t-live" aria-selected="false" tabindex="-1" aria-controls="dm-infos" type="button" data-d="live" data-kind="live" data-src="" data-poster="demos/live.jpg" data-play="Start the live demo" data-small="2 min" data-aria="Start the live demo on this page"><span class="dm-th"><img src="demos/live-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>Live</em></span><span class="dm-tx"><b>Live on this page</b><span>Real charts, voice and captions</span></span></button>
+        <button class="dm-it" role="tab" id="dm-t-live" aria-selected="false" tabindex="-1" aria-controls="dm-infos" type="button" data-d="live" data-kind="live" data-src="" data-poster="demos/live.jpg" data-play="Start the live demo" data-small="2:20" data-aria="Start the live demo on this page, 2 minutes 20 seconds"><span class="dm-th"><img src="demos/live-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>Live</em></span><span class="dm-tx"><b>Live on this page</b><span>Real charts, voice and captions</span></span></button>
         <button class="dm-it" role="tab" id="dm-t-console" aria-selected="false" tabindex="-1" aria-controls="dm-infos" type="button" data-d="console" data-kind="yt" data-src="knU4XB-90Nw" data-poster="demos/console.jpg" data-play="Watch on YouTube" data-small="new tab" data-aria="Watch the walkthrough on Confluent Cloud on YouTube, opens in a new tab"><span class="dm-th"><img src="demos/console-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>YouTube</em></span><span class="dm-tx"><b>Walkthrough on Confluent Cloud</b><span>The official demo by Confluent</span></span></button>
       </div>
       <div class="dm-infos" id="dm-infos" role="tabpanel" aria-labelledby="dm-t-notebook">
@@ -2010,7 +2100,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <ol class="dm-ch" aria-label="Chapters"><li><button type="button" data-t="0"><time>0:00</time><span>From words to decisions</span></button></li><li><button type="button" data-t="25.1"><time>0:25</time><span>IBM Granite inside Confluent</span></button></li><li><button type="button" data-t="40.2"><time>0:40</time><span>One store on a hot day</span></button></li><li><button type="button" data-t="55.1"><time>0:55</time><span>Where the data already flows</span></button></li><li><button type="button" data-t="80.8"><time>1:21</time><span>What changes for your teams</span></button></li><li><button type="button" data-t="93.5"><time>1:33</time><span>Production optimization</span></button></li><li><button type="button" data-t="109.8"><time>1:49</time><span>Anomaly detection and demand planning</span></button></li><li><button type="button" data-t="129.1"><time>2:09</time><span>Fraud, search and trading</span></button></li><li><button type="button" data-t="155.5"><time>2:35</time><span>Next steps</span></button></li></ol><p class="dm-links"><a href="demos/film.mp4" download="real-time-intelligence-and-use-cases.mp4">Download MP4 <small>31 MB</small></a></p>
         </div>
         <div class="dm-info" data-d="live" hidden>
-          <p class="dm-meta">Interactive · 2 min · on this page</p>
+          <p class="dm-meta">Interactive · 2:20 · on this page</p>
           <h3>The live demo</h3>
           <p class="dm-desc">It starts at the top of this page and plays the real charts, with voice and captions. Pause, skip a step or take over at any point.</p>
         </div>
@@ -4248,6 +4338,20 @@ const CS={
   App.arch={focus(i,pin,slow){const now=performance.now();st.pin=pin?now+CYCLE*(slow||1)+800:-1e9;start(i,now,slow);},hi(k){setHi(k,false);}};
 })();
 
+/* ============ 01 intro: from words to decisions. Wave one on unstructured data, wave two on time series, built step by step ============ */
+(function(){
+  const el=$('#st-why');if(!el)return;
+  const K=['s1','s2','s3','s4','s5','s6'],T=[200,1100,1900,3500,4400,5200];let timers=[];
+  const set=k=>K.forEach((c,i)=>el.classList.toggle(c,i<k));
+  const clear=()=>{timers.forEach(clearTimeout);timers=[];};
+  function play(){clear();set(0);void el.offsetWidth;T.forEach((t,i)=>timers.push(setTimeout(()=>set(i+1),t)));}
+  /* the live demo drives the same steps from its voice */
+  App.why={reset:()=>{clear();set(0);},set:k=>{clear();set(k);},play};
+  if(reduced||!('IntersectionObserver' in window))set(K.length);
+  else{const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();if(!document.body.classList.contains('pitching'))play();}},{threshold:.3});io.observe(el);}
+  const r=$('#why-replay');if(r)r.addEventListener('click',()=>{if(reduced)set(K.length);else play();});
+})();
+
 /* ============ live demo (scripted tour) ============ */
 /* How it behaves, by design:
    opens   on a first visit to the home page, once the page is visible, unless the visitor arrived on a deep link,
@@ -4266,7 +4370,8 @@ const CS={
   const click=sel=>{const el=$(sel);if(el)el.click();return !!el;};
   const setRange=(sel,v)=>{const el=$(sel);if(!el)return;el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));};
   const tab=id=>{const f=App.tabSel&&App.tabSel[id];if(f){f();return true;}return click('[role=tab][aria-controls="'+id+'"]');};
-  /* one pitch, about two minutes, told as one story with no pauses between steps: time series intelligence meets real-time context, the forecast that sees it coming,
+  /* one pitch, about two and a half minutes, told as one story with no pauses between steps: from words to decisions (wave one on unstructured data, wave two on time series),
+     time series intelligence meets real-time context, the forecast that sees it coming,
      the decision in time, Confluent and Granite better together, the value, then the proof of breadth: six decisions, four industries, three case studies, and the ask.
      subs are the subtitles, timed to the voice by their length. at('phrase') waits for that phrase in the line.
      hold keeps a step on screen a moment after the voice ends */
@@ -4275,58 +4380,64 @@ const CS={
   const show=(strip,id)=>{tab(id);$$('#'+strip+' [role=tab]').forEach(x=>x.classList.toggle('tour-hi',x.getAttribute('aria-controls')===id));};
   const montage=async(at,strip,list)=>{for(const [p,id] of list){await at(p);show(strip,id);}};
   const SCRIPT=[
-    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:17940,
-      say:'Time series intelligence meets real-time context. IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands.',
-      subs:['<em>Time series intelligence</em> meets <em>real-time context</em>.','IBM Granite Time Series models now run <em>live inside Confluent</em>,','<em>pretrained to scale</em> across plants, stores, SKUs and customers,','<em>efficient</em> on standard CPUs,','and <em>learning</em> as each event lands.'],
-      run:async(w,at)=>{const H=App.hero;if(!H)return;H.reset();await at('live inside');scrollTo('#st-live');await at('pretrained');H.flash('dom');await at('efficient');H.flash('dist');await at('and learning');H.flash('inter');}},
-    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:8170,
+    {n:1,act:0,focus:'.hero-head,#st-why',scroll:'top',dur:21410,
+      say:'Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data, with LLMs, chatbots and agents. The bigger prize is time series and streaming data, where the mission-critical decisions live, from production and demand planning to anomaly detection.',
+      subs:['<em>Time series intelligence</em> meets <em>real-time context</em>.','Foundation models transformed how enterprises','unlock value from <em>unstructured data</em>,','with <em>LLMs, chatbots and agents</em>.','The bigger prize is <em>time series and streaming data</em>,','where the <em>mission-critical decisions</em> live,','from <em>production</em> and <em>demand planning</em> to <em>anomaly detection</em>.'],
+      run:async(w,at)=>{const W=App.why;if(!W)return;W.reset();const phone=window.innerWidth<=760;
+        await at('Foundation models');scrollTo('#st-why',true);await at('unstructured data');W.set(1);await at('with LLMs');W.set(2);await at('chatbots and agents');W.set(3);
+        await at('The bigger prize');if(phone)scrollTo('#st-why .sh-card.b',true);W.set(4);await at('where the mission');W.set(5);await at('from production');W.set(6);}},
+    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:14420,
+      say:'IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands.',
+      subs:['IBM Granite Time Series models now run <em>live inside Confluent</em>,','<em>pretrained to scale</em> across plants, stores, SKUs and customers,','<em>efficient</em> on standard CPUs,','and <em>learning</em> as each event lands.'],
+      run:async(w,at)=>{const H=App.hero;if(!H)return;H.reset();await at('pretrained');H.flash('dom');await at('efficient');H.flash('dist');await at('and learning');H.flash('inter');}},
+    {n:3,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:8170,
       say:'Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,',
       subs:['Take <em>one store</em> on a hot day.','The forecast reads the heat wave','and <em>sees the stockout coming</em>,','so the empty shelf is <em>flagged in seconds</em>,'],
       run:async(w,at)=>{await at('reads the heat wave');if(App.hero)App.hero.ctx();await at('so the empty shelf');if(App.hero)App.hero.anomaly();}},
-    {n:3,act:0,focus:'.hero-head,#st-live',dur:4500,
+    {n:4,act:0,focus:'.hero-head,#st-live',dur:4500,
       say:'and the next order is optimized to keep it full, while the decision still matters.',
       subs:['and the <em>next order is optimized</em> to keep it full,','<em>while the decision still matters</em>.'],
       run:async(w,at)=>{if(App.hero)App.hero.optimize();}},
-    {n:4,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:12850,
+    {n:5,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:12850,
       say:'That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, while the usual way is still a day behind.',
       subs:['That works because the intelligence','<em>lives where the data already flows</em>.','Confluent <em>streams and governs</em> every event,','and Granite turns it into <em>a decision in under a second</em>,','while the usual way is <em>still a day behind</em>.'],
       run:async(w,at)=>{const A=App.arch;if(!A)return;const phone=window.innerWidth<=760,v=n=>{A.hi('v'+n);hi('#ax-vals [data-v="'+n+'"]');};A.focus(0,true,1.5);
         await at('lives where');v(3);await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('governs');v(1);v(2);
         await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);await at('in under a second');if(phone)scrollTo('#arch-a-out',true);A.hi('out');v(4);await at('while the usual way');v(6);v(5);if(phone)scrollTo('#ax-vals',true);}},
-    {n:5,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:9900,
+    {n:6,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:9900,
       say:'So your teams ship a forecast in one step instead of six, get thirty-two percent less error than a seasonal baseline, and stop waiting on nightly scoring runs.',
       subs:['So your teams ship a forecast in <em>one step instead of six</em>,','get <em>thirty-two percent less error</em> than a seasonal baseline,','and <em>stop waiting</em> on nightly scoring runs.'],
       run:async w=>{}},
-    {n:6,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-prod'),dur:13400,
+    {n:7,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-prod'),dur:13400,
       say:'Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.',
       subs:['Time series models <em>optimize mission-critical decisions</em>','as each event lands.','On a chocolate line, <em>temper is forecast on every reading</em>,','so setpoints adjust before a new cocoa butter lot','<em>turns into rework</em>.'],
       run:async(w,at)=>{hi('#uctabs [role=tab]');await at('On a chocolate');click('#pr-inject .chip[data-v="butter"]');}},
-    {n:7,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-anom'),dur:8410,
+    {n:8,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-anom'),dur:8410,
       say:'Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.',
       subs:['Across thousands of signals,','each series gets <em>its own expected band</em>,','so weekend peaks pass','and <em>only the real breaks are flagged</em>.'],
       run:async(w,at)=>{await at('so weekend');click('#an-inject .chip[data-v="stockout"]');}},
-    {n:8,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-demand'),dur:6540,
+    {n:9,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-demand'),dur:6540,
       say:'In retail, one model forecasts every SKU in every store and reorders at the service level you choose.',
       subs:['In retail, one model forecasts <em>every SKU in every store</em>','and reorders at <em>the service level you choose</em>.'],
       run:async(w,at)=>{await at('and reorders');click('#dm-sl .chip[data-v="95"]');}},
-    {n:9,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-fraud'),dur:8290,
+    {n:10,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-fraud'),dur:8290,
       say:'In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.',
       subs:['In payments, each card is scored <em>against its own normal</em>','before authorization,','so <em>card testing is held</em>','and travelers get through.'],
       run:async(w,at)=>{await at('before authorization');click('#fr-inject .chip[data-v="testing"]');}},
-    {n:10,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-search'),dur:5940,
+    {n:11,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-search'),dur:5940,
       say:'Years of history become searchable by shape, so one sketch finds every signal that looked like this.',
       subs:['Years of history become <em>searchable by shape</em>,','so one sketch finds every signal that looked like this.'],
       run:async(w,at)=>{await at('so one sketch');click('#se-q .chip[data-v="spike"]');}},
-    {n:11,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-trade'),dur:5960,
+    {n:12,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-trade'),dur:5960,
       say:'On the trading desk, a volume forecast with a probability band paces large orders to the market.',
       subs:['On the trading desk, a volume forecast with <em>a probability band</em>','<em>paces large orders</em> to the market.'],
       run:async(w,at)=>{await at('paces');click('#tr-inject .chip[data-v="news"]');}},
-    {n:12,act:2,focus:'#cases,#cstabs,#usecases .cspanel',scroll:'#cstabs',topM:true,pre:()=>{if(App.cement)App.cement.set(false);},dur:14560,
+    {n:13,act:2,focus:'#cases,#cstabs,#usecases .cspanel',scroll:'#cstabs',topM:true,pre:()=>{if(App.cement)App.cement.set(false);},dur:14560,
       say:'And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error.',
       subs:['And it <em>already works in the field</em>.','Telco tickets open only on <em>confirmed causes</em>,','<em>two models replaced thirty</em> in a cement plant','and lifted accuracy to <em>ninety-nine percent</em>,','and trading forecasts carry <em>about ten percent less error</em>.'],
       run:async(w,at)=>{hi('#cstabs [role=tab]');await at('Telco');show('cstabs','cs-telco');click('#ni-mode .chip[data-v="assist"]');await w(200);click('#ni-inject .chip[data-v="fiber"]');
         await at('two models');show('cstabs','cs-cement');await w(500);if(App.cement)App.cement.set(true);await at('and trading');show('cstabs','cs-fin');}},
-    {n:13,act:3,focus:'.contact',scroll:'#contact',dur:3300,hold:1200,
+    {n:14,act:3,focus:'.contact',scroll:'#contact',dur:3300,hold:1200,
       say:'Bring us a stream and a decision. Contact us to start.',
       subs:['Bring us <em>a stream and a decision</em>.','<em>Contact us</em> to start.'],
       run:async w=>{}}
@@ -4348,7 +4459,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-10-19c';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='2026-10-20a';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}
