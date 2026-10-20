@@ -1461,7 +1461,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 /* phones: the nav row scrolls sideways, a soft edge shows there is more */
 .nav-links.more{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent)}
 /* ---------- 04 demos: one player, four ways to see it ---------- */
-.dm{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(250px,1fr);grid-template-areas:"screen list" "info list";column-gap:clamp(16px,2vw,28px);align-items:start}
+.dm{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(250px,1fr);grid-template-areas:"screen list";column-gap:clamp(16px,2vw,28px);align-items:start}
 .dm-screen{grid-area:screen;position:relative;aspect-ratio:16/9;background:#1b2746;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.18)}
 .dm-screen>video,.dm-screen>iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;display:block}
 .dm-poster{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;background:#1b2746;cursor:pointer;display:block;overflow:hidden;color:#fff}
@@ -1503,7 +1503,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .dm-links a:hover{text-decoration:none;border-bottom-color:var(--ink)}
 .dm-links small{margin-left:.35rem;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-3)}
 @media (max-width:980px){
-  .dm{grid-template-columns:minmax(0,1fr);grid-template-areas:"screen" "list" "info"}
+  .dm{grid-template-columns:minmax(0,1fr);grid-template-areas:"screen" "list"}
   .dm-list{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:12px}
   .dm-it{grid-template-columns:minmax(0,1fr);gap:.55rem;align-items:start;align-content:start;padding:6px 6px 9px}
   .dm-tx{padding:0 .2rem}
