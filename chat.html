@@ -1551,6 +1551,11 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 @media (max-width:480px){.v7r{grid-template-columns:44px minmax(0,1fr) 12px minmax(0,1fr);column-gap:6px}}
 .v4viz .v4k .v6il{margin-left:0;white-space:nowrap}
 .v4m{container-type:inline-size}
+.pg-sub{align-items:center}
+.pg-sub-k{font:600 .66rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-right:.2rem}
+.pg-sub a.pill{text-decoration:none}
+.pg-sub a.pill:not(.live){color:var(--ink-3)}
+.pg-sub a.pill:not(.live):hover{color:var(--ink);border-color:var(--ink-3)}
 .v4m b{font-weight:400;font-size:1.45rem;line-height:1.25;letter-spacing:-.015em}
 @media (min-width:1061px){.v4m b{font-size:min(2rem,6.1cqi);white-space:nowrap}}
 @media (min-width:1061px){.v4c[data-k="resp"] .v6dc{flex:1 1 150px;height:auto;min-height:150px}}
@@ -1768,9 +1773,9 @@ html{scroll-behavior:auto}
       <a href="/#value"><b>02</b>Value</a>
       <a href="/#usecases"><b>03</b>Enterprise use cases</a>
       <a href="/#demos"><b>04</b>Demos</a>
-      <a href="/playground"><b>05</b>Playground</a>
-      <a href="/chat" class="on"><b>06</b>Chat</a>
+      <a href="/playground" class="on"><b>05</b>Playground</a>
     </div>
+    <a class="nav-stat nav-pitch" href="/?demo=1"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg> Walkthrough</a>
     <a class="btn sm" href="/#contact">Contact us <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </div>
 </nav>
@@ -1778,7 +1783,7 @@ html{scroll-behavior:auto}
 <main class="ch" id="ch" data-empty="1">
   <div class="ch-col">
     <section class="ch-intro" id="ch-intro">
-      <div class="pills"><span class="pill live">Chat · real models, no sign-up</span></div>
+      <nav class="pills pg-sub" aria-label="Playground"><span class="pg-sub-k">Playground</span><a class="pill" href="/playground">Streams</a><a class="pill live" href="/chat" aria-current="page">Chat</a></nav>
       <h1 class="h-display ch-h">Ask the models.</h1>
       <p class="ch-sub">Forecast a stream, find what is unusual, race TTM, FlowState and PatchTST-FM, or bring your own data. Claude runs the IBM Granite Time Series models and tells you what they found.</p>
       <p class="ch-off" id="ch-off" hidden>The chat opens soon. Until then, the <a href="/playground">playground</a> runs every model on the same streams, or <a href="#ch-skill">add the skill</a> to your own Claude.</p>
