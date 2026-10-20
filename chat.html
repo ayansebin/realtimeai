@@ -1379,10 +1379,13 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .why .stage-top{align-items:center}
 .why .stage-title{flex:1 1 auto;max-width:none;min-width:0}
 .why .stage-title p{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem 1.25rem}
-.why .stage-title p.why-say{display:block;margin:.15rem 0 .25rem;font-size:clamp(.95rem,1.15vw,1.05rem);line-height:1.45;font-weight:300;color:var(--ink-2)}
+.stage-title p.why-say{display:block;margin:.15rem 0 .25rem;font-size:clamp(.95rem,1.15vw,1.05rem);line-height:1.45;font-weight:300;color:var(--ink-2)}
 /* wider screens: Replay sits beside the title so the explainer runs the full width on one line */
 @media (min-width:761px){.why .stage-top{display:block;position:relative}.why .stage-top>.v4rp{position:absolute;top:clamp(18px,2.4vw,28px);right:clamp(16px,2.4vw,28px)}.why .stage-title h3{padding-right:130px}}
 .why-say em{font-style:normal;color:#a6c8ff}
+/* the live chart: the same one line explainer on top */
+#st-live .hx-top .stage-title{flex:1 1 0;max-width:none;min-width:0}
+#st-live .hx-top p.why-say{margin:0}
 .sh-grid{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);gap:12px}
 .sh-card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px 18px;border:1px solid rgba(255,255,255,.16);border-radius:4px;background:rgba(10,20,48,.45);transition:opacity .7s,border-color .7s,box-shadow .7s}
 .sh-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 10px}
