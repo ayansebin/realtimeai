@@ -96,5 +96,10 @@
     "api/chat.js": {
       "maxDuration": 60
     }
+  },
+  "git": {
+    "deploymentEnabled": {
+      "chat-parked": false
+    }
   }
 }
