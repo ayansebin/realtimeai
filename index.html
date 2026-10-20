@@ -1711,8 +1711,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
         <div class="v4">
           <article class="v4c" data-k="prod">
             <div class="v4top"><span class="v4n"><i>01</i>Productivity</span><span class="v4p">For data and AI teams</span></div>
-            <p class="v4pain">Every forecast is a pipeline to build and maintain, per series.</p>
-            <div class="v4m"><b>6 steps → 1</b><span>to a first forecast in production</span></div>
+            <p class="v4pain">Hundreds of bespoke models to build and maintain, one per series.</p>
+            <div class="v4m"><b>6 steps → 1</b><span>No bespoke models. Compact, agile teams.</span></div>
             <div class="v4viz">
               <div class="v4k">The usual way, per series</div>
               <div class="v5steps" id="v5-steps"><span class="v5s"><i>1</i>Export the data</span><span class="v5s"><i>2</i>Build features</span><span class="v5s"><i>3</i>Train a model</span><span class="v5s"><i>4</i>Validate</span><span class="v5s"><i>5</i>Deploy an endpoint</span><span class="v5s"><i>6</i>Monitor and retrain</span></div>
@@ -1723,7 +1723,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           <article class="v4c" data-k="acc">
             <div class="v4top"><span class="v4n"><i>02</i>Accuracy</span><span class="v4p">For planners and risk teams</span></div>
             <p class="v4pain">Rules and per series models miss what just changed.</p>
-            <div class="v4m"><b data-c="32">0%</b><span>less error than a seasonal baseline, zero-shot</span></div>
+            <div class="v4m"><b>Millions saved</b><span>from more accurate forecasts</span></div>
             <div class="v4viz">
               <div class="v4k">Learned across domains</div>
               <div class="v6tr"><canvas id="v6-tr" role="img" aria-label="Eight pretraining domains, electricity, weather, traffic, solar and wind, smart meters, web traffic, cash withdrawals and bitcoin, each with its own pattern. The patterns that match a new series light up and flow into one model, which forecasts the new series zero-shot."></canvas></div>
@@ -2755,7 +2755,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   const set=(e,v)=>{if(e&&e.textContent!==v)e.textContent=v;};
   const tog=(e,c,on)=>{if(e&&e.classList.contains(c)!==on)e.classList.toggle(c,on);};
   const steps=$$('.v5steps .v5s',P),one=$('.v5one',P);
-  const big=$('.v4m b[data-c]',A),ctxBar=$('.v6ctx i',A),ctxV=$('[data-v="ctx"]',A),rel=$$('.v6rel b',A),relV=$('[data-v="rel"]',A);
+  const ctxBar=$('.v6ctx i',A),ctxV=$('[data-v="ctx"]',A),rel=$$('.v6rel b',A),relV=$('[data-v="rel"]',A);
   const st={t:0,run:false,seen:false};
 
   /* ---------- accuracy: transfer across domains ---------- */
@@ -2821,8 +2821,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   function frame(t){
     /* productivity: the usual way lights its six steps one by one, together is done in one */
     steps.forEach((s,k)=>tog(s,'on',t>=500+k*520));tog(one,'on',t>=450);tog(P,'u-done',t>=500+5*520+300);
-    /* accuracy: the headline counts to 32, history grows to 512 points, releases light up in turn */
-    set(big,Math.round(32*ez((t-600)/1400))+'%');
+    /* accuracy: history grows to 512 points, releases light up in turn */
     const pts=Math.round(20+492*ez((t-500)/3200));if(ctxBar)ctxBar.style.width=(pts/512*100).toFixed(1)+'%';set(ctxV,pts+' points');
     rel.forEach((b,k)=>tog(b,'on',t>=900+k*900));set(relV,t>=1800?'+15%':'');}
   function start(){st.t=0;st.run=true;dcs.t0=performance.now();}
