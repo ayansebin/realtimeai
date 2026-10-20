@@ -1,7 +1,7 @@
   const SCRIPT=[
-    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:19930,
-      say:'Time series intelligence meets real-time context. IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands.',
-      subs:['<em>Time series intelligence</em> meets <em>real-time context</em>.','IBM Granite Time Series models now run <em>live inside Confluent</em>,','<em>pretrained to scale</em> across plants, stores, SKUs and customers,','<em>efficient</em> on standard CPUs,','and <em>learning</em> as each event lands.'],
+    {n:1,act:0,focus:'.hero-head,#st-live',scroll:'top',dur:30970,
+      say:'Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data. The bigger prize is time series and streaming data, where the mission-critical decisions live. IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands.',
+      subs:['<em>Time series intelligence</em> meets <em>real-time context</em>.','Foundation models transformed how enterprises','unlock value from <em>unstructured data</em>.','The bigger prize is <em>time series and streaming data</em>,','where the <em>mission-critical decisions</em> live.','IBM Granite Time Series models now run <em>live inside Confluent</em>,','<em>pretrained to scale</em> across plants, stores, SKUs and customers,','<em>efficient</em> on standard CPUs,','and <em>learning</em> as each event lands.'],
       run:async(w,at)=>{const H=App.hero;if(!H)return;H.reset();await at('live inside');scrollTo('#st-live');await at('pretrained');H.flash('dom');await at('efficient');H.flash('dist');await at('and learning');H.flash('inter');}},
     {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:9780,
       say:'       Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,',
@@ -43,8 +43,8 @@
       say:'                 On the trading desk, a volume forecast with a probability band paces large orders to the market.',
       subs:['                 On the trading desk, a volume forecast with <em>a probability band</em>','<em>paces large orders</em> to the market.'],
       run:async(w,at)=>{await at('paces');click('#tr-inject .chip[data-v="news"]');}},
-    {n:13,act:3,focus:'.contact',dur:6950,
-      say:'                        Bring us a stream and a decision. Tell us where you want to start, and we will get back to you.',
-      subs:['                       Bring us <em>a stream and a decision</em>.','Tell us where you want to start,','and we will get back to you.'],
+    {n:13,act:3,focus:'.contact',dur:15440,
+      say:'                    Try the models in the playground. Sign up for early access on Confluent Cloud. Then bring us a stream and a decision, and we will co-innovate with you to bring real-time intelligence to your enterprise.',
+      subs:['                    Try the models <em>in the playground</em>.','Sign up for early access <em>on Confluent Cloud</em>.','Then bring us <em>a stream and a decision</em>,','and we will <em>co-innovate with you</em>','to bring real-time intelligence to your enterprise.'],
       run:async w=>{}}
   ];

@@ -6,9 +6,9 @@
   {
    "n": 1,
    "file": "01.mp3",
-   "dur": 19.99,
+   "dur": 31.03,
    "lead": 0.0,
-   "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands."
+   "text": "Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data. The bigger prize is time series and streaming data, where the mission-critical decisions live. I B M Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands."
   },
   {
    "n": 2,
@@ -83,9 +83,9 @@
   {
    "n": 13,
    "file": "13.mp3",
-   "dur": 7.01,
+   "dur": 15.5,
    "lead": 1.4,
-   "text": "Bring us a stream and a decision. Tell us where you want to start, and we will get back to you."
+   "text": "Try the models in the playground. Sign up for early access on Confluent Cloud. Then bring us a stream and a decision, and we will co-innovate with you to bring real-time intelligence to your enterprise."
   }
  ]
 }

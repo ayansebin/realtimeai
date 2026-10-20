@@ -26,7 +26,7 @@ def visual(c):  # first captured frame that actually shows the new shot, and the
 cuts = [(c['why'], c['t'] / 1000) for c in m['cuts']]
 xcuts = [(w,) + visual(t) for w, t in cuts if w != 'start']          # (why, visual time, old frame time)
 vc = {w: c for w, c, o in xcuts}
-OV_ON, OV_OFF = vc['title'] - T0, dict(cuts)['end'] - T0                     # overlays live between the title card and the end card
+OV_ON, OV_OFF = vc.get('hero', vc.get('title')) - T0, dict(cuts)['end'] - T0                     # overlays live between the title card and the end card
 
 man = json.load(open(NAR + 'manifest.json'))['lines']
 import re as _re
@@ -63,7 +63,7 @@ def snap(t):  # labels change with the picture, not with the voice
     best = None
     for w, c, o in xcuts:
         if t - 0.05 <= c <= t + 1.5 and (best is None or c < best): best = c
-    return (best if best is not None else t + T0) - T0
+    return (best if best is not None else t) - T0
 labels = [(snap(l['t'] / 1000), l['h']) for l in m['labels']]
 
 def comp(fr, ov, k):

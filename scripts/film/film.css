@@ -39,10 +39,26 @@ html.film .film-shot .tour-hi{transition:none}
 #film-ui .f-card h1 em{font-style:normal}
 #film-ui .f-card .b{color:var(--fb)}
 #film-ui .f-card .g{color:var(--fg)}
-#film-ui .f-end h1{font-size:50px;max-width:none}
-#film-ui .f-end p{margin:22px 0 0;font-size:17px;font-weight:300;color:var(--fi2)}
-#film-ui .f-end .f-url{margin-top:34px;font-size:21px;font-weight:500;letter-spacing:.005em;color:var(--fi);padding:12px 22px;border:1px solid rgba(22,22,22,.32)}
-#film-ui .f-end .f-url i{display:inline-block;width:8px;height:8px;background:var(--fb);margin-right:12px;vertical-align:2px}
+#film-ui .f-end h1{font-size:46px;max-width:none}
+#film-ui .f-end .f-eye{margin-bottom:22px}
+#film-ui .f-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;width:980px;margin-top:52px;text-align:left}
+#film-ui .fs{display:grid;gap:7px;padding-top:16px;box-shadow:inset 0 1px 0 rgba(22,22,22,.22);opacity:.42;transition:opacity .5s,box-shadow .5s}
+#film-ui .fs b{font:500 11.5px/1 "IBM Plex Mono",monospace;letter-spacing:.12em;color:var(--fi4);transition:color .5s}
+#film-ui .fs strong{font-size:21px;font-weight:500;letter-spacing:-.01em;color:var(--fi)}
+#film-ui .fs span{font:400 13px/1.3 "IBM Plex Mono",monospace;color:var(--fi3)}
+#film-ui .fs.on{opacity:1;box-shadow:inset 0 2px 0 var(--fb)}
+#film-ui .fs.on b{color:var(--fb)}
+#film-ui .f-th{display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);align-items:start;gap:44px;width:1060px;text-align:left}
+#film-ui .f-th .tc{display:grid;gap:12px;padding-top:18px;box-shadow:inset 0 1px 0 rgba(22,22,22,.22)}
+#film-ui .f-th .tc b{font:500 11.5px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--fi3)}
+#film-ui .f-th .tc strong{font-size:44px;font-weight:300;line-height:1.08;letter-spacing:-.015em;color:var(--fi3)}
+#film-ui .f-th .tc span{font-size:17px;font-weight:300;color:var(--fi2)}
+#film-ui .f-th .tc.z{box-shadow:inset 0 2px 0 var(--fb)}
+#film-ui .f-th .tc.z b{color:var(--fb)}
+#film-ui .f-th .tc.z strong{color:var(--fi)}
+#film-ui .f-th .tarr{width:56px;height:16px;color:var(--fi4);margin-top:62px}
+#film-ui .f-th .tarr,#film-ui .f-th .tc.z{opacity:0;transform:translateX(-10px);transition:opacity .7s ease,transform .7s ease}
+#film-ui .f-thesis.on .tarr,#film-ui .f-thesis.on .tc.z{opacity:1;transform:none}
 /* capture pass: shots and cards only, the editor draws brand, labels and captions */
 #film-ui.capture .f-top,#film-ui.capture .f-cap{visibility:hidden!important}
 /* overlay pass: transparent page, overlays only */

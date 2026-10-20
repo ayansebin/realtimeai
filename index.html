@@ -1121,6 +1121,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 @media (max-width:760px){body.pitching .hero .canvas-wrap.hx-wrap{height:400px}}
 /* ---------- the first two charts: the palette of the model section ---------- */
 #st-live .canvas-wrap.hx-wrap,#st-arch .ax{background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px;border:1px solid rgba(255,255,255,.12);border-radius:4px}
+/* hero: the value chart's scheme. Each stream is a translucent card over the stage gradient */
+#st-live .canvas-wrap.hx-wrap{background:none;border-color:transparent}
 #st-live .hx-ben,#st-arch .ax-v{background:rgba(10,20,48,.45);border-color:rgba(255,255,255,.16)}
 #st-live .hx-ben.on{background:rgba(69,137,255,.2);border-color:#78a9ff}
 #st-arch .ax-v.on,#st-arch .ax-v:hover,#st-arch .ax-v:focus-visible,#st-arch .ax-v.tour-hi{background:rgba(69,137,255,.2);border-color:#78a9ff}
@@ -2303,7 +2305,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   }
   function smooth(ctx,P){ctx.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length-1;i++){const xc=(P[i][0]+P[i+1][0])/2,yc=(P[i][1]+P[i+1][1])/2;ctx.quadraticCurveTo(P[i][0],P[i][1],xc,yc);}const q=P[P.length-1];ctx.lineTo(q[0],q[1]);}
   const RGB={t:'61,219,217',r:'250,77,86',g:'66,190,101',b:'69,137,255'};
-  function drawPanel(ctx,s,p,now,f){const nar=L.narrow,spot=s.i===st.spot,dim=st.focus&&!spot;ctx.save();if(dim)ctx.globalAlpha=0.4;
+  function drawPanel(ctx,s,p,now,f){const nar=L.narrow,spot=s.i===st.spot,dim=st.focus&&!spot;ctx.save();if(dim)ctx.globalAlpha=0.62;
     const n0=st.n-1,uc=st.ctx&&s.cx?sm((now-st.ctx.T-350-s.i*70-PD)/MORPH):0,ud=st.dec?sm((now-st.dec.T-s.i*110-PD)/MORPH):0,decOn=ud>0.5;
     /* what happened to this stream: it decides the panel's color and its one line */
     let txt=null,tone=null,a=0;
@@ -2311,6 +2313,9 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     else if(st.an&&s.flagT){txt=nar&&s.an.tagS?s.an.tagS:s.an.tag;tone='r';a=sm((now-s.flagT)/350);}
     else if(st.ctx&&s.cx&&uc>0.7){txt=(nar&&s.ctxTagS?s.ctxTagS:s.ctxTag)(s.risk);tone='t';a=sm((uc-0.7)/0.3);}
     const bg=ctx.createLinearGradient(0,p.y,0,p.y+p.h);bg.addColorStop(0,'rgba(69,137,255,.12)');bg.addColorStop(1,'rgba(69,137,255,.05)');
+    /* each stream is a translucent card with a faint grid, like the value chart's cards */
+    ctx.save();ctx.fillStyle='rgba(10,20,48,.45)';ctx.fillRect(p.x,p.y,p.w,p.h);ctx.strokeStyle='rgba(255,255,255,.035)';ctx.lineWidth=1;ctx.beginPath();
+    for(let gx=p.x+24;gx<p.x+p.w-1;gx+=24){ctx.moveTo(Math.round(gx)+0.5,p.y);ctx.lineTo(Math.round(gx)+0.5,p.y+p.h);}for(let gy=p.y+24;gy<p.y+p.h-1;gy+=24){ctx.moveTo(p.x,Math.round(gy)+0.5);ctx.lineTo(p.x+p.w,Math.round(gy)+0.5);}ctx.stroke();ctx.restore();
     ctx.save();ctx.fillStyle=bg;ctx.fillRect(p.x,p.y,p.w,p.h);if(tone&&a>0.05){ctx.fillStyle='rgba('+RGB[tone]+','+(0.07*a).toFixed(3)+')';ctx.fillRect(p.x,p.y,p.w,p.h);}ctx.restore();
     const ar=arrival(s.i,now);
     ctx.strokeStyle=tone&&a>0.05?'rgba('+RGB[tone]+','+(0.25+0.4*a)+')':spot?'rgba(166,200,255,.6)':'rgba(166,200,255,.16)';ctx.lineWidth=1;ctx.strokeRect(Math.round(p.x)+0.5,Math.round(p.y)+0.5,Math.round(p.w)-1,Math.round(p.h)-1);

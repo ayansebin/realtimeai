@@ -9,9 +9,19 @@
   ui.innerHTML='<div class="f-top"><span class="f-brand"><i></i>Real-time intelligence</span><span class="f-label" id="f-label"></span></div>'+
     '<div class="f-cap" id="f-cap"></div>'+
     '<div class="f-card f-title" id="f-title"><div class="f-eye"><i></i>IBM Granite Time Series models on Confluent</div><h1><em class="b">Time series intelligence</em> meets <em class="g">real-time context</em>.</h1></div>'+
-    '<div class="f-card f-end" id="f-end" hidden><h1>Bring us <em class="b">a stream and a decision</em>.</h1><p>Contact us to start.</p><div class="f-url"><i></i>realtimeintelligence.io</div></div>';
+    '<div class="f-card f-thesis" id="f-thesis" hidden><div class="f-th">'+
+      '<div class="tc a"><b>Foundation models transformed</b><strong>Unstructured data</strong><span>text, images and documents</span></div>'+
+      '<svg class="tarr" viewBox="0 0 56 16" aria-hidden="true"><path d="M0 8h52M45 2l7 6-7 6" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>'+
+      '<div class="tc z"><b>The bigger prize</b><strong>Time series and streaming data</strong><span>where the mission-critical decisions live</span></div>'+
+    '</div></div>'+
+    '<div class="f-card f-end" id="f-end" hidden><div class="f-eye"><i></i>Real-time intelligence</div><h1>Bring us <em class="b">a stream and a decision</em>.</h1>'+
+      '<div class="f-steps">'+
+        '<div class="fs" data-k="1"><b>01</b><strong>Try the models</strong><span>realtimeintelligence.io/playground</span></div>'+
+        '<div class="fs" data-k="2"><b>02</b><strong>Sign up for early access</strong><span>confluent.io/get-started</span></div>'+
+        '<div class="fs" data-k="3"><b>03</b><strong>Co-innovate with us</strong><span>realtimeintelligence.io</span></div>'+
+      '</div></div>';
   document.body.appendChild(ui);
-  const label=$('#f-label'),cap=$('#f-cap'),title=$('#f-title'),end=$('#f-end');
+  const label=$('#f-label'),cap=$('#f-cap'),title=$('#f-title'),thesis=$('#f-thesis'),end=$('#f-end');
   const log=window.__film={cuts:[],caps:[],labels:[]};
   const cut=why=>log.cuts.push({t:Date.now(),why});
   const setLabel=h=>{if(label.innerHTML===h)return;label.innerHTML=h;log.labels.push({t:Date.now(),h});};
@@ -38,21 +48,26 @@
   /* use case navigation: every use case in a row, the current one underlined, so the viewer always knows where they are */
   const UCN=[5,6,7,8,9,10].map(k=>UC[k][1]);
   const nav=k=>'<b>03</b>Use cases<span class="nav-uc">'+UCN.map((n,j)=>'<i class="'+(j<k?'done':j===k?'on':'')+'">'+n+'</i>').join('')+'</span>';
-  const CS={'cs-telco':'Telco <s>·</s> Network Intelligence','cs-cement':'Manufacturing <s>·</s> Cement plant production','cs-fin':'Financial services <s>·</s> Forecasting for trading'};
   let step=-1,subN=0;
-  function hideTitle(){if(title.hidden)return;title.hidden=true;cap.style.opacity='';cut('title');}
+  /* opening: title card, then the thesis card, then the live hero chart */
+  function toThesis(){if(title.hidden)return;title.hidden=true;thesis.hidden=false;cut('title');}
+  function toHero(){if(thesis.hidden&&title.hidden&&cap.style.opacity==='')return;title.hidden=true;thesis.hidden=true;cap.style.opacity='';cut('hero');}
   function onStep(i){
     if(i===step)return;step=i;subN=0;
-    if(i<=2){if(i===0){title.hidden=false;cap.style.opacity='0';cut('start');}frame($('#st-live'),'<b>01</b>Innovation');if(i>0)hideTitle();return;}
+    if(i<=2){if(i===0){title.hidden=false;thesis.hidden=true;cap.style.opacity='0';cut('start');}frame($('#st-live'),'<b>01</b>Innovation');if(i>0)toHero();return;}
     if(i===3){frame($('#st-arch'),'<b>01</b>Confluent + IBM Granite');cut('arch');return;}
     if(i===4){frame($('#st-three'),'<b>02</b>Three things change for your teams');cut('value');return;}
     if(UC[i]){frame($(UC[i][0]),nav(i-5));cut(UC[i][0]);return;}
     if(i===11){end.hidden=false;cap.style.opacity='0';setLabel('');cut('end');return;}  /* the film script ends on the call to action */
   }
+  function onCap(){
+    if(step===0){if(subN===2)toThesis();if(subN===4)thesis.classList.add('on');if(subN===6)toHero();}
+    if(step===11){const on=k=>{const e=end.querySelector('.fs[data-k="'+k+'"]');if(e)e.classList.add('on');};if(subN===1)on(1);if(subN===2)on(2);if(subN===4)on(3);}
+  }
   const stepEl=$('#pitch-step');
   new MutationObserver(()=>{const m=/^(\d+)\s*\//.exec(stepEl.textContent.trim());if(m)onStep(+m[1]-1);}).observe(stepEl,{childList:true,characterData:true,subtree:true});
   const pc=$('#pitch-cap');
   new MutationObserver(()=>{const h=pc.innerHTML;cap.innerHTML='<span>'+h+'</span>';cap.classList.remove('in');void cap.offsetWidth;cap.classList.add('in');log.caps.push({t:Date.now(),h,step});
-    subN++;if(step===0&&subN===2)hideTitle();}).observe(pc,{childList:true,subtree:true,characterData:true});
+    subN++;onCap();}).observe(pc,{childList:true,subtree:true,characterData:true});
   window.__cuts=log.cuts;
 })();
