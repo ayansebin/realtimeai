@@ -1,6 +1,7 @@
 // Contact form endpoint for realtimeintelligence.io
 //   POST /api/contact                 public, stores one lead privately in Vercel Blob
 //                                     kind: contact (default), trial, early-access, feedback or chat-feedback
+//                                     the contact form sends a LinkedIn link, the other forms a company: one of the two is required
 //                                     chat-feedback comes from /chat and needs only a rating or a note, the rest is optional
 //                                     early-access, feedback and chat-feedback with a note also notify the owner when one of these is set:
 //                                     RESEND_API_KEY with NOTIFY_EMAIL (and optionally NOTIFY_FROM), or NOTIFY_WEBHOOK
@@ -10,11 +11,13 @@
 const crypto = require('crypto');
 const { put, list, get, del } = require('@vercel/blob');
 
-const LIMITS = { name: 120, email: 200, company: 160, notes: 4000, page: 200, org: 80, region: 40, context: 6000 };
+const LIMITS = { name: 120, email: 200, company: 160, linkedin: 200, notes: 4000, page: 200, org: 80, region: 40, context: 6000 };
 const KINDS = ['contact', 'trial', 'early-access', 'feedback', 'chat-feedback'];
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const COLUMNS = ['received', 'kind', 'name', 'email', 'company', 'notes', 'org', 'region', 'rating', 'country', 'page', 'context'];
+const COLUMNS = ['received', 'kind', 'name', 'email', 'company', 'linkedin', 'notes', 'org', 'region', 'rating', 'country', 'page', 'context'];
 
+// a LinkedIn link as typed: https:// added when it is missing, anything that is not a linkedin.com link is dropped
+const linkedinUrl = (s) => { if (!s) return ''; const u = /^https?:\/\//i.test(s) ? s : 'https://' + s.replace(/^\/+/, ''); return /^https:\/\/([a-z0-9-]+\.)?linkedin\.com\/\S+$/i.test(u.replace(/^http:/i, 'https:')) ? u.replace(/^http:/i, 'https:') : ''; };
 const clean = (v, n) => String(v == null ? '' : v).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '').trim().slice(0, n);
 const csvCell = (v) => { const s = String(v == null ? '' : v); return /[",\r\n]/.test(s) || /^[=+\-@]/.test(s) ? '"' + (/^[=+\-@]/.test(s) ? "'" : '') + s.replace(/"/g, '""') + '"' : s; };
 
@@ -54,7 +57,7 @@ async function notify(lead) {
       ? 'Chat feedback' + (lead.rating === 'up' ? ', thumbs up' : lead.rating === 'down' ? ', thumbs down' : lead.rating ? ', ' + lead.rating : '') + (lead.company ? ' from ' + lead.company : '')
       : 'Playground feedback from ' + lead.company + (lead.rating ? ', ' + lead.rating + ' of 5' : '');
   const facts = [
-    lead.name ? 'Name: ' + lead.name : '', lead.email ? 'Email: ' + lead.email : '', lead.company ? 'Company: ' + lead.company : '',
+    lead.name ? 'Name: ' + lead.name : '', lead.email ? 'Email: ' + lead.email : '', lead.company ? 'Company: ' + lead.company : '', lead.linkedin ? 'LinkedIn: ' + lead.linkedin : '',
     lead.org ? 'Confluent organization: ' + lead.org : '', lead.region ? 'Region: ' + lead.region : '',
     lead.rating ? 'Rating: ' + lead.rating + (typeof lead.rating === 'number' ? ' of 5' : '') : '', lead.notes ? 'Notes: ' + lead.notes : '',
     'Country: ' + (lead.country || 'unknown'), 'Received: ' + lead.received,
@@ -117,6 +120,7 @@ module.exports = async (req, res) => {
       name: clean(b.name, LIMITS.name),
       email: clean(b.email, LIMITS.email),
       company: clean(b.company, LIMITS.company),
+      linkedin: linkedinUrl(clean(b.linkedin, LIMITS.linkedin)),
       notes: clean(b.notes, LIMITS.notes),
       org: clean(b.org, LIMITS.org),
       region: clean(b.region, LIMITS.region),
@@ -128,7 +132,7 @@ module.exports = async (req, res) => {
     if (kind === 'chat-feedback') {
       if (!lead.rating && !lead.notes) return send(res, 400, { ok: false, error: 'missing' });
       if (lead.email && !EMAIL.test(lead.email)) lead.email = '';
-    } else if (!lead.name || !lead.company || !EMAIL.test(lead.email)) return send(res, 400, { ok: false, error: 'missing' });
+    } else if (!lead.name || !(lead.company || lead.linkedin) || !EMAIL.test(lead.email)) return send(res, 400, { ok: false, error: 'missing' });
     const id = lead.received.replace(/[:.]/g, '-') + '-' + crypto.randomBytes(4).toString('hex');
     try {
       await put('leads/' + id + '.json', JSON.stringify(lead, null, 2), { access: 'private', contentType: 'application/json', addRandomSuffix: false });
