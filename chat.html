@@ -1519,7 +1519,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 
 /* value cards: header, headline, visual, no pain line */
 .v4c{grid-template-rows:auto auto 1fr}
-@media (min-width:1061px){.v4{grid-template-rows:auto auto 1fr}.v4c{grid-row:span 3}}
+@media (min-width:1061px){.v4{grid-template-rows:auto auto 1fr}.v4c{grid-row:span 3;grid-template-rows:subgrid}}
 @media (max-width:1060px){.v4c{grid-template-rows:auto auto auto}}
 /* productivity: the usual way against one universal model, a compact team and one call */
 .v7{gap:12px}
@@ -1549,6 +1549,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .v7h{padding-bottom:8px}.v7h .v4k{white-space:nowrap}
 .v7r:not(.v7h){flex:1 1 auto;padding:11px 0;border-top:1px solid rgba(255,255,255,.08)}
 @media (max-width:480px){.v7r{grid-template-columns:44px minmax(0,1fr) 12px minmax(0,1fr);column-gap:6px}}
+.v4viz .v4k .v6il{margin-left:0;white-space:nowrap}
+@media (min-width:1061px){.v4c[data-k="resp"] .v6dc{flex:1 1 150px;height:auto;min-height:150px}}
 .pg-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .pg-tile{display:grid;gap:.2rem;background:rgba(10,18,40,.35);border:1px solid var(--line);padding:.7rem .8rem}
 .pg-tile b{font-weight:300;font-size:1.55rem;line-height:1.1;color:#fff}

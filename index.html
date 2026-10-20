@@ -1519,7 +1519,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 
 /* value cards: header, headline, visual, no pain line */
 .v4c{grid-template-rows:auto auto 1fr}
-@media (min-width:1061px){.v4{grid-template-rows:auto auto 1fr}.v4c{grid-row:span 3}}
+@media (min-width:1061px){.v4{grid-template-rows:auto auto 1fr}.v4c{grid-row:span 3;grid-template-rows:subgrid}}
 @media (max-width:1060px){.v4c{grid-template-rows:auto auto auto}}
 /* productivity: the usual way against one universal model, a compact team and one call */
 .v7{gap:12px}
@@ -1549,6 +1549,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .v7h{padding-bottom:8px}.v7h .v4k{white-space:nowrap}
 .v7r:not(.v7h){flex:1 1 auto;padding:11px 0;border-top:1px solid rgba(255,255,255,.08)}
 @media (max-width:480px){.v7r{grid-template-columns:44px minmax(0,1fr) 12px minmax(0,1fr);column-gap:6px}}
+.v4viz .v4k .v6il{margin-left:0;white-space:nowrap}
+@media (min-width:1061px){.v4c[data-k="resp"] .v6dc{flex:1 1 150px;height:auto;min-height:150px}}
 </style>
 </head>
 <body>
@@ -1754,26 +1756,29 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
           </article>
           <article class="v4c" data-k="acc">
             <div class="v4top"><span class="v4n"><i>02</i>Accuracy</span><span class="v4p">For planners and risk teams</span></div>
-            <div class="v4m"><b>Millions saved</b><span>from more accurate forecasts</span></div>
+            <div class="v4m"><b>More accurate</b><span>from transfer and continuous learning</span></div>
             <div class="v4viz">
-              <div class="v4k">Learned across domains</div>
+              <div class="v4k">Transfer learning <em class="v6il">zero-shot</em></div>
               <div class="v6tr"><canvas id="v6-tr" role="img" aria-label="Eight pretraining domains, electricity, weather, traffic, solar and wind, smart meters, web traffic, cash withdrawals and bitcoin, each with its own pattern. The patterns that match a new series light up and flow into one model, which forecasts the new series zero-shot."></canvas></div>
-              <div class="v4k">Keeps improving</div>
+              <div class="v4k">Continuous learning <em class="v6il">as each event lands</em></div>
               <div class="v6imp">
                 <div class="v6r"><span class="v4l">In the stream</span><span class="v6ctx"><i></i></span><span class="v4v" data-v="ctx">20 points</span></div>
+              </div>
+              <div class="v4k">Accuracy <em class="v6il">r2 vs r1 on benchmarks</em></div>
+              <div class="v6imp">
                 <div class="v6r"><span class="v4l">Each release</span><span class="v6rel"><b data-r="0">r1<em>250M</em></b><b data-r="1">r2<em>700M</em></b><b data-r="2">r2.1<em>~1B</em></b></span><span class="v4v" data-v="rel">+15%</span></div>
               </div>
             </div>
           </article>
           <article class="v4c" data-k="resp">
             <div class="v4top"><span class="v4n"><i>03</i>Responsiveness</span><span class="v4p">For operations teams</span></div>
-            <div class="v4m"><b>12 h → 0</b><span>average wait for the scoring run</span></div>
+            <div class="v4m"><b>Days → seconds</b><span>time to decision</span></div>
             <div class="v4viz">
               <div class="v4k">Value of the decision over time <em class="v6il">illustrative</em></div>
               <div class="v6uc" role="group" aria-label="Pick a use case"><button type="button" class="on" data-u="0">Fraud</button><button type="button" data-u="1">Stockout</button><button type="button" data-u="2">Network</button><button type="button" data-u="3">Process</button></div>
-              <div class="v6dc"><canvas id="v6-dc" role="img" aria-label="The value of a decision falls as the time to act grows from seconds to a week. Scored in the stream it acts in seconds and keeps most of the value. A nightly batch acts after 12 hours on average and keeps little."></canvas></div>
+              <div class="v6dc"><canvas id="v6-dc" role="img" aria-label="The value of a decision falls as the time to act grows from seconds to a week. Scored in the stream it acts in seconds and keeps most of the value. A nightly batch acts the next day and keeps little."></canvas></div>
               <div class="v6o t"><span class="v6dot"></span><b>In the stream · seconds</b><span data-o="t"></span><em data-p="t">96%</em></div>
-              <div class="v6o u"><span class="v6dot"></span><b>Nightly batch · 12 h on average</b><span data-o="u"></span><em data-p="u">4%</em></div>
+              <div class="v6o u"><span class="v6dot"></span><b>Nightly batch · next day</b><span data-o="u"></span><em data-p="u">4%</em></div>
             </div>
           </article>
         </div>
@@ -2829,7 +2834,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     {f:x=>0.08+0.92*sig(x,0.55,12),txt:x=>x<0.35?'order raised, the shelf never empties':x<0.65?'expedited at a premium':'lost sales, waste on the rebound'},
     {f:x=>0.05+0.95*sig(x,0.35,16),txt:x=>x<0.25?'rerouted before anyone notices':x<0.6?'ticket after the complaints':'outage report'},
     {f:x=>0.1+0.9*sig(x,0.5,10),txt:x=>x<0.4?'setpoint corrected in the cycle':x<0.7?'off spec batch reblended':'scrap and wasted energy'}];
-  const XS=0.03,XB=0.5+11/22*0.25;/* seconds, and 12 hours */
+  const XS=0.03,XB=0.75;/* seconds, and the next day */
   const dcs={u:0,pin:-1e9,t0:0};
   ucB.forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();dcs.u=+b.dataset.u;dcs.pin=performance.now();dcs.t0=performance.now();}));
   const oT=$('[data-o="t"]',R),oU=$('[data-o="u"]',R),pT=$('[data-p="t"]',R),pU=$('[data-p="u"]',R);
@@ -2851,9 +2856,9 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   function frame(t){
     /* productivity: row by row, the usual way, then one universal model, a compact team and one call */
     rows.forEach((r,k)=>{tog(r,'u',t>=300+k*650);tog(r,'t',t>=750+k*650);});
-    /* accuracy: history grows to 512 points, releases light up in turn */
-    const pts=Math.round(20+492*ez((t-500)/3200));if(ctxBar)ctxBar.style.width=(pts/512*100).toFixed(1)+'%';set(ctxV,pts+' points');
-    rel.forEach((b,k)=>tog(b,'on',t>=900+k*900));set(relV,t>=1800?'+15%':'');}
+    /* accuracy: the context fills to 512 points as events land, then the releases light up in turn */
+    const pts=Math.round(20+492*ez((t-300)/2000));if(ctxBar)ctxBar.style.width=(pts/512*100).toFixed(1)+'%';set(ctxV,pts+' points');
+    rel.forEach((b,k)=>tog(b,'on',t>=2300+k*600));set(relV,t>=2900?'+15%':'');}
   function start(){st.t=0;st.run=true;dcs.t0=performance.now();}
   const rp=$('#th-replay');if(rp)rp.addEventListener('click',start);
   cards.forEach(c=>c.addEventListener('click',e=>{if(e.target.closest('a,button'))return;start();}));
@@ -4421,10 +4426,10 @@ const CS={
       run:async(w,at)=>{const A=App.arch;if(!A)return;const phone=window.innerWidth<=760,v=n=>{A.hi('v'+n);hi('#ax-vals [data-v="'+n+'"]');};A.focus(0,true,1.5);
         await at('lives where');v(3);await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('governs');v(1);v(2);
         await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);await at('in under a second');if(phone)scrollTo('#arch-a-out',true);A.hi('out');v(4);await at('while the usual way');v(6);v(5);if(phone)scrollTo('#ax-vals',true);}},
-    {n:6,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:10070,
-      say:'So your teams get to value ten times faster with one universal model, save millions with more accurate forecasts, and stop waiting on nightly scoring runs.',
-      subs:['So your teams get to value <em>ten times faster</em>','with <em>one universal model</em>,','<em>save millions</em> with more accurate forecasts,','and <em>stop waiting</em> on nightly scoring runs.'],
-      run:async(w,at)=>{if(window.innerWidth>760)return;await at('save millions');scrollTo('#st-three .v4c[data-k="acc"]',true);await at('and stop waiting');scrollTo('#st-three .v4c[data-k="resp"]',true);}},
+    {n:6,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:10310,
+      say:'So your teams get to value ten times faster with one universal model, forecast more accurately with transfer and continuous learning, and go from days to seconds.',
+      subs:['So your teams get to value <em>ten times faster</em>','with <em>one universal model</em>,','forecast <em>more accurately</em>','with <em>transfer and continuous learning</em>,','and go <em>from days to seconds</em>.'],
+      run:async(w,at)=>{if(window.innerWidth>760)return;await at('forecast more accurately');scrollTo('#st-three .v4c[data-k="acc"]',true);await at('and go from days');scrollTo('#st-three .v4c[data-k="resp"]',true);}},
     {n:7,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-prod'),dur:13400,
       say:'Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.',
       subs:['Time series models <em>optimize mission-critical decisions</em>','as each event lands.','On a chocolate line, <em>temper is forecast on every reading</em>,','so setpoints adjust before a new cocoa butter lot','<em>turns into rework</em>.'],
@@ -4476,7 +4481,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-10-20b';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='2026-10-20c';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}
