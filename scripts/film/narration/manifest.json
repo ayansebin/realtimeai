@@ -1,0 +1,91 @@
+{
+ "engine": "kokoro",
+ "voice": "am_michael",
+ "speed": 0.93,
+ "lines": [
+  {
+   "n": 1,
+   "file": "01.mp3",
+   "dur": 19.99,
+   "lead": 0.0,
+   "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands."
+  },
+  {
+   "n": 2,
+   "file": "02.mp3",
+   "dur": 9.84,
+   "lead": 0.5,
+   "text": "Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,"
+  },
+  {
+   "n": 3,
+   "file": "03.mp3",
+   "dur": 5.14,
+   "lead": 0.0,
+   "text": "and the next order is optimized to keep it full, while the decision still matters."
+  },
+  {
+   "n": 4,
+   "file": "04.mp3",
+   "dur": 25.49,
+   "lead": 1.4,
+   "text": "That works because the intelligence lives where the data already flows. When store sales stall, the event lands in a governed Confluent topic, joins the live weather stream, and Granite forecasts it inside Flink. The shelf check goes out in under a second, while the usual way copies, trains and scores in a nightly batch, and is still a day behind."
+  },
+  {
+   "n": 5,
+   "file": "05.mp3",
+   "dur": 12.58,
+   "lead": 1.4,
+   "text": "So your teams ship a forecast in one step instead of six, get thirty-two percent less error than a seasonal baseline, and stop waiting on nightly scoring runs."
+  },
+  {
+   "n": 6,
+   "file": "06.mp3",
+   "dur": 16.44,
+   "lead": 1.4,
+   "text": "Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework."
+  },
+  {
+   "n": 7,
+   "file": "07.mp3",
+   "dur": 10.49,
+   "lead": 1.2,
+   "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged."
+  },
+  {
+   "n": 8,
+   "file": "08.mp3",
+   "dur": 8.66,
+   "lead": 1.2,
+   "text": "In retail, one model forecasts every SKU in every store and reorders at the service level you choose."
+  },
+  {
+   "n": 9,
+   "file": "09.mp3",
+   "dur": 10.34,
+   "lead": 1.2,
+   "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through."
+  },
+  {
+   "n": 10,
+   "file": "10.mp3",
+   "dur": 7.8,
+   "lead": 1.2,
+   "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this."
+  },
+  {
+   "n": 11,
+   "file": "11.mp3",
+   "dur": 8.06,
+   "lead": 1.2,
+   "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market."
+  },
+  {
+   "n": 13,
+   "file": "13.mp3",
+   "dur": 7.01,
+   "lead": 1.4,
+   "text": "Bring us a stream and a decision. Tell us where you want to start, and we will get back to you."
+  }
+ ]
+}

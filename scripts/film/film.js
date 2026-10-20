@@ -47,15 +47,12 @@
     if(i===3){frame($('#st-arch'),'<b>01</b>Confluent + IBM Granite');cut('arch');return;}
     if(i===4){frame($('#st-three'),'<b>02</b>Three things change for your teams');cut('value');return;}
     if(UC[i]){frame($(UC[i][0]),nav(i-5));cut(UC[i][0]);return;}
-    if(i===11){log.skipped=(log.skipped||[]).concat([{t:Date.now(),step:i}]);$('#pitch-next').click();return;}  /* the film leaves out the case studies */
-    if(i===12){end.hidden=false;cap.style.opacity='0';setLabel('');cut('end');return;}
+    if(i===11){end.hidden=false;cap.style.opacity='0';setLabel('');cut('end');return;}  /* the film script ends on the call to action */
   }
   const stepEl=$('#pitch-step');
   new MutationObserver(()=>{const m=/^(\d+)\s*\//.exec(stepEl.textContent.trim());if(m)onStep(+m[1]-1);}).observe(stepEl,{childList:true,characterData:true,subtree:true});
   const pc=$('#pitch-cap');
   new MutationObserver(()=>{const h=pc.innerHTML;cap.innerHTML='<span>'+h+'</span>';cap.classList.remove('in');void cap.offsetWidth;cap.classList.add('in');log.caps.push({t:Date.now(),h,step});
     subN++;if(step===0&&subN===2)hideTitle();}).observe(pc,{childList:true,subtree:true,characterData:true});
-  new MutationObserver(()=>{if(step!==11||log.skipped)return;const v=$$('.cspanel').find(p=>!p.hidden);if(v&&v!==cur){frame(v,'<b>04</b>In the field <s>·</s> '+(CS[v.id]||''));cut(v.id);}})
-    .observe(document.body,{subtree:true,attributes:true,attributeFilter:['hidden']});
   window.__cuts=log.cuts;
 })();

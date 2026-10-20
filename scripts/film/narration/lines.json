@@ -1,0 +1,62 @@
+[
+ {
+  "n": 1,
+  "text": "Time series intelligence meets real-time context. I B M Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands.",
+  "lead": 0.0
+ },
+ {
+  "n": 2,
+  "text": "Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,",
+  "lead": 0.5
+ },
+ {
+  "n": 3,
+  "text": "and the next order is optimized to keep it full, while the decision still matters.",
+  "lead": 0.0
+ },
+ {
+  "n": 4,
+  "text": "That works because the intelligence lives where the data already flows. When store sales stall, the event lands in a governed Confluent topic, joins the live weather stream, and Granite forecasts it inside Flink. The shelf check goes out in under a second, while the usual way copies, trains and scores in a nightly batch, and is still a day behind.",
+  "lead": 1.4
+ },
+ {
+  "n": 5,
+  "text": "So your teams ship a forecast in one step instead of six, get thirty-two percent less error than a seasonal baseline, and stop waiting on nightly scoring runs.",
+  "lead": 1.4
+ },
+ {
+  "n": 6,
+  "text": "Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.",
+  "lead": 1.4
+ },
+ {
+  "n": 7,
+  "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.",
+  "lead": 1.2
+ },
+ {
+  "n": 8,
+  "text": "In retail, one model forecasts every SKU in every store and reorders at the service level you choose.",
+  "lead": 1.2
+ },
+ {
+  "n": 9,
+  "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.",
+  "lead": 1.2
+ },
+ {
+  "n": 10,
+  "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this.",
+  "lead": 1.2
+ },
+ {
+  "n": 11,
+  "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market.",
+  "lead": 1.2
+ },
+ {
+  "n": 13,
+  "text": "Bring us a stream and a decision. Tell us where you want to start, and we will get back to you.",
+  "lead": 1.4
+ }
+]

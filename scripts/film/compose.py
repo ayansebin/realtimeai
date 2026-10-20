@@ -10,7 +10,7 @@ D, OUT = sys.argv[1], sys.argv[2]
 TAIL = float(sys.argv[3]) if len(sys.argv) > 3 else 1.6
 FPS, XF, FIN, FOUT, CAPIN = 30, 0.45, 0.45, 0.7, 0.18
 PAPER = np.array([236, 235, 230], dtype=np.float32)  # the site's paper color, fades go to it
-NAR = os.environ.get('NARRATION', os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'narration')) + '/'
+NAR = os.environ.get('NARRATION', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'narration')).rstrip('/') + '/'
 
 m = json.load(open(D + '/meta.json'))
 frames = sorted(m['frames'], key=lambda f: f['t']); ts = [f['t'] for f in frames]
@@ -49,7 +49,16 @@ def load_ovl(fn):
 brand = load_ovl('brand.png')
 CAPS = {h: load_ovl(f) for h, f in idx['caps'].items()}
 LABS = {h: load_ovl(f) for h, f in idx['labels'].items()}
-caps = [(c['t'] / 1000 - T0, c['h']) for c in m['caps'] if c.get('step') not in (11, 12)]
+ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13]          # film steps by narration line
+LEADS = {k: byfile.get('%02d.mp3' % n, {}).get('lead', 0) for k, n in enumerate(ORDER)}
+caps, seen = [], set()
+for c in m['caps']:
+    st = c.get('step')
+    if st is None or st >= 11: continue                    # the end card carries its own words
+    t = c['t'] / 1000 - T0
+    if st not in seen: seen.add(st); t += max(0.0, LEADS.get(st, 0) - 0.2)   # first caption waits for the voice
+    caps.append((t, c['h']))
+caps.sort()
 def snap(t):  # labels change with the picture, not with the voice
     best = None
     for w, c, o in xcuts:

@@ -14,6 +14,13 @@ await ctx.route(/fonts\.gstatic\.com/,r=>r.abort());
 await ctx.route(/\/__f\//,r=>{const f=r.request().url().split('/').pop();const d=f.includes('mono')?'ibm-plex-mono':'ibm-plex-sans';r.fulfill({contentType:'font/woff2',body:fs.readFileSync(FONTS+'/'+d+'/files/'+f)});});
 await ctx.addInitScript(()=>{window.__filmCapture=true;window.__plays=[];const p=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(){if(!this.muted)window.__plays.push({src:this.src,t:Date.now()});return p.apply(this,arguments);};
   try{localStorage.setItem('rti-demo-seen',String(Date.now()));localStorage.setItem('rti-demo-sound','on');}catch(e){}});
+/* the film runs its own script and narration: same charts, its own pacing */
+const FILM_SCRIPT=process.env.FILM_SCRIPT||path.join(HERE,'film_script.js'),FILM_NARR=process.env.FILM_NARR||path.join(HERE,'narration');
+if(fs.existsSync(FILM_SCRIPT)){const FS=fs.readFileSync(FILM_SCRIPT,'utf8');
+  await ctx.route(u=>new URL(u).pathname==='/',async r=>{const resp=await r.fetch();let html=await resp.text();const a=html.indexOf('  const SCRIPT=[');const b=html.indexOf('  ];',a)+4;
+    if(a<0)throw new Error('SCRIPT not found');html=html.slice(0,a)+FS+html.slice(b);html=html.replace(/const NARR='narration\/',NARR_V='[^']*'/,"const NARR='film-narration/',NARR_V='film'");
+    r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:html});});}
+if(fs.existsSync(FILM_NARR))await ctx.route(/\/film-narration\//,r=>{const f=new URL(r.request().url()).pathname.split('/').pop();r.fulfill({status:200,contentType:'audio/mpeg',body:fs.readFileSync(path.join(FILM_NARR,f))});});
 const p=await ctx.newPage();p.on('pageerror',e=>console.log('pageerror',e.message));
 await p.goto(SITE,{waitUntil:'load'});await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(1200);
 await p.addStyleTag({content:rd('film.css')});await p.addScriptTag({content:rd('film.js')});await p.waitForTimeout(400);
