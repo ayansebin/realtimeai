@@ -1,0 +1,131 @@
+{
+ "built": "2026-10-19T12:58:23.231307+00:00",
+ "repo": "ibm-granite/granite-timeseries-ttm-r3",
+ "license": "Apache-2.0",
+ "onnxruntime": "1.20.1",
+ "weights": "float16 storage for tensors of 4096 values or more, float32 compute",
+ "variants": [
+  {
+   "name": "ttm-r3-1024-96",
+   "revision": "1024-96-r3",
+   "file": "ttm-r3-1024-96.onnx",
+   "ctx": 1024,
+   "h": 96,
+   "quantiles": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+   ],
+   "bytes": 21111339,
+   "params": 10420047,
+   "url": "https://github.com/ayansebin/realtimeai/raw/main/models/ttm-r3-1024-96.onnx"
+  },
+  {
+   "name": "ttm-r3-512-96",
+   "revision": "512-96-dec-512-r3",
+   "file": "ttm-r3-512-96.onnx",
+   "ctx": 512,
+   "h": 96,
+   "quantiles": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+   ],
+   "bytes": 11380350,
+   "params": 5328932
+  },
+  {
+   "name": "ttm-r3-512-30",
+   "revision": "512-30-dec-90-r3",
+   "file": "ttm-r3-512-30.onnx",
+   "ctx": 512,
+   "h": 30,
+   "quantiles": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+   ],
+   "bytes": 3187903,
+   "params": 1414514
+  },
+  {
+   "name": "ttm-r3-156-16",
+   "revision": "156-16-dec-52-r3",
+   "file": "ttm-r3-156-16.onnx",
+   "ctx": 156,
+   "h": 16,
+   "quantiles": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+   ],
+   "bytes": 3538978,
+   "params": 1501420
+  },
+  {
+   "name": "ttm-r3-90-30",
+   "revision": "90-30-dec-90-r3",
+   "file": "ttm-r3-90-30.onnx",
+   "ctx": 90,
+   "h": 30,
+   "quantiles": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+   ],
+   "bytes": 3428071,
+   "params": 1481062
+  },
+  {
+   "name": "ttm-r3-52-16",
+   "revision": "52-16-dec-52-r3",
+   "file": "ttm-r3-52-16.onnx",
+   "ctx": 52,
+   "h": 16,
+   "quantiles": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+   ],
+   "bytes": 3364705,
+   "params": 1453596
+  }
+ ],
+ "note": "TTM r3 exported to ONNX from ibm-granite/granite-timeseries-ttm-r3 (Apache 2.0). ttm-r3-1024-96 is fetched from GitHub on first use when the series is long enough, the others ship with the skill."
+}

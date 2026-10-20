@@ -1,0 +1,1 @@
+The TTM r3 model files in models/ are exported from ibm-granite/granite-timeseries-ttm-r3, licensed under the Apache License 2.0.

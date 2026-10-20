@@ -1,0 +1,73 @@
+<body class="ch-page">
+<a class="sr" href="#ch-q">Skip to the message box</a>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="dot"></span>Real-time intelligence <span class="co">Granite Time Series on Confluent</span></a>
+    <div class="nav-links" id="navlinks">
+      <a href="/#innovation"><b>01</b>Innovation</a>
+      <a href="/#value"><b>02</b>Value</a>
+      <a href="/#usecases"><b>03</b>Enterprise use cases</a>
+      <a href="/#demos"><b>04</b>Demos</a>
+      <a href="/playground" class="on"><b>05</b>Playground</a>
+    </div>
+    <a class="nav-stat nav-pitch" href="/?demo=1"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg> Walkthrough</a>
+    <a class="btn sm" href="/#contact">Contact us <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </div>
+</nav>
+
+<main class="ch" id="ch" data-empty="1">
+  <div class="ch-col">
+    <section class="ch-intro" id="ch-intro">
+      <nav class="pills pg-sub" aria-label="Playground"><span class="pg-sub-k">Playground</span><a class="pill" href="/playground">Streams</a><a class="pill live" href="/chat" aria-current="page">Chat</a></nav>
+      <h1 class="h-display ch-h">Ask the models.</h1>
+      <p class="ch-sub">Forecast a stream, find what is unusual, race TTM, FlowState and PatchTST-FM, or bring your own data. Claude runs the IBM Granite Time Series models and tells you what they found.</p>
+      <p class="ch-off" id="ch-off" hidden>The chat opens soon. Until then, the <a href="/playground">playground</a> runs every model on the same streams, or <a href="#ch-skill">add the skill</a> to your own Claude.</p>
+      <details class="ch-skill" id="ch-skill">
+        <summary><span>Use it in your own Claude</span><em>a skill that runs TTM r3 on your files, inside Claude</em></summary>
+        <ol>
+          <li><a href="/skills/granite-time-series.zip" download>Download the skill</a> <span>(ZIP, 23 MB, Apache 2.0)</span></li>
+          <li>In Claude, open Customize, then Skills, and upload the ZIP. Code execution must be on.</li>
+          <li>Drop in a CSV, Excel or JSON file and ask for a forecast or the anomalies.</li>
+        </ol>
+        <p>Claude runs the models in its own sandbox and gives back a chart, the backtest and the Flink SQL to run the same models on Confluent Cloud. Team and Enterprise admins can add it for the whole org.</p>
+      </details>
+    </section>
+    <div class="ch-thread" id="ch-thread"></div>
+    <p class="sr" id="ch-sr" aria-live="polite"></p>
+  </div>
+
+  <div class="ch-dock" id="ch-dock">
+    <div class="ch-col">
+      <div class="ch-starters" id="ch-starters" role="list" aria-label="Ideas to start with">
+        <button type="button" class="ch-st" role="listitem" data-q="Forecast the steel plant's energy use.">Forecast the steel plant's energy</button>
+        <button type="button" class="ch-st" role="listitem" data-q="Which model wins on US retail sales?">Which model wins on US retail sales?</button>
+        <button type="button" class="ch-st" role="listitem" data-q="Find the fraud bursts in the card authorizations.">Find the fraud in card payments</button>
+        <button type="button" class="ch-st" role="listitem" data-attach="1"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11V3M4.5 6.5L8 3l3.5 3.5M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>Try my own data</button>
+        <button type="button" class="ch-st" role="listitem" data-q="Make me a test stream: hourly website visits around 1,800, evening peaks, quiet weekends, one outage. Then find the outage.">Make a stream with an outage, then find it</button>
+        <button type="button" class="ch-st" role="listitem" data-q="How do I run these models on Confluent Cloud?">How do I run this on Confluent?</button>
+      </div>
+      <form class="ch-box" id="ch-box" autocomplete="off">
+        <div class="ch-att" id="ch-att" hidden></div>
+        <label class="sr" for="ch-q">Message</label>
+        <textarea id="ch-q" rows="1" maxlength="8000" spellcheck="true" placeholder="Ask about the models, or drop a CSV here"></textarea>
+        <div class="ch-bar">
+          <button type="button" class="ch-ic" id="ch-attach" aria-label="Attach a file" title="Attach a CSV, Excel or JSON file. It stays in your browser."><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13.5 6.5l-5.6 5.6a1.6 1.6 0 002.3 2.3l6-6a3.2 3.2 0 00-4.5-4.5l-6.2 6.2a4.8 4.8 0 006.8 6.8l5.2-5.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+          <input type="file" id="ch-file" hidden accept=".csv,.tsv,.txt,.json,.xlsx,.xls,.xlsm,.ods,text/csv,application/json">
+          <span class="ch-tip" id="ch-tip">Files stay in your browser</span>
+          <button type="submit" class="ch-send" id="ch-send" aria-label="Send" disabled><svg class="i-send" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><svg class="i-stop" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="4" width="8" height="8" fill="currentColor"/></svg></button>
+        </div>
+      </form>
+      <div class="ch-fine"><span>Claude can make mistakes. Messages go to Anthropic, files stay in your browser.</span><button type="button" class="ch-new" id="ch-new" hidden>New chat</button></div>
+      <p class="ch-legal">Not an official IBM or Confluent site. IBM, Granite, Confluent, Apache Flink and Apache Kafka are trademarks of their owners.</p>
+    </div>
+  </div>
+  <div class="ch-drop" id="ch-drop" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V5M8 9l4-4 4 4M5 14v5h14v-5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><b>Drop a CSV, Excel or JSON file</b><span>It is read here and stays in your browser.</span></div></div>
+</main>
+<script>/* nav row on phones: a soft edge while more links sit to the side */
+(function(){const n=document.getElementById('navlinks');if(!n)return;
+  const u=()=>{n.classList.toggle('more',n.scrollWidth>n.clientWidth+2&&n.scrollLeft+n.clientWidth<n.scrollWidth-2);};
+  /* keep the current page or chapter in view */
+  const show=()=>{const a=n.querySelector('a.on');if(a&&n.scrollWidth>n.clientWidth+2){const r=a.getBoundingClientRect(),q=n.getBoundingClientRect();if(r.right>q.right-40)n.scrollLeft+=r.right-q.right+40;else if(r.left<q.left)n.scrollLeft-=q.left-r.left+8;}u();};
+  n.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',show,{passive:true});
+  if(window.MutationObserver){const mo=new MutationObserver(show);n.querySelectorAll('a').forEach(a=>mo.observe(a,{attributes:true,attributeFilter:['class']}));}
+  show();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(show);})();</script>
