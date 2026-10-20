@@ -1,6 +1,6 @@
 # Chat, parked
 
-The site chat (/chat) is switched off for now. Everything needed to bring it back is in this tagged commit (`chat-parked`).
+The site chat (/chat) is switched off for now. Everything needed to bring it back is on this branch (`chat-parked`).
 
 ## What was live at the time of parking
 
@@ -23,7 +23,8 @@ The site chat (/chat) is switched off for now. Everything needed to bring it bac
 
 ## To bring it back
 
-1. Restore `chat.html`, `api/chat.js`, `api/_lib/chat-prompt.js` and `skills/` from this tag, plus the `functions` and `/skills` header blocks in `vercel.json` and the /chat line in `sitemap.xml`
+1. Restore `chat.html`, `api/chat.js`, `api/_lib/chat-prompt.js` and `skills/` from this branch, plus the `functions` and `/skills` header blocks in `vercel.json` and the /chat line in `sitemap.xml`
 2. Remove the /chat redirect from `vercel.json`
 3. Put the Chat link back under Playground (the Streams and Chat tabs)
-4. Set `ANTHROPIC_API_KEY` in Vercel (optional: `CHAT_MODEL`, `CHAT_EFFORT`, `CHAT_MAX_TOKENS`) and redeploy
+4. Drop the `git.deploymentEnabled` entry for `chat-parked` from `vercel.json`
+5. Set `ANTHROPIC_API_KEY` in Vercel (optional: `CHAT_MODEL`, `CHAT_EFFORT`, `CHAT_MAX_TOKENS`) and redeploy
