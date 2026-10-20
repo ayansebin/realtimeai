@@ -1,6 +1,6 @@
 # Notebook film
 
-The same pitch as the demo film, told as a notebook sketch: a pen draws simple hand-drawn diagrams and handwritten notes in time with the narration. Same words, same voice, same captions. 1080p30 MP4, about 2:56.
+The same pitch as the demo film, told as a notebook sketch: a pen draws simple hand-drawn diagrams and handwritten notes in time with the narration. Same words, same voice, same captions. 1080p30 MP4, about 3:01.
 
 Everything is drawn in the browser and rendered frame by frame, so the result is the same on every run. The site does not need to be running.
 

@@ -69,19 +69,21 @@ window.TIMING=[
  {
   "n": 5,
   "start": 81.34,
-  "dur": 12.58,
+  "dur": 17.59,
   "lead": 1.4,
-  "text": "So your teams ship a forecast in one step instead of six, get thirty-two percent less error than a seasonal baseline, and stop waiting on nightly scoring runs.",
+  "text": "So your teams get to value ten times faster, with one universal model and a lower skills barrier. Transfer and continuous learning optimize decisions with millions in savings, and decision time drops from days to seconds.",
   "subs": [
-   "So your teams ship a forecast in <em>one step instead of six</em>,",
-   "get <em>thirty-two percent less error</em> than a seasonal baseline,",
-   "and <em>stop waiting</em> on nightly scoring runs."
+   "So your teams get to value <em>ten times faster</em>,",
+   "with <em>one universal model</em> and a <em>lower skills barrier</em>.",
+   "<em>Transfer and continuous learning</em> optimize decisions",
+   "with <em>millions in savings</em>,",
+   "and decision time drops <em>from days to seconds</em>."
   ],
   "file": "05.mp3"
  },
  {
   "n": 6,
-  "start": 94.07,
+  "start": 99.08,
   "dur": 16.44,
   "lead": 1.4,
   "text": "Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.",
@@ -96,7 +98,7 @@ window.TIMING=[
  },
  {
   "n": 7,
-  "start": 110.66,
+  "start": 115.67,
   "dur": 10.49,
   "lead": 1.2,
   "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.",
@@ -110,7 +112,7 @@ window.TIMING=[
  },
  {
   "n": 8,
-  "start": 121.3,
+  "start": 126.31,
   "dur": 8.66,
   "lead": 1.2,
   "text": "In retail, one model forecasts every SKU in every store and reorders at the service level you choose.",
@@ -122,7 +124,7 @@ window.TIMING=[
  },
  {
   "n": 9,
-  "start": 130.11,
+  "start": 135.12,
   "dur": 10.34,
   "lead": 1.2,
   "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.",
@@ -136,7 +138,7 @@ window.TIMING=[
  },
  {
   "n": 10,
-  "start": 140.6,
+  "start": 145.61,
   "dur": 7.8,
   "lead": 1.2,
   "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this.",
@@ -148,7 +150,7 @@ window.TIMING=[
  },
  {
   "n": 11,
-  "start": 148.55,
+  "start": 153.56,
   "dur": 8.06,
   "lead": 1.2,
   "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market.",
@@ -160,7 +162,7 @@ window.TIMING=[
  },
  {
   "n": 13,
-  "start": 156.76,
+  "start": 161.77,
   "dur": 15.5,
   "lead": 1.4,
   "text": "Try the models in the playground. Sign up for early access on Confluent Cloud. Then bring us a stream and a decision, and we will co-innovate with you to bring real-time intelligence to your enterprise.",

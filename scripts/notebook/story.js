@@ -139,12 +139,13 @@ beat(cue(4,'and is still a day behind'),[P.arrow(1105,712,1290,712,{stroke:RED,s
 /* ============ 5. for your teams ============ */
 scene();
 beat(lineStart(5),[T(960,150,'what changes for your teams',{size:60,anchor:'middle',weight:700}),
-  P.gon(rot(270,290,400,300,-2),fillY({})),T(470,410,'6 steps',{size:66,anchor:'middle',color:GRAY}),P.line(372,392,568,384,{stroke:RED,strokeWidth:4.5}),
-  T(470,512,'1 step',{size:84,anchor:'middle',color:BLUE,weight:700}),T(470,640,'to a forecast in production',{size:34,anchor:'middle',color:GRAY})]);
-beat(cue(5,'get thirty-two percent less error'),[P.gon(rot(760,290,400,300,1.5),fillY({})),T(960,450,'32%',{size:120,anchor:'middle',color:BLUE,weight:700}),
-  T(960,520,'less error',{size:50,anchor:'middle'}),T(960,640,'than a seasonal baseline',{size:34,anchor:'middle',color:GRAY})]);
-beat(cue(5,'and stop waiting'),[P.gon(rot(1250,290,400,300,-1.5),fillY({})),T(1450,412,'nightly batch',{size:58,anchor:'middle',color:GRAY}),P.line(1315,396,1585,390,{stroke:RED,strokeWidth:4.5}),
-  T(1450,512,'no wait',{size:84,anchor:'middle',color:BLUE,weight:700}),T(1450,640,'no nightly scoring run',{size:34,anchor:'middle',color:GRAY})]);
+  P.gon(rot(270,290,400,300,-2),fillY({})),T(470,452,'10×',{size:120,anchor:'middle',color:BLUE,weight:700}),
+  T(470,522,'faster time to value',{size:46,anchor:'middle'})]);
+beat(cue(5,'with one universal model'),[T(470,640,'1 universal model',{size:34,anchor:'middle',color:GRAY}),T(470,684,'lower skills barrier',{size:34,anchor:'middle',color:GRAY})]);
+beat(cue(5,'Transfer and continuous learning'),[P.gon(rot(760,290,400,300,1.5),fillY({})),T(960,362,'transfer + continuous learning',{size:30,anchor:'middle',color:GRAY}),
+  T(960,470,'$M',{size:120,anchor:'middle',color:BLUE,weight:700}),T(960,536,'savings',{size:50,anchor:'middle'}),T(960,640,'optimized decisions',{size:34,anchor:'middle',color:GRAY})]);
+beat(cue(5,'and decision time drops'),[P.gon(rot(1250,290,400,300,-1.5),fillY({})),T(1450,412,'days',{size:58,anchor:'middle',color:GRAY}),P.line(1392,396,1508,390,{stroke:RED,strokeWidth:4.5}),
+  T(1450,512,'seconds',{size:84,anchor:'middle',color:BLUE,weight:700}),T(1450,640,'decision time',{size:34,anchor:'middle',color:GRAY})]);
 
 /* ============ 6 to 11. use cases, with a hand-drawn navigation strip ============ */
 const NAV=['production','anomalies','retail','payments','search','trading'],NX=[540,760,945,1125,1310,1495],NY=118,NW=[150,140,86,132,96,108];
