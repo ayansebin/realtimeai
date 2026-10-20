@@ -1475,8 +1475,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .dm-play small{font-family:var(--font-mono);font-size:.76rem;color:rgba(255,255,255,.7);padding-left:.65rem;border-left:1px solid rgba(255,255,255,.28)}
 .dm-msg{position:absolute;inset:0;display:grid;place-content:center;gap:.8rem;justify-items:center;padding:1.5rem;text-align:center;background:#1b2746;color:#f6f7fb;font-size:1rem}
 .dm-msg a{color:#a6c8ff}
-.dm-list{grid-area:list;display:grid;gap:10px;align-content:start}
-.dm-it{display:grid;grid-template-columns:minmax(0,46%) minmax(0,1fr);gap:.8rem;align-items:center;width:100%;margin:0;padding:7px;text-align:left;font:inherit;color:#161616;background:#f8f7f3;border:1px solid rgba(22,22,22,.18);box-shadow:0 1px 0 rgba(22,22,22,.04);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
+.dm-list{grid-area:list;display:grid;gap:8px;align-content:start}
+.dm-it{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:.8rem;align-items:center;width:100%;margin:0;padding:7px;text-align:left;font:inherit;color:#161616;background:#f8f7f3;border:1px solid rgba(22,22,22,.18);box-shadow:0 1px 0 rgba(22,22,22,.04);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
 .dm-it:hover{border-color:rgba(22,22,22,.45);box-shadow:0 6px 18px rgba(22,22,22,.08);transform:translateY(-1px)}
 .dm-it[aria-selected="true"]{color:#f6f7fb;background:linear-gradient(150deg,#2c5066 0%,#26375f 70%);border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe;transform:none}
 .dm-th{position:relative;display:block;aspect-ratio:16/9;background:#1b2746;overflow:hidden}
@@ -1504,14 +1504,15 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .dm-links small{margin-left:.35rem;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-3)}
 @media (max-width:980px){
   .dm{grid-template-columns:minmax(0,1fr);grid-template-areas:"screen" "list"}
-  .dm-list{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:12px}
+  .dm-list{grid-template-columns:repeat(5,minmax(0,1fr));margin-top:12px}
   .dm-it{grid-template-columns:minmax(0,1fr);gap:.55rem;align-items:start;align-content:start;padding:6px 6px 9px}
   .dm-tx{padding:0 .2rem}
   .dm-tx b{font-size:.92rem}
   .dm-ch{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:640px){
-  .dm-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .dm-list{grid-template-columns:minmax(0,1fr);gap:8px}
+  .dm-it{grid-template-columns:minmax(0,40%) minmax(0,1fr);gap:.75rem;align-items:center;padding:6px}
   .dm-tx>span{display:none}
   .dm-play{min-height:40px;padding:.4rem .8rem .4rem .7rem;font-size:.88rem}
 }
@@ -2080,7 +2081,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     <div class="chapter-head">
       <span class="n">04 / DEMOS</span>
       <h2>See it in action.</h2>
-      <p>The pitch as a film and as a notebook sketch, the live demo on this page, and the official walkthrough in the Confluent Cloud console.</p>
+      <p>The pitch as a film and as a notebook sketch, the live demo on this page, and two walkthroughs in the Confluent Cloud console: the official one, and multivariate forecasting with weather data.</p>
     </div>
     <div class="dm" id="dm">
       <div class="dm-screen" id="dm-screen" role="tabpanel" aria-labelledby="dm-t-notebook">
@@ -2091,10 +2092,11 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
         <button class="dm-it" role="tab" id="dm-t-film" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="film" data-kind="video" data-src="demos/film.mp4" data-poster="demos/film.jpg" data-play="Play" data-small="2:55" data-aria="Play Real-time intelligence and use cases, 2 minutes 55 seconds"><span class="dm-th"><img src="demos/film-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>2:55</em></span><span class="dm-tx"><b>Real-time intelligence and use cases</b></span></button>
         <button class="dm-it" role="tab" id="dm-t-live" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="live" data-kind="live" data-src="" data-poster="demos/live.jpg" data-play="Start the live demo" data-small="2:20" data-aria="Start the live demo on this page, 2 minutes 20 seconds"><span class="dm-th"><img src="demos/live-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>Live</em></span><span class="dm-tx"><b>Live on this page</b></span></button>
         <button class="dm-it" role="tab" id="dm-t-console" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="console" data-kind="yt" data-src="knU4XB-90Nw" data-poster="demos/console.jpg" data-play="Watch on YouTube" data-small="new tab" data-aria="Watch the walkthrough on Confluent Cloud on YouTube, opens in a new tab"><span class="dm-th"><img src="demos/console-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>YouTube</em></span><span class="dm-tx"><b>Walkthrough on Confluent Cloud</b></span></button>
+        <button class="dm-it" role="tab" id="dm-t-multivariate" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="multivariate" data-kind="video" data-src="demos/multivariate.mp4" data-poster="demos/multivariate.jpg" data-play="Play" data-small="2:53" data-aria="Play Multivariate forecasting with weather data, 2 minutes 53 seconds"><span class="dm-th"><img src="demos/multivariate-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>2:53</em></span><span class="dm-tx"><b>Multivariate forecasting with weather data</b></span></button>
       </div>
     </div>
   </div>
-  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"VideoObject","name":"Time series on Confluent, simplified","description":"The same story drawn by hand on a notebook page. Two waves of foundation models, IBM Granite Time Series models inside Confluent, one store on a hot day, six use cases and the next steps.","thumbnailUrl":"https://realtimeintelligence.io/demos/notebook.jpg","uploadDate":"2026-10-20","duration":"PT2M56S","contentUrl":"https://realtimeintelligence.io/demos/notebook.mp4","inLanguage":"en"},{"@context":"https://schema.org","@type":"VideoObject","name":"Real-time intelligence and use cases","description":"One chart at a time, full screen. Why time series is the bigger prize, how IBM Granite Time Series models run inside Confluent, what changes for your teams and six use cases.","thumbnailUrl":"https://realtimeintelligence.io/demos/film.jpg","uploadDate":"2026-10-20","duration":"PT2M55S","contentUrl":"https://realtimeintelligence.io/demos/film.mp4","inLanguage":"en"}]</script>
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"VideoObject","name":"Time series on Confluent, simplified","description":"The same story drawn by hand on a notebook page. Two waves of foundation models, IBM Granite Time Series models inside Confluent, one store on a hot day, six use cases and the next steps.","thumbnailUrl":"https://realtimeintelligence.io/demos/notebook.jpg","uploadDate":"2026-10-20","duration":"PT2M56S","contentUrl":"https://realtimeintelligence.io/demos/notebook.mp4","inLanguage":"en"},{"@context":"https://schema.org","@type":"VideoObject","name":"Real-time intelligence and use cases","description":"One chart at a time, full screen. Why time series is the bigger prize, how IBM Granite Time Series models run inside Confluent, what changes for your teams and six use cases.","thumbnailUrl":"https://realtimeintelligence.io/demos/film.jpg","uploadDate":"2026-10-20","duration":"PT2M55S","contentUrl":"https://realtimeintelligence.io/demos/film.mp4","inLanguage":"en"},{"@context":"https://schema.org","@type":"VideoObject","name":"Multivariate forecasting with weather data","description":"A walkthrough in the Confluent Cloud console. A fine-tuned IBM Granite TinyTimeMixer is registered with CREATE MODEL, then AI_FORECAST_MULTIVARIATE in Flink SQL forecasts Spain's energy demand and solar generation 96 hours ahead, with ten weather columns as context.","thumbnailUrl":"https://realtimeintelligence.io/demos/multivariate.jpg","uploadDate":"2026-10-20","duration":"PT2M53S","contentUrl":"https://realtimeintelligence.io/demos/multivariate.mp4","inLanguage":"en"}]</script>
 </section>
 
 <!-- ============ CONTACT ============ -->
@@ -4556,7 +4558,7 @@ const CS={
   window.__rtiDemo={state:()=>({on:st.on,mini:st.mini,i:st.i,paused:st.paused,voice:st.voice,unlocked:st.unlocked,playing:!player.paused,src:(player.dataset.src||'').replace(/^.*\//,''),t:+(player.currentTime||0).toFixed(2)})};
 })();
 
-/* ============ 04 demos: one player, four ways to see it ============ */
+/* ============ 04 demos: one player, five ways to see it ============ */
 (function(){
   const dm=$('#dm');if(!dm)return;
   const scr=$('#dm-screen'),poster=$('#dm-poster'),img=$('#dm-img'),playT=$('#dm-play-t'),playD=$('#dm-play-d'),list=$('#dm-list');
@@ -4589,7 +4591,7 @@ const CS={
     if(k!=null){e.preventDefault();select(tabs[k],{focus:true});}});
   /* one voice at a time: the live demo and the walkthrough take over from a playing video */
   ['#pitch-play','#nav-pitch','#pitch-resume','#walk-open'].forEach(s=>{const b=$(s);if(b)b.addEventListener('click',()=>{if(media&&media.tagName==='VIDEO')media.pause();});});
-  /* deep links: #demos-notebook, #demos-film, #demos-live, #demos-console */
+  /* deep links: #demos-notebook, #demos-film, #demos-live, #demos-console, #demos-multivariate */
   function deep(){const m=/^#demos-(\w+)$/.exec(location.hash),t=m&&tabs.find(x=>x.dataset.d===m[1]);
     if(t){select(t);requestAnimationFrame(()=>{const s=$('#demos');if(s)s.scrollIntoView();});}}
   deep();window.addEventListener('hashchange',deep);
