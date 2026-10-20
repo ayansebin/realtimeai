@@ -1373,6 +1373,64 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 /* hero: the claims live inside the universal layer now */
 .hx-body{padding-top:clamp(12px,1.8vw,20px)}
 @media (max-width:760px){.hero .canvas-wrap.hx-wrap{height:540px}}
+/* phones: the nav row scrolls sideways, a soft edge shows there is more */
+.nav-links.more{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent)}
+/* ---------- 04 demos: one player, four ways to see it ---------- */
+.dm{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(250px,1fr);grid-template-areas:"screen list" "info list";column-gap:clamp(16px,2vw,28px);align-items:start}
+.dm-screen{grid-area:screen;position:relative;aspect-ratio:16/9;background:#1b2746;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.18)}
+.dm-screen>video,.dm-screen>iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;display:block}
+.dm-poster{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;background:#1b2746;cursor:pointer;display:block;overflow:hidden;color:#fff}
+.dm-poster img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.dm-poster:hover img{transform:scale(1.012)}
+.dm-play{position:absolute;left:clamp(10px,1.8vw,22px);bottom:clamp(10px,1.8vw,22px);display:inline-flex;align-items:center;gap:.65rem;min-height:46px;padding:.5rem 1rem .5rem .9rem;background:#161616;color:#fff;font-size:.95rem;line-height:1.2;box-shadow:0 10px 28px rgba(0,0,0,.25);transition:background .12s}
+.dm-poster:hover .dm-play{background:#393939}
+.dm-poster:focus-visible{outline:none}
+.dm-poster:focus-visible .dm-play{outline:2px solid #fff;outline-offset:2px;background:#393939}
+.dm-play svg{width:15px;height:15px;flex:none}
+.dm-play small{font-family:var(--font-mono);font-size:.76rem;color:rgba(255,255,255,.7);padding-left:.65rem;border-left:1px solid rgba(255,255,255,.28)}
+.dm-msg{position:absolute;inset:0;display:grid;place-content:center;gap:.8rem;justify-items:center;padding:1.5rem;text-align:center;background:#1b2746;color:#f6f7fb;font-size:1rem}
+.dm-msg a{color:#a6c8ff}
+.dm-list{grid-area:list;display:grid;gap:10px;align-content:start}
+.dm-it{display:grid;grid-template-columns:minmax(0,46%) minmax(0,1fr);gap:.8rem;align-items:center;width:100%;margin:0;padding:7px;text-align:left;font:inherit;color:#161616;background:#f8f7f3;border:1px solid rgba(22,22,22,.18);box-shadow:0 1px 0 rgba(22,22,22,.04);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
+.dm-it:hover{border-color:rgba(22,22,22,.45);box-shadow:0 6px 18px rgba(22,22,22,.08);transform:translateY(-1px)}
+.dm-it[aria-selected="true"]{color:#f6f7fb;background:linear-gradient(150deg,#2c5066 0%,#26375f 70%);border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe;transform:none}
+.dm-th{position:relative;display:block;aspect-ratio:16/9;background:#1b2746;overflow:hidden}
+.dm-th img{display:block;width:100%;height:100%;object-fit:cover}
+.dm-th em{position:absolute;right:5px;bottom:5px;font:500 .66rem/1 var(--font-mono);font-style:normal;letter-spacing:.04em;color:#fff;background:rgba(12,14,20,.8);padding:.22rem .35rem}
+.dm-tx{display:grid;gap:.25rem;min-width:0;padding-right:.2rem}
+.dm-tx b{font-weight:500;font-size:.98rem;line-height:1.25}
+.dm-tx>span{font-size:.8rem;line-height:1.35;color:#6a6a66}
+.dm-it[aria-selected="true"] .dm-tx>span{color:#d6dbe5}
+.dm-infos{grid-area:info;min-width:0}
+.dm-info{display:grid;gap:.5rem;padding-top:clamp(16px,1.8vw,24px)}
+.dm-meta{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.dm-info h3{font-size:clamp(1.35rem,2.1vw,1.85rem);font-weight:300;line-height:1.15;letter-spacing:-.01em}
+.dm-desc{color:var(--ink-2);font-size:1rem;line-height:1.5;font-weight:300;max-width:72ch}
+.dm-ch{list-style:none;margin:.55rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(12px,1.6vw,24px);border-top:1px solid var(--line)}
+.dm-ch li{min-width:0;display:flex}
+.dm-ch button{display:flex;align-items:baseline;gap:.65rem;width:100%;min-height:40px;padding:.5rem 0;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;font-size:.86rem;line-height:1.3;color:var(--ink-2);cursor:pointer;transition:color .12s}
+.dm-ch button:hover{color:var(--ink)}
+.dm-ch time{flex:none;min-width:2.6em;font-family:var(--font-mono);font-size:.74rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.dm-ch button.on{color:var(--ink)}
+.dm-ch button.on time{color:#0f62fe}
+.dm-links{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:.4rem;font-size:.88rem}
+.dm-links a{color:var(--ink);border-bottom:1px solid var(--line-2);padding-bottom:1px}
+.dm-links a:hover{text-decoration:none;border-bottom-color:var(--ink)}
+.dm-links small{margin-left:.35rem;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-3)}
+@media (max-width:980px){
+  .dm{grid-template-columns:minmax(0,1fr);grid-template-areas:"screen" "list" "info"}
+  .dm-list{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:12px}
+  .dm-it{grid-template-columns:minmax(0,1fr);gap:.55rem;align-items:start;align-content:start;padding:6px 6px 9px}
+  .dm-tx{padding:0 .2rem}
+  .dm-tx b{font-size:.92rem}
+  .dm-ch{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .dm-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .dm-tx>span{display:none}
+  .dm-play{min-height:40px;padding:.4rem .8rem .4rem .7rem;font-size:.88rem}
+}
+@media (max-width:420px){.dm-ch{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -1384,8 +1442,9 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <a href="#innovation" data-ch="innovation"><b>01</b>Innovation</a>
       <a href="#value" data-ch="value"><b>02</b>Value</a>
       <a href="#usecases" data-ch="usecases"><b>03</b>Enterprise use cases</a>
-      <a href="/playground" data-ch="playground"><b>04</b>Playground</a>
-      <a href="/chat" data-ch="chat"><b>05</b>Chat</a>
+      <a href="#demos" data-ch="demos"><b>04</b>Demos</a>
+      <a href="/playground" data-ch="playground"><b>05</b>Playground</a>
+      <a href="/chat" data-ch="chat"><b>06</b>Chat</a>
     </div>
     <button class="nav-stat nav-pitch" id="nav-pitch" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg> Demo</button>
     <a class="btn sm" href="#contact">Contact us <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
@@ -1917,6 +1976,54 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       </div>
     </div>
   </div>
+</section>
+
+<!-- ============ 04 DEMOS ============ -->
+<section class="chapter" id="demos">
+  <div class="wrap">
+    <div class="chapter-head">
+      <span class="n">04 / DEMOS</span>
+      <h2>See it in action.</h2>
+      <p>The pitch as a film and as a notebook sketch, the live demo on this page, and the official walkthrough in the Confluent Cloud console.</p>
+    </div>
+    <div class="dm" id="dm">
+      <div class="dm-screen" id="dm-screen" role="region" aria-label="Demo player">
+        <button class="dm-poster" id="dm-poster" type="button" aria-label="Play the notebook sketch, 2 minutes 56 seconds"><img id="dm-img" src="demos/notebook.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async"><span class="dm-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg><span id="dm-play-t">Play</span><small id="dm-play-d">2:56</small></span></button>
+      </div>
+      <div class="dm-list" id="dm-list" role="tablist" aria-label="Demos" aria-orientation="vertical">
+        <button class="dm-it" role="tab" id="dm-t-notebook" aria-selected="true" tabindex="0" aria-controls="dm-infos" type="button" data-d="notebook" data-kind="video" data-src="demos/notebook.mp4" data-poster="demos/notebook.jpg" data-play="Play" data-small="2:56" data-aria="Play the notebook sketch, 2 minutes 56 seconds"><span class="dm-th"><img src="demos/notebook-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>2:56</em></span><span class="dm-tx"><b>Notebook sketch</b><span>The pitch, drawn by hand</span></span></button>
+        <button class="dm-it" role="tab" id="dm-t-film" aria-selected="false" tabindex="-1" aria-controls="dm-infos" type="button" data-d="film" data-kind="video" data-src="demos/film.mp4" data-poster="demos/film.jpg" data-play="Play" data-small="2:55" data-aria="Play the pitch film, 2 minutes 55 seconds"><span class="dm-th"><img src="demos/film-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>2:55</em></span><span class="dm-tx"><b>Pitch film</b><span>The pitch, one chart at a time</span></span></button>
+        <button class="dm-it" role="tab" id="dm-t-live" aria-selected="false" tabindex="-1" aria-controls="dm-infos" type="button" data-d="live" data-kind="live" data-src="" data-poster="demos/live.jpg" data-play="Start the live demo" data-small="2 min" data-aria="Start the live demo on this page"><span class="dm-th"><img src="demos/live-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>Live</em></span><span class="dm-tx"><b>Live on this page</b><span>Real charts, voice and captions</span></span></button>
+        <button class="dm-it" role="tab" id="dm-t-console" aria-selected="false" tabindex="-1" aria-controls="dm-infos" type="button" data-d="console" data-kind="yt" data-src="knU4XB-90Nw" data-poster="demos/console.jpg" data-play="Play" data-small="YouTube" data-aria="Play the walkthrough on Confluent Cloud, from YouTube"><span class="dm-th"><img src="demos/console-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>Video</em></span><span class="dm-tx"><b>Walkthrough on Confluent Cloud</b><span>The official demo by Confluent</span></span></button>
+      </div>
+      <div class="dm-infos" id="dm-infos" role="tabpanel" aria-labelledby="dm-t-notebook">
+        <div class="dm-info" data-d="notebook">
+          <p class="dm-meta">Video · 2:56</p>
+          <h3>The pitch, sketched in a notebook</h3>
+          <p class="dm-desc">The same story drawn by hand on a notebook page. Two waves of foundation models, IBM Granite Time Series models inside Confluent, one store on a hot day, six use cases and the next steps.</p>
+          <ol class="dm-ch" aria-label="Chapters"><li><button type="button" data-t="0"><time>0:00</time><span>From words to decisions</span></button></li><li><button type="button" data-t="25.8"><time>0:25</time><span>IBM Granite inside Confluent</span></button></li><li><button type="button" data-t="40.5"><time>0:40</time><span>One store on a hot day</span></button></li><li><button type="button" data-t="56"><time>0:56</time><span>Where the data already flows</span></button></li><li><button type="button" data-t="81.85"><time>1:21</time><span>What changes for your teams</span></button></li><li><button type="button" data-t="95.1"><time>1:35</time><span>Production optimization</span></button></li><li><button type="button" data-t="110.7"><time>1:50</time><span>Anomaly detection and demand planning</span></button></li><li><button type="button" data-t="131.4"><time>2:11</time><span>Fraud, search and trading</span></button></li><li><button type="button" data-t="158.15"><time>2:38</time><span>Next steps</span></button></li></ol><p class="dm-links"><a href="demos/notebook.mp4" download="realtime-intelligence-notebook.mp4">Download MP4 <small>25 MB</small></a></p>
+        </div>
+        <div class="dm-info" data-d="film" hidden>
+          <p class="dm-meta">Video · 2:55</p>
+          <h3>The pitch film</h3>
+          <p class="dm-desc">One chart at a time, full screen. Why time series is the bigger prize, how IBM Granite Time Series models run inside Confluent, what changes for your teams and six use cases.</p>
+          <ol class="dm-ch" aria-label="Chapters"><li><button type="button" data-t="0"><time>0:00</time><span>From words to decisions</span></button></li><li><button type="button" data-t="25.1"><time>0:25</time><span>IBM Granite inside Confluent</span></button></li><li><button type="button" data-t="40.2"><time>0:40</time><span>One store on a hot day</span></button></li><li><button type="button" data-t="55.1"><time>0:55</time><span>Where the data already flows</span></button></li><li><button type="button" data-t="80.8"><time>1:21</time><span>What changes for your teams</span></button></li><li><button type="button" data-t="93.5"><time>1:33</time><span>Production optimization</span></button></li><li><button type="button" data-t="109.8"><time>1:49</time><span>Anomaly detection and demand planning</span></button></li><li><button type="button" data-t="129.1"><time>2:09</time><span>Fraud, search and trading</span></button></li><li><button type="button" data-t="155.5"><time>2:35</time><span>Next steps</span></button></li></ol><p class="dm-links"><a href="demos/film.mp4" download="realtime-intelligence-demo.mp4">Download MP4 <small>31 MB</small></a></p>
+        </div>
+        <div class="dm-info" data-d="live" hidden>
+          <p class="dm-meta">Interactive · 2 min · on this page</p>
+          <h3>The live demo</h3>
+          <p class="dm-desc">It starts at the top of this page and plays the real charts, with voice and captions. Pause, skip a step or take over at any point.</p>
+        </div>
+        <div class="dm-info" data-d="console" hidden>
+          <p class="dm-meta">Video · by Confluent · on YouTube</p>
+          <h3>Real-time forecasting on Confluent Cloud, in the console</h3>
+          <p class="dm-desc">The official demo: IBM Granite Time Series models running in the Confluent Cloud console on live Kafka data. A topic of live readings, one step in the Flink workspace, the forecast next to the actuals, and a switch of models with one word.</p>
+          <p class="dm-links"><a href="https://www.youtube.com/watch?v=knU4XB-90Nw" target="_blank" rel="noopener">Open on YouTube</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"VideoObject","name":"IBM Granite Time Series models on Confluent, sketched in a notebook","description":"The same story drawn by hand on a notebook page. Two waves of foundation models, IBM Granite Time Series models inside Confluent, one store on a hot day, six use cases and the next steps.","thumbnailUrl":"https://realtimeintelligence.io/demos/notebook.jpg","uploadDate":"2026-10-20","duration":"PT2M56S","contentUrl":"https://realtimeintelligence.io/demos/notebook.mp4","inLanguage":"en"},{"@context":"https://schema.org","@type":"VideoObject","name":"IBM Granite Time Series models on Confluent: the pitch film","description":"One chart at a time, full screen. Why time series is the bigger prize, how IBM Granite Time Series models run inside Confluent, what changes for your teams and six use cases.","thumbnailUrl":"https://realtimeintelligence.io/demos/film.jpg","uploadDate":"2026-10-20","duration":"PT2M55S","contentUrl":"https://realtimeintelligence.io/demos/film.mp4","inLanguage":"en"}]</script>
 </section>
 
 <!-- ============ CONTACT ============ -->
@@ -4384,12 +4491,71 @@ const CS={
   if(/[?&]walkthrough=1/.test(location.search))setTimeout(open,500);
 })();
 
+/* ============ 04 demos: one player, four ways to see it ============ */
+(function(){
+  const dm=$('#dm');if(!dm)return;
+  const scr=$('#dm-screen'),poster=$('#dm-poster'),img=$('#dm-img'),playT=$('#dm-play-t'),playD=$('#dm-play-d'),infos=$('#dm-infos'),list=$('#dm-list');
+  const tabs=$$('.dm-it',dm),HOST='realtimeintelligence.io',SITE='https://'+HOST+'/';
+  const local=/^(localhost|127\.|\[::1\])/.test(location.hostname),away=location.hostname!==HOST&&!local;
+  let cur=tabs.find(t=>t.getAttribute('aria-selected')==='true')||tabs[0],media=null;
+  const infoOf=t=>$('.dm-info[data-d="'+t.dataset.d+'"]',infos);
+  /* on a copy of the page hosted elsewhere, the files come from the site */
+  if(away)$$('.dm-links a[download]',dm).forEach(a=>{a.href=SITE+a.getAttribute('href');});
+  function clearMedia(){if(!media)return;try{if(media.pause)media.pause();}catch(e){}media.remove();media=null;poster.hidden=false;$$('.dm-ch button.on',infos).forEach(b=>b.classList.remove('on'));}
+  function select(t,o){o=o||{};if(t===cur){if(o.focus)t.focus();return;}
+    clearMedia();cur=t;
+    tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;});
+    infos.setAttribute('aria-labelledby',t.id);
+    $$('.dm-info',infos).forEach(x=>{x.hidden=x.dataset.d!==t.dataset.d;});
+    img.src=t.dataset.poster;playT.textContent=t.dataset.play;playD.textContent=t.dataset.small;poster.setAttribute('aria-label',t.dataset.aria);
+    if(o.focus)t.focus();}
+  function mark(s){const bs=$$('.dm-ch button',infoOf(cur));let k=-1;bs.forEach((b,i)=>{if(+b.dataset.t<=s+.25)k=i;});bs.forEach((b,i)=>b.classList.toggle('on',i===k));}
+  function fail(t){clearMedia();poster.hidden=true;const m=document.createElement('div');m.className='dm-msg';
+    m.innerHTML=away?'<p>This video plays on the site.</p><a href="'+SITE+'#demos-'+t.dataset.d+'">Watch it on '+HOST+'</a>':'<p>This browser could not play the video.</p><a href="'+t.dataset.src+'" download>Download the MP4</a>';
+    scr.appendChild(m);media=m;}
+  function playVideo(at){const t=cur;let v=media&&media.tagName==='VIDEO'?media:null;
+    if(!v){clearMedia();v=document.createElement('video');v.controls=true;v.playsInline=true;v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.preload='auto';v.poster=t.dataset.poster;v.setAttribute('aria-label',t.dataset.aria.replace(/^Play /,''));
+      let retried=false;
+      v.addEventListener('error',()=>{if(media!==v)return;if(away&&!retried){retried=true;v.src=SITE+t.dataset.src;const p=v.play();if(p&&p.catch)p.catch(()=>{});return;}fail(t);});
+      v.addEventListener('timeupdate',()=>{if(media===v)mark(v.currentTime);});
+      v.src=t.dataset.src;scr.appendChild(v);media=v;poster.hidden=true;}
+    if(at!=null){const go=()=>{try{v.currentTime=at;}catch(e){}mark(at);};if(v.readyState>=1)go();else v.addEventListener('loadedmetadata',go,{once:true});}
+    const p=v.play();if(p&&p.catch)p.catch(()=>{});try{v.focus({preventScroll:true});}catch(e){}}
+  function playYT(){const t=cur;clearMedia();const f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+t.dataset.src+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    f.title='Confluent demo: real-time forecasting with IBM Granite Time Series models, Apache Flink and Apache Kafka';
+    f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';
+    scr.appendChild(f);media=f;poster.hidden=true;try{f.focus({preventScroll:true});}catch(e){}}
+  function startLive(){const b=$('#pitch-play');if(b)b.click();}
+  poster.addEventListener('click',()=>{const k=cur.dataset.kind;if(k==='video')playVideo(null);else if(k==='yt')playYT();else startLive();});
+  tabs.forEach(t=>t.addEventListener('click',()=>select(t)));
+  list.addEventListener('keydown',e=>{const i=tabs.indexOf(document.activeElement);if(i<0)return;let k=null;
+    if(e.key==='ArrowDown'||e.key==='ArrowRight')k=(i+1)%tabs.length;else if(e.key==='ArrowUp'||e.key==='ArrowLeft')k=(i+tabs.length-1)%tabs.length;else if(e.key==='Home')k=0;else if(e.key==='End')k=tabs.length-1;
+    if(k!=null){e.preventDefault();select(tabs[k],{focus:true});}});
+  infos.addEventListener('click',e=>{const b=e.target.closest('.dm-ch button');if(b&&cur.dataset.kind==='video')playVideo(+b.dataset.t);});
+  /* one voice at a time: the live demo and the walkthrough take over from a playing video */
+  ['#pitch-play','#nav-pitch','#pitch-resume','#walk-open'].forEach(s=>{const b=$(s);if(b)b.addEventListener('click',()=>{if(!media)return;if(media.tagName==='VIDEO')media.pause();else if(media.tagName==='IFRAME')clearMedia();});});
+  /* deep links: #demos-notebook, #demos-film, #demos-live, #demos-console */
+  function deep(){const m=/^#demos-(\w+)$/.exec(location.hash),t=m&&tabs.find(x=>x.dataset.d===m[1]);
+    if(t){select(t);requestAnimationFrame(()=>{const s=$('#demos');if(s)s.scrollIntoView();});}}
+  deep();window.addEventListener('hashchange',deep);
+})();
+
 /* ============ anchors clear the sticky nav at any height ============ */
 (function(){const nav=document.querySelector('.nav');if(!nav)return;const set=()=>document.documentElement.style.setProperty('--nav-off',nav.offsetHeight+'px');set();window.addEventListener('resize',set,{passive:true});if(window.ResizeObserver)new ResizeObserver(set).observe(nav);})();
 
+/* ============ nav row on phones: a soft edge while more links sit to the side ============ */
+(function(){const n=document.getElementById('navlinks');if(!n)return;
+  const u=()=>{n.classList.toggle('more',n.scrollWidth>n.clientWidth+2&&n.scrollLeft+n.clientWidth<n.scrollWidth-2);};
+  /* keep the current page or chapter in view */
+  const show=()=>{const a=n.querySelector('a.on');if(a&&n.scrollWidth>n.clientWidth+2){const r=a.getBoundingClientRect(),q=n.getBoundingClientRect();if(r.right>q.right-40)n.scrollLeft+=r.right-q.right+40;else if(r.left<q.left)n.scrollLeft-=q.left-r.left+8;}u();};
+  n.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',show,{passive:true});
+  if(window.MutationObserver){const mo=new MutationObserver(show);n.querySelectorAll('a').forEach(a=>mo.observe(a,{attributes:true,attributeFilter:['class']}));}
+  show();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(show);})();
+
 /* ============ nav scroll spy ============ */
 (function(){
-  const links=$$('#navlinks a');const map={'innovation':'innovation','innovation-2':'innovation','value':'value','usecases':'usecases','contact':'contact'};
+  const links=$$('#navlinks a');const map={'innovation':'innovation','innovation-2':'innovation','value':'value','usecases':'usecases','demos':'demos','contact':'contact'};
   const secs=Object.keys(map).map(id=>document.getElementById(id)).filter(Boolean);
   function upd(){const y=window.scrollY+window.innerHeight*0.35;let cur='innovation';secs.forEach(s=>{if(s.offsetTop<=y)cur=map[s.id];});links.forEach(a=>a.classList.toggle('on',a.dataset.ch===cur));}
   window.addEventListener('scroll',upd,{passive:true});upd();
