@@ -1379,6 +1379,10 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .why .stage-top{align-items:center}
 .why .stage-title{flex:1 1 auto;max-width:none;min-width:0}
 .why .stage-title p{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem 1.25rem}
+.why .stage-title p.why-say{display:block;margin:.15rem 0 .25rem;font-size:clamp(.95rem,1.15vw,1.05rem);line-height:1.45;font-weight:300;color:var(--ink-2)}
+/* wider screens: Replay sits beside the title so the explainer runs the full width on one line */
+@media (min-width:761px){.why .stage-top{display:block;position:relative}.why .stage-top>.v4rp{position:absolute;top:clamp(18px,2.4vw,28px);right:clamp(16px,2.4vw,28px)}.why .stage-title h3{padding-right:130px}}
+.why-say em{font-style:normal;color:#a6c8ff}
 .sh-grid{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);gap:12px}
 .sh-card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px 18px;border:1px solid rgba(255,255,255,.16);border-radius:4px;background:rgba(10,20,48,.45);transition:opacity .7s,border-color .7s,box-shadow .7s}
 .sh-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 10px}
@@ -1544,7 +1548,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 
     <div class="stage why" id="st-why">
       <div class="stage-top">
-        <div class="stage-title"><h3>From words to decisions</h3><p><span class="lg lg-a">Wave one: unstructured data</span><span class="lg lg-b">Wave two: time series and streaming data</span></p></div>
+        <div class="stage-title"><h3>From words to decisions</h3><p class="why-say">Foundation models transformed unstructured data. The bigger prize is <em>time series and streaming data</em>, where the mission-critical decisions live.</p><p><span class="lg lg-a">Wave one: unstructured data</span><span class="lg lg-b">Wave two: time series and streaming data</span></p></div>
         <button class="btn sm ghost v4rp" id="why-replay" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.2h2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Replay</button>
       </div>
       <div class="stage-body">
