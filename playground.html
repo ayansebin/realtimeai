@@ -1475,8 +1475,8 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .dm-play small{font-family:var(--font-mono);font-size:.76rem;color:rgba(255,255,255,.7);padding-left:.65rem;border-left:1px solid rgba(255,255,255,.28)}
 .dm-msg{position:absolute;inset:0;display:grid;place-content:center;gap:.8rem;justify-items:center;padding:1.5rem;text-align:center;background:#1b2746;color:#f6f7fb;font-size:1rem}
 .dm-msg a{color:#a6c8ff}
-.dm-list{grid-area:list;display:grid;gap:10px;align-content:start}
-.dm-it{display:grid;grid-template-columns:minmax(0,46%) minmax(0,1fr);gap:.8rem;align-items:center;width:100%;margin:0;padding:7px;text-align:left;font:inherit;color:#161616;background:#f8f7f3;border:1px solid rgba(22,22,22,.18);box-shadow:0 1px 0 rgba(22,22,22,.04);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
+.dm-list{grid-area:list;display:grid;gap:8px;align-content:start}
+.dm-it{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:.8rem;align-items:center;width:100%;margin:0;padding:7px;text-align:left;font:inherit;color:#161616;background:#f8f7f3;border:1px solid rgba(22,22,22,.18);box-shadow:0 1px 0 rgba(22,22,22,.04);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
 .dm-it:hover{border-color:rgba(22,22,22,.45);box-shadow:0 6px 18px rgba(22,22,22,.08);transform:translateY(-1px)}
 .dm-it[aria-selected="true"]{color:#f6f7fb;background:linear-gradient(150deg,#2c5066 0%,#26375f 70%);border-color:#0f62fe;box-shadow:0 0 0 1px #0f62fe;transform:none}
 .dm-th{position:relative;display:block;aspect-ratio:16/9;background:#1b2746;overflow:hidden}
@@ -1504,7 +1504,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .dm-links small{margin-left:.35rem;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-3)}
 @media (max-width:980px){
   .dm{grid-template-columns:minmax(0,1fr);grid-template-areas:"screen" "list"}
-  .dm-list{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:12px}
+  .dm-list{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px}
   .dm-it{grid-template-columns:minmax(0,1fr);gap:.55rem;align-items:start;align-content:start;padding:6px 6px 9px}
   .dm-tx{padding:0 .2rem}
   .dm-tx b{font-size:.92rem}
