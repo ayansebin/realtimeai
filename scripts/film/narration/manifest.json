@@ -6,9 +6,9 @@
   {
    "n": 1,
    "file": "01.mp3",
-   "dur": 31.03,
+   "dur": 39.67,
    "lead": 0.0,
-   "text": "Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data. The bigger prize is time series and streaming data, where the mission-critical decisions live. I B M Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands."
+   "text": "Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data, with LLMs, chatbots and agents. The bigger prize is time series and streaming data, where the mission-critical decisions live, from production and demand planning to anomaly detection. I B M Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands."
   },
   {
    "n": 2,

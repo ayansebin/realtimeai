@@ -1,6 +1,6 @@
 # Demo film
 
-Turns the home page demo into a standalone pitch video: one chart at a time on the site's paper background, crossfades between shots, a use case navigation bar, captions drawn on top, narration mixed in. 1080p30 MP4, about 2:47.
+Turns the home page demo into a standalone pitch video: one chart at a time on the site's paper background, crossfades between shots, a use case navigation bar, captions drawn on top, narration mixed in. 1080p30 MP4, about 2:55.
 
 The web demo is unchanged. The film runs its own script (`film_script.js`) and narration (`narration/`): no case studies, a slower voice, a pause before each new chart, more time on Confluent + IBM Granite and on the closing.
 

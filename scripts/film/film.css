@@ -63,3 +63,75 @@ html.film .film-shot .tour-hi{transition:none}
 #film-ui.capture .f-top,#film-ui.capture .f-cap{visibility:hidden!important}
 /* overlay pass: transparent page, overlays only */
 html.film.ovl,html.film.ovl body{background:transparent!important}
+/* opening chart: from words to decisions. Wave one on unstructured data, wave two on time series and streaming data */
+#film-ui .f-shift{display:block}
+#film-ui .sh-stage{position:absolute;left:40px;top:48px;width:1200px;height:572px;box-sizing:border-box;padding:22px 26px 24px;display:flex;flex-direction:column;text-align:left;color:#f2f4f8;overflow:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(116deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 24%,rgba(255,255,255,.06) 24.4%,rgba(0,0,0,0) 34%),radial-gradient(110% 90% at 0% 0%,rgba(74,150,160,.6),rgba(0,0,0,0) 58%),radial-gradient(95% 110% at 100% 100%,rgba(118,108,190,.55),rgba(0,0,0,0) 62%),linear-gradient(120deg,#2c5066 0%,#26375f 46%,#343a76 100%);
+  box-shadow:0 0 0 1px rgba(22,22,22,.10),0 24px 60px rgba(0,0,0,.20)}
+#film-ui .sh-stage::before{content:"";position:absolute;inset:0;opacity:.18;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:24px 24px}
+#film-ui .sh-stage>*{position:relative}
+#film-ui .sh-head h2{margin:0;font-size:27px;font-weight:300;letter-spacing:-.01em;color:#fff}
+#film-ui .sh-head p{margin:8px 0 0;display:flex;align-items:center;gap:8px;font-size:13px;color:#c6cfdc}
+#film-ui .sh-head .lg{display:inline-block;width:18px;height:2px;margin-left:10px}
+#film-ui .sh-head .lg:first-child{margin-left:0}
+#film-ui .sh-head .lg.a{background:rgba(255,255,255,.55)}
+#film-ui .sh-head .lg.b{background:#78a9ff}
+#film-ui .sh-grid{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);gap:12px;margin-top:16px}
+#film-ui .sh-card{display:flex;flex-direction:column;gap:10px;min-width:0;padding:15px 16px 14px;border:1px solid rgba(255,255,255,.16);border-radius:4px;background:rgba(10,20,48,.45);transition:opacity .7s,border-color .7s,box-shadow .7s}
+#film-ui .sh-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+#film-ui .sh-n{font:600 11.5px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#d0e2ff;white-space:nowrap}
+#film-ui .sh-n b{color:#78a9ff;margin-right:.7em}
+#film-ui .sh-pill{font-size:12.5px;line-height:1.5;color:#fff;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);white-space:nowrap}
+#film-ui .sh-pill.on{background:rgba(15,98,254,.2);border-color:rgba(120,169,255,.55)}
+#film-ui .sh-big{font-size:22px;font-weight:300;line-height:1.2;color:#fff}
+#film-ui .sh-foot{font-size:13.5px;font-weight:400;color:#a7f0ba}
+#film-ui .sh-card.a .sh-foot{color:#c6cfdc}
+#film-ui .sh-viz{position:relative;height:300px;flex:none;border:1px solid rgba(255,255,255,.12);border-radius:4px;background-color:#0a1430;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px}
+#film-ui .sh-wires{position:absolute;inset:0;width:100%;height:100%}
+#film-ui .sh-wires .w{fill:none;stroke:rgba(255,255,255,.3);stroke-width:1.3;stroke-dasharray:3 5;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .6s}
+#film-ui .sh-card.b .sh-wires .w{stroke:rgba(120,169,255,.75)}
+#film-ui .sh-col{position:absolute;top:0;bottom:0;display:grid;grid-template-rows:repeat(3,minmax(0,1fr));align-items:center}
+#film-ui .sh-col.ins{left:2.7%;width:25.4%}
+#film-ui .sh-col.outs{left:61.2%;width:36.1%}
+#film-ui .sh-chip{display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px;min-height:40px;box-sizing:border-box;padding:7px 9px;border:1px solid rgba(255,255,255,.14);border-radius:4px;background:rgba(255,255,255,.04);font-size:12.5px;line-height:1.2;color:#c6cfdc;
+  opacity:0;transform:translateX(-8px);transition:opacity .5s,transform .5s,border-color .5s,background .5s,color .5s}
+#film-ui .sh-ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+#film-ui .sh-sp{flex-basis:100%;width:100%;height:14px;overflow:hidden}
+#film-ui .sh-sp path{fill:none;stroke:#78a9ff;stroke-width:1.3;vector-effect:non-scaling-stroke}
+#film-ui .sh-sp-g{animation:shsp 2.4s linear infinite}
+@keyframes shsp{from{transform:translateX(0)}to{transform:translateX(-60px)}}
+#film-ui .sh-node{position:absolute;left:35%;width:19.2%;top:60px;bottom:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;border-radius:2px;opacity:0;transition:opacity .6s,box-shadow .6s}
+#film-ui .sh-card.a .sh-node{background:linear-gradient(135deg,rgba(110,124,160,.55),rgba(70,80,120,.55));border:1px solid rgba(255,255,255,.3)}
+#film-ui .sh-card.b .sh-node{background:linear-gradient(135deg,rgba(20,50,132,.96),rgba(33,34,106,.96));border:1px solid rgba(166,200,255,.62)}
+#film-ui .sh-node em{font:500 9.5px/1 "IBM Plex Mono",monospace;font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:#a6c8ff}
+#film-ui .sh-node b{font-size:19px;font-weight:300;line-height:1.1;color:#fff}
+#film-ui .sh-card.a .sh-node b{font-size:24px}
+#film-ui .sh-node span{font-size:11px;color:#c6cfdc}
+#film-ui .sh-mid{display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .6s}
+#film-ui .sh-mid svg{width:36px;height:16px;fill:none;stroke:#78a9ff;stroke-width:1.5}
+/* the build, one class per spoken phrase */
+#film-ui .sh-card.b{opacity:.4}
+#film-ui .f-shift.s1 .a .ins .sh-chip{opacity:1;transform:none}
+#film-ui .f-shift.s1 .a .ins .sh-chip:nth-child(2){transition-delay:.15s}
+#film-ui .f-shift.s1 .a .ins .sh-chip:nth-child(3){transition-delay:.3s}
+#film-ui .f-shift.s2 .a .sh-node,#film-ui .f-shift.s2 .a .w.in{opacity:1}
+#film-ui .f-shift.s2 .a .w.in{animation:shdash .9s linear infinite}
+#film-ui .f-shift.s3 .a .w.out{opacity:1;animation:shdash .9s linear infinite}
+#film-ui .f-shift.s3 .a .outs .sh-chip{opacity:1;transform:none;color:#fff;border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1)}
+#film-ui .f-shift.s3 .a .outs .sh-chip:nth-child(2){transition-delay:.5s}
+#film-ui .f-shift.s3 .a .outs .sh-chip:nth-child(3){transition-delay:1s}
+#film-ui .f-shift.s4 .sh-card.a{opacity:.6}
+#film-ui .f-shift.s4 .sh-card.b{opacity:1;border-color:rgba(120,169,255,.6);box-shadow:0 0 0 1px rgba(120,169,255,.25),0 10px 40px rgba(15,98,254,.25)}
+#film-ui .f-shift.s4 .sh-mid{opacity:1}
+#film-ui .f-shift.s4 .b .ins .sh-chip{opacity:1;transform:none;color:#e5ecf8}
+#film-ui .f-shift.s4 .b .ins .sh-chip:nth-child(2){transition-delay:.15s}
+#film-ui .f-shift.s4 .b .ins .sh-chip:nth-child(3){transition-delay:.3s}
+#film-ui .f-shift.s4 .b .sh-node{opacity:1;transition-delay:.4s}
+#film-ui .f-shift.s5 .b .w.in{opacity:1;animation:shdash .7s linear infinite}
+#film-ui .f-shift.s5 .b .sh-node{box-shadow:0 0 0 1px rgba(166,200,255,.5),0 0 28px rgba(69,137,255,.45)}
+#film-ui .f-shift.s6 .b .w.out{opacity:1;animation:shdash .7s linear infinite}
+#film-ui .f-shift.s6 .b .outs .sh-chip{opacity:1;transform:none;color:#fff;border-color:#78a9ff;background:rgba(69,137,255,.2)}
+#film-ui .f-shift.s6 .b .outs .sh-chip .sh-ic{color:#a6c8ff}
+#film-ui .f-shift.s6 .b .outs .sh-chip:nth-child(2){transition-delay:.9s}
+#film-ui .f-shift.s6 .b .outs .sh-chip:nth-child(3){transition-delay:1.8s}
+@keyframes shdash{to{stroke-dashoffset:-16}}
