@@ -7,7 +7,7 @@ The site at realtimeintelligence.io, deployed on Vercel from `main`.
 - `index.html`: the site, self-contained (inline CSS and JS, Google Fonts only)
 - `playground.html` (/playground): the models on real public and synthetic streams, and on the visitor's own data, which TTM r3 forecasts in the browser. Precomputed outputs are in `data/pg/`, the ONNX exports of TTM r3 in `models/`
 - Chat (/chat) is parked: the page, the API relay and its sources are on the `chat-parked` branch, see `parked/chat/README.md` there. /chat redirects to the playground for now
-- `demos/`: the two demo videos in the Demos section (the pitch film and the notebook sketch), with their posters. Made with `scripts/film` and `scripts/notebook`
+- `demos/`: the demo videos in the Demos section (the pitch film, the anomaly detection demo, the notebook sketch and the Confluent Cloud demos), with their posters. The film and notebook are made with `scripts/film` and `scripts/notebook`
 
 ## API (Vercel Functions in `api/`)
 
