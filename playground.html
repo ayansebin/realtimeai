@@ -1872,6 +1872,9 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
   --line:rgba(23,48,51,.14);--line-2:rgba(23,48,51,.28);--panel:rgba(23,48,51,.04);--panel-2:rgba(23,48,51,.07);--panel-3:rgba(23,48,51,.11);--grid:rgba(23,48,51,.10);
   --blue:#0f62fe;--blue-2:#0f62fe;--blue-3:#0043ce;--blue-4:#0043ce;--blue-5:#002d9c;--green:#198038;--green-2:#198038;--red:#da1e28;--red-2:#da1e28;
   --purple:#8a3ffc;--purple-2:#6929c4;--teal:#007d79;--teal-2:#007d79;--orange:#ba4e00;--yellow:#8e6a00;--band:rgba(15,98,254,.12)}
+
+/* ---------- blue accents: primary actions in IBM blue, teal stays the surface ---------- */
+:root{--btn-bg:#0f62fe;--btn-hover:#0353e9}
 </style>
 </head>
 <body class="pg">
@@ -1993,7 +1996,8 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
 <script>
 /* light chart areas: a canvas inside one draws dark on very light green. Each color a chart sets is mapped once:
    the teal surfaces become the light well, white and light greys become ink, light accents a deeper tone of the
-   same hue, and dark fills light tints. '#fffffe' is white that stays white (text on a saturated chip).
+   same hue, and dark fills light tints. '#fffffe' is white that stays white (text on a saturated chip),
+   and ctx.__raw=1 draws as written (the blue model cards).
    Canvases outside the light areas are untouched. */
 const LIGHT_WELLS='#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv,.pg-scrub,.dcard canvas';
 (function(){
@@ -2022,8 +2026,8 @@ const LIGHT_WELLS='#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv
     memo.set(x,r);return r;}
   window.__wellColor=map;
   for(const k of ['fillStyle','strokeStyle','shadowColor']){const d=Object.getOwnPropertyDescriptor(P,k);if(!d||!d.set)continue;
-    Object.defineProperty(P,k,{get:d.get,set(v){d.set.call(this,lightOf(this)?map(v):v);},configurable:true});}
-  for(const k of ['createLinearGradient','createRadialGradient']){const f=P[k];if(!f)continue;P[k]=function(){const g=f.apply(this,arguments);if(lightOf(this))g.__light=1;return g;};}
+    Object.defineProperty(P,k,{get:d.get,set(v){d.set.call(this,lightOf(this)&&!this.__raw?map(v):v);},configurable:true});}
+  for(const k of ['createLinearGradient','createRadialGradient']){const f=P[k];if(!f)continue;P[k]=function(){const g=f.apply(this,arguments);if(lightOf(this)&&!this.__raw)g.__light=1;return g;};}
   if(G){const acs=G.addColorStop;G.addColorStop=function(o,c){return acs.call(this,o,this.__light?map(c):c);};}
 })();
 /* nav row on phones: a soft edge while more links sit to the side */

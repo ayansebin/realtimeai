@@ -1640,6 +1640,18 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
 .v7t .v7stp i:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){background-color:rgb(26,107,47)}
 .v7r:not(.v7h):is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){border-top-color:rgba(23,48,51,0.108)}
 .mf-o:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){box-shadow:rgba(15,74,179,0.25) 0px 0px 0px 1px}
+
+/* ---------- blue accents: the model, the forecast lines and what you act on. Teal stays the surface, blue stays under a fifth of the page ---------- */
+:root{--btn-bg:#0f62fe;--btn-hover:#0353e9}
+/* the selected card in every picker */
+#uctabs .uc[aria-selected="true"],#mdtabs .uc[aria-selected="true"],#cstabs .cs[aria-selected="true"]{background:linear-gradient(150deg,#0f62fe 0%,#0043ce 100%);border-color:#0043ce;box-shadow:0 0 0 1px #0043ce}
+/* the model, wherever it appears: a blue card with white type */
+.mf-m:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){background:linear-gradient(90deg,#0f62fe,#0043ce);border-color:#0043ce}
+.mf-m i:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){color:rgba(255,255,255,.82)}
+.mf-m span:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){color:#fff}
+.sh-card.b .sh-node:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){background:linear-gradient(135deg,#0f62fe,#0043ce);border-color:#0043ce}
+.sh-card.b .sh-node em:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *),.sh-card.b .sh-node b:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *),.sh-card.b .sh-node span:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){color:#fff}
+.v7uni:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){background:linear-gradient(135deg,#4589ff,#0f62fe);border-color:#0043ce}
 </style>
 </head>
 <body>
@@ -2275,7 +2287,8 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
 <script>
 /* light chart areas: a canvas inside one draws dark on very light green. Each color a chart sets is mapped once:
    the teal surfaces become the light well, white and light greys become ink, light accents a deeper tone of the
-   same hue, and dark fills light tints. '#fffffe' is white that stays white (text on a saturated chip).
+   same hue, and dark fills light tints. '#fffffe' is white that stays white (text on a saturated chip),
+   and ctx.__raw=1 draws as written (the blue model cards).
    Canvases outside the light areas are untouched. */
 const LIGHT_WELLS='#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv';
 (function(){
@@ -2304,8 +2317,8 @@ const LIGHT_WELLS='#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv
     memo.set(x,r);return r;}
   window.__wellColor=map;
   for(const k of ['fillStyle','strokeStyle','shadowColor']){const d=Object.getOwnPropertyDescriptor(P,k);if(!d||!d.set)continue;
-    Object.defineProperty(P,k,{get:d.get,set(v){d.set.call(this,lightOf(this)?map(v):v);},configurable:true});}
-  for(const k of ['createLinearGradient','createRadialGradient']){const f=P[k];if(!f)continue;P[k]=function(){const g=f.apply(this,arguments);if(lightOf(this))g.__light=1;return g;};}
+    Object.defineProperty(P,k,{get:d.get,set(v){d.set.call(this,lightOf(this)&&!this.__raw?map(v):v);},configurable:true});}
+  for(const k of ['createLinearGradient','createRadialGradient']){const f=P[k];if(!f)continue;P[k]=function(){const g=f.apply(this,arguments);if(lightOf(this)&&!this.__raw)g.__light=1;return g;};}
   if(G){const acs=G.addColorStop;G.addColorStop=function(o,c){return acs.call(this,o,this.__light?map(c):c);};}
 })();
 
@@ -2594,10 +2607,12 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
       if(!reduced){const e=E[Math.floor(t*1.2)%E.length],u=fr(t*1.2);ctx.beginPath();ctx.arc(lerp(P[e[0]][0],P[e[1]][0],u),lerp(P[e[0]][1],P[e[1]][1],u),1.6,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();}
       P.forEach(([px,py])=>{ctx.beginPath();ctx.arc(px,py,2.1,0,Math.PI*2);ctx.fillStyle=on?'#d0e2ff':'#78a9ff';ctx.fill();});}
     ctx.restore();}
-  function drawHub(ctx,now){const h=L.hub,cx=(h.x0+h.x1)/2,w=h.x1-h.x0,hh=h.y1-h.y0,nar=L.narrow;
+  /* the model is the blue card on the light chart area: drawn as written, not mapped */
+  function drawHub(ctx,now){ctx.__raw=1;try{drawHub0(ctx,now);}finally{ctx.__raw=0;}}
+  function drawHub0(ctx,now){const h=L.hub,cx=(h.x0+h.x1)/2,w=h.x1-h.x0,hh=h.y1-h.y0,nar=L.narrow;
     const g=st.ctx?sm(1-(now-st.ctx.T-350)/900)*(now>st.ctx.T+350?1:0):0;
     ctx.save();if(!reduced){ctx.shadowColor=g>0.02?'rgba(61,219,217,.65)':'rgba(69,137,255,.42)';ctx.shadowBlur=g>0.02?18+14*g:26;}
-    const hg=ctx.createLinearGradient(h.x0,h.y0,h.x1,h.y1);hg.addColorStop(0,'rgba(47,96,105,.96)');hg.addColorStop(1,'rgba(43,88,96,.96)');ctx.fillStyle=hg;ctx.fillRect(h.x0,h.y0,w,hh);ctx.restore();
+    const hg=ctx.createLinearGradient(h.x0,h.y0,h.x1,h.y1);hg.addColorStop(0,'rgba(15,98,254,.98)');hg.addColorStop(1,'rgba(0,67,206,.98)');ctx.fillStyle=hg;ctx.fillRect(h.x0,h.y0,w,hh);ctx.restore();
     ctx.strokeStyle='rgba(166,200,255,.62)';ctx.lineWidth=1;ctx.strokeRect(h.x0+0.5,h.y0+0.5,w-1,hh-1);ctx.fillStyle='#d0e2ff';ctx.fillRect(Math.round(h.x0+w*0.3),h.y0,Math.round(w*0.4),1.5);
     if(!reduced){const per=2*(w+hh),d=fr(now/3600)*per,pt=q=>{q=((q%per)+per)%per;if(q<w)return [h.x0+q,h.y0];q-=w;if(q<hh)return [h.x1,h.y0+q];q-=hh;if(q<w)return [h.x1-q,h.y1];q-=w;return [h.x0,h.y1-q];};
       ctx.save();for(let k=0;k<32;k++){const [x,y]=pt(d-k*3);ctx.fillStyle='rgba(208,226,255,'+(0.95*(1-k/32)).toFixed(3)+')';ctx.fillRect(x-0.9,y-0.9,1.8,1.8);}ctx.restore();}
@@ -2605,7 +2620,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     if(!nar){ctx.textAlign='center';const my=(h.y0+h.y1)/2;
       let tz=16;for(let z=28;z>=16;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText('Foundation Model').width<=w-40){tz=z;break;}}
       const ey=h.y0+26,l1=ey+16+tz*0.55,l2=l1+tz*1.05;
-      ctx.font='400 11px '+MF;ctx.fillStyle='rgba(166,200,255,.85)';{const T='IBM GRANITE TIME SERIES';let sp=0;if(LS)for(const q of [2.6,2,1.4,0.8,0]){ctx.letterSpacing=q+'px';sp=q;if(ctx.measureText(T).width<=w-20)break;}ctx.fillText(fitText(ctx,T,w-18),cx+sp/2,ey);if(LS)ctx.letterSpacing='0px';}
+      ctx.font='400 11px '+MF;ctx.fillStyle='rgba(255,255,255,.86)';{const T='IBM GRANITE TIME SERIES';let sp=0;if(LS)for(const q of [2.6,2,1.4,0.8,0]){ctx.letterSpacing=q+'px';sp=q;if(ctx.measureText(T).width<=w-20)break;}ctx.fillText(fitText(ctx,T,w-18),cx+sp/2,ey);if(LS)ctx.letterSpacing='0px';}
       ctx.font='300 '+tz+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText('Universal',cx,l1);ctx.fillText('Foundation Model',cx,l2);
       const dv=Math.round(l2+tz*0.5+16)+0.5,ix0=h.x0+14,ix1=h.x1-14,r0=dv+4,RH=(h.y1-10-r0)/3,t=reduced?0:now/1000;
       ctx.strokeStyle='rgba(166,200,255,.22)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ix0,dv);ctx.lineTo(ix1,dv);ctx.stroke();
@@ -2617,13 +2632,13 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
         let fz=13;ctx.font='400 '+fz+'px '+SANS;while(fz>11.5&&ctx.measureText(c.t).width>tw){fz-=0.5;ctx.font='400 '+fz+'px '+SANS;}const TL=wrap(ctx,c.t,tw,2);
         ctx.font='300 11px '+SANS;const SL=wrap(ctx,c.s,tw,2);const bh=TL.length*15+4+SL.length*13.5;let yy=rc-bh/2+7.5;
         ctx.textAlign='left';ctx.font='400 '+fz+'px '+SANS;ctx.fillStyle=on?'#fff':'rgba(255,255,255,.86)';TL.forEach(l=>{ctx.fillText(l,tx,yy);yy+=15;});
-        yy+=4-7.5+6.75;ctx.font='300 11px '+SANS;ctx.fillStyle=on?'rgba(208,226,255,.95)':'rgba(185,195,211,.78)';SL.forEach(l=>{ctx.fillText(l,tx,yy);yy+=13.5;});});
+        yy+=4-7.5+6.75;ctx.font='300 11px '+SANS;ctx.fillStyle=on?'rgba(255,255,255,.95)':'rgba(255,255,255,.8)';SL.forEach(l=>{ctx.fillText(l,tx,yy);yy+=13.5;});});
       ctx.textAlign='center';}
-    else{ctx.textAlign='left';ctx.font='400 10px '+MF;ctx.fillStyle='rgba(166,200,255,.85)';if(LS)ctx.letterSpacing='1.8px';ctx.fillText('IBM GRANITE TIME SERIES',h.x0+13,h.y0+22);if(LS)ctx.letterSpacing='0px';
+    else{ctx.textAlign='left';ctx.font='400 10px '+MF;ctx.fillStyle='rgba(255,255,255,.86)';if(LS)ctx.letterSpacing='1.8px';ctx.fillText('IBM GRANITE TIME SERIES',h.x0+13,h.y0+22);if(LS)ctx.letterSpacing='0px';
       {const T='Universal Foundation Model';let z=21;for(;z>15;z-=0.5){ctx.font='300 '+z+'px '+SANS;if(ctx.measureText(T).width<=w-26)break;}ctx.font='300 '+z+'px '+SANS;ctx.fillStyle='#fff';ctx.fillText(fitText(ctx,T,w-26),h.x0+13,h.y0+48);}
       {const t=reduced?0:now/1000,cw=(w-26)/3;ctx.strokeStyle='rgba(166,200,255,.2)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(h.x0+13,h.y0+68.5);ctx.lineTo(h.x1-13,h.y0+68.5);ctx.stroke();
         CL.forEach((c,i)=>{const on=lit(c.k),x=h.x0+13+i*cw,gw2=Math.min(46,cw-14);if(on){ctx.fillStyle='#78a9ff';ctx.fillRect(x,h.y0+68,gw2,1.5);}
-          glyph(ctx,c.k,x,h.y0+80,gw2,20,on,t);ctx.textAlign='left';ctx.font='400 10px '+SANS;ctx.fillStyle=on?'#fff':'rgba(208,226,255,.78)';ctx.fillText(fitText(ctx,c.m,cw-6),x,h.y0+114);});}}
+          glyph(ctx,c.k,x,h.y0+80,gw2,20,on,t);ctx.textAlign='left';ctx.font='400 10px '+SANS;ctx.fillStyle=on?'#fff':'rgba(255,255,255,.82)';ctx.fillText(fitText(ctx,c.m,cw-6),x,h.y0+114);});}}
   }
   function smooth(ctx,P){ctx.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length-1;i++){const xc=(P[i][0]+P[i+1][0])/2,yc=(P[i][1]+P[i+1][1])/2;ctx.quadraticCurveTo(P[i][0],P[i][1],xc,yc);}const q=P[P.length-1];ctx.lineTo(q[0],q[1]);}
   const RGB={t:'61,219,217',r:'250,77,86',g:'66,190,101',b:'69,137,255'};
@@ -4419,13 +4434,13 @@ const CS={
     const vbox=n=>nar?{x:n.x+8,y:n.y+n.h-30,w:n.w-16,h:24}:{x:n.x+12,y:n.y+n.h-44,w:n.w-24,h:36};
     const ty=n=>n.y+(nar?16:21),sy=n=>n.y+(nar?32:40);
     /* the fast road: three stops inside Confluent, each showing what it does */
-    L.fn.forEach((n,k)=>{const on=fr1.stop===k&&!fDone,past=fDone||fr1.next>k,gran=k===2;ctx.save();if(on&&!reduced){ctx.shadowColor=gran?'rgba(165,110,255,.8)':'rgba(69,137,255,.8)';ctx.shadowBlur=20;}
-      rr(ctx,n.x+0.5,n.y+0.5,n.w-1,n.h-1,6);ctx.fillStyle='#2c5a63';ctx.fill();ctx.restore();
-      rr(ctx,n.x+0.5,n.y+0.5,n.w-1,n.h-1,6);if(gran){const g=ctx.createLinearGradient(n.x,0,n.x+n.w,0);g.addColorStop(0,'rgba(69,137,255,.4)');g.addColorStop(1,'rgba(138,63,252,.4)');ctx.fillStyle=g;}else ctx.fillStyle=on?'rgba(69,137,255,.32)':'rgba(69,137,255,.16)';ctx.fill();
-      ctx.strokeStyle=on||past?(gran?'#be95ff':'#78a9ff'):'rgba(120,169,255,.4)';ctx.lineWidth=on?1.6:1;ctx.stroke();
+    L.fn.forEach((n,k)=>{const on=fr1.stop===k&&!fDone,past=fDone||fr1.next>k,gran=k===2;ctx.__raw=gran?1:0;ctx.save();if(on&&!reduced){ctx.shadowColor='rgba(69,137,255,.8)';ctx.shadowBlur=20;}
+      rr(ctx,n.x+0.5,n.y+0.5,n.w-1,n.h-1,6);ctx.fillStyle=gran?'#0f62fe':'#2c5a63';ctx.fill();ctx.restore();
+      rr(ctx,n.x+0.5,n.y+0.5,n.w-1,n.h-1,6);if(gran){const g=ctx.createLinearGradient(n.x,0,n.x+n.w,0);g.addColorStop(0,'#0f62fe');g.addColorStop(1,'#0043ce');ctx.fillStyle=g;}else ctx.fillStyle=on?'rgba(69,137,255,.32)':'rgba(69,137,255,.16)';ctx.fill();
+      ctx.strokeStyle=on||past?(gran?'#a6c8ff':'#78a9ff'):(gran?'#4589ff':'rgba(120,169,255,.4)');ctx.lineWidth=on?1.6:1;ctx.stroke();
       const title=k===1?'+ '+U.ctx:FAST[k].t;ctx.textAlign='center';fz(ctx,title,n.w-16,nar?13:14.5,10.5);ctx.fillStyle='#fff';ctx.fillText(fit(ctx,title,n.w-10),n.x+n.w/2,ty(n));
-      const sub=nar&&n.w<200?FAST[k].ss:FAST[k].s;fz(ctx,sub,n.w-16,nar?10:11,9,'400',MF);ctx.fillStyle=gran?'#d4bbff':'#a6c8ff';ctx.fillText(fit(ctx,sub,n.w-12),n.x+n.w/2,sy(n));
-      const v=vbox(n),lvl=on||past?1:0.55;if(k===0)visTopic(ctx,v,now,lvl);else if(k===1)visJoin(ctx,v,now,lvl);else visModel(ctx,v,now,U,lvl,past||on);});
+      const sub=nar&&n.w<200?FAST[k].ss:FAST[k].s;fz(ctx,sub,n.w-16,nar?10:11,9,'400',MF);ctx.fillStyle=gran?'#e5f0ff':'#a6c8ff';ctx.fillText(fit(ctx,sub,n.w-12),n.x+n.w/2,sy(n));
+      const v=vbox(n),lvl=on||past?1:0.55;if(k===0)visTopic(ctx,v,now,lvl);else if(k===1)visJoin(ctx,v,now,lvl);else visModel(ctx,v,now,U,lvl,past||on);ctx.__raw=0;});
     /* the slow road: four systems outside, each showing what it costs */
     L.sn.forEach((n,k)=>{const on=sr.stop===k&&!sDone,past=sDone||sr.next>k;rr(ctx,n.x+0.5,n.y+0.5,n.w-1,n.h-1,6);ctx.fillStyle='#2c5a63';ctx.fill();ctx.fillStyle=on?'rgba(255,255,255,.09)':'rgba(255,255,255,.04)';ctx.fill();
       ctx.strokeStyle=on?'rgba(255,255,255,.6)':'rgba(255,255,255,.22)';ctx.lineWidth=1;ctx.stroke();
