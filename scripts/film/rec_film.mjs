@@ -28,7 +28,7 @@ const cdp=await ctx.newCDPSession(p);let n=0;const meta=[];
 cdp.on('Page.screencastFrame',async f=>{const name=String(n++).padStart(5,'0')+'.jpg';fs.writeFileSync(OUT+'/'+name,Buffer.from(f.data,'base64'));meta.push({name,t:f.metadata.timestamp});try{await cdp.send('Page.screencastFrameAck',{sessionId:f.sessionId});}catch(e){}});
 await cdp.send('Page.startScreencast',{format:'jpeg',quality:94,maxWidth:1920,maxHeight:1080,everyNthFrame:1});
 await p.waitForTimeout(500);
-const t0=Date.now();await p.evaluate(()=>document.getElementById('pitch-play').click());
+const t0=Date.now();await p.evaluate(()=>window.__rtiDemo.start());
 let done=0;
 while(Date.now()-t0<SECS*1000){await p.waitForTimeout(400);
   const on=await p.evaluate(()=>!document.getElementById('pitch').hidden).catch(()=>false);

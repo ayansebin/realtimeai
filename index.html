@@ -511,10 +511,6 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 .btn.play{gap:.7rem;padding-right:1.2rem;box-shadow:0 0 0 1px rgba(69,137,255,.4),0 10px 30px rgba(15,98,254,.35)}
 .btn.play svg{width:14px;height:14px}
 .btn.play small{font-size:.72rem;color:rgba(255,255,255,.75);letter-spacing:.04em;text-transform:uppercase;margin-left:.1rem}
-.nav-pitch{background:transparent;cursor:pointer;color:var(--ink);border-color:var(--blue-2);gap:.3rem;align-items:center}
-.nav-pitch svg{width:10px;height:10px;color:var(--blue-3)}
-.nav-pitch:hover{background:rgba(15,98,254,.18)}
-@media (max-width:900px){.nav-pitch{display:inline-flex;padding:.3rem .5rem}.nav-pitch svg{display:none}}
 body.pitching .stage:not(.pitch-focus),body.pitching .chapter-head,body.pitching .inds,body.pitching .ucgrid,body.pitching .trust,body.pitching .cform,body.pitching .ways,body.pitching .cta,body.pitching .marquee,body.pitching .hero-head{opacity:.22;filter:saturate(.3);transition:opacity .6s,filter .6s}
 body.pitching .stage,body.pitching .chapter-head,body.pitching .hero-head{transition:opacity .6s,filter .6s}
 body.pitching .stage.pitch-focus{box-shadow:0 0 0 1px var(--blue-2),0 0 0 6px rgba(69,137,255,.18),0 30px 90px rgba(0,0,0,.28);z-index:5}
@@ -720,9 +716,6 @@ body::before{background:var(--paper)}
 .btn{background:var(--btn-bg)}
 .btn:hover{background:var(--btn-hover)}
 .nav{background:rgba(236,235,230,.86);border-bottom:1px solid var(--line-2)}
-.nav-pitch{border-color:var(--line-2)}
-.nav-pitch svg{color:var(--ink)}
-.nav-pitch:hover{background:var(--panel-3)}
 .nav-links a.on{border-bottom-color:var(--ink)}
 .brand .dot{background:var(--blue)}
 .pill{border-color:var(--line-2);color:var(--ink-2)}
@@ -1574,7 +1567,6 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <a href="#demos" data-ch="demos"><b>04</b>Demos</a>
       <a href="/playground" data-ch="playground"><b>05</b>Playground</a>
     </div>
-    <button class="nav-stat nav-pitch" id="nav-pitch" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg> Walkthrough</button>
     <a class="btn sm" href="#contact">Contact us <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </div>
 </nav>
@@ -1587,7 +1579,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <p class="hero-kicker"><span class="k-ts">Time series intelligence</span> meets <span class="k-ctx">real-time context</span>.</p>
       <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
       <p class="lede">IBM Granite Time Series models now run inside Confluent. They read every live signal in its context and optimize mission-critical decisions while they still matter.</p>
-      <div class="btn-row hero-cta"><button class="btn play" id="pitch-play"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>Watch the demo <small>2:27, live</small></button><a class="btn ghost play2" id="walk-open" href="https://www.youtube.com/watch?v=knU4XB-90Nw" target="_blank" rel="noopener" aria-label="Walkthrough on Confluent Cloud, a video on YouTube, opens in a new tab"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></a></div>
+      <div class="btn-row hero-cta"><a class="btn play" id="walk-open" href="https://www.youtube.com/watch?v=knU4XB-90Nw" target="_blank" rel="noopener" aria-label="Walkthrough on Confluent Cloud, a video on YouTube, opens in a new tab"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Walkthrough on Confluent Cloud <small>video</small></a></div>
     </div>
 
     <div class="stage why" id="st-why">
@@ -2123,7 +2115,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
     <div class="chapter-head">
       <span class="n">04 / DEMOS</span>
       <h2>See it in action.</h2>
-      <p>The pitch as a film, anomaly detection in the stream, the live demo on this page, and three demos on Confluent Cloud.</p>
+      <p>The pitch as a film, anomaly detection in the stream, and three demos on Confluent Cloud.</p>
     </div>
     <div class="dm" id="dm">
       <div class="dm-screen" id="dm-screen" role="tabpanel" aria-labelledby="dm-t-film">
@@ -2132,7 +2124,6 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
       <div class="dm-list" id="dm-list" role="tablist" aria-label="Demos" aria-orientation="vertical">
         <button class="dm-it" role="tab" id="dm-t-film" aria-selected="true" tabindex="0" aria-controls="dm-screen" type="button" data-d="film" data-kind="video" data-src="demos/film.mp4?v=1103a" data-poster="demos/film.jpg" data-play="Play" data-small="2:50" data-aria="Play Real-time intelligence and use cases, 2 minutes 50 seconds"><span class="dm-th"><img src="demos/film-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>2:50</em></span><span class="dm-tx"><b>Real-time intelligence and use cases</b></span></button>
         <button class="dm-it" role="tab" id="dm-t-anomaly" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="anomaly" data-kind="video" data-src="demos/anomaly.mp4" data-poster="demos/anomaly.jpg" data-play="Play" data-small="3:09" data-aria="Play Anomaly detection in the stream, 3 minutes 9 seconds"><span class="dm-th"><img src="demos/anomaly-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>3:09</em></span><span class="dm-tx"><b>Anomaly detection in the stream</b></span></button>
-        <button class="dm-it" role="tab" id="dm-t-live" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="live" data-kind="live" data-src="" data-poster="demos/live.jpg?v=1020b" data-play="Start the live demo" data-small="2:27" data-aria="Start the live demo on this page, 2 minutes 27 seconds"><span class="dm-th"><img src="demos/live-s.jpg?v=1020b" alt="" width="384" height="216" loading="lazy" decoding="async"><em>Live</em></span><span class="dm-tx"><b>Live on this page</b></span></button>
         <button class="dm-it" role="tab" id="dm-t-multivariate" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="multivariate" data-kind="video" data-src="demos/multivariate.mp4" data-poster="demos/multivariate.jpg" data-play="Play" data-small="2:53" data-aria="Play Multivariate forecasting with the weather, 2 minutes 53 seconds"><span class="dm-th"><img src="demos/multivariate-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>2:53</em></span><span class="dm-tx"><b>Multivariate forecasting with the weather</b></span></button>
         <button class="dm-it" role="tab" id="dm-t-retail" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="retail" data-kind="video" data-src="demos/retail.mp4" data-poster="demos/retail.jpg" data-play="Play" data-small="4:30" data-aria="Play Retail sales forecasting and anomaly detection, 4 minutes 30 seconds"><span class="dm-th"><img src="demos/retail-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>4:30</em></span><span class="dm-tx"><b>Retail sales forecasting and anomaly detection</b></span></button>
         <button class="dm-it" role="tab" id="dm-t-console" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="console" data-kind="yt" data-src="knU4XB-90Nw" data-poster="demos/console.jpg" data-play="Watch on YouTube" data-small="new tab" data-aria="Watch the walkthrough on Confluent Cloud on YouTube, opens in a new tab"><span class="dm-th"><img src="demos/console-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>YouTube</em></span><span class="dm-tx"><b>Walkthrough on Confluent Cloud</b></span></button>
@@ -4383,18 +4374,10 @@ const CS={
   if(window.MutationObserver)new MutationObserver(()=>{if(pitching())stop();else start();}).observe(document.body,{attributes:true,attributeFilter:['class']});
 })();
 
-/* ============ live demo (scripted tour) ============ */
-/* How it behaves, by design:
-   opens   on a first visit to the home page, once the page is visible, unless the visitor arrived on a deep link,
-           came back or forward, came from another page of this site, prefers reduced motion, or already saw it this week.
-           A visitor who scrolls, taps or types before it opens is exploring, so it stays closed. ?demo=1 forces it, ?demo=0 blocks it.
-   sound   tries to speak at once. When the browser holds sound back until a first interaction, captions run, the sound
-           button asks for a tap, and the first tap anywhere on the page brings the voice in mid-line, in sync.
-   control pause and resume, back and next, jump on the progress bar, mute, minimize, close. Space, arrows, M and Esc
-           do the same, and never fire while the visitor is typing.
-   yields  when the visitor scrolls or clicks into the page it pauses and shrinks to a small Resume pill.
-           A hidden tab pauses it, a visible one resumes it.
-   ends    by fading out on the contact form. Closing or finishing it means it will not open by itself again this week. */
+/* ============ scripted tour engine (film only) ============ */
+/* The narrated walkthrough is no longer offered on the page: there is no button for it and it never opens by itself.
+   The engine stays because the pitch film (scripts/film) is recorded through it: rec_film.mjs swaps in the film's
+   script and narration and starts it with window.__rtiDemo.start(). */
 (function(){
   const ui=$('#pitch'),mini=$('#pitch-mini');if(!ui||!mini)return;
   const cap=$('#pitch-cap'),prog=$('#pitch-prog'),stepEl=$('#pitch-step'),actEl=$('#pitch-act'),pauseBtn=$('#pitch-pause'),soundBtn=$('#pitch-sound'),hint=$('#pitch-hint'),miniStep=$('#pitch-mini-step');
@@ -4410,69 +4393,7 @@ const CS={
   const hi=sel=>$$(sel).forEach(x=>x.classList.add('tour-hi'));
   const show=(strip,id)=>{tab(id);$$('#'+strip+' [role=tab]').forEach(x=>x.classList.toggle('tour-hi',x.getAttribute('aria-controls')===id));};
   const montage=async(at,strip,list)=>{for(const [p,id] of list){await at(p);show(strip,id);}};
-  const SCRIPT=[
-    {n:1,act:0,focus:'.hero-head,#st-why',scroll:'top',dur:22370,
-      say:'Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data, with LLMs, chatbots and agents. The bigger prize is time series and streaming data, where the mission-critical decisions live, from production and demand planning to anomaly detection.',
-      subs:['<em>Time series intelligence</em> meets <em>real-time context</em>.','Foundation models transformed how enterprises','unlock value from <em>unstructured data</em>,','with <em>LLMs, chatbots and agents</em>.','The bigger prize is <em>time series and streaming data</em>,','where the <em>mission-critical decisions</em> live,','from <em>production</em> and <em>demand planning</em> to <em>anomaly detection</em>.'],
-      run:async(w,at)=>{const W=App.why;if(!W)return;W.reset();const phone=window.innerWidth<=760;
-        await at('Foundation models');scrollTo('#st-why',true);await at('unstructured data');W.set(1);await at('with LLMs');W.set(2);await at('chatbots and agents');W.set(3);
-        await at('The bigger prize');if(phone)scrollTo('#st-why .sh-card.b',true);W.set(4);await at('where the mission');W.set(5);await at('from production');W.set(6);}},
-    {n:2,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:14930,
-      say:'IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands.',
-      subs:['IBM Granite Time Series models now run <em>live inside Confluent</em>,','<em>pretrained to scale</em> across plants, stores, SKUs and customers,','<em>efficient</em> on standard CPUs,','and <em>learning</em> as each event lands.'],
-      run:async(w,at)=>{const H=App.hero;if(!H)return;H.reset();await at('pretrained');H.flash('dom');await at('efficient');H.flash('dist');await at('and learning');H.flash('inter');}},
-    {n:3,act:0,focus:'.hero-head,#st-live',scroll:'#st-live',dur:8970,
-      say:'Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,',
-      subs:['Take <em>one store</em> on a hot day.','The forecast reads the heat wave','and <em>sees the stockout coming</em>,','so the empty shelf is <em>flagged in seconds</em>,'],
-      run:async(w,at)=>{await at('reads the heat wave');if(App.hero)App.hero.ctx();await at('so the empty shelf');if(App.hero)App.hero.anomaly();}},
-    {n:4,act:0,focus:'.hero-head,#st-live',dur:4830,
-      say:'and the next order is optimized to keep it full, while the decision still matters.',
-      subs:['and the <em>next order is optimized</em> to keep it full,','<em>while the decision still matters</em>.'],
-      run:async(w,at)=>{if(App.hero)App.hero.optimize();}},
-    {n:5,act:0,focus:'#h-arch,#st-arch',scroll:'#h-arch',top:true,scrollM:'#h-arch',dur:13660,
-      say:'That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, while the usual way is still a day behind.',
-      subs:['That works because the intelligence','<em>lives where the data already flows</em>.','Confluent <em>streams and governs</em> every event,','and Granite turns it into <em>a decision in under a second</em>,','while the usual way is <em>still a day behind</em>.'],
-      run:async(w,at)=>{const A=App.arch;if(!A)return;const phone=window.innerWidth<=760,v=n=>{A.hi('v'+n);hi('#ax-vals [data-v="'+n+'"]');};A.focus(0,true,1.5);
-        await at('lives where');v(3);await at('Confluent streams');scrollTo(phone?'#arch-a-in':'#st-arch',true);A.hi('cf');await at('governs');v(1);v(2);
-        await at('and Granite');if(phone)scrollTo('#arch-a-chip',true);await at('in under a second');if(phone)scrollTo('#arch-a-out',true);A.hi('out');v(4);await at('while the usual way');v(6);v(5);if(phone)scrollTo('#ax-vals',true);}},
-    {n:6,act:1,focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),dur:15400,
-      say:'So your teams get to value ten times faster, with one universal model and a lower skills barrier. Transfer and continuous learning optimize decisions with millions in savings, and decision time drops from days to seconds.',
-      subs:['So your teams get to value <em>ten times faster</em>,','with <em>one universal model</em> and a <em>lower skills barrier</em>.','<em>Transfer and continuous learning</em> optimize decisions','with <em>millions in savings</em>,','and decision time drops <em>from days to seconds</em>.'],
-      run:async(w,at)=>{const phone=window.innerWidth<=760,card=k=>{$$('#st-three .v4c.tour-hi').forEach(e=>e.classList.remove('tour-hi'));hi('#st-three .v4c[data-k="'+k+'"]');if(phone&&k!=='prod')scrollTo('#st-three .v4c[data-k="'+k+'"]',true);};
-        card('prod');await at('Transfer and continuous');card('acc');await at('and decision time');card('resp');}},
-    {n:7,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-prod'),dur:14340,
-      say:'Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.',
-      subs:['Time series models <em>optimize mission-critical decisions</em>','as each event lands.','On a chocolate line, <em>temper is forecast on every reading</em>,','so setpoints adjust before a new cocoa butter lot','<em>turns into rework</em>.'],
-      run:async(w,at)=>{hi('#uctabs [role=tab]');await at('On a chocolate');click('#pr-inject .chip[data-v="butter"]');}},
-    {n:8,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-anom'),dur:8890,
-      say:'Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.',
-      subs:['Across thousands of signals,','each series gets <em>its own expected band</em>,','so weekend peaks pass','and <em>only the real breaks are flagged</em>.'],
-      run:async(w,at)=>{await at('so weekend');click('#an-inject .chip[data-v="stockout"]');}},
-    {n:9,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-demand'),dur:7220,
-      say:'In retail, one model forecasts every SKU in every store and reorders at the service level you choose.',
-      subs:['In retail, one model forecasts <em>every SKU in every store</em>','and reorders at <em>the service level you choose</em>.'],
-      run:async(w,at)=>{await at('and reorders');click('#dm-sl .chip[data-v="95"]');}},
-    {n:10,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-fraud'),dur:8660,
-      say:'In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.',
-      subs:['In payments, each card is scored <em>against its own normal</em>','before authorization,','so <em>card testing is held</em>','and travelers get through.'],
-      run:async(w,at)=>{await at('before authorization');click('#fr-inject .chip[data-v="testing"]');}},
-    {n:11,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-search'),dur:6600,
-      say:'Years of history become searchable by shape, so one sketch finds every signal that looked like this.',
-      subs:['Years of history become <em>searchable by shape</em>,','so one sketch finds every signal that looked like this.'],
-      run:async(w,at)=>{await at('so one sketch');click('#se-q .chip[data-v="spike"]');}},
-    {n:12,act:2,focus:'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel',scroll:'#uctabs',top:true,scrollM:'#uctabs',pre:()=>show('uctabs','uc-trade'),dur:6730,
-      say:'On the trading desk, a volume forecast with a probability band paces large orders to the market.',
-      subs:['On the trading desk, a volume forecast with <em>a probability band</em>','<em>paces large orders</em> to the market.'],
-      run:async(w,at)=>{await at('paces');click('#tr-inject .chip[data-v="news"]');}},
-    {n:13,act:2,focus:'#cases,#cstabs,#usecases .cspanel',scroll:'#cstabs',topM:true,pre:()=>{if(App.cement)App.cement.set(false);},dur:15240,
-      say:'And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error.',
-      subs:['And it <em>already works in the field</em>.','Telco tickets open only on <em>confirmed causes</em>,','<em>two models replaced thirty</em> in a cement plant','and lifted accuracy to <em>ninety-nine percent</em>,','and trading forecasts carry <em>about ten percent less error</em>.'],
-      run:async(w,at)=>{hi('#cstabs [role=tab]');await at('Telco');show('cstabs','cs-telco');click('#ni-mode .chip[data-v="assist"]');await w(200);click('#ni-inject .chip[data-v="fiber"]');
-        await at('two models');show('cstabs','cs-cement');await w(500);if(App.cement)App.cement.set(true);await at('and trading');show('cstabs','cs-fin');}},
-    {n:14,act:3,focus:'.contact',scroll:'#contact',dur:3850,hold:1200,
-      say:'Bring us a stream and a decision. Contact us to start.',
-      subs:['Bring us <em>a stream and a decision</em>.','<em>Contact us</em> to start.'],
-      run:async w=>{}}
+  const SCRIPT=[/* filled in by scripts/film/rec_film.mjs */
   ];
   const store={get(k){try{return localStorage.getItem(k);}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
   const SEEN='rti-demo-seen',SOUND='rti-demo-sound',WEEK=7*864e5;
@@ -4491,7 +4412,7 @@ const CS={
   const segBtns=$$('button',prog),segs=segBtns.map(b=>$('i',b));
 
   /* narration: one player for every clip, so a single tap unlocks them all (iOS included) */
-  const NARR='narration/',NARR_V='2026-11-03a';/* bump NARR_V whenever the clips are regenerated: they are cached for a week */
+  const NARR='narration/',NARR_V='none';/* rewritten by rec_film.mjs */
   const urlFor=i=>NARR+String((SCRIPT[i]&&SCRIPT[i].n)||i+1).padStart(2,'0')+'.mp3?v='+NARR_V;
   const player=new Audio();player.preload='auto';let narrOK=true,gen=0,preloaded=false;
   function preload(){if(preloaded)return;preloaded=true;const c=navigator.connection;if(c&&c.saveData)return;SCRIPT.forEach((s,i)=>{const a=new Audio();a.preload='auto';a.src=urlFor(i);});}
@@ -4558,8 +4479,6 @@ const CS={
   function start(){st.auto=false;cancelPending();if(st.voice)unlock();preload();play(0);}
 
   /* controls */
-  $('#pitch-play').addEventListener('click',start);
-  $('#nav-pitch').addEventListener('click',start);
   $('#pitch-exit').addEventListener('click',close);
   $('#pitch-min').addEventListener('click',minimize);
   $('#pitch-resume').addEventListener('click',()=>{unlock();restore();});
@@ -4585,20 +4504,9 @@ const CS={
   document.addEventListener('visibilitychange',()=>{if(!st.on||st.mini)return;if(document.hidden){if(!st.paused){st.autoPaused=true;setPaused(true);}}else if(st.autoPaused){st.autoPaused=false;setPaused(false);}});
   window.addEventListener('pagehide',()=>{stopAudio();});
 
-  /* when it opens by itself */
-  const navEntry=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};
-  let fromSite=false;try{fromSite=!!document.referrer&&new URL(document.referrer).origin===location.origin;}catch(e){}
-  const forced=/[?&](demo|pitch)=1/.test(location.search),blocked=/[?&](demo|pitch)=0/.test(location.search);
-  const seenRecently=Date.now()-Number(store.get(SEEN)||0)<WEEK;
-  const landing=!blocked&&(forced||(!location.hash&&navEntry.type!=='back_forward'&&!fromSite&&!seenRecently&&!reduced));
-  let pending=null;
-  function cancelPending(){if(pending){clearTimeout(pending);pending=null;}}
-  function autostart(){pending=null;if(st.on)return;st.auto=true;store.set(SEEN,String(Date.now()));preload();play(0);}
-  if(landing){const go=()=>{pending=setTimeout(autostart,1200);};
-    if(document.visibilityState!=='hidden')go();else document.addEventListener('visibilitychange',function v(){if(document.visibilityState!=='hidden'){document.removeEventListener('visibilitychange',v);go();}});
-    if(!forced){const early=e=>{if(!pending)return;if(e.type==='wheel'&&Math.abs(e.deltaY)<3)return;cancelPending();};['wheel','touchmove','pointerdown','keydown'].forEach(t=>window.addEventListener(t,early,{passive:true,capture:true}));}}
+  function cancelPending(){}
   soundUI();
-  window.__rtiDemo={state:()=>({on:st.on,mini:st.mini,i:st.i,paused:st.paused,voice:st.voice,unlocked:st.unlocked,playing:!player.paused,src:(player.dataset.src||'').replace(/^.*\//,''),t:+(player.currentTime||0).toFixed(2)})};
+  window.__rtiDemo={start,state:()=>({on:st.on,mini:st.mini,i:st.i,paused:st.paused,voice:st.voice,unlocked:st.unlocked,playing:!player.paused,src:(player.dataset.src||'').replace(/^.*\//,''),t:+(player.currentTime||0).toFixed(2)})};
 })();
 
 /* ============ 04 demos: one player, four ways to see it ============ */
@@ -4626,15 +4534,14 @@ const CS={
     const p=v.play();if(p&&p.catch)p.catch(()=>{});try{v.focus({preventScroll:true});}catch(e){}}
   /* Confluent's video plays on YouTube itself: embedded players fail in some browsers and work profiles */
   function openYT(){const w=window.open('https://www.youtube.com/watch?v='+cur.dataset.src,'_blank','noopener');if(w)try{w.opener=null;}catch(e){}}
-  function startLive(){const b=$('#pitch-play');if(b)b.click();}
-  poster.addEventListener('click',()=>{const k=cur.dataset.kind;if(k==='video')playVideo();else if(k==='yt')openYT();else startLive();});
+  poster.addEventListener('click',()=>{const k=cur.dataset.kind;if(k==='video')playVideo();else if(k==='yt')openYT();});
   tabs.forEach(t=>t.addEventListener('click',()=>select(t)));
   list.addEventListener('keydown',e=>{const i=tabs.indexOf(document.activeElement);if(i<0)return;let k=null;
     if(e.key==='ArrowDown'||e.key==='ArrowRight')k=(i+1)%tabs.length;else if(e.key==='ArrowUp'||e.key==='ArrowLeft')k=(i+tabs.length-1)%tabs.length;else if(e.key==='Home')k=0;else if(e.key==='End')k=tabs.length-1;
     if(k!=null){e.preventDefault();select(tabs[k],{focus:true});}});
-  /* one voice at a time: the live demo and the walkthrough take over from a playing video */
-  ['#pitch-play','#nav-pitch','#pitch-resume','#walk-open'].forEach(s=>{const b=$(s);if(b)b.addEventListener('click',()=>{if(media&&media.tagName==='VIDEO')media.pause();});});
-  /* deep links: #demos-film, #demos-anomaly, #demos-live, #demos-multivariate, #demos-retail, #demos-console */
+  /* one voice at a time: the walkthrough on YouTube takes over from a playing video */
+  ['#walk-open'].forEach(s=>{const b=$(s);if(b)b.addEventListener('click',()=>{if(media&&media.tagName==='VIDEO')media.pause();});});
+  /* deep links: #demos-film, #demos-anomaly, #demos-multivariate, #demos-retail, #demos-console */
   function deep(){const m=/^#demos-(\w+)$/.exec(location.hash),t=m&&tabs.find(x=>x.dataset.d===m[1]);
     if(t){select(t);requestAnimationFrame(()=>{const s=$('#demos');if(s)s.scrollIntoView();});}}
   deep();window.addEventListener('hashchange',deep);

@@ -7,8 +7,31 @@ from kokoro_onnx import Kokoro
 SPEED=float(sys.argv[1]) if len(sys.argv)>1 else 0.87
 VOICE=os.environ.get('FILM_VOICE','af_heart')
 HERE=os.path.dirname(os.path.abspath(__file__)); KD=os.environ.get('KOKORO_DIR','.')
-sys.path.insert(0,os.path.dirname(HERE))
-from narration import _tidy  # trims, caps over-long pauses, levels the speech
+
+def _frames_db(a,hop=240):
+  n=len(a)//hop; r=np.sqrt((a[:n*hop].reshape(n,hop)**2).mean(1)+1e-12); return 20*np.log10(r)
+def _tidy(a,sr=24000):
+  """Trim the silence Kokoro leaves around a clip, cap pauses over 520 ms, level the speech."""
+  a=a.astype(np.float64); db=_frames_db(a); on=np.where(db>-50)[0]
+  a=a[max(0,on[0]*240-int(.02*sr)):min(len(a),(on[-1]+1)*240+int(.02*sr))]
+  db=_frames_db(a); n=len(db); sp=db>np.percentile(db,90)-35; cuts=[]; i=0
+  while i<n:
+    if not sp[i]:
+      j=i
+      while j<n and not sp[j]: j+=1
+      p=(j-i)*10
+      if 5<i and j<n-5 and p>520:
+        rem=int((p-520)/10); mid=(i+j)//2; cuts.append(((mid-rem//2)*240,(mid-rem//2+rem)*240))
+      i=j
+    else: i+=1
+  if cuts:
+    parts,prev=[],0
+    for s_,e_ in cuts: parts.append(a[prev:s_]); prev=e_
+    parts.append(a[prev:]); out=parts[0]; xf=120
+    for q in parts[1:]:
+      r=np.linspace(0,1,xf); out=np.concatenate([out[:-xf],out[-xf:]*(1-r)+q[:xf]*r,q[xf:]])
+    a=out
+  db=_frames_db(a); lvl=db[db>np.percentile(db,90)-28].mean(); return a*10**((-20.0-lvl)/20)
 k=Kokoro(os.path.join(KD,'kokoro-v1.0.onnx'),os.path.join(KD,'voices-v1.0.bin'))
 OUT=os.path.join(HERE,'narration'); L=json.load(open(os.path.join(OUT,'lines.json'))); man=[]
 for l in L:

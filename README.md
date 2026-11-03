@@ -17,5 +17,5 @@ The site at realtimeintelligence.io, deployed on Vercel from `main`.
 
 - `scripts/playground.py` with `.github/workflows/playground.yml`: precomputes the playground streams
 - `scripts/export_onnx.py` with `.github/workflows/onnx.yml`: exports TTM r3 to ONNX for the browser
-- `scripts/narration.py`, `scripts/photos.py`: the demo narration and the photos
+- `scripts/photos.py`: the photos
 - `og-image.png`, `robots.txt`, `sitemap.xml`, `404.html`
