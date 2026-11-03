@@ -52,7 +52,10 @@
   function toHero(){const h=$('#st-live');if(cur===h)return;frame(h,'<b>01</b>Innovation');cut('hero');}
   function onStep(i){
     if(i===step)return;step=i;subN=0;
-    if(i===0){cap.style.opacity='';frame($('#st-why'),'<b>01</b>From words to decisions');setWhy(0);cut('start');setTimeout(()=>cut('title'),600);return;}
+    if(i===0){const w=$('#st-why');cap.style.opacity='';frame(w,'<b>01</b>From words to decisions');
+      /* clear what the page's own loop had drawn at once, so nothing fades out on screen as the film opens */
+      if(w){w.classList.add('film-instant');setWhy(0);void w.offsetWidth;setTimeout(()=>w.classList.remove('film-instant'),120);}
+      cut('start');setTimeout(()=>cut('title'),600);return;}
     if(i<=2){toHero();return;}
     if(i===3){frame($('#st-arch'),'<b>01</b>Confluent + IBM Granite');cut('arch');return;}
     if(i===4){frame($('#st-three'),'<b>02</b>Three things change for your teams');cut('value');return;}

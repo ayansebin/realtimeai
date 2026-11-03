@@ -53,3 +53,4 @@ html.film .film-shot .tour-hi{transition:none}
 html.film.ovl,html.film.ovl body{background:transparent!important}
 /* the page's own "from words to decisions" chart opens the film: the captions carry its sentence */
 html.film #st-why.film-shot .why-say{display:none!important}
+#st-why.film-instant,#st-why.film-instant *{transition:none!important;animation:none!important}
