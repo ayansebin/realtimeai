@@ -781,6 +781,13 @@ body::before{background:var(--paper)}
 .pnav-dots{display:inline-flex;gap:4px}
 .pnav-dots i{width:6px;height:6px;background:rgba(255,255,255,.28)}
 .pnav-dots i.on{background:#fff}
+/* strips that move on their own: the open tab shows the time to the next one, the button by the counter pauses */
+.tabprog{display:none}
+.autoplay:not(.held) [aria-selected="true"]>.tabprog{display:block;position:absolute;left:0;bottom:0;height:3px;width:calc(var(--ap,0) * 100%);background:#fff;opacity:.9;pointer-events:none;z-index:1}
+.pnav-auto{display:inline-grid;place-items:center;width:26px;height:26px;padding:0;margin-right:.15rem;background:transparent;border:1px solid var(--line-2);color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s}
+.pnav-auto svg{width:12px;height:12px}
+.pnav-auto:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+.pnav-auto:focus-visible{outline:2px solid #43b0ff;outline-offset:2px}
 .strip-hint{display:none}
 @media (max-width:600px){
   .ucgrid,.inds{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:8px;margin-inline:-16px;padding:2px 16px 14px;margin-bottom:0}
@@ -1276,11 +1283,12 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .v6r .v4v{text-align:right;color:#dcf0ff}
 .v6ctx{position:relative;height:10px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden}
 .v6ctx i{position:absolute;left:0;top:0;bottom:0;width:4%;border-radius:5px;background:linear-gradient(90deg,#0090f6,#88ceff);box-shadow:0 0 10px rgba(0,144,246,.6)}
-.v6rel{display:flex;gap:4px}
-.v6rel b{flex:1;display:grid;justify-items:center;gap:2px;padding:4px 2px;border-radius:3px;border:1px solid rgba(255,255,255,.14);font:600 .72rem/1 var(--font-mono);color:var(--ink-3);transition:all .35s}
-.v6rel b em{font-style:normal;font-weight:400;font-size:.62rem;color:var(--ink-3)}
-.v6rel b.on{color:#fff;border-color:#43b0ff;background:rgba(0,144,246,.22)}
-.v6rel b.on em{color:#dcf0ff}
+/* each release: three names on one line, the line between them lights as each one ships */
+.v6rel{display:flex;align-items:center;gap:7px;font:600 .74rem/1 var(--font-mono)}
+.v6rel b{font-weight:600;color:var(--ink-3);transition:color .35s}
+.v6rel i{flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,.16);transition:background .35s}
+.v6rel b.on{color:#88ceff}
+.v6rel i:has(+b.on){background:#43b0ff}
 .v6n{margin:0 0 4px;font-size:.76rem;line-height:1.35;color:var(--ink-3)}
 .v6uc{display:flex;flex-wrap:wrap;gap:5px}
 .v6uc button{font:inherit;font-size:.74rem;color:var(--ink-3);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:.22rem .6rem;cursor:pointer;transition:all .25s}
@@ -1605,9 +1613,9 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
 .v6r .v4v:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){color:rgb(12,93,151)}
 .v6ctx:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){background-color:rgba(23,48,51,0.095)}
 .v6ctx i:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){background-image:linear-gradient(90deg, rgb(0, 144, 246), rgb(12,94,151));box-shadow:rgba(0, 144, 246, 0.6) 0px 0px 10px}
-.v6rel b:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){border-top-color:rgba(23,48,51,0.189);border-right-color:rgba(23,48,51,0.189);border-bottom-color:rgba(23,48,51,0.189);border-left-color:rgba(23,48,51,0.189)}
-.v6rel b.on:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){color:rgb(23,48,51);border-top-color:rgb(12,93,151);border-right-color:rgb(12,93,151);border-bottom-color:rgb(12,93,151);border-left-color:rgb(12,93,151);background-color:rgba(0, 144, 246, 0.22)}
-.v6rel b.on em:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){color:rgb(12,93,151)}
+.v6rel i:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){background-color:rgba(23,48,51,0.216)}
+.v6rel b.on:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){color:rgb(12,94,151)}
+.v6rel i:has(+ b.on):is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){background-color:rgb(12,93,151)}
 .v6uc button:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){background-color:rgba(23,48,51,0.054);border-top-color:rgba(23,48,51,0.216);border-right-color:rgba(23,48,51,0.216);border-bottom-color:rgba(23,48,51,0.216);border-left-color:rgba(23,48,51,0.216)}
 .v6uc button.on:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){color:rgb(23,48,51);border-top-color:rgb(12,93,151);border-right-color:rgb(12,93,151);border-bottom-color:rgb(12,93,151);border-left-color:rgb(12,93,151);background-color:rgba(0, 144, 246, 0.22)}
 .v6o b:is(:is(#st-live .canvas-wrap.hx-wrap,#st-arch .ax,#uctabs .uc .uc-cv,#mdtabs .uc .uc-cv,.stage .canvas-wrap,.plant-inner,.three-cv,.pg-chart,.tiles .tile,.qbox,.cspanel .plant-wrap,.v3cv,.md-viz,.ax,.v4viz,.sh-viz,.uc .uc-cv) *){color:rgb(23,48,51)}
@@ -1887,7 +1895,7 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
               </div>
               <div class="v4k">Accuracy <em class="v6il">r2 vs r1 on benchmarks</em></div>
               <div class="v6imp">
-                <div class="v6r"><span class="v4l">Each release</span><span class="v6rel"><b data-r="0">r1<em>250M</em></b><b data-r="1">r2<em>700M</em></b><b data-r="2">r2.1<em>~1B</em></b></span><span class="v4v" data-v="rel">+15%</span></div>
+                <div class="v6r"><span class="v4l">Each release</span><span class="v6rel"><b data-r="0">r1</b><i></i><b data-r="1">r2</b><i></i><b data-r="2">r2.1</b></span><span class="v4v" data-v="rel">+15%</span></div>
               </div>
             </div>
           </article>
@@ -3663,6 +3671,52 @@ twin((()=>{const P={blue3:'#43b0ff',blue4:'#88ceff',green:'#6fdc8c',orange:'#ff8
     });
     btns.forEach(x=>{x.tabIndex=x.getAttribute('aria-selected')==='true'?0:-1;});
     App.tabSel=App.tabSel||{};btns.forEach(b=>{App.tabSel[b.getAttribute('aria-controls')]=()=>select(b);});
+  });
+})();
+
+/* ============ the four strips move on their own. Each tab stays open a while, then the next one opens, and the open tab shows the time left.
+   Picking a tab yourself, or using its demo, holds it there: it moves on again after a minute untouched, or when you come back to the strip.
+   Pointing at the strip or the open tab pauses it, and the button by the counter stops it until you start it again. ============ */
+(function(){
+  if(reduced||!('IntersectionObserver' in window))return;
+  const DWELL={uctabs:15000,mdtabs:11000,indtabs:22000,cstabs:14000},HOLD=60000;
+  const FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const I_PAUSE='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.5v9M10.5 3.5v9" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+  const I_PLAY='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.3l7.6 4.7L5 12.7z" fill="currentColor"/></svg>';
+  Object.keys(DWELL).forEach(id=>{
+    const tabs=document.getElementById(id);if(!tabs)return;
+    const btns=$$('[role=tab]',tabs),n=btns.length;if(n<2)return;
+    const pans=btns.map(b=>document.getElementById(b.getAttribute('aria-controls')));if(pans.some(p=>!p))return;
+    const D=DWELL[id],st={el:0,last:0,stopped:false,hold:0,on:false,off:0,raf:0,expect:-1,shown:null};
+    const cur=()=>Math.max(0,btns.findIndex(b=>b.getAttribute('aria-selected')==='true'));
+    btns.forEach(b=>{const s=document.createElement('span');s.className='tabprog';s.setAttribute('aria-hidden','true');b.appendChild(s);});
+    const ctl=[];
+    pans.forEach(p=>{const c=p.querySelector('.pnav-c');if(!c)return;const b=document.createElement('button');b.type='button';b.className='pnav-auto';c.insertBefore(b,c.firstChild);ctl.push(b);
+      b.addEventListener('click',()=>{st.stopped=!st.stopped;st.hold=0;st.el=0;paint();loop();});});
+    function paint(){tabs.classList.toggle('autoplay',!st.stopped);tabs.classList.toggle('held',st.stopped||performance.now()<st.hold);tabs.style.setProperty('--ap',Math.min(1,st.el/D).toFixed(4));
+      if(st.shown===st.stopped)return;st.shown=st.stopped;
+      ctl.forEach(b=>{b.innerHTML=st.stopped?I_PLAY:I_PAUSE;b.title=st.stopped?'Play':'Pause';b.setAttribute('aria-label',st.stopped?'Play: move through the tabs on their own':'Pause: stay on this tab');});}
+    function hold(){st.hold=performance.now()+HOLD;st.el=0;paint();}
+    /* a tab opened by anything but this loop is a pick: hold it */
+    new MutationObserver(()=>{if(cur()===st.expect){st.expect=-1;return;}hold();}).observe(tabs,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+    /* touching the strip, or using the open tab's demo, holds it too */
+    tabs.addEventListener('pointerdown',hold);tabs.addEventListener('keydown',hold);
+    pans.forEach(p=>{const h=e=>{if(!e.target.closest('.pnav-auto'))hold();};p.addEventListener('pointerdown',h);p.addEventListener('keydown',h);});
+    /* only while the strip or the open tab is on screen; leaving both ends a hold */
+    const vis=new Map(),seen=()=>!!(vis.get(tabs)||vis.get(pans[cur()]));
+    function check(){st.on=seen();if(st.on){clearTimeout(st.off);st.off=0;loop();return;}
+      if(st.hold&&!st.off)st.off=setTimeout(()=>{st.off=0;if(!seen()){st.hold=0;st.el=0;paint();}},1200);}
+    const io=new IntersectionObserver(es=>{es.forEach(e=>{const r=e.intersectionRect.height,h=e.boundingClientRect.height;vis.set(e.target,e.isIntersecting&&r>0&&r>=Math.min(h*0.35,innerHeight*0.35));});check();},{threshold:[0,.05,.1,.2,.3,.4,.5,.6,.8,1]});
+    [tabs,...pans].forEach(x=>io.observe(x));
+    function paused(){const p=pans[cur()],a=document.activeElement;
+      if(FINE&&(tabs.matches(':hover')||p.matches(':hover')))return true;
+      return !!(a&&a!==document.body&&(tabs.contains(a)||p.contains(a))&&a.matches(':focus-visible')&&!a.closest('.pnav-auto'));}
+    function loop(){if(st.raf||st.stopped||!st.on)return;st.last=performance.now();st.raf=requestAnimationFrame(tick);}
+    function tick(now){st.raf=0;if(st.stopped||!st.on)return;const dt=Math.min(100,now-st.last);st.last=now;
+      if(now>=st.hold&&!document.hidden&&!paused()){st.el+=dt;
+        if(st.el>=D){st.el=0;const k=(cur()+1)%n;st.expect=k;const f=App.tabSel&&App.tabSel[btns[k].getAttribute('aria-controls')];if(f)f();}}
+      paint();st.raf=requestAnimationFrame(tick);}
+    paint();
   });
 })();
 
