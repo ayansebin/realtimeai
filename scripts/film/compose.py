@@ -56,7 +56,9 @@ for c in m['caps']:
     st = c.get('step')
     if st is None or st >= 11: continue                    # the end card carries its own words
     t = c['t'] / 1000 - T0
-    if st not in seen: seen.add(st); t += max(0.0, LEADS.get(st, 0) - 0.2)   # first caption waits for the voice
+    if st not in seen:
+        seen.add(st); caps.append((t, ''))                                   # a new step clears the last caption with the cut
+        t += max(0.0, LEADS.get(st, 0) - 0.2)                                # its first caption waits for the voice
     caps.append((t, c['h']))
 caps.sort()
 def snap(t):  # labels change with the picture, not with the voice
@@ -87,7 +89,7 @@ for k, (st, dur, fn) in enumerate(plays):
     ins += ['-i', NAR + fn]; flt.append(f'[{k+1}:a]adelay={ms}|{ms},aresample=48000[a{k}]')
 mix = ''.join(f'[a{k}]' for k in range(len(plays))) + f'amix=inputs={len(plays)}:normalize=0,apad,atrim=0:{END:.3f},afade=t=out:st={END-0.4:.3f}:d=0.4[aout]'
 cmd = ['ffmpeg', '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', '1920x1080', '-r', str(FPS), '-i', '-'] + ins + \
-      ['-filter_complex', ';'.join(flt + [mix]), '-map', '0:v', '-map', '[aout]', '-c:v', 'libx264', '-preset', 'slow', '-crf', '17',
+      ['-filter_complex', ';'.join(flt + [mix]), '-map', '0:v', '-map', '[aout]', '-c:v', 'libx264', '-preset', os.environ.get('X264_PRESET', 'veryfast'), '-crf', os.environ.get('X264_CRF', '18'),
        '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-r', str(FPS), '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', OUT]
 ff = subprocess.Popen(cmd, stdin=subprocess.PIPE)
 for k in range(N):

@@ -4,6 +4,8 @@ Turns the home page demo into a standalone pitch video: one chart at a time on t
 
 The page no longer offers the narrated walkthrough itself; its engine stays in `index.html` for this recording, started with `window.__rtiDemo.start()`. The film runs its own script (`film_script.js`) and narration (`narration/`): no case studies, the same af_heart voice as the other films at a measured pace, a pause before each new chart, more time on Confluent + IBM Granite and on the closing.
 
+The film follows the site's design: flat paper with no grain, teal bands with light chart areas, IBM cyan accents. It opens on the page's own "from words to decisions" chart, built phrase by phrase through `App.why`, then the hero, where one model reads six use cases. The spoken words avoid acronyms (language models, products, standard servers), and the close points to the playground and Confluent Cloud.
+
 ## Steps
 
 1. Serve the site locally, for example `npx serve -l 8800 .` from the repo root. Set `SITE` if it is not `http://127.0.0.1:8800/`.

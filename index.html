@@ -3709,6 +3709,7 @@ twin((()=>{const P={blue3:'#43b0ff',blue4:'#88ceff',green:'#6fdc8c',orange:'#ff8
     const io=new IntersectionObserver(es=>{es.forEach(e=>{const r=e.intersectionRect.height,h=e.boundingClientRect.height;vis.set(e.target,e.isIntersecting&&r>0&&r>=Math.min(h*0.35,innerHeight*0.35));});check();},{threshold:[0,.05,.1,.2,.3,.4,.5,.6,.8,1]});
     [tabs,...pans].forEach(x=>io.observe(x));
     function paused(){const p=pans[cur()],a=document.activeElement;
+      if(document.body.classList.contains('pitching'))return true;  /* the walkthrough is driving the tabs */
       if(FINE&&(tabs.matches(':hover')||p.matches(':hover')))return true;
       return !!(a&&a!==document.body&&(tabs.contains(a)||p.contains(a))&&a.matches(':focus-visible')&&!a.closest('.pnav-auto'));}
     function loop(){if(st.raf||st.stopped||!st.on)return;st.last=performance.now();st.raf=requestAnimationFrame(tick);}
