@@ -1,62 +1,36 @@
 [
- {
-  "n": 1,
-  "text": "Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data, with language models, chatbots and agents. The bigger prize is time series and streaming data, where the mission-critical decisions live, from production and demand planning to anomaly detection. IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, products and customers, efficient on standard servers, and learning as each event lands.",
-  "lead": 0.0
- },
- {
-  "n": 2,
-  "text": "One model forecasts six use cases at once, from store demand and card payments to plants, deliveries and energy. A heat wave bends the three that depend on the weather, and every event is scored as it lands, so an empty shelf, card testing and a missed delivery are flagged in seconds,",
-  "lead": 0.5
- },
- {
-  "n": 3,
-  "text": "and every forecast becomes a decision, each one before its risk lands.",
-  "lead": 0.0
- },
- {
-  "n": 4,
-  "text": "That works because the intelligence lives where the data already flows. When store sales stall, the event lands in a governed Confluent topic, joins the live weather stream, and Granite forecasts it inside Flink. The shelf check goes out in under a second, while the usual way copies, trains and scores in a nightly batch, and is still a day behind.",
-  "lead": 1.4
- },
- {
-  "n": 5,
-  "text": "So your teams get to value ten times faster, with one universal model and a lower skills barrier. Transfer and continuous learning optimize decisions with millions in savings, and decision time drops from days to seconds.",
-  "lead": 1.4
- },
- {
-  "n": 6,
-  "text": "Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.",
-  "lead": 1.4
- },
- {
-  "n": 7,
-  "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.",
-  "lead": 1.2
- },
- {
-  "n": 8,
-  "text": "In retail, one model forecasts every product in every store and reorders at the service level you choose.",
-  "lead": 1.2
- },
- {
-  "n": 9,
-  "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.",
-  "lead": 1.2
- },
- {
-  "n": 10,
-  "text": "Years of history become searchable by shape, so one query finds every time a signal looked like this.",
-  "lead": 1.2
- },
- {
-  "n": 11,
-  "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market.",
-  "lead": 1.2
- },
- {
-  "n": 13,
-  "text": "Try the models in the playground, and run them on Confluent Cloud. Then bring us a stream and a decision, and we will co-innovate with you to bring real-time intelligence to your enterprise.",
-  "lead": 1.4
- }
+ {"n": 1, "lead": 0.6,
+  "text": "Ask your clients what language models do for them. You'll hear chatbots, copilots and agents. Now ask where their money is made or lost. Sales every minute. Payments every second. Readings from every machine. IBM Granite Time Series models are built for exactly that data. They forecast what's next, catch what doesn't fit, and turn both into a decision. That's the bigger prize, and it's in every account you cover.",
+  "pause_before": {"Now ask": 0.6, "IBM Granite": 0.5, "That's the bigger": 0.5}},
+ {"n": 2, "lead": 1.0,
+  "text": "Here's one model reading six businesses at once: stores, payments, plants, deliveries, a checkout service and a building's energy. It was never trained on any of them. It forecasts each one from its own recent history, in milliseconds, on standard servers. Then a heat wave bends three forecasts at once. Every event is checked as it arrives: an empty shelf, card testing, a missed delivery, a slow checkout.",
+  "pause_before": {"It was never": 0.45, "Then a heat wave": 0.7, "Every event": 0.7}},
+ {"n": 3, "lead": 0.25,
+  "text": "Each becomes a decision before the risk lands."},
+ {"n": 4, "lead": 1.1,
+  "text": "It all runs inside Confluent, now part of IBM. Store one twelve goes quiet for twenty minutes. The event joins the live weather, and Granite forecasts it inside Flink. A shelf check goes out in under a second. The usual way copies the data out and finds it tomorrow.",
+  "pause_before": {"Store one twelve": 0.5, "A shelf check": 0.5, "The usual way": 0.4}},
+ {"n": 5, "lead": 1.1,
+  "text": "For your client, three things change. Data teams replace hundreds of custom models with one. Planners get forecasts on day one, and they update with every event. And operations act in seconds, instead of the next morning.",
+  "pause_before": {"Planners": 0.5, "And operations": 0.5}},
+ {"n": 6, "lead": 1.0,
+  "text": "Take a chocolate line, where quality is forecast on every reading. New cocoa butter arrives, and the forecast slips below spec before any bar does. The operator approves new settings, and rework drops.",
+  "pause_before": {"New cocoa butter": 0.9}},
+ {"n": 7, "lead": 1.0,
+  "text": "Every store gets its own expected range. Weekend peaks pass quietly. A real break, like this stockout, gets flagged with the next step.",
+  "pause_before": {"A real break": 0.6}},
+ {"n": 8, "lead": 1.0,
+  "text": "Back at store one twelve, every product gets a fresh forecast every hour. Pick the service level, and the purchase order follows.",
+  "pause_before": {"Pick the service": 0.5}},
+ {"n": 9, "lead": 1.0,
+  "text": "For the fraud team, every card has its own normal. One dollar test charges are declined, and travelers still get through.",
+  "pause_before": {"One dollar": 0.7}},
+ {"n": 10, "lead": 1.0,
+  "text": "Engineers can search years of history by shape, and find every machine that spiked and recovered the same way."},
+ {"n": 11, "lead": 1.0,
+  "text": "And on a trading desk, a big order follows the volume forecast, slice by slice. A news burst, and it pauses.",
+  "pause_before": {"A news burst": 0.8}},
+ {"n": 13, "lead": 1.1,
+  "text": "The models are open source, with over forty million downloads, and run on Confluent Cloud. Find one decision your client makes too late. We'll build the rest with you. Bring us a stream and a decision.",
+  "pause_before": {"Find one": 0.6, "Bring us": 0.9}}
 ]

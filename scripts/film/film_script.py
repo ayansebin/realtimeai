@@ -1,59 +1,91 @@
 """Build the film's own demo script (film_script.js) from the film narration manifest.
-The film leaves out the case studies, spends longer on Confluent + IBM Granite and on the closing call to action,
-and starts each line after a short pause so the new chart is on screen before the voice.
-Timing: dur is the clip length, and leading spaces in `say` and in the first caption shift the in-line cues past that pause.
+The film leaves out the case studies, opens on the "from words to decisions" chart and ends on the call to action.
+Timing: the page times captions by their length and on-screen actions by where their phrase sits in `say`,
+both against the clip length. So captions and `say` are padded with spaces until characters run at one steady
+rate (R per second) through the clip, using the sentence timings genfilm.py wrote: every caption and action
+lands on its word, pauses included.
 usage: python3 film_script.py <film narration manifest.json> <out film_script.js>"""
 import json, re, sys
 
 man = {l['n']: l for l in json.load(open(sys.argv[1]))['lines']}
+R = 40.0
 UCF = "'#usecases > .wrap > .chapter-head:first-child,#uctabs,#usecases .ucpanel'"
 STEPS = [
-  dict(n=1, act=0, extra="focus:'.hero-head,#st-live',scroll:'top',",
-       subs=['<em>Time series intelligence</em> meets <em>real-time context</em>.', 'Foundation models transformed how enterprises', 'unlock value from <em>unstructured data</em>,', 'with <em>language models, chatbots and agents</em>.', 'The bigger prize is <em>time series and streaming data</em>,', 'where the <em>mission-critical decisions</em> live,', 'from <em>production</em> and <em>demand planning</em> to <em>anomaly detection</em>.', 'IBM Granite Time Series models now run <em>live inside Confluent</em>,', '<em>pretrained to scale</em> across plants, stores, products and customers,', '<em>efficient</em> on standard servers,', 'and <em>learning</em> as each event lands.'],
-       run="async(w,at)=>{const H=App.hero;if(!H)return;H.reset();await at('live inside');scrollTo('#st-live');await at('pretrained');H.flash('dom');await at('efficient');H.flash('dist');await at('and learning');H.flash('inter');}"),
+  dict(n=1, act=0, extra="focus:'#st-why',scroll:'top',",
+       subs=['Ask your clients', 'what <em>language models</em> do for them.', "You'll hear <em>chatbots, copilots and agents</em>.", 'Now ask where their <em>money is made or lost</em>.', 'Sales every minute.', 'Payments every second.', 'Readings from every machine.', '<em>IBM Granite Time Series</em> models are built for exactly that data.', "They forecast what's next, catch what doesn't fit,", 'and turn both into <em>a decision</em>.', "That's <em>the bigger prize</em>, and it's in every account you cover."],
+       run="async w=>{}"),
   dict(n=2, act=0, extra="focus:'.hero-head,#st-live',scroll:'#st-live',",
-       subs=['<em>One model</em> forecasts <em>six use cases</em> at once,', 'from store demand and card payments', 'to plants, deliveries and energy.', 'A <em>heat wave</em> bends the three that depend on the weather,', 'and <em>every event is scored</em> as it lands,', 'so an empty shelf, card testing and a missed delivery', 'are <em>flagged in seconds</em>,'],
-       run="async(w,at)=>{await at('A heat wave');if(App.hero)App.hero.ctx();await at('and every event');if(App.hero)App.hero.anomaly();}"),
+       subs=["Here's <em>one model</em> reading <em>six businesses</em> at once:", 'stores, payments, plants, deliveries,', "a checkout service and a building's energy.", 'It was <em>never trained</em> on any of them.', 'It forecasts each one from its own recent history,', '<em>in milliseconds</em>, on standard servers.', 'Then a <em>heat wave</em> bends three forecasts at once.', 'Every event is <em>checked as it arrives</em>:', 'an empty shelf, card testing,', 'a missed delivery, a slow checkout.'],
+       run="async(w,at)=>{const H=App.hero;if(!H)return;H.reset();await at('never trained');H.flash('dom');await at('from its own recent history');H.flash('inter');await at('in milliseconds');H.flash('dist');await at('Then a heat wave');H.ctx();await at('Every event is checked');H.anomaly();}"),
   dict(n=3, act=0, extra="focus:'.hero-head,#st-live',",
-       subs=['and <em>every forecast becomes a decision</em>,', '<em>each one before its risk lands</em>.'],
-       run="async(w,at)=>{await at('and every forecast');if(App.hero)App.hero.optimize();}"),
+       subs=['Each becomes <em>a decision</em> before the risk lands.'],
+       run="async(w,at)=>{await at('Each becomes');if(App.hero)App.hero.optimize();}"),
   dict(n=4, act=0, extra="focus:'#h-arch,#st-arch',",
-       subs=['That works because the intelligence', '<em>lives where the data already flows</em>.', 'When store sales stall, the event lands', 'in a <em>governed Confluent topic</em>,', 'joins the <em>live weather stream</em>,', 'and Granite forecasts it <em>inside Flink</em>.', 'The shelf check goes out <em>in under a second</em>,', 'while the usual way copies, trains', 'and scores in a nightly batch,', 'and is <em>still a day behind</em>.'],
-       run="async(w,at)=>{const A=App.arch;if(!A)return;const v=n=>{A.hi('v'+n);hi('#ax-vals [data-v=\"'+n+'\"]');};A.focus(0,true,8);await at('lives where');v(3);await at('When store sales');A.focus(0,true,3.0);await at('governed');A.hi('cf');v(1);await at('weather');v(2);await at('Granite forecasts');v(5);await at('The shelf check');A.hi('out');v(4);await at('while the usual way');v(6);}"),
+       subs=['It all runs <em>inside Confluent</em>, now part of IBM.', 'Store one twelve goes quiet for twenty minutes.', 'The event joins the <em>live weather</em>,', 'and Granite forecasts it <em>inside Flink</em>.', 'A shelf check goes out <em>in under a second</em>.', 'The usual way copies the data out', 'and finds it <em>tomorrow</em>.'],
+       run="async(w,at)=>{const A=App.arch;if(!A)return;const v=n=>{A.hi('v'+n);hi('#ax-vals [data-v=\"'+n+'\"]');};A.focus(0,true,8);await at('inside Confluent');v(3);await at('Store one twelve');A.focus(0,true,3.0);await at('The event joins');A.hi('cf');v(1);await at('live weather');v(2);await at('Granite forecasts');v(5);await at('A shelf check');A.hi('out');v(4);await at('The usual way');v(6);}"),
   dict(n=5, act=1, extra="focus:'#value > .wrap > .chapter-head:first-child,#st-three',scroll:'#st-three',pre:()=>click('#th-replay'),",
-       subs=['So your teams get to value <em>ten times faster</em>,', 'with <em>one universal model</em> and a <em>lower skills barrier</em>.', '<em>Transfer and continuous learning</em> optimize decisions', 'with <em>millions in savings</em>,', 'and decision time drops <em>from days to seconds</em>.'],
-       run="async(w,at)=>{const card=k=>{$$('#st-three .v4c.tour-hi').forEach(e=>e.classList.remove('tour-hi'));hi('#st-three .v4c[data-k=\"'+k+'\"]');};card('prod');await at('Transfer and continuous');card('acc');await at('and decision time');card('resp');}"),
+       subs=['For your client, <em>three things change</em>.', 'Data teams replace <em>hundreds of custom models</em> with one.', 'Planners get forecasts <em>on day one</em>,', 'and they update with every event.', 'And operations act <em>in seconds</em>, instead of the next morning.'],
+       run="async(w,at)=>{const card=k=>{$$('#st-three .v4c.tour-hi').forEach(e=>e.classList.remove('tour-hi'));hi('#st-three .v4c[data-k=\"'+k+'\"]');};card('prod');await at('Planners get');card('acc');await at('And operations');card('resp');}"),
   dict(n=6, act=2, extra="focus:" + UCF + ",pre:()=>show('uctabs','uc-prod'),",
-       subs=['Time series models <em>optimize mission-critical decisions</em>', 'as each event lands.', 'On a chocolate line, <em>temper is forecast on every reading</em>,', 'so setpoints adjust before a new cocoa butter lot', '<em>turns into rework</em>.'],
-       run="async(w,at)=>{hi('#uctabs [role=tab]');await at('On a chocolate');click('#pr-inject .chip[data-v=\"butter\"]');}"),
+       subs=['Take a chocolate line,', 'where <em>quality is forecast</em> on every reading.', 'New cocoa butter arrives,', 'and the forecast slips below spec <em>before any bar does</em>.', 'The operator approves new settings, and <em>rework drops</em>.'],
+       run="async(w,at)=>{hi('#uctabs [role=tab]');await at('New cocoa butter');click('#pr-inject .chip[data-v=\"butter\"]');}"),
   dict(n=7, act=2, extra="focus:" + UCF + ",pre:()=>show('uctabs','uc-anom'),",
-       subs=['Across thousands of signals,', 'each series gets <em>its own expected band</em>,', 'so weekend peaks pass', 'and <em>only the real breaks are flagged</em>.'],
-       run="async(w,at)=>{await at('so weekend');click('#an-inject .chip[data-v=\"stockout\"]');}"),
+       subs=['Every store gets <em>its own expected range</em>.', 'Weekend peaks pass quietly.', 'A real break, like this stockout,', 'gets <em>flagged with the next step</em>.'],
+       run="async(w,at)=>{await at('Weekend peaks');click('#an-inject .chip[data-v=\"stockout\"]');}"),
   dict(n=8, act=2, extra="focus:" + UCF + ",pre:()=>show('uctabs','uc-demand'),",
-       subs=['In retail, one model forecasts <em>every product in every store</em>', 'and reorders at <em>the service level you choose</em>.'],
-       run="async(w,at)=>{await at('and reorders');click('#dm-sl .chip[data-v=\"95\"]');}"),
+       subs=['Back at store one twelve, every product', 'gets a <em>fresh forecast every hour</em>.', 'Pick the service level, and <em>the purchase order follows</em>.'],
+       run="async(w,at)=>{await at('Pick the service');click('#dm-sl .chip[data-v=\"95\"]');}"),
   dict(n=9, act=2, extra="focus:" + UCF + ",pre:()=>show('uctabs','uc-fraud'),",
-       subs=['In payments, each card is scored <em>against its own normal</em>', 'before authorization,', 'so <em>card testing is held</em>', 'and travelers get through.'],
-       run="async(w,at)=>{await at('before authorization');click('#fr-inject .chip[data-v=\"testing\"]');}"),
+       subs=['For the fraud team, every card has <em>its own normal</em>.', 'One dollar test charges are <em>declined</em>,', 'and travelers still get through.'],
+       run="async(w,at)=>{await at('its own normal');click('#fr-inject .chip[data-v=\"testing\"]');}"),
   dict(n=10, act=2, extra="focus:" + UCF + ",pre:()=>show('uctabs','uc-search'),",
-       subs=['Years of history become <em>searchable by shape</em>,', 'so one query finds every time a signal looked like this.'],
-       run="async(w,at)=>{await at('so one query');click('#se-q .chip[data-v=\"spike\"]');}"),
+       subs=['Engineers can search years of history <em>by shape</em>,', 'and find every machine that spiked and recovered the same way.'],
+       run="async(w,at)=>{await at('by shape');click('#se-q .chip[data-v=\"spike\"]');}"),
   dict(n=11, act=2, extra="focus:" + UCF + ",pre:()=>show('uctabs','uc-trade'),",
-       subs=['On the trading desk, a volume forecast with <em>a probability band</em>', '<em>paces large orders</em> to the market.'],
-       run="async(w,at)=>{await at('paces');click('#tr-inject .chip[data-v=\"news\"]');}"),
+       subs=['And on a trading desk, a big order follows the volume forecast,', '<em>slice by slice</em>.', 'A news burst, and <em>it pauses</em>.'],
+       run="async(w,at)=>{await at('slice by slice');click('#tr-inject .chip[data-v=\"news\"]');}"),
   dict(n=13, act=3, extra="focus:'.contact',",
-       subs=['Try the models <em>in the playground</em>,', 'and run them <em>on Confluent Cloud</em>.', 'Then bring us <em>a stream and a decision</em>,', 'and we will <em>co-innovate with you</em>', 'to bring real-time intelligence to your enterprise.'],
+       subs=['The models are <em>open source</em>,', 'with over <em>forty million downloads</em>,', 'and run on <em>Confluent Cloud</em>.', 'Find one decision your client makes <em>too late</em>.', "<em>We'll build the rest with you</em>.", 'Bring us <em>a stream and a decision</em>.'],
        run="async w=>{}"),
 ]
 vis = lambda h: re.sub(r'<[^>]+>', '', h)
 js = lambda s: s.replace('\\', '\\\\').replace("'", "\\'")
-out = []
+
+def clock(l):
+    """Time in the clip for any character offset of the line text, from the sentence timings."""
+    text = l['text']; marks = []; o = 0
+    for sg in l['segs']:
+        k = text.index(sg['text'], o); marks.append((k, len(sg['text']), sg['start'], sg['end'])); o = k + len(sg['text'])
+    def t(off):
+        for k, c, a, b in marks:
+            if off < k: return a                              # in the space before a sentence: its start
+            if off <= k + c: return a + (off - k) / c * (b - a)
+        return marks[-1][3]
+    return t
+
+out = []; report = []
 for st in STEPS:
-    l = man[st['n']]; D, L = l['dur'], l['lead']; V = max(0.5, D - L)
-    say = l['text'].replace('I B M', 'IBM')
-    padS = int(round(L * len(say) / V)); tot = sum(len(vis(x)) for x in st['subs']); padC = int(round(L * tot / V))
-    subs = [' ' * padC + st['subs'][0]] + st['subs'][1:]
+    l = man[st['n']]; D = (int(round(l['dur'] * 1000)) - 60) / 1000; t = clock(l); text = l['text']
+    # say: each comma-sized piece starts where its first word is spoken
+    say = ''; o = 0
+    for piece in re.split(r'(?<=[,:;.!?])\s+', text):
+        k = text.index(piece, o); o = k + len(piece)
+        say += ' ' * max(0, int(round(R * t(k))) - len(say)) + piece
+    say += ' ' * max(0, int(round(R * D)) - len(say))
+    # captions: each one shows when its first word is spoken
+    starts = []; o = 0
+    for h in st['subs']:
+        v = vis(h); k = text.index(v, o); o = k + len(v); starts.append(0.0 if not starts else t(k))
+    assert o == len(text), ('captions do not cover the line', st['n'], text[o:])
+    ends = starts[1:] + [D]; subs = []; tot = 0
+    for h, a, b in zip(st['subs'], starts, ends):
+        n = max(len(vis(h)), int(round(R * b)) - tot) if b < D else max(len(vis(h)), int(round(R * D)) - tot)
+        subs.append(h + ' ' * (n - len(vis(h)))); tot += n
+    for p in re.findall(r"at\('([^']+)'\)", st['run']):
+        k = say.find(p); assert k >= 0, ('anchor not in say', st['n'], p)
+        report.append(f"  {st['n']:2d} {p!r:32s} at {k / len(say) * D:5.2f}s (spoken {t(text.index(p)):5.2f}s)")
     out.append("    {n:%d,act:%d,%sdur:%d,\n      say:'%s',\n      subs:[%s],\n      run:%s}" % (
-        st['n'], st['act'], st['extra'], int(round(D * 1000)) - 60, js(' ' * padS + say), ','.join("'" + js(x) + "'" for x in subs), st['run']))
+        st['n'], st['act'], st['extra'], int(round(D * 1000)), js(say), ','.join("'" + js(x) + "'" for x in subs), st['run']))
 open(sys.argv[2], 'w').write('  const SCRIPT=[\n' + ',\n'.join(out) + '\n  ];')
+print('\n'.join(report))
 print('steps', len(out), 'voice', round(sum(man[s['n']]['dur'] for s in STEPS), 2), 's')
