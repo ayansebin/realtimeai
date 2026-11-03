@@ -1,89 +1,104 @@
 {
- "engine": "kokoro",
- "voice": "am_michael",
+ "engine": "kokoro-onnx",
+ "voice": "af_heart",
+ "speed": 0.87,
  "lines": [
   {
    "id": "01",
    "file": "01.mp3",
-   "dur": 21.41,
+   "dur": 22.44,
+   "speech_end": 22.25,
    "text": "Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data, with LLMs, chatbots and agents. The bigger prize is time series and streaming data, where the mission-critical decisions live, from production and demand planning to anomaly detection."
   },
   {
    "id": "02",
    "file": "02.mp3",
-   "dur": 14.42,
+   "dur": 15.0,
+   "speech_end": 14.81,
    "text": "I B M Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, SKUs and customers, efficient on standard CPUs, and learning as each event lands."
   },
   {
    "id": "03",
    "file": "03.mp3",
-   "dur": 8.23,
+   "dur": 9.02,
+   "speech_end": 8.85,
    "text": "Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,"
   },
   {
    "id": "04",
    "file": "04.mp3",
-   "dur": 4.56,
+   "dur": 4.9,
+   "speech_end": 4.71,
    "text": "and the next order is optimized to keep it full, while the decision still matters."
   },
   {
    "id": "05",
    "file": "05.mp3",
-   "dur": 12.91,
+   "dur": 13.73,
+   "speech_end": 13.54,
    "text": "That works because the intelligence lives where the data already flows. Confluent streams and governs every event, and Granite turns it into a decision in under a second, while the usual way is still a day behind."
   },
   {
    "id": "06",
    "file": "06.mp3",
-   "dur": 14.81,
+   "dur": 15.46,
+   "speech_end": 15.28,
    "text": "So your teams get to value ten times faster, with one universal model and a lower skills barrier. Transfer and continuous learning optimize decisions with millions in savings, and decision time drops from days to seconds."
   },
   {
    "id": "07",
    "file": "07.mp3",
-   "dur": 13.46,
+   "dur": 14.4,
+   "speech_end": 14.22,
    "text": "Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework."
   },
   {
    "id": "08",
    "file": "08.mp3",
-   "dur": 8.47,
+   "dur": 8.95,
+   "speech_end": 8.77,
    "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged."
   },
   {
    "id": "09",
    "file": "09.mp3",
-   "dur": 6.6,
+   "dur": 7.27,
+   "speech_end": 7.1,
    "text": "In retail, one model forecasts every SKU in every store and reorders at the service level you choose."
   },
   {
    "id": "10",
    "file": "10.mp3",
-   "dur": 8.35,
+   "dur": 8.71,
+   "speech_end": 8.54,
    "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through."
   },
   {
    "id": "11",
    "file": "11.mp3",
-   "dur": 6.0,
+   "dur": 6.65,
+   "speech_end": 6.48,
    "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this."
   },
   {
    "id": "12",
    "file": "12.mp3",
-   "dur": 6.02,
+   "dur": 6.79,
+   "speech_end": 6.61,
    "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market."
   },
   {
    "id": "13",
    "file": "13.mp3",
-   "dur": 14.62,
+   "dur": 15.29,
+   "speech_end": 15.12,
    "text": "And it already works in the field. Telco tickets open only on confirmed causes, two models replaced thirty in a cement plant and lifted accuracy to ninety-nine percent, and trading forecasts carry about ten percent less error."
   },
   {
    "id": "14",
    "file": "14.mp3",
-   "dur": 3.36,
+   "dur": 3.91,
+   "speech_end": 3.73,
    "text": "Bring us a stream and a decision. Contact us to start."
   }
  ]

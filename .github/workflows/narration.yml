@@ -9,7 +9,7 @@ on:
       voice:
         description: "Kokoro voice (am_michael, am_fenrir, am_puck, af_heart, bm_george ...)"
         required: true
-        default: am_michael
+        default: af_heart
 permissions:
   contents: write
 jobs:

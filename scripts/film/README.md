@@ -2,7 +2,7 @@
 
 Turns the home page demo into a standalone pitch video: one chart at a time on the site's paper background, crossfades between shots, a use case navigation bar, captions drawn on top, narration mixed in. 1080p30 MP4, about 3:00.
 
-The web demo is unchanged. The film runs its own script (`film_script.js`) and narration (`narration/`): no case studies, a slower voice, a pause before each new chart, more time on Confluent + IBM Granite and on the closing.
+The web demo is unchanged. The film runs its own script (`film_script.js`) and narration (`narration/`): no case studies, the same af_heart voice as the other films at a measured pace, a pause before each new chart, more time on Confluent + IBM Granite and on the closing.
 
 ## Steps
 
@@ -11,7 +11,7 @@ The web demo is unchanged. The film runs its own script (`film_script.js`) and n
 3. After a change to the words, regenerate the narration and the script (needs `pip install kokoro-onnx soundfile` and the two Kokoro model files in `KOKORO_DIR`):
 
 ```
-python3 scripts/film/genfilm.py 0.93
+python3 scripts/film/genfilm.py 0.87
 python3 scripts/film/film_script.py scripts/film/narration/manifest.json scripts/film/film_script.js
 ```
 
