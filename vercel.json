@@ -76,5 +76,10 @@
       "destination": "/playground",
       "permanent": false
     }
-  ]
+  ],
+  "functions": {
+    "api/build.js": {
+      "maxDuration": 300
+    }
+  }
 }

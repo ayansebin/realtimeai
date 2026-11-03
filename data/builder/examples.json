@@ -1,0 +1,116 @@
+[
+ {
+  "id": "ex-retail",
+  "spec": {
+   "title": "Every shelf full through the heat wave",
+   "subtitle": "Store demand forecast in the stream, so the order moves before the shelf empties.",
+   "client": "A national grocery chain",
+   "industry": "Retail",
+   "persona": "VP Supply Chain",
+   "pain": "Hot weekends empty the cold drinks aisle by noon, and the nightly forecast only sees it the next morning.",
+   "outcome": "Orders that move with the weather, so the shelf stays full and nothing spoils on the rebound.",
+   "tone": "Executive brief",
+   "use_case": "Demand forecasting",
+   "model": "TTM",
+   "signal": {"name": "Cold drinks sales, store 112", "unit": "units/h", "source": "Point of sale", "topic": "pos.sales.store112", "interval_minutes": 30, "pattern": "daily", "base": 64, "swing": 0.38, "noise": 0.09, "decimals": 0},
+   "context": {"name": "Weather", "topic": "weather.forecast", "event": "Heat wave, 36 °C by noon", "effect": "up", "size": 0.7, "lag_steps": 2},
+   "anomaly": {"kind": "drop", "label": "No sales for 40 min: shelf empty", "size": 2.6},
+   "limit": {"enabled": false, "label": "", "value": 0, "side": "above"},
+   "decision": {"action": "Raise the next truck by 204 cases", "owner": "Store replenishment", "timing": "Before the 14:00 cutoff", "impact": "Shelf stays full through Sunday", "effect": "up", "size": 0.25},
+   "usual_way": {"steps": "Copy to a data lake, retrain, score in the nightly batch", "delay": "Next day"},
+   "kpis": [
+    {"value": "−38%", "label": "stockouts on hot weekends", "basis": "Illustrative"},
+    {"value": "12 min", "label": "from weather alert to a new order", "basis": "Illustrative"},
+    {"value": "1 model", "label": "for every product in every store", "basis": "IBM Granite TTM, zero-shot"}
+   ],
+   "steps": [
+    {"phase": "intro", "title": "The weekend problem", "say": "Every hot weekend, the cold drinks aisle is empty by noon. The nightly forecast only sees it the next morning, when the sales are already lost.", "caption": "Empty by noon, seen the next morning"},
+    {"phase": "signal", "title": "Sales as they happen", "say": "Here is store 112, live. Every sale lands in a Confluent topic the moment it rings up.", "caption": "Every sale lands in Confluent as it rings up"},
+    {"phase": "forecast", "title": "A forecast in the stream", "say": "IBM Granite forecasts the next day for this store, right inside Confluent. No training and no model per store, just the next 24 hours with its range.", "caption": "The next day, zero-shot, inside Confluent"},
+    {"phase": "context", "title": "The weather changes the plan", "say": "Then the weather stream says 36 degrees by noon. The same model reads it, and the afternoon forecast climbs right away.", "caption": "A heat wave lifts the afternoon forecast"},
+    {"phase": "anomaly", "title": "The shelf goes quiet", "say": "Just before noon, sales stop for 40 minutes. That is not a slow hour. It is an empty shelf, and it is flagged as it happens.", "caption": "Forty quiet minutes, flagged as an empty shelf"},
+    {"phase": "decision", "title": "The order moves first", "say": "So the next truck grows by 204 cases before the two o'clock cutoff, and the shelf stays full through Sunday.", "caption": "The next truck grows before the cutoff"},
+    {"phase": "stream", "title": "Where it runs", "say": "All of it runs where the data already flows. Sales and weather topics feed Flink, Granite forecasts each store, and the order goes straight to replenishment. The usual way copies, retrains and scores overnight, a day too late.", "caption": "In the stream, not in a nightly batch"},
+    {"phase": "outcome", "title": "What changes", "say": "Fewer stockouts on hot weekends, orders that move in minutes, and one model for every product in every store.", "caption": "Fewer stockouts, faster orders, one model"},
+    {"phase": "close", "title": "Next", "say": "Let's pick two stores and one hot weekend, and run this on your own sales stream.", "caption": "Two stores, one weekend, your own stream"}
+   ],
+   "close": {"headline": "Bring us a stream and a decision.", "next": ["Pick two pilot stores and one product family", "Connect point of sale and weather topics in Confluent Cloud", "Compare orders with and without the forecast over one weekend"]},
+   "notes": ["Lead with the lost Sunday sales, not the model.", "On accuracy: the model is zero-shot, so we measure it on their own history in the pilot.", "The data stays in Confluent: no copies to a separate ML platform.", "Numbers on screen are illustrative until the pilot."]
+  }
+ },
+ {
+  "id": "ex-energy",
+  "spec": {
+   "title": "Keep the building under its peak",
+   "subtitle": "A load forecast that sees the afternoon peak coming, so cooling and charging move first.",
+   "client": "A university campus",
+   "industry": "Energy and utilities",
+   "persona": "Director of Facilities",
+   "pain": "One hot afternoon over the 1,000 kW line sets the demand charge for the whole month.",
+   "outcome": "The peak is seen hours ahead and shaved before it is billed.",
+   "tone": "Plain and concise",
+   "use_case": "Production optimization",
+   "model": "FlowState",
+   "signal": {"name": "Building 7 load", "unit": "kW", "source": "Building meters", "topic": "meters.building7", "interval_minutes": 15, "pattern": "daily", "base": 720, "swing": 0.2, "noise": 0.03, "decimals": 0},
+   "context": {"name": "Weather", "topic": "weather.campus", "event": "Afternoon heat, cooling load rising", "effect": "up", "size": 0.32, "lag_steps": 4},
+   "anomaly": {"kind": "drift", "label": "Chiller 2 drawing more than expected", "size": 1.8},
+   "limit": {"enabled": true, "label": "Peak 1,000 kW", "value": 1000, "side": "above"},
+   "decision": {"action": "Pre-cool floors 3 to 8 now, start car charging after 18:00", "owner": "Building automation", "timing": "Starts at 12:15", "impact": "Peak stays under 1,000 kW", "effect": "down", "size": 0.14},
+   "usual_way": {"steps": "Monthly bill review and manual setpoint changes", "delay": "After the bill"},
+   "kpis": [
+    {"value": "0", "label": "peaks over the demand line this month", "basis": "Illustrative"},
+    {"value": "4 h", "label": "warning before the afternoon peak", "basis": "Illustrative"},
+    {"value": "1 model", "label": "for meters at any sampling rate", "basis": "IBM Granite FlowState"}
+   ],
+   "steps": [
+    {"phase": "intro", "title": "One afternoon sets the bill", "say": "One hot afternoon over the peak line sets the demand charge for the whole month.", "caption": "One afternoon sets the month's bill"},
+    {"phase": "signal", "title": "The meters, live", "say": "Building 7 streams its load every 15 minutes into Confluent.", "caption": "Every meter reading, live in Confluent"},
+    {"phase": "forecast", "title": "The day ahead", "say": "IBM Granite forecasts the rest of the day, with the range, the moment each reading lands.", "caption": "The rest of the day, with its range"},
+    {"phase": "context", "title": "Heat on the way", "say": "The weather stream adds an afternoon of heat. Now the forecast crosses 1,000 kilowatts at three o'clock.", "caption": "The forecast crosses the line at three"},
+    {"phase": "decision", "title": "Shave it first", "say": "So the building pre-cools floors 3 to 8 now, and car charging waits until six. The peak stays under the line.", "caption": "Pre-cool now, charge after six"},
+    {"phase": "outcome", "title": "What changes", "say": "No surprise peaks, hours of warning, and one model for every meter on campus.", "caption": "No surprise peaks, hours of warning"},
+    {"phase": "close", "title": "Next", "say": "Let's start with one building and one month of meter data.", "caption": "One building, one month"}
+   ],
+   "close": {"headline": "Bring us a stream and a decision.", "next": ["Stream one building's meters into Confluent Cloud", "Set the peak line and the actions you allow", "Run one month side by side with today's process"]},
+   "notes": ["The demand charge story lands with finance and facilities alike.", "FlowState reads 15 minute meters and hourly weather with one model.", "Actions stay with building automation: the forecast proposes, the operator approves."]
+  }
+ },
+ {
+  "id": "ex-fraud",
+  "spec": {
+   "title": "Card testing held before authorization",
+   "subtitle": "Every authorization scored against the card's own normal, inside the stream.",
+   "client": "A regional bank",
+   "industry": "Banking",
+   "persona": "Head of Fraud Operations",
+   "pain": "Card testing slips through as small charges, and the big fraud lands before the batch rules catch up.",
+   "outcome": "Testing is held within seconds, and real customers pay without friction.",
+   "tone": "Technical deep dive",
+   "use_case": "Fraud and security",
+   "model": "TSPulse",
+   "signal": {"name": "Authorizations, card range 4471", "unit": "tx/min", "source": "Card switch", "topic": "payments.authorizations", "interval_minutes": 1, "pattern": "bursty", "base": 1200, "swing": 0.12, "noise": 0.1, "decimals": 0},
+   "context": {"name": "Customer history", "topic": "customers.profile", "event": "Same cards seen at 9 new merchants in 2 minutes", "effect": "up", "size": 0.2, "lag_steps": 1},
+   "anomaly": {"kind": "spike", "label": "Card testing: 3× small attempts in 2 min", "size": 3.2},
+   "limit": {"enabled": false, "label": "", "value": 0, "side": "above"},
+   "decision": {"action": "Hold the next authorizations on this card range", "owner": "Fraud operations", "timing": "Within 2 seconds", "impact": "Testing stopped before the large purchase", "effect": "none", "size": 0},
+   "usual_way": {"steps": "Static rules, then a batch model on settled transactions", "delay": "After settlement"},
+   "kpis": [
+    {"value": "2 s", "label": "from first test charge to a hold", "basis": "Illustrative"},
+    {"value": "−60%", "label": "false declines for travelers", "basis": "Illustrative"},
+    {"value": "0", "label": "models to train per merchant", "basis": "IBM Granite TSPulse, zero-shot"}
+   ],
+   "steps": [
+    {"phase": "intro", "title": "Small charges, big losses", "say": "Card testing starts with tiny charges. By the time batch rules catch it, the large purchase has already cleared.", "caption": "Tiny charges first, the big loss after"},
+    {"phase": "signal", "title": "Every authorization", "say": "Every authorization on this card range streams into a governed Confluent topic, with its schema checked on the way in.", "caption": "Every authorization, governed and live"},
+    {"phase": "forecast", "title": "The expected band", "say": "TSPulse, from the IBM Granite family, learns nothing per card. It reads the stream zero-shot and draws the expected band for the next minutes.", "caption": "An expected band, zero-shot, for every card range"},
+    {"phase": "anomaly", "title": "The burst", "say": "Then three times the usual small attempts arrive in two minutes. The anomaly score jumps outside the band, on the event itself.", "caption": "Three times the attempts, scored as they land"},
+    {"phase": "decision", "title": "Hold, not decline", "say": "The next authorizations on that range are held within two seconds, so the testing stops before the large purchase, and travelers elsewhere still get through.", "caption": "Held in two seconds, travelers still pass"},
+    {"phase": "stream", "title": "How it runs", "say": "In Flink SQL, one call to the anomaly detection function scores each window as it arrives. The result lands in a topic that the authorization service reads. Nothing is copied out, and there is no model to train.", "caption": "One Flink SQL call, results back in a topic"},
+    {"phase": "outcome", "title": "What changes", "say": "Holds in seconds, fewer false declines, and no models to train or retrain.", "caption": "Seconds to hold, fewer false declines"},
+    {"phase": "close", "title": "Next", "say": "Let's replay one week of your authorizations and compare the holds with your current rules.", "caption": "Replay one week, compare with today's rules"}
+   ],
+   "close": {"headline": "Bring us a stream and a decision.", "next": ["Replay one week of authorizations into Confluent Cloud", "Score them with TSPulse next to the current rules", "Review holds and false declines together"]},
+   "notes": ["Position the hold as a step before decline: it protects good customers.", "TSPulse scores univariate and multivariate streams: ask which signals they trust most.", "Replaying history in Confluent makes the comparison safe: nothing touches production."]
+  }
+ }
+]
