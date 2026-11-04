@@ -287,6 +287,7 @@ async function run(b, effort, who, signal, emit) {
 const errorFor = (err, aborted) => aborted ? { code: 'timeout', msg: 'Opus was still thinking when the time ran out. Build it again at a faster effort, or shorten the brief.' }
   : err.status === 429 || err.status === 529 ? { code: 'busy', msg: 'Claude is busy right now. Try again in a minute.' }
   : err.status === 402 ? { code: 'credits', msg: 'The site\'s AI Gateway is out of credits. The site owner needs to top it up in Vercel.' }
+  : /customer_verification_required|credit card/i.test(String(err.text || '')) ? { code: 'credits', msg: 'The site\'s AI Gateway needs a card on file in Vercel before it can build. The site owner needs to add one.' }
   : err.status === 401 || err.status === 403 ? { code: 'key', msg: 'The site\'s model access was not accepted. The site owner needs to check it.' }
   : { code: 'failed', msg: 'The build did not finish. Try again.' };
 
