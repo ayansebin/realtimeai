@@ -7,313 +7,218 @@
   {
    "n": 1,
    "file": "01.mp3",
-   "dur": 30.89,
+   "dur": 40.44,
    "lead": 0.6,
-   "text": "Ask your clients what language models do for them. You'll hear chatbots, copilots and agents. Now ask where their money is made or lost. Sales every minute. Payments every second. Readings from every machine. IBM Granite Time Series models are built for exactly that data. They forecast what's next, catch what doesn't fit, and turn both into a decision. That's the bigger prize, and it's in every account you cover.",
+   "text": "Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data, with language models, chatbots and agents. The bigger prize is time series and streaming data, where the mission-critical decisions live, from production and demand planning to anomaly detection. IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, products and customers, efficient on standard servers, and learning as each event lands.",
    "segs": [
     {
-     "text": "Ask your clients what language models do for them.",
+     "text": "Time series intelligence meets real-time context.",
      "start": 0.6,
-     "end": 3.47
+     "end": 4.62
     },
     {
-     "text": "You'll hear chatbots, copilots and agents.",
-     "start": 3.81,
-     "end": 6.96
+     "text": "Foundation models transformed how enterprises unlock value from unstructured data, with language models, chatbots and agents.",
+     "start": 5.07,
+     "end": 14.405
     },
     {
-     "text": "Now ask where their money is made or lost.",
-     "start": 7.56,
-     "end": 10.15
+     "text": "The bigger prize is time series and streaming data, where the mission-critical decisions live, from production and demand planning to anomaly detection.",
+     "start": 14.955,
+     "end": 25.085
     },
     {
-     "text": "Sales every minute.",
-     "start": 10.49,
-     "end": 11.93
-    },
-    {
-     "text": "Payments every second.",
-     "start": 12.27,
-     "end": 13.93
-    },
-    {
-     "text": "Readings from every machine.",
-     "start": 14.27,
-     "end": 16.18
-    },
-    {
-     "text": "IBM Granite Time Series models are built for exactly that data.",
-     "start": 16.68,
-     "end": 21.35
-    },
-    {
-     "text": "They forecast what's next, catch what doesn't fit, and turn both into a decision.",
-     "start": 21.69,
-     "end": 26.88
-    },
-    {
-     "text": "That's the bigger prize, and it's in every account you cover.",
-     "start": 27.38,
-     "end": 30.76
+     "text": "IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, products and customers, efficient on standard servers, and learning as each event lands.",
+     "start": 25.685,
+     "end": 40.315
     }
    ]
   },
   {
    "n": 2,
    "file": "02.mp3",
-   "dur": 29.95,
-   "lead": 1.0,
-   "text": "Here's one model reading six businesses at once: stores, payments, plants, deliveries, a checkout service and a building's energy. It was never trained on any of them. It forecasts each one from its own recent history, in milliseconds, on standard servers. Then a heat wave bends three forecasts at once. Every event is checked as it arrives: an empty shelf, card testing, a missed delivery, a slow checkout.",
+   "dur": 10.01,
+   "lead": 0.6,
+   "text": "Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,",
    "segs": [
     {
-     "text": "Here's one model reading six businesses at once: stores, payments, plants, deliveries, a checkout service and a building's energy.",
-     "start": 1.0,
-     "end": 9.665
+     "text": "Take one store on a hot day.",
+     "start": 0.6,
+     "end": 2.47
     },
     {
-     "text": "It was never trained on any of them.",
-     "start": 10.115,
-     "end": 12.035
-    },
-    {
-     "text": "It forecasts each one from its own recent history, in milliseconds, on standard servers.",
-     "start": 12.375,
-     "end": 18.515
-    },
-    {
-     "text": "Then a heat wave bends three forecasts at once.",
-     "start": 19.215,
-     "end": 22.075
-    },
-    {
-     "text": "Every event is checked as it arrives: an empty shelf, card testing, a missed delivery, a slow checkout.",
-     "start": 22.775,
-     "end": 29.84
+     "text": "The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,",
+     "start": 2.92,
+     "end": 9.9
     }
    ]
   },
   {
    "n": 3,
    "file": "03.mp3",
-   "dur": 3.14,
-   "lead": 0.25,
-   "text": "Each becomes a decision before the risk lands.",
+   "dur": 5.02,
+   "lead": 0.15,
+   "text": "and the next order is optimized to keep it full, while the decision still matters.",
    "segs": [
     {
-     "text": "Each becomes a decision before the risk lands.",
-     "start": 0.25,
-     "end": 3.03
+     "text": "and the next order is optimized to keep it full, while the decision still matters.",
+     "start": 0.15,
+     "end": 4.9
     }
    ]
   },
   {
    "n": 4,
    "file": "04.mp3",
-   "dur": 20.11,
+   "dur": 25.61,
    "lead": 1.1,
-   "text": "It all runs inside Confluent, now part of IBM. Store one twelve goes quiet for twenty minutes. The event joins the live weather, and Granite forecasts it inside Flink. A shelf check goes out in under a second. The usual way copies the data out and finds it tomorrow.",
+   "text": "That works because the intelligence lives where the data already flows. When store sales stall, the event lands in a governed Confluent topic, joins the live weather stream, and Granite forecasts it inside Flink. The shelf check goes out in under a second, while the usual way copies, trains and scores in a nightly batch, and is still a day behind.",
    "segs": [
     {
-     "text": "It all runs inside Confluent, now part of IBM.",
+     "text": "That works because the intelligence lives where the data already flows.",
      "start": 1.1,
-     "end": 4.86
+     "end": 5.5
     },
     {
-     "text": "Store one twelve goes quiet for twenty minutes.",
-     "start": 5.36,
-     "end": 8.21
+     "text": "When store sales stall, the event lands in a governed Confluent topic, joins the live weather stream, and Granite forecasts it inside Flink.",
+     "start": 6.0,
+     "end": 15.86
     },
     {
-     "text": "The event joins the live weather, and Granite forecasts it inside Flink.",
-     "start": 8.55,
-     "end": 13.15
-    },
-    {
-     "text": "A shelf check goes out in under a second.",
-     "start": 13.65,
-     "end": 15.89
-    },
-    {
-     "text": "The usual way copies the data out and finds it tomorrow.",
-     "start": 16.29,
-     "end": 20.0
+     "text": "The shelf check goes out in under a second, while the usual way copies, trains and scores in a nightly batch, and is still a day behind.",
+     "start": 16.36,
+     "end": 25.5
     }
    ]
   },
   {
    "n": 5,
    "file": "05.mp3",
-   "dur": 16.49,
+   "dur": 17.28,
    "lead": 1.1,
-   "text": "For your client, three things change. Data teams replace hundreds of custom models with one. Planners get forecasts on day one, and they update with every event. And operations act in seconds, instead of the next morning.",
+   "text": "So your teams get to value ten times faster, with one universal model and a lower skills barrier. Transfer and continuous learning optimize decisions with millions in savings, and decision time drops from days to seconds.",
    "segs": [
     {
-     "text": "For your client, three things change.",
+     "text": "So your teams get to value ten times faster, with one universal model and a lower skills barrier.",
      "start": 1.1,
-     "end": 3.45
+     "end": 7.72
     },
     {
-     "text": "Data teams replace hundreds of custom models with one.",
-     "start": 3.79,
-     "end": 7.35
-    },
-    {
-     "text": "Planners get forecasts on day one, and they update with every event.",
-     "start": 7.85,
-     "end": 12.13
-    },
-    {
-     "text": "And operations act in seconds, instead of the next morning.",
-     "start": 12.63,
-     "end": 16.37
+     "text": "Transfer and continuous learning optimize decisions with millions in savings, and decision time drops from days to seconds.",
+     "start": 8.22,
+     "end": 17.165
     }
    ]
   },
   {
    "n": 6,
    "file": "06.mp3",
-   "dur": 15.07,
-   "lead": 1.0,
-   "text": "Take a chocolate line, where quality is forecast on every reading. New cocoa butter arrives, and the forecast slips below spec before any bar does. The operator approves new settings, and rework drops.",
+   "dur": 16.08,
+   "lead": 1.1,
+   "text": "Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.",
    "segs": [
     {
-     "text": "Take a chocolate line, where quality is forecast on every reading.",
-     "start": 1.0,
-     "end": 5.01
+     "text": "Time series models optimize mission-critical decisions as each event lands.",
+     "start": 1.1,
+     "end": 6.56
     },
     {
-     "text": "New cocoa butter arrives, and the forecast slips below spec before any bar does.",
-     "start": 5.91,
-     "end": 11.34
-    },
-    {
-     "text": "The operator approves new settings, and rework drops.",
-     "start": 11.68,
-     "end": 14.95
+     "text": "On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.",
+     "start": 7.06,
+     "end": 15.95
     }
    ]
   },
   {
    "n": 7,
    "file": "07.mp3",
-   "dur": 11.06,
+   "dur": 10.1,
    "lead": 1.0,
-   "text": "Every store gets its own expected range. Weekend peaks pass quietly. A real break, like this stockout, gets flagged with the next step.",
+   "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.",
    "segs": [
     {
-     "text": "Every store gets its own expected range.",
+     "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.",
      "start": 1.0,
-     "end": 4.0
-    },
-    {
-     "text": "Weekend peaks pass quietly.",
-     "start": 4.34,
-     "end": 6.41
-    },
-    {
-     "text": "A real break, like this stockout, gets flagged with the next step.",
-     "start": 7.01,
-     "end": 10.94
+     "end": 9.98
     }
    ]
   },
   {
    "n": 8,
    "file": "08.mp3",
-   "dur": 9.5,
+   "dur": 8.21,
    "lead": 1.0,
-   "text": "Back at store one twelve, every product gets a fresh forecast every hour. Pick the service level, and the purchase order follows.",
+   "text": "In retail, one model forecasts every product in every store and reorders at the service level you choose.",
    "segs": [
     {
-     "text": "Back at store one twelve, every product gets a fresh forecast every hour.",
+     "text": "In retail, one model forecasts every product in every store and reorders at the service level you choose.",
      "start": 1.0,
-     "end": 5.8
-    },
-    {
-     "text": "Pick the service level, and the purchase order follows.",
-     "start": 6.3,
-     "end": 9.39
+     "end": 8.08
     }
    ]
   },
   {
    "n": 9,
    "file": "09.mp3",
-   "dur": 9.34,
+   "dur": 9.72,
    "lead": 1.0,
-   "text": "For the fraud team, every card has its own normal. One dollar test charges are declined, and travelers still get through.",
+   "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.",
    "segs": [
     {
-     "text": "For the fraud team, every card has its own normal.",
+     "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.",
      "start": 1.0,
-     "end": 4.15
-    },
-    {
-     "text": "One dollar test charges are declined, and travelers still get through.",
-     "start": 4.85,
-     "end": 9.22
+     "end": 9.605
     }
    ]
   },
   {
    "n": 10,
    "file": "10.mp3",
-   "dur": 8.26,
+   "dur": 7.66,
    "lead": 1.0,
-   "text": "Engineers can search years of history by shape, and find every machine that spiked and recovered the same way.",
+   "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this.",
    "segs": [
     {
-     "text": "Engineers can search years of history by shape, and find every machine that spiked and recovered the same way.",
+     "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this.",
      "start": 1.0,
-     "end": 8.145
+     "end": 7.54
     }
    ]
   },
   {
    "n": 11,
    "file": "11.mp3",
-   "dur": 9.55,
+   "dur": 7.87,
    "lead": 1.0,
-   "text": "And on a trading desk, a big order follows the volume forecast, slice by slice. A news burst, and it pauses.",
+   "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market.",
    "segs": [
     {
-     "text": "And on a trading desk, a big order follows the volume forecast, slice by slice.",
+     "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market.",
      "start": 1.0,
-     "end": 6.48
-    },
-    {
-     "text": "A news burst, and it pauses.",
-     "start": 7.28,
-     "end": 9.43
+     "end": 7.76
     }
    ]
   },
   {
    "n": 13,
    "file": "13.mp3",
-   "dur": 15.82,
+   "dur": 13.85,
    "lead": 1.1,
-   "text": "The models are open source, with over forty million downloads, and run on Confluent Cloud. Find one decision your client makes too late. We'll build the rest with you. Bring us a stream and a decision.",
+   "text": "Try the models in the playground. Run them on Confluent Cloud. Then bring us a stream and a decision, and we will co-innovate with you to bring real-time intelligence to your enterprise.",
    "segs": [
     {
-     "text": "The models are open source, with over forty million downloads, and run on Confluent Cloud.",
+     "text": "Try the models in the playground.",
      "start": 1.1,
-     "end": 7.43
+     "end": 3.17
     },
     {
-     "text": "Find one decision your client makes too late.",
-     "start": 8.03,
-     "end": 10.67
+     "text": "Run them on Confluent Cloud.",
+     "start": 3.51,
+     "end": 5.6
     },
     {
-     "text": "We'll build the rest with you.",
-     "start": 11.01,
-     "end": 12.68
-    },
-    {
-     "text": "Bring us a stream and a decision.",
-     "start": 13.58,
-     "end": 15.7
+     "text": "Then bring us a stream and a decision, and we will co-innovate with you to bring real-time intelligence to your enterprise.",
+     "start": 6.2,
+     "end": 13.725
     }
    ]
   }

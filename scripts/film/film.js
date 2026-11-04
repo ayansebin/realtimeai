@@ -48,7 +48,7 @@
      then the live hero chart. The page stops its own loop of this chart while the walkthrough runs, so the film sets its steps directly */
   title.hidden=true;
   const setWhy=k=>{const w=$('#st-why');if(w)['s1','s2','s3','s4','s5','s6'].forEach((c,j)=>w.classList.toggle(c,j<k));};
-  const WHY={1:1,2:2,3:3,4:4,8:5,9:6};   /* caption number -> chart stage: inputs, language model, its outputs, wave two, Granite, its outputs */
+  const WHY={1:1,2:2,4:3,5:4,6:5,7:6};   /* caption number -> chart stage: inputs, language model, its outputs, wave two, Granite, its outputs */
   function toHero(){const h=$('#st-live');if(cur===h)return;frame(h,'<b>01</b>Innovation');cut('hero');}
   function onStep(i){
     if(i===step)return;step=i;subN=0;
@@ -63,8 +63,8 @@
     if(i===11){end.hidden=false;cap.style.opacity='0';setLabel('');cut('end');return;}  /* the film script ends on the call to action */
   }
   function onCap(){
-    if(step===0&&WHY[subN])setWhy(WHY[subN]);
-    if(step===11){const on=k=>{const e=end.querySelector('.fs[data-k="'+k+'"]');if(e)e.classList.add('on');};if(subN===1)on(1);if(subN===3)on(2);if(subN===5)on(3);}
+    if(step===0){if(WHY[subN])setWhy(WHY[subN]);if(subN===8)toHero();}   /* the Granite line moves to the hero, whose card it reads out */
+    if(step===11){const on=k=>{const e=end.querySelector('.fs[data-k="'+k+'"]');if(e)e.classList.add('on');};if(subN===1)on(1);if(subN===2)on(2);if(subN===4)on(3);}
   }
   const stepEl=$('#pitch-step');
   new MutationObserver(()=>{const m=/^(\d+)\s*\//.exec(stepEl.textContent.trim());if(m)onStep(+m[1]-1);}).observe(stepEl,{childList:true,characterData:true,subtree:true});
