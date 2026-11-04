@@ -102,14 +102,15 @@ module.exports = async function handler(req, res) {
     lines = (Array.isArray(lines) ? lines : []).map((x) => String(x || '').trim().slice(0, 600)).filter(Boolean).slice(0, 12);
     const vk = VOICES[q.voices] ? q.voices : 'eric', model = /^elevenlabs\/[a-z0-9.-]+$/.test(String(q.model || '')) ? q.model : MODEL;
     const speed = Math.min(1.2, Math.max(0.7, Number(q.speed) || 1));
+    const vid = /^[A-Za-z0-9]{20}$/.test(String(q.voice_id || '')) ? String(q.voice_id) : VOICES[vk];   // any ElevenLabs voice, to try one out
     if (!lines.length) return json(res, 400, { ok: false, error: 'lines' });
     if (!(await takeChars(lines.reduce((n, x) => n + x.length, 0)))) return json(res, 429, { ok: false, error: 'cap' });
     const out = await Promise.all(lines.map(async (text, i) => {
-      try { const r = await speak(text, VOICES[vk], auth, model, speed); return { i, ok: true, ms: r.ms, bytes: r.audio.length, warnings: r.warnings, b64: r.audio.toString('base64') }; }
+      try { const r = await speak(text, vid, auth, model, speed); return { i, ok: true, ms: r.ms, bytes: r.audio.length, warnings: r.warnings, b64: r.audio.toString('base64') }; }
       catch (e) { return { i, ok: false, status: e.status || null, detail: String(e.text || e.message).slice(0, 300) }; }
     }));
-    console.log('voice: batch ' + JSON.stringify({ model, voice: vk, speed, lines: lines.length, ok: out.filter((x) => x.ok).length }));
-    return json(res, out.every((x) => x.ok) ? 200 : 502, { ok: out.every((x) => x.ok), model, voice: vk, speed, lines: out });
+    console.log('voice: batch ' + JSON.stringify({ model, voice: vid === VOICES[vk] ? vk : vid, speed, lines: lines.length, ok: out.filter((x) => x.ok).length }));
+    return json(res, out.every((x) => x.ok) ? 200 : 502, { ok: out.every((x) => x.ok), model, voice: vid === VOICES[vk] ? vk : vid, speed, lines: out });
   }
   if (q.selftest) {
     if (!same(String(q.code || ''), process.env.DEMO_BUILDER_CODE || '')) return json(res, 403, { ok: false, error: 'code' });
