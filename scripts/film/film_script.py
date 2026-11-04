@@ -66,12 +66,17 @@ def clock(l):
 out = []; report = []
 for st in STEPS:
     l = man[st['n']]; D = (int(round(l['dur'] * 1000)) - 60) / 1000; t = clock(l); text = l['text']
-    # say: each comma-sized piece starts where its first word is spoken
-    say = ''; o = 0
-    for piece in re.split(r'(?<=[,:;.!?])\s+', text):
-        k = text.index(piece, o); o = k + len(piece)
-        say += ' ' * max(0, int(round(R * t(k))) - len(say)) + piece
+    # say: every word starts where it is spoken, and each action's phrase becomes a marker just before its first word
+    phrases = re.findall(r"at\('([^']+)'\)", st['run']); mark = {}; run = st['run']
+    for i, p in enumerate(phrases):
+        k = text.find(p); assert k >= 0, ('anchor not in the line', st['n'], p)
+        mark[k] = '§%d§' % i; run = run.replace("at('%s')" % p, "at('§%d§')" % i, 1)
+    say = ''
+    for m_ in re.finditer(r'\S+', text):
+        k = m_.start(); pos = int(round(R * t(k))); mk = mark.get(k, '')
+        say += ' ' * max(1 if say else 0, pos - len(mk) - len(say)) + mk + m_.group()
     say += ' ' * max(0, int(round(R * D)) - len(say))
+    st = dict(st, run=run)
     # captions: each one shows when its first word is spoken
     starts = []; o = 0
     for h in st['subs']:
@@ -81,8 +86,8 @@ for st in STEPS:
     for h, a, b in zip(st['subs'], starts, ends):
         n = max(len(vis(h)), int(round(R * b)) - tot) if b < D else max(len(vis(h)), int(round(R * D)) - tot)
         subs.append(h + ' ' * (n - len(vis(h)))); tot += n
-    for p in re.findall(r"at\('([^']+)'\)", st['run']):
-        k = say.find(p); assert k >= 0, ('anchor not in say', st['n'], p)
+    for i, p in enumerate(phrases):
+        k = say.find('§%d§' % i); assert k >= 0, ('marker not in say', st['n'], p)
         report.append(f"  {st['n']:2d} {p!r:32s} at {k / len(say) * D:5.2f}s (spoken {t(text.index(p)):5.2f}s)")
     out.append("    {n:%d,act:%d,%sdur:%d,\n      say:'%s',\n      subs:[%s],\n      run:%s}" % (
         st['n'], st['act'], st['extra'], int(round(D * 1000)), js(say), ','.join("'" + js(x) + "'" for x in subs), st['run']))
