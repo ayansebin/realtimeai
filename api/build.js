@@ -4,20 +4,25 @@
 //   GET  /api/build?status=1   whether building is switched on (no secrets)
 //   GET  /api/build?id=ID      one saved demo, by its share id
 //   GET  /api/build?key=KEY    the saved demos for the site owner, newest first (KEY is CONTACT_KEY)
-//   GET  /api/build?selftest=1&code=CODE  one quick low-effort build through the same path, as JSON (counts toward the cap)
+//   GET  /api/build?selftest=1&code=CODE[&effort=LEVEL&fast=1]  one test build through the same path, as JSON (low effort
+//        unless asked; counts toward the cap). Every run also logs one line with its timings and token use.
 // Environment: DEMO_BUILDER_CODE (the sellers' access code) switches building on. The model is reached through Vercel AI
 //   Gateway with the deployment's own OIDC token (or AI_GATEWAY_API_KEY), so no model key is stored; with ANTHROPIC_API_KEY
 //   set, calls go straight to Anthropic instead. Through the gateway the Vercel team needs a card on file and purchased
 //   AI Gateway Credits: the free monthly credit covers only some models.
 //   Optional: DEMO_DAILY_CAP (builds a day, default 80), DEMO_MODEL (default anthropic/claude-opus-5.5 through the gateway,
-//   claude-opus-5-5 direct), DEMO_EFFORT (default max), DEMO_DEADLINE_S (seconds before a build gives up, default 290),
-//   ANTHROPIC_BASE_URL (for tests).
+//   claude-opus-5-5 direct), DEMO_EFFORT (default max), DEMO_FAST (1 for the gateway's fast mode), DEMO_DEADLINE_S
+//   (seconds before a build gives up, default 290), ANTHROPIC_BASE_URL (for tests).
 const crypto = require('crypto');
 const { put, list, get } = require('@vercel/blob');
 
 const DIRECT = !!process.env.ANTHROPIC_API_KEY;   // an Anthropic key goes straight to Anthropic, otherwise Vercel AI Gateway
 const MODEL = process.env.DEMO_MODEL || (DIRECT ? 'claude-opus-5-5' : 'anthropic/claude-opus-5.5');
 const EFFORT = process.env.DEMO_EFFORT || 'max';
+const LEVELS = ['low', 'medium', 'high', 'xhigh', 'max'];
+/* fast mode: the same model on the gateway's faster serving path (about 2.5x the output speed, twice the token price),
+   falling back to standard speed when the fast tier is busy */
+const FAST = !DIRECT && /^(1|true|on|yes)$/i.test(process.env.DEMO_FAST || '');
 const CAP = Math.max(1, parseInt(process.env.DEMO_DAILY_CAP || '80', 10) || 80);
 const DEADLINE = Math.max(30, parseInt(process.env.DEMO_DEADLINE_S || '290', 10) || 290) * 1000;
 const API = (process.env.ANTHROPIC_BASE_URL || (DIRECT ? 'https://api.anthropic.com' : 'https://ai-gateway.vercel.sh')).replace(/\/+$/, '');
@@ -243,7 +248,7 @@ async function* claude(body, signal, who) {
 }
 
 /* one model run: the full request first, then lighter variants if the endpoint rejects an option before anything streams */
-async function run(b, effort, who, signal, emit) {
+async function run(b, effort, who, signal, emit, fast) {
   const req0 = {
     model: MODEL, max_tokens: 64000, stream: true,
     system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
@@ -251,6 +256,8 @@ async function run(b, effort, who, signal, emit) {
     thinking: { type: 'adaptive', display: 'summarized' },
     output_config: { effort, format: { type: 'json_schema', schema: SCHEMA } }
   };
+  if (fast && !DIRECT) req0.providerOptions = { gateway: { speed: 'fast' } };
+  const T0 = Date.now(), t = { first: 0, text: 0, end: 0 };
   const plain = { role: 'user', content: brief(b) + '\n\nReturn only the JSON object, with no other text.' };
   const variants = [req0,
     Object.assign({}, req0, { thinking: { type: 'adaptive' } }),
@@ -260,8 +267,9 @@ async function run(b, effort, who, signal, emit) {
   for (let v = 0; v < variants.length && !started; v++) {
     try {
       for await (const ev of claude(variants[v], signal, who)) {
+        if (!started) t.first = Date.now() - T0;
         started = true; used = v; const d = ev.data;
-        if (d.type === 'content_block_start' && d.content_block && d.content_block.type === 'text' && !text) emit('status', { step: 'writing', msg: 'Writing the story, the data and the narration' });
+        if (d.type === 'content_block_start' && d.content_block && d.content_block.type === 'text' && !text) { if (!t.text) t.text = Date.now() - T0; emit('status', { step: 'writing', msg: 'Writing the story, the data and the narration' }); }
         else if (d.type === 'content_block_delta' && d.delta) {
           if (d.delta.type === 'thinking_delta' && d.delta.thinking) {
             thinking += d.delta.thinking;
@@ -283,7 +291,13 @@ async function run(b, effort, who, signal, emit) {
       if (!retry) break;
     }
   }
-  return { text, thinking, stop, usage, used, err };
+  t.end = Date.now() - T0;
+  return { text, thinking, stop, usage, used, err, t };
+}
+/* one line per model run in the function logs, so build times and token use can be read back */
+function logRun(kind, effort, fast, r, aborted) {
+  console.log('build: ' + kind + ' ' + JSON.stringify({ effort, fast: !!fast, ok: !r.err, aborted: !!aborted, status: (r.err && r.err.status) || null,
+    stop: r.stop, t: r.t, thinking_chars: r.thinking.length, text_chars: r.text.length, usage: r.usage }));
 }
 /* AI Gateway refusals, from its FAQ: 403 customer_verification_required = no card on file; 403 naming the free tier = the model
    needs purchased credits (the free monthly credit covers only some models); 402 = no balance; 402 quota_for_entity_exceeded = a budget */
@@ -310,9 +324,10 @@ async function build(req, res, b, ip) {
   const timer = setTimeout(() => ac.abort(), DEADLINE);
   const finish = () => { clearInterval(ping); clearTimeout(timer); try { res.end(); } catch (e) {} };
 
-  const effort = ['low', 'medium', 'high', 'xhigh', 'max'].includes(b.effort) && b.effort !== 'max' ? b.effort : EFFORT;
+  const effort = LEVELS.includes(b.effort) && b.effort !== 'max' ? b.effort : EFFORT;
   emit('status', { step: 'start', msg: 'Claude Opus 5.5 is reading your brief', model: MODEL, effort });
-  const r = await run(b, effort, auth(req), ac.signal, emit);
+  const r = await run(b, effort, auth(req), ac.signal, emit, FAST);
+  logRun('build', effort, FAST, r, ac.signal.aborted);
   const { text, thinking, stop, usage, used, err } = r;
   if (thinking) emit('thinking', { text: thinking.slice(-1600) });
   const ms = Date.now() - t0;
@@ -336,17 +351,19 @@ module.exports = async function handler(req, res) {
   const ready = !!process.env.DEMO_BUILDER_CODE && !!auth(req);
   if (req.method === 'GET') {
     const q = req.query || Object.fromEntries(new URL(req.url, 'http://local').searchParams);
-    if (q.status) return send(res, 200, { ok: true, ready, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, effort: EFFORT, store: blobOn() });
+    if (q.status) return send(res, 200, { ok: true, ready, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, effort: EFFORT, fast: FAST, store: blobOn() });
     if (q.selftest) {
       if (!ready) return send(res, 503, { ok: false, error: 'off' });
       if (!same(clean(q.code, LIMIT.code), process.env.DEMO_BUILDER_CODE)) return send(res, 403, { ok: false, error: 'code' });
       const cap = await takeBuild(); if (!cap.ok) return send(res, 429, { ok: false, error: 'cap' });
       const t0 = Date.now(), ac = new AbortController(), timer = setTimeout(() => ac.abort(), DEADLINE);
       const tb = { mode: 'questions', fields: { client: 'A regional grocery chain', industry: 'Retail', usecase: 'Demand forecasting', pain: 'Hot weekends empty the cold drinks aisle by noon, and the nightly forecast only sees it the next morning.' }, audience: 'Line of business leader', tone: 'Plain and concise', length: '1 minute' };
-      const r = await run(tb, q.effort === 'max' ? 'max' : 'low', auth(req), ac.signal, () => {}); clearTimeout(timer);
-      if (r.err) return send(res, 502, { ok: false, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, error: errorFor(r.err, ac.signal.aborted).code, status: r.err.status || null, detail: String(r.err.text || r.err.message || '').slice(0, 400) });
+      const effort = LEVELS.includes(q.effort) ? q.effort : 'low', fast = q.fast != null ? /^(1|true|on|yes)$/i.test(String(q.fast)) && !DIRECT : FAST;
+      const r = await run(tb, effort, auth(req), ac.signal, () => {}, fast); clearTimeout(timer);
+      logRun('selftest', effort, fast, r, ac.signal.aborted);
+      if (r.err) return send(res, 502, { ok: false, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, effort, fast, t: r.t, error: errorFor(r.err, ac.signal.aborted).code, status: r.err.status || null, detail: String(r.err.text || r.err.message || '').slice(0, 400) });
       let spec = null, parse = null; try { spec = tidy(parseSpec(r.text)); } catch (e) { parse = e.message; }
-      return send(res, 200, { ok: !!spec, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, variant: r.used, ms: Date.now() - t0, stop: r.stop, usage: r.usage, thinking_chars: r.thinking.length, parse, title: spec && spec.title, steps: spec && spec.steps.length });
+      return send(res, 200, { ok: !!spec, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, effort, fast, variant: r.used, ms: Date.now() - t0, t: r.t, stop: r.stop, usage: r.usage, thinking_chars: r.thinking.length, parse, title: spec && spec.title, steps: spec && spec.steps.length });
     }
     if (q.id) {
       if (!/^[a-z0-9]{10}$/.test(String(q.id))) return send(res, 404, { ok: false });
