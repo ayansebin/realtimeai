@@ -4,6 +4,8 @@
 //        text to speech service. Each line is generated once per voice and model, kept in Vercel Blob, and served from
 //        the cache after that; n and h only change the address when the text changes, so browsers and the CDN can keep it.
 //   GET /api/voice?selftest=1&code=CODE[&voices=a,b&model=M&b64=1]  one sample line per voice, as JSON (b64=1 adds the audio)
+//   GET /api/voice?selftest=1&code=CODE&lines=["..."]&voices=eric&speed=0.8  up to 12 lines in one voice, with the audio
+//        as base64, for the site's own films (scripts/film/genfilm.py with FILM_ENGINE=eleven)
 // Environment: DEMO_VOICE_MODEL (default elevenlabs/eleven-v4), DEMO_VOICE_DAILY_CHARS (characters generated a day,
 //   default 400000). Auth as in api/build.js: AI_GATEWAY_API_KEY or the deployment's OIDC token.
 const crypto = require('crypto');
@@ -40,12 +42,12 @@ async function readBlob(pathname, asJSON) {
 }
 
 /* one line of speech through the gateway's speech endpoint */
-async function speak(text, voice, auth, model) {
+async function speak(text, voice, auth, model, speed) {
   const t0 = Date.now();
   const r = await fetch(GATEWAY + '/v4/ai/speech-model', {
     method: 'POST',
     headers: Object.assign({ 'ai-gateway-protocol-version': '0.0.1', 'ai-speech-model-specification-version': '4', 'ai-model-id': model || MODEL, 'content-type': 'application/json' }, auth),
-    body: JSON.stringify({ text, voice, outputFormat: 'mp3' })
+    body: JSON.stringify(Object.assign({ text, voice, outputFormat: 'mp3' }, speed && speed !== 1 ? { speed } : {}))
   });
   const raw = await r.text();
   if (!r.ok) { const e = new Error('speech ' + r.status + ': ' + raw.slice(0, 300)); e.status = r.status; e.text = raw; throw e; }
@@ -93,6 +95,22 @@ module.exports = async function handler(req, res) {
   if (!auth) return json(res, 503, { ok: false, error: 'off' });
   const ip = String((req.headers && (req.headers['x-forwarded-for'] || req.headers['x-real-ip'])) || '').split(',')[0].trim();
 
+  if (q.selftest && q.lines) {
+    /* a batch of lines in one voice, for the site's own films: lines is a JSON list of strings, speed 0.7 to 1.2 */
+    if (!same(String(q.code || ''), process.env.DEMO_BUILDER_CODE || '')) return json(res, 403, { ok: false, error: 'code' });
+    let lines = []; try { lines = JSON.parse(String(q.lines)); } catch (e) {}
+    lines = (Array.isArray(lines) ? lines : []).map((x) => String(x || '').trim().slice(0, 600)).filter(Boolean).slice(0, 12);
+    const vk = VOICES[q.voices] ? q.voices : 'eric', model = /^elevenlabs\/[a-z0-9.-]+$/.test(String(q.model || '')) ? q.model : MODEL;
+    const speed = Math.min(1.2, Math.max(0.7, Number(q.speed) || 1));
+    if (!lines.length) return json(res, 400, { ok: false, error: 'lines' });
+    if (!(await takeChars(lines.reduce((n, x) => n + x.length, 0)))) return json(res, 429, { ok: false, error: 'cap' });
+    const out = await Promise.all(lines.map(async (text, i) => {
+      try { const r = await speak(text, VOICES[vk], auth, model, speed); return { i, ok: true, ms: r.ms, bytes: r.audio.length, warnings: r.warnings, b64: r.audio.toString('base64') }; }
+      catch (e) { return { i, ok: false, status: e.status || null, detail: String(e.text || e.message).slice(0, 300) }; }
+    }));
+    console.log('voice: batch ' + JSON.stringify({ model, voice: vk, speed, lines: lines.length, ok: out.filter((x) => x.ok).length }));
+    return json(res, out.every((x) => x.ok) ? 200 : 502, { ok: out.every((x) => x.ok), model, voice: vk, speed, lines: out });
+  }
   if (q.selftest) {
     if (!same(String(q.code || ''), process.env.DEMO_BUILDER_CODE || '')) return json(res, 403, { ok: false, error: 'code' });
     const line = String(q.text || 'Every hot weekend, the cold drinks aisle is empty by noon. With IBM Granite running inside Confluent, the store sees it coming and moves the order before the shelf runs out.').slice(0, 400);
