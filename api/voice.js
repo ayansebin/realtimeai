@@ -4,13 +4,15 @@
 //        text to speech service. Each line is generated once per voice and model, kept in Vercel Blob, and served from
 //        the cache after that; n and h only change the address when the text changes, so browsers and the CDN can keep it.
 //   GET /api/voice?selftest=1&code=CODE[&voices=a,b&model=M&b64=1]  one sample line per voice, as JSON (b64=1 adds the audio)
-// Environment: DEMO_VOICE_MODEL (default elevenlabs/eleven-v3), DEMO_VOICE_DAILY_CHARS (characters generated a day,
+// Environment: DEMO_VOICE_MODEL (default elevenlabs/eleven-v4), DEMO_VOICE_DAILY_CHARS (characters generated a day,
 //   default 400000). Auth as in api/build.js: AI_GATEWAY_API_KEY or the deployment's OIDC token.
 const crypto = require('crypto');
 const { put, get } = require('@vercel/blob');
 const EXAMPLES = require('../data/builder/examples.json');
 
-const MODEL = process.env.DEMO_VOICE_MODEL || 'elevenlabs/eleven-v3';
+/* Eleven v4 by default: ElevenLabs' newest model; through the gateway a 170 character line took about 3 s (v3 5 s,
+   v4 Turbo 2 s, Multilingual v2 1.3 s) */
+const MODEL = process.env.DEMO_VOICE_MODEL || 'elevenlabs/eleven-v4';
 const GATEWAY = (process.env.VOICE_BASE_URL || 'https://ai-gateway.vercel.sh').replace(/\/+$/, '');   // VOICE_BASE_URL is for tests
 const CAP = Math.max(1000, parseInt(process.env.DEMO_VOICE_DAILY_CHARS || '400000', 10) || 400000);
 /* ElevenLabs default voices, chosen for narration; the key is what the demo and the player use */
