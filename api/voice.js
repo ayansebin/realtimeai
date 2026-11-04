@@ -109,7 +109,7 @@ module.exports = async function handler(req, res) {
   }
 
   /* one step of one demo */
-  const d = String(q.d || ''), phase = String(q.p || ''), vk = VOICES[q.v] ? q.v : 'bella';
+  const d = String(q.d || ''), phase = String(q.p || ''), vk = VOICES[q.v] ? q.v : 'eric';
   if (!PHASES.includes(phase)) return json(res, 404, { ok: false });
   let spec = null;
   const ex = EXAMPLES.find((x) => x.id === d);

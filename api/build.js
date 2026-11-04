@@ -42,7 +42,7 @@ function auth(req) {
 }
 const PHASES = ['intro', 'signal', 'forecast', 'context', 'anomaly', 'decision', 'stream', 'outcome', 'close'];
 const MODELS = ['TTM', 'FlowState', 'PatchTST-FM', 'TSPulse'];
-const VOICES = ['bella', 'sarah', 'matilda', 'alice', 'brian', 'eric', 'george'];   // ElevenLabs narrators, see api/voice.js
+const VOICES = ['eric', 'bella', 'sarah', 'matilda', 'alice', 'brian', 'george'];   // ElevenLabs narrators, see api/voice.js
 const LIMIT = { client: 160, industry: 80, usecase: 80, pain: 900, data: 600, decision: 600, audience: 60, tone: 60, length: 30, prompt: 3000, code: 120 };
 
 /* ---------------------------------------------------------------- what Opus fills in */
@@ -114,7 +114,7 @@ THE DATA (it drives the chart, keep it realistic)
 - notes: 3 to 5 short talking points or objection answers for the seller. They are not narrated.
 - title under 60 characters, in the client's terms. subtitle one sentence. client: the client name the seller gave, else a short descriptor ("A national grocery chain"). persona: the role the demo speaks to. pain and outcome: one sentence each. tone: the tone you used. use_case: a short label.
 - model: the Granite model that fits best (TTM for forecasting at scale, FlowState for mixed sampling rates, PatchTST-FM for risk, limits and long history, TSPulse for anomalies, search and classification).
-- voice: the narrator who reads the say text aloud, an ElevenLabs voice: bella (warm American woman), sarah (calm American woman), matilda (friendly American woman), alice (clear British woman), brian (deep American man), eric (smooth American man), george (warm British man). Use bella unless the seller asks for another voice.
+- voice: the narrator who reads the say text aloud, an ElevenLabs voice: eric (smooth American man), bella (warm American woman), sarah (calm American woman), matilda (friendly American woman), alice (clear British woman), brian (deep American man), george (warm British man). Use eric unless the seller asks for another voice.
 
 If the brief is not about a business decision that time series data can inform, still design the closest sensible demo and say so in the notes. Never include personal data about real people.`;
 
@@ -200,7 +200,7 @@ function tidy(x) {
   const spec = {
     title: t(x.title, 90, 'A real-time decision, in the stream'), subtitle: t(x.subtitle, 200), client: t(x.client, 80, 'Your client'),
     industry: t(x.industry, 60), persona: t(x.persona, 80), pain: t(x.pain, 260), outcome: t(x.outcome, 260), tone: t(x.tone, 60), use_case: t(x.use_case, 60),
-    model: MODELS.includes(x.model) ? x.model : 'TTM', voice: VOICES.includes(x.voice) ? x.voice : 'bella',
+    model: MODELS.includes(x.model) ? x.model : 'TTM', voice: VOICES.includes(x.voice) ? x.voice : 'eric',
     signal: { name: t(sig.name, 70, 'Live signal'), unit: t(sig.unit, 16), source: t(sig.source, 60), topic: t(sig.topic, 60, 'events.live').toLowerCase().replace(/[^a-z0-9._-]/g, '.'),
       interval_minutes: clamp(sig.interval_minutes, 1, 1440, 15), pattern: ['daily', 'weekly', 'bursty', 'intermittent', 'trend', 'smooth'].includes(sig.pattern) ? sig.pattern : 'daily',
       base, swing: clamp(sig.swing, 0, 0.8, 0.25), noise: clamp(sig.noise, 0.005, 0.4, 0.08), decimals: Math.round(clamp(sig.decimals, 0, 2, 0)) },

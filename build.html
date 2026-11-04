@@ -792,9 +792,9 @@ const P=(function(){
 
   /* ---------- the voice: an ElevenLabs narrator through the site's AI Gateway, each line made once and cached on the server;
      this browser's own voice when a line cannot be fetched, or for a demo that only lives in its link */
-  const NARR=[['bella','Bella · warm, American'],['sarah','Sarah · calm, American'],['matilda','Matilda · friendly, American'],['alice','Alice · clear, British'],
-    ['brian','Brian · deep, American'],['eric','Eric · smooth, American'],['george','George · warm, British'],['browser','This browser\'s voice']];
-  const V={list:[],pick:null,on:store.get('rti-build-voice')!=='off',name:'bella',src:null,own:null,link:null};
+  const NARR=[['eric','Eric · smooth, American'],['bella','Bella · warm, American'],['sarah','Sarah · calm, American'],['matilda','Matilda · friendly, American'],
+    ['alice','Alice · clear, British'],['brian','Brian · deep, American'],['george','George · warm, British'],['browser','This browser\'s voice']];
+  const V={list:[],pick:null,on:store.get('rti-build-voice')!=='off',name:'eric',src:null,own:null,link:null};
   const synth=window.speechSynthesis,au=new Audio(),clips=new Map();au.preload='auto';
   function voices(){if(!synth)return;const all=synth.getVoices().filter(v=>/^en(-|_|$)/i.test(v.lang));
     const score=v=>{const n=v.name;let s=0;if(/natural|neural|online|premium|enhanced/i.test(n))s+=40;if(/Google US English/i.test(n))s+=30;if(/Samantha|Ava|Allison|Susan|Victoria|Karen|Moira|Tessa|Serena|Zira|Jenny|Aria|Libby|Sonia|Michelle|Emma|Joanna|Salli|Kendra|Nicky|Female/i.test(n))s+=25;
@@ -803,7 +803,7 @@ const P=(function(){
   if(synth){voices();synth.onvoiceschanged=voices;}
   const vsel=$('#c-vsel');vsel.innerHTML=NARR.map(([k,n])=>'<option value="'+k+'">'+esc(n)+'</option>').join('');
   /* the demo names its narrator; a choice made here is this viewer's own and wins */
-  function syncSel(){V.name=V.own||(spec&&spec.voice)||'bella';if(!NARR.some(x=>x[0]===V.name))V.name='bella';vsel.value=V.name;}
+  function syncSel(){V.name=V.own||(spec&&spec.voice)||'eric';if(!NARR.some(x=>x[0]===V.name))V.name='eric';vsel.value=V.name;}
   $('#c-voice').checked=V.on;
   $('#c-voice').addEventListener('change',e=>{V.on=e.target.checked;store.set('rti-build-voice',V.on?'on':'off');if(!V.on){hush();speakDone=true;}else if(playing)speak(i);});
   vsel.addEventListener('change',()=>{V.own=vsel.value;V.name=V.own;if(playing&&V.on){hush();speak(i);}else warm(i);});
@@ -860,7 +860,7 @@ const P=(function(){
 
   /* ---------- load a demo into the frame */
   function load(sp,src){
-    if(!spec||(sp.voice||'bella')!==(spec.voice||'bella'))V.own=V.link;   /* a new narrator from Claude wins over an earlier pick here */
+    if(!spec||(sp.voice||'eric')!==(spec.voice||'eric'))V.own=V.link;   /* a new narrator from Claude wins over an earlier pick here */
     V.src=src||null;spec=sp;steps=sp.steps.slice().sort((a,b)=>ORDER.indexOf(a.phase)-ORDER.indexOf(b.phase));series=makeSeries(sp);i=0;S=target(0);from=S;to=S;
     const g=sp.signal,fnName=has('anomaly')&&!has('context')?'AI_DETECT_ANOMALIES':'AI_FORECAST';
     $('#pf-label').innerHTML='<b>'+esc(sp.industry||'Demo')+'</b>'+esc(sp.client)+' · '+esc(sp.use_case);
@@ -886,7 +886,7 @@ const P=(function(){
   return {load,stop:()=>setPlaying(false),play:()=>setPlaying(true),
     warmAll:()=>{steps.forEach((_,j)=>clip(j).catch(()=>{}));},
     narrator:()=>V.name,linkVoice:v=>{if(NARR.some(x=>x[0]===v)){V.link=v;V.own=v;}},
-    ownVoice:()=>spec&&V.name!==(spec.voice||'bella')?V.name:null};
+    ownVoice:()=>spec&&V.name!==(spec.voice||'eric')?V.name:null};
 })();
 
 /* ================================================================ open, share, and links */
