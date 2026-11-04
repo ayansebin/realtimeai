@@ -1,224 +1,225 @@
 {
- "engine": "kokoro",
- "voice": "af_heart",
- "speed": 0.84,
- "slow": 0.8,
+ "engine": "elevenlabs",
+ "model": "elevenlabs/eleven-v4",
+ "voice": "eric",
+ "tempo": 0.8,
+ "gaps": 1.2,
  "lines": [
   {
    "n": 1,
    "file": "01.mp3",
-   "dur": 40.44,
+   "dur": 43.46,
    "lead": 0.6,
    "text": "Time series intelligence meets real-time context. Foundation models transformed how enterprises unlock value from unstructured data, with language models, chatbots and agents. The bigger prize is time series and streaming data, where the mission-critical decisions live, from production and demand planning to anomaly detection. IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, products and customers, efficient on standard servers, and learning as each event lands.",
    "segs": [
     {
      "text": "Time series intelligence meets real-time context.",
      "start": 0.6,
-     "end": 4.62
+     "end": 4.65
     },
     {
      "text": "Foundation models transformed how enterprises unlock value from unstructured data, with language models, chatbots and agents.",
-     "start": 5.07,
-     "end": 14.405
+     "start": 5.19,
+     "end": 15.35
     },
     {
      "text": "The bigger prize is time series and streaming data, where the mission-critical decisions live, from production and demand planning to anomaly detection.",
-     "start": 14.955,
-     "end": 25.085
+     "start": 16.01,
+     "end": 26.75
     },
     {
      "text": "IBM Granite Time Series models now run live inside Confluent, pretrained to scale across plants, stores, products and customers, efficient on standard servers, and learning as each event lands.",
-     "start": 25.685,
-     "end": 40.315
+     "start": 27.47,
+     "end": 43.34
     }
    ]
   },
   {
    "n": 2,
    "file": "02.mp3",
-   "dur": 10.01,
+   "dur": 11.23,
    "lead": 0.6,
    "text": "Take one store on a hot day. The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,",
    "segs": [
     {
      "text": "Take one store on a hot day.",
      "start": 0.6,
-     "end": 2.47
+     "end": 3.03
     },
     {
      "text": "The forecast reads the heat wave and sees the stockout coming, so the empty shelf is flagged in seconds,",
-     "start": 2.92,
-     "end": 9.9
+     "start": 3.57,
+     "end": 11.11
     }
    ]
   },
   {
    "n": 3,
    "file": "03.mp3",
-   "dur": 5.02,
+   "dur": 6.19,
    "lead": 0.15,
    "text": "and the next order is optimized to keep it full, while the decision still matters.",
    "segs": [
     {
      "text": "and the next order is optimized to keep it full, while the decision still matters.",
      "start": 0.15,
-     "end": 4.9
+     "end": 6.08
     }
    ]
   },
   {
    "n": 4,
    "file": "04.mp3",
-   "dur": 25.61,
+   "dur": 27.67,
    "lead": 1.1,
    "text": "That works because the intelligence lives where the data already flows. When store sales stall, the event lands in a governed Confluent topic, joins the live weather stream, and Granite forecasts it inside Flink. The shelf check goes out in under a second, while the usual way copies, trains and scores in a nightly batch, and is still a day behind.",
    "segs": [
     {
      "text": "That works because the intelligence lives where the data already flows.",
      "start": 1.1,
-     "end": 5.5
+     "end": 6.07
     },
     {
      "text": "When store sales stall, the event lands in a governed Confluent topic, joins the live weather stream, and Granite forecasts it inside Flink.",
-     "start": 6.0,
-     "end": 15.86
+     "start": 6.67,
+     "end": 16.88
     },
     {
      "text": "The shelf check goes out in under a second, while the usual way copies, trains and scores in a nightly batch, and is still a day behind.",
-     "start": 16.36,
-     "end": 25.5
+     "start": 17.48,
+     "end": 27.55
     }
    ]
   },
   {
    "n": 5,
    "file": "05.mp3",
-   "dur": 17.28,
+   "dur": 19.49,
    "lead": 1.1,
    "text": "So your teams get to value ten times faster, with one universal model and a lower skills barrier. Transfer and continuous learning optimize decisions with millions in savings, and decision time drops from days to seconds.",
    "segs": [
     {
      "text": "So your teams get to value ten times faster, with one universal model and a lower skills barrier.",
      "start": 1.1,
-     "end": 7.72
+     "end": 9.03
     },
     {
      "text": "Transfer and continuous learning optimize decisions with millions in savings, and decision time drops from days to seconds.",
-     "start": 8.22,
-     "end": 17.165
+     "start": 9.63,
+     "end": 19.36
     }
    ]
   },
   {
    "n": 6,
    "file": "06.mp3",
-   "dur": 16.08,
+   "dur": 17.21,
    "lead": 1.1,
    "text": "Time series models optimize mission-critical decisions as each event lands. On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.",
    "segs": [
     {
      "text": "Time series models optimize mission-critical decisions as each event lands.",
      "start": 1.1,
-     "end": 6.56
+     "end": 6.97
     },
     {
      "text": "On a chocolate line, temper is forecast on every reading, so setpoints adjust before a new cocoa butter lot turns into rework.",
-     "start": 7.06,
-     "end": 15.95
+     "start": 7.57,
+     "end": 17.1
     }
    ]
   },
   {
    "n": 7,
    "file": "07.mp3",
-   "dur": 10.1,
+   "dur": 11.33,
    "lead": 1.0,
    "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.",
    "segs": [
     {
      "text": "Across thousands of signals, each series gets its own expected band, so weekend peaks pass and only the real breaks are flagged.",
      "start": 1.0,
-     "end": 9.98
+     "end": 11.21
     }
    ]
   },
   {
    "n": 8,
    "file": "08.mp3",
-   "dur": 8.21,
+   "dur": 9.72,
    "lead": 1.0,
    "text": "In retail, one model forecasts every product in every store and reorders at the service level you choose.",
    "segs": [
     {
      "text": "In retail, one model forecasts every product in every store and reorders at the service level you choose.",
      "start": 1.0,
-     "end": 8.08
+     "end": 9.61
     }
    ]
   },
   {
    "n": 9,
    "file": "09.mp3",
-   "dur": 9.72,
+   "dur": 10.44,
    "lead": 1.0,
    "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.",
    "segs": [
     {
      "text": "In payments, each card is scored against its own normal before authorization, so card testing is held and travelers get through.",
      "start": 1.0,
-     "end": 9.605
+     "end": 10.31
     }
    ]
   },
   {
    "n": 10,
    "file": "10.mp3",
-   "dur": 7.66,
+   "dur": 8.69,
    "lead": 1.0,
    "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this.",
    "segs": [
     {
      "text": "Years of history become searchable by shape, so one sketch finds every signal that looked like this.",
      "start": 1.0,
-     "end": 7.54
+     "end": 8.56
     }
    ]
   },
   {
    "n": 11,
    "file": "11.mp3",
-   "dur": 7.87,
+   "dur": 8.23,
    "lead": 1.0,
    "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market.",
    "segs": [
     {
      "text": "On the trading desk, a volume forecast with a probability band paces large orders to the market.",
      "start": 1.0,
-     "end": 7.76
+     "end": 8.11
     }
    ]
   },
   {
    "n": 13,
    "file": "13.mp3",
-   "dur": 13.85,
+   "dur": 15.05,
    "lead": 1.1,
    "text": "Try the models in the playground. Run them on Confluent Cloud. Then bring us a stream and a decision, and we will co-innovate with you to bring real-time intelligence to your enterprise.",
    "segs": [
     {
      "text": "Try the models in the playground.",
      "start": 1.1,
-     "end": 3.17
+     "end": 3.02
     },
     {
      "text": "Run them on Confluent Cloud.",
-     "start": 3.51,
-     "end": 5.6
+     "start": 3.428,
+     "end": 5.658
     },
     {
      "text": "Then bring us a stream and a decision, and we will co-innovate with you to bring real-time intelligence to your enterprise.",
-     "start": 6.2,
-     "end": 13.725
+     "start": 6.378,
+     "end": 14.928
     }
    ]
   }
