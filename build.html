@@ -635,7 +635,7 @@ async function send(text,retry){
       else if(ev==='building'){endThink();o.txt.classList.remove('caret');demoCard(o,'Building the demo',d.steps?'Writing step '+d.steps:'Laying out the story',true);stageBusy(true,d.steps||0);scrollDown();}
       else if(ev==='reset'){reply='';o.txt.innerHTML='';const c=$('.dcard',o.el);if(c)c.remove();note(o,d.msg||'Trying that again');stageBusy(false);}
       else if(ev==='demo'){gotDemo=true;S.spec=d.spec;S.version=d.version||S.version+1;if(d.id)S.id=d.id;if(d.key)S.key=d.key;S.example=null;ver=S.version;title=d.spec.title;
-        const n=$('.note',o.el);if(n)n.remove();demoCard(o,'Version '+ver,title,false);stageBusy(false);openDemo(d.spec,{version:ver,fresh:true});flagDemo();persist();}
+        const n=$('.note',o.el);if(n)n.remove();demoCard(o,'Version '+ver,title,false);stageBusy(false);openDemo(d.spec,{version:ver,fresh:true,src:S.id?{d:S.id,n:ver}:null});flagDemo();persist();}
       else if(ev==='error'){fail(d.msg||'Something went wrong on my side. Send it again.');}
     }
     if(!failed&&!reply&&!gotDemo)fail('The connection closed before I finished. Send it again.');
@@ -659,7 +659,7 @@ function stageBusy(on,steps){
 function useExample(id){const x=examples.find(y=>y.id===id);if(!x)return;
   S.spec=x.spec;S.version=0;S.id=null;S.key=null;S.example=x.id;
   S.chat.push({role:'assistant',text:'This is an example to start from: **'+x.spec.title+'**. Tell me about your client and I will rework it for them, or ask me to change anything.',demo:'example',title:x.spec.title});
-  persist();render();openDemo(x.spec,{example:x.id});showDemo();}
+  persist();render();openDemo(x.spec,{example:x.id,src:{d:x.id,n:0}});showDemo();}
 $('#new').addEventListener('click',()=>{if(ctl)ctl.abort();P.stop();S=fresh();persist();$('#player').hidden=true;$('#empty').hidden=false;$('#ghost').hidden=true;document.title=BASE_TITLE;
   history.replaceState(null,'','/build');render();setView('chat');msg.focus();});
 
@@ -790,25 +790,47 @@ const P=(function(){
   const kick=()=>{if(!raf)raf=requestAnimationFrame(frameLoop);};
   new ResizeObserver(()=>{draw();}).observe(frame);
 
-  /* ---------- the voice: the most natural voice this browser has, a woman's voice first */
-  const V={list:[],pick:null,on:store.get('rti-build-voice')!=='off'};
-  const synth=window.speechSynthesis;
+  /* ---------- the voice: an ElevenLabs narrator through the site's AI Gateway, each line made once and cached on the server;
+     this browser's own voice when a line cannot be fetched, or for a demo that only lives in its link */
+  const NARR=[['bella','Bella · warm, American'],['sarah','Sarah · calm, American'],['matilda','Matilda · friendly, American'],['alice','Alice · clear, British'],
+    ['brian','Brian · deep, American'],['eric','Eric · smooth, American'],['george','George · warm, British'],['browser','This browser\'s voice']];
+  const V={list:[],pick:null,on:store.get('rti-build-voice')!=='off',name:'bella',src:null,own:store.get('rti-build-narrator')||null};
+  const synth=window.speechSynthesis,au=new Audio(),clips=new Map();au.preload='auto';
   function voices(){if(!synth)return;const all=synth.getVoices().filter(v=>/^en(-|_|$)/i.test(v.lang));
     const score=v=>{const n=v.name;let s=0;if(/natural|neural|online|premium|enhanced/i.test(n))s+=40;if(/Google US English/i.test(n))s+=30;if(/Samantha|Ava|Allison|Susan|Victoria|Karen|Moira|Tessa|Serena|Zira|Jenny|Aria|Libby|Sonia|Michelle|Emma|Joanna|Salli|Kendra|Nicky|Female/i.test(n))s+=25;
       if(/Daniel|Alex\b|Fred|Tom\b|David|Mark|Guy|Ryan|Aaron|Arthur|Oliver|Thomas|Male|Rocko|Grandpa|Ralph|Albert|Bahh|Bells|Boing|Bubbles|Cellos|Wobble|Whisper|Zarvox|Trinoids|Jester|Organ|Superstar|Junior|Eddy|Reed|Sandy|Shelley/i.test(n))s-=30;if(/en-US/i.test(v.lang))s+=8;else if(/en-GB/i.test(v.lang))s+=4;if(v.localService===false)s+=4;return s;};
-    V.list=all.sort((a,b)=>score(b)-score(a));const saved=store.get('rti-build-vname');V.pick=V.list.find(v=>v.name===saved)||V.list[0]||null;
-    const sel=$('#c-vsel');sel.innerHTML=V.list.slice(0,24).map(v=>'<option'+(V.pick&&v.name===V.pick.name?' selected':'')+'>'+esc(v.name)+'</option>').join('')||'<option>Default voice</option>';}
-  if(synth){voices();synth.onvoiceschanged=voices;}else{$('#c-voice').checked=false;$('#c-voice').disabled=true;V.on=false;}
+    V.list=all.sort((a,b)=>score(b)-score(a));V.pick=V.list[0]||null;}
+  if(synth){voices();synth.onvoiceschanged=voices;}
+  const vsel=$('#c-vsel');vsel.innerHTML=NARR.map(([k,n])=>'<option value="'+k+'">'+esc(n)+'</option>').join('');
+  /* the demo names its narrator; a choice made here is this viewer's own and wins */
+  function syncSel(){V.name=V.own||(spec&&spec.voice)||'bella';if(!NARR.some(x=>x[0]===V.name))V.name='bella';vsel.value=V.name;}
   $('#c-voice').checked=V.on;
-  $('#c-voice').addEventListener('change',e=>{V.on=e.target.checked;store.set('rti-build-voice',V.on?'on':'off');if(!V.on){hush();speakDone=true;}else if(playing)say(steps[i].say);});
-  $('#c-vsel').addEventListener('change',e=>{V.pick=V.list.find(v=>v.name===e.target.value)||V.pick;store.set('rti-build-vname',V.pick?V.pick.name:'');if(playing&&V.on){hush();say(steps[i].say);}});
-  let gen=0;
-  function hush(){gen++;if(synth)synth.cancel();}
-  function say(text){hush();if(!V.on||!synth||!text){speakDone=true;return;}speakDone=false;const my=gen;
+  $('#c-voice').addEventListener('change',e=>{V.on=e.target.checked;store.set('rti-build-voice',V.on?'on':'off');if(!V.on){hush();speakDone=true;}else if(playing)speak(i);});
+  vsel.addEventListener('change',()=>{V.own=vsel.value;store.set('rti-build-narrator',V.own);V.name=V.own;if(playing&&V.on){hush();speak(i);}else warm(i);});
+  const fnv=t=>{let h=2166136261;for(let j=0;j<t.length;j++){h^=t.charCodeAt(j);h=Math.imul(h,16777619);}return (h>>>0).toString(36);};
+  function clipUrl(k){const s=steps[k];if(!s||!s.say||!V.src||!V.src.d||V.name==='browser')return null;
+    return '/api/voice?d='+encodeURIComponent(V.src.d)+'&n='+(V.src.n||0)+'&p='+s.phase+'&v='+V.name+'&h='+fnv(s.say.trim());}
+  function clip(k){const u=clipUrl(k);if(!u)return Promise.reject(new Error('no clip'));
+    if(!clips.has(u))clips.set(u,fetch(u).then(r=>{if(!r.ok||!/audio/.test(r.headers.get('content-type')||''))throw new Error('voice '+r.status);return r.blob();})
+      .then(b=>URL.createObjectURL(b)).catch(e=>{clips.delete(u);throw e;}));
+    return clips.get(u);}
+  function warm(k){for(let j=Math.max(0,k);j<Math.min(steps.length,k+2);j++)clip(j).catch(()=>{});}
+  let gen=0,unlocked=false;
+  /* a phone only lets a page play sound after a tap, so the first Play also plays a moment of silence */
+  function unlock(){if(unlocked)return;unlocked=true;try{au.src='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';const p=au.play();if(p&&p.catch)p.catch(()=>{});}catch(e){}}
+  function hush(){gen++;if(synth)synth.cancel();try{au.pause();}catch(e){}}
+  /* if a voice never reports the end of a line, the step still moves on */
+  const guard=(text,my,extra)=>setTimeout(()=>{if(my===gen&&!speakDone){speakDone=true;maybeAdvance();}},Math.max(4000,text.split(/\s+/).length*520+(extra||2500)));
+  function browserSay(text,my){if(!synth){speakDone=true;maybeAdvance();return;}guard(text,my);
     const parts=text.match(/[^.!?]+[.!?]*\s*/g)||[text];let k=0;
     const next=()=>{if(my!==gen)return;if(k>=parts.length){speakDone=true;maybeAdvance();return;}const u=new SpeechSynthesisUtterance(parts[k++].trim());if(V.pick){u.voice=V.pick;u.lang=V.pick.lang;}else u.lang='en-US';u.rate=.98;u.pitch=1;
       u.onend=()=>setTimeout(next,90);u.onerror=()=>setTimeout(next,90);synth.speak(u);};
     setTimeout(next,120);}
+  function speak(k){hush();const s=steps[k];if(!V.on||!s||!s.say){speakDone=true;return;}speakDone=false;const my=gen;
+    if(!clipUrl(k)){browserSay(s.say,my);return;}
+    clip(k).then(u=>{if(my!==gen)return;guard(s.say,my,6000);au.onended=()=>{if(my===gen){speakDone=true;maybeAdvance();}};au.onerror=()=>{if(my===gen)browserSay(s.say,my);};
+      au.src=u;const p=au.play();if(p&&p.catch)p.catch(()=>{if(my===gen)browserSay(s.say,my);});warm(k+1);})
+      .catch(()=>{if(my===gen)browserSay(s.say,my);});}
 
   /* ---------- steps */
   function setCap(t){cap.innerHTML=t?'<span>'+esc(t)+'</span>':'';}
@@ -822,14 +844,14 @@ const P=(function(){
     $$('#sdots button').forEach((b,j)=>{b.classList.toggle('on',j===k);b.classList.toggle('done',j<k);});
     $$('#script button').forEach((b,j)=>b.classList.toggle('on',j===k));
     stepT0=performance.now();
-    if(playing){say(s.say);timer=setTimeout(maybeAdvance,MIN[s.phase]||4500);}
+    if(playing){speak(k);timer=setTimeout(maybeAdvance,MIN[s.phase]||4500);}
     else hush();
   }
-  function maybeAdvance(){if(!playing)return;const s=steps[i];const words=(s.say||'').split(/\s+/).length,need=V.on&&synth?(MIN[s.phase]||4500):Math.max(MIN[s.phase]||4500,words*390);
+  function maybeAdvance(){if(!playing)return;const s=steps[i];const words=(s.say||'').split(/\s+/).length,need=V.on?(MIN[s.phase]||4500):Math.max(MIN[s.phase]||4500,words*390);
     const el=performance.now()-stepT0;if(!speakDone||el<need){clearTimeout(timer);timer=setTimeout(maybeAdvance,Math.max(150,need-el));return;}
     if(i>=steps.length-1){setPlaying(false);return;}clearTimeout(timer);timer=setTimeout(()=>{if(playing)go(i+1);},650);}
   function setPlaying(on){playing=on;const b=$('#c-play');b.innerHTML=on?'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10M11 3v10" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Pause</span>':'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg><span>'+(i>=steps.length-1&&steps.length?'Play again':'Play')+'</span>';
-    if(on){if(i>=steps.length-1)go(0);else{say(steps[i].say);stepT0=performance.now();clearTimeout(timer);timer=setTimeout(maybeAdvance,MIN[steps[i].phase]||4500);}}else{hush();clearTimeout(timer);}kick();}
+    if(on){unlock();if(i>=steps.length-1)go(0);else{speak(i);stepT0=performance.now();clearTimeout(timer);timer=setTimeout(maybeAdvance,MIN[steps[i].phase]||4500);}}else{hush();clearTimeout(timer);}kick();}
   $('#c-play').addEventListener('click',()=>setPlaying(!playing));
   $('#c-prev').addEventListener('click',()=>go(i-1));$('#c-next').addEventListener('click',()=>go(i+1));
   $('#c-full').addEventListener('click',()=>{const w=$('#pwrap');if(document.fullscreenElement)document.exitFullscreen();else if(w.requestFullscreen)w.requestFullscreen().catch(()=>{});});
@@ -837,8 +859,8 @@ const P=(function(){
     if(e.key===' '){e.preventDefault();setPlaying(!playing);}else if(e.key==='ArrowRight')go(i+1);else if(e.key==='ArrowLeft')go(i-1);else if(e.key==='f'||e.key==='F')$('#c-full').click();});
 
   /* ---------- load a demo into the frame */
-  function load(sp){
-    spec=sp;steps=sp.steps.slice().sort((a,b)=>ORDER.indexOf(a.phase)-ORDER.indexOf(b.phase));series=makeSeries(sp);i=0;S=target(0);from=S;to=S;
+  function load(sp,src){
+    V.src=src||null;spec=sp;steps=sp.steps.slice().sort((a,b)=>ORDER.indexOf(a.phase)-ORDER.indexOf(b.phase));series=makeSeries(sp);i=0;S=target(0);from=S;to=S;
     const g=sp.signal,fnName=has('anomaly')&&!has('context')?'AI_DETECT_ANOMALIES':'AI_FORECAST';
     $('#pf-label').innerHTML='<b>'+esc(sp.industry||'Demo')+'</b>'+esc(sp.client)+' · '+esc(sp.use_case);
     $('#vi-eye').textContent=[sp.client,sp.persona].filter(Boolean).join(' · ');$('#vi-title').textContent=sp.title;$('#vi-sub').textContent=sp.subtitle;$('#vi-pain').textContent=sp.pain;$('#vi-out').textContent=sp.outcome;
@@ -859,7 +881,7 @@ const P=(function(){
     $('#sdots').innerHTML=steps.map((s,j)=>'<button type="button" aria-label="Step '+(j+1)+': '+esc(s.title)+'" title="'+esc(s.title)+'"></button>').join('');$$('#sdots button').forEach((b,j)=>b.addEventListener('click',()=>go(j,{jump:true})));
     $('#script').innerHTML=steps.map((s,j)=>'<button type="button"><b>'+String(j+1).padStart(2,'0')+'</b><span><strong>'+esc(s.title)+'</strong>'+esc(s.say)+'</span></button>').join('');$$('#script button').forEach((b,j)=>b.addEventListener('click',()=>go(j,{jump:true})));
     $('#notes').innerHTML=(sp.notes&&sp.notes.length?sp.notes:['Lead with the client\'s pain, then the decision.']).map(n=>'<li>'+esc(n)+'</li>').join('');
-    setPlaying(false);go(0,{jump:true});}
+    setPlaying(false);go(0,{jump:true});syncSel();warm(0);}
   return {load,stop:()=>setPlaying(false),play:()=>setPlaying(true)};
 })();
 
@@ -872,7 +894,7 @@ function openDemo(spec,meta){meta=meta||{};
   $('#p-title').textContent=spec.title;$('#p-meta').textContent=[spec.client,spec.industry,spec.use_case,'IBM Granite '+spec.model,spec.tone].filter(Boolean).join(' · ');
   document.title=spec.title+' · Real-Time Intelligence';
   if(meta.id)history.replaceState(null,'','/build?d='+meta.id);else if(meta.example&&viewer)history.replaceState(null,'','/build?ex='+meta.example);
-  P.load(spec);
+  P.load(spec,meta.src||null);
   if(meta.fresh&&!isPhone())showDemo();}
 async function packed(spec){/* no store: the demo travels in the link itself */
   const raw=new TextEncoder().encode(JSON.stringify(spec));let bytes=raw,tag='j';
@@ -894,12 +916,12 @@ $('#share').addEventListener('click',async()=>{let url;
   const q=new URLSearchParams(location.search),had=restore();
   if(q.get('d')&&!(had&&S.id===q.get('d'))){
     document.body.classList.add('viewer');
-    try{const r=await fetch('/api/build?id='+encodeURIComponent(q.get('d')));const j=await r.json();if(j&&j.ok){viewing=j.id;openDemo(j.spec,{viewer:true,version:j.version});return;}}catch(e){}
+    try{const r=await fetch('/api/build?id='+encodeURIComponent(q.get('d')));const j=await r.json();if(j&&j.ok){viewing=j.id;openDemo(j.spec,{viewer:true,version:j.version,src:{d:j.id,n:j.version||1}});return;}}catch(e){}
     document.body.classList.remove('viewer');toast('That demo link was not found');history.replaceState(null,'','/build');}
-  else if(q.get('ex')&&examples.some(x=>x.id===q.get('ex'))){viewing=q.get('ex');openDemo(examples.find(x=>x.id===q.get('ex')).spec,{example:q.get('ex'),viewer:true});return;}
+  else if(q.get('ex')&&examples.some(x=>x.id===q.get('ex'))){viewing=q.get('ex');openDemo(examples.find(x=>x.id===q.get('ex')).spec,{example:q.get('ex'),viewer:true,src:{d:q.get('ex'),n:0}});return;}
   else if(/^#s=/.test(location.hash)){try{viewing='packed';openDemo(await unpack(location.hash.slice(3)),{viewer:true});return;}catch(e){viewing=null;toast('That demo link could not be read');}}
   render();
-  if(S.spec)openDemo(S.spec,{version:S.version,example:S.example});
+  if(S.spec)openDemo(S.spec,{version:S.version,example:S.example,src:S.id?{d:S.id,n:S.version}:S.example?{d:S.example,n:0}:null});
   grow();if(!isPhone())msg.focus();
 })();
 })();

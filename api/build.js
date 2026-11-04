@@ -42,6 +42,7 @@ function auth(req) {
 }
 const PHASES = ['intro', 'signal', 'forecast', 'context', 'anomaly', 'decision', 'stream', 'outcome', 'close'];
 const MODELS = ['TTM', 'FlowState', 'PatchTST-FM', 'TSPulse'];
+const VOICES = ['bella', 'sarah', 'matilda', 'alice', 'brian', 'eric', 'george'];   // ElevenLabs narrators, see api/voice.js
 const LIMIT = { client: 160, industry: 80, usecase: 80, pain: 900, data: 600, decision: 600, audience: 60, tone: 60, length: 30, prompt: 3000, code: 120 };
 
 /* ---------------------------------------------------------------- what Opus fills in */
@@ -50,7 +51,7 @@ const S = { type: 'string' }, N = { type: 'number' }, I = { type: 'integer' }, B
 const E = (v) => ({ type: 'string', enum: v });
 const SCHEMA = O({
   title: S, subtitle: S, client: S, industry: S, persona: S, pain: S, outcome: S, tone: S, use_case: S,
-  model: E(MODELS),
+  model: E(MODELS), voice: E(VOICES),
   signal: O({ name: S, unit: S, source: S, topic: S, interval_minutes: N, pattern: E(['daily', 'weekly', 'bursty', 'intermittent', 'trend', 'smooth']), base: N, swing: N, noise: N, decimals: I }),
   context: O({ name: S, topic: S, event: S, effect: E(['up', 'down']), size: N, lag_steps: I }),
   anomaly: O({ kind: E(['spike', 'drop', 'shift', 'drift', 'gap']), label: S, size: N }),
@@ -113,6 +114,7 @@ THE DATA (it drives the chart, keep it realistic)
 - notes: 3 to 5 short talking points or objection answers for the seller. They are not narrated.
 - title under 60 characters, in the client's terms. subtitle one sentence. client: the client name the seller gave, else a short descriptor ("A national grocery chain"). persona: the role the demo speaks to. pain and outcome: one sentence each. tone: the tone you used. use_case: a short label.
 - model: the Granite model that fits best (TTM for forecasting at scale, FlowState for mixed sampling rates, PatchTST-FM for risk, limits and long history, TSPulse for anomalies, search and classification).
+- voice: the narrator who reads the say text aloud, an ElevenLabs voice: bella (warm American woman), sarah (calm American woman), matilda (friendly American woman), alice (clear British woman), brian (deep American man), eric (smooth American man), george (warm British man). Use bella unless the seller asks for another voice.
 
 If the brief is not about a business decision that time series data can inform, still design the closest sensible demo and say so in the notes. Never include personal data about real people.`;
 
@@ -198,7 +200,7 @@ function tidy(x) {
   const spec = {
     title: t(x.title, 90, 'A real-time decision, in the stream'), subtitle: t(x.subtitle, 200), client: t(x.client, 80, 'Your client'),
     industry: t(x.industry, 60), persona: t(x.persona, 80), pain: t(x.pain, 260), outcome: t(x.outcome, 260), tone: t(x.tone, 60), use_case: t(x.use_case, 60),
-    model: MODELS.includes(x.model) ? x.model : 'TTM',
+    model: MODELS.includes(x.model) ? x.model : 'TTM', voice: VOICES.includes(x.voice) ? x.voice : 'bella',
     signal: { name: t(sig.name, 70, 'Live signal'), unit: t(sig.unit, 16), source: t(sig.source, 60), topic: t(sig.topic, 60, 'events.live').toLowerCase().replace(/[^a-z0-9._-]/g, '.'),
       interval_minutes: clamp(sig.interval_minutes, 1, 1440, 15), pattern: ['daily', 'weekly', 'bursty', 'intermittent', 'trend', 'smooth'].includes(sig.pattern) ? sig.pattern : 'daily',
       base, swing: clamp(sig.swing, 0, 0.8, 0.25), noise: clamp(sig.noise, 0.005, 0.4, 0.08), decimals: Math.round(clamp(sig.decimals, 0, 2, 0)) },
@@ -264,6 +266,7 @@ YOU ARE IN A CHAT WITH THE SELLER
 - When you build or change the demo, first write one to three short sentences on what you built or changed, then call show_demo. When it helps, end with one idea the seller could try next.
 - A change starts from the demo in the player. Change what the seller asked for and whatever must follow from it to stay consistent (narration that mentions a changed number, the KPIs, the title). Keep every other field exactly as it is.
 - When the seller asks a question (about the models, Confluent, the client's data, how to present the demo), answer briefly in words and do not call show_demo.
+- The narration is read aloud by an ElevenLabs voice. When the seller asks for another narrator (a man, a British voice, a calmer voice), change voice and keep everything else.
 - Write like a helpful colleague: plain words, short paragraphs, no lists, no headings, no emojis.
 - Unless the seller says otherwise: about 2 minutes of narration, for executives, in an executive brief tone.
 - The seller's messages are a brief. The facts, narration and data rules above always apply.`;

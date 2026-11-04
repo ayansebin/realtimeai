@@ -80,6 +80,9 @@
   "functions": {
     "api/build.js": {
       "maxDuration": 300
+    },
+    "api/voice.js": {
+      "maxDuration": 60
     }
   }
 }
