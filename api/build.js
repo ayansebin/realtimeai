@@ -447,6 +447,29 @@ module.exports = async function handler(req, res) {
   if (req.method === 'GET') {
     const q = req.query || Object.fromEntries(new URL(req.url, 'http://local').searchParams);
     if (q.status) return send(res, 200, { ok: true, ready, via, model: MODEL, effort: EFFORT, edit_effort: EDIT_EFFORT, fast: FAST, store: blobOn() });
+    if (q.selftest === 'sse') {
+      /* the full chat path as a browser sees it, saving included: a first version, then a change to the same conversation */
+      if (!ready) return send(res, 503, { ok: false, error: 'off' });
+      if (!same(clean(q.code, LIMIT.code), process.env.DEMO_BUILDER_CODE)) return send(res, 403, { ok: false, error: 'code' });
+      const cap = await takeBuild(); if (!cap.ok) return send(res, 429, { ok: false, error: 'cap' });
+      const T0 = Date.now();
+      const once = (body) => new Promise((done) => {
+        const out = [], t0 = Date.now(), fake = { statusCode: 0, writableEnded: false, setHeader() {}, flushHeaders() {}, on() {}, write(s) { out.push(s); return true; }, end() { this.writableEnded = true; done({ ms: Date.now() - t0, ev: out.join('').split('\n\n').filter((x) => x.startsWith('event:')).map((x) => { const i = x.indexOf('\ndata: '); return [x.slice(7, i), JSON.parse(x.slice(i + 7))]; }) }); } };
+        chatTurn({ headers: req.headers, on() {} }, fake, body, ip).catch((e) => done({ ms: Date.now() - t0, ev: [['error', { msg: e.message }]] }));
+      });
+      const sum = (r) => { const c = {}; r.ev.forEach(([e]) => { c[e] = (c[e] || 0) + 1; }); const d = (r.ev.find(([e]) => e === 'demo') || [])[1], er = (r.ev.find(([e]) => e === 'error') || [])[1];
+        return { ms: r.ms, events: c, reply: r.ev.filter(([e]) => e === 'text').map(([, x]) => x.d).join('').slice(0, 300), demo: d ? { id: d.id, key: !!d.key, version: d.version, title: d.spec.title, client: d.spec.client } : null, error: er || null }; };
+      const chat = [{ role: 'user', text: 'A card issuer wants to stop card testing before authorization, without blocking travelers. About one minute.' }];
+      const r1 = await once({ chat }), s1 = sum(r1), d1 = (r1.ev.find(([e]) => e === 'demo') || [])[1];
+      let s2 = null, back = null;
+      if (d1) {
+        chat.push({ role: 'assistant', text: s1.reply }, { role: 'user', text: 'Make the client Northwind Bank and make it for their fraud operations team.' });
+        const r2 = await once({ chat, spec: d1.spec, version: d1.version, id: d1.id, key: d1.key }); s2 = sum(r2);
+        if (d1.id) { const rec = await readJSON('builder/demos/' + d1.id + '.json'); back = rec ? { version: rec.version, client: rec.spec && rec.spec.client, messages: rec.chat && rec.chat.length } : null; }
+      }
+      const ok = !!(s1.demo && s2 && s2.demo && (!s1.demo.id || (s2.demo.id === s1.demo.id && back && back.version === s2.demo.version)));
+      return send(res, ok ? 200 : 502, { ok, ms: Date.now() - T0, turn1: s1, turn2: s2, stored: back, link: s1.demo && s1.demo.id ? 'https://realtimeintelligence.io/build?d=' + s1.demo.id : null });
+    }
     if (q.selftest) {
       /* a first version and one change, through the same path as the chat, as JSON */
       if (!ready) return send(res, 503, { ok: false, error: 'off' });
