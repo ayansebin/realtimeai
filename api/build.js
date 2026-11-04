@@ -7,7 +7,8 @@
 //   GET  /api/build?selftest=1&code=CODE  one quick low-effort build through the same path, as JSON (counts toward the cap)
 // Environment: DEMO_BUILDER_CODE (the sellers' access code) switches building on. The model is reached through Vercel AI
 //   Gateway with the deployment's own OIDC token (or AI_GATEWAY_API_KEY), so no model key is stored; with ANTHROPIC_API_KEY
-//   set, calls go straight to Anthropic instead.
+//   set, calls go straight to Anthropic instead. Through the gateway the Vercel team needs a card on file and purchased
+//   AI Gateway Credits: the free monthly credit covers only some models.
 //   Optional: DEMO_DAILY_CAP (builds a day, default 80), DEMO_MODEL (default anthropic/claude-opus-5.5 through the gateway,
 //   claude-opus-5-5 direct), DEMO_EFFORT (default max), DEMO_DEADLINE_S (seconds before a build gives up, default 290),
 //   ANTHROPIC_BASE_URL (for tests).
@@ -284,12 +285,16 @@ async function run(b, effort, who, signal, emit) {
   }
   return { text, thinking, stop, usage, used, err };
 }
-const errorFor = (err, aborted) => aborted ? { code: 'timeout', msg: 'Opus was still thinking when the time ran out. Build it again at a faster effort, or shorten the brief.' }
+/* AI Gateway refusals, from its FAQ: 403 customer_verification_required = no card on file; 403 naming the free tier = the model
+   needs purchased credits (the free monthly credit covers only some models); 402 = no balance; 402 quota_for_entity_exceeded = a budget */
+const errorFor = (err, aborted) => { const t = String(err.text || ''); return aborted ? { code: 'timeout', msg: 'Opus was still thinking when the time ran out. Build it again at a faster effort, or shorten the brief.' }
   : err.status === 429 || err.status === 529 ? { code: 'busy', msg: 'Claude is busy right now. Try again in a minute.' }
+  : /quota_for_entity_exceeded/i.test(t) ? { code: 'credits', msg: 'The site\'s AI Gateway reached its spending limit. The site owner needs to raise it in Vercel.' }
   : err.status === 402 ? { code: 'credits', msg: 'The site\'s AI Gateway is out of credits. The site owner needs to top it up in Vercel.' }
-  : /customer_verification_required|credit card/i.test(String(err.text || '')) ? { code: 'credits', msg: 'The site\'s AI Gateway needs a card on file in Vercel before it can build. The site owner needs to add one.' }
+  : /customer_verification_required|credit card/i.test(t) ? { code: 'credits', msg: 'The site\'s AI Gateway needs a card on file in Vercel before it can build. The site owner needs to add one.' }
+  : /free.?tier|RestrictedModels/i.test(t) ? { code: 'credits', msg: 'The site\'s AI Gateway needs purchased credits to run Claude Opus. The site owner needs to buy some in Vercel.' }
   : err.status === 401 || err.status === 403 ? { code: 'key', msg: 'The site\'s model access was not accepted. The site owner needs to check it.' }
-  : { code: 'failed', msg: 'The build did not finish. Try again.' };
+  : { code: 'failed', msg: 'The build did not finish. Try again.' }; };
 
 async function build(req, res, b, ip) {
   const t0 = Date.now(), ac = new AbortController();
