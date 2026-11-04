@@ -4,17 +4,28 @@
 //   GET  /api/build?status=1   whether building is switched on (no secrets)
 //   GET  /api/build?id=ID      one saved demo, by its share id
 //   GET  /api/build?key=KEY    the saved demos for the site owner, newest first (KEY is CONTACT_KEY)
-// Environment: ANTHROPIC_API_KEY and DEMO_BUILDER_CODE (the sellers' access code) switch building on.
-//   Optional: DEMO_DAILY_CAP (builds a day, default 80), DEMO_MODEL (default claude-opus-5-5), DEMO_EFFORT (default max),
-//   DEMO_DEADLINE_S (seconds before a build gives up, default 290), ANTHROPIC_BASE_URL (for tests).
+//   GET  /api/build?selftest=1&code=CODE  one quick low-effort build through the same path, as JSON (counts toward the cap)
+// Environment: DEMO_BUILDER_CODE (the sellers' access code) switches building on. The model is reached through Vercel AI
+//   Gateway with the deployment's own OIDC token (or AI_GATEWAY_API_KEY), so no model key is stored; with ANTHROPIC_API_KEY
+//   set, calls go straight to Anthropic instead.
+//   Optional: DEMO_DAILY_CAP (builds a day, default 80), DEMO_MODEL (default anthropic/claude-opus-5.5 through the gateway,
+//   claude-opus-5-5 direct), DEMO_EFFORT (default max), DEMO_DEADLINE_S (seconds before a build gives up, default 290),
+//   ANTHROPIC_BASE_URL (for tests).
 const crypto = require('crypto');
 const { put, list, get } = require('@vercel/blob');
 
-const MODEL = process.env.DEMO_MODEL || 'claude-opus-5-5';
+const DIRECT = !!process.env.ANTHROPIC_API_KEY;   // an Anthropic key goes straight to Anthropic, otherwise Vercel AI Gateway
+const MODEL = process.env.DEMO_MODEL || (DIRECT ? 'claude-opus-5-5' : 'anthropic/claude-opus-5.5');
 const EFFORT = process.env.DEMO_EFFORT || 'max';
 const CAP = Math.max(1, parseInt(process.env.DEMO_DAILY_CAP || '80', 10) || 80);
 const DEADLINE = Math.max(30, parseInt(process.env.DEMO_DEADLINE_S || '290', 10) || 290) * 1000;
-const API = (process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/+$/, '');
+const API = (process.env.ANTHROPIC_BASE_URL || (DIRECT ? 'https://api.anthropic.com' : 'https://ai-gateway.vercel.sh')).replace(/\/+$/, '');
+/* who signs the call: an Anthropic key, an AI Gateway key, or this deployment's OIDC token (sent with every request on Vercel) */
+function auth(req) {
+  if (DIRECT) return { 'x-api-key': process.env.ANTHROPIC_API_KEY };
+  const t = process.env.AI_GATEWAY_API_KEY || (req && req.headers && req.headers['x-vercel-oidc-token']) || process.env.VERCEL_OIDC_TOKEN;
+  return t ? { authorization: 'Bearer ' + t } : null;
+}
 const PHASES = ['intro', 'signal', 'forecast', 'context', 'anomaly', 'decision', 'stream', 'outcome', 'close'];
 const MODELS = ['TTM', 'FlowState', 'PatchTST-FM', 'TSPulse'];
 const LIMIT = { client: 160, industry: 80, usecase: 80, pain: 900, data: 600, decision: 600, audience: 60, tone: 60, length: 30, prompt: 3000, code: 120 };
@@ -220,9 +231,9 @@ function sseParse(raw) {
   for (const line of raw.split('\n')) { if (line.startsWith('event:')) event = line.slice(6).trim(); else if (line.startsWith('data:')) data += line.slice(5).trim(); }
   if (!data) return null; try { return { event, data: JSON.parse(data) }; } catch (e) { return null; }
 }
-async function* claude(body, signal) {
-  const r = await fetch(API + '/v1/messages', { method: 'POST', signal, headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' }, body: JSON.stringify(body) });
-  if (!r.ok) { const txt = await r.text().catch(() => ''); const e = new Error('Anthropic ' + r.status + ': ' + txt.slice(0, 600)); e.status = r.status; e.text = txt; throw e; }
+async function* claude(body, signal, who) {
+  const r = await fetch(API + '/v1/messages', { method: 'POST', signal, headers: Object.assign({ 'anthropic-version': '2023-06-01', 'content-type': 'application/json' }, who), body: JSON.stringify(body) });
+  if (!r.ok) { const txt = await r.text().catch(() => ''); const e = new Error((DIRECT ? 'Anthropic ' : 'AI Gateway ') + r.status + ': ' + txt.slice(0, 600)); e.status = r.status; e.text = txt; throw e; }
   const dec = new TextDecoder(); let buf = '';
   for await (const chunk of r.body) {
     buf += dec.decode(chunk, { stream: true }).replace(/\r\n/g, '\n'); let i;
@@ -230,22 +241,8 @@ async function* claude(body, signal) {
   }
 }
 
-async function build(req, res, b, ip) {
-  const t0 = Date.now(), ac = new AbortController();
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
-  res.setHeader('Cache-Control', 'no-cache, no-transform');
-  res.setHeader('X-Accel-Buffering', 'no');
-  res.setHeader('X-Robots-Tag', 'noindex');
-  if (res.flushHeaders) res.flushHeaders();
-  let open = true; req.on && req.on('close', () => { open = false; });
-  const emit = (event, data) => { if (!open) return; try { res.write('event: ' + event + '\ndata: ' + JSON.stringify(data) + '\n\n'); } catch (e) {} };
-  const ping = setInterval(() => { if (open) { try { res.write(': keepalive\n\n'); } catch (e) {} } }, 12000);
-  const timer = setTimeout(() => ac.abort(), DEADLINE);
-  const finish = () => { clearInterval(ping); clearTimeout(timer); try { res.end(); } catch (e) {} };
-
-  const effort = ['low', 'medium', 'high', 'xhigh', 'max'].includes(b.effort) && b.effort !== 'max' ? b.effort : EFFORT;
-  emit('status', { step: 'start', msg: 'Claude Opus 5.5 is reading your brief', model: MODEL, effort });
+/* one model run: the full request first, then lighter variants if the endpoint rejects an option before anything streams */
+async function run(b, effort, who, signal, emit) {
   const req0 = {
     model: MODEL, max_tokens: 64000, stream: true,
     system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
@@ -253,14 +250,15 @@ async function build(req, res, b, ip) {
     thinking: { type: 'adaptive', display: 'summarized' },
     output_config: { effort, format: { type: 'json_schema', schema: SCHEMA } }
   };
-  /* if the API rejects an option this build relies on, drop that option and try again before anything streams */
+  const plain = { role: 'user', content: brief(b) + '\n\nReturn only the JSON object, with no other text.' };
   const variants = [req0,
     Object.assign({}, req0, { thinking: { type: 'adaptive' } }),
-    Object.assign({}, req0, { thinking: { type: 'adaptive' }, output_config: { effort }, messages: [{ role: 'user', content: brief(b) + '\n\nReturn only the JSON object, with no other text.' }] })];
+    Object.assign({}, req0, { thinking: { type: 'adaptive' }, output_config: { effort }, messages: [plain] }),
+    Object.assign({}, req0, { system: SYSTEM, thinking: { type: 'adaptive' }, output_config: { effort }, messages: [plain] })];
   let text = '', thinking = '', lastThink = 0, lastProg = 0, stop = null, usage = {}, used = 0, started = false, err = null;
   for (let v = 0; v < variants.length && !started; v++) {
     try {
-      for await (const ev of claude(variants[v], ac.signal)) {
+      for await (const ev of claude(variants[v], signal, who)) {
         started = true; used = v; const d = ev.data;
         if (d.type === 'content_block_start' && d.content_block && d.content_block.type === 'text' && !text) emit('status', { step: 'writing', msg: 'Writing the story, the data and the narration' });
         else if (d.type === 'content_block_delta' && d.delta) {
@@ -279,21 +277,40 @@ async function build(req, res, b, ip) {
     } catch (e) {
       err = e;
       const msg = String(e && e.text || e && e.message || '');
-      const retry = !started && e && e.status === 400 && /display|thinking|output_config|format|schema/i.test(msg);
+      const retry = !started && e && e.status === 400 && /display|thinking|output_config|format|schema|cache_control|system/i.test(msg);
       console.error('build: attempt', v, 'failed', e && e.status, msg.slice(0, 300));
       if (!retry) break;
     }
   }
+  return { text, thinking, stop, usage, used, err };
+}
+const errorFor = (err, aborted) => aborted ? { code: 'timeout', msg: 'Opus was still thinking when the time ran out. Build it again at a faster effort, or shorten the brief.' }
+  : err.status === 429 || err.status === 529 ? { code: 'busy', msg: 'Claude is busy right now. Try again in a minute.' }
+  : err.status === 402 ? { code: 'credits', msg: 'The site\'s AI Gateway is out of credits. The site owner needs to top it up in Vercel.' }
+  : err.status === 401 || err.status === 403 ? { code: 'key', msg: 'The site\'s model access was not accepted. The site owner needs to check it.' }
+  : { code: 'failed', msg: 'The build did not finish. Try again.' };
+
+async function build(req, res, b, ip) {
+  const t0 = Date.now(), ac = new AbortController();
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-cache, no-transform');
+  res.setHeader('X-Accel-Buffering', 'no');
+  res.setHeader('X-Robots-Tag', 'noindex');
+  if (res.flushHeaders) res.flushHeaders();
+  let open = true; req.on && req.on('close', () => { open = false; });
+  const emit = (event, data) => { if (!open) return; try { res.write('event: ' + event + '\ndata: ' + JSON.stringify(data) + '\n\n'); } catch (e) {} };
+  const ping = setInterval(() => { if (open) { try { res.write(': keepalive\n\n'); } catch (e) {} } }, 12000);
+  const timer = setTimeout(() => ac.abort(), DEADLINE);
+  const finish = () => { clearInterval(ping); clearTimeout(timer); try { res.end(); } catch (e) {} };
+
+  const effort = ['low', 'medium', 'high', 'xhigh', 'max'].includes(b.effort) && b.effort !== 'max' ? b.effort : EFFORT;
+  emit('status', { step: 'start', msg: 'Claude Opus 5.5 is reading your brief', model: MODEL, effort });
+  const r = await run(b, effort, auth(req), ac.signal, emit);
+  const { text, thinking, stop, usage, used, err } = r;
   if (thinking) emit('thinking', { text: thinking.slice(-1600) });
   const ms = Date.now() - t0;
-  if (err) {
-    const aborted = err.name === 'AbortError' || ac.signal.aborted;
-    emit('error', aborted ? { code: 'timeout', msg: 'Opus was still thinking when the time ran out. Build it again at a faster effort, or shorten the brief.' }
-      : err.status === 429 || err.status === 529 ? { code: 'busy', msg: 'Claude is busy right now. Try again in a minute.' }
-      : err.status === 401 || err.status === 403 ? { code: 'key', msg: 'The site\'s Anthropic key was not accepted. The site owner needs to check it.' }
-      : { code: 'failed', msg: 'The build did not finish. Try again.' });
-    return finish();
-  }
+  if (err) { emit('error', errorFor(err, err.name === 'AbortError' || ac.signal.aborted)); return finish(); }
   if (stop === 'refusal') { emit('error', { code: 'refused', msg: 'Claude declined this brief. Describe a business decision that streaming data can inform.' }); return finish(); }
   let spec;
   try { spec = tidy(parseSpec(text)); }
@@ -310,10 +327,21 @@ async function build(req, res, b, ip) {
 /* ---------------------------------------------------------------- routes */
 module.exports = async function handler(req, res) {
   const ip = String((req.headers && (req.headers['x-forwarded-for'] || req.headers['x-real-ip'])) || (req.socket && req.socket.remoteAddress) || '').split(',')[0].trim();
-  const ready = !!process.env.ANTHROPIC_API_KEY && !!process.env.DEMO_BUILDER_CODE;
+  const ready = !!process.env.DEMO_BUILDER_CODE && !!auth(req);
   if (req.method === 'GET') {
     const q = req.query || Object.fromEntries(new URL(req.url, 'http://local').searchParams);
-    if (q.status) return send(res, 200, { ok: true, ready, model: MODEL, effort: EFFORT, store: blobOn() });
+    if (q.status) return send(res, 200, { ok: true, ready, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, effort: EFFORT, store: blobOn() });
+    if (q.selftest) {
+      if (!ready) return send(res, 503, { ok: false, error: 'off' });
+      if (!same(clean(q.code, LIMIT.code), process.env.DEMO_BUILDER_CODE)) return send(res, 403, { ok: false, error: 'code' });
+      const cap = await takeBuild(); if (!cap.ok) return send(res, 429, { ok: false, error: 'cap' });
+      const t0 = Date.now(), ac = new AbortController(), timer = setTimeout(() => ac.abort(), DEADLINE);
+      const tb = { mode: 'questions', fields: { client: 'A regional grocery chain', industry: 'Retail', usecase: 'Demand forecasting', pain: 'Hot weekends empty the cold drinks aisle by noon, and the nightly forecast only sees it the next morning.' }, audience: 'Line of business leader', tone: 'Plain and concise', length: '1 minute' };
+      const r = await run(tb, q.effort === 'max' ? 'max' : 'low', auth(req), ac.signal, () => {}); clearTimeout(timer);
+      if (r.err) return send(res, 502, { ok: false, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, error: errorFor(r.err, ac.signal.aborted).code, status: r.err.status || null, detail: String(r.err.text || r.err.message || '').slice(0, 400) });
+      let spec = null, parse = null; try { spec = tidy(parseSpec(r.text)); } catch (e) { parse = e.message; }
+      return send(res, 200, { ok: !!spec, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, variant: r.used, ms: Date.now() - t0, stop: r.stop, usage: r.usage, thinking_chars: r.thinking.length, parse, title: spec && spec.title, steps: spec && spec.steps.length });
+    }
     if (q.id) {
       if (!/^[a-z0-9]{10}$/.test(String(q.id))) return send(res, 404, { ok: false });
       const r = blobOn() ? await readJSON('builder/demos/' + q.id + '.json') : null;
@@ -334,7 +362,7 @@ module.exports = async function handler(req, res) {
   }
   if (req.method !== 'POST') { res.setHeader('Allow', 'GET, POST'); return send(res, 405, { ok: false }); }
   const b = await readBody(req);
-  if (!ready) return send(res, 503, { ok: false, error: 'off', msg: 'Building is not switched on yet. The site owner needs to add the Anthropic key and an access code.' });
+  if (!ready) return send(res, 503, { ok: false, error: 'off', msg: 'Building is not switched on yet. The site owner needs to add an access code.' });
   if (!same(clean(b.code, LIMIT.code), process.env.DEMO_BUILDER_CODE)) return send(res, 403, { ok: false, error: 'code', msg: 'That access code did not work. Ask your team for the seller code.' });
   if (!hasBrief(b)) return send(res, 400, { ok: false, error: 'brief', msg: 'Tell us at least the client\'s pain point, or describe the demo in your own words.' });
   if (tooFast(ip)) return send(res, 429, { ok: false, error: 'fast', msg: 'That is a lot of builds in a few minutes. Try again shortly.' });
