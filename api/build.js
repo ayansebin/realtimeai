@@ -1,28 +1,36 @@
-// Demo builder for realtimeintelligence.io. An IBM seller describes a client, Claude Opus 5.5 at max effort designs a
-// narrated demo of IBM Granite Time Series on Confluent, and /build plays it.
-//   POST /api/build            { code, mode, fields, prompt } → server-sent events: status, thinking, progress, demo, error
+// Demo builder for realtimeintelligence.io. An IBM seller chats with Claude Opus 5.5 about a client, and Claude builds and
+// changes a narrated demo of IBM Granite Time Series on Confluent that plays beside the chat, in the site's design.
+//   POST /api/build            { code, chat: [{ role, text }], spec, version, id, key } → server-sent events: status, thinking,
+//                              text, building, reset, demo, done, error. The newest chat message is the seller's.
 //   GET  /api/build?status=1   whether building is switched on (no secrets)
-//   GET  /api/build?id=ID      one saved demo, by its share id
+//   GET  /api/build?id=ID      one saved demo, by its share id (the newest version of that conversation)
 //   GET  /api/build?key=KEY    the saved demos for the site owner, newest first (KEY is CONTACT_KEY)
-//   GET  /api/build?selftest=1&code=CODE[&effort=LEVEL&fast=1]  one test build through the same path, as JSON (low effort
-//        unless asked; counts toward the cap). Every run also logs one line with its timings and token use.
+//   GET  /api/build?selftest=chat&code=CODE[&effort=LEVEL&fast=0|1]  a first version and one change through the chat path,
+//        as JSON (selftest=1 runs the first version only; counts toward the cap). Every model run logs one line with its
+//        timings and token use.
 // Environment: DEMO_BUILDER_CODE (the sellers' access code) switches building on. The model is reached through Vercel AI
 //   Gateway with the deployment's own OIDC token (or AI_GATEWAY_API_KEY), so no model key is stored; with ANTHROPIC_API_KEY
 //   set, calls go straight to Anthropic instead. Through the gateway the Vercel team needs a card on file and purchased
 //   AI Gateway Credits: the free monthly credit covers only some models.
-//   Optional: DEMO_DAILY_CAP (builds a day, default 80), DEMO_MODEL (default anthropic/claude-opus-5.5 through the gateway,
-//   claude-opus-5-5 direct), DEMO_EFFORT (default max), DEMO_FAST (1 for the gateway's fast mode), DEMO_DEADLINE_S
-//   (seconds before a build gives up, default 290), ANTHROPIC_BASE_URL (for tests).
+//   Optional: DEMO_DAILY_CAP (chat turns a day, default 80), DEMO_MODEL (default anthropic/claude-opus-5.5 through the
+//   gateway, claude-opus-5-5 direct), DEMO_EFFORT (a first version, default xhigh), DEMO_EDIT_EFFORT (changes and
+//   questions, default high), DEMO_FAST (0 turns off the gateway's fast mode), DEMO_DEADLINE_S (seconds a turn may take,
+//   default 290), ANTHROPIC_BASE_URL (for tests).
+//   Measured through the gateway on a one minute brief: max effort thought for 54,000 tokens (3 minutes even in fast mode),
+//   xhigh 6,200 tokens (76 s standard), high 3,700 (47 s standard); fast mode ran about 3.8 times the standard speed.
 const crypto = require('crypto');
 const { put, list, get } = require('@vercel/blob');
 
 const DIRECT = !!process.env.ANTHROPIC_API_KEY;   // an Anthropic key goes straight to Anthropic, otherwise Vercel AI Gateway
 const MODEL = process.env.DEMO_MODEL || (DIRECT ? 'claude-opus-5-5' : 'anthropic/claude-opus-5.5');
-const EFFORT = process.env.DEMO_EFFORT || 'max';
 const LEVELS = ['low', 'medium', 'high', 'xhigh', 'max'];
-/* fast mode: the same model on the gateway's faster serving path (about 2.5x the output speed, twice the token price),
+const pick = (v, d) => (LEVELS.includes(v) ? v : d);
+const EFFORT = pick(process.env.DEMO_EFFORT, 'xhigh');            // a first version
+const EDIT_EFFORT = pick(process.env.DEMO_EDIT_EFFORT, 'high');    // a change or a question
+const SOFT = 170000;                                               // a pass still running after this gives way to a quicker one
+/* fast mode: the same model on the gateway's faster serving path (2.5x and more the output speed, twice the token price),
    falling back to standard speed when the fast tier is busy */
-const FAST = !DIRECT && /^(1|true|on|yes)$/i.test(process.env.DEMO_FAST || '');
+const FAST = !DIRECT && !/^(0|false|off|no)$/i.test(process.env.DEMO_FAST || '1');
 const CAP = Math.max(1, parseInt(process.env.DEMO_DAILY_CAP || '80', 10) || 80);
 const DEADLINE = Math.max(30, parseInt(process.env.DEMO_DEADLINE_S || '290', 10) || 290) * 1000;
 const API = (process.env.ANTHROPIC_BASE_URL || (DIRECT ? 'https://api.anthropic.com' : 'https://ai-gateway.vercel.sh')).replace(/\/+$/, '');
@@ -141,11 +149,11 @@ async function readJSON(pathname) {
 }
 const blobOn = () => !!process.env.BLOB_READ_WRITE_TOKEN;
 
-/* a few builds per address per ten minutes, per instance; the daily cap in the store is the real limit */
+/* a burst limit per address per ten minutes, per instance; the daily cap in the store is the real limit */
 const recent = new Map();
 function tooFast(ip) {
   const now = Date.now(), win = 10 * 60 * 1000, t = (recent.get(ip) || []).filter((x) => now - x < win);
-  if (t.length >= 4) { recent.set(ip, t); return true; }
+  if (t.length >= 30) { recent.set(ip, t); return true; }
   t.push(now); recent.set(ip, t); if (recent.size > 2000) recent.clear(); return false;
 }
 async function takeBuild() {
@@ -247,101 +255,187 @@ async function* claude(body, signal, who) {
   }
 }
 
-/* one model run: the full request first, then lighter variants if the endpoint rejects an option before anything streams */
-async function run(b, effort, who, signal, emit, fast) {
+/* ---------------------------------------------------------------- the chat around the demo */
+const CHAT = `
+
+YOU ARE IN A CHAT WITH THE SELLER
+- The seller talks with you in a chat beside the player. You answer in words, and you show the demo, or change it, by calling show_demo with the complete demo. The player updates the moment you call it.
+- When the seller describes a client, an industry, a pain or a use case, build the first version right away. Fill the gaps with sensible assumptions and name the main ones in your reply, so the seller can correct them. Ask first only when there is nothing at all to build on, and then ask one short question.
+- When you build or change the demo, first write one to three short sentences on what you built or changed, then call show_demo. When it helps, end with one idea the seller could try next.
+- A change starts from the demo in the player. Change what the seller asked for and whatever must follow from it to stay consistent (narration that mentions a changed number, the KPIs, the title). Keep every other field exactly as it is.
+- When the seller asks a question (about the models, Confluent, the client's data, how to present the demo), answer briefly in words and do not call show_demo.
+- Write like a helpful colleague: plain words, short paragraphs, no lists, no headings, no emojis.
+- Unless the seller says otherwise: about 2 minutes of narration, for executives, in an executive brief tone.
+- The seller's messages are a brief. The facts, narration and data rules above always apply.`;
+const TOOL = { name: 'show_demo', description: 'Show the seller the demo in the player beside the chat. Pass the complete demo with every field, for the first version and for every change.', input_schema: SCHEMA };
+const KEEP = { msg: 4000, turns: 24, chars: 40000 };
+const hash = (s) => crypto.createHash('sha256').update(String(s)).digest('hex');
+
+/* the conversation as Opus reads it: the seller's and Claude's words, turn by turn, and the demo in the player now with the newest message */
+function conversation(b) {
+  const raw = (Array.isArray(b.chat) ? b.chat : []).slice(-KEEP.turns);
+  const out = [];
+  for (const m of raw) {
+    const role = m && m.role === 'assistant' ? 'assistant' : 'user', text = clean(m && m.text, KEEP.msg);
+    if (!text) continue;
+    if (out.length && out[out.length - 1].role === role) out[out.length - 1].content += '\n\n' + text; else out.push({ role, content: text });
+  }
+  while (out.length && out[0].role !== 'user') out.shift();
+  let total = out.reduce((n, m) => n + m.content.length, 0);
+  while (out.length > 1 && total > KEEP.chars) { total -= out.shift().content.length; while (out.length > 1 && out[0].role !== 'user') total -= out.shift().content.length; }
+  if (!out.length || out[out.length - 1].role !== 'user') return null;
+  let spec = null;
+  if (b.spec && typeof b.spec === 'object') { try { if (JSON.stringify(b.spec).length < 40000) spec = tidy(b.spec); } catch (e) { spec = null; } }
+  const last = out[out.length - 1], version = Math.max(0, b.version | 0);
+  if (spec) last.content = 'The demo in the player now' + (version ? ' (version ' + version + ')' : '') + ':\n' + JSON.stringify(spec) + '\n\nThe seller:\n' + last.content;
+  const firstUser = (raw.find((m) => m && m.role !== 'assistant' && clean(m.text, 10)) || {}).text;
+  return { messages: out, spec, version, firstUser: clean(firstUser, 600) };
+}
+
+/* one turn: Opus thinks, replies in words and may call show_demo. Lighter variants follow if the endpoint rejects an option before anything streams */
+async function turn(conv, effort, fast, who, signal, emit) {
+  const sys = SYSTEM + CHAT;
   const req0 = {
-    model: MODEL, max_tokens: 64000, stream: true,
-    system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
-    messages: [{ role: 'user', content: brief(b) }],
+    model: MODEL, max_tokens: 32000, stream: true,
+    system: [{ type: 'text', text: sys, cache_control: { type: 'ephemeral' } }],
+    tools: [Object.assign({}, TOOL, { strict: true })],
+    tool_choice: { type: 'auto' },
+    messages: conv.messages,
     thinking: { type: 'adaptive', display: 'summarized' },
-    output_config: { effort, format: { type: 'json_schema', schema: SCHEMA } }
+    output_config: { effort }
   };
   if (fast && !DIRECT) req0.providerOptions = { gateway: { speed: 'fast' } };
-  const T0 = Date.now(), t = { first: 0, text: 0, end: 0 };
-  const plain = { role: 'user', content: brief(b) + '\n\nReturn only the JSON object, with no other text.' };
   const variants = [req0,
     Object.assign({}, req0, { thinking: { type: 'adaptive' } }),
-    Object.assign({}, req0, { thinking: { type: 'adaptive' }, output_config: { effort }, messages: [plain] }),
-    Object.assign({}, req0, { system: SYSTEM, thinking: { type: 'adaptive' }, output_config: { effort }, messages: [plain] })];
-  let text = '', thinking = '', lastThink = 0, lastProg = 0, stop = null, usage = {}, used = 0, started = false, err = null;
+    Object.assign({}, req0, { thinking: { type: 'adaptive' }, tools: [TOOL] }),
+    Object.assign({}, req0, { system: sys, thinking: { type: 'adaptive' }, tools: [TOOL] })];
+  const T0 = Date.now(), t = { first: 0, text: 0, tool: 0, end: 0 };
+  let text = '', thinking = '', json = '', inTool = false, calls = [], stop = null, usage = {}, used = 0, started = false, err = null, lastThink = 0, lastBuild = 0;
   for (let v = 0; v < variants.length && !started; v++) {
     try {
       for await (const ev of claude(variants[v], signal, who)) {
         if (!started) t.first = Date.now() - T0;
         started = true; used = v; const d = ev.data;
-        if (d.type === 'content_block_start' && d.content_block && d.content_block.type === 'text' && !text) { if (!t.text) t.text = Date.now() - T0; emit('status', { step: 'writing', msg: 'Writing the story, the data and the narration' }); }
-        else if (d.type === 'content_block_delta' && d.delta) {
-          if (d.delta.type === 'thinking_delta' && d.delta.thinking) {
-            thinking += d.delta.thinking;
-            if (Date.now() - lastThink > 600) { lastThink = Date.now(); emit('thinking', { text: thinking.slice(-1600) }); }
-          } else if (d.delta.type === 'text_delta' && d.delta.text) {
-            text += d.delta.text;
-            if (Date.now() - lastProg > 500) { lastProg = Date.now(); emit('progress', { chars: text.length }); }
+        if (d.type === 'content_block_start' && d.content_block) {
+          const k = d.content_block.type;
+          if (k === 'tool_use') { inTool = d.content_block.name === TOOL.name; json = ''; if (!t.tool) t.tool = Date.now() - T0; if (inTool) emit('building', { chars: 0, steps: 0 }); }
+          else if (k === 'text' && !t.text) t.text = Date.now() - T0;
+        } else if (d.type === 'content_block_delta' && d.delta) {
+          const x = d.delta;
+          if (x.type === 'thinking_delta' && x.thinking) { thinking += x.thinking; if (Date.now() - lastThink > 450) { lastThink = Date.now(); emit('thinking', { text: thinking.slice(-1200) }); } }
+          else if (x.type === 'text_delta' && x.text) { text += x.text; emit('text', { d: x.text }); }
+          else if (x.type === 'input_json_delta' && inTool) {
+            json += x.partial_json || '';
+            if (Date.now() - lastBuild > 350) { lastBuild = Date.now(); emit('building', { chars: json.length, steps: (json.match(/"phase"\s*:/g) || []).length }); }
           }
-        } else if (d.type === 'message_delta') { if (d.delta && d.delta.stop_reason) stop = d.delta.stop_reason; if (d.usage) usage = Object.assign(usage, d.usage); }
+        } else if (d.type === 'content_block_stop') { if (inTool) { calls.push(json); inTool = false; } }
+        else if (d.type === 'message_delta') { if (d.delta && d.delta.stop_reason) stop = d.delta.stop_reason; if (d.usage) usage = Object.assign(usage, d.usage); }
         else if (d.type === 'message_start' && d.message && d.message.usage) usage = Object.assign(usage, d.message.usage);
-        else if (d.type === 'error') throw Object.assign(new Error((d.error && d.error.message) || 'stream error'), { status: 529 });
+        else if (d.type === 'error') {
+          const et = String(d.error && d.error.type || '');
+          throw Object.assign(new Error((d.error && d.error.message) || 'stream error'), { status: /overload/i.test(et) ? 529 : /rate/i.test(et) ? 429 : 500, text: JSON.stringify(d.error || {}) });
+        }
       }
       err = null;
     } catch (e) {
       err = e;
       const msg = String(e && e.text || e && e.message || '');
-      const retry = !started && e && e.status === 400 && /display|thinking|output_config|format|schema|cache_control|system/i.test(msg);
-      console.error('build: attempt', v, 'failed', e && e.status, msg.slice(0, 300));
+      const retry = !started && e && e.status === 400 && /display|thinking|strict|tool|output_config|cache_control|system|schema/i.test(msg);
+      if (!(e && e.name === 'AbortError')) console.error('build: attempt', v, 'failed', e && e.status, msg.slice(0, 300));
       if (!retry) break;
     }
   }
+  if (thinking) emit('thinking', { text: thinking.slice(-1200) });
   t.end = Date.now() - T0;
-  return { text, thinking, stop, usage, used, err, t };
+  /* the last complete show_demo call is the demo */
+  let spec = null, bad = null;
+  for (let i = calls.length - 1; i >= 0 && !spec; i--) { try { spec = tidy(JSON.parse(calls[i] || '{}')); } catch (e) { bad = e.message; } }
+  return { text, thinking, spec, called: calls.length > 0 || inTool, bad, stop, usage, used, err, t };
 }
-/* one line per model run in the function logs, so build times and token use can be read back */
+/* one line per model run in the function logs, so turn times and token use can be read back */
 function logRun(kind, effort, fast, r, aborted) {
   console.log('build: ' + kind + ' ' + JSON.stringify({ effort, fast: !!fast, ok: !r.err, aborted: !!aborted, status: (r.err && r.err.status) || null,
-    stop: r.stop, t: r.t, thinking_chars: r.thinking.length, text_chars: r.text.length, usage: r.usage }));
+    stop: r.stop, demo: !!r.spec, called: r.called, t: r.t, thinking_chars: r.thinking.length, text_chars: r.text.length, usage: r.usage }));
 }
 /* AI Gateway refusals, from its FAQ: 403 customer_verification_required = no card on file; 403 naming the free tier = the model
-   needs purchased credits (the free monthly credit covers only some models); 402 = no balance; 402 quota_for_entity_exceeded = a budget */
-const errorFor = (err, aborted) => { const t = String(err.text || ''); return aborted ? { code: 'timeout', msg: 'Opus was still thinking when the time ran out. Build it again at a faster effort, or shorten the brief.' }
-  : err.status === 429 || err.status === 529 ? { code: 'busy', msg: 'Claude is busy right now. Try again in a minute.' }
-  : /quota_for_entity_exceeded/i.test(t) ? { code: 'credits', msg: 'The site\'s AI Gateway reached its spending limit. The site owner needs to raise it in Vercel.' }
-  : err.status === 402 ? { code: 'credits', msg: 'The site\'s AI Gateway is out of credits. The site owner needs to top it up in Vercel.' }
-  : /customer_verification_required|credit card/i.test(t) ? { code: 'credits', msg: 'The site\'s AI Gateway needs a card on file in Vercel before it can build. The site owner needs to add one.' }
-  : /free.?tier|RestrictedModels/i.test(t) ? { code: 'credits', msg: 'The site\'s AI Gateway needs purchased credits to run Claude Opus. The site owner needs to buy some in Vercel.' }
-  : err.status === 401 || err.status === 403 ? { code: 'key', msg: 'The site\'s model access was not accepted. The site owner needs to check it.' }
-  : { code: 'failed', msg: 'The build did not finish. Try again.' }; };
+   needs purchased credits (the free monthly credit covers only some models); 402 = no balance; 402 quota_for_entity_exceeded = a budget.
+   These show in the chat as Claude's own words. */
+const errorFor = (err, aborted) => { const t = String(err.text || ''); return aborted ? { code: 'timeout', msg: 'That took longer than it should on my side. Send it again and I will keep it simpler.' }
+  : err.status === 429 || err.status === 529 ? { code: 'busy', msg: 'Claude is very busy right now. Send it again in a minute.' }
+  : /quota_for_entity_exceeded/i.test(t) ? { code: 'credits', msg: 'The builder reached its spending limit for now. The site owner can raise it in Vercel.' }
+  : err.status === 402 ? { code: 'credits', msg: 'The builder is out of AI credits. The site owner can top them up in Vercel.' }
+  : /customer_verification_required|credit card/i.test(t) ? { code: 'credits', msg: 'The builder needs a card on file in Vercel before it can reach Claude. The site owner can add one.' }
+  : /free.?tier|RestrictedModels/i.test(t) ? { code: 'credits', msg: 'The builder needs purchased AI credits to run Claude Opus. The site owner can buy some in Vercel.' }
+  : err.status === 401 || err.status === 403 ? { code: 'key', msg: 'The builder cannot reach Claude right now. The site owner needs to check its model access.' }
+  : { code: 'failed', msg: 'Something went wrong on my side. Send it again.' }; };
+const retryable = (e) => e && (e.status === 429 || e.status === 529 || e.status === 503 || e.status === 502 || e.status === 500 || (!e.status && e.name !== 'AbortError'));
 
-async function build(req, res, b, ip) {
-  const t0 = Date.now(), ac = new AbortController();
+/* save the demo under the conversation: the share link always shows the newest version, and only the browser holding the key can change it */
+async function save(b, conv, r, effort, ip) {
+  let version = conv.version + 1;
+  if (!blobOn()) return { id: null, version };
+  let id = typeof b.id === 'string' && /^[a-z0-9]{10}$/.test(b.id) ? b.id : null, key = typeof b.key === 'string' ? b.key.slice(0, 80) : '', prev = null, fresh = false;
+  if (id) { prev = await readJSON('builder/demos/' + id + '.json'); if (!prev || !prev.keyhash || !key || !same(hash(key), prev.keyhash)) { id = null; prev = null; } }
+  if (!id) { id = newId(); key = crypto.randomBytes(18).toString('hex'); fresh = true; }
+  if (prev && prev.version >= version) version = prev.version + 1;
+  const chat = (Array.isArray(b.chat) ? b.chat : []).slice(-30).map((m) => ({ role: m && m.role === 'assistant' ? 'assistant' : 'user', text: clean(m && m.text, 2000) })).filter((m) => m.text);
+  if (r.text) chat.push({ role: 'assistant', text: clean(r.text, 2000) });
+  const now = new Date().toISOString();
+  const record = { id, keyhash: hash(key), created: (prev && prev.created) || now, updated: now, model: MODEL, effort, fast: FAST, version, ms: r.t.end, usage: r.usage,
+    ip: crypto.createHash('sha256').update(ip + '|rti').digest('hex').slice(0, 16), request: { prompt: conv.firstUser }, chat, spec: r.spec };
+  try { await put('builder/demos/' + id + '.json', JSON.stringify(record, null, 1), { access: 'private', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true }); }
+  catch (e) { console.error('build: save failed', e && e.message); return { id: null, version }; }
+  return { id, key: fresh ? key : undefined, version };
+}
+
+/* a chat turn, streamed to the page as server-sent events: status, thinking, text, building, reset, demo, done, error.
+   A pass that runs long gives way to a quicker one, and a busy or dropped call is tried again, so the seller sees an answer, not a timeout. */
+async function chatTurn(req, res, b, ip) {
+  const T0 = Date.now(), outer = new AbortController();
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
   res.setHeader('Cache-Control', 'no-cache, no-transform');
   res.setHeader('X-Accel-Buffering', 'no');
   res.setHeader('X-Robots-Tag', 'noindex');
   if (res.flushHeaders) res.flushHeaders();
-  let open = true; req.on && req.on('close', () => { open = false; });
+  let open = true;
+  if (res.on) res.on('close', () => { if (!res.writableEnded) { open = false; outer.abort(); } });
   const emit = (event, data) => { if (!open) return; try { res.write('event: ' + event + '\ndata: ' + JSON.stringify(data) + '\n\n'); } catch (e) {} };
   const ping = setInterval(() => { if (open) { try { res.write(': keepalive\n\n'); } catch (e) {} } }, 12000);
-  const timer = setTimeout(() => ac.abort(), DEADLINE);
-  const finish = () => { clearInterval(ping); clearTimeout(timer); try { res.end(); } catch (e) {} };
-
-  const effort = LEVELS.includes(b.effort) && b.effort !== 'max' ? b.effort : EFFORT;
-  emit('status', { step: 'start', msg: 'Claude Opus 5.5 is reading your brief', model: MODEL, effort });
-  const r = await run(b, effort, auth(req), ac.signal, emit, FAST);
-  logRun('build', effort, FAST, r, ac.signal.aborted);
-  const { text, thinking, stop, usage, used, err } = r;
-  if (thinking) emit('thinking', { text: thinking.slice(-1600) });
-  const ms = Date.now() - t0;
-  if (err) { emit('error', errorFor(err, err.name === 'AbortError' || ac.signal.aborted)); return finish(); }
-  if (stop === 'refusal') { emit('error', { code: 'refused', msg: 'Claude declined this brief. Describe a business decision that streaming data can inform.' }); return finish(); }
-  let spec;
-  try { spec = tidy(parseSpec(text)); }
-  catch (e) { console.error('build: unreadable answer', stop, e.message, text.slice(0, 300)); emit('error', { code: stop === 'max_tokens' ? 'long' : 'parse', msg: 'The demo came back incomplete. Try again.' }); return finish(); }
-  const id = newId();
-  const record = { id, created: new Date().toISOString(), model: MODEL, effort, variant: used, ms, usage, ip: crypto.createHash('sha256').update(ip + '|rti').digest('hex').slice(0, 16),
-    request: { mode: clean(b.mode, 10), fields: Object.fromEntries(Object.entries(b.fields || {}).map(([k, v]) => [k, clean(v, LIMIT[k] || 600)])), prompt: clean(b.prompt, LIMIT.prompt) }, spec };
-  let saved = false;
-  if (blobOn()) { try { await put('builder/demos/' + id + '.json', JSON.stringify(record, null, 1), { access: 'private', contentType: 'application/json', addRandomSuffix: false }); saved = true; } catch (e) { console.error('build: save failed', e && e.message); } }
-  emit('demo', { id: saved ? id : null, spec, ms, effort });
+  const finish = () => { clearInterval(ping); try { res.end(); } catch (e) {} };
+  const conv = conversation(b);
+  if (!conv) { emit('error', { code: 'brief', msg: 'Tell me about your client first.' }); return finish(); }
+  const who = auth(req);
+  let effort = LEVELS.includes(b.effort) && b.effort !== 'max' ? b.effort : (conv.spec ? EDIT_EFFORT : EFFORT), quick = false, tries = 0, r = null, timedOut = false;
+  emit('status', { step: 'start', effort, fast: FAST });
+  for (;;) {
+    const left = DEADLINE - (Date.now() - T0);
+    if (left < 12000 || !open) break;
+    const ac = new AbortController(), kill = () => ac.abort();
+    outer.signal.addEventListener('abort', kill);
+    const timer = setTimeout(kill, Math.max(8000, quick ? left - 4000 : Math.min(SOFT, left - 45000)));
+    r = await turn(conv, effort, FAST, who, ac.signal, emit);
+    clearTimeout(timer); outer.signal.removeEventListener('abort', kill);
+    timedOut = !!(r.err && ac.signal.aborted && open);
+    logRun('chat', effort, FAST, r, timedOut);
+    tries++;
+    if (!open) return finish();
+    const broken = !r.err && r.called && !r.spec;
+    if (!r.err && !broken) break;
+    if (tries >= 4 || !(timedOut || broken || retryable(r.err))) break;
+    if (timedOut || broken) { if (quick) break; quick = true; effort = 'medium'; }
+    emit('reset', { msg: timedOut ? 'Taking a quicker pass' : broken ? 'Finishing the demo again' : 'Trying that again' });
+    if (!timedOut && !broken) await new Promise((ok) => setTimeout(ok, 1500 * tries));
+  }
+  if (!r) { emit('error', errorFor({}, true)); return finish(); }
+  if (r.err) { emit('error', errorFor(r.err, timedOut)); return finish(); }
+  if (r.called && !r.spec) { emit('error', { code: 'parse', msg: 'I could not finish that version of the demo. Send it again and I will keep it simpler.' }); return finish(); }
+  if (r.stop === 'refusal') { emit('error', { code: 'refused', msg: 'I cannot help with that one. Tell me about a business decision that streaming data can inform.' }); return finish(); }
+  if (r.spec) {
+    const s = await save(b, conv, r, effort, ip);
+    emit('demo', { spec: r.spec, id: s.id, key: s.key, version: s.version });
+  }
+  emit('done', { ms: Date.now() - T0, effort, fast: FAST, demo: !!r.spec });
   return finish();
 }
 
@@ -349,27 +443,39 @@ async function build(req, res, b, ip) {
 module.exports = async function handler(req, res) {
   const ip = String((req.headers && (req.headers['x-forwarded-for'] || req.headers['x-real-ip'])) || (req.socket && req.socket.remoteAddress) || '').split(',')[0].trim();
   const ready = !!process.env.DEMO_BUILDER_CODE && !!auth(req);
+  const via = DIRECT ? 'anthropic' : 'gateway';
   if (req.method === 'GET') {
     const q = req.query || Object.fromEntries(new URL(req.url, 'http://local').searchParams);
-    if (q.status) return send(res, 200, { ok: true, ready, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, effort: EFFORT, fast: FAST, store: blobOn() });
+    if (q.status) return send(res, 200, { ok: true, ready, via, model: MODEL, effort: EFFORT, edit_effort: EDIT_EFFORT, fast: FAST, store: blobOn() });
     if (q.selftest) {
+      /* a first version and one change, through the same path as the chat, as JSON */
       if (!ready) return send(res, 503, { ok: false, error: 'off' });
       if (!same(clean(q.code, LIMIT.code), process.env.DEMO_BUILDER_CODE)) return send(res, 403, { ok: false, error: 'code' });
       const cap = await takeBuild(); if (!cap.ok) return send(res, 429, { ok: false, error: 'cap' });
-      const t0 = Date.now(), ac = new AbortController(), timer = setTimeout(() => ac.abort(), DEADLINE);
-      const tb = { mode: 'questions', fields: { client: 'A regional grocery chain', industry: 'Retail', usecase: 'Demand forecasting', pain: 'Hot weekends empty the cold drinks aisle by noon, and the nightly forecast only sees it the next morning.' }, audience: 'Line of business leader', tone: 'Plain and concise', length: '1 minute' };
-      const effort = LEVELS.includes(q.effort) ? q.effort : 'low', fast = q.fast != null ? /^(1|true|on|yes)$/i.test(String(q.fast)) && !DIRECT : FAST;
-      const r = await run(tb, effort, auth(req), ac.signal, () => {}, fast); clearTimeout(timer);
-      logRun('selftest', effort, fast, r, ac.signal.aborted);
-      if (r.err) return send(res, 502, { ok: false, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, effort, fast, t: r.t, error: errorFor(r.err, ac.signal.aborted).code, status: r.err.status || null, detail: String(r.err.text || r.err.message || '').slice(0, 400) });
-      let spec = null, parse = null; try { spec = tidy(parseSpec(r.text)); } catch (e) { parse = e.message; }
-      return send(res, 200, { ok: !!spec, via: DIRECT ? 'anthropic' : 'gateway', model: MODEL, effort, fast, variant: r.used, ms: Date.now() - t0, t: r.t, stop: r.stop, usage: r.usage, thinking_chars: r.thinking.length, parse, title: spec && spec.title, steps: spec && spec.steps.length });
+      const effort = LEVELS.includes(q.effort) && q.effort !== 'max' ? q.effort : null, fast = q.fast != null ? /^(1|true|on|yes)$/i.test(String(q.fast)) && !DIRECT : FAST;
+      const asks = ['A regional grocery chain. Hot weekends empty the cold drinks aisle by noon, and the nightly forecast only sees it the next morning. About one minute, plain and concise.',
+        'Make the client Fresh Market, and make the context a weekend promotion instead of the weather.'];
+      const T0 = Date.now(), turns = [], chat = []; let spec = null, version = 0;
+      for (let k = 0; k < (q.selftest === 'chat' ? 2 : 1); k++) {
+        chat.push({ role: 'user', text: asks[k] });
+        const conv = conversation({ chat, spec, version }), eff = effort || (spec ? EDIT_EFFORT : EFFORT);
+        const ac = new AbortController(), timer = setTimeout(() => ac.abort(), Math.max(10000, DEADLINE - (Date.now() - T0) - 5000));
+        const r = await turn(conv, eff, fast, auth(req), ac.signal, () => {}); clearTimeout(timer);
+        logRun('selftest', eff, fast, r, ac.signal.aborted);
+        turns.push({ effort: eff, ok: !r.err && (!!r.spec || !r.called), error: r.err ? errorFor(r.err, ac.signal.aborted).code : null, status: r.err ? r.err.status || null : null,
+          detail: r.err ? String(r.err.text || r.err.message || '').slice(0, 300) : r.bad, variant: r.used, t: r.t, stop: r.stop, usage: r.usage,
+          reply: r.text.slice(0, 500), demo: !!r.spec, title: r.spec && r.spec.title, client: r.spec && r.spec.client, context: r.spec && r.spec.context.name, steps: r.spec && r.spec.steps.length });
+        if (r.err || !r.spec) break;
+        chat.push({ role: 'assistant', text: r.text }); spec = r.spec; version++;
+      }
+      const ok = turns.length > 0 && turns.every((x) => x.ok);
+      return send(res, ok ? 200 : 502, { ok, via, model: MODEL, fast, ms: Date.now() - T0, turns });
     }
     if (q.id) {
       if (!/^[a-z0-9]{10}$/.test(String(q.id))) return send(res, 404, { ok: false });
       const r = blobOn() ? await readJSON('builder/demos/' + q.id + '.json') : null;
       if (!r || !r.spec) return send(res, 404, { ok: false });
-      return send(res, 200, { ok: true, id: r.id, created: r.created, spec: r.spec }, { cache: 'public, max-age=300, s-maxage=86400' });
+      return send(res, 200, { ok: true, id: r.id, created: r.created, updated: r.updated || r.created, version: r.version || 1, spec: r.spec }, { cache: 'public, max-age=60, s-maxage=60' });
     }
     if (q.key) {
       if (!same(String(q.key), process.env.CONTACT_KEY || '')) return send(res, 404, { ok: false });
@@ -377,20 +483,23 @@ module.exports = async function handler(req, res) {
       do { const r = await list({ prefix: 'builder/demos/', cursor, limit: 1000 }); blobs.push(...r.blobs); cursor = r.hasMore ? r.cursor : undefined; } while (cursor);
       blobs.sort((a, b) => String(b.uploadedAt).localeCompare(String(a.uploadedAt)));
       const rows = (await Promise.all(blobs.slice(0, 300).map((x) => readJSON(x.pathname)))).filter(Boolean).map((r) => ({
-        id: r.id, created: r.created, link: 'https://realtimeintelligence.io/build?d=' + r.id, title: r.spec && r.spec.title, client: r.spec && r.spec.client,
-        industry: r.spec && r.spec.industry, use_case: r.spec && r.spec.use_case, seconds: Math.round((r.ms || 0) / 1000), output_tokens: r.usage && r.usage.output_tokens, request: r.request }));
+        id: r.id, created: r.created, updated: r.updated || r.created, version: r.version || 1, link: 'https://realtimeintelligence.io/build?d=' + r.id, title: r.spec && r.spec.title, client: r.spec && r.spec.client,
+        industry: r.spec && r.spec.industry, use_case: r.spec && r.spec.use_case, seconds: Math.round((r.ms || 0) / 1000), output_tokens: r.usage && r.usage.output_tokens,
+        request: r.request, messages: Array.isArray(r.chat) ? r.chat.length : undefined }));
       return send(res, 200, { ok: true, count: rows.length, demos: rows });
     }
     return send(res, 404, { ok: false });
   }
   if (req.method !== 'POST') { res.setHeader('Allow', 'GET, POST'); return send(res, 405, { ok: false }); }
-  const b = await readBody(req);
-  if (!ready) return send(res, 503, { ok: false, error: 'off', msg: 'Building is not switched on yet. The site owner needs to add an access code.' });
+  let b = await readBody(req);
+  if (!ready) return send(res, 503, { ok: false, error: 'off', msg: 'Building is switched off right now. The examples still play.' });
   if (!same(clean(b.code, LIMIT.code), process.env.DEMO_BUILDER_CODE)) return send(res, 403, { ok: false, error: 'code', msg: 'That access code did not work. Ask your team for the seller code.' });
-  if (!hasBrief(b)) return send(res, 400, { ok: false, error: 'brief', msg: 'Tell us at least the client\'s pain point, or describe the demo in your own words.' });
-  if (tooFast(ip)) return send(res, 429, { ok: false, error: 'fast', msg: 'That is a lot of builds in a few minutes. Try again shortly.' });
+  /* the earlier form sent one brief: it becomes the first message */
+  if (!Array.isArray(b.chat) && hasBrief(b)) b = Object.assign({}, b, { chat: [{ role: 'user', text: brief(b) }] });
+  if (!Array.isArray(b.chat) || !b.chat.length) return send(res, 400, { ok: false, error: 'brief', msg: 'Tell me about your client first.' });
+  if (tooFast(ip)) return send(res, 429, { ok: false, error: 'fast', msg: 'That is a lot of messages in a few minutes. Give it a moment and send it again.' });
   const cap = await takeBuild();
-  if (!cap.ok) return send(res, 429, { ok: false, error: 'cap', msg: 'Today\'s builds are used up. Try again tomorrow.' });
-  return build(req, res, b, ip);
+  if (!cap.ok) return send(res, 429, { ok: false, error: 'cap', msg: 'The builder has used today\'s messages. It opens again tomorrow.' });
+  return chatTurn(req, res, b, ip);
 };
-module.exports._test = { tidy, parseSpec, brief, SCHEMA, SYSTEM };
+module.exports._test = { tidy, parseSpec, brief, conversation, SCHEMA, SYSTEM: SYSTEM + CHAT };

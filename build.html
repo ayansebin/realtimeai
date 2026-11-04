@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Build a demo · Real-Time Intelligence on Confluent</title>
-<meta name="description" content="For IBM sellers: describe your client and Claude Opus 5.5 designs a narrated demo of IBM Granite Time Series models on Confluent, with the story, the data and the voice.">
+<title>Build a demo with Claude · Real-Time Intelligence on Confluent</title>
+<meta name="description" content="For IBM sellers: talk your client through with Claude Opus 5.5 and get a narrated demo of IBM Granite Time Series models on Confluent that you can change by asking.">
 <meta name="robots" content="noindex,nofollow">
 <meta property="og:type" content="website">
 <meta property="og:title" content="A real-time intelligence demo">
@@ -61,74 +61,126 @@ button,input,textarea,select{font:inherit;color:inherit}
 .nav-links a.on{color:var(--ink);border-bottom-color:var(--ink)}
 @media (max-width:960px){.nav .wrap{flex-wrap:wrap;gap:.25rem 1rem;padding-top:.4rem}.nav-links{order:3;width:100%;margin-left:0}.brand .co{display:none}.nav .btn{margin-left:auto}}
 
-/* head */
-.bhead{padding-top:3.2rem;padding-bottom:1.6rem}
-.bhead .eyebrow{display:inline-flex;align-items:center;gap:.55rem;color:var(--green);border:1px solid rgba(25,128,56,.45);padding:.3rem .6rem;margin-bottom:1.3rem}
-.bhead .eyebrow i{width:7px;height:7px;background:var(--green)}
-.bhead h1{font-size:clamp(2.2rem,4.6vw,3.8rem);letter-spacing:-.02em;max-width:18ch}
-.bhead .lede{margin-top:1rem;max-width:62ch;font-size:clamp(1.02rem,1.3vw,1.18rem);font-weight:300;color:var(--ink-2)}
-.bhead .lede b{font-weight:500;color:var(--ink)}
-
-/* the builder: questions on the left, what happens on the right */
-.bgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;align-items:start;padding-bottom:3rem}
-@media (max-width:980px){.bgrid{grid-template-columns:1fr}}
-.bform{background:var(--paper-2);border:1px solid var(--line);padding:clamp(18px,2.2vw,28px)}
-.tabs{display:flex;border-bottom:1px solid var(--line-2);margin:-4px 0 18px;gap:4px}
-.tabs button{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:.55rem .2rem;margin-right:1.1rem;font-size:.95rem;color:var(--ink-3);cursor:pointer}
-.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--cyan)}
-.q{display:grid;gap:7px;margin-bottom:18px}
-.q > label,.q > .ql{font-size:.9rem;font-weight:500;color:var(--ink)}
-.q > label small,.q > .ql small{font-weight:400;color:var(--ink-3);margin-left:.35rem}
-.q input[type=text],.q input[type=password],.q textarea{width:100%;background:#fff;border:1px solid var(--line-2);border-radius:0;padding:.65rem .75rem;font-size:.95rem;line-height:1.4;color:var(--ink);transition:border-color .15s}
-.q textarea{resize:vertical;min-height:84px}
-.q input:focus,.q textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan)}
-.q input::placeholder,.q textarea::placeholder{color:#9a9993}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{background:transparent;border:1px solid var(--line-2);color:var(--ink-2);padding:.32rem .7rem;font-size:.84rem;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
-.chip:hover{border-color:var(--ink-3);color:var(--ink)}
-.chip[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan);color:#fff}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media (max-width:560px){.row2{grid-template-columns:1fr}}
-.codeq{border-top:1px solid var(--line);padding-top:16px;margin-top:4px}
-.remember{display:flex;align-items:center;gap:.45rem;font-size:.84rem;color:var(--ink-3)}
-.go{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:6px}
-.go small{font-size:.82rem;color:var(--ink-3);line-height:1.35}
-.go small b{color:var(--ink-2);font-weight:500}
-.ferr{color:var(--red);font-size:.88rem;min-height:1.2em}
-.off-note{background:#fff8e1;border:1px solid rgba(142,106,0,.35);color:#5c4500;font-size:.88rem;padding:.65rem .8rem;margin-bottom:16px}
-
-/* right side: examples, then progress while Opus works */
-.bside{display:grid;gap:18px}
-@media (min-width:981px){.bside{position:sticky;top:calc(var(--nav-h) + 16px)}}
-.card{background:var(--band);color:#fff;padding:clamp(18px,2vw,24px)}
-.card h3{font-size:1.25rem;font-weight:300}
-.card p{color:#e7f2f4}
-.what{display:grid;gap:10px;margin-top:14px}
-.what div{display:grid;grid-template-columns:26px 1fr;gap:10px;font-size:.92rem;color:#f1f8f9;line-height:1.4}
-.what b{font:500 .74rem/1.9 var(--font-mono);color:var(--cyan-xl)}
-.exs{display:grid;gap:8px;margin-top:12px}
-.ex{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;text-align:left;background:linear-gradient(180deg,var(--pb-top),var(--pb-bot));border:1px solid var(--pb-line);color:#fff;padding:.75rem .9rem;cursor:pointer;transition:background .2s,border-color .2s}
-.ex:hover{background:linear-gradient(160deg,#0a66a8,var(--cyan-d));border-color:var(--cyan-l)}
-.ex b{display:block;font-weight:500;font-size:.98rem;line-height:1.25}
-.ex span{display:block;font-size:.8rem;color:#dcf0ff;margin-top:2px}
-.ex svg{width:16px;height:16px;color:#dcf0ff}
-.prog .ph{display:flex;align-items:center;gap:.7rem}
-.prog .ph b{font-weight:400;font-size:1.1rem;flex:1}
-.prog .ph .t{font:500 .9rem var(--font-mono);color:#dcf0ff}
 .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.25);border-top-color:var(--cyan-xl);border-radius:50%;animation:spin 1s linear infinite;flex:none}
 @keyframes spin{to{transform:rotate(360deg)}}
-.psteps{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
-.psteps li{display:flex;align-items:center;gap:.6rem;font-size:.92rem;color:#c9dfe2}
-.psteps li i{width:9px;height:9px;border:1px solid rgba(255,255,255,.45);flex:none}
-.psteps li.on{color:#fff}.psteps li.on i{background:var(--cyan-xl);border-color:var(--cyan-xl);animation:blink 1.2s ease-in-out infinite}
-.psteps li.done{color:#e7f2f4}.psteps li.done i{background:var(--green-l);border-color:var(--green-l)}
-@keyframes blink{50%{opacity:.35}}
-.think{margin-top:16px;background:var(--well);color:var(--wink);padding:.8rem .9rem;max-height:220px;overflow:auto}
-.think .eyebrow{color:var(--wink-3)}
-.think p{margin-top:6px;font-size:.88rem;line-height:1.5;white-space:pre-wrap;color:var(--wink)}
-.perr{border-left:3px solid var(--red-l)}
-.perr .acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
-.perr .btn.ghost{color:#fff;border-color:rgba(255,255,255,.4)}
+
+/* ---------------------------------------------------------------- the workspace: the chat beside the demo */
+.btn.sm{padding:.4rem .75rem;font-size:.84rem}
+.ws{display:grid;grid-template-columns:minmax(330px,420px) minmax(0,1fr);align-items:start}
+.chat{position:sticky;top:var(--navh,56px);height:calc(var(--vh,100vh) - var(--navh,56px));display:flex;flex-direction:column;min-width:0;background:var(--paper-2);border-right:1px solid var(--line-2)}
+.chat-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px 12px 22px;border-bottom:1px solid var(--line)}
+.chat-hd .t{display:grid;gap:5px;min-width:0}
+.chat-hd .eyebrow{display:inline-flex;align-items:center;gap:.5rem;color:var(--green)}
+.chat-hd .eyebrow i{width:7px;height:7px;background:var(--green)}
+.chat-hd h1{font-size:1.12rem;font-weight:400;letter-spacing:-.005em}
+.thread{flex:1;min-height:0;overflow-y:auto;padding:18px 16px 12px 22px;display:flex;flex-direction:column;gap:20px;overscroll-behavior:contain;scrollbar-width:thin}
+.msg{min-width:0;font-size:.95rem;line-height:1.55}
+.msg.u{align-self:flex-end;max-width:88%;background:#fff;border:1px solid var(--line);padding:.55rem .8rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.a .who{display:flex;align-items:center;gap:.45rem;font:500 .68rem/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.5rem}
+.msg.a .who i{width:7px;height:7px;background:var(--cyan)}
+.msg.a .txt p+p{margin-top:.55em}
+.msg.a .txt:empty{display:none}
+.caret>p:last-child::after,.caret:empty::after{content:"";display:inline-block;width:.45em;height:1em;margin-left:3px;vertical-align:-.13em;background:var(--cyan);animation:caret 1s steps(2,start) infinite}
+@keyframes caret{to{visibility:hidden}}
+.thk{margin-bottom:.4rem}
+.thk-h{display:inline-flex;align-items:center;gap:.5rem;background:none;border:0;padding:.1rem 0;color:var(--ink-3);font-size:.85rem;cursor:pointer}
+.thk-h:hover{color:var(--ink-2)}
+.thk-h svg{width:11px;height:11px;transition:transform .2s}
+.thk-h[disabled]{cursor:default}.thk-h[disabled] svg{display:none}
+.thk-h[aria-expanded="true"] svg{transform:rotate(90deg)}
+.thk-b{margin:.35rem 0 .3rem;padding:.1rem 0 .1rem .75rem;border-left:2px solid var(--line-2);color:var(--ink-3);font-size:.84rem;line-height:1.5;white-space:pre-wrap;max-height:240px;overflow:auto}
+.spin.d{width:13px;height:13px;border-color:rgba(22,22,22,.14);border-top-color:var(--cyan)}
+.note{margin-top:.45rem;font-size:.82rem;color:var(--ink-3)}
+.dcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;margin-top:.75rem;text-align:left;background:linear-gradient(180deg,var(--pb-top),var(--pb-bot));border:1px solid var(--pb-line);color:#fff;padding:.65rem .85rem;cursor:pointer;transition:background .2s,border-color .2s}
+.dcard:hover{background:linear-gradient(160deg,#0a66a8,var(--cyan-d));border-color:var(--cyan-l)}
+.dcard.building,.dcard.building:hover{cursor:default;background:linear-gradient(180deg,var(--pb-top),var(--pb-bot));border-color:var(--pb-line)}
+.dcard .ic{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(255,255,255,.35)}
+.dcard .ic svg{width:12px;height:12px}
+.dcard b{display:block;font:500 .68rem/1.2 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--cyan-xl)}
+.dcard .tt{display:block;font-size:.93rem;line-height:1.3;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dcard em{font-style:normal;font-size:.8rem;color:#dcf0ff}
+.err{margin-top:.6rem;display:grid;gap:.55rem;justify-items:start;border-left:3px solid var(--red-l);padding:.15rem 0 .15rem .75rem;color:var(--ink-2)}
+.starters{display:grid;gap:6px;margin-top:.85rem}
+.starter{text-align:left;background:#fff;border:1px solid var(--line);padding:.55rem .75rem;font-size:.88rem;line-height:1.4;color:var(--ink-2);cursor:pointer;transition:border-color .15s,color .15s}
+.starter:hover{border-color:var(--cyan);color:var(--ink)}
+.wex{display:none;margin-top:.9rem}
+.wex .eyebrow{display:block;margin-bottom:.45rem}
+.wex button{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:.5rem 0;font-size:.88rem;color:var(--cyan-d);cursor:pointer}
+.offn{margin-top:.7rem;background:#fff8e1;border:1px solid rgba(142,106,0,.35);color:#5c4500;font-size:.85rem;padding:.55rem .7rem}
+.composer{padding:10px 16px 14px 22px;border-top:1px solid var(--line);background:var(--paper-2)}
+.codebar{display:grid;gap:6px;margin-bottom:10px;padding:10px 12px;background:#fff;border:1px solid var(--line-2)}
+.codebar label{font-size:.85rem;font-weight:500}
+.codebar .row{display:flex;gap:8px}
+.codebar input{flex:1;min-width:0;border:1px solid var(--line-2);border-radius:0;padding:.45rem .6rem;font-size:.92rem;background:#fff}
+.codebar input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan)}
+.codebar small{font-size:.8rem;color:var(--ink-3)}
+.codebar small.bad{color:var(--red)}
+.cbox{display:flex;align-items:flex-end;gap:8px;background:#fff;border:1px solid var(--line-2);padding:6px 6px 6px 12px;transition:border-color .15s,box-shadow .15s}
+.cbox:focus-within{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan)}
+.cbox textarea{flex:1;min-width:0;border:0;border-radius:0;outline:none;resize:none;background:transparent;font-size:.95rem;line-height:1.45;padding:.42rem 0;height:2.3rem;max-height:200px;color:var(--ink)}
+.cbox textarea::placeholder{color:#9a9993}
+.send{flex:none;display:grid;place-items:center;width:38px;height:38px;background:var(--cyan);color:#fff;border:0;cursor:pointer;transition:background .15s,opacity .15s}
+.send:hover{background:var(--cyan-d)}
+.send[disabled]{opacity:.35;cursor:default;background:var(--cyan)}
+.send svg{width:16px;height:16px}
+.send.stop,.send.stop:hover{background:var(--ink)}
+.hint{display:flex;justify-content:space-between;gap:10px;margin-top:7px;font-size:.75rem;color:var(--ink-4)}
+
+/* the stage: what you get before the first demo, then the demo */
+.stage{min-width:0;padding:26px clamp(16px,2.6vw,40px) 44px}
+.empty{max-width:900px;padding-top:clamp(4px,3vh,40px)}
+.empty .eyebrow{display:inline-flex;align-items:center;gap:.55rem;color:var(--green);border:1px solid rgba(25,128,56,.45);padding:.3rem .6rem;margin-bottom:1.2rem}
+.empty .eyebrow i{width:7px;height:7px;background:var(--green)}
+.empty h2{font-size:clamp(2rem,3.5vw,3.3rem);letter-spacing:-.02em;max-width:19ch}
+.empty .lede{margin-top:1rem;max-width:62ch;font-size:clamp(1.02rem,1.25vw,1.16rem);font-weight:300;color:var(--ink-2)}
+.empty .lede b{font-weight:500;color:var(--ink)}
+.gets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:26px}
+.gets div{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:14px 16px;background:var(--paper-2);border:1px solid var(--line);font-size:.92rem;line-height:1.42;color:var(--ink-2)}
+.gets b{font:500 .74rem/1.9 var(--font-mono);color:var(--cyan)}
+.exh{margin-top:30px}
+.exs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.ex{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;text-align:left;background:linear-gradient(180deg,var(--pb-top),var(--pb-bot));border:1px solid var(--pb-line);color:#fff;padding:.8rem .9rem;cursor:pointer;transition:background .2s,border-color .2s}
+.ex:hover{background:linear-gradient(160deg,#0a66a8,var(--cyan-d));border-color:var(--cyan-l)}
+.ex b{display:block;font-weight:500;font-size:.96rem;line-height:1.25}
+.ex span{display:block;font-size:.8rem;color:#dcf0ff;margin-top:3px}
+.ex svg{width:15px;height:15px;color:#dcf0ff}
+.gframe{position:relative;aspect-ratio:16/9;background:var(--band);color:#fff;display:grid;place-items:center;text-align:center;overflow:hidden;max-width:1240px}
+.gframe::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.07) 50%,transparent 70%);background-size:220% 100%;animation:sheen 1.8s linear infinite}
+@keyframes sheen{from{background-position:120% 0}to{background-position:-120% 0}}
+.gframe div{position:relative;display:grid;gap:12px;justify-items:center}
+.gframe b{font-weight:300;font-size:clamp(1.3rem,2.2vw,1.9rem)}
+.gframe span{font:500 .8rem/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--cyan-xl)}
+.gframe .gsteps{display:flex;gap:6px}
+.gframe .gsteps i{width:28px;height:3px;background:rgba(255,255,255,.22);transition:background .3s}
+.gframe .gsteps i.on{background:var(--cyan-xl)}
+.upd{display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--cyan-d);background:var(--cyan-w);border:1px solid rgba(1,114,195,.3);padding:.32rem .65rem}
+.pframe{transition:opacity .3s}
+.pframe.dim{opacity:.5}
+.mtabs{display:none}
+@media (max-width:900px){
+  .ws{display:block}
+  .mtabs{display:flex;position:sticky;top:var(--navh,56px);z-index:20;background:var(--paper);border-bottom:1px solid var(--line-2)}
+  .mtabs button{flex:1;background:none;border:0;border-bottom:2px solid transparent;padding:.7rem 0;font-size:.95rem;color:var(--ink-3);cursor:pointer}
+  .mtabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--cyan)}
+  .mtabs button i{display:inline-block;width:7px;height:7px;margin-left:.4rem;vertical-align:.15em;background:var(--cyan);border-radius:50%}
+  .chat{position:static;height:auto;min-height:calc(var(--vh,100vh) - var(--navh,56px) - 46px);border-right:0;background:var(--paper)}
+  .chat-hd{padding:12px 16px}
+  .thread{overflow:visible;padding:16px}
+  .composer{position:sticky;bottom:0;z-index:10;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px))}
+  .ws[data-view="demo"] .chat{display:none}
+  .ws[data-view="chat"] .stage{display:none}
+  .stage{padding:16px 16px 36px}
+  .gets,.exs{grid-template-columns:1fr}
+  .wex{display:block}
+  .hint{display:none}
+  body:not(.viewer) .foot{display:none}
+}
+body.viewer .ws{display:block}
+body.viewer .chat,body.viewer .mtabs,body.viewer #empty,body.viewer #ghost{display:none}
+body.viewer .stage{max-width:1320px;margin:0 auto;padding-top:2rem}
+
+.stage .psec{padding:0;scroll-margin-top:calc(var(--navh,56px) + 12px)}
+.phd .acts{align-items:center}
 
 /* ---------------------------------------------------------------- the player */
 .psec{padding-top:1rem;padding-bottom:3.5rem;scroll-margin-top:calc(var(--nav-h) + 6px)}
@@ -321,8 +373,6 @@ button,input,textarea,select{font:inherit;color:inherit}
 .foot{border-top:1px solid var(--line-2);padding:22px 0 34px;font-size:.84rem;color:var(--ink-3)}
 .foot .wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between}
 .foot a{color:var(--ink-2)}
-body.viewer .bhead,body.viewer .bgrid{display:none}
-body.viewer .psec{padding-top:2rem}
 </style>
 </head>
 <body>
@@ -341,94 +391,53 @@ body.viewer .psec{padding-top:2rem}
   </div>
 </nav>
 
-<main>
-<header class="bhead wrap">
-  <span class="eyebrow"><i></i>For IBM sellers · Claude Opus 5.5, max effort</span>
-  <h1>Build a demo for your client.</h1>
-  <p class="lede">Answer a few questions, or describe it in your own words. <b>Claude Opus 5.5</b> designs the story, the data and the narration at maximum effort, and it plays right here, narrated, in the site's design. Share the link with your client. Simulated data, real models.</p>
-</header>
+<main class="ws" id="ws" data-view="chat">
+<div class="mtabs" role="tablist" aria-label="Chat or demo">
+  <button type="button" role="tab" id="mt-chat" aria-selected="true">Chat</button>
+  <button type="button" role="tab" id="mt-demo" aria-selected="false">Demo</button>
+</div>
 
-<section class="bgrid wrap" aria-label="Demo builder">
-  <form class="bform" id="bform" novalidate>
-    <p class="off-note" id="off-note" hidden>Building is not switched on yet: the site owner still needs to set the seller access code. The examples work already.</p>
-    <div class="tabs" role="tablist" aria-label="How to describe the demo">
-      <button type="button" role="tab" id="t-guided" aria-selected="true" aria-controls="p-guided">Answer a few questions</button>
-      <button type="button" role="tab" id="t-free" aria-selected="false" aria-controls="p-free">Describe it yourself</button>
+<section class="chat" id="chat" aria-label="Chat with Claude">
+  <div class="chat-hd">
+    <div class="t"><span class="eyebrow"><i></i>For IBM sellers</span><h1>Build a demo with Claude</h1></div>
+    <button type="button" class="btn ghost sm" id="new">New demo</button>
+  </div>
+  <div class="thread" id="thread" aria-live="polite"></div>
+  <form class="composer" id="composer" novalidate>
+    <div class="codebar" id="codebar" hidden>
+      <label for="f-code">Seller access code</label>
+      <div class="row"><input type="password" id="f-code" maxlength="120" autocomplete="off" placeholder="From your team"><button type="button" class="btn sm" id="code-ok">Continue</button></div>
+      <small id="code-msg">You only need it once on this device.</small>
     </div>
-    <div id="p-guided" role="tabpanel" aria-labelledby="t-guided">
-      <div class="q"><label for="f-client">Who is the client? <small>a name or a short description</small></label>
-        <input type="text" id="f-client" name="client" maxlength="160" placeholder="A national grocery chain" autocomplete="off"></div>
-      <div class="q"><label for="f-industry">Industry or domain</label>
-        <div class="chips" data-fill="f-industry"><button type="button" class="chip">Retail</button><button type="button" class="chip">Manufacturing</button><button type="button" class="chip">Banking</button><button type="button" class="chip">Insurance</button><button type="button" class="chip">Telco</button><button type="button" class="chip">Energy and utilities</button><button type="button" class="chip">Travel and transport</button><button type="button" class="chip">Logistics</button><button type="button" class="chip">Healthcare</button><button type="button" class="chip">Public sector</button></div>
-        <input type="text" id="f-industry" name="industry" maxlength="80" placeholder="Or type it" autocomplete="off"></div>
-      <div class="q"><label for="f-usecase">Use case</label>
-        <div class="chips" data-fill="f-usecase"><button type="button" class="chip">Demand forecasting</button><button type="button" class="chip">Anomaly detection</button><button type="button" class="chip">Production optimization</button><button type="button" class="chip">Predictive maintenance</button><button type="button" class="chip">Fraud and security</button><button type="button" class="chip">Capacity planning</button><button type="button" class="chip">Supply chain planning</button><button type="button" class="chip">Pricing and revenue</button></div>
-        <input type="text" id="f-usecase" name="usecase" maxlength="80" placeholder="Or type it" autocomplete="off"></div>
-      <div class="q"><label for="f-pain">What hurts today? <small>the client's pain, in their words</small></label>
-        <textarea id="f-pain" name="pain" maxlength="900" rows="3" placeholder="Hot weekends empty the cold drinks aisle by noon, and the nightly forecast only sees it the next morning."></textarea></div>
-      <div class="row2">
-        <div class="q"><label for="f-data">Data they stream <small>optional</small></label>
-          <input type="text" id="f-data" name="data" maxlength="600" placeholder="Point of sale, weather, promotions" autocomplete="off"></div>
-        <div class="q"><label for="f-decision">Decision to improve <small>optional</small></label>
-          <input type="text" id="f-decision" name="decision" maxlength="600" placeholder="The next replenishment order per store" autocomplete="off"></div>
-      </div>
+    <div class="cbox">
+      <textarea id="msg" rows="1" maxlength="4000" placeholder="Tell Claude about your client" aria-label="Message to Claude"></textarea>
+      <button type="submit" class="send" id="send" aria-label="Send" disabled></button>
     </div>
-    <div id="p-free" role="tabpanel" aria-labelledby="t-free" hidden>
-      <div class="q"><label for="f-prompt">Describe the demo you need</label>
-        <textarea id="f-prompt" name="prompt" maxlength="3000" rows="8" placeholder="A two minute demo for the CFO of a European steel maker. Energy is their biggest cost and the grid price spikes every evening. Show how forecasting furnace load with the price stream lets them move melts to cheaper hours, without missing delivery dates."></textarea></div>
-    </div>
-    <div class="q"><span class="ql" id="l-aud">Audience</span>
-      <div class="chips" data-seg="audience" role="group" aria-labelledby="l-aud"><button type="button" class="chip" aria-pressed="true">Executives</button><button type="button" class="chip" aria-pressed="false">Line of business</button><button type="button" class="chip" aria-pressed="false">Data and AI team</button><button type="button" class="chip" aria-pressed="false">Mixed</button></div></div>
-    <div class="q"><span class="ql" id="l-tone">Style and tone</span>
-      <div class="chips" data-seg="tone" role="group" aria-labelledby="l-tone"><button type="button" class="chip" aria-pressed="true">Executive brief</button><button type="button" class="chip" aria-pressed="false">Storytelling</button><button type="button" class="chip" aria-pressed="false">Technical deep dive</button><button type="button" class="chip" aria-pressed="false">Bold and visionary</button><button type="button" class="chip" aria-pressed="false">Plain and concise</button></div></div>
-    <div class="q"><span class="ql" id="l-len">Length</span>
-      <div class="chips" data-seg="length" role="group" aria-labelledby="l-len"><button type="button" class="chip" aria-pressed="false">About 1 minute</button><button type="button" class="chip" aria-pressed="true">About 2 minutes</button><button type="button" class="chip" aria-pressed="false">About 3 minutes</button></div></div>
-    <div class="q codeq"><label for="f-code">Seller access code</label>
-      <input type="password" id="f-code" name="code" maxlength="120" autocomplete="off" placeholder="From your team">
-      <label class="remember"><input type="checkbox" id="f-remember" checked> Remember it on this device</label></div>
-    <p class="ferr" id="ferr" role="alert"></p>
-    <div class="go">
-      <button class="btn lg" id="go" type="submit">Build the demo <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
-      <small>Claude Opus 5.5 at <b>max effort</b>. Usually 1 to 3 minutes: it thinks the story through first.</small>
-    </div>
+    <p class="hint"><span>Enter to send · Shift+Enter for a new line</span></p>
   </form>
-
-  <aside class="bside" aria-live="polite">
-    <div class="card" id="side-idle">
-      <h3>What you get</h3>
-      <div class="what">
-        <div><b>01</b><span>A story in your client's terms: persona, pain, the decision and what it is worth.</span></div>
-        <div><b>02</b><span>A live chart of their signal: the forecast, the context that bends it, the flag and the decision.</span></div>
-        <div><b>03</b><span>How it runs on Confluent with IBM Granite, next to the usual way.</span></div>
-        <div><b>04</b><span>Narration you can play or present yourself, talking points, and a link to share.</span></div>
-      </div>
-      <p style="margin-top:18px" class="eyebrow">Or start from an example</p>
-      <div class="exs" id="exs"></div>
-    </div>
-    <div class="card prog" id="side-prog" hidden>
-      <div class="ph"><span class="spin" aria-hidden="true"></span><b id="prog-msg">Claude Opus 5.5 is reading your brief</b><span class="t" id="prog-t">0:00</span></div>
-      <ol class="psteps" id="psteps">
-        <li data-k="start"><i></i>Reading the brief</li>
-        <li data-k="think"><i></i>Thinking the story through, at max effort</li>
-        <li data-k="writing"><i></i>Writing the story, the data and the narration</li>
-        <li data-k="ready"><i></i>Ready to play</li>
-      </ol>
-      <div class="think" id="think" hidden><span class="eyebrow">What Opus is working on</span><p id="think-t"></p></div>
-    </div>
-    <div class="card perr" id="side-err" hidden>
-      <h3>The demo did not build</h3>
-      <p id="err-t" style="margin-top:8px"></p>
-      <div class="acts"><button type="button" class="btn" id="err-retry">Try again</button><button type="button" class="btn ghost" id="err-fast" hidden>Build faster, at high effort</button></div>
-    </div>
-  </aside>
 </section>
 
-<section class="psec wrap" id="player" hidden aria-label="Your demo">
+<section class="stage" id="stage" aria-label="Your demo">
+  <div class="empty" id="empty">
+    <span class="eyebrow"><i></i>Claude Opus 5.5 · IBM Granite on Confluent</span>
+    <h2>Build a demo for your client by talking it through.</h2>
+    <p class="lede">Tell Claude about the client, what hurts and the decision you want to improve. <b>Claude Opus 5.5</b> designs the story, the data and the narration, and the demo plays right here in the site's design. Ask for any change and Claude reworks it. Share the link when it is ready. Simulated data, real models.</p>
+    <div class="gets">
+      <div><b>01</b><span>A story in your client's terms: persona, pain, the decision and what it is worth.</span></div>
+      <div><b>02</b><span>A live chart of their signal: the forecast, the context that bends it, the flag and the decision.</span></div>
+      <div><b>03</b><span>How it runs on Confluent with IBM Granite, next to the usual way.</span></div>
+      <div><b>04</b><span>Narration you can play or present yourself, talking points, and a link to share.</span></div>
+    </div>
+    <p class="eyebrow exh" style="border:0;padding:0;color:var(--ink-3)">Or start from an example</p>
+    <div class="exs" id="exs"></div>
+  </div>
+  <div class="gframe" id="ghost" hidden><div><span>Claude is building your demo</span><b id="ghost-t">Laying out the story</b><div class="gsteps" id="ghost-s"></div></div></div>
+<section class="psec" id="player" hidden aria-label="The demo">
   <div class="phd">
     <div><span class="eyebrow" id="p-eye">Your demo</span><h2 id="p-title"></h2><p class="meta" id="p-meta"></p></div>
     <div class="acts">
+      <span class="upd" id="upd" hidden><span class="spin d"></span>Claude is updating this demo</span>
       <button type="button" class="btn" id="share"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5l3-3M5 7.5L3.6 8.9a2.5 2.5 0 0 0 3.5 3.5L8.5 11M11 8.5l1.4-1.4a2.5 2.5 0 0 0-3.5-3.5L7.5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Copy the link</button>
-      <button type="button" class="btn ghost" id="rebuild">Change the brief</button>
       <a class="btn ghost" id="own" href="/build" hidden>Build your own</a>
     </div>
   </div>
@@ -504,9 +513,10 @@ body.viewer .psec{padding-top:2rem}
     <div class="notes"><span class="eyebrow">For the seller</span><ul id="notes"></ul><p class="sim">The data is simulated and the numbers are illustrative until a pilot on the client's own streams. Keys: space to play or pause, arrows to step, F for full screen.</p></div>
   </div>
 </section>
+</section>
 </main>
 
-<footer class="foot"><div class="wrap"><span>Demos are designed by Claude Opus 5.5 from the seller's brief and played with simulated data. IBM, Granite, Confluent and Apache Flink are trademarks of their owners.</span><span><a href="/">Home</a> · <a href="/playground">Playground</a></span></div></footer>
+<footer class="foot"><div class="wrap"><span>Demos are designed by Claude Opus 5.5 in a chat with the seller and played with simulated data. IBM, Granite, Confluent and Apache Flink are trademarks of their owners.</span><span><a href="/">Home</a> · <a href="/playground">Playground</a></span></div></footer>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -520,63 +530,140 @@ const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),ease=x=>{x=clamp(x,0,1);return x*
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200);};
 const SANS='"IBM Plex Sans","Helvetica Neue",Arial,sans-serif',MONO='"IBM Plex Mono",Menlo,monospace';
 
-/* ================================================================ the builder form */
-const form=$('#bform');let mode='guided';
-$$('.tabs [role=tab]').forEach(t=>t.addEventListener('click',()=>{mode=t.id==='t-free'?'free':'guided';$$('.tabs [role=tab]').forEach(x=>x.setAttribute('aria-selected',String(x===t)));$('#p-guided').hidden=mode!=='guided';$('#p-free').hidden=mode!=='free';}));
-$$('[data-fill]').forEach(g=>{const inp=document.getElementById(g.dataset.fill);const sync=()=>$$('.chip',g).forEach(c=>c.setAttribute('aria-pressed',String(c.textContent===inp.value)));
-  $$('.chip',g).forEach(c=>c.addEventListener('click',()=>{inp.value=inp.value===c.textContent?'':c.textContent;sync();}));inp.addEventListener('input',sync);sync();});
-$$('[data-seg]').forEach(g=>$$('.chip',g).forEach(c=>c.addEventListener('click',()=>$$('.chip',g).forEach(x=>x.setAttribute('aria-pressed',String(x===c))))));
-const seg=k=>{const c=$('[data-seg="'+k+'"] .chip[aria-pressed="true"]');return c?c.textContent:'';};
-const code=$('#f-code'),remember=$('#f-remember');code.value=store.get('rti-build-code')||'';
-const ferr=$('#ferr');
-function fields(){const f={};['client','industry','usecase','pain','data','decision'].forEach(k=>{const e=document.getElementById('f-'+k);if(e)f[k]=e.value.trim();});f.audience=seg('audience');f.tone=seg('tone');f.length=seg('length');return f;}
-let ready=true;
-fetch('/api/build?status=1').then(r=>r.ok?r.json():null).then(s=>{if(s&&s.ok&&!s.ready){ready=false;$('#off-note').hidden=false;}}).catch(()=>{});
 
-/* the side panel shows one of: what you get, progress, a failure */
-const side=k=>{$('#side-idle').hidden=k!=='idle';$('#side-prog').hidden=k!=='prog';$('#side-err').hidden=k!=='err';};
-const pstep=k=>{const order=['start','think','writing','ready'],i=order.indexOf(k);$$('#psteps li').forEach((li,j)=>{li.classList.toggle('done',j<i);li.classList.toggle('on',j===i);});};
-let lastReq=null,busy=false;
-form.addEventListener('submit',e=>{e.preventDefault();const f=fields();const prompt=$('#f-prompt').value.trim();
-  if(mode==='guided'&&!f.pain&&!f.usecase){ferr.textContent='Add the client\'s pain point, or pick a use case.';$('#f-pain').focus();return;}
-  if(mode==='free'&&prompt.length<20){ferr.textContent='Describe the demo in a sentence or two.';$('#f-prompt').focus();return;}
-  if(!code.value.trim()){ferr.textContent='Add the seller access code.';code.focus();return;}
-  ferr.textContent='';if(remember.checked)store.set('rti-build-code',code.value.trim());else store.del('rti-build-code');
-  const body={code:code.value.trim(),mode,fields:mode==='guided'?f:{audience:f.audience,tone:f.tone,length:f.length},prompt:mode==='free'?prompt:''};
-  run(body);});
-$('#err-retry').addEventListener('click',()=>{if(lastReq)run(lastReq);});
-$('#err-fast').addEventListener('click',()=>{if(lastReq)run(Object.assign({},lastReq,{effort:'high'}));});
-
-async function run(body){
-  if(busy)return;busy=true;lastReq=body;const go=$('#go');go.disabled=true;
-  side('prog');pstep('start');$('#prog-msg').textContent='Claude Opus 5.5 is reading your brief';$('#think').hidden=true;$('#think-t').textContent='';
-  const t0=Date.now(),tick=setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);$('#prog-t').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');},500);
-  if(innerWidth<980)$('#side-prog').scrollIntoView({behavior:reduced?'auto':'smooth',block:'center'});
-  const fail=(msg,codeK)=>{side('err');$('#err-t').textContent=msg;$('#err-fast').hidden=!(codeK==='timeout'&&body.effort!=='high');};
-  try{
-    const r=await fetch('/api/build',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
-    const ct=r.headers.get('content-type')||'';
-    if(!r.ok||!/event-stream/.test(ct)){let j={};try{j=await r.json();}catch(e){}if(j.error==='code'){store.del('rti-build-code');side('idle');ferr.textContent=j.msg;code.focus();}else fail(j.msg||'The build did not start. Try again in a moment.',j.error);return;}
-    const rd=r.body.getReader(),dec=new TextDecoder();let buf='',got=false;
-    for(;;){const {value,done}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true}).replace(/\r\n/g,'\n');let i;
-      while((i=buf.indexOf('\n\n'))>=0){const raw=buf.slice(0,i);buf=buf.slice(i+2);let ev='message',data='';raw.split('\n').forEach(l=>{if(l.startsWith('event:'))ev=l.slice(6).trim();else if(l.startsWith('data:'))data+=l.slice(5).trim();});
-        if(!data)continue;let d;try{d=JSON.parse(data);}catch(e){continue;}
-        if(ev==='status'){if(d.step==='writing'){pstep('writing');$('#prog-msg').textContent='Writing the story, the data and the narration';}}
-        else if(ev==='thinking'){pstep('think');$('#prog-msg').textContent='Opus is thinking it through';$('#think').hidden=false;const p=$('#think-t');p.textContent=d.text.replace(/^[\s\S]{0,40}?\s/,'… ');p.parentNode.scrollTop=p.parentNode.scrollHeight;}
-        else if(ev==='progress'){pstep('writing');}
-        else if(ev==='demo'){got=true;pstep('ready');await sleep(350);side('idle');openDemo(d.spec,{id:d.id,fresh:true});}
-        else if(ev==='error'){got=true;fail(d.msg,d.code);}}}
-    if(!got)fail('The connection closed before the demo was ready. Try again.','closed');
-  }catch(e){fail('Could not reach the builder. Check your connection and try again.','net');}
-  finally{clearInterval(tick);busy=false;go.disabled=false;}
-}
+const el=(tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-$('#rebuild').addEventListener('click',()=>{P.stop();document.body.classList.remove('viewer');$('#player').hidden=true;history.replaceState(null,'','/build');scrollTo({top:0,behavior:reduced?'auto':'smooth'});});
+const isPhone=()=>matchMedia('(max-width:900px)').matches;
 
-/* examples */
-fetch('/data/builder/examples.json').then(r=>r.json()).then(list=>{window.__examples=list;$('#exs').innerHTML=list.map(x=>'<button type="button" class="ex" data-ex="'+esc(x.id)+'"><span><b>'+esc(x.spec.title)+'</b><span>'+esc(x.spec.client)+' · '+esc(x.spec.use_case)+' · '+esc(x.spec.tone)+'</span></span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg></button>').join('');
-  $$('#exs .ex').forEach(b=>b.addEventListener('click',()=>{const x=list.find(y=>y.id===b.dataset.ex);if(x)openDemo(x.spec,{example:x.id});}));
-  const q=new URLSearchParams(location.search);if(q.get('ex')){const x=list.find(y=>y.id===q.get('ex'));if(x)openDemo(x.spec,{example:x.id,viewer:true});}}).catch(()=>{});
+/* ================================================================ layout: the chat fills the window under the nav */
+const root=document.documentElement,navEl=$('.nav'),ws=$('#ws');
+function fit(){const z=parseFloat(getComputedStyle(root).zoom)||1;root.style.setProperty('--vh',(innerHeight/z)+'px');root.style.setProperty('--navh',navEl.offsetHeight+'px');}
+fit();addEventListener('resize',fit);
+function setView(v){ws.dataset.view=v;$('#mt-chat').setAttribute('aria-selected',String(v==='chat'));$('#mt-demo').setAttribute('aria-selected',String(v==='demo'));
+  if(v==='demo'){const i=$('#mt-demo i');if(i)i.remove();scrollTo({top:0});}else{P.stop();scrollDown(true);}}
+$('#mt-chat').addEventListener('click',()=>setView('chat'));$('#mt-demo').addEventListener('click',()=>setView('demo'));
+function flagDemo(){if(isPhone()&&ws.dataset.view!=='demo'&&!$('#mt-demo i'))$('#mt-demo').appendChild(el('i'));}
+function showDemo(){if(isPhone())setView('demo');else{const p=$('#player');if(!p.hidden){const r=p.getBoundingClientRect();if(r.top<0||r.top>innerHeight*.5)p.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});}}}
+
+/* ================================================================ the conversation */
+const SKEY='rti-build-chat',CKEY='rti-build-code';
+const fresh=()=>({chat:[],spec:null,version:0,id:null,key:null,example:null});
+let S=fresh(),ready=true,busy=false,ctl=null,examples=[];
+const persist=()=>store.set(SKEY,JSON.stringify(Object.assign({},S,{chat:S.chat.slice(-40),t:Date.now()})));
+function restore(){try{const j=JSON.parse(store.get(SKEY)||'null');if(j&&Array.isArray(j.chat)&&Date.now()-(j.t||0)<30*864e5){delete j.t;S=Object.assign(fresh(),j);return true;}}catch(e){}return false;}
+const STARTERS=['A national grocery chain: hot weekends empty the cold drinks aisle by noon, and the nightly forecast only sees it the next day.',
+  'A card issuer wants to stop card testing before authorization, without blocking travelers.',
+  'A European steel maker wants to move furnace load to cheaper grid hours without missing delivery dates.',
+  'A telco needs to see cell congestion coming before stadium events.'];
+const thread=$('#thread'),msg=$('#msg'),sendB=$('#send');
+const SEND='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>',
+  STOP='<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="4" width="8" height="8" fill="currentColor"/></svg>',
+  PLAYI='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg>';
+const md=t=>esc(String(t||'').trim()).split(/\n{2,}/).map(p=>'<p>'+p.replace(/\n/g,'<br>').replace(/\*\*([^*\n]+)\*\*/g,'<b>$1</b>')+'</p>').join('');
+function scrollDown(force){const box=isPhone()?document.scrollingElement:thread;const near=box.scrollHeight-box.scrollTop-box.clientHeight<160;if(force||near)box.scrollTop=box.scrollHeight;}
+
+function welcome(){
+  const w=el('div','msg a');
+  w.innerHTML='<div class="who"><i></i>Claude</div><div class="txt">'+md('Tell me about your client: who they are, what hurts today, and the decision you want to improve. I will build a narrated demo you can play right here, and you can change anything just by asking.')+'</div>'+
+    (ready?'':'<p class="offn">Building is switched off right now. The examples still play.</p>')+
+    (S.chat.length?'':'<div class="starters">'+STARTERS.map(s=>'<button type="button" class="starter">'+esc(s)+'</button>').join('')+'</div>'+
+    (examples.length?'<div class="wex"><span class="eyebrow">Or open an example demo</span>'+examples.map(x=>'<button type="button" data-ex="'+esc(x.id)+'">'+esc(x.spec.title)+'</button>').join('')+'</div>':''));
+  $$('.starter',w).forEach(b=>b.addEventListener('click',()=>{msg.value=b.textContent;grow();msg.focus();msg.setSelectionRange(msg.value.length,msg.value.length);}));
+  $$('.wex button',w).forEach(b=>b.addEventListener('click',()=>useExample(b.dataset.ex)));
+  return w;}
+function userEl(text){const d=el('div','msg u');d.textContent=text;return d;}
+function claudeEl(){
+  const e=el('div','msg a','<div class="who"><i></i>Claude</div><div class="thk" hidden><button type="button" class="thk-h" aria-expanded="false"><span class="spin d"></span><span class="thk-l">Thinking</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button><div class="thk-b" hidden></div></div><div class="txt"></div>');
+  const o={el:e,thk:$('.thk',e),head:$('.thk-h',e),lab:$('.thk-l',e),body:$('.thk-b',e),txt:$('.txt',e)};
+  o.head.addEventListener('click',()=>{const on=o.head.getAttribute('aria-expanded')!=='true';o.head.setAttribute('aria-expanded',String(on));o.body.hidden=!on;});
+  return o;}
+function thought(o,secs,text){o.thk.hidden=false;const s=$('.spin',o.head);if(s)s.remove();o.lab.textContent='Thought for '+Math.max(1,secs)+'s';if(text!=null)o.body.textContent=text;if(!o.body.textContent)o.head.disabled=true;}
+function demoCard(o,label,title,building){
+  let c=$('.dcard',o.el);
+  if(!c){c=el('button','dcard');c.type='button';o.el.appendChild(c);c.addEventListener('click',()=>{if(!c.classList.contains('building'))showDemo();});}
+  c.classList.toggle('building',!!building);
+  c.innerHTML='<span class="ic">'+(building?'<span class="spin"></span>':PLAYI)+'</span><span><b>'+esc(label)+'</b><span class="tt">'+esc(title||'')+'</span></span><em>'+(building?'':'View')+'</em>';
+  return c;}
+function note(o,t){let n=$('.note',o.el);if(!n){n=el('p','note');o.el.appendChild(n);}n.textContent=t;}
+function render(){
+  thread.innerHTML='';thread.appendChild(welcome());
+  S.chat.forEach(m=>{if(m.role==='user'){thread.appendChild(userEl(m.text));return;}
+    const o=claudeEl();o.txt.innerHTML=md(m.text);if(m.thought)thought(o,m.thought,m.think||'');if(m.demo)demoCard(o,m.demo==='example'?'Example demo':'Version '+m.demo,m.title||'');if(m.stopped)note(o,'Stopped.');thread.appendChild(o.el);});
+  scrollDown(true);}
+function grow(){msg.style.height='auto';msg.style.height=Math.min(msg.scrollHeight+2,200)+'px';if(!busy)sendB.disabled=!msg.value.trim();}
+msg.addEventListener('input',grow);
+msg.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();if(!busy)send(msg.value);}});
+$('#composer').addEventListener('submit',e=>{e.preventDefault();if(busy){if(ctl)ctl.abort();}else send(msg.value);});
+sendB.innerHTML=SEND;
+function setBusy(on){busy=on;sendB.classList.toggle('stop',on);sendB.innerHTML=on?STOP:SEND;sendB.setAttribute('aria-label',on?'Stop':'Send');sendB.disabled=on?false:!msg.value.trim();}
+
+/* the seller access code, asked for once */
+const codeIn=$('#f-code'),codeBar=$('#codebar'),codeMsg=$('#code-msg');
+function askCode(text,bad){codeBar.hidden=false;codeMsg.textContent=bad||'You only need it once on this device.';codeMsg.classList.toggle('bad',!!bad);if(text&&!msg.value.trim()){msg.value=text;grow();}codeIn.value='';codeIn.focus();}
+function saveCode(){const v=codeIn.value.trim();if(!v){codeIn.focus();return;}store.set(CKEY,v);codeBar.hidden=true;if(msg.value.trim())send(msg.value);else msg.focus();}
+$('#code-ok').addEventListener('click',saveCode);codeIn.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();saveCode();}});
+
+async function* sse(r){const rd=r.body.getReader(),dec=new TextDecoder();let buf='';
+  for(;;){const {value,done}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true}).replace(/\r\n/g,'\n');let i;
+    while((i=buf.indexOf('\n\n'))>=0){const raw=buf.slice(0,i);buf=buf.slice(i+2);let ev='message',data='';
+      raw.split('\n').forEach(l=>{if(l.startsWith('event:'))ev=l.slice(6).trim();else if(l.startsWith('data:'))data+=l.slice(5).trim();});
+      if(!data)continue;let d;try{d=JSON.parse(data);}catch(e){continue;}yield [ev,d];}}}
+
+/* one turn: the seller's message goes out with the conversation and the demo in the player; Claude's words, its thinking and the new version stream back */
+async function send(text,retry){
+  if(busy)return;text=String(text||'').trim();if(!text)return;
+  const code=(store.get(CKEY)||'').trim();if(!code){askCode(text);return;}
+  if(!retry){S.chat.push({role:'user',text});thread.appendChild(userEl(text));msg.value='';grow();persist();}
+  $$('.starters,.wex',thread).forEach(x=>x.remove());
+  const o=claudeEl();thread.appendChild(o.el);o.thk.hidden=false;scrollDown(true);setBusy(true);
+  const t0=Date.now();let thinkEnd=0,think='',reply='',ver=null,title='',gotDemo=false,failed=false,stopped=false;
+  const tick=setInterval(()=>{if(!thinkEnd)o.lab.textContent='Thinking · '+Math.round((Date.now()-t0)/1000)+'s';},1000);
+  const endThink=()=>{if(thinkEnd)return;thinkEnd=Date.now();thought(o,Math.round((thinkEnd-t0)/1000),think);};
+  const fail=m=>{failed=true;endThink();o.txt.classList.remove('caret');const c=$('.dcard.building',o.el);if(c)c.remove();
+    const e=el('div','err','<span>'+esc(m)+'</span><button type="button" class="btn sm ghost">Try again</button>');o.el.appendChild(e);
+    $('button',e).addEventListener('click',()=>{o.el.remove();send(text,true);});scrollDown();};
+  ctl=new AbortController();
+  try{
+    const r=await fetch('/api/build',{method:'POST',headers:{'content-type':'application/json'},signal:ctl.signal,
+      body:JSON.stringify({code,chat:S.chat.map(m=>({role:m.role,text:m.text})),spec:S.spec,version:S.version,id:S.id,key:S.key})});
+    if(!r.ok||!/event-stream/.test(r.headers.get('content-type')||'')){let j={};try{j=await r.json();}catch(e){}
+      if(j.error==='code'){store.del(CKEY);const last=S.chat.pop();persist();render();askCode(last&&last.text,j.msg);return;}
+      fail(j.msg||'I could not start on that. Send it again in a moment.');return;}
+    for await (const [ev,d] of sse(r)){
+      if(ev==='thinking'){think=String(d.text||'').replace(/^[\s\S]{0,40}?\s/,'… ');o.body.textContent=think;o.body.scrollTop=o.body.scrollHeight;}
+      else if(ev==='text'){endThink();reply+=d.d||'';o.txt.innerHTML=md(reply);o.txt.classList.add('caret');scrollDown();}
+      else if(ev==='building'){endThink();o.txt.classList.remove('caret');demoCard(o,'Building the demo',d.steps?'Writing step '+d.steps:'Laying out the story',true);stageBusy(true,d.steps||0);scrollDown();}
+      else if(ev==='reset'){reply='';o.txt.innerHTML='';const c=$('.dcard',o.el);if(c)c.remove();note(o,d.msg||'Trying that again');stageBusy(false);}
+      else if(ev==='demo'){gotDemo=true;S.spec=d.spec;S.version=d.version||S.version+1;if(d.id)S.id=d.id;if(d.key)S.key=d.key;S.example=null;ver=S.version;title=d.spec.title;
+        const n=$('.note',o.el);if(n)n.remove();demoCard(o,'Version '+ver,title,false);stageBusy(false);openDemo(d.spec,{version:ver,fresh:true});flagDemo();persist();}
+      else if(ev==='error'){fail(d.msg||'Something went wrong on my side. Send it again.');}
+    }
+    if(!failed&&!reply&&!gotDemo)fail('The connection closed before I finished. Send it again.');
+  }catch(e){if(e&&e.name==='AbortError'){stopped=true;endThink();note(o,'Stopped.');}else fail('I lost the connection. Check your network and send it again.');}
+  finally{
+    clearInterval(tick);endThink();o.txt.classList.remove('caret');stageBusy(false);setBusy(false);ctl=null;
+    if(!failed&&(reply||gotDemo||stopped)){if(!reply&&gotDemo){reply='Here is the demo.';o.txt.innerHTML=md(reply);}
+      if(reply||gotDemo)S.chat.push({role:'assistant',text:reply||'(stopped)',demo:ver||undefined,title:title||undefined,thought:Math.max(1,Math.round((thinkEnd-t0)/1000)),think:think.slice(-1200)||undefined,stopped:stopped||undefined});persist();}
+  }
+}
+
+/* while a version builds: a placeholder before the first one, a quiet note on the player after that */
+function stageBusy(on,steps){
+  const has=!!S.spec&&!$('#player').hidden;
+  $('#upd').hidden=!(on&&has);$('#pframe').classList.toggle('dim',!!(on&&has));
+  const g=$('#ghost');
+  if(on&&!has){$('#empty').hidden=true;g.hidden=false;$('#ghost-t').textContent=steps?'Writing step '+steps:'Laying out the story';
+    $('#ghost-s').innerHTML=Array.from({length:9},(_,j)=>'<i class="'+(j<steps?'on':'')+'"></i>').join('');}
+  else{g.hidden=true;if(!has)$('#empty').hidden=false;}}
+
+function useExample(id){const x=examples.find(y=>y.id===id);if(!x)return;
+  S.spec=x.spec;S.version=0;S.id=null;S.key=null;S.example=x.id;
+  S.chat.push({role:'assistant',text:'This is an example to start from: **'+x.spec.title+'**. Tell me about your client and I will rework it for them, or ask me to change anything.',demo:'example',title:x.spec.title});
+  persist();render();openDemo(x.spec,{example:x.id});showDemo();}
+$('#new').addEventListener('click',()=>{if(ctl)ctl.abort();P.stop();S=fresh();persist();$('#player').hidden=true;$('#empty').hidden=false;$('#ghost').hidden=true;document.title=BASE_TITLE;
+  history.replaceState(null,'','/build');render();setView('chat');msg.focus();});
+
+fetch('/api/build?status=1').then(r=>r.ok?r.json():null).then(s=>{if(s&&s.ok&&!s.ready){ready=false;if(!busy)render();}}).catch(()=>{});
 
 /* ================================================================ the player */
 const P=(function(){
@@ -777,26 +864,44 @@ const P=(function(){
 })();
 
 /* ================================================================ open, share, and links */
-let current=null;
-function openDemo(spec,meta){meta=meta||{};current={spec,id:meta.id||null,example:meta.example||null};
-  if(meta.viewer)document.body.classList.add('viewer');$('#own').hidden=!document.body.classList.contains('viewer');$('#rebuild').hidden=document.body.classList.contains('viewer');
-  $('#player').hidden=false;$('#p-eye').textContent=meta.example?'Example demo':meta.fresh?'Your demo, built by Claude Opus 5.5':'A real-time intelligence demo';
+const BASE_TITLE=document.title;
+function openDemo(spec,meta){meta=meta||{};
+  if(meta.viewer)document.body.classList.add('viewer');const viewer=document.body.classList.contains('viewer');$('#own').hidden=!viewer;
+  $('#empty').hidden=true;$('#ghost').hidden=true;$('#player').hidden=false;
+  $('#p-eye').textContent=meta.example?'Example demo':meta.version?'Version '+meta.version+' · built with Claude Opus 5.5':'A real-time intelligence demo';
   $('#p-title').textContent=spec.title;$('#p-meta').textContent=[spec.client,spec.industry,spec.use_case,'IBM Granite '+spec.model,spec.tone].filter(Boolean).join(' · ');
   document.title=spec.title+' · Real-Time Intelligence';
-  if(meta.id)history.replaceState(null,'','/build?d='+meta.id);else if(meta.example)history.replaceState(null,'','/build?ex='+meta.example);
-  P.load(spec);requestAnimationFrame(()=>$('#player').scrollIntoView({behavior:reduced||meta.viewer?'auto':'smooth',block:'start'}));}
+  if(meta.id)history.replaceState(null,'','/build?d='+meta.id);else if(meta.example&&viewer)history.replaceState(null,'','/build?ex='+meta.example);
+  P.load(spec);
+  if(meta.fresh&&!isPhone())showDemo();}
 async function packed(spec){/* no store: the demo travels in the link itself */
   const raw=new TextEncoder().encode(JSON.stringify(spec));let bytes=raw,tag='j';
   if(window.CompressionStream){try{const s=new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw'));bytes=new Uint8Array(await new Response(s).arrayBuffer());tag='z';}catch(e){}}
   let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return tag+btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
 async function unpack(s){const tag=s[0],b64=s.slice(1).replace(/-/g,'+').replace(/_/g,'/');const bin=atob(b64),u=Uint8Array.from(bin,c=>c.charCodeAt(0));
   if(tag==='z'){const st=new Blob([u]).stream().pipeThrough(new DecompressionStream('deflate-raw'));return JSON.parse(await new Response(st).text());}return JSON.parse(new TextDecoder().decode(u));}
-$('#share').addEventListener('click',async()=>{if(!current)return;let url;
-  if(current.id)url=location.origin+'/build?d='+current.id;else if(current.example)url=location.origin+'/build?ex='+current.example;else url=location.origin+'/build#s='+await packed(current.spec);
+let viewing=null;
+$('#share').addEventListener('click',async()=>{let url;
+  if(viewing)url=location.href;
+  else if(S.id)url=location.origin+'/build?d='+S.id;else if(S.example&&S.spec)url=location.origin+'/build?ex='+S.example;else if(S.spec)url=location.origin+'/build#s='+await packed(S.spec);else return;
   try{await navigator.clipboard.writeText(url);toast('Link copied');}catch(e){prompt('Copy this link',url);}});
-(async function(){const q=new URLSearchParams(location.search);
-  if(q.get('d')){document.body.classList.add('viewer');try{const r=await fetch('/api/build?id='+encodeURIComponent(q.get('d')));const j=await r.json();if(j&&j.ok)openDemo(j.spec,{id:j.id,viewer:true});else{document.body.classList.remove('viewer');toast('That demo link was not found');}}catch(e){document.body.classList.remove('viewer');}}
-  else if(/^#s=/.test(location.hash)){try{openDemo(await unpack(location.hash.slice(3)),{viewer:true});}catch(e){toast('That demo link could not be read');}}})();
+
+/* examples, then whatever the address asks for: a shared demo, an example, or this device's own conversation */
+(async function(){
+  try{examples=await (await fetch('/data/builder/examples.json')).json();}catch(e){examples=[];}
+  $('#exs').innerHTML=examples.map(x=>'<button type="button" class="ex" data-ex="'+esc(x.id)+'"><span><b>'+esc(x.spec.title)+'</b><span>'+esc(x.spec.client)+' · '+esc(x.spec.use_case)+'</span></span>'+PLAYI+'</button>').join('');
+  $$('#exs .ex').forEach(b=>b.addEventListener('click',()=>useExample(b.dataset.ex)));
+  const q=new URLSearchParams(location.search),had=restore();
+  if(q.get('d')&&!(had&&S.id===q.get('d'))){
+    document.body.classList.add('viewer');
+    try{const r=await fetch('/api/build?id='+encodeURIComponent(q.get('d')));const j=await r.json();if(j&&j.ok){viewing=j.id;openDemo(j.spec,{viewer:true,version:j.version});return;}}catch(e){}
+    document.body.classList.remove('viewer');toast('That demo link was not found');history.replaceState(null,'','/build');}
+  else if(q.get('ex')&&examples.some(x=>x.id===q.get('ex'))){viewing=q.get('ex');openDemo(examples.find(x=>x.id===q.get('ex')).spec,{example:q.get('ex'),viewer:true});return;}
+  else if(/^#s=/.test(location.hash)){try{viewing='packed';openDemo(await unpack(location.hash.slice(3)),{viewer:true});return;}catch(e){viewing=null;toast('That demo link could not be read');}}
+  render();
+  if(S.spec)openDemo(S.spec,{version:S.version,example:S.example});
+  grow();if(!isPhone())msg.focus();
+})();
 })();
 </script>
 </body>
