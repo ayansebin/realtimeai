@@ -17,8 +17,9 @@ const EXAMPLES = require('../data/builder/examples.json');
 const MODEL = process.env.DEMO_VOICE_MODEL || 'elevenlabs/eleven-v4';
 const GATEWAY = (process.env.VOICE_BASE_URL || 'https://ai-gateway.vercel.sh').replace(/\/+$/, '');   // VOICE_BASE_URL is for tests
 const CAP = Math.max(1000, parseInt(process.env.DEMO_VOICE_DAILY_CHARS || '400000', 10) || 400000);
-/* ElevenLabs default voices, chosen for narration; the key is what the demo and the player use */
+/* ElevenLabs voices chosen for narration (Jessica Anne from the voice library, the rest default voices); the key is what the demo and the player use */
 const VOICES = {
+  jessicaanne: 'lxYfHSkYm1EzQzGhdbfc',   // Jessica Anne, from the ElevenLabs voice library: professional, conversational, the default
   bella: 'hpp4J3VqNfWAUOO0d1Us', sarah: 'EXAVITQu4vr4xnSDxMaL', matilda: 'XrExE9yKIg1WjnnlVkGX', alice: 'Xb7hH8MSUJpSbSDYk0k2',
   brian: 'nPczCjzI2devNBz1zQrb', eric: 'cjVigY5qzO86Huf0OWal', george: 'JBFqnCBsd6RMkjVDRZzb'
 };
@@ -128,7 +129,7 @@ module.exports = async function handler(req, res) {
   }
 
   /* one step of one demo */
-  const d = String(q.d || ''), phase = String(q.p || ''), vk = VOICES[q.v] ? q.v : 'eric';
+  const d = String(q.d || ''), phase = String(q.p || ''), vk = VOICES[q.v] ? q.v : 'jessicaanne';
   if (!PHASES.includes(phase)) return json(res, 404, { ok: false });
   let spec = null;
   const ex = EXAMPLES.find((x) => x.id === d);

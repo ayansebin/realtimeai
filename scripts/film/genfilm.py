@@ -4,16 +4,18 @@ short punch lines a touch slower. Writes loudness-normalized MP3s and manifest.j
 so film_script.py can put captions and on-screen actions on the exact words.
 Voice af_heart at speed 0.84, 0.80 on sentences of seven words or fewer (FILM_VOICE, FILM_SPEED, FILM_SLOW override).
 Models: kokoro-v1.0.onnx and voices-v1.0.bin from github.com/thewh1teagle/kokoro-onnx releases (model-files-v1.0), in KOKORO_DIR.
-ElevenLabs: Eric on Eleven v4, voiced through the site's AI Gateway (/api/voice?selftest=1&lines=...&voices=eric, which returns
-each sentence as base64), one MP3 per sentence in FILM_CLIPS named by sha1('eric|elevenlabs/eleven-v4|' + sentence)[:16].
-Eleven v4 takes no speed setting through the gateway, so each sentence is slowed with a pitch and formant preserving
-time stretch (FILM_TEMPO, default 0.8 = 20 percent slower), and the breaths between sentences grow by FILM_GAPS (1.2).
+ElevenLabs: Jessica Anne (a professional, conversational American voice from the ElevenLabs voice library) on Eleven v4,
+voiced through the site's AI Gateway by eleven_clips.py, one MP3 per sentence in FILM_CLIPS named by
+sha1(FILM_VOICE + '|elevenlabs/eleven-v4|' + sentence)[:16]. Eleven v4 takes no speed setting through the gateway, so the
+pace can be changed with a pitch and formant preserving time stretch (FILM_TEMPO); the film uses 1.0, her natural pace of about
+150 words a minute. FILM_GAPS scales the breaths between sentences (1.0).
 usage: python3 genfilm.py"""
 import json, re, numpy as np, soundfile as sf, subprocess, os, hashlib
 ENGINE = os.environ.get('FILM_ENGINE', 'kokoro')
-TEMPO = float(os.environ.get('FILM_TEMPO', '0.8')); GAPS = float(os.environ.get('FILM_GAPS', '1.2')) if ENGINE == 'eleven' else 1.0
-CLIPS = os.environ.get('FILM_CLIPS', '.'); ELEVEN = 'eric|elevenlabs/eleven-v4|'
-VOICE = os.environ.get('FILM_VOICE', 'eric' if ENGINE == 'eleven' else 'af_heart')
+TEMPO = float(os.environ.get('FILM_TEMPO', '1.0')); GAPS = float(os.environ.get('FILM_GAPS', '1.0')) if ENGINE == 'eleven' else 1.0
+CLIPS = os.environ.get('FILM_CLIPS', '.')
+VOICE = os.environ.get('FILM_VOICE', 'jessicaanne' if ENGINE == 'eleven' else 'af_heart')
+ELEVEN = VOICE + '|elevenlabs/eleven-v4|'
 SPEED = float(os.environ.get('FILM_SPEED', '0.84')); SLOW = float(os.environ.get('FILM_SLOW', '0.80')); SHORT = 7
 GAP = 0.34 * GAPS                            # breath between sentences
 HERE = os.path.dirname(os.path.abspath(__file__)); KD = os.environ.get('KOKORO_DIR', '.')
