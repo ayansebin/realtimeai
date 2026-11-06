@@ -1472,6 +1472,17 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .dm-msg{position:absolute;inset:0;display:grid;place-content:center;gap:.8rem;justify-items:center;padding:1.5rem;text-align:center;background:#2c5a63;color:#f4f8fa;font-size:1rem}
 .dm-msg a{color:#dcf0ff}
 .dm-list{grid-area:list;display:grid;gap:8px;align-content:start}
+.dm-build{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1.5rem clamp(1.5rem,4vw,3.5rem);margin-top:clamp(18px,2.4vw,28px);padding:clamp(22px,3vw,36px) clamp(22px,3.2vw,40px);color:#f4f8fa;text-decoration:none;background:linear-gradient(135deg,#1f4b56 0%,#3b6e78 55%,#448b97 100%);border:1px solid rgba(1,114,195,.55);box-shadow:0 18px 48px rgba(0,0,0,.18);transition:transform .15s,box-shadow .15s,border-color .15s}
+.dm-build:hover,.dm-build:focus-visible{text-decoration:none;color:#fff;transform:translateY(-2px);box-shadow:0 24px 56px rgba(0,0,0,.24);border-color:#43b0ff;outline:none}
+.dm-build:focus-visible{box-shadow:0 0 0 3px #88ceff,0 24px 56px rgba(0,0,0,.24)}
+.dm-build-tx{display:grid;gap:.45rem;min-width:0}
+.dm-build-tx .eyebrow{font:500 .72rem/1.2 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:#c2e5ff}
+.dm-build-tx strong{font-size:clamp(1.5rem,2.6vw,2.15rem);font-weight:400;line-height:1.15;letter-spacing:-.01em}
+.dm-build-tx>span:last-child{color:#d6e4ea;font-size:clamp(.98rem,1.2vw,1.1rem);font-weight:300;max-width:58ch}
+.dm-build-go{display:inline-flex;align-items:center;gap:.8rem;min-height:50px;padding:.6rem .6rem .6rem 1.2rem;font-size:.98rem;font-weight:500;color:#fff;background:var(--blue);border:1px solid transparent;white-space:nowrap;transition:background .12s}
+.dm-build-go svg{width:30px;height:30px;padding:7px;background:rgba(255,255,255,.14)}
+.dm-build:hover .dm-build-go{background:var(--blue-2)}
+@media (max-width:760px){.dm-build{grid-template-columns:1fr}.dm-build-go{justify-self:start}}
 .dm-it{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:.8rem;align-items:center;width:100%;margin:0;padding:7px;text-align:left;font:inherit;color:#161616;background:#f8f7f3;border:1px solid rgba(22,22,22,.18);box-shadow:0 1px 0 rgba(22,22,22,.04);cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
 .dm-it:hover{border-color:rgba(22,22,22,.45);box-shadow:0 6px 18px rgba(22,22,22,.08);transform:translateY(-1px)}
 .dm-it[aria-selected="true"]{color:#f4f8fa;background:linear-gradient(150deg,#448b97 0%,#3b6e78 70%);border-color:#0172c3;box-shadow:0 0 0 1px #0172c3;transform:none}
@@ -1695,7 +1706,6 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
       <a href="#usecases" data-ch="usecases"><b>03</b>Enterprise use cases</a>
       <a href="#demos" data-ch="demos"><b>04</b>Demos</a>
       <a href="/playground" data-ch="playground"><b>05</b>Playground</a>
-      <a href="/build"><b>06</b>Build a demo</a>
     </div>
     <a class="btn sm" href="#contact">Contact us <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </div>
@@ -2245,7 +2255,7 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
     <div class="chapter-head">
       <span class="n">04 / DEMOS</span>
       <h2>See it in action.</h2>
-      <p>A two-minute overview, anomaly detection in the stream, and two demos on Confluent Cloud. IBM sellers: <a href="/build">build a demo for your client</a> with Claude Opus 5.5.</p>
+      <p>A two-minute overview, anomaly detection in the stream, and two demos on Confluent Cloud. Or build your own, for your client.</p>
     </div>
     <div class="dm" id="dm">
       <div class="dm-screen" id="dm-screen" role="tabpanel" aria-labelledby="dm-t-film">
@@ -2258,6 +2268,10 @@ input[type=range]::-moz-range-thumb{box-shadow:0 0 0 1px var(--blue-2)}
         <button class="dm-it" role="tab" id="dm-t-retail" aria-selected="false" tabindex="-1" aria-controls="dm-screen" type="button" data-d="retail" data-kind="video" data-src="demos/retail.mp4" data-poster="demos/retail.jpg" data-play="Play" data-small="4:30" data-aria="Play Retail sales forecasting and anomaly detection, 4 minutes 30 seconds"><span class="dm-th"><img src="demos/retail-s.jpg" alt="" width="384" height="216" loading="lazy" decoding="async"><em>4:30</em></span><span class="dm-tx"><b>Retail sales forecasting and anomaly detection</b></span></button>
       </div>
     </div>
+    <a class="dm-build" href="/build" aria-label="Build your custom demo with Claude, opens the demo builder">
+      <span class="dm-build-tx"><span class="eyebrow">For IBM sellers · Claude Opus 5.5</span><strong>Build your custom demo</strong><span>Name the client, the industry and the decision. Claude writes the story, the data and the Flink SQL, and hands you a demo on Confluent to present.</span></span>
+      <span class="dm-build-go">Open the demo builder <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+    </a>
   </div>
   <script type="application/ld+json">[{"@context":"https://schema.org","@type":"VideoObject","name":"Time series on Confluent: a brief overview","description":"Why time series is the bigger prize after language models, IBM Granite Time Series as one pretrained family of models, how they run inside Confluent to decide in the stream, and use cases in production optimization, supply chain planning and semantic search.","thumbnailUrl":"https://realtimeintelligence.io/demos/overview.jpg","uploadDate":"2026-11-06","duration":"PT1M58S","contentUrl":"https://realtimeintelligence.io/demos/overview.mp4","inLanguage":"en"},{"@context":"https://schema.org","@type":"VideoObject","name":"Anomaly detection in the stream","description":"Every signal has a normal. How a time series foundation model learns each series' own normal zero-shot and flags spikes and slow drifts in Flink SQL on Confluent, with a payments and a plant example, and why Confluent matters: data already in motion, state per series, and a flag that is already an action.","thumbnailUrl":"https://realtimeintelligence.io/demos/anomaly.jpg","uploadDate":"2026-11-02","duration":"PT3M9S","contentUrl":"https://realtimeintelligence.io/demos/anomaly.mp4","inLanguage":"en"},{"@context":"https://schema.org","@type":"VideoObject","name":"Multivariate forecasting with the weather","description":"Streaming multivariate forecasting with exogenous data on Confluent Cloud. A fine-tuned IBM Granite TinyTimeMixer forecasts grid load and solar generation in Spain together, with ten weather columns as context, called from Flink SQL as the data arrives.","thumbnailUrl":"https://realtimeintelligence.io/demos/multivariate.jpg","uploadDate":"2026-10-20","duration":"PT2M53S","contentUrl":"https://realtimeintelligence.io/demos/multivariate.mp4","inLanguage":"en"},{"@context":"https://schema.org","@type":"VideoObject","name":"Retail sales forecasting and anomaly detection","description":"Daily sales of household goods at one store stream from a Kafka topic on Confluent Cloud, and Flink SQL calls IBM Granite Time Series models through two Flink AI functions. AI_FORECAST forecasts 28 days ahead with quantile bands, and AI_DETECT_ANOMALIES flags unusual days at 99.9% confidence, with no fine-tuning and no external ML infrastructure.","thumbnailUrl":"https://realtimeintelligence.io/demos/retail.jpg","uploadDate":"2026-10-20","duration":"PT4M30S","contentUrl":"https://realtimeintelligence.io/demos/retail.mp4","inLanguage":"en"}]</script>
 </section>
