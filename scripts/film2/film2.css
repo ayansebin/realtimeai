@@ -1,0 +1,92 @@
+/* film mode, the roadmap look: one chart at a time on the site's off-white paper, captions in their own band.
+   Poppins for titles, Inter for everything else, Confluent blue for the accent, navy for the closing card. */
+html.film{--fp:#F8F8F8;--fi:#1E1E1E;--fi2:#4A4F5C;--fi3:#6B6F7B;--fi4:#9AA0B0;--fb:#0056F9;--fn:#0B1F66;--fg:#1E7F45;
+  background:var(--fp)!important;scroll-behavior:auto!important;zoom:1!important}
+html.film body{background:transparent!important;background-image:none!important;visibility:hidden}
+html.film body::before{display:none!important}
+html.film #pitch,html.film #pitch-mini,html.film .nav,html.film .sr,html.film .hero-band{display:none!important}
+html.film .film-shot{visibility:visible;position:fixed!important;margin:0!important;z-index:20!important;opacity:1!important;filter:none!important;
+  box-shadow:0 24px 60px rgba(16,24,64,.16)!important;transition:none!important;border-radius:14px}
+html.film .film-shot.flat{box-shadow:none!important;border-radius:0}
+html.film .film-shot .pnav,html.film .film-shot #th-replay,html.film .film-shot .th-hint,html.film .film-shot .ax-vals,html.film .film-shot #ax-vals{display:none!important}
+html.film #st-three.film-shot > .stage-top{display:none!important}
+html.film #st-live.film-shot .hx-top{display:none!important}
+html.film #mdtabs.neutral .uc[aria-selected="true"]{background:#fff!important;color:#1E1E1E!important;box-shadow:0 1px 2px rgba(16,24,64,.05)!important;border-color:rgba(16,24,64,.18)!important;transform:none!important}
+html.film #mdtabs.neutral .uc[aria-selected="true"] b,html.film #mdtabs.neutral .uc[aria-selected="true"] span,html.film #mdtabs.neutral .uc[aria-selected="true"] i{color:inherit!important}
+html.film .film-shot .tour-hi{transition:none}
+html.film .film-shot.why .why-say{display:none!important}
+/* the models shot: the tabs and the open panel travel together */
+html.film #md-shot.film-shot{background:transparent}
+html.film #md-shot .mdgrid{margin-bottom:10px}
+html.film #md-shot .strip-hint{display:none!important}
+/* a dimmed time series card belongs to the page's old build-up, never to the film */
+html.film .why .sh-card.b{opacity:1!important}
+
+#film-ui{visibility:visible;position:fixed;inset:0;z-index:2147483000;pointer-events:none;font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--fi)}
+#film-ui .f-top{position:absolute;left:40px;right:40px;top:0;height:40px;display:flex;align-items:center;justify-content:space-between}
+#film-ui .f-brand{display:inline-flex;align-items:center;gap:9px;font:500 14px/1 "Poppins","Segoe UI",sans-serif;letter-spacing:-.005em;color:var(--fn)}
+#film-ui .f-brand i{width:8px;height:8px;background:var(--fb);display:inline-block;border-radius:2px}
+#film-ui .f-brand.quiet{font:500 11.5px/1 "Inter",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--fi3)}
+#film-ui .f-brand.quiet i{display:none}
+#film-ui .f-label{font:600 11px/1 "Inter",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--fb)}
+#film-ui .f-label b{font-weight:600;color:var(--fi4);margin-right:.9em}
+#film-ui .f-label .nav-uc{display:inline-flex;align-items:center;gap:22px;margin-left:20px;padding-left:20px;border-left:1px solid rgba(16,24,64,.18);
+  font:400 13px/1 "Inter",sans-serif;letter-spacing:0;text-transform:none;vertical-align:middle}
+#film-ui .f-label .nav-uc i{font-style:normal;color:var(--fi4);position:relative;padding:8px 0}
+#film-ui .f-label .nav-uc i.done{color:var(--fi3)}
+#film-ui .f-label .nav-uc i.on{color:var(--fn);font-weight:500}
+#film-ui .f-label .nav-uc i.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--fb);border-radius:2px}
+#film-ui .f-cap{position:absolute;left:80px;right:80px;bottom:0;height:92px;display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:23px;font-weight:400;line-height:1.3;letter-spacing:-.003em;color:var(--fi);text-wrap:balance}
+#film-ui .f-cap > span{display:block;max-width:100%}
+#film-ui .f-cap em{font-style:normal;color:var(--fb);font-weight:500}
+
+/* cards: the models family, the use case gallery and the closing call */
+#film-ui .f-card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--fp)}
+#film-ui .f-card[hidden]{display:none}
+#film-ui .f-eye{font:600 11px/1 "Inter",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--fb);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+#film-ui .f-eye i{width:8px;height:8px;background:var(--fb);display:inline-block;border-radius:2px}
+#film-ui .f-card h1{margin:0;font:400 46px/1.15 "Poppins","Segoe UI",sans-serif;letter-spacing:-.015em;max-width:24ch;color:var(--fn)}
+#film-ui .f-card h1 em{font-style:normal}
+#film-ui .f-card .b{color:var(--fb)}
+#film-ui .f-card .g{color:var(--fg)}
+#film-ui .f-card p.sub{margin:14px 0 0;font-size:19px;color:var(--fi2);font-weight:400}
+
+/* the models family card: text above and below, the live tabs framed in between */
+#film-ui .f-models{background:transparent;justify-content:flex-start;align-items:flex-start;text-align:left;padding:0 40px}
+#film-ui .f-models .f-head{position:absolute;left:40px;top:92px}
+#film-ui .f-models .f-head h1{font-size:40px}
+#film-ui .f-models .f-proof{position:absolute;left:40px;top:412px;padding-top:16px;border-top:3px solid var(--fb);width:640px}
+#film-ui .f-models .f-proof strong{display:block;font:500 20px/1.25 "Poppins","Segoe UI",sans-serif;color:var(--fn);letter-spacing:-.005em}
+#film-ui .f-models .f-proof span{display:block;font-size:15.5px;color:var(--fi2);margin-top:5px}
+#film-ui .f-models .f-proof small{display:block;font-size:11.5px;color:var(--fi3);margin-top:10px;line-height:1.5}
+
+/* the use case gallery */
+#film-ui .f-gallery{justify-content:flex-start;align-items:flex-start;text-align:left;padding:84px 40px 0}
+#film-ui .f-gallery h1{font-size:36px;max-width:none}
+#film-ui .f-gallery .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 20px;width:1200px;margin-top:26px}
+#film-ui .f-gallery .cell{display:grid;gap:7px}
+#film-ui .f-gallery .cell b{font:500 15px/1.2 "Inter",sans-serif;color:var(--fi);display:flex;align-items:center;gap:8px}
+#film-ui .f-gallery .cell b i{font-style:normal;font:600 10.5px/1 "Inter",sans-serif;letter-spacing:.1em;color:var(--fb)}
+#film-ui .f-gallery .cell img{display:block;width:100%;aspect-ratio:16/8.4;object-fit:cover;object-position:top;border-radius:10px;box-shadow:0 10px 30px rgba(16,24,64,.14);background:#0B1F66}
+
+/* the closing card: the site's hero band */
+#film-ui .f-end{background:linear-gradient(135deg,#040531 0%,#061a7a 55%,#0056F9 100%);color:#fff;overflow:hidden}
+#film-ui .f-end .lines{position:absolute;right:-6%;top:-20%;width:62%;height:160%;opacity:.5}
+#film-ui .f-end .f-eye{color:#C2E5FF}
+#film-ui .f-end .f-eye i{background:#9BE7FF}
+#film-ui .f-end h1{color:#fff;font-size:50px;max-width:none}
+#film-ui .f-end .b{color:#9BE7FF}
+#film-ui .f-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px;width:760px;margin-top:48px;text-align:left}
+#film-ui .fs{display:grid;gap:7px;padding-top:16px;box-shadow:inset 0 2px 0 rgba(255,255,255,.35);opacity:.5;transition:opacity .5s,box-shadow .5s}
+#film-ui .fs b{font:600 11px/1 "Inter",sans-serif;letter-spacing:.14em;color:#C2E5FF}
+#film-ui .fs strong{font:500 22px/1.2 "Poppins","Segoe UI",sans-serif;letter-spacing:-.01em;color:#fff}
+#film-ui .fs span{font:400 14px/1.3 "Inter",sans-serif;color:#DCE8FF}
+#film-ui .fs.on{opacity:1;box-shadow:inset 0 3px 0 #9BE7FF}
+#film-ui .fs.on b{color:#9BE7FF}
+/* capture pass: shots and cards only, the editor draws brand, labels and captions */
+#film-ui.capture .f-top,#film-ui.capture .f-cap{visibility:hidden!important}
+/* overlay pass: transparent page, overlays only */
+html.film.ovl,html.film.ovl body{background:transparent!important}
+html.film.ovl.light #film-ui .f-cap{color:#fff}
+html.film.ovl.light #film-ui .f-cap em{color:#9BE7FF}

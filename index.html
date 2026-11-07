@@ -2573,6 +2573,7 @@ const MODELS={
   tspulse:{name:'TSPulse',params:'1.1M',ms:2,bandK:1,smooth:0,sqlv:'ttm'}
 };
 const App={model:'ttm',listeners:[]};
+if(window.__filmCapture||/[?&]debug/.test(location.search))window.__rti=App;/* the film recorder and debugging reach the page's modules here */
 function setModel(k){if(!MODELS[k])return;App.model=k;$$('.mcard').forEach(c=>c.classList.toggle('on',c.dataset.m===k));App.listeners.forEach(f=>f(k));}
 $$('.mcard').forEach(c=>c.addEventListener('click',()=>setModel(c.dataset.m)));
 const sqlModel=()=>MODELS[App.model].sqlv;
@@ -2937,7 +2938,7 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   reg({el,resize(){cv.fit();gl.forEach(c=>c.fit());L=null;draw();},update(dt){st.acc+=dt;while(st.acc>=RATE){st.acc-=RATE;commit();loop();}ui(performance.now());},draw(){draw();drawGlyphs();}});
   /* the headline loop (below) walks the six use cases nonstop and moves the chart's spotlight with it; a click on the chart pins one for 30 s */
   App.heroPairs=ORDER.map(k=>{const x=S.find(q=>q.k===k);return {k,a:x.pair[0],b:x.pair[1]};});
-  App.heroSpot=k=>{const i=S.findIndex(q=>q.k===k);if(i>=0&&performance.now()-st.pinT>30000)st.spot=i;};
+  App.heroSpot=k=>{const i=S.findIndex(q=>q.k===k);if(i>=0&&performance.now()-st.pinT>30000&&st.hold<=performance.now())st.spot=i;};
   /* the demo drives the same chart, starting on the store */
   const hold=ms=>{st.hold=performance.now()+ms;};
   App.hero={reset(){hold(60000);restart();setSpot(0,false);st.focus=true;},flash(k){flash(k);},ctx(){hold(60000);context();},anomaly(){hold(60000);anomaly();},optimize(){hold(30000);optimize();}};
