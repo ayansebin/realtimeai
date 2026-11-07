@@ -118,6 +118,20 @@ def load_steel():
     return regularize(s, "15min")
 
 
+@dataset(id="tk101", name="Hold tank steam valve, TK-101", domain="Process manufacturing", kind="public", cls="sub", freq="15min",
+         season=96, unit="% open", fs_scale=0.25, ttm_freq="15min",
+         source={"name": "HistorianRCA: A Root Cause Analysis Benchmark, 90 days of simulated plant historian data from TK-101, a steam-heated agitated hold tank (Scott Duncan, v1.0)",
+                 "url": "https://github.com/ScottDuncanAI/HistorianRCA", "license": "CC BY 4.0"},
+         blurb="The steam valve on a steam-heated hold tank, every 15 minutes over the last month of a 90-day plant historian. A daily rhythm from the steam header, and faults the temperature controller hides: the tank stays at setpoint while the valve creeps open.")
+def load_tk101():
+    raw = fetch("https://github.com/ScottDuncanAI/HistorianRCA/raw/main/historian_60s.parquet", timeout=300)
+    df = pd.read_parquet(io.BytesIO(raw), columns=["timestamp", "TV-101.POS"])
+    ts = pd.to_datetime(df["timestamp"], utc=True).dt.tz_localize(None)
+    s = pd.Series(df["TV-101.POS"].astype(float).values, index=ts)
+    s = s.resample("15min").mean()
+    return regularize(s, "15min")
+
+
 @dataset(id="traffic", name="Interstate traffic volume", domain="Transport", kind="public", cls="sub", freq="h",
          season=24, unit="vehicles / h", fs_scale=1.0, ttm_freq="h",
          source={"name": "Metro Interstate Traffic Volume, UCI Machine Learning Repository (MN DoT, I-94 westbound)",
