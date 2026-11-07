@@ -1741,7 +1741,7 @@ h3,h4,.stage-title h3{font-weight:500;letter-spacing:-.005em}
 .chapter.hero{padding-top:0}
 .hero-band{position:relative;overflow:hidden;background:linear-gradient(135deg,#040531 0%,#061a7a 55%,#0056F9 100%);color:#fff;margin-bottom:clamp(28px,3.5vw,56px)}
 .hero-band .lines{position:absolute;right:-6%;top:-20%;width:62%;height:160%;opacity:.5;pointer-events:none}
-.hero-band .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.85fr);gap:2rem 3rem;align-items:center;padding-block:clamp(40px,6vw,88px)}
+.hero-band .wrap{position:relative;display:grid;grid-template-columns:1fr;align-items:center;padding-block:clamp(40px,6vw,88px)}
 .hero-band .hero-head{margin-bottom:0}
 .hero-band .pill.live{border-color:rgba(255,255,255,.38);color:#DCE8FF;background:rgba(255,255,255,.08)}
 .hero-band .pill.live::before{background:#6fdc8c}
@@ -1757,12 +1757,7 @@ h3,h4,.stage-title h3{font-weight:500;letter-spacing:-.005em}
 .hero-band .btn.play{background:#fff;color:#0B1F66;box-shadow:none}
 .hero-band .btn.play:hover{background:#DCE8FF;color:#0B1F66}
 .hero-band .btn.play small{color:#4A5A8F}
-.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;position:relative}
-.hstat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:.9rem 1rem;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.hstat b{display:block;font-family:var(--font-head);font-weight:300;font-size:clamp(1.6rem,2.6vw,2.3rem);line-height:1.05;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
-.hstat span{display:block;font-size:.72rem;color:#C2E5FF;letter-spacing:.06em;text-transform:uppercase;margin-top:.35rem;line-height:1.3}
-@media (max-width:1100px){.hero-band .wrap{grid-template-columns:1fr}.hero-band .lines{right:-30%;width:90%;opacity:.35}.hero-stats{max-width:640px}}
-@media (max-width:600px){.hero-stats{grid-template-columns:1fr 1fr}.hero-stats .hstat:last-child{grid-column:1/-1}}
+@media (max-width:1100px){.hero-band .lines{right:-30%;width:90%;opacity:.35}}
 
 /* ---------- nav groups: four tabs, sub-tabs open under them on hover or tap ---------- */
 .nav-links{overflow:visible;gap:.15rem}
@@ -1854,11 +1849,6 @@ h3,h4,.stage-title h3{font-weight:500;letter-spacing:-.005em}
       <h1 class="h-display">Predict the next <em class="rot"><span id="rot">stockout</span><i class="caret" aria-hidden="true"></i></em><br>Optimize for <em class="rot rot2"><span id="rot2">service level</span><i class="caret c2" aria-hidden="true"></i></em></h1>
       <p class="lede">IBM Granite Time Series models now run inside Confluent. They read every live signal in its context and optimize mission-critical decisions while they still matter.</p>
       <div class="btn-row hero-cta"><a class="btn play" id="walk-open" href="#demos-film" aria-label="Watch the two-minute overview film"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Watch the overview <small>1:58</small></a></div>
-    </div>
-    <div class="hero-stats" aria-label="Key figures">
-      <div class="hstat"><b>44M+</b><span>Hugging Face downloads</span></div>
-      <div class="hstat"><b>0.8 s</b><span>Event to decision</span></div>
-      <div class="hstat"><b>1 model</b><span>Six industries, zero‑shot</span></div>
     </div>
     </div>
   </div>
