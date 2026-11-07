@@ -35,7 +35,7 @@ export const T = [
   [163.47, `__film2.tab('uc-search');__film2.frame('#uc-search',{label:${nav(4)}});__film2.click('#se-q .chip[data-v="spike"]');__film2.cut('uc-search')`],
   [170.60, `__film2.tab('uc-trade');__film2.frame('#uc-trade',{label:${nav(5)}});__film2.cut('uc-trade')`],
   [177.20, `__film2.click('#tr-inject .chip[data-v="news"]')`],
-  [181.80, `__film2.release();__film2.card('gallery',true);__film2.setBrand('Real-time intelligence',true);__film2.setLabel('');__film2.cut('gallery')`],
+  [181.80, `__film2.card('gallery',true);__film2.setBrand('Real-time intelligence',true);__film2.setLabel('');__film2.cut('gallery')`],
   [188.10, `__film2.card('end',true);__film2.setBrand(null);__film2.cut('end')`],
   [188.27, `__film2.endStep(1)`],
   [190.17, `__film2.endStep(2)`],

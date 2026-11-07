@@ -29,12 +29,12 @@ const F = (code) => p.evaluate(code);
 const gallery = [];
 for (const [id, name] of UCS) {
   await F(`__film2.tab('${id}');__film2.frame('#${id}',{label:''})`); await p.waitForTimeout(1600);
-  const buf = await p.locator('#' + id).screenshot({ type: 'jpeg', quality: 88 });
+  const buf = await p.locator('#' + id).screenshot({ type: 'jpeg', quality: 86, scale: 'css' });
   gallery.push({ name, src: 'data:image/jpeg;base64,' + buf.toString('base64') });
 }
 await p.evaluate(items => __film2.gallery(items), gallery);
 /* show the gallery once now, so its pictures are decoded before the clock runs */
-await F(`__film2.card('gallery',true)`); await p.waitForTimeout(1500); await F(`__film2.card('gallery',false)`);
+await F(`__film2.card('gallery',true)`); await p.waitForTimeout(2500); await F(`__film2.card('gallery',false)`); await p.waitForTimeout(400); await F(`__film2.card('gallery',true)`); await p.waitForTimeout(800); await F(`__film2.card('gallery',false)`);
 await F(`__film2.tab('uc-prod');__film2.tab('md-ttm')`);
 if (ENDCARD) await p.evaluate(c => __film2.setEnd(c), ENDCARD);
 /* opening shot in place before the clock starts */

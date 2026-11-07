@@ -22,7 +22,7 @@ export const T = [
   [46.00, `__film2.tab('md-patchtstfm');__film2.frame('#md-patchtstfm',{label:${mnav(2)}});__film2.cut('md-patchtstfm')`],
   [48.40, `__film2.tab('md-tspulse');__film2.frame('#md-tspulse',{label:${mnav(3)}});__film2.cut('md-tspulse')`],
   [53.80, `__film2.frame('#st-arch',{brand:'Real-time intelligence',quiet:false,label:'<b>01</b>Confluent + IBM Granite'});__rti.arch.focus(0,true,1.6);__film2.cut('arch')`],
-  [72.50, `__film2.release();__film2.card('gallery',true);__film2.setBrand('Real-time intelligence',true);__film2.setLabel('');__film2.cut('gallery')`],
+  [72.50, `__film2.card('gallery',true);__film2.setBrand('Real-time intelligence',true);__film2.setLabel('');__film2.cut('gallery')`],
   [78.90, `__film2.card('gallery',false);__film2.tab('uc-prod');__film2.frame('#uc-prod',{brand:'Real-time intelligence',quiet:false,label:${nav(0)}});__film2.cut('uc-prod')`],
   [82.90, `__film2.click('#pr-inject .chip[data-v="butter"]')`],
   [84.10, `__film2.tab('uc-anom');__film2.click('#an-conf .chip[data-v="99.9"]');__film2.frame('#uc-anom',{label:${nav(1)}});__film2.cut('uc-anom')`],
@@ -34,6 +34,6 @@ export const T = [
   [99.40, `__film2.click('#fr-inject .chip[data-v="testing"]')`],
   [104.50, `__film2.tab('uc-trade');__film2.frame('#uc-trade',{label:${nav(4)}});__film2.cut('uc-trade')`],
   [107.50, `__film2.tab('uc-search');__film2.frame('#uc-search',{label:${nav(5)}});__film2.click('#se-q .chip[data-v="spike"]');__film2.cut('uc-search')`],
-  [113.00, `__film2.release();__film2.card('end',true);__film2.setBrand(null);__film2.setLabel('');__film2.endStep(1);__film2.cut('end')`],
+  [113.00, `__film2.card('end',true);__film2.setBrand(null);__film2.setLabel('');__film2.endStep(1);__film2.cut('end')`],
   [114.40, `__film2.endStep(2)`],
 ];
