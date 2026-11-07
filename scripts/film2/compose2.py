@@ -9,7 +9,7 @@ from PIL import Image
 
 D, AUDIO, SRT, OUT = sys.argv[1:5]
 FPS, XF, FIN, FOUT, CAPIN = 30, 0.45, 0.45, 0.7, 0.18
-PAPER = np.array([248, 248, 248], dtype=np.float32)
+PAPER = np.array([236, 235, 230], dtype=np.float32)
 NAVY = np.array([4, 5, 49], dtype=np.float32)
 
 m = json.load(open(D + '/meta.json'))
@@ -37,7 +37,7 @@ def load_ovl(fn):
 BRANDS = {k: load_ovl(f) for k, f in idx['brands'].items()}
 LABS = {h: load_ovl(f) for h, f in idx['labels'].items()}
 CAPS = [(c['a'], load_ovl(c['f']), load_ovl(c.get('fl', c['f']))) for c in idx['caps']]
-END_CUT = next((c - T0 for w, c, o in xcuts if w == 'end'), None)   # light captions on the navy closing card
+END_CUT = None   # the closing card is on the paper, so captions stay dark throughout
 def snap(t):  # labels and the brand change with the picture, not before it
     best = None
     for w, c, o in xcuts:
@@ -95,7 +95,7 @@ for k in range(N):
     if i >= 0: comp(fr, CAPS[i][2] if (END_CUT is not None and vt >= END_CUT) else CAPS[i][1], ease((vt - CAPS[i][0]) / CAPIN))
     g_in = ease(vt / FIN); g_out = ease((END - vt) / FOUT)
     if g_in < 1: fr = fr * g_in + PAPER * (1 - g_in)
-    if g_out < 1: fr = fr * g_out + NAVY * (1 - g_out)
+    if g_out < 1: fr = fr * g_out + PAPER * (1 - g_out)
     ff.stdin.write(np.clip(fr, 0, 255).astype(np.uint8).tobytes())
 ff.stdin.close(); ff.wait()
 print(OUT, round(END, 2), 's,', N, 'frames; visual cuts at', [(w, round(c - T0, 2)) for w, c, o in xcuts])
