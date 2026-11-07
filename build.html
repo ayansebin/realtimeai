@@ -426,12 +426,20 @@ h3,h4{font-weight:500;letter-spacing:-.005em}
   .ng-p.ng-six{min-width:0;grid-template-columns:1fr 1fr}
 }
 @media (max-width:420px){.ng-p.ng-six{grid-template-columns:1fr}.ng-t{font-size:.8rem;padding-inline:.25rem;gap:0}.ng-t .chev{display:none}.ng.open .ng-t{text-decoration:underline;text-underline-offset:4px}}
+
+/* ---------- home: top left, a full reload of the site ---------- */
+.nav-home{display:inline-flex;align-items:center;gap:.35rem;color:#C9CFE2;font-size:.84rem;padding:.32rem .6rem;border:1px solid rgba(255,255,255,.2);border-radius:999px;text-decoration:none;white-space:nowrap;flex:none;line-height:1}
+.nav-home svg{width:14px;height:14px}
+.nav-home:hover{color:#fff;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4);text-decoration:none}
+.nav-home:focus-visible{outline:2px solid #9BBCFF;outline-offset:2px}
+@media (max-width:480px){.nav-home span{display:none}.nav-home{padding:.32rem .45rem}.nav .brand{flex:1 1 0%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.nav .btn{flex:none}}
 </style>
 </head>
 <body>
 <nav class="nav" aria-label="Main">
   <div class="wrap">
     <a class="brand" href="/"><span class="dot"></span>Real-time intelligence <span class="co">Granite Time Series on Confluent</span></a>
+    <a class="nav-home" href="/" aria-label="Home, back to the start of the site"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5 8 3l6 5.5M4 7.5V13h8V7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Home</span></a>
     <div class="nav-links" id="navlinks">
     <div class="ng" data-g="tech">
       <button class="ng-t" type="button" aria-expanded="false" aria-controls="ng-tech">Technology<svg class="chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
