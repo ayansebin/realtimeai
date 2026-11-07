@@ -12,7 +12,7 @@
     '<div class="f-card f-models" id="f-models" hidden><div class="f-head"><div class="f-eye"><i></i>IBM Granite Time Series</div><h1>A holistic model family.</h1><p class="sub">Different strengths for different jobs, data rhythms and budgets.</p></div>'+
       '<div class="f-proof"><strong>Leading forecasting and anomaly detection benchmark performers</strong><span>In production with multiple clients</span><small>Forecasting: commercial-friendly zero-shot category · GIFT-Eval, Aug 2026.<br>Anomaly detection: #1 in univariate and multivariate · TSB-AD.</small></div></div>'+
     '<div class="f-card f-gallery" id="f-gallery" hidden><h1>Mission-critical decisions across the business.</h1><div class="grid" id="f-grid"></div></div>'+
-    '<div class="f-card f-end" id="f-end" hidden>'+LINES+'<div class="f-eye"><i></i>Real-time intelligence</div><h1>Turn time series into <em class="b">better decisions</em>.</h1>'+
+    '<div class="f-card f-end" id="f-end" hidden><div class="f-eye"><i></i>Real-time intelligence</div><h1>Turn time series into <em class="b">better decisions</em>.</h1>'+
       '<div class="f-steps">'+
         '<div class="fs" data-k="1"><b>01</b><strong>Try the time series models</strong><span>Forecast, detect and optimize. realtimeintelligence.io/playground</span></div>'+
         '<div class="fs" data-k="2"><b>02</b><strong>Get in touch</strong><span>Bring real-time intelligence to your business. realtimeintelligence.io</span></div>'+
