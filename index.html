@@ -1415,7 +1415,7 @@ body.pitching .hero .canvas-wrap.hx-wrap{height:clamp(360px,46vh,460px)}
 .sh-mid svg{width:36px;height:16px;fill:none;stroke:#4D8BFF;stroke-width:1.5}
 @keyframes shdash{to{stroke-dashoffset:-16}}
 /* the build, one class per step: inputs, the model, the outcomes, then the same for wave two */
-.why .sh-card.b{opacity:.4}
+.why .sh-card.b{opacity:1}
 .why.s1 .a .ins .sh-chip{opacity:1;transform:none}
 .why.s1 .a .ins .sh-chip:nth-child(2){transition-delay:.15s}
 .why.s1 .a .ins .sh-chip:nth-child(3){transition-delay:.3s}
@@ -1854,7 +1854,7 @@ h3,h4,.stage-title h3{font-weight:500;letter-spacing:-.005em}
   </div>
   <div class="wrap">
 
-    <div class="stage why" id="st-why">
+    <div class="stage why s1 s2 s3 s4 s5 s6" id="st-why">
       <div class="stage-top">
         <div class="stage-title"><h3>From words to decisions</h3><p class="why-say">Foundation models transformed unstructured data. The bigger prize is <em>time series and streaming data</em>, where the mission-critical decisions live.</p><p><span class="lg lg-a">Wave one: unstructured data</span><span class="lg lg-b">Wave two: time series and streaming data</span></p></div>
       </div>
@@ -4721,22 +4721,11 @@ const CS={
   App.arch={focus(i,pin,slow){const now=performance.now();st.pin=pin?now+CYCLE*(slow||1)+800:-1e9;start(i,now,slow);},hi(k){setHi(k,false);}};
 })();
 
-/* ============ 01 intro: from words to decisions. Wave one on unstructured data, wave two on time series, built step by step in a loop ============ */
+/* ============ 01 intro: from words to decisions. Both waves are always fully on; nothing dims or loops ============ */
 (function(){
   const el=$('#st-why');if(!el)return;
-  const K=['s1','s2','s3','s4','s5','s6'],T=[200,1100,1900,3500,4400,5200],FULL=7200,HOLD=4500,GAP=900;
-  let timers=[],looping=false,visible=false;
-  const set=k=>K.forEach((c,i)=>el.classList.toggle(c,i<k));
-  const clear=()=>{timers.forEach(clearTimeout);timers=[];};
-  const pitching=()=>document.body.classList.contains('pitching');
-  function cycle(lead){clear();set(0);void el.offsetWidth;T.forEach((t,i)=>timers.push(setTimeout(()=>set(i+1),lead+t)));timers.push(setTimeout(()=>{if(looping)cycle(GAP);},lead+FULL+HOLD));}
-  function start(){if(looping||reduced||!visible||pitching())return;looping=true;cycle(0);}
-  function stop(){looping=false;clear();}
-  /* the live demo drives the same steps from its voice, and the loop picks up again when it is done */
-  App.why={reset:()=>{stop();set(0);},set:k=>{stop();set(k);}};
-  if(reduced||!('IntersectionObserver' in window)){set(K.length);return;}
-  new IntersectionObserver(es=>{visible=es[es.length-1].isIntersecting;if(visible)start();else stop();},{threshold:.2}).observe(el);
-  if(window.MutationObserver)new MutationObserver(()=>{if(pitching())stop();else start();}).observe(document.body,{attributes:true,attributeFilter:['class']});
+  const K=['s1','s2','s3','s4','s5','s6'],on=()=>K.forEach(c=>el.classList.add(c));on();
+  App.why={reset:on,set:on};
 })();
 
 /* ============ scripted tour engine (film only) ============ */
