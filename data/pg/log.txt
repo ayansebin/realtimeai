@@ -1,18 +1,7 @@
-== steel
-  ttm: ok, 20.0 ms per forecast, 8.0 s total
-  flowstate: ok, 1611.1 ms per forecast, 18.3 s total
-  patchtstfm: ok, 4423.8 ms per forecast, 54.3 s total
+== tk101
+  ttm: ok, 30.0 ms per forecast, 7.7 s total
+  flowstate: ok, 1601.5 ms per forecast, 18.8 s total
+  patchtstfm: ok, 5992.4 ms per forecast, 66.5 s total
   snaive: ok, 0.0 ms per forecast, 0.0 s total
-  tspulse: ok, 11179 ms for 3104 points
-== bikes
-  ttm: ok, 18.2 ms per forecast, 0.2 s total
-  flowstate: ok, 1636.3 ms per forecast, 16.6 s total
-  patchtstfm: ok, 4496.3 ms per forecast, 45.0 s total
-  snaive: ok, 0.0 ms per forecast, 0.0 s total
-  tspulse: ok, 11125 ms for 3104 points
-== retail
-  ttm: ok, 4.0 ms per forecast, 1.9 s total
-  flowstate: ok, 56.9 ms per forecast, 0.5 s total
-  patchtstfm: ok, 4392.5 ms per forecast, 26.4 s total
-  snaive: ok, 0.0 ms per forecast, 0.0 s total
-done: ['steel', 'traffic', 'bikes', 'grid', 'retail', 'treasury', 'subway', 'syn-kiln', 'syn-sku', 'syn-cards', 'syn-api']
+  tspulse: ok, 24391 ms for 3104 points
+done: ['steel', 'tk101', 'traffic', 'bikes', 'grid', 'retail', 'treasury', 'subway', 'syn-kiln', 'syn-sku', 'syn-cards', 'syn-api']
