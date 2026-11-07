@@ -1736,6 +1736,33 @@ h3,h4,.stage-title h3{font-weight:500;letter-spacing:-.005em}
 .dm-build-go{border-radius:8px}
 .dm-build-go svg{border-radius:6px}
 .pitch-mini{border-radius:10px;overflow:hidden}
+
+/* ---------- hero band: the hub's navy to blue gradient, diagonal lines and glass stat tiles ---------- */
+.chapter.hero{padding-top:0}
+.hero-band{position:relative;overflow:hidden;background:linear-gradient(135deg,#040531 0%,#061a7a 55%,#0056F9 100%);color:#fff;margin-bottom:clamp(28px,3.5vw,56px)}
+.hero-band .lines{position:absolute;right:-6%;top:-20%;width:62%;height:160%;opacity:.5;pointer-events:none}
+.hero-band .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.85fr);gap:2rem 3rem;align-items:center;padding-block:clamp(40px,6vw,88px)}
+.hero-band .hero-head{margin-bottom:0}
+.hero-band .pill.live{border-color:rgba(255,255,255,.38);color:#DCE8FF;background:rgba(255,255,255,.08)}
+.hero-band .pill.live::before{background:#6fdc8c}
+.hero-band .hero-kicker{color:#DCE8FF}
+.hero-band .hero-kicker .k-ts{color:#9BE7FF}
+.hero-band .hero-kicker .k-ctx{color:#7EEBA5}
+.hero-band .h-display{color:#fff;font-size:clamp(2.2rem,4.8vw,4rem)}
+.hero-band .h-display em,.hero-band .h-display em.rot{color:#9BE7FF}
+.hero-band .h-display em.rot2{color:#7EEBA5}
+.hero-band .h-display .caret{background:#9BE7FF}
+.hero-band .h-display .caret.c2{background:#7EEBA5}
+.hero-band .lede{color:#DCE8FF}
+.hero-band .btn.play{background:#fff;color:#0B1F66;box-shadow:none}
+.hero-band .btn.play:hover{background:#DCE8FF;color:#0B1F66}
+.hero-band .btn.play small{color:#4A5A8F}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;position:relative}
+.hstat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:.9rem 1rem;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.hstat b{display:block;font-family:var(--font-head);font-weight:300;font-size:clamp(1.6rem,2.6vw,2.3rem);line-height:1.05;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+.hstat span{display:block;font-size:.72rem;color:#C2E5FF;letter-spacing:.06em;text-transform:uppercase;margin-top:.35rem;line-height:1.3}
+@media (max-width:1100px){.hero-band .wrap{grid-template-columns:1fr}.hero-band .lines{right:-30%;width:90%;opacity:.35}.hero-stats{max-width:640px}}
+@media (max-width:600px){.hero-stats{grid-template-columns:1fr 1fr}.hero-stats .hstat:last-child{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -1756,7 +1783,9 @@ h3,h4,.stage-title h3{font-weight:500;letter-spacing:-.005em}
 
 <!-- ============ 01 INNOVATION ============ -->
 <header class="chapter hero" id="innovation">
-  <div class="wrap" id="top">
+  <div class="hero-band">
+    <svg class="lines" viewBox="0 0 600 600" aria-hidden="true" preserveAspectRatio="none"><g fill="none" stroke="#9BE7FF" stroke-width="1" stroke-opacity=".55"><path d="M0 600 L600 0"/><path d="M60 600 L600 60"/><path d="M120 600 L600 120"/><path d="M180 600 L600 180"/><path d="M240 600 L600 240"/><path d="M300 600 L600 300"/><path d="M360 600 L600 360"/><path d="M420 600 L600 420"/><path d="M480 600 L600 480"/><path d="M0 540 L540 0"/><path d="M0 480 L480 0"/><path d="M0 420 L420 0"/><path d="M0 360 L360 0"/></g></svg>
+    <div class="wrap hero-grid" id="top">
     <div class="hero-head">
       <div class="pills"><span class="pill live">Now on Confluent Cloud</span></div>
       <p class="hero-kicker"><span class="k-ts">Time series intelligence</span> meets <span class="k-ctx">real-time context</span>.</p>
@@ -1764,6 +1793,14 @@ h3,h4,.stage-title h3{font-weight:500;letter-spacing:-.005em}
       <p class="lede">IBM Granite Time Series models now run inside Confluent. They read every live signal in its context and optimize mission-critical decisions while they still matter.</p>
       <div class="btn-row hero-cta"><a class="btn play" id="walk-open" href="#demos-film" aria-label="Watch the two-minute overview film"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 6l3.5 2-3.5 2z" fill="currentColor"/></svg>Watch the overview <small>1:58</small></a></div>
     </div>
+    <div class="hero-stats" aria-label="Key figures">
+      <div class="hstat"><b>44M+</b><span>Hugging Face downloads</span></div>
+      <div class="hstat"><b>0.8 s</b><span>Event to decision</span></div>
+      <div class="hstat"><b>1 model</b><span>Six industries, zero‑shot</span></div>
+    </div>
+    </div>
+  </div>
+  <div class="wrap">
 
     <div class="stage why" id="st-why">
       <div class="stage-top">
