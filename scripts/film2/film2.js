@@ -22,7 +22,7 @@
   const log=window.__film={cuts:[],labels:[],brands:[]};
   const cut=why=>log.cuts.push({t:Date.now(),why});
   const setLabel=h=>{if(label.innerHTML===h)return;label.innerHTML=h;log.labels.push({t:Date.now(),h});};
-  const setBrand=(text,quiet)=>{const h=text===null?'':(quiet?'<i></i>'+text:'<i></i>'+text);brand.style.visibility=text===null?'hidden':'visible';brand.classList.toggle('quiet',!!quiet);brand.innerHTML=h;log.brands.push({t:Date.now(),text,quiet:!!quiet});};
+  const setBrand=(text,quiet)=>{const h=text===null?'':(quiet?'<i></i>'+text:'<i></i>'+text);brand.style.visibility=text===null?'hidden':(CAPTURE?'':'visible');brand.classList.toggle('quiet',!!quiet);brand.innerHTML=h;log.brands.push({t:Date.now(),text,quiet:!!quiet});};
   let cur=null,shotZ=1,shotT=0,shotOpt={};
   function release(el){if(!el)return;el.classList.remove('film-shot','why','flat');['position','left','top','width','zoom','margin','z-index'].forEach(p=>el.style.removeProperty(p));}
   function fit(force){
@@ -47,7 +47,7 @@
   }
   (function watch(){fit(false);setTimeout(watch,performance.now()-shotT<1500?60:250);})();
   const UCN=['Production optimization','Anomaly detection','Supply chain planning','Fraud and security','Semantic search','Trading'];
-  const nav=(k,names)=>'<b>03</b>Use cases<span class="nav-uc">'+(names||UCN).map((n,j)=>'<i class="'+(j<k?'done':j===k?'on':'')+'">'+n+'</i>').join('')+'</span>';
+  const nav=(k,names,head)=>(head||'<b>03</b>Use cases')+'<span class="nav-uc">'+(names||UCN).map((n,j)=>'<i class="'+(j<k?'done':j===k?'on':'')+'">'+n+'</i>').join('')+'</span>';
   const setWhy=k=>{const w=$('#st-why');if(w)['s1','s2','s3','s4','s5','s6'].forEach((c,j)=>w.classList.toggle(c,j<k));};
   /* the models shot: tabs and panels in one box, so they travel together */
   function mdShot(){let w=$('#md-shot');if(w)return w;const tabs=$('#mdtabs');if(!tabs)return null;w=document.createElement('div');w.id='md-shot';tabs.before(w);

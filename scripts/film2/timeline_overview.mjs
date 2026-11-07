@@ -4,6 +4,8 @@ export const UCS = [['uc-prod', 'Production optimization'], ['uc-anom', 'Anomaly
 export const ENDCARD = null;
 export const PRE = [`__film2.frame('#st-why',{label:'<b>01</b>From words to decisions',why:true,brand:'Real-time intelligence'});__film2.setWhy(6)`];
 const nav = k => `__film2.nav(${k})`;
+const MNAMES = JSON.stringify(['TTM','FlowState','PatchTST-FM','TSPulse']);
+const mnav = k => `__film2.nav(${k},${MNAMES},'Models')`;
 export const T = [
   [0.00, `__film2.cut('start')`],
   [16.30, `__film2.frame('#st-live',{label:'<b>01</b>Innovation'});__rti.hero.reset();__film2.cut('hero')`],
@@ -13,10 +15,10 @@ export const T = [
   [30.51, `__rti.hero.flash('dom')`],
   [33.40, `__rti.hero.flash('dist')`],
   [36.00, `__film2.card('models',true);__film2.tabsNeutral(true);__film2.frame('#mdtabs',{top:236,width:1200,flat:true,brand:'Real-time intelligence',quiet:true,label:''});__film2.cut('models')`],
-  [49.73, `__film2.card('models',false);__film2.tabsNeutral(false);__film2.tab('md-ttm');__film2.frame(__film2.mdShot(),{brand:'A holistic model family.',quiet:false,label:'<b>MODELS</b>'});__film2.cut('md-ttm')`],
-  [56.40, `__film2.tab('md-flowstate');__film2.cut('md-flowstate')`],
-  [63.13, `__film2.tab('md-patchtstfm');__film2.cut('md-patchtstfm')`],
-  [70.37, `__film2.tab('md-tspulse');__film2.cut('md-tspulse')`],
+  [49.73, `__film2.card('models',false);__film2.tabsNeutral(false);__film2.tab('md-ttm');__film2.frame('#md-ttm',{brand:'Real-time intelligence',quiet:false,label:${mnav(0)}});__film2.cut('md-ttm')`],
+  [56.40, `__film2.tab('md-flowstate');__film2.frame('#md-flowstate',{label:${mnav(1)}});__film2.cut('md-flowstate')`],
+  [63.13, `__film2.tab('md-patchtstfm');__film2.frame('#md-patchtstfm',{label:${mnav(2)}});__film2.cut('md-patchtstfm')`],
+  [70.37, `__film2.tab('md-tspulse');__film2.frame('#md-tspulse',{label:${mnav(3)}});__film2.cut('md-tspulse')`],
   [77.77, `__film2.frame('#st-arch',{brand:'Real-time intelligence',quiet:false,label:'<b>01</b>Confluent + IBM Granite'});__rti.arch.focus(0,true,2.0);__film2.cut('arch')`],
   [100.87, `__film2.frame('#st-three',{label:'<b>02</b>Productivity, accuracy and responsiveness'});__film2.click('#th-replay');__film2.hiCard('prod');__film2.cut('three')`],
   [105.42, `__film2.hiCard('acc')`],

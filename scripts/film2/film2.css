@@ -68,7 +68,7 @@ html.film .why .sh-card.b{opacity:1!important}
 #film-ui .f-gallery .cell{display:grid;gap:7px}
 #film-ui .f-gallery .cell b{font:500 15px/1.2 "Inter",sans-serif;color:var(--fi);display:flex;align-items:center;gap:8px}
 #film-ui .f-gallery .cell b i{font-style:normal;font:600 10.5px/1 "Inter",sans-serif;letter-spacing:.1em;color:var(--fb)}
-#film-ui .f-gallery .cell img{display:block;width:100%;aspect-ratio:16/8.4;object-fit:cover;object-position:top;border-radius:10px;box-shadow:0 10px 30px rgba(16,24,64,.14);background:#0B1F66}
+#film-ui .f-gallery .cell img{display:block;width:100%;aspect-ratio:2.2;object-fit:contain;object-position:center;border-radius:10px;box-shadow:0 10px 30px rgba(16,24,64,.14);background:#0B1F66}
 
 /* the closing card: the site's hero band */
 #film-ui .f-end{background:linear-gradient(135deg,#040531 0%,#061a7a 55%,#0056F9 100%);color:#fff;overflow:hidden}

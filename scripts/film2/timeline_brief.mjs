@@ -7,6 +7,8 @@ export const ENDCARD = { title: 'Turn time series into <em class="b">better deci
 export const PRE = [`__film2.frame('#st-why',{label:'<b>01</b>From words to decisions',why:true,brand:'Real-time intelligence'});__film2.setWhy(6)`];
 const NAMES = JSON.stringify(UCS.map(u => u[1]));
 const nav = k => `__film2.nav(${k},${NAMES})`;
+const MNAMES = JSON.stringify(['TTM','FlowState','PatchTST-FM','TSPulse']);
+const mnav = k => `__film2.nav(${k},${MNAMES},'Models')`;
 export const T = [
   [0.00, `__film2.cut('start')`],
   [12.30, `__film2.frame('#st-live',{label:'<b>01</b>Innovation'});__rti.hero.reset();__film2.cut('hero')`],
@@ -15,10 +17,10 @@ export const T = [
   [21.40, `__rti.hero.flash('dist')`],
   [24.00, `__rti.hero.anomaly()`],
   [26.70, `__rti.hero.optimize()`],
-  [30.00, `__film2.tab('md-ttm');__film2.frame(__film2.mdShot(),{brand:'A holistic model family.',quiet:false,label:'<b>MODELS</b>'});__film2.cut('md-ttm')`],
-  [43.30, `__film2.tab('md-flowstate');__film2.cut('md-flowstate')`],
-  [46.00, `__film2.tab('md-patchtstfm');__film2.cut('md-patchtstfm')`],
-  [48.40, `__film2.tab('md-tspulse');__film2.cut('md-tspulse')`],
+  [30.00, `__film2.tab('md-ttm');__film2.frame('#md-ttm',{brand:'Real-time intelligence',quiet:false,label:${mnav(0)}});__film2.cut('md-ttm')`],
+  [43.30, `__film2.tab('md-flowstate');__film2.frame('#md-flowstate',{label:${mnav(1)}});__film2.cut('md-flowstate')`],
+  [46.00, `__film2.tab('md-patchtstfm');__film2.frame('#md-patchtstfm',{label:${mnav(2)}});__film2.cut('md-patchtstfm')`],
+  [48.40, `__film2.tab('md-tspulse');__film2.frame('#md-tspulse',{label:${mnav(3)}});__film2.cut('md-tspulse')`],
   [53.80, `__film2.frame('#st-arch',{brand:'Real-time intelligence',quiet:false,label:'<b>01</b>Confluent + IBM Granite'});__rti.arch.focus(0,true,1.6);__film2.cut('arch')`],
   [72.50, `__film2.release();__film2.card('gallery',true);__film2.setBrand('Real-time intelligence',true);__film2.setLabel('');__film2.cut('gallery')`],
   [78.90, `__film2.card('gallery',false);__film2.tab('uc-prod');__film2.frame('#uc-prod',{brand:'Real-time intelligence',quiet:false,label:${nav(0)}});__film2.cut('uc-prod')`],

@@ -35,7 +35,7 @@ for (const [id, name] of UCS) {
 await p.evaluate(items => __film2.gallery(items), gallery);
 /* show the gallery once now, so its pictures are decoded before the clock runs */
 await F(`__film2.card('gallery',true)`); await p.waitForTimeout(1500); await F(`__film2.card('gallery',false)`);
-await F(`__film2.mdShot();__film2.tab('uc-prod');__film2.tab('md-ttm')`);
+await F(`__film2.tab('uc-prod');__film2.tab('md-ttm')`);
 if (ENDCARD) await p.evaluate(c => __film2.setEnd(c), ENDCARD);
 /* opening shot in place before the clock starts */
 for (const code of PRE) await F(code);
@@ -43,7 +43,7 @@ await p.waitForTimeout(1500);
 
 const cdp = await ctx.newCDPSession(p); let n = 0; const meta = [];
 cdp.on('Page.screencastFrame', async f => { const name = String(n++).padStart(5, '0') + '.jpg'; fs.writeFileSync(OUT + '/' + name, Buffer.from(f.data, 'base64')); meta.push({ name, t: f.metadata.timestamp }); try { await cdp.send('Page.screencastFrameAck', { sessionId: f.sessionId }); } catch (e) {} });
-await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 94, maxWidth: 1920, maxHeight: 1080, everyNthFrame: 1 });
+await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 90, maxWidth: 1920, maxHeight: 1080, everyNthFrame: 1 });
 await p.waitForTimeout(600);
 const t0 = Date.now(); let k = 0; const done = [];
 while (Date.now() - t0 < END * 1000) {
