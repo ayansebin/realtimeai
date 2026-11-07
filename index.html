@@ -370,7 +370,8 @@ canvas.stage-canvas{display:block;width:100%;height:100%;touch-action:none}
 /* rotating word */
 .h-display .rot{position:relative;white-space:nowrap}
 .h-display .caret{display:inline-block;width:3px;height:.85em;background:var(--blue-3);vertical-align:-.08em;margin-left:.08em;animation:blink .9s steps(1) infinite}
-.h-display .caret.c2{animation-delay:.45s;background:var(--green-2)}
+.h-display .caret.c2{background:var(--green-2)}
+.h-display.typing .caret{animation:none;opacity:1}
 .h-display em.rot2{color:var(--green-2)}
 
 /* hero stats + marquee */
@@ -2713,13 +2714,12 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
     S.forEach(s=>{if(s.dec.mode==='lower'){for(let m=n0+1;m<n0+260;m++){const o=s.add?-s.cx.add*eff(m,s):-Math.max(0,level(s,m,true)-(s.limit-40));if(o)s.plan.set(m,o);}}
       else if(s.dec.mode==='raise')s.raiseAt=n0+Math.max(1,(s.risk||6)-2);});
     st.dec={n:n0,T:performance.now()};setPhase(2);refresh();}
-  function setSpot(i,user){st.spot=i;if(user)st.pinT=performance.now();if(App.headline)App.headline(S[i].pair[0],S[i].pair[1]);}
+  function setSpot(i,user){st.spot=i;if(user){st.pinT=performance.now();if(App.headline)App.headline(S[i].pair[0],S[i].pair[1],30000);}}
   function spotNext(){const k=ORDER[(ORDER.indexOf(S[st.spot].k)+1)%ORDER.length];setSpot(S.findIndex(s=>s.k===k),false);}
   function loop(){const now=performance.now();if(st.hold>now)return;st.focus=false;const k=st.n-st.loopAt;
     if(k>=CTX_AT&&!st.ctx)context();
     if(k>=AN_AT&&!st.an&&!st.dec)anomaly();
     if(k>=OPT_AT&&!st.dec)optimize();
-    if(k>0&&k%SPOT_EVERY===0&&now-st.pinT>30000)spotNext();
     if(k>=LOOP)restart();}
   stepEls.forEach(b=>b.addEventListener('click',()=>{const s=+b.dataset.s;st.hold=0;st.focus=false;restart();
     if(s>=1){context();st.ctx.T-=MORPH;}if(s===1)anomaly();if(s===2)optimize();st.loopAt=st.n-[0,AN_AT,OPT_AT][s];}));
@@ -2930,11 +2930,10 @@ function hoverIndex(layout,cv,ev){if(!layout)return -1;const rect=cv.c.getBoundi
   S.forEach(s=>{s.nx=sim(s,0,null);});fc();for(let i=0;i<90;i++)commit();
   restart();
   if(/[?&]debug/.test(location.search))window.__hero={st,S};
-  const stage=reg({el,resize(){cv.fit();gl.forEach(c=>c.fit());L=null;draw();},update(dt){st.acc+=dt;while(st.acc>=RATE){st.acc-=RATE;commit();loop();}ui(performance.now());},draw(){draw();drawGlyphs();}});
-  /* the headline keeps typing the six use cases while the hero band is on screen, before the chart has scrolled into view */
-  (function(){const band=document.querySelector('.hero-band');if(!band||reduced)return;let vis=true;
-    if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[es.length-1].isIntersecting;},{threshold:.05}).observe(band);
-    setInterval(()=>{if(vis&&!stage.vis&&!document.body.classList.contains('pitching')&&performance.now()-st.pinT>30000)spotNext();},SPOT_EVERY*RATE);})();
+  reg({el,resize(){cv.fit();gl.forEach(c=>c.fit());L=null;draw();},update(dt){st.acc+=dt;while(st.acc>=RATE){st.acc-=RATE;commit();loop();}ui(performance.now());},draw(){draw();drawGlyphs();}});
+  /* the headline loop (below) walks the six use cases nonstop and moves the chart's spotlight with it; a click on the chart pins one for 30 s */
+  App.heroPairs=ORDER.map(k=>{const x=S.find(q=>q.k===k);return {k,a:x.pair[0],b:x.pair[1]};});
+  App.heroSpot=k=>{const i=S.findIndex(q=>q.k===k);if(i>=0&&performance.now()-st.pinT>30000)st.spot=i;};
   /* the demo drives the same chart, starting on the store */
   const hold=ms=>{st.hold=performance.now()+ms;};
   App.hero={reset(){hold(60000);restart();setSpot(0,false);st.focus=true;},flash(k){flash(k);},ctx(){hold(60000);context();},anomaly(){hold(60000);anomaly();},optimize(){hold(30000);optimize();}};
@@ -4501,14 +4500,30 @@ const CS={
   const share=$('#share-link');if(share)share.addEventListener('click',()=>{if(navigator.share){navigator.share({title:document.title,url:location.href}).catch(()=>{});return;}copyText(location.href,null,ok=>{$('#share-toast').textContent=ok?'Link copied.':'Copy the address from your browser bar.';});});
 })();
 
-/* ============ hero: the headline types the industry on the chart ============ */
+/* ============ hero: the headline types the six use cases, nonstop ============ */
+/* Each pair types in, holds for a beat, erases and the next one follows; the chart's spotlight moves with it.
+   A click on a series in the chart pins that pair for 30 s. With reduced motion the words swap without typing. */
 (function(){
   const el=$('#rot'),el2=$('#rot2');if(!el)return;
-  let token=0;
-  function type(node,word,t,done){let k=0;const tick=()=>{if(t!==token)return;node.textContent=word.slice(0,++k);if(k<word.length)setTimeout(tick,55);else done();};tick();}
-  function erase(node,t,done){const tick=()=>{if(t!==token)return;node.textContent=node.textContent.slice(0,-1);if(node.textContent.length)setTimeout(tick,28);else done();};tick();}
-  App.headline=(a,b)=>{const t=++token;if(reduced){el.textContent=a;if(el2)el2.textContent=b;return;}if(el.textContent===a&&(!el2||el2.textContent===b))return;
-    erase(el,t,()=>type(el,a,t,()=>{if(el2)erase(el2,t,()=>type(el2,b,t,()=>{}));}));};
+  const h1=el.closest('.h-display'),PAIRS=(App.heroPairs&&App.heroPairs.length)?App.heroPairs:[{k:'sales',a:el.textContent,b:el2?el2.textContent:''}];
+  const HOLD=2400,TYPE=55,ERASE=28;
+  let token=0,idx=0,pinnedUntil=0,timer=null;
+  const typing=on=>{if(h1)h1.classList.toggle('typing',on);};
+  function type(node,word,t,done){let k=0;const tick=()=>{if(t!==token)return;node.textContent=word.slice(0,++k);if(k<word.length)setTimeout(tick,TYPE);else done();};tick();}
+  function erase(node,t,done){const tick=()=>{if(t!==token)return;node.textContent=node.textContent.slice(0,-1);if(node.textContent.length)setTimeout(tick,ERASE);else done();};tick();}
+  function show(p,done){const t=++token;clearTimeout(timer);
+    if(reduced){el.textContent=p.a;if(el2)el2.textContent=p.b;done();return;}
+    typing(true);
+    const finish=()=>{typing(false);done();};
+    erase(el,t,()=>type(el,p.a,t,()=>{if(!el2)return finish();erase(el2,t,()=>type(el2,p.b,t,finish));}));}
+  function step(){if(document.body.classList.contains('pitching')||performance.now()<pinnedUntil){timer=setTimeout(step,800);return;}
+    idx=(idx+1)%PAIRS.length;const p=PAIRS[idx];if(App.heroSpot)App.heroSpot(p.k);
+    show(p,()=>{timer=setTimeout(step,reduced?4000:HOLD);});}
+  /* the chart (a click on a series) or the film engine asks for a pair; it stays for pinMs */
+  App.headline=(a,b,pinMs)=>{const i=PAIRS.findIndex(p=>p.a===a&&p.b===b);if(i>=0)idx=i;pinnedUntil=performance.now()+(pinMs||0);
+    if(el.textContent===a&&(!el2||el2.textContent===b)){clearTimeout(timer);timer=setTimeout(step,HOLD);return;}
+    show({a,b},()=>{timer=setTimeout(step,HOLD);});};
+  timer=setTimeout(step,HOLD);
 })();
 
 /* ============ 01 better together: streams in, Confluent and IBM Granite in one flow, decisions out ============ */
