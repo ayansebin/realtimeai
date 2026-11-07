@@ -47,7 +47,7 @@
   }
   (function watch(){fit(false);setTimeout(watch,performance.now()-shotT<1500?60:250);})();
   const UCN=['Production optimization','Anomaly detection','Supply chain planning','Fraud and security','Semantic search','Trading'];
-  const nav=k=>'<b>03</b>Use cases<span class="nav-uc">'+UCN.map((n,j)=>'<i class="'+(j<k?'done':j===k?'on':'')+'">'+n+'</i>').join('')+'</span>';
+  const nav=(k,names)=>'<b>03</b>Use cases<span class="nav-uc">'+(names||UCN).map((n,j)=>'<i class="'+(j<k?'done':j===k?'on':'')+'">'+n+'</i>').join('')+'</span>';
   const setWhy=k=>{const w=$('#st-why');if(w)['s1','s2','s3','s4','s5','s6'].forEach((c,j)=>w.classList.toggle(c,j<k));};
   /* the models shot: tabs and panels in one box, so they travel together */
   function mdShot(){let w=$('#md-shot');if(w)return w;const tabs=$('#mdtabs');if(!tabs)return null;w=document.createElement('div');w.id='md-shot';tabs.before(w);
@@ -59,6 +59,7 @@
   const hiCard=k=>{$$('#st-three .v4c.tour-hi').forEach(e=>e.classList.remove('tour-hi'));const e=$('#st-three .v4c[data-k="'+k+'"]');if(e)e.classList.add('tour-hi');};
   const gallery=items=>{$('#f-grid').innerHTML=items.map((it,i)=>'<div class="cell"><b><i>0'+(i+1)+'</i>'+it.name+'</b><img src="'+it.src+'" alt=""></div>').join('');};
   const endStep=k=>{const e=$('#f-end .fs[data-k="'+k+'"]');if(e)e.classList.add('on');};
+  const setEnd=c=>{const e=$('#f-end');if(!e||!c)return;if(c.title)e.querySelector('h1').innerHTML=c.title;if(c.steps)e.querySelector('.f-steps').innerHTML=c.steps.map((s,i)=>'<div class="fs" data-k="'+(i+1)+'"><b>0'+(i+1)+'</b><strong>'+s[0]+'</strong><span>'+s[1]+'</span></div>').join('');};
   const tabsNeutral=on=>{const t=$('#mdtabs');if(t)t.classList.toggle('neutral',!!on);};
-  window.__film2={frame,setLabel,setBrand,setWhy,mdShot,tab,click,card,hiCard,gallery,endStep,cut,nav,tabsNeutral,release:()=>{release(cur);cur=null;}};
+  window.__film2={frame,setLabel,setBrand,setWhy,mdShot,tab,click,card,hiCard,gallery,endStep,setEnd,cut,nav,tabsNeutral,release:()=>{release(cur);cur=null;}};
 })();

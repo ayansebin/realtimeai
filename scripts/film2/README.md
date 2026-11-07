@@ -1,6 +1,6 @@
-# Overview film, re-rendered on the current design
+# Films re-rendered on the current design
 
-Rebuilds `Time Series FMs on Confluent Overview` (3:15) from the live site, shot for shot, at the source film's own times, with the source film's voice track and subtitle track kept untouched. Every chart is the page's own, in whatever design the page has today; only the pictures change.
+Rebuilds a film from the live site, shot for shot, at the source film's own times, with the source film's voice track kept untouched. Every chart is the page's own, in whatever design the page has today; only the pictures change. Two timelines exist: `timeline_overview.mjs` for `Time Series FMs on Confluent Overview` (3:15, with its subtitle track) and `timeline_brief.mjs` for `Time series on Confluent: a brief overview` (1:58, the film in the site's Demos section; its captions were read off its frames into an SRT).
 
 The timeline in `rec2.mjs` was taken from the source film: its cut times (ffmpeg scene detection), its sentences and their times (the embedded subtitle track), and the on-chart actions seen in its frames (the new cocoa butter lot, the stockout flag, the P95 service level, the card testing burst, the spike search, the news burst, the three value cards lighting up in turn). The two closing cards and the model family card are drawn by `film2.js` in the site's typography.
 
@@ -18,7 +18,7 @@ ffmpeg -i source.mp4 -map 0:s:0 -f srt captions.srt
 4. Record, render the overlays, compose:
 
 ```
-node scripts/film2/rec2.mjs take1                     # about 3.5 minutes, real time
+node scripts/film2/rec2.mjs take1 scripts/film2/timeline_brief.mjs   # real time, the film's length
 node scripts/film2/overlays2.mjs take1 captions.srt
 python3 scripts/film2/compose2.py take1 voice.m4a captions.srt overview.mp4
 ```
@@ -28,6 +28,7 @@ python3 scripts/film2/compose2.py take1 voice.m4a captions.srt overview.mp4
 - `film2.css`: film mode on the roadmap look. Off-white paper, one framed chart at a time, Inter captions, Poppins titles, the closing card on the hero's navy to blue band.
 - `film2.js`: the driver the recorder calls (`window.__film2`): frame a chart, swap cards, set the brand and label, pick a tab, click a chip, light a value card. The page exposes its modules as `window.__rti` when `window.__filmCapture` is set before load.
 - `fonts2.css`: the font rules served in place of Google Fonts while recording.
-- `rec2.mjs`: the timeline and the screencast capture (1280x720 at 1.5x, 1920x1080 frames with timestamps).
+- `rec2.mjs`: the screencast capture (1280x720 at 1.5x, 1920x1080 frames with timestamps), driven by a timeline module.
+- `timeline_overview.mjs`, `timeline_brief.mjs`: each film's cuts, on-chart moments, use case order and closing card.
 - `overlays2.mjs`: brand, labels and every caption as transparent PNGs, captions in a light variant for the closing card.
 - `compose2.py`: crossfades at the cuts, overlays on top, fade in from the paper and out to navy, the voice muxed in and the subtitle track kept.
